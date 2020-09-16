@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: bookinfo
+commonLabels:
+  owner: developer
+  app: bookinfo
+resources:
+- bookinfo-gw.yaml
+- bookinfo-vs.yaml
+- dr-all.yaml
+- vs-all.yaml
