@@ -1,5 +1,3 @@
-#!/usr/bin/bash
-
 hostnamectl set-hostname access.example.com
 hostnamectl set-hostname controlplane1.example.com
 hostnamectl set-hostname controlplane2.example.com
