@@ -14,7 +14,7 @@ helm upgrade --install my-redis \
     --set password="${PASSWORD}" \
     --set ingress.enabled="true" \
     --set ingress.annotations."kubernetes\.io/ingress\.class"="nginx" \
-    --set ingress.name={"redis.kube.example.com"} \
+    --set ingress.name={"redis.example.com"} \
     --set ingress.path="/" \
     --set master.persistence.enabled="true" \
     --set master.persistence.storageClass="rook-ceph-block" \

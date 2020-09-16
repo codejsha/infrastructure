@@ -8,7 +8,7 @@ metadata:
   namespace: kube-system
 spec:
   rules:
-    - host: dashboard.kube.example.com
+    - host: dashboard.example.com
       http:
         paths:
           - path: /dashboard(/|$)(.*)

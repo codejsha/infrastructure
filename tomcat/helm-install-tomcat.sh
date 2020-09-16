@@ -9,7 +9,7 @@ helm upgrade --install my-tomcat \
     --namespace ${NAMESPACE} \
     --set ingress.enabled="true" \
     --set ingress.annotations."kubernetes\.io/ingress\.class"="nginx" \
-    --set ingress.hosts[0].name="tomcat.kube.example.com" \
+    --set ingress.hosts[0].name="tomcat.example.com" \
     --set ingress.hosts[0].path="/" \
     --set persistence.enabled="true" \
     --set persistence.storageClass="rook-ceph-block" \
@@ -17,7 +17,7 @@ helm upgrade --install my-tomcat \
     bitnami/tomcat
 
     ### custom image
-    # --set image.registry="nexus.kube.example.com/repository/docker-public"
+    # --set image.registry="nexus.example.com/repository/docker-public"
     # --set image.repository="tomcat"
     # --set image.tag="latest"
 

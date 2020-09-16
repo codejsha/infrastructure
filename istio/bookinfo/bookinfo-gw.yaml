@@ -7,7 +7,7 @@ spec:
     istio: ingressgateway
   servers:
     - hosts:
-        - bookinfo.kube.example.com
+        - bookinfo.example.com
       port:
         name: http
         number: 80

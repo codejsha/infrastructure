@@ -14,7 +14,7 @@ metadata:
   namespace: tekton-pipelines
 spec:
   rules:
-  - host: tekton.kube.example.com
+  - host: tekton.example.com
     http:
       paths:
       - path: /

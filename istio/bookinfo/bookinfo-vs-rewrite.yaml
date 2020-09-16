@@ -4,7 +4,7 @@ metadata:
   name: bookinfo
 spec:
   hosts:
-    - bookinfo.kube.example.com
+    - bookinfo.example.com
   gateways:
     - bookinfo-gateway
   http:

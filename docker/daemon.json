@@ -1,4 +1,4 @@
 {
-  "insecure-registries": ["registry.kube.example.com"],
-  "registry-mirrors": ["registry.kube.example.com"]
+  "insecure-registries": ["registry.example.com"],
+  "registry-mirrors": ["registry.example.com"]
 }

@@ -12,7 +12,7 @@ helm upgrade --install my-jenkins \
     --set master.adminPassword="${PASSWORD}" \
     --set master.ingress.enabled="true" \
     --set master.ingress.annotations."kubernetes\.io/ingress\.class"="nginx" \
-    --set master.ingress.hostName="jenkins.kube.example.com" \
+    --set master.ingress.hostName="jenkins.example.com" \
     --set master.ingress.path="/" \
     --set agent.resources.requests.cpu="128m" \
     --set agent.resources.requests.memory="512Mi" \

@@ -17,7 +17,7 @@ helm upgrade --install my-drone-runner \
     --namespace ${NAMESPACE} \
     --set ingress.enabled="true" \
     --set ingress.annotations."kubernetes\.io/ingress\.class"="nginx" \
-    --set ingress.hosts[0].host="drone-runner.kube.example.com" \
+    --set ingress.hosts[0].host="drone-runner.example.com" \
     --set ingress.hosts[0].paths[0]="/" \
     --set env.DRONE_RPC_SECRET="${SHARED_SECRET}" \
     --set env.DRONE_RPC_HOST="my-drone" \

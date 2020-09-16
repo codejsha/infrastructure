@@ -19,8 +19,8 @@ helm upgrade --install my-nexus \
     --set nexusBackup.persistence.storageClass="rook-ceph-block" \
     --set nexusBackup.persistence.storageSize="100Gi" \
     --set nexusProxy.enabled="true" \
-    --set nexusProxy.env.nexusDockerHost="container.kube.example.com" \
-    --set nexusProxy.env.nexusHttpHost="nexus.kube.example.com" \
+    --set nexusProxy.env.nexusDockerHost="container.example.com" \
+    --set nexusProxy.env.nexusHttpHost="nexus.example.com" \
     --set ingress.enabled="true" \
     --set ingress.tls.enabled="false" \
     --set ingress.annotations."kubernetes\.io/ingress\.allow-http"="true" \

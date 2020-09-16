@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-NEXUS_URL="https://nexus.kube.example.com"
+NEXUS_URL="https://nexus.example.com"
 NEXUS_USER="admin"
 NEXUS_PASSWORD="admin123"
 BLOBSTORE_NAME="${1}"

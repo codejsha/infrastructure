@@ -1,6 +1,6 @@
 {
   "auths": {
-    "registry.kube.example.com": {
+    "registry.example.com": {
       "auth": "AUTH"
     }
   }

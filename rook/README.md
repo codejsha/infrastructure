@@ -38,10 +38,10 @@ spec:
 spec:
   tls:
    - hosts:
-     - rook-ceph.kube.example.com
-     secretName: rook-ceph.kube.example.com
+     - rook-ceph.example.com
+     secretName: rook-ceph.example.com
   rules:
-  - host: rook-ceph.kube.example.com
+  - host: rook-ceph.example.com
 ```
 
 ### loadbalancer

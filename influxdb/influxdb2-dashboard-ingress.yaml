@@ -7,7 +7,7 @@ metadata:
   namespace: influx-system
 spec:
   rules:
-    - host: influx.kube.example.com
+    - host: influx.example.com
       http:
         paths:
           - path: /

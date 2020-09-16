@@ -26,9 +26,9 @@ helm upgrade --install my-harbor \
     --set database.external.username="admin" \
     --set database.external.password="${EXTERNAL_DATABASE_PASSWORD}" \
     --set expose.ingress.annotations."kubernetes\.io/ingress\.class"="nginx" \
-    --set expose.ingress.hosts.core="core.harbor.kube.example.com" \
-    --set expose.ingress.hosts.notary="notary.harbor.kube.example.com" \
-    --set externalURL="https://core.harbor.kube.example.com" \
+    --set expose.ingress.hosts.core="core.harbor.example.com" \
+    --set expose.ingress.hosts.notary="notary.harbor.example.com" \
+    --set externalURL="https://core.harbor.example.com" \
     --set persistence.persistentVolumeClaim.registry.storageClass="rook-ceph-block" \
     --set persistence.persistentVolumeClaim.chartmuseum.storageClass="rook-ceph-block" \
     --set persistence.persistentVolumeClaim.jobservice.storageClass="rook-ceph-block" \
@@ -40,6 +40,6 @@ helm upgrade --install my-harbor \
 
     ### for loadbalancer
     # --set expose.type="loadBalancer" \
-    # --set expose.tls.commonName="core.harbor.kube.example.com" \
+    # --set expose.tls.commonName="core.harbor.example.com" \
     # --set expose.loadBalancer.IP="10.10.10.50" \
-    # --set externalURL="core.harbor.kube.example.com" \
+    # --set externalURL="core.harbor.example.com" \

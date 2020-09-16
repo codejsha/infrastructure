@@ -40,7 +40,7 @@ helm upgrade --install my-kafka-manager \
     --set clusters[0].tuning.kafkaManagedOffsetGroupExpireDays= \
     --set ingress.enabled="true" \
     --set ingress.annotations."kubernetes\.io/ingress\.class"="nginx" \
-    --set ingress.hosts={"kafka.kube.example.com"} \
+    --set ingress.hosts={"kafka.example.com"} \
     --version 2.3.1 \
     stable/kafka-manager
 

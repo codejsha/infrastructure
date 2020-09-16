@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # https://istio.io/latest/docs/tasks/observability/gateways/
 
-INGRESS_DOMAIN="${INGRESS_DOMAIN:-kube.example.com}"
+INGRESS_DOMAIN="${INGRESS_DOMAIN:-example.com}"
 
 cat <<EOF | kubectl apply -f -
 apiVersion: networking.istio.io/v1alpha3

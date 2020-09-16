@@ -23,7 +23,7 @@ helm upgrade --install my-docker-registry \
     --set ingress.enabled="true" \
     --set ingress.annotations."kubernetes\.io/ingress\.class"="nginx" \
     --set ingress.annotations."nginx\.ingress\.kubernetes\.io/proxy-body-size"="0" \
-    --set ingress.hosts={"registry.kube.example.com"} \
+    --set ingress.hosts={"registry.example.com"} \
     --set ingress.path="/" \
     --set persistence.enabled="true" \
     --set persistence.storageClass="rook-ceph-block" \

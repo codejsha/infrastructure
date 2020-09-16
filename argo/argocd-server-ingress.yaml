@@ -14,8 +14,8 @@ spec:
           - backend:
               serviceName: argocd-server
               servicePort: https
-      host: argocd.kube.example.com
+      host: argocd.example.com
   tls:
     - hosts:
-        - argocd.kube.example.com
+        - argocd.example.com
       secretName: argocd-secret

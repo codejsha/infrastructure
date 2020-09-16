@@ -14,7 +14,7 @@ helm upgrade --install my-nifi \
     --set service.type="ClusterIP" \
     --set ingress.enabled="true" \
     --set ingress.annotations."kubernetes\.io/ingress\.class"="nginx" \
-    --set ingress.hosts={"nifi.kube.example.com"} \
+    --set ingress.hosts={"nifi.example.com"} \
     --set ingress.path="/" \
     --set persistence.enabled="true" \
     --set persistence.storageClass="rook-ceph-block" \

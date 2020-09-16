@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 MINIO_ALIAS="myminio"
-MINIO_URL="http://minio.kube.example.com"
+MINIO_URL="http://minio.example.com"
 ACCESSKEY="admin"
 SECRETKEY="changeit"
 

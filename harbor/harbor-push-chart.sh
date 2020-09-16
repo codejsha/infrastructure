@@ -6,7 +6,7 @@
 CHART_PATH="${1}"
 TAG="${2:-latest}"
 
-HARBOR_URL="core.harbor.kube.example.com"
+HARBOR_URL="core.harbor.example.com"
 PROJECT="myproject"
 REPOSITORY="myrepo"
 

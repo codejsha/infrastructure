@@ -16,7 +16,7 @@ helm upgrade --install my-vault \
     --set server.ui.enabled="true" \
     --set server.ingress.enabled="true" \
     --set server.ingress.annotations."kubernetes\.io/ingress\.class"="nginx" \
-    --set server.ingress.hosts[0].host="vault.kube.example.com" \
+    --set server.ingress.hosts[0].host="vault.example.com" \
     --set server.ingress.hosts[0].path={"/"} \
     --set server.dataStorage.enabled="true" \
     --set server.dataStorage.storageClass="rook-ceph-block" \

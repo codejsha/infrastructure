@@ -12,9 +12,9 @@ docker build -f Dockerfile.dev -t example/apache:2.0 .
 
 ### tag and push
 
-docker login registry.kube.example.com
-docker tag centos:latest registry.kube.example.com/example/centos:latest
-docker push registry.kube.example.com/example/centos:latest
+docker login registry.example.com
+docker tag centos:latest registry.example.com/example/centos:latest
+docker push registry.example.com/example/centos:latest
 
 ######################################################################
 

@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # https://istio.io/latest/docs/tasks/observability/gateways/
 
-INGRESS_DOMAIN="kube.example.com"
+INGRESS_DOMAIN="example.com"
 # INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 # INGRESS_DOMAIN=${INGRESS_HOST}.nip.io
 export INGRESS_DOMAIN

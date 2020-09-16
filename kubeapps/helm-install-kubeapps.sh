@@ -12,6 +12,6 @@ helm upgrade --install my-kubeapps \
     --set useHelm3="true" \
     --set ingress.enabled="true" \
     --set ingress.annotations."kubernetes\.io/ingress\.class"="nginx" \
-    --set ingress.hostname="kubeapps.kube.example.com" \
+    --set ingress.hostname="kubeapps.example.com" \
     --version 3.7.2 \
     bitnami/kubeapps
