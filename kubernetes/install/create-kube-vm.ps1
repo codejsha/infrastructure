@@ -36,9 +36,9 @@ function New-KubeVM {
 }
 
 New-KubeVM -VMName "KubeAccessMachine" -VMPath "$env:USERPROFILE\hyper" -VMMemory 2GB -Switch "PlatformPrivate"
-New-KubeVM -VMName "KubeControlPlaneMachine1" -VMPath "$env:USERPROFILE\hyper" -VMMemory 2GB -Switch "PlatformPrivate"
-New-KubeVM -VMName "KubeControlPlaneMachine2" -VMPath "$env:USERPROFILE\hyper" -VMMemory 2GB -Switch "PlatformPrivate"
-New-KubeVM -VMName "KubeControlPlaneMachine3" -VMPath "$env:USERPROFILE\hyper" -VMMemory 2GB -Switch "PlatformPrivate"
+New-KubeVM -VMName "KubeControlPlaneMachine1" -VMPath "$env:USERPROFILE\hyper" -VMMemory 3GB -Switch "PlatformPrivate"
+New-KubeVM -VMName "KubeControlPlaneMachine2" -VMPath "$env:USERPROFILE\hyper" -VMMemory 3GB -Switch "PlatformPrivate"
+New-KubeVM -VMName "KubeControlPlaneMachine3" -VMPath "$env:USERPROFILE\hyper" -VMMemory 3GB -Switch "PlatformPrivate"
 New-KubeVM -VMName "KubeNodeMachine1" -VMPath "$env:USERPROFILE\hyper" -VMMemory 16GB -Switch "PlatformPrivate"
 New-KubeVM -VMName "KubeNodeMachine2" -VMPath "$env:USERPROFILE\hyper" -VMMemory 16GB -Switch "PlatformPrivate"
 New-KubeVM -VMName "KubeNodeMachine3" -VMPath "$env:USERPROFILE\hyper" -VMMemory 16GB -Switch "PlatformPrivate"
