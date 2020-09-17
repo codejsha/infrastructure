@@ -9,7 +9,7 @@
     <role rolename="manager-script" />
     <role rolename="manager-status" />
     <user username="admin"
-          password="changeit"
+          password="PASSWORD"
           roles="manager-gui,manager-script,manager-status" />
  -->
 </tomcat-users>

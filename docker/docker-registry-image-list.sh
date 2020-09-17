@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 USERNAME="admin"
-PASSWORD="changeit"
+PASSWORD="${PASSWORD}"
 IMAGE_NAME="${1}"
 
 if [ -n "${IMAGE_NAME}" ]; then

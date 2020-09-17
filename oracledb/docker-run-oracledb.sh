@@ -13,7 +13,7 @@ docker run \
     --shm-size=1g \
     --publish 1521:1521 \
     --publish 5500:8080 \
-    --env ORACLE_PWD="changeit" \
+    --env ORACLE_PWD="${PASSWORD}" \
     --mount type=bind,src=/mnt/volume/oracledb11,dst=/u01/app/oracle/oradata \
     oracle/database:11.2.0.2-xe
 
@@ -27,7 +27,7 @@ docker run \
     --publish 5500:5500 \
     --env ORACLE_SID=ORCLCDB \
     --env ORACLE_PDB=ORCLPDB1 \
-    --env ORACLE_PWD="changeit" \
+    --env ORACLE_PWD="${PASSWORD}" \
     --env ORACLE_CHARACTERSET=AL32UTF8 \
     --mount type=bind,src=/mnt/volume/oracledb12,dst=/opt/oracle/oradata \
     oracle/database:12.1.0.2-ee
@@ -42,7 +42,7 @@ docker run \
     --publish 5500:5500 \
     --env ORACLE_SID=ORCLCDB \
     --env ORACLE_PDB=ORCLPDB1 \
-    --env ORACLE_PWD="changeit" \
+    --env ORACLE_PWD="${PASSWORD}" \
     --env ORACLE_CHARACTERSET=AL32UTF8 \
     --mount type=bind,src=/mnt/volume/oracledb12,dst=/opt/oracle/oradata \
     oracle/database:12.1.0.2-ee
@@ -72,7 +72,7 @@ docker run \
     --publish 5500:5500 \
     --env ORACLE_SID=ORCLCDB \
     --env ORACLE_PDB=ORCLPDB1 \
-    --env ORACLE_PWD="changeit" \
+    --env ORACLE_PWD="${PASSWORD}" \
     --env ORACLE_CHARACTERSET=AL32UTF8 \
     --mount type=bind,src=/mnt/volume/oracledb18,dst=/opt/oracle/oradata \
     oracle/database:18.3.0-ee
@@ -87,7 +87,7 @@ docker run \
     --publish 5500:5500 \
     --env ORACLE_SID=ORCLCDB \
     --env ORACLE_PDB=ORCLPDB1 \
-    --env ORACLE_PWD="changeit" \
+    --env ORACLE_PWD="${PASSWORD}" \
     --env ORACLE_CHARACTERSET=AL32UTF8 \
     --mount type=bind,src=/mnt/volume/oracledb19,dst=/opt/oracle/oradata \
     oracle/database:19.3.0-ee

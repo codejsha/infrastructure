@@ -3,7 +3,7 @@
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 
-PASSWORD="changeit"
+PASSWORD="${PASSWORD}"
 
 NAMESPACE="postgres-system"
 kubectl create namespace ${NAMESPACE}

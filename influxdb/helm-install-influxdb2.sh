@@ -3,7 +3,7 @@
 helm repo add influxdata https://helm.influxdata.com
 helm repo update
 
-PASSWORD="changeit"
+PASSWORD="${PASSWORD}"
 
 NAMESPACE="influx-system"
 kubectl create namespace ${NAMESPACE}

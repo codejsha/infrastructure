@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-PASSWORD="changeit"
+PASSWORD="${PASSWORD}"
 
 NAMESPACE="minio-system"
 kubectl create namespace ${NAMESPACE}

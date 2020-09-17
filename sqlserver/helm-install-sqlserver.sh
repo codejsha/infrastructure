@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # https://docs.microsoft.com/en-us/sql/relational-databases/security/password-policy
 
-PASSWORD="changeit"
+PASSWORD="${PASSWORD}"
 
 NAMESPACE="mssql-system"
 kubectl create namespace ${NAMESPACE}

@@ -61,7 +61,7 @@ docker run -d \
     --env DRONE_RUNNER_NAME="${HOSTNAME}" \
     --env DRONE_UI_DISABLE="false" \
     --env DRONE_UI_USERNAME="admin" \
-    --env DRONE_UI_PASSWORD="changeit" \
+    --env DRONE_UI_PASSWORD="${PASSWORD}" \
     -v /var/run/docker.sock:/var/run/docker.sock \
     drone/drone-runner-docker:1
 
