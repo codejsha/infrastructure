@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-GIT_VERSION="2.27.0"
+GIT_VERSION="2.28.0"
 
 sudo yum install -y dh-autoreconf curl-devel expat-devel gettext-devel openssl-devel perl-devel zlib-devel
 sudo yum install -y asciidoc xmlto docbook2X
