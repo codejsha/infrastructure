@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-PASSWORD="changeit"
+PASSWORD="${PASSWORD}"
 declare -A NODES=(
     [10.10.10.11]="controlplane1.example.com"
     [10.10.10.12]="controlplane2.example.com"
