@@ -10,7 +10,7 @@ function New-KubeVM {
         [string]$Switch
     )
 
-    # $InstallMedia = "F:\os-iso\CentOS-7-x86_64-DVD-1908.iso"
+    # $InstallMedia = "F:\os-iso\CentOS-7-x86_64-DVD-2003.iso"
 
     New-VM -Name $VMName `
         -Path $VMPath `
