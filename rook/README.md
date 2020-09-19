@@ -28,6 +28,8 @@ spec:
     - name: "sdb"
 ```
 
+cf. `lsblk` command
+
 ## dashboard
 
 ### ingress
