@@ -12,6 +12,9 @@ function Add-KubeCephVHD {
 
     $CephVHDPath = "$VMPath\$VMName\Virtual Hard Disks\$DiskName.vhdx"
 
+    if (Get-VMHardDiskDrive -VMName $VMName -ControllerType SCSI -ControllerNumber 0 -ControllerLocation 1) {
+        Remove-VMHardDiskDrive -VMName $VMName -ControllerType SCSI -ControllerNumber 0 -ControllerLocation 1
+    }
     if (Test-Path -Path "$CephVHDPath") {
         Remove-Item -Path "$CephVHDPath"
     }

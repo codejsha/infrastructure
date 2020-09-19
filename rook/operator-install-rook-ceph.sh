@@ -1,29 +1,15 @@
 #!/usr/bin/bash
-# https://rook.github.io/docs/rook/v1.3/ceph-quickstart.html
-# https://rook.github.io/docs/rook/v1.3/ceph-block.html
-# https://rook.github.io/docs/rook/v1.3/ceph-csi-drivers.html
-# https://rook.github.io/docs/rook/v1.3/ceph-dashboard.html
+# https://rook.github.io/docs/rook/v1.4/ceph-quickstart.html
 
-kubectl create -f rook/cluster/examples/kubernetes/ceph/cluster.yaml
-kubectl create -f rook/cluster/examples/kubernetes/ceph/toolbox.yaml
-kubectl create -f rook/cluster/examples/kubernetes/ceph/dashboard-ingress-https.yaml
-# kubectl create -f rook/cluster/examples/kubernetes/ceph/dashboard-loadbalancer.yaml
+git clone --single-branch --branch release-1.4 https://github.com/rook/rook.git
 
-kubectl create -f rook/cluster/examples/kubernetes/ceph/csi/rbd/storageclass.yaml
+kubectl create -f rook/cluster/examples/kubernetes/ceph/common.yaml
+kubectl create -f rook/cluster/examples/kubernetes/ceph/operator.yaml
 
-### get dashboard password
-# kubectl -n rook-ceph get secret rook-ceph-dashboard-password -o jsonpath="{['data']['password']}" | base64 --decode && echo
-
-### health check
-# kubectl -n rook-ceph get pod
-# kubectl -n rook-ceph get cephcluster
-# kubectl -n rook-ceph exec -it $(kubectl -n rook-ceph get pod -l "app=rook-ceph-tools" -o jsonpath='{.items[0].metadata.name}') bash
-### > ceph status
-### > ceph osd status
-### > ceph osd df
-### > ceph osd utilization
-### > ceph osd pool stats
-### > ceph osd tree
-### > ceph pg stat
-### > ceph quorum_status
-### > ceph mon stat
+### verify the rook-ceph-operator is in the `Running` state before proceeding
+kubectl -n rook-ceph get pod --watch
+### NAME                                  READY   STATUS    RESTARTS   AGE
+### rook-ceph-operator-667756ddb6-spzpt   1/1     Running   0          2m9s
+### rook-discover-54vcm                   1/1     Running   0          83s
+### rook-discover-tfsl4                   1/1     Running   0          83s
+### rook-discover-v26jr                   1/1     Running   0          83s
