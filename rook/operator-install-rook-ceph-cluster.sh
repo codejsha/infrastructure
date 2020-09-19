@@ -4,6 +4,7 @@
 # https://rook.github.io/docs/rook/v1.4/ceph-csi-drivers.html
 # https://rook.github.io/docs/rook/v1.4/ceph-dashboard.html
 
+/usr/bin/cp -f cluster.yaml rook/cluster/examples/kubernetes/ceph/cluster.yaml
 kubectl create -f rook/cluster/examples/kubernetes/ceph/cluster.yaml
 kubectl create -f rook/cluster/examples/kubernetes/ceph/toolbox.yaml
 # kubectl create -f rook/cluster/examples/kubernetes/ceph/dashboard-ingress-https.yaml
