@@ -22,10 +22,5 @@ istioctl profile list
 istioctl install --set profile=default \
    --set meshConfig.accessLogFile=/dev/stdout
 
-kubectl apply --filename https://raw.githubusercontent.com/istio/istio/master/samples/addons/grafana.yaml
-kubectl apply --filename https://raw.githubusercontent.com/istio/istio/master/samples/addons/jaeger.yaml
-kubectl apply --filename https://raw.githubusercontent.com/istio/istio/master/samples/addons/kiali.yaml
-kubectl apply --filename https://raw.githubusercontent.com/istio/istio/master/samples/addons/prometheus.yaml
-
 # kubectl get services -n istio-system
 # kubectl get pods -n istio-system
