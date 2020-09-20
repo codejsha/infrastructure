@@ -18,13 +18,14 @@ create-kube-vm.ps1
 ### in linux
 bash require-all-node.sh
 
-### add hosts
-cat <<EOF | sudo tee -a /etc/hosts
-$(cat hosts.txt)
-EOF
+### add scripts
+# set-hostname.sh
+# set-network.sh
+# hosts.txt
 ```
 
 ```powershell
+### copy vhd
 convert-kube-vhd.ps1
 ```
 
@@ -36,6 +37,12 @@ convert-kube-vhd.ps1
 - network: `set-network.sh`
 
 ### ssh key
+
+```bash
+cat <<EOF | sudo tee -a /etc/hosts
+$(cat hosts.txt)
+EOF
+```
 
 ```bash
 bash pre-copy-ssh-key.sh
