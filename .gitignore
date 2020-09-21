@@ -1,4 +1,7 @@
 .vs/
 .vscode/
 .idea/
-temp/
+
+/temp/
+/kubernetes/install/kubespray/
+/rook/rook/
