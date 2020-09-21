@@ -6,26 +6,31 @@
 
 ## Virtual machine
 
-```powershell
 ### create hyper-v vm
-create-kube-vm.ps1
 
-### install linux
-# manually install linux(cent os)
+```powershell
+create-kube-vm.ps1
 ```
+
+### install os
+
+manually install linux(cent os)
+
+### requirements
 
 ```bash
-### in linux
 bash require-all-node.sh
-
-### add scripts
-# set-hostname.sh
-# set-network.sh
-# hosts.txt
 ```
 
-```powershell
+### add scripts
+
+- set-hostname.sh
+- set-network.sh
+- hosts.txt
+
 ### copy vhd
+
+```powershell
 convert-kube-vhd.ps1
 ```
 
@@ -36,7 +41,7 @@ convert-kube-vhd.ps1
 - hostname: `set-hostname.sh`
 - network: `set-network.sh`
 
-### ssh key
+### copy ssh keys
 
 ```bash
 cat <<EOF | sudo tee -a /etc/hosts
@@ -65,6 +70,8 @@ bash install-k8s-kubespray.sh
 ```
 
 ## Post-install
+
+### copy config and cert files
 
 ```bash
 bash post-install.sh
