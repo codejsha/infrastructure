@@ -1,8 +1,9 @@
 # logging
 
 ## logrotate
-https://www.redhat.com/sysadmin/setting-logrotate
-https://access.redhat.com/solutions/1294
+
+- https://www.redhat.com/sysadmin/setting-logrotate
+- https://access.redhat.com/solutions/1294
 
 `/etc/logrotate.d/weblogic_base_domain.conf`:
 
@@ -21,10 +22,9 @@ missingok
 }
 ```
 
-
 ## rotating log file in windows service
 
-https://docs.oracle.com/middleware/12213/wls/START/winservice.htm
+- https://docs.oracle.com/middleware/12213/wls/START/winservice.htm
 
 ### edit arguments
 
