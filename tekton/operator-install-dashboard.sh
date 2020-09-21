@@ -1,6 +1,10 @@
 #!/usr/bin/bash
 # https://github.com/tektoncd/operator
 
+NAMESPACE="tekton-pipelines"
+kubectl create namespace ${NAMESPACE}
+kubectl config set-context --current --namespace="${NAMESPACE}"
+
 kubectl create clusterrolebinding tekton-operator-cluster-admin --clusterrole cluster-admin --serviceaccount tekton-operator:tekton-operator
 
 cat <<EOF > ./operator-tekton-dashboard.yaml

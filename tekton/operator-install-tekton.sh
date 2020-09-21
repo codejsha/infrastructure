@@ -2,6 +2,10 @@
 # https://github.com/tektoncd/operator
 # rerequisites: kubernetes cluster, kubectl, tkn
 
+NAMESPACE="tekton-pipelines"
+kubectl create namespace ${NAMESPACE}
+kubectl config set-context --current --namespace="${NAMESPACE}"
+
 kubectl apply -f https://storage.googleapis.com/tekton-releases/operator/latest/release.notags.yaml
 
 # tkn version
