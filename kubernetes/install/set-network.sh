@@ -17,6 +17,7 @@ do
         nmcli connection delete "Wired connection 1"
         nmcli connection add type ethernet con-name eth0 ifname eth0
         nmcli connection modify eth0 ipv4.addresses ${ADDRESS}/24
+        nmcli connection modify eth1 ipv4.gateway 10.10.10.1
         nmcli connection modify eth0 ipv4.method manual
         nmcli connection modify eth0 ipv6.ip6-privacy 0
         nmcli connection modify eth0 ipv4.dns "8.8.8.8,168.126.63.1"
