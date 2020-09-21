@@ -54,3 +54,16 @@ spec:
 spec:
   loadBalancerIP: 10.10.10.50
 ```
+
+## default storageclass
+
+`change-default-storageclass.sh`
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+//...
+```
