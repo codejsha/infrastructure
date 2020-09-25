@@ -62,6 +62,7 @@ function opatch_apply {
 
 function opatch_lsinventory {
     ${ORACLE_HOME}/OPatch/opatch lsinventory
+    # ${ORACLE_HOME}/OPatch/opatch lsinventory -invPtrLoc ${ORACLE_HOME}/oraInst.loc
 }
 
 ######################################################################
