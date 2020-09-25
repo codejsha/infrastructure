@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  gitlab:
+    image: "gitlab/gitlab-ce:latest"
+    restart: unless-stopped
+    hostname: "gitlab.example.com"
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://gitlab.example.com:9480'
+        gitlab_rails['lfs_enabled'] = true
+        gitlab_rails['gitlab_shell_ssh_port'] = 9422
+    ports:
+      - "9480:9480"
+      - "9443:443"
+      - "9422:22"
+    volumes:
+      - "/mnt/volume/gitlab/config:/etc/gitlab"
+      - "/mnt/volume/gitlab/logs:/var/log/gitlab"
+      - "/mnt/volume/gitlab/data:/var/opt/gitlab"
