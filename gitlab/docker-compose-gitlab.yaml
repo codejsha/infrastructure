@@ -18,3 +18,5 @@ services:
       - "/mnt/volume/gitlab/config:/etc/gitlab"
       - "/mnt/volume/gitlab/logs:/var/log/gitlab"
       - "/mnt/volume/gitlab/data:/var/opt/gitlab"
+    extra_hosts:
+      - "el-gitlab.example.com:10.10.10.21"
