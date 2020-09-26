@@ -1,3 +1,5 @@
+# https://hub.docker.com/r/gitlab/gitlab-ce
+
 $GitlabHome="$env:USERPROFILE\volume\gitlab"
 New-Item -Path $GitlabHome\config -ItemType Directory -Force
 New-Item -Path $GitlabHome\logs -ItemType Directory -Force

@@ -23,7 +23,7 @@ ${JAVA_HOME}/bin/java -jar ${JDBC_DRIVER_FILE} -getversion
 
 ######################################################################
 
-unzip -p ${JDBC_DRIVER_FILE} META-INF/MANIFEST.MF
+# unzip -p ${JDBC_DRIVER_FILE} META-INF/MANIFEST.MF
 
 ### ojdbc6.jar:
 ###
