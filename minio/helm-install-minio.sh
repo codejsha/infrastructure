@@ -1,5 +1,8 @@
 #!/usr/bin/bash
 
+helm repo add minio https://helm.min.io
+helm repo update
+
 PASSWORD="${PASSWORD}"
 
 NAMESPACE="minio-system"
@@ -18,5 +21,5 @@ helm upgrade --install my-minio \
     --set persistence.enabled="true" \
     --set persistence.storageClass="rook-ceph-block" \
     --set persistence.accessMode="ReadWriteOnce" \
-    --version 5.0.33 \
-    stable/minio
+    --version 7.0.1 \
+    minio/minio
