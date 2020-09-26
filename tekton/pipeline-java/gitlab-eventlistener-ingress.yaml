@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: el-gitlab-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+    - host: el-gitlab.example.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: el-gitlab-listener
+              servicePort: 8080
