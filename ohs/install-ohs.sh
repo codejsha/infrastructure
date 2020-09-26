@@ -5,7 +5,7 @@
 # INSTALL_FILE_DIR="/mnt/share/oracle-http-server/ohs12.2.1.3/fmw_12.2.1.3.0_ohs_linux64_Disk1_1of1"
 INSTALL_FILE_DIR="/mnt/share/oracle-http-server/ohs12.2.1.4/fmw_12.2.1.4.0_ohs_linux64_Disk1_1of1"
 
-# INSTALL_FILE="/Disk1/runInstaller"
+# INSTALL_FILE="Disk1/runInstaller"
 # INSTALL_FILE="fmw_12.1.3.0.0_ohs_linux64.bin"
 # INSTALL_FILE="fmw_12.2.1.3.0_ohs_linux64.bin"
 INSTALL_FILE="fmw_12.2.1.4.0_ohs_linux64.bin"
