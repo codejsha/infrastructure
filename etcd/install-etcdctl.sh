@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # https://github.com/etcd-io/etcd
 
-ETCD_VER=v3.4.10
+ETCD_VER=v3.4.13
 
 # choose either URL
 GOOGLE_URL=https://storage.googleapis.com/etcd
