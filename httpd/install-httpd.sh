@@ -12,9 +12,9 @@ APRUTIL_VERSION="1.6.1"
 PREFIX="/usr/local/httpd"
 INSTALL_FILE_DIR="/svc/install"
 
-curl -o ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}.tar.gz -JLO http://apache.tt.co.kr/httpd/httpd-${HTTPD_VERSION}.tar.gz
-curl -o ${INSTALL_FILE_DIR}/apr-${APR_VERSION}.tar.gz -JLO http://apache.tt.co.kr/apr/apr-${APR_VERSION}.tar.gz
-curl -o ${INSTALL_FILE_DIR}/apr-util-${APRUTIL_VERSION}.tar.gz -JLO http://apache.tt.co.kr/apr/apr-util-${APRUTIL_VERSION}.tar.gz
+curl -o ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}.tar.gz -LJO http://apache.tt.co.kr/httpd/httpd-${HTTPD_VERSION}.tar.gz
+curl -o ${INSTALL_FILE_DIR}/apr-${APR_VERSION}.tar.gz -LJO http://apache.tt.co.kr/apr/apr-${APR_VERSION}.tar.gz
+curl -o ${INSTALL_FILE_DIR}/apr-util-${APRUTIL_VERSION}.tar.gz -LJO http://apache.tt.co.kr/apr/apr-util-${APRUTIL_VERSION}.tar.gz
 
 tar -xvzf ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}.tar.gz -C ${INSTALL_FILE_DIR}
 tar -xvzf ${INSTALL_FILE_DIR}/apr-${APR_VERSION}.tar.gz -C ${INSTALL_FILE_DIR}
