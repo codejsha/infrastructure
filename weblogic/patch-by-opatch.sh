@@ -71,6 +71,9 @@ function opatch_lsinventory {
 
 ######################################################################
 
+# export ORACLE_HOME="${ORACLE_HOME}"
+# export PATH="${ORACLE_HOME}/OPatch:${PATH}"
+
 check_requirement
 opatch_update "p28186730_139422_Generic.zip" "6880880"
 # opatch_rollback 30675853
