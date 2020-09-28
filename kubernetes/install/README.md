@@ -49,14 +49,6 @@ convert-kube-vhd.ps1
 
 ### Copy ssh keys
 
-- [hosts.txt](/kubernetes/install/hosts.txt)
-
-```bash
-cat <<EOF | sudo tee -a /etc/hosts
-$(cat hosts.txt)
-EOF
-```
-
 - [pre-copy-ssh-key.sh](/kubernetes/install/pre-copy-ssh-key.sh)
 - [copy-ssh-key.sh](/kubernetes/install/copy-ssh-key.sh)
 

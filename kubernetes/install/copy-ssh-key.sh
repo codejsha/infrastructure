@@ -10,7 +10,11 @@ declare -A NODES=(
     [10.10.10.23]="kubenode3"
 )
 
-rm --recursive --force ~/.ssh
+rm --force ~/.ssh/id_rsa
+rm --force ~/.ssh/id_rsa.pub
+rm --force ~/.ssh/known_hosts
+# rm --force ~/.ssh/authorized_keys
+
 ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
 
 for ADDRESS in "${!NODES[@]}"
