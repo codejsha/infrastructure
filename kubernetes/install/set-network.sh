@@ -1,13 +1,13 @@
 #!/usr/bin/bash
 
 declare -A NODES=(
-    [10.10.10.10]="access.example.com"
-    [10.10.10.11]="controlplane1.example.com"
-    [10.10.10.12]="controlplane2.example.com"
-    [10.10.10.13]="controlplane3.example.com"
-    [10.10.10.21]="node1.example.com"
-    [10.10.10.22]="node2.example.com"
-    [10.10.10.23]="node3.example.com"
+    [10.10.10.10]="kubeaccess"
+    [10.10.10.11]="kubecontrolplane1"
+    [10.10.10.12]="kubecontrolplane2"
+    [10.10.10.13]="kubecontrolplane3"
+    [10.10.10.21]="kubenode1"
+    [10.10.10.22]="kubenode2"
+    [10.10.10.23]="kubenode3"
 )
 
 for ADDRESS in "${!NODES[@]}"
@@ -28,13 +28,13 @@ done
 systemctl restart NetworkManager
 
 # declare -A NODES=(
-#     [10.10.10.10]="access.example.com"
-#     [10.10.10.11]="controlplane1.example.com"
-#     [10.10.10.12]="controlplane2.example.com"
-#     [10.10.10.13]="controlplane3.example.com"
-#     [10.10.10.21]="node1.example.com"
-#     [10.10.10.22]="node2.example.com"
-#     [10.10.10.23]="node3.example.com"
+#     [10.10.10.10]="kubeaccess"
+#     [10.10.10.11]="kubecontrolplane1"
+#     [10.10.10.12]="kubecontrolplane2"
+#     [10.10.10.13]="kubecontrolplane3"
+#     [10.10.10.21]="kubenode1"
+#     [10.10.10.22]="kubenode2"
+#     [10.10.10.23]="kubenode3"
 # )
 #
 # for ADDRESS in "${!NODES[@]}"
@@ -51,13 +51,13 @@ systemctl restart NetworkManager
 # done
 #
 # declare -A INT_NODES=(
-#     [192.168.137.10]="access.example.com"
-#     [192.168.137.11]="controlplane1.example.com"
-#     [192.168.137.12]="controlplane2.example.com"
-#     [192.168.137.13]="controlplane3.example.com"
-#     [192.168.137.21]="node1.example.com"
-#     [192.168.137.22]="node2.example.com"
-#     [192.168.137.23]="node3.example.com"
+#     [192.168.137.10]="kubeaccess"
+#     [192.168.137.11]="kubecontrolplane1"
+#     [192.168.137.12]="kubecontrolplane2"
+#     [192.168.137.13]="kubecontrolplane3"
+#     [192.168.137.21]="kubenode1"
+#     [192.168.137.22]="kubenode2"
+#     [192.168.137.23]="kubenode3"
 # )
 #
 # for INT_ADDRESS in "${!INT_NODES[@]}"
