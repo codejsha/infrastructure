@@ -1,6 +1,6 @@
-# tekton
+# Tekton
 
-## api resources
+## API resources
 
 ```txt
 NAME                      SHORTNAMES    APIGROUP                NAMESPACED    KIND

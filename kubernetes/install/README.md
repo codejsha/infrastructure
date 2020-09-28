@@ -6,29 +6,29 @@
 
 ## Virtual machine
 
-### create hyper-v vm
+### Create hyper-v vm
 
 ```powershell
 create-kube-vm.ps1
 ```
 
-### install os
+### Install os
 
 manually install linux(cent os)
 
-### requirements
+### Requirements
 
 ```bash
 bash require-all-node.sh
 ```
 
-### add scripts
+### Add scripts
 
 - set-hostname.sh
 - set-network.sh
 - hosts.txt
 
-### copy vhd
+### Copy vhd
 
 ```powershell
 convert-kube-vhd.ps1
@@ -36,12 +36,12 @@ convert-kube-vhd.ps1
 
 ## Pre-install
 
-### configure
+### Configure
 
 - hostname: `set-hostname.sh`
 - network: `set-network.sh`
 
-### copy ssh keys
+### Copy ssh keys
 
 ```bash
 cat <<EOF | sudo tee -a /etc/hosts
@@ -56,14 +56,14 @@ bash copy-ssh-key.sh
 
 ## Deploy cluster
 
-### configure
+### Configure
 
 - `all.yaml`
 - `docker.yaml`
 - `addons.yaml`
 - `k8s-cluster.yaml`
 
-### run playbook
+### Run playbook
 
 ```bash
 bash install-k8s-kubespray.sh
@@ -71,13 +71,13 @@ bash install-k8s-kubespray.sh
 
 ## Post-install
 
-### copy config and cert files
+### Copy config and cert files
 
 ```bash
 bash post-install.sh
 ```
 
-### dashboard
+### Dashboard
 
 ```bash
 bash dashboard-clusterrolebinding.sh

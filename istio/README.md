@@ -1,12 +1,12 @@
-# istio
+# Istio
 
-## install operator
+## Install operator
 
 ```bash
 bash operator-install-istio.sh
 ```
 
-## install addons
+## Install addons
 
 ```bash
 bash remote-access-setup-cert.sh

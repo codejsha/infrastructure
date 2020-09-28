@@ -1,10 +1,10 @@
-# rook-ceph
+# Rook-Ceph
 
-## cluster
+## Cluster
 
 `rook/cluster/examples/kubernetes/ceph/cluster.yaml`
 
-### prefix for loadbalancer or ingress
+### Prefix for loadbalancer or ingress
 
 ```yaml
 spec:
@@ -12,7 +12,7 @@ spec:
     urlPrefix: /ceph-dashboard
 ```
 
-### specific devices
+### Specific devices
 
 ```yaml
 spec:
@@ -30,9 +30,9 @@ spec:
 
 cf. `lsblk` command
 
-## dashboard
+## Dashboard
 
-### ingress
+### Ingress
 
 `rook/cluster/examples/kubernetes/ceph/dashboard-ingress-https.yaml`
 
@@ -46,7 +46,7 @@ spec:
   - host: rook-ceph.example.com
 ```
 
-### loadbalancer
+### Loadbalancer
 
 `rook/cluster/examples/kubernetes/ceph/dashboard-loadbalancer.yaml`
 
@@ -55,7 +55,7 @@ spec:
   loadBalancerIP: 10.10.10.50
 ```
 
-## default storageclass
+## Default storageclass
 
 `change-default-storageclass.sh`
 

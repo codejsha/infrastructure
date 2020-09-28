@@ -1,8 +1,8 @@
-# tomcat
+# Tomcat
 
-## install
+## Install
 
-### general
+### General
 
 ```bash
 ### requirements
@@ -15,7 +15,7 @@ sudo yum install -y tidy
 ./create-instance.sh inst2 8081 8444 8006
 ```
 
-### cluster
+### Cluster
 
 ```bash
 ### requirements
