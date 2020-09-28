@@ -38,7 +38,6 @@ function bsu_update {
     check_patch_file ${PATCH_FILE_DIR}/${PATCH_FILE}
     unzip -q -o ${PATCH_FILE_DIR}/${PATCH_FILE} -d ${MW_HOME}/utils/bsu
     chmod 750 ${MW_HOME}/utils/bsu/bsu_update.sh
-    cd ${MW_HOME}/utils/bsu
     ${MW_HOME}/utils/bsu/bsu_update.sh install
 }
 
