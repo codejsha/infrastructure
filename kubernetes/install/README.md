@@ -30,7 +30,6 @@ bash require-all-node.sh
 
 - [set-hostname.sh](/kubernetes/install/set-hostname.sh)
 - [set-network.sh](/kubernetes/install/set-network.sh)
-- [hosts.txt](/kubernetes/install/hosts.txt)
 
 ### Copy vhd
 
