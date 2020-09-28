@@ -56,7 +56,7 @@ function bsu_install {
 
     check_patch_file ${PATCH_FILE_DIR}/${PATCH_FILE}
     unzip -q -o ${PATCH_FILE_DIR}/${PATCH_FILE} -d ${MW_HOME}/utils/bsu/cache_dir
-    echo "Patch (${PATCH_LIST}) is starting..."
+    echo "Patch (${PATCH_LIST}) is installing..."
     ${MW_HOME}/utils/bsu/bsu.sh -install -patchlist=${PATCH_LIST} -prod_dir=${MW_HOME}/wlserver_10.3
 }
 
