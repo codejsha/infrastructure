@@ -166,9 +166,6 @@ enable_coredns_k8s_external: true
 coredns_k8s_external_zone: k8s_external.local
 # Enable endpoint_pod_names option for kubernetes plugin
 enable_coredns_k8s_endpoint_pod_names: true
-dns_etchosts: |
-  10.10.10.10 access.example.com
-  10.10.10.10 gitlab.example.com
 
 # Can be docker_dns, host_resolvconf or none
 resolvconf_mode: docker_dns
