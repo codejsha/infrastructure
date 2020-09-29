@@ -50,27 +50,27 @@ JAVA_OPTIONS="\${JAVA_OPTIONS} -DSecureListener=false"
 JAVA_OPTIONS="\${JAVA_OPTIONS} -DLogFile=\${LOG_HOME}/nodemanager/machine_NodeManager.out"
 export JAVA_OPTIONS
 
-if [ -f \${LOG_HOME}/nohup_NodeManager.out ]; then
-  mv \${LOG_HOME}/nohup_NodeManager.out \${LOG_HOME}/nodemanager/nohup_NodeManager_\${GET_DATE}.out
+if [ -f \${LOG_HOME}/nohup.NodeManager.out ]; then
+  mv \${LOG_HOME}/nohup.NodeManager.out \${LOG_HOME}/nodemanager/nohup.NodeManager_\${GET_DATE}.out
 fi
 if [ -f \${LOG_HOME}/gc_NodeManager.log ]; then
   mv \${LOG_HOME}/gc_NodeManager.log \${LOG_HOME}/nodemanager/gc_NodeManager_\${GET_DATE}.log
 fi
-touch \${LOG_HOME}/nohup_NodeManager.out
+touch \${LOG_HOME}/nohup.NodeManager.out
 EOF
 
 if [ "${MAJOR_VERSION}" == "11g" ]; then
 cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
-\${WL_HOME}/server/bin/startNodeManager.sh >> \${LOG_HOME}/nohup_NodeManager.out 2>&1 &
+\${WL_HOME}/server/bin/startNodeManager.sh >> \${LOG_HOME}/nohup.NodeManager.out 2>&1 &
 EOF
 elif [ "${MAJOR_VERSION}" == "12c" ] && [ "${MAJOR_VERSION}" == "14c" ]; then
 cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
-\${DOMAIN_HOME}/bin/startNodeManager.sh >> \${LOG_HOME}/nohup_NodeManager.out 2>&1 &
+\${DOMAIN_HOME}/bin/startNodeManager.sh >> \${LOG_HOME}/nohup.NodeManager.out 2>&1 &
 EOF
 fi
 
 cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
-tail -f \${LOG_HOME}/nohup_NodeManager.out
+tail -f \${LOG_HOME}/nohup.NodeManager.out
 EOF
 
 ######################################################################

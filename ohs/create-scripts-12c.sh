@@ -21,13 +21,13 @@ if [ -n "\${PID}" ]; then
   exit
 fi
 
-if [ -f ${LOG_HOME}/nohup_NodeManager.out ]; then
-  mv ${LOG_HOME}/nohup_NodeManager.out ${LOG_HOME}/NodeManager/nohup_NodeManager_\${GET_DATE}.out
+if [ -f ${LOG_HOME}/nohup.NodeManager.out ]; then
+  mv ${LOG_HOME}/nohup.NodeManager.out ${LOG_HOME}/NodeManager/nohup.NodeManager_\${GET_DATE}.out
 fi
 
-touch ${LOG_HOME}/nohup_NodeManager.out
-nohup \${DOMAIN_HOME}/bin/startNodeManager.sh > ${LOG_HOME}/nohup_NodeManager.out 2>&1 &
-tail -f ${LOG_HOME}/nohup_NodeManager.out
+touch ${LOG_HOME}/nohup.NodeManager.out
+nohup \${DOMAIN_HOME}/bin/startNodeManager.sh > ${LOG_HOME}/nohup.NodeManager.out 2>&1 &
+tail -f ${LOG_HOME}/nohup.NodeManager.out
 EOF
 
 cat <<EOF > "${DOMAIN_HOME}/stop-nodemanager.sh"
