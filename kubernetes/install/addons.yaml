@@ -104,9 +104,9 @@ ingress_nginx_secure_port: 443
 #   - --default-ssl-certificate=default/foo-tls
 
 # ambassador ingress controller deployment
-ingress_ambassador_enabled: true
-ingress_ambassador_namespace: "ambassador"
-ingress_ambassador_version: "*"
+ingress_ambassador_enabled: false
+# ingress_ambassador_namespace: "ambassador"
+# ingress_ambassador_version: "*"
 
 # ALB ingress controller deployment
 ingress_alb_enabled: false
