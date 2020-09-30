@@ -100,8 +100,8 @@ ingress_nginx_secure_port: 443
 #   9000: "default/example-go:8080"
 # ingress_nginx_configmap_udp_services:
 #   53: "kube-system/coredns:53"
-# ingress_nginx_extra_args:
-#   - --default-ssl-certificate=default/foo-tls
+ingress_nginx_extra_args:
+  - --enable-ssl-passthrough
 
 # ambassador ingress controller deployment
 ingress_ambassador_enabled: false
