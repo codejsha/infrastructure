@@ -1,6 +1,7 @@
 #!/usr/bin/bash
+# https://github.com/argoproj/argo
 
-ARGO_VERSION="v2.10.1"
+ARGO_VERSION="v2.11.0"
 
 curl -sLO https://github.com/argoproj/argo/releases/download/${ARGO_VERSION}/argo-linux-amd64.gz
 gunzip argo-linux-amd64.gz

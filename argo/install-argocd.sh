@@ -1,6 +1,7 @@
 #!/usr/bin/bash
+# https://github.com/argoproj/argo-cd
 
-ARGOCD_VERSION="v1.7.5"
+ARGOCD_VERSION="v1.7.7"
 
 kubectl create namespace argocd
 ### Non HA
