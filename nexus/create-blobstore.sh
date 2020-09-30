@@ -7,7 +7,8 @@ BLOBSTORE_NAME="${1}"
 
 AWS_ACCESS_KEY_ID="admin"
 AWS_SECRET_ACCESS_KEY="SECRET_KEY"
-AWS_ENDPOINT_URL="http://10.10.10.52:9000"
+AWS_ENDPOINT_URL="http://minio.example.com"
+# AWS_ENDPOINT_URL="http://10.10.10.52:9000"
 BUCKET_NAME="${BLOBSTORE_NAME}"
 
 function create_s3_blob_store {
