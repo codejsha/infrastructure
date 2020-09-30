@@ -1,33 +1,49 @@
-### Installing on CentOS/Red Hat Enterprise Linux
-sudo yum install httpd
-sudo systemctl enable httpd
-sudo systemctl start httpd
+#!/usr/bin/bash
+# http://httpd.apache.org/docs/current/install.html
+
+### Installing on Fedora/CentOS/Red Hat Enterprise Linux
+function install_on_centos {
+    sudo yum install httpd
+    sudo systemctl enable httpd
+    sudo systemctl start httpd
+}
 
 ######################################################################
 
-### Installing from source
-HTTPD_VERSION="2.4.43"
-APR_VERSION="1.7.0"
-APRUTIL_VERSION="1.6.1"
-PREFIX="/usr/local/httpd"
-INSTALL_FILE_DIR="/svc/install"
+function install_from_source {
+    HTTPD_VERSION="2.4.43"
+    APR_VERSION="1.7.0"
+    APRUTIL_VERSION="1.6.1"
+    PREFIX="/usr/local/httpd"
+    INSTALL_FILE_DIR="/svc/install"
 
-curl -o ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}.tar.gz -LJO http://apache.tt.co.kr/httpd/httpd-${HTTPD_VERSION}.tar.gz
-curl -o ${INSTALL_FILE_DIR}/apr-${APR_VERSION}.tar.gz -LJO http://apache.tt.co.kr/apr/apr-${APR_VERSION}.tar.gz
-curl -o ${INSTALL_FILE_DIR}/apr-util-${APRUTIL_VERSION}.tar.gz -LJO http://apache.tt.co.kr/apr/apr-util-${APRUTIL_VERSION}.tar.gz
+    sudo yum install -y gcc
+    sudo yum install -y pcre pcre-devel
+    sudo yum install -y expat expat-devel
+    sudo yum install -y openssl openssl-devel
 
-tar -xvzf ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}.tar.gz -C ${INSTALL_FILE_DIR}
-tar -xvzf ${INSTALL_FILE_DIR}/apr-${APR_VERSION}.tar.gz -C ${INSTALL_FILE_DIR}
-tar -xvzf ${INSTALL_FILE_DIR}/apr-util-${APRUTIL_VERSION}.tar.gz -C ${INSTALL_FILE_DIR}
+    curl -o ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}.tar.gz -LJO http://apache.tt.co.kr/httpd/httpd-${HTTPD_VERSION}.tar.gz
+    curl -o ${INSTALL_FILE_DIR}/apr-${APR_VERSION}.tar.gz -LJO http://apache.tt.co.kr/apr/apr-${APR_VERSION}.tar.gz
+    curl -o ${INSTALL_FILE_DIR}/apr-util-${APRUTIL_VERSION}.tar.gz -LJO http://apache.tt.co.kr/apr/apr-util-${APRUTIL_VERSION}.tar.gz
 
-mv ${INSTALL_FILE_DIR}/apr-${APR_VERSION} ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}/srclib/apr
-mv ${INSTALL_FILE_DIR}/apr-util-${APRUTIL_VERSION} ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}/srclib/apr-util
+    tar -xvzf ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}.tar.gz -C ${INSTALL_FILE_DIR}
+    tar -xvzf ${INSTALL_FILE_DIR}/apr-${APR_VERSION}.tar.gz -C ${INSTALL_FILE_DIR}
+    tar -xvzf ${INSTALL_FILE_DIR}/apr-util-${APRUTIL_VERSION}.tar.gz -C ${INSTALL_FILE_DIR}
 
-cd ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}
-./configure --prefix=${PREFIX} \
-    --with-included-apr \
-    --enable-modules=most
-    # --enable-modules=all
+    mv ${INSTALL_FILE_DIR}/apr-${APR_VERSION} ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}/srclib/apr
+    mv ${INSTALL_FILE_DIR}/apr-util-${APRUTIL_VERSION} ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}/srclib/apr-util
 
-make
-make install
+    cd ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}
+    ./configure --prefix=${PREFIX} \
+        --with-included-apr \
+        --enable-modules=most
+        # --enable-modules=all
+
+    make
+    make install
+}
+
+######################################################################
+
+# install_on_centos
+install_from_source
