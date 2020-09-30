@@ -37,5 +37,5 @@ helm upgrade --install my-nexus \
     --set persistence.enabled="true" \
     --set persistence.storageClass="rook-ceph-block" \
     --set persistence.storageSize="100Gi" \
-    --version 2.7.1 \
+    --version 2.8.0 \
     oteemocharts/sonatype-nexus
