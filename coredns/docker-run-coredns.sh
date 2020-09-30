@@ -10,4 +10,5 @@ docker run \
     --restart=unless-stopped \
     --publish 53:53/udp \
     --mount type=bind,src=${COREDNS_VOLUME_DIR},dst=/root/coredns \
-    coredns/coredns:latest -conf /root/coredns/Corefile
+    coredns/coredns:latest \
+    -conf /root/coredns/Corefile

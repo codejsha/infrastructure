@@ -2,6 +2,8 @@
 
 USERNAME="admin"
 PASSWORD="${PASSWORD}"
+ACCESS_KEY="admin"
+SECRET_KEY="SECRET_KEY"
 
 NAMESPACE="registry-system"
 kubectl create namespace ${NAMESPACE}
@@ -13,7 +15,7 @@ helm upgrade --install my-docker-registry \
     --namespace ${NAMESPACE} \
     --set storage="s3" \
     --set secrets.htpasswd="$(cat ./htpasswd)" \
-    --set secrets.s3.accessKey="admin" \
+    --set secrets.s3.accessKey="${ACCESS_KEY}" \
     --set secrets.s3.secretKey="${SECRET_KEY}" \
     --set s3.region="us-east-1" \
     --set s3.regionEndpoint="http://minio.example.com" \
