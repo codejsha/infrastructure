@@ -19,7 +19,7 @@ spec:
   params:
     - name: git-code-repo-url
       type: string
-    - name: git-code-branch-name
+    - name: git-code-revision
       type: string
     - name: git-code-subdir
       type: string
@@ -57,7 +57,7 @@ spec:
         - name: url
           value: $(params.git-code-repo-url)
         - name: revision
-          value: $(params.git-code-branch-name)
+          value: $(params.git-code-revision)
         - name: subdirectory
           value: $(params.git-code-subdir)
       workspaces:
