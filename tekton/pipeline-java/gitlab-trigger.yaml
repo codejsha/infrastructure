@@ -75,10 +75,10 @@ spec:
           - name: git-cd-subdir
             value: ""
           - name: git-cd-user-name
-            value: Administrator
+            value: root
           - name: git-cd-user-email
-            value: USER_EMAIL
-          - name: admin@example.com
+            value: admin@example.com
+          - name: git-cd-script
             value: |
               RELEASE_VERSION="0.0.1"
               
