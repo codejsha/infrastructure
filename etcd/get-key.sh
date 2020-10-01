@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-KEYWORD="${KEYWORD}"
+KEYWORD="${1}"
 
 export ETCDCTL_API=3
 /usr/local/bin/etcdctl \
