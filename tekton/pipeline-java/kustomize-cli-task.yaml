@@ -12,9 +12,13 @@ spec:
   description: >-
     This task is the Kustomize CLI task
   workspaces:
+    - name: source
     - name: kubeconfig-dir
-    - name: base-dir
   params:
+    - name: base-dir
+      description: The base directory
+      type: string
+      default: ./
     - name: script
       description: The Kustomize CLI script to run
       type: string
@@ -30,7 +34,7 @@ spec:
   steps:
     - name: kustomize
       image: $(params.image)
-      workingDir: $(workspaces.base-dir.path)
+      workingDir: $(workspaces.source.path)/$(params.base-dir)
       script: |
         #!/usr/bin/bash
         if [[ -f $(workspaces.kubeconfig-dir.path)/kubeconfig ]]; then
