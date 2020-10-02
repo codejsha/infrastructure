@@ -17,7 +17,7 @@ helm upgrade --install my-tomcat \
     bitnami/tomcat
 
     ### custom image
-    # --set image.registry="nexus.example.com/repository/docker-public"
+    # --set image.registry="registry.example.com"
     # --set image.repository="tomcat"
     # --set image.tag="latest"
 
