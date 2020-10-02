@@ -114,6 +114,7 @@ spec:
             value: base
           - name: kustomize-script
             value: |
+              #!/usr/bin/bash
               kustomize edit set image registry.example.com/starter:$(tt.params.git-revision)
           - name: kustomize-args
             value:
@@ -126,14 +127,14 @@ spec:
             value: admin@example.com
           - name: git-cd-script
             value: |
+              #!/usr/bin/bash
+
               HEAD_COMMIT="${$(tt.params.git-ref)/refs\/heads\//}"
               RELEASE_VERSION="${HEAD_COMMIT}"
 
               git branch ${HEAD_COMMIT}
               git checkout ${HEAD_COMMIT}
-
               # cp $(workspaces.input.path)/* $(workspaces.source.path)
               git add .
-
               git commit -m "${HEAD_COMMIT}" --allow-empty
               git push origin ${HEAD_COMMIT}
