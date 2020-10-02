@@ -24,6 +24,7 @@ kubectl apply --filename gitlab-eventlistener-ingress.yaml
 kubectl apply --filename docker-configmap.yaml
 kubectl apply --filename maven-configmap.yaml
 kubectl apply --filename input-asset-configmap.yaml
+kubectl apply --filename kube-configmap.yaml
 kubectl apply --filename pvc.yaml
 kubectl apply --filename java-pipeline.yaml
 

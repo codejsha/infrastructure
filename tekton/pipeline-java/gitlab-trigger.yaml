@@ -44,7 +44,7 @@ spec:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:
-        generateName: pipelinerun-java
+        generateName: pipelinerun-java-
       spec:
         pipelineRef:
           name: java-pipeline
