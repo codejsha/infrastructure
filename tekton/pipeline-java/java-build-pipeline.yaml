@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: java-pipeline
+  name: java-build-pipeline
 spec:
   description: |
     tasks:
@@ -9,31 +9,16 @@ spec:
       - build-source (maven)
       - build-image (kaniko)
       - verify-digest (verify-image-digest)
-      - clone-cd-repo (git-clone)
-      - git-commit (git-cli)
   workspaces:
     - name: shared-workspace
     - name: maven-settings
     - name: docker-config
-    - name: input-asset
   params:
-    - name: git-code-repo-url
+    - name: git-repo-url
       type: string
-    - name: git-code-revision
+    - name: git-revision
       type: string
-    - name: git-code-subdir
-      type: string
-    - name: git-cd-repo-url
-      type: string
-    - name: git-cd-branch-name
-      type: string
-    - name: git-cd-subdir
-      type: string
-    - name: git-cd-user-name
-      type: string
-    - name: git-cd-user-email
-      type: string
-    - name: git-cd-script
+    - name: git-subdir
       type: string
     - name: maven-goals
       type: array
@@ -55,11 +40,11 @@ spec:
         name: git-clone
       params:
         - name: url
-          value: $(params.git-code-repo-url)
+          value: $(params.git-repo-url)
         - name: revision
-          value: $(params.git-code-revision)
+          value: $(params.git-revision)
         - name: subdirectory
-          value: $(params.git-code-subdir)
+          value: $(params.git-subdir)
       workspaces:
         - name: output
           workspace: shared-workspace
@@ -109,35 +94,3 @@ spec:
       params:
         - name: digest
           value: $(tasks.build-image.results.IMAGE-DIGEST)
-    - name: clone-cd-repo
-      taskRef:
-        name: git-clone
-      runAfter:
-        - verify-digest
-      params:
-        - name: url
-          value: $(params.git-cd-repo-url)
-        - name: revision
-          value: $(params.git-cd-branch-name)
-        - name: subdirectory
-          value: $(params.git-cd-subdir)
-      workspaces:
-        - name: output
-          workspace: shared-workspace
-    - name: git-commit
-      taskRef:
-        name: git-cli
-      runAfter:
-        - clone-cd-repo
-      workspaces:
-        - name: source
-          workspace: shared-workspace
-        - name: input
-          workspace: input-asset
-      params:
-        - name: GIT_USER_NAME
-          value: $(params.git-cd-user-name)
-        - name: GIT_USER_EMAIL
-          value: $(params.git-cd-user-email)
-        - name: GIT_SCRIPT
-          value: $(params.git-cd-script)

@@ -1,0 +1,41 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: kustomize-cli
+  labels:
+    app.kubernetes.io/version: "0.1"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.12.1"
+    tekton.dev/tags: cli, kubectl, kustomize
+    tekton.dev/displayName: "kustomize cli"
+spec:
+  description: >-
+    This task is the Kustomize CLI task
+  workspaces:
+    - name: kubeconfig-dir
+    - name: base-dir
+  params:
+    - name: script
+      description: The Kustomize CLI script to run
+      type: string
+      default: "kustomize $@"
+    - name: args
+      description: The Kustomize CLI arguments to run
+      type: array
+      default:
+        - "help"
+    - name: image
+      description: Kustomize wrapper image
+      default: registry.example.com/kustomize-cli:latest
+  steps:
+    - name: kustomize
+      image: $(params.image)
+      workingDir: $(workspaces.base-dir.path)
+      script: |
+        #!/usr/bin/bash
+        if [[ -f $(workspaces.kubeconfig-dir.path)/kubeconfig ]]; then
+          export KUBECONFIG=$(workspaces.kubeconfig-dir.path)/kubeconfig
+        fi
+        $(params.script)
+      args:
+        - "$(params.args)"

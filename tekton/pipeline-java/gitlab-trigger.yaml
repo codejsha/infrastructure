@@ -26,26 +26,28 @@ spec:
   params:
     - name: git-repo-url
       value: $(body.repository.git_http_url)
+    - name: git-ref
+      value: $(body.ref)
     - name: git-revision
       value: $(body.checkout_sha)
 ---
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerTemplate
 metadata:
-  name: gitlab-echo-template
+  name: gitlab-java-template
 spec:
   params:
     - name: git-repo-url
+    - name: git-ref
     - name: git-revision
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:
-        # name: java-pipelinerun
-        generateName: java-pipelinerun-
+        generateName: pipelinerun-build
       spec:
         pipelineRef:
-          name: java-pipeline
+          name: java-build-pipeline
         serviceAccountName: tekton-triggers-gitlab-sa
         workspaces:
           - name: shared-workspace
@@ -57,42 +59,13 @@ spec:
           - name: docker-config
             configMap:
               name: docker-config-store
-          - name: input-asset
-            emptyDir: {}
-            # configMap:
-            #   name: input-asset-store
         params:
-          - name: git-code-repo-url
+          - name: git-repo-url
             value: $(tt.params.git-repo-url)
-          - name: git-code-revision
+          - name: git-revision
             value: $(tt.params.git-revision)
-          - name: git-code-subdir
+          - name: git-subdir
             value: ""
-          - name: git-cd-repo-url
-            value: http://gitlab.example.com:9480/root/myproject-cd.git
-          - name: git-cd-branch-name
-            value: master
-          - name: git-cd-subdir
-            value: ""
-          - name: git-cd-user-name
-            value: root
-          - name: git-cd-user-email
-            value: admin@example.com
-          - name: git-cd-script
-            value: |
-              RELEASE_VERSION="0.0.1"
-              
-              kustomize edit set image my-docker-registry.registry-system:5000/starter:${RELEASE_VERSION}
-
-              git branch release-${RELEASE_VERSION}
-              git checkout release-${RELEASE_VERSION}
-
-              # cp $(workspaces.input.path)/* $(workspaces.source.path)
-              git add .
-
-              git commit -m "release-${RELEASE_VERSION}" --allow-empty
-              git push origin release-${RELEASE_VERSION}
-
           - name: maven-goals
             value:
               # - -DskipTests
@@ -101,16 +74,64 @@ spec:
           - name: maven-context-dir
             value: ./
           - name: kaniko-image
-            value: my-docker-registry.registry-system:5000/IMAGE:TAG
+            value: registry.example.com/starter:$(tt.params.git-revision)
           - name: kaniko-dockerfile
             value: ./Dockerfile
           - name: kaniko-context
             value: ./
           - name: kaniko-extra-args
             value:
-              - --insecure-registry=my-docker-registry.registry-system:5000
+              - --insecure-registry=registry.example.com
               - --insecure-registry=sonatype-nexus-service.nexus-system:5003
               - --registry-mirror=sonatype-nexus-service.nexus-system:5003
               - --verbosity=info
           - name: kaniko-builder-image
             value: gcr.io/kaniko-project/executor:latest
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: pipelinerun-delivery
+      spec:
+        pipelineRef:
+          name: java-delivery-pipeline
+        serviceAccountName: tekton-triggers-gitlab-sa
+        workspaces:
+          - name: shared-workspace
+            persistentvolumeclaim:
+              claimName: tkn-shared-workspace-pvc
+          - name: kube-config
+            configMap:
+              name: kube-config-store
+          - name: input-asset
+            emptyDir: {}
+            # configMap:
+            #   name: input-asset-store
+        params:
+          - name: git-repo-url
+            value: http://gitlab.example.com:9480/root/myproject-cd.git
+          - name: git-branch-name
+            value: master
+          - name: git-subdir
+            value: ""
+          - name: kube-script
+            value: |
+              kustomize edit set image registry.example.com/starter:$(tt.params.git-revision)
+          - name: kube-args
+            value: ""
+          - name: git-user-name
+            value: root
+          - name: git-user-email
+            value: admin@example.com
+          - name: git-script
+            value: |
+              HEAD_COMMIT="${$(tt.params.ref)/refs\/heads\//}"
+              RELEASE_VERSION="${HEAD_COMMIT}"
+
+              git branch ${HEAD_COMMIT}
+              git checkout ${HEAD_COMMIT}
+
+              # cp $(workspaces.input.path)/* $(workspaces.source.path)
+              git add .
+
+              git commit -m "${HEAD_COMMIT}" --allow-empty
+              git push origin ${HEAD_COMMIT}

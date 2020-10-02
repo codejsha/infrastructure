@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kube-config-store
+data:
+  config: |
+    apiVersion: v1
+    clusters:
+    - cluster:
+        certificate-authority-data: CERTIFICATE_AUTHORITY_DATA
+        server: https://10.10.10.11:6443
+      name: cluster.local
+    contexts:
+    - context:
+        cluster: cluster.local
+        namespace: default
+        user: kubernetes-admin
+      name: kubernetes-admin@cluster.local
+    current-context: kubernetes-admin@cluster.local
+    kind: Config
+    preferences: {}
+    users:
+    - name: kubernetes-admin
+      user:
+        client-certificate-data: CLIENT_CERTIFICATE_DATA
+        client-key-data: CLIENT_KEY_DATA
