@@ -109,7 +109,7 @@ spec:
         params:
           - name: git-repo-url
             value: http://gitlab.example.com:9480/root/myproject-cd.git
-          - name: git-branch-name
+          - name: git-revision
             value: master
           - name: git-subdir
             value: ""
