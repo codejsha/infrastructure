@@ -48,6 +48,12 @@ spec:
       spec:
         pipelineRef:
           name: java-pipeline
+        podTemplate:
+          dnsConfig:
+            nameservers:
+              - 10.10.10.10
+              - 8.8.8.8
+              - 168.126.63.1
         serviceAccountName: tekton-triggers-gitlab-sa
         workspaces:
           - name: shared-workspace
