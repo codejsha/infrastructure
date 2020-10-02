@@ -16,7 +16,7 @@ spec:
       bindings:
         - ref: gitlab-push-binding
       template:
-        name: gitlab-echo-template
+        name: gitlab-java-template
 ---
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerBinding
