@@ -124,7 +124,7 @@ spec:
             value: admin@example.com
           - name: git-script
             value: |
-              HEAD_COMMIT="${$(tt.params.ref)/refs\/heads\//}"
+              HEAD_COMMIT="${$(tt.params.git-ref)/refs\/heads\//}"
               RELEASE_VERSION="${HEAD_COMMIT}"
 
               git branch ${HEAD_COMMIT}

@@ -47,7 +47,7 @@ spec:
       taskRef:
         name: kustomize-cli
       runAfter:
-        - git-clone
+        - clone-cd-repo
       params:
         - name: script
           value: $(params.kube-script)
