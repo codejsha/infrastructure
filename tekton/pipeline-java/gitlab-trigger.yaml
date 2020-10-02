@@ -110,6 +110,8 @@ spec:
             value: ""
 
           ### kustomize params
+          - name: kustomize-base-dir
+            value: base
           - name: kustomize-script
             value: |
               kustomize edit set image registry.example.com/starter:$(tt.params.git-revision)
