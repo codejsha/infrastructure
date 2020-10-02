@@ -24,11 +24,11 @@ metadata:
   name: gitlab-push-binding
 spec:
   params:
-    - name: git-code-repo-url
+    - name: git-repo-url
       value: $(body.repository.git_http_url)
-    - name: git-code-ref
+    - name: git-ref
       value: $(body.ref)
-    - name: git-code-revision
+    - name: git-revision
       value: $(body.checkout_sha)
 ---
 apiVersion: triggers.tekton.dev/v1alpha1
@@ -37,9 +37,9 @@ metadata:
   name: gitlab-java-template
 spec:
   params:
-    - name: git-code-repo-url
-    - name: git-code-ref
-    - name: git-code-revision
+    - name: git-repo-url
+    - name: git-ref
+    - name: git-revision
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
@@ -70,9 +70,9 @@ spec:
         params:
           ### git (code repo) params
           - name: git-code-repo-url
-            value: $(tt.params.git-code-repo-url)
+            value: $(tt.params.git-repo-url)
           - name: git-code-revision
-            value: $(tt.params.git-code-revision)
+            value: $(tt.params.git-revision)
           - name: git-code-subdir
             value: ""
 
@@ -87,7 +87,7 @@ spec:
 
           ### kaniko params
           - name: kaniko-image
-            value: registry.example.com/starter:$(tt.params.git-code-revision)
+            value: registry.example.com/starter:$(tt.params.git-revision)
           - name: kaniko-dockerfile
             value: ./Dockerfile
           - name: kaniko-context
@@ -112,7 +112,7 @@ spec:
           ### kustomize params
           - name: kustomize-script
             value: |
-              kustomize edit set image registry.example.com/starter:$(tt.params.git-code-revision)
+              kustomize edit set image registry.example.com/starter:$(tt.params.git-revision)
           - name: kustomize-args
             value:
               - ""
