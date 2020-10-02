@@ -24,11 +24,11 @@ metadata:
   name: gitlab-push-binding
 spec:
   params:
-    - name: git-repo-url
+    - name: git-code-repo-url
       value: $(body.repository.git_http_url)
-    - name: git-ref
+    - name: git-code-ref
       value: $(body.ref)
-    - name: git-revision
+    - name: git-code-revision
       value: $(body.checkout_sha)
 ---
 apiVersion: triggers.tekton.dev/v1alpha1
@@ -37,17 +37,17 @@ metadata:
   name: gitlab-java-template
 spec:
   params:
-    - name: git-repo-url
-    - name: git-ref
-    - name: git-revision
+    - name: git-code-repo-url
+    - name: git-code-ref
+    - name: git-code-revision
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:
-        generateName: pipelinerun-build
+        generateName: pipelinerun-java
       spec:
         pipelineRef:
-          name: java-build-pipeline
+          name: java-pipeline
         serviceAccountName: tekton-triggers-gitlab-sa
         workspaces:
           - name: shared-workspace
@@ -59,13 +59,24 @@ spec:
           - name: docker-config
             configMap:
               name: docker-config-store
+          - name: kube-config
+            configMap:
+              name: kube-config-store
+          - name: input-asset
+            emptyDir: {}
+            # configMap:
+            #   name: input-asset-store
+
         params:
-          - name: git-repo-url
-            value: $(tt.params.git-repo-url)
-          - name: git-revision
-            value: $(tt.params.git-revision)
-          - name: git-subdir
+          ### git (code repo) params
+          - name: git-code-repo-url
+            value: $(tt.params.git-code-repo-url)
+          - name: git-code-revision
+            value: $(tt.params.git-code-revision)
+          - name: git-code-subdir
             value: ""
+
+          ### maven params
           - name: maven-goals
             value:
               # - -DskipTests
@@ -73,8 +84,10 @@ spec:
               - deploy
           - name: maven-context-dir
             value: ./
+
+          ### kaniko params
           - name: kaniko-image
-            value: registry.example.com/starter:$(tt.params.git-revision)
+            value: registry.example.com/starter:$(tt.params.git-code-revision)
           - name: kaniko-dockerfile
             value: ./Dockerfile
           - name: kaniko-context
@@ -87,44 +100,31 @@ spec:
               - --verbosity=info
           - name: kaniko-builder-image
             value: gcr.io/kaniko-project/executor:latest
-    - apiVersion: tekton.dev/v1beta1
-      kind: PipelineRun
-      metadata:
-        generateName: pipelinerun-delivery
-      spec:
-        pipelineRef:
-          name: java-delivery-pipeline
-        serviceAccountName: tekton-triggers-gitlab-sa
-        workspaces:
-          - name: shared-workspace
-            persistentvolumeclaim:
-              claimName: tkn-shared-workspace-pvc
-          - name: kube-config
-            configMap:
-              name: kube-config-store
-          - name: input-asset
-            emptyDir: {}
-            # configMap:
-            #   name: input-asset-store
-        params:
-          - name: git-repo-url
+
+          ### git (cd repo) params
+          - name: git-cd-repo-url
             value: http://gitlab.example.com:9480/root/myproject-cd.git
-          - name: git-revision
+          - name: git-cd-revision
             value: master
-          - name: git-subdir
+          - name: git-cd-subdir
             value: ""
-          - name: kube-script
+
+          ### kustomize params
+          - name: kustomize-script
             value: |
-              kustomize edit set image registry.example.com/starter:$(tt.params.git-revision)
-          - name: kube-args
-            value: ""
-          - name: git-user-name
+              kustomize edit set image registry.example.com/starter:$(tt.params.git-code-revision)
+          - name: kustomize-args
+            value:
+              - ""
+
+          ### git (cd repo) commit params
+          - name: git-cd-user-name
             value: root
-          - name: git-user-email
+          - name: git-cd-user-email
             value: admin@example.com
-          - name: git-script
+          - name: git-cd-script
             value: |
-              HEAD_COMMIT="${$(tt.params.git-ref)/refs\/heads\//}"
+              HEAD_COMMIT="${$(tt.params.git-code-ref)/refs\/heads\//}"
               RELEASE_VERSION="${HEAD_COMMIT}"
 
               git branch ${HEAD_COMMIT}

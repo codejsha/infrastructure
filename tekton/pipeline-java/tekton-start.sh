@@ -25,8 +25,7 @@ kubectl apply --filename docker-configmap.yaml
 kubectl apply --filename maven-configmap.yaml
 kubectl apply --filename input-asset-configmap.yaml
 kubectl apply --filename pvc.yaml
-kubectl apply --filename java-build-pipeline.yaml
-kubectl apply --filename java-delivery-pipeline.yaml
+kubectl apply --filename java-pipeline.yaml
 
 # kubectl create --filename run.yaml
 # tkn pipelineruns logs --follow --last
