@@ -1,4 +1,4 @@
 {
   "insecure-registries": ["registry.example.com"],
-  "registry-mirrors": ["registry.example.com"]
+  "registry-mirrors": ["http://registry.example.com"]
 }
