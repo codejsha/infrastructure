@@ -134,9 +134,9 @@ spec:
     ### clone-cd-repo
     - name: clone-cd-repo
       taskRef:
-        name: verify-image-digest
+        name: git-clone
       runAfter:
-        - clone-cd-repo
+        - verify-digest
       params:
         - name: url
           value: $(params.git-cd-repo-url)
