@@ -62,7 +62,7 @@ spec:
       taskRef:
         name: git-cli
       runAfter:
-        - kubernetes-cd-repo
+        - kustomize-cd-repo
       workspaces:
         - name: source
           workspace: shared-workspace
