@@ -2,5 +2,8 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: argocd-env-configmap
+  labels:
+    app.kubernetes.io/name: argocd-env-configmap
+    app.kubernetes.io/part-of: argocd
 data:
   ARGOCD_SERVER: argocd.example.com

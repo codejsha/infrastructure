@@ -8,4 +8,4 @@ subjects:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: tekton-triggers-gitlab-ci-minimal
+  name: tekton-triggers-gitlab-ci-role

@@ -6,7 +6,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: docker-config-store
+  name: docker-config-configmap
 data:
   config.json: |
     {

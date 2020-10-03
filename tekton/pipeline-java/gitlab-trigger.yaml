@@ -9,7 +9,7 @@ spec:
       interceptors:
         - gitlab:
             secretRef:
-              secretName: gitlab-ci-auth
+              secretName: gitlab-ci-secret
               secretKey: secretToken
             eventTypes:
               - Push Hook
@@ -67,17 +67,17 @@ spec:
               claimName: tkn-shared-workspace-pvc
           - name: maven-settings
             configMap:
-              name: maven-settings-store
+              name: maven-settings-configmap
           - name: docker-config
             configMap:
-              name: docker-config-store
+              name: docker-config-configmap
           - name: kube-config
             configMap:
-              name: kube-config-store
+              name: kube-config-configmap
           - name: input-asset
             emptyDir: {}
             # configMap:
-            #   name: input-asset-store
+            #   name: input-asset-configmap
 
         params:
           ### git (code repo) params

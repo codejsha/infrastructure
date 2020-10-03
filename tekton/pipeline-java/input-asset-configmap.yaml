@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: input-asset-store
+  name: input-asset-configmap
 data:
   RELEASE.md: |
     # Release Note

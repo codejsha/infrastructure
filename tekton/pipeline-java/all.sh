@@ -15,7 +15,13 @@ kubectl apply --filename https://raw.githubusercontent.com/tektoncd/catalog/mast
 # kubectl apply --filename github-secret.yaml
 # kubectl apply --filename github-serviceaccount.yaml
 
-kubectl apply --filename gitlab-cd-secret.yaml
+kubectl apply --filename docker-configmap.yaml
+kubectl apply --filename maven-configmap.yaml
+kubectl apply --filename input-asset-configmap.yaml
+kubectl apply --filename kube-configmap.yaml
+kubectl apply --filename argocd-configmap.yaml
+kubectl apply --filename argocd-secret.yaml
+kubectl apply --filename gitlab-cd-basic-secret.yaml
 kubectl apply --filename gitlab-cd-serviceaccount.yaml
 kubectl apply --filename gitlab-ci-secret.yaml
 kubectl apply --filename gitlab-ci-serviceaccount.yaml
@@ -23,11 +29,6 @@ kubectl apply --filename gitlab-ci-role.yaml
 kubectl apply --filename gitlab-ci-rolebinding.yaml
 kubectl apply --filename gitlab-trigger.yaml
 kubectl apply --filename gitlab-eventlistener-ingress.yaml
-
-kubectl apply --filename docker-configmap.yaml
-kubectl apply --filename maven-configmap.yaml
-kubectl apply --filename input-asset-configmap.yaml
-kubectl apply --filename kube-configmap.yaml
 kubectl apply --filename pvc.yaml
 kubectl apply --filename pipeline.yaml
 

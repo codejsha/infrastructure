@@ -11,8 +11,8 @@ spec:
       - verify-digest (verify-image-digest)
       - clone-cd-repo (git-clone)
       - kustomize-cd-repo (kustomize-cli)
-      - git-commit (git-cli)
-      - argocd-sync (argocd-task-sync-and-wait)
+      - commit-cd-repo (git-cli)
+      - sync-app (argocd-task-sync-and-wait)
   workspaces:
     - name: shared-workspace
     - name: maven-settings
@@ -178,8 +178,8 @@ spec:
         - name: kubeconfig-dir
           workspace: kube-config
 
-    ### git-commit
-    - name: git-commit
+    ### commit-cd-repo
+    - name: commit-cd-repo
       taskRef:
         name: git-cli
       runAfter:
@@ -197,17 +197,17 @@ spec:
         - name: GIT_SCRIPT
           value: $(params.git-cd-script)
 
-    ### argocd-sync
-    - name: argocd-sync
+    ### sync-app
+    - name: sync-app
       taskRef:
         name: argocd-task-sync-and-wait
       runAfter:
-        - git-commit
+        - commit-cd-repo
       params:
         - name: application-name
           value: $(params.argocd-app-name)
         - name: revision
-          value: $(params.git-cd-revision)
+          value: $(tasks.commit-cd-repo.results.commit)
         - name: flags
           value: $(params.argocd-flags)
         - name: argocd-version

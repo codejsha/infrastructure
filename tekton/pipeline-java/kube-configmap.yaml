@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: kube-config-store
+  name: kube-config-configmap
 data:
   config: |
     apiVersion: v1
