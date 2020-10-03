@@ -3,7 +3,7 @@
 
 PROJECT="myproject"
 APP="myproject"
-ROLE_NAME="get-role"
+ROLE_NAME="my-role"
 
 argocd proj role create ${PROJECT} ${ROLE_NAME}
 argocd proj role list ${PROJECT}
