@@ -59,7 +59,7 @@ spec:
             taskServiceAccountName: tekton-triggers-gitlab-ci-sa
           - pipelineTaskName: clone-cd-repo
             taskServiceAccountName: tekton-gitlab-cd-sa
-          - pipelineTaskName: git-commit
+          - pipelineTaskName: commit-cd-repo
             taskServiceAccountName: tekton-gitlab-cd-sa
         workspaces:
           - name: shared-workspace
