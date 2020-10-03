@@ -1,11 +1,11 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: tekton-triggers-gitlab-binding
+  name: tekton-triggers-gitlab-ci-binding
 subjects:
   - kind: ServiceAccount
-    name: tekton-triggers-gitlab-sa
+    name: tekton-triggers-gitlab-ci-sa
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: tekton-triggers-gitlab-minimal
+  name: tekton-triggers-gitlab-ci-minimal

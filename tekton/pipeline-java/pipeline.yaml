@@ -5,7 +5,7 @@ metadata:
 spec:
   description: |
     tasks:
-      - clone-code-repo (git-clone)
+      - clone-ci-repo (git-clone)
       - build-source (maven)
       - build-image (kaniko)
       - verify-digest (verify-image-digest)
@@ -21,11 +21,11 @@ spec:
 
   params:
     ### git (code repo) params
-    - name: git-code-repo-url
+    - name: git-ci-repo-url
       type: string
-    - name: git-code-revision
+    - name: git-ci-revision
       type: string
-    - name: git-code-subdir
+    - name: git-ci-subdir
       type: string
     ### maven params
     - name: maven-goals
@@ -66,17 +66,17 @@ spec:
       type: string
 
   tasks:
-    ### clone-code-repo
-    - name: clone-code-repo
+    ### clone-ci-repo
+    - name: clone-ci-repo
       taskRef:
         name: git-clone
       params:
         - name: url
-          value: $(params.git-code-repo-url)
+          value: $(params.git-ci-repo-url)
         - name: revision
-          value: $(params.git-code-revision)
+          value: $(params.git-ci-revision)
         - name: subdirectory
-          value: $(params.git-code-subdir)
+          value: $(params.git-ci-subdir)
       workspaces:
         - name: output
           workspace: shared-workspace
@@ -86,7 +86,7 @@ spec:
       taskRef:
         name: maven
       runAfter:
-        - clone-code-repo
+        - clone-ci-repo
       params:
         - name: GOALS
           value:

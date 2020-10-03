@@ -1,15 +1,15 @@
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: EventListener
 metadata:
-  name: gitlab-listener
+  name: gitlab-ci-listener
 spec:
-  serviceAccountName: tekton-triggers-gitlab-sa
+  serviceAccountName: tekton-triggers-gitlab-ci-sa
   triggers:
     - name: gitlab-push-events-trigger
       interceptors:
         - gitlab:
             secretRef:
-              secretName: gitlab-auth
+              secretName: gitlab-ci-auth
               secretKey: secretToken
             eventTypes:
               - Push Hook
@@ -54,7 +54,13 @@ spec:
               - 10.10.10.10
               - 8.8.8.8
               - 168.126.63.1
-        serviceAccountName: tekton-triggers-gitlab-sa
+        taskRunSpecs:
+          - pipelineTaskName: clone-ci-repo
+            taskServiceAccountName: tekton-triggers-gitlab-ci-sa
+          - pipelineTaskName: clone-cd-repo
+            taskServiceAccountName: tekton-gitlab-cd-sa
+          - pipelineTaskName: git-commit
+            taskServiceAccountName: tekton-gitlab-cd-sa
         workspaces:
           - name: shared-workspace
             persistentvolumeclaim:
@@ -75,11 +81,11 @@ spec:
 
         params:
           ### git (code repo) params
-          - name: git-code-repo-url
+          - name: git-ci-repo-url
             value: $(tt.params.git-repo-url)
-          - name: git-code-revision
+          - name: git-ci-revision
             value: $(tt.params.git-revision)
-          - name: git-code-subdir
+          - name: git-ci-subdir
             value: ""
 
           ### maven params
@@ -117,10 +123,14 @@ spec:
 
           ### kustomize params
           - name: kustomize-base-dir
-            value: base
+            value: ./
           - name: kustomize-script
             value: |
-              #!/usr/bin/bash
+
+              tree base
+              echo -n "---\\n"
+              kustomize cfg tree base
+              cd base
               kustomize edit set image registry.example.com/starter:$(tt.params.git-revision)
           - name: kustomize-args
             value:
@@ -133,7 +143,6 @@ spec:
             value: admin@example.com
           - name: git-cd-script
             value: |
-              #!/usr/bin/bash
 
               REF="$(tt.params.git-ref)"
               RELEASE_VERSION="${REF/refs\/heads\//}"
@@ -142,5 +151,6 @@ spec:
               git checkout ${RELEASE_VERSION}
               # cp $(workspaces.input.path)/* $(workspaces.source.path)
               git add .
+              git status
               git commit -m "${RELEASE_VERSION}" --allow-empty
               git push origin ${RELEASE_VERSION}
