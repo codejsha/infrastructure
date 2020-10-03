@@ -21,6 +21,10 @@ argocd app get guestbook
 ######################################################################
 
 argocd app sync guestbook
+argocd app set guestbook --sync-policy none
+argocd app set guestbook --sync-policy automated
+argocd app set guestbook --auto-prune
+argocd app set guestbook --self-heal
 
 ######################################################################
 
