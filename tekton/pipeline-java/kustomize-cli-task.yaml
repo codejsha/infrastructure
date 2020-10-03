@@ -36,7 +36,7 @@ spec:
       image: $(params.image)
       workingDir: $(workspaces.source.path)/$(params.base-dir)
       script: |
-        #!/usr/bin/bash
+        #!/usr/bin/bash -x
         if [[ -f $(workspaces.kubeconfig-dir.path)/kubeconfig ]]; then
           export KUBECONFIG=$(workspaces.kubeconfig-dir.path)/kubeconfig
         fi

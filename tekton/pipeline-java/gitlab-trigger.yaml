@@ -128,7 +128,7 @@ spec:
             value: |
 
               tree base
-              echo -n "---\\n"
+              echo -e "---\n"
               kustomize cfg tree base
               cd base
               kustomize edit set image registry.example.com/starter:$(tt.params.git-revision)
