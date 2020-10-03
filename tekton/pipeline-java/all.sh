@@ -21,7 +21,7 @@ kubectl apply --filename input-asset-configmap.yaml
 kubectl apply --filename kube-configmap.yaml
 kubectl apply --filename argocd-configmap.yaml
 kubectl apply --filename argocd-secret.yaml
-kubectl apply --filename gitlab-cd-basic-secret.yaml
+kubectl apply --filename gitlab-cd-secret.yaml
 kubectl apply --filename gitlab-cd-serviceaccount.yaml
 kubectl apply --filename gitlab-ci-secret.yaml
 kubectl apply --filename gitlab-ci-serviceaccount.yaml
