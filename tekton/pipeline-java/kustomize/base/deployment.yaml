@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: starter
-          image: my-docker-registry.registry-system:5000/starter:RELEASE_VERION
+          image: registry.example.com/starter:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080

@@ -106,6 +106,7 @@ spec:
             value: ./
           - name: kaniko-extra-args
             value:
+              - --destination=registry.example.com/starter:latest
               - --insecure-registry=registry.example.com
               - --insecure-registry=sonatype-nexus-service.nexus-system:5003
               - --registry-mirror=sonatype-nexus-service.nexus-system:5003
