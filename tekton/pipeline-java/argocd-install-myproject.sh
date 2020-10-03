@@ -6,4 +6,6 @@ argocd app create myproject \
     --dest-server https://10.10.10.11:6443 \
     --dest-namespace myproject
 
-# argocd app sync guestbook
+# argocd app get myproject
+# argocd app sync myproject
+# argocd app delete myproject
