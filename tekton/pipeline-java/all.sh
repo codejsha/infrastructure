@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-kubectl config set-context --current --namespace=tekton-pipelines
+kubectl config set-context --current --namespace=myproject
 
 kubectl apply --filename https://raw.githubusercontent.com/tektoncd/catalog/master/task/git-clone/0.2/git-clone.yaml
 kubectl apply --filename https://raw.githubusercontent.com/tektoncd/catalog/master/task/maven/0.2/maven.yaml
@@ -10,6 +10,7 @@ kubectl apply --filename verify-image-digest-task.yaml
 # kubectl apply --filename https://raw.githubusercontent.com/tektoncd/catalog/master/task/kubernetes-actions/0.1/kubernetes-actions.yaml
 kubectl apply --filename kustomize-cli-task.yaml
 kubectl apply --filename https://raw.githubusercontent.com/tektoncd/catalog/master/task/git-cli/0.1/git-cli.yaml
+kubectl apply --filename https://raw.githubusercontent.com/tektoncd/catalog/master/task/argocd-task-sync-and-wait/0.1/argocd-task-sync-and-wait.yaml
 
 # kubectl apply --filename github-secret.yaml
 # kubectl apply --filename github-serviceaccount.yaml

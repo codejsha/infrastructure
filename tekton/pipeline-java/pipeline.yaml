@@ -12,6 +12,7 @@ spec:
       - clone-cd-repo (git-clone)
       - kustomize-cd-repo (kustomize-cli)
       - git-commit (git-cli)
+      - argocd-sync (argocd-task-sync-and-wait)
   workspaces:
     - name: shared-workspace
     - name: maven-settings
@@ -63,6 +64,13 @@ spec:
     - name: git-cd-user-email
       type: string
     - name: git-cd-script
+      type: string
+    ### argocd params
+    - name: argocd-app-name
+      type: string
+    - name: argocd-flags
+      type: string
+    - name: argocd-version
       type: string
 
   tasks:
@@ -188,3 +196,19 @@ spec:
           value: $(params.git-cd-user-email)
         - name: GIT_SCRIPT
           value: $(params.git-cd-script)
+
+    ### argocd-sync
+    - name: argocd-sync
+      taskRef:
+        name: argocd-task-sync-and-wait
+      runAfter:
+        - git-commit
+      params:
+        - name: application-name
+          value: $(params.argocd-app-name)
+        - name: revision
+          value: $(params.git-cd-revision)
+        - name: flags
+          value: $(params.argocd-flags)
+        - name: argocd-version
+          value: $(params.argocd-version)

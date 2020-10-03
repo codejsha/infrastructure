@@ -154,3 +154,11 @@ spec:
               git status
               git commit -m "${RELEASE_VERSION}" --allow-empty
               git push origin ${RELEASE_VERSION}
+
+          ### argocd params
+          - name: argocd-app-name
+            value: myproject
+          - name: argocd-flags
+            value: --
+          - name: argocd-version
+            value: v1.7.7
