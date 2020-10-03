@@ -131,16 +131,6 @@ spec:
         - name: BUILDER_IMAGE
           value: $(params.kaniko-builder-image)
 
-    ### verify-digest
-    - name: verify-digest
-      taskRef:
-        name: verify-image-digest
-      runAfter:
-        - build-image
-      params:
-        - name: digest
-          value: $(tasks.build-image.results.IMAGE-DIGEST)
-
     ### clone-cd-repo
     - name: clone-cd-repo
       taskRef:
