@@ -8,5 +8,5 @@ env:
     # STORAGE_AMAZON_REGION:
     STORAGE_AMAZON_ENDPOINT: "http://my-minio.minio-system:9000"
   secret:
-    AWS_ACCESS_KEY_ID: "admin"
-    AWS_SECRET_ACCESS_KEY: "SECRET_KEY"
+    AWS_ACCESS_KEY_ID: "<ACCESS_KEY>"
+    AWS_SECRET_ACCESS_KEY: "<SECRET_KEY>"
