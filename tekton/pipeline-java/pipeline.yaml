@@ -8,7 +8,6 @@ spec:
       - clone-ci-repo (git-clone)
       - build-source (maven)
       - build-image (kaniko)
-      - verify-digest (verify-image-digest)
       - clone-cd-repo (git-clone)
       - kustomize-cd-repo (kustomize-cli)
       - commit-cd-repo (git-cli)
