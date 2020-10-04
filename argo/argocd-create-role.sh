@@ -17,4 +17,3 @@ echo ${JWT_TOKEN}
 argocd proj role add-policy ${PROJECT} ${ROLE_NAME} --action get --permission allow --object ${APP}
 argocd proj role add-policy ${PROJECT} ${ROLE_NAME} --action sync --permission allow --object ${APP}
 argocd app get ${PROJECT} ${ROLE_NAME} --auth-token ${JWT_TOKEN}
-argocd app get $PROJ-$TOKEN --auth-token $JWT
