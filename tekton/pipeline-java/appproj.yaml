@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: myproject
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: My Project
+  sourceRepos:
+    - "*"
+  destinations:
+    - server: "*"
+      namespace: "*"
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  roles:
+    - name: my-role
+      policies:
+        - p, proj:myproject:get, applications, get, myproject/*, allow
+        - p, proj:myproject:sync, applications, sync, myproject/*, allow
+      groups:
+        - my-oidc-group
+      jwtTokens:
+        - name: cd-token
+          id: <UUID>
+          iat: <ISSUED_AT>
