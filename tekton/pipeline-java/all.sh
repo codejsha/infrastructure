@@ -11,9 +11,6 @@ kubectl apply --filename kustomize-cli-task.yaml
 kubectl apply --filename https://raw.githubusercontent.com/tektoncd/catalog/master/task/git-cli/0.1/git-cli.yaml
 kubectl apply --filename https://raw.githubusercontent.com/tektoncd/catalog/master/task/argocd-task-sync-and-wait/0.1/argocd-task-sync-and-wait.yaml
 
-# kubectl apply --filename github-secret.yaml
-# kubectl apply --filename github-serviceaccount.yaml
-
 kubectl apply --filename docker-configmap.yaml
 kubectl apply --filename maven-configmap.yaml
 kubectl apply --filename input-asset-configmap.yaml
@@ -30,5 +27,3 @@ kubectl apply --filename gitlab-trigger.yaml
 kubectl apply --filename gitlab-eventlistener-ingress.yaml
 kubectl apply --filename pvc.yaml
 kubectl apply --filename pipeline.yaml
-
-# tkn pipelineruns logs --follow --last
