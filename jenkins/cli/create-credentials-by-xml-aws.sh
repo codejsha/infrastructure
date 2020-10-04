@@ -7,7 +7,7 @@ CREDENTIAL_ACCESSKEY="${1:-accesskey}"
 CREDENTIAL_SECRETKEY="${2:-secretkey}"
 CREDENTIAL_DESCRIPTION="${CREDENTIAL_DESCRIPTION}"
 
-CREDENTIAL_UUID=$(uuidgen)
+CREDENTIAL_UUID="$(uuidgen)"
 echo "UUID: ${CREDENTIAL_UUID}"
 
 cat <<EOF > ./credentials-aws.xml
