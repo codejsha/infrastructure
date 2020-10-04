@@ -57,11 +57,12 @@ kustomize
 Resource structure:
 
 ```txt
-kustomize/base
-├── [deployment.yaml]  Deployment starter
-├── [ingress.yaml]  Ingress starter
-├── [kustomization.yaml]  Kustomization
-└── [service.yaml]  Service starter
+kustomize
+└── base
+    ├── [deployment.yaml]  Deployment starter
+    ├── [ingress.yaml]  Ingress starter
+    ├── [kustomization.yaml]  Kustomization
+    └── [service.yaml]  Service starter
 ```
 
 ## Application details
