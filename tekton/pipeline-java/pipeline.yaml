@@ -136,7 +136,7 @@ spec:
       taskRef:
         name: git-clone
       runAfter:
-        - verify-digest
+        - build-image
       params:
         - name: url
           value: $(params.git-cd-repo-url)
