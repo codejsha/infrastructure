@@ -1,6 +1,6 @@
 # Java Pipeline
 
-## Flow
+## Workflow
 
 ```txt
 Push event ---> Event trigger ---> CI/CD
