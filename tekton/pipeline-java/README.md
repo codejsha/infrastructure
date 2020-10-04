@@ -36,6 +36,34 @@ clone-cd-repo ---> kustomize-cd-repo ---> commit-cd-repo
 sync-app
 ```
 
+## Kustomize
+
+File structure:
+
+```txt
+kustomize
+├── base
+│   ├── deployment.yaml
+│   ├── ingress.yaml
+│   ├── kustomization.yaml
+│   └── service.yaml
+└── overlays
+    ├── development
+    │   └── kustomization.yaml
+    └── production
+        └── kustomization.yaml
+```
+
+Resource structure:
+
+```txt
+kustomize/base
+├── [deployment.yaml]  Deployment starter
+├── [ingress.yaml]  Ingress starter
+├── [kustomization.yaml]  Kustomization
+└── [service.yaml]  Service starter
+```
+
 ## Application details
 
 ```txt
