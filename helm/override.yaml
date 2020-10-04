@@ -6,7 +6,7 @@ env:
     STORAGE_AMAZON_BUCKET: "mychart"
     # STORAGE_AMAZON_PREFIX:
     # STORAGE_AMAZON_REGION:
-    STORAGE_AMAZON_ENDPOINT: "http://my-minio.minio-system:9000"
+    STORAGE_AMAZON_ENDPOINT: "http://minio.example.com"
   secret:
     AWS_ACCESS_KEY_ID: "<ACCESS_KEY>"
     AWS_SECRET_ACCESS_KEY: "<SECRET_KEY>"
