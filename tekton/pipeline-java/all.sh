@@ -6,7 +6,6 @@ kubectl apply --filename https://raw.githubusercontent.com/tektoncd/catalog/mast
 kubectl apply --filename https://raw.githubusercontent.com/tektoncd/catalog/master/task/maven/0.2/maven.yaml
 # kubectl apply --filename https://raw.githubusercontent.com/tektoncd/catalog/master/task/kaniko/0.1/kaniko.yaml
 kubectl apply --filename kaniko-0.1-custom-task.yaml
-kubectl apply --filename verify-image-digest-task.yaml
 # kubectl apply --filename https://raw.githubusercontent.com/tektoncd/catalog/master/task/kubernetes-actions/0.1/kubernetes-actions.yaml
 kubectl apply --filename kustomize-cli-task.yaml
 kubectl apply --filename https://raw.githubusercontent.com/tektoncd/catalog/master/task/git-cli/0.1/git-cli.yaml
