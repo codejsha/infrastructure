@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: kraken
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+spec:
+  rules:
+    - host: kraken.example.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: kraken-proxy
+              servicePort: 80
