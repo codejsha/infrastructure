@@ -6,7 +6,10 @@ cd docker-images/OracleDatabase/SingleInstance/dockerfiles
 
 ######################################################################
 
+/mnt/share/oracle-database/11gr2/oracle-xe-11.2.0-1.0.x86_64.rpm.zip 11.2.0.2
 bash buildDockerImage.sh -v 11.2.0.2 -x -i
+rm -f 11.2.0.2/*.zip
+sudo mkdir -p /mnt/volume/oracledb11
 docker run \
     --detach \
     --name oracledb11 \
@@ -19,7 +22,11 @@ docker run \
 
 ######################################################################
 
+/mnt/share/oracle-database/12cr1/linuxamd64_12102_database_1of2.zip 12.1.0.2
+/mnt/share/oracle-database/12cr1/linuxamd64_12102_database_2of2.zip 12.1.0.2
 bash buildDockerImage.sh -v 12.1.0.2 -e -i
+rm -f 12.1.0.2/*.zip
+sudo mkdir -p /mnt/volume/oracledb12
 docker run \
     --detach \
     --name oracledb12 \
@@ -34,7 +41,10 @@ docker run \
 
 ######################################################################
 
+cp /mnt/share/oracle-database/12cr2/linuxx64_12201_database.zip 18.3.0
 bash buildDockerImage.sh -v 12.2.0.1 -e -i
+rm -f 12.2.0.1/*.zip
+sudo mkdir -p /mnt/volume/oracledb12
 docker run \
     --detach \
     --name oracledb12 \
@@ -64,7 +74,10 @@ docker run \
 
 ######################################################################
 
+cp /mnt/share/oracle-database/18c/LINUX.X64_180000_db_home.zip 18.3.0
 bash buildDockerImage.sh -v 18.3.0 -e -i
+rm -f 18.3.0/*.zip
+sudo mkdir -p /mnt/volume/oracledb18
 docker run \
     --detach \
     --name oracledb18 \
@@ -79,7 +92,10 @@ docker run \
 
 ######################################################################
 
+cp /mnt/share/oracle-database/19c/LINUX.X64_193000_db_home.zip 19.3.0
 bash buildDockerImage.sh -v 19.3.0 -e -i
+rm -f 19.3.0/*.zip
+sudo mkdir -p /mnt/volume/oracledb19
 docker run \
     --detach \
     --name oracledb19 \
