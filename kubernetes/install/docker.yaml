@@ -39,13 +39,13 @@ docker_rpm_keepcache: 0
 ## example define 172.19.16.11 or mirror.registry.io
 docker_insecure_registries:
   - registry.example.com
+  - core.harbor.example.com
   - kraken.example.com
   - nexus.example.com
 
 ## Add other registry,example China registry mirror.
-# docker_registry_mirrors:
-#   - https://registry.docker-cn.com
-#   - https://mirror.aliyuncs.com
+docker_registry_mirrors:
+  - nexus.example.com
 
 ## If non-empty will override default system MountFlags value.
 ## This option takes a mount propagation flag: shared, slave
