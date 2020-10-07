@@ -34,7 +34,6 @@ helm upgrade --install my-harbor \
     --set database.external.username="${EXTERNAL_DATABASE_USERNAME}" \
     --set database.external.password="${EXTERNAL_DATABASE_PASSWORD}" \
     --set expose.ingress.annotations."kubernetes\.io/ingress\.class"="nginx" \
-    --set expose.ingress.annotations."nginx\.ingress\.kubernetes\.io/proxy-body-size"="\"0\"" \
     --set expose.ingress.hosts.core="core.harbor.example.com" \
     --set expose.ingress.hosts.notary="notary.harbor.example.com" \
     --set externalURL="https://core.harbor.example.com" \
