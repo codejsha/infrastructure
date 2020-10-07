@@ -17,7 +17,7 @@ helm upgrade --install my-minio \
     --set ingress.enabled="true" \
     --set ingress.labels."node-role\.kubernetes\.io/ingress"="platform" \
     --set ingress.annotations."kubernetes\.io/ingress\.class"="nginx" \
-    --set ingress.annotations."nginx\.ingress\.kubernetes\.io/proxy-body-size"="\"0\"" \
+    --set-string ingress.annotations."nginx\.ingress\.kubernetes\.io/proxy-body-size"="0" \
     --set ingress.hosts={"minio.example.com"} \
     --set persistence.enabled="true" \
     --set persistence.storageClass="rook-ceph-block" \
