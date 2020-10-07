@@ -36,6 +36,51 @@ clone-cd-repo ---> kustomize-cd-repo ---> commit-cd-repo
 sync-app
 ```
 
+### Docker Registry URL
+
+- Docker Registry: `registry.example.com`
+- Harbor: `core.harbor.example.com`
+
+kaniko params in PR:
+
+```yaml
+          ### kaniko params
+          - name: kaniko-image
+            value: registry.example.com/starter:$(tt.params.git-revision)
+            # value: core.harbor.example.com/starter:$(tt.params.git-revision)
+# // ...
+          - name: kaniko-extra-args
+            value:
+              - --destination=registry.example.com/starter:latest
+              - --insecure-registry=registry.example.com
+              # - --destination=core.harbor.example.com/starter:latest
+              # - --insecure-registry=core.harbor.example.com
+              - --insecure-registry=sonatype-nexus-service.nexus-system:5003
+              - --registry-mirror=sonatype-nexus-service.nexus-system:5003
+              - --verbosity=info
+          - name: kaniko-builder-image
+            value: gcr.io/kaniko-project/executor:latest
+```
+
+kustomize params in PR:
+
+```yaml
+          ### kustomize params
+          - name: kustomize-base-dir
+            value: ./
+          - name: kustomize-script
+            value: |
+
+              tree base
+              kustomize cfg tree base
+              cd base
+              kustomize edit set image registry.example.com/starter:$(tt.params.git-revision)
+              # kustomize edit set image core.harbor.example.com/starter:$(tt.params.git-revision)
+          - name: kustomize-args
+            value:
+              - ""
+```
+
 ## Kustomize
 
 File structure:

@@ -100,6 +100,7 @@ spec:
           ### kaniko params
           - name: kaniko-image
             value: registry.example.com/starter:$(tt.params.git-revision)
+            # value: core.harbor.example.com/starter:$(tt.params.git-revision)
           - name: kaniko-dockerfile
             value: ./Dockerfile
           - name: kaniko-context
@@ -108,6 +109,8 @@ spec:
             value:
               - --destination=registry.example.com/starter:latest
               - --insecure-registry=registry.example.com
+              # - --destination=core.harbor.example.com/starter:latest
+              # - --insecure-registry=core.harbor.example.com
               - --insecure-registry=sonatype-nexus-service.nexus-system:5003
               - --registry-mirror=sonatype-nexus-service.nexus-system:5003
               - --verbosity=info
@@ -132,6 +135,7 @@ spec:
               kustomize cfg tree base
               cd base
               kustomize edit set image registry.example.com/starter:$(tt.params.git-revision)
+              # kustomize edit set image core.harbor.example.com/starter:$(tt.params.git-revision)
           - name: kustomize-args
             value:
               - ""

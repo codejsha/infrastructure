@@ -14,6 +14,9 @@ data:
         "registry.example.com": {
           "auth": "ZGV2ZWxvcGVyOmRldmVsb3Blcg=="
         },
+        "core.harbor.example.com": {
+          "auth": "ZGV2ZWxvcGVyOmRldmVsb3Blcg=="
+        },
         "my-docker-registry.registry-system:5000": {
           "auth": "ZGV2ZWxvcGVyOmRldmVsb3Blcg=="
         },
