@@ -38,6 +38,13 @@ helm upgrade --install my-harbor \
     --set expose.ingress.hosts.notary="notary.harbor.example.com" \
     --set externalURL="https://core.harbor.example.com" \
     --set persistence.enabled="true" \
+    --set persistence.imageChartStorage.type="s3" \
+    --set persistence.imageChartStorage.disableredirect="true" \
+    --set persistence.imageChartStorage.s3.region="us-west-1" \
+    --set persistence.imageChartStorage.s3.bucket="harbor-storage" \
+    --set persistence.imageChartStorage.s3.accesskey="${AWS_ACCESS_KEY}" \
+    --set persistence.imageChartStorage.s3.secretkey="${AWS_SECRET_KEY}" \
+    --set persistence.imageChartStorage.s3.regionendpoint="http://minio.example.com" \
     --set persistence.persistentVolumeClaim.registry.storageClass="rook-ceph-block" \
     --set persistence.persistentVolumeClaim.chartmuseum.storageClass="rook-ceph-block" \
     --set persistence.persistentVolumeClaim.jobservice.storageClass="rook-ceph-block" \
@@ -46,15 +53,6 @@ helm upgrade --install my-harbor \
     --set persistence.persistentVolumeClaim.trivy.storageClass="rook-ceph-block" \
     --version 1.5.0 \
     harbor/harbor
-
-    ### for s3 storage
-    # --set persistence.imageChartStorage.type="s3" \
-    # --set persistence.imageChartStorage.s3.region="us-west-1" \
-    # --set persistence.imageChartStorage.s3.bucket="harbor-storage" \
-    # --set persistence.imageChartStorage.s3.accesskey="${AWS_ACCESS_KEY}" \
-    # --set persistence.imageChartStorage.s3.secretkey="${AWS_SECRET_KEY}" \
-    # --set persistence.imageChartStorage.s3.regionendpoint="minio.example.com" \
-    # --set persistence.imageChartStorage.s3.storageclass="rook-ceph-block" \
 
     ### for loadbalancer
     # --set expose.type="loadBalancer" \
