@@ -1,7 +1,10 @@
 .vs/
 .vscode/
 .idea/
+*.zip
 
 /temp/
 /kubernetes/install/kubespray/
+/kraken/kraken/
+/oracledb/docker-images/OracleDatabase/SingleInstance/dockerfiles/
 /rook/rook/
