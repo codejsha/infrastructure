@@ -20,7 +20,7 @@ do
         nmcli connection modify eth1 ipv4.gateway 10.10.10.1
         nmcli connection modify eth0 ipv4.method manual
         nmcli connection modify eth0 ipv6.ip6-privacy 0
-        nmcli connection modify eth0 ipv4.dns "8.8.8.8,168.126.63.1"
+        nmcli connection modify eth0 ipv4.dns "10.10.10.10,8.8.8.8,168.126.63.1"
         exit
     fi
 done
@@ -70,7 +70,7 @@ systemctl restart NetworkManager
 #         nmcli connection modify eth1 ipv4.gateway 192.168.137.1
 #         nmcli connection modify eth1 ipv4.method manual
 #         nmcli connection modify eth1 ipv6.ip6-privacy 0
-#         nmcli connection modify eth1 ipv4.dns "8.8.8.8,168.126.63.1"
+#         nmcli connection modify eth1 ipv4.dns "10.10.10.10,8.8.8.8,168.126.63.1"
 #         break
 #     fi
 # done
