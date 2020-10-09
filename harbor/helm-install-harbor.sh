@@ -2,8 +2,9 @@
 # https://goharbor.io/
 # https://github.com/goharbor/harbor
 
-### required package:
+### requirements:
 ### sudo yum install -y httpd-tools
+### mc mb myminio/harbor-storage
 
 helm repo add harbor https://helm.goharbor.io
 helm repo update
