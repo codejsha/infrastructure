@@ -45,7 +45,8 @@ docker_insecure_registries:
 
 ## Add other registry,example China registry mirror.
 docker_registry_mirrors:
-  - nexus.example.com
+  - https://nexus.example.com
+  - http://nexus.example.com
 
 ## If non-empty will override default system MountFlags value.
 ## This option takes a mount propagation flag: shared, slave
