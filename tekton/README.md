@@ -1,14 +1,5 @@
 # Tekton
 
-## Version
-
-```bash
-tkn version
-# Client version: 0.11.0
-# Pipeline version: v0.16.3
-# Triggers version: v0.8.1
-```
-
 ## Install
 
 ```bash
@@ -19,7 +10,16 @@ bash install-tekton-trigger.sh
 kubectl apply --filename tekton-dashboard-ingress.yaml
 ```
 
-for operator:
+Version:
+
+```bash
+tkn version
+# Client version: 0.11.0
+# Pipeline version: v0.16.3
+# Triggers version: v0.8.1
+```
+
+### Operator
 
 ```bash
 bash operator-install-dashboard.sh

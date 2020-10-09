@@ -11,6 +11,17 @@ bash install-docker-compose.sh
 bash helm-install-docker-registry.sh
 ```
 
+## Configuration file
+
+`${HOME}/.docker/config.json`: [config.json](/docker/config.json)
+
+## Daemon
+
+- https://docs.docker.com/engine/reference/commandline/dockerd/
+- https://docs.docker.com/registry/insecure/
+
+`/etc/docker/daemon.json`: [daemon.json](/docker/daemon.json)
+
 ## Expose Docker daemon socket
 
 ### Configure Service
