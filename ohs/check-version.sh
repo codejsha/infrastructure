@@ -3,7 +3,7 @@
 ORACLE_HOME="/usr/local/ohs"
 MAJOR_VERSION="12c"    # (available: 11g, 12c)
 
-function check_version_with_directory {
+function check_version_by_directory {
     if [ "${MAJOR_VERSION}" == "11g" ]; then
         ls ${ORACLE_HOME}/inventory/Components21/oracle.ohs2
     elif [ "${MAJOR_VERSION}" == "12c" ]; then
@@ -11,7 +11,7 @@ function check_version_with_directory {
     fi
 }
 
-function check_version_with_httpd {
+function check_version_by_httpd {
     if [ "${MAJOR_VERSION}" == "11g" ]; then
         export ORACLE_HOME=${ORACLE_HOME}
         export LD_LIBRARY_PATH=${ORACLE_HOME}/lib:${ORACLE_HOME}/ohs/lib
@@ -23,7 +23,7 @@ function check_version_with_httpd {
     fi
 }
 
-# check_version_with_directory
+# check_version_by_directory
 ### 11g Result:
 ### 06/26/2019  11:23 AM    <DIR>          11.1.1.9.0
 ###
@@ -31,7 +31,7 @@ function check_version_with_httpd {
 ### 06/26/2019  01:42 PM    <DIR>          12.1.3.0.0
 ### 06/26/2019  01:13 PM    <DIR>          12.2.1.3.0
 
-check_version_with_httpd
+check_version_by_httpd
 ### 11g Result:
 ### Server version: Oracle-HTTP-Server/2.2.22 (Unix)
 ### Server built:   Mar 20 2015 20:48:14
