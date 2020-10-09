@@ -18,4 +18,5 @@ EOF
 
 kubectl apply -f operator-tekton-dashboard.yaml
 
+### check
 # kubectl get tektonaddon dashboard -o jsonpath='{.status.conditions[0]}'

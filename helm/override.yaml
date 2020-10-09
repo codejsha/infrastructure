@@ -1,5 +1,3 @@
-# https://github.com/helm/charts/tree/master/stable/chartmuseum
----
 env:
   open:
     STORAGE: "amazon"

@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+# https://github.com/tektoncd/operator
 
 NAMESPACE="tekton-pipelines"
 kubectl create namespace ${NAMESPACE}
@@ -15,4 +16,5 @@ EOF
 
 kubectl apply -f operator-tekton-triggers.yaml
 
+### check
 # tkn version
