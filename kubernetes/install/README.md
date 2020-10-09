@@ -8,7 +8,7 @@
 
 ### Create Hyper-V VMs
 
-- [create-kube-vm.ps1](/kubernetes/install/create-kube-vm.ps1)
+[create-kube-vm.ps1](/kubernetes/install/create-kube-vm.ps1)
 
 ```powershell
 create-kube-vm.ps1
@@ -20,7 +20,7 @@ manually install linux (CentOS)
 
 ### Requirements
 
-- [require-all-node.sh](/kubernetes/install/require-all-node.sh)
+[require-all-node.sh](/kubernetes/install/require-all-node.sh)
 
 ```bash
 bash require-all-node.sh
@@ -33,7 +33,7 @@ bash require-all-node.sh
 
 ### Copy vhd
 
-- [convert-kube-vhd.ps1](/kubernetes/install/convert-kube-vhd.ps1)
+[convert-kube-vhd.ps1](/kubernetes/install/convert-kube-vhd.ps1)
 
 ```powershell
 convert-kube-vhd.ps1
@@ -41,10 +41,31 @@ convert-kube-vhd.ps1
 
 ## Pre-install
 
-### Configure
+### Hostname and network
 
-- hostname: [set-hostname.sh](/kubernetes/install/set-hostname.sh)
-- network: [set-network.sh](/kubernetes/install/set-network.sh)
+[set-hostname.sh](/kubernetes/install/set-hostname.sh)
+
+```bash
+# controlplane1
+bash set-hostname.sh c1
+# controlplane2
+bash set-hostname.sh c2
+# controlplane3
+bash set-hostname.sh c3
+# node1
+bash set-hostname.sh n1
+# node2
+bash set-hostname.sh n2
+# node3
+bash set-hostname.sh n3
+```
+
+[set-network.sh](/kubernetes/install/set-network.sh)
+
+```bash
+# all hosts
+bash set-network.sh
+```
 
 ### Copy ssh keys
 
@@ -53,6 +74,7 @@ convert-kube-vhd.ps1
 
 ```bash
 bash pre-copy-ssh-key.sh
+export PASSWORD="<PASSWORD>"
 bash copy-ssh-key.sh
 ```
 
@@ -67,9 +89,10 @@ bash copy-ssh-key.sh
 
 ### Run playbook
 
-- [install-k8s-kubespray.sh](/kubernetes/install/install-k8s-kubespray.sh)
+[install-k8s-kubespray.sh](/kubernetes/install/install-k8s-kubespray.sh)
 
 ```bash
+export PASSWORD="<PASSWORD>"
 bash install-k8s-kubespray.sh
 ```
 
@@ -77,7 +100,7 @@ bash install-k8s-kubespray.sh
 
 ### Copy config and cert files
 
-- [post-install.sh](/kubernetes/install/post-install.sh)
+[post-install.sh](/kubernetes/install/post-install.sh)
 
 ```bash
 bash post-install.sh
@@ -90,5 +113,13 @@ bash post-install.sh
 
 ```bash
 bash dashboard-clusterrolebinding.sh
-kubectl apply -f dashboard-ingress.yaml
+kubectl apply -filename dashboard-ingress.yaml
+```
+
+### Netchecker
+
+[netchecker-ingress.yaml](/kubernetes/install/netchecker-ingress.yaml)
+
+```bash
+kubectl apply -filename netchecker-ingress.yaml
 ```
