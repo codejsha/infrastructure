@@ -7,7 +7,7 @@ $StorageVHDName = "github-storage.vhd"
 New-VM -Name $VMName `
     -Path $VMPath `
     -Generation 1 `
-    -MemoryStartupBytes 2GB `
+    -MemoryStartupBytes 16GB `
     -Switch $Switch `
     -BootDevice VHD `
     -VHDPath "$VMPath\$VMName\Virtual Hard Disks\$GitHubVHDName"
