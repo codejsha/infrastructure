@@ -44,9 +44,12 @@ foreach ($item in $collection) {
         -Path $SharePath `
         -NetworkName $NetworkName `
         -Authentication $Authentication `
-        -AnonymousUid $AnonymousUid -AnonymousGid $AnonymousGid `
+        -AnonymousUid $AnonymousUid `
+        -AnonymousGid $AnonymousGid `
         -LanguageEncoding $LanguageEncoding `
-        -EnableAnonymousAccess $EnableAnonymousAccess -EnableUnmappedAccess $EnableUnmappedAccess -AllowRootAccess $AllowRootAccess `
+        -EnableAnonymousAccess $EnableAnonymousAccess `
+        -EnableUnmappedAccess $EnableUnmappedAccess `
+        -AllowRootAccess $AllowRootAccess `
         -Permission $Permission
 }
 ```
