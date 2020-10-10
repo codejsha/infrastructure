@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 # usage:
-# bash harbor-push-helm.sh <CHART_PATH> [TAG]
+# bash ./harbor-push-helm.sh <CHART_PATH> [TAG]
 
 CHART_PATH="${1}"
 TAG="${2:-latest}"
@@ -11,7 +11,7 @@ PROJECT="myproject"
 REPOSITORY="myrepo"
 
 if [ -z "${CHART_PATH}" ]; then
-    echo "usage:  bash harbor-push-helm.sh <CHART_PATH> [TAG]"
+    echo "usage:  bash ./harbor-push-helm.sh <CHART_PATH> [TAG]"
     exit
 fi
 

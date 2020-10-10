@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 # usage:
-# bash print-thread-dump.sh <PID>
+# bash ./print-thread-dump.sh <PID>
 
 PID="${1}"
 # JAVA_HOME="/usr/lib/jvm/java-1.8.0"
@@ -11,7 +11,7 @@ LOOP_COUNT=1
 INTERVAL_SECONDS=5
 
 if [ -z "${PID}" ]; then
-    echo "usage:  bash print-thread-dump.sh PID"
+    echo "usage:  bash ./print-thread-dump.sh PID"
     exit
 fi
 

@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 # usage:
-# bash java-thread-high-cpu.sh <PID>
+# bash ./java-thread-high-cpu.sh <PID>
 
 PID="${1}"
 # JAVA_HOME="/usr/lib/jvm/java-1.8.0"
@@ -12,7 +12,7 @@ TOP_THREAD_COUNT=5
 INTERVAL_SECONDS=5
 
 if [ -z "${PID}" ]; then
-    echo "usage:  bash java-thread-high-cpu.sh PID"
+    echo "usage:  bash ./java-thread-high-cpu.sh PID"
     exit
 fi
 

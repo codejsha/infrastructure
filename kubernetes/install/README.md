@@ -23,7 +23,7 @@ manually install linux (CentOS)
 [require-all-node.sh](/kubernetes/install/require-all-node.sh)
 
 ```bash
-bash require-all-node.sh
+bash ./require-all-node.sh
 ```
 
 ### Add scripts
@@ -47,24 +47,24 @@ convert-kube-vhd.ps1
 
 ```bash
 # controlplane1
-bash set-hostname.sh c1
+bash ./set-hostname.sh c1
 # controlplane2
-bash set-hostname.sh c2
+bash ./set-hostname.sh c2
 # controlplane3
-bash set-hostname.sh c3
+bash ./set-hostname.sh c3
 # node1
-bash set-hostname.sh n1
+bash ./set-hostname.sh n1
 # node2
-bash set-hostname.sh n2
+bash ./set-hostname.sh n2
 # node3
-bash set-hostname.sh n3
+bash ./set-hostname.sh n3
 ```
 
 [set-network.sh](/kubernetes/install/set-network.sh)
 
 ```bash
 # all hosts
-bash set-network.sh
+bash ./set-network.sh
 ```
 
 ### Copy ssh keys
@@ -73,9 +73,9 @@ bash set-network.sh
 - [copy-ssh-key.sh](/kubernetes/install/copy-ssh-key.sh)
 
 ```bash
-bash pre-copy-ssh-key.sh
+bash ./pre-copy-ssh-key.sh
 export PASSWORD="<PASSWORD>"
-bash copy-ssh-key.sh
+bash ./copy-ssh-key.sh
 ```
 
 ## Deploy cluster
@@ -93,7 +93,7 @@ bash copy-ssh-key.sh
 
 ```bash
 export PASSWORD="<PASSWORD>"
-bash install-k8s-kubespray.sh
+bash ./install-k8s-kubespray.sh
 ```
 
 ## Post-install
@@ -103,7 +103,7 @@ bash install-k8s-kubespray.sh
 [post-install.sh](/kubernetes/install/post-install.sh)
 
 ```bash
-bash post-install.sh
+bash ./post-install.sh
 ```
 
 ### Dashboard
@@ -112,7 +112,7 @@ bash post-install.sh
 - [dashboard-ingress.yaml](/kubernetes/install/dashboard-ingress.yaml)
 
 ```bash
-bash dashboard-clusterrolebinding.sh
+bash ./dashboard-clusterrolebinding.sh
 kubectl apply -filename dashboard-ingress.yaml
 ```
 

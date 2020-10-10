@@ -5,7 +5,7 @@ https://github.com/helm/charts/tree/master/stable/chartmuseum
 ## Install
 
 ```bash
-bash install-helm.sh
+bash ./install-helm.sh
 ```
 
 ### Using docker container
@@ -15,7 +15,7 @@ bash install-helm.sh
 ### Push plugin
 
 ```bash
-bash install-helm-push-plugin.sh
+bash ./install-helm-push-plugin.sh
 ```
 
 ## ChartMuseum
@@ -40,5 +40,5 @@ env:
 Install:
 
 ```bash
-bash helm-install-chartmuseum.sh
+bash ./helm-install-chartmuseum.sh
 ```

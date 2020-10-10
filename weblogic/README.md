@@ -11,7 +11,7 @@ Add 'WebLogic Server/Server Examples' component to COMPONENT_PATHS in [silent.xm
 And then, install weblogic.
 
 ```bash
-bash install-weblogic.sh
+bash ./install-weblogic.sh
 ```
 
 For convenience, add symbolic links.

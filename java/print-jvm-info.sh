@@ -1,14 +1,14 @@
 #!/usr/bin/bash
 
 # usage:
-# bash print-jvm-info.sh <PID>
+# bash ./print-jvm-info.sh <PID>
 
 PID="${1}"
 # JAVA_HOME="/usr/lib/jvm/java-1.8.0"
 JAVA_HOME="/usr/lib/jvm/java-11"
 
 if [ -z "${PID}" ]; then
-    echo "usage:  bash print-jvm-info.sh PID"
+    echo "usage:  bash ./print-jvm-info.sh PID"
     exit
 fi
 

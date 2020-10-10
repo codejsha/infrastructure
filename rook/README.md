@@ -3,8 +3,8 @@
 ## Install
 
 ```bash
-bash operator-install-rook-ceph.sh
-bash operator-install-rook-ceph-cluster.sh
+bash ./operator-install-rook-ceph.sh
+bash ./operator-install-rook-ceph-cluster.sh
 ```
 
 ## Cluster

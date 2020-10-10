@@ -3,7 +3,7 @@
 ## Install
 
 ```bash
-bash helm-install-harbor.sh
+bash ./helm-install-harbor.sh
 ```
 
 ## Pods

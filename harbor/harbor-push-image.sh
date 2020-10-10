@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 # usage:
-# bash harbor-push-image.sh <SOURCE_IMAGE> [TAG]
+# bash ./harbor-push-image.sh <SOURCE_IMAGE> [TAG]
 
 SOURCE_IMAGE="${1}"
 TAG="${2:-latest}"
@@ -11,7 +11,7 @@ PROJECT="myproject"
 REPOSITORY="myrepo"
 
 if [ -z "${SOURCE_IMAGE}" ]; then
-    echo "usage:  bash harbor-push-image.sh <SOURCE_IMAGE> [TAG]"
+    echo "usage:  bash ./harbor-push-image.sh <SOURCE_IMAGE> [TAG]"
     exit
 fi
 

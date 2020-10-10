@@ -5,28 +5,28 @@ https://argoproj.github.io/projects/argo-cd
 ## Install
 
 ```bash
-bash install-argocd.sh
-bash install-argocd-cli.sh
+bash ./install-argocd.sh
+bash ./install-argocd-cli.sh
 kubectl apply --filename argocd-server-ingress.yaml
 ```
 
 ## Change password
 
 ```bash
-bash change-password.sh
+bash ./change-password.sh
 ```
 
 ## Register cluster
 
 ```bash
-bash register-cluster.sh
+bash ./register-cluster.sh
 ```
 
 ## Login/Logout
 
 ```bash
-bash login-server.sh
-bash logout-server.sh
+bash ./login-server.sh
+bash ./logout-server.sh
 ```
 
 ## Project
