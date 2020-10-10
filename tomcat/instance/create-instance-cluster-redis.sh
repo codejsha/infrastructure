@@ -1,5 +1,4 @@
 #!/usr/bin/bash
-#!/usr/bin/bash
 
 source ./env-base.sh
 source ./env-function.sh
@@ -18,10 +17,6 @@ mkdir -p "$(eval echo $(eval echo ${DUMP_LOG_DIR}))"
 ######################################################################
 
 ### copy config files
-mv ${CATALINA_BASE}/conf/server.xml ${CATALINA_BASE}/conf/server.xml_default
-mv ${CATALINA_BASE}/conf/context.xml ${CATALINA_BASE}/conf/context.xml_default
-mv ${CATALINA_BASE}/conf/tomcat-users.xml ${CATALINA_BASE}/conf/tomcat-users.xml_default
-
 envsubst < ./server-cluster-redis.xml > ${CATALINA_BASE}/conf/server.xml
 envsubst < ./context.xml > ${CATALINA_BASE}/conf/context.xml
 envsubst < ./tomcat-users.xml > ${CATALINA_BASE}/conf/tomcat-users.xml
@@ -54,7 +49,7 @@ fi
 # tidy_nowrap ${CATALINA_BASE}/conf/redisson.yaml
 
 ### change permission
-chmod 600 ${CATALINA_BASE}/conf/*
+find ${CATALINA_BASE} -type f | xargs chmod 600 
 
 ######################################################################
 
