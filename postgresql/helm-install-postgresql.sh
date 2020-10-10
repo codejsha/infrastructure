@@ -17,7 +17,7 @@ helm upgrade --install my-postgres \
     --set service.loadBalancerIP="10.10.10.99" \
     --set persistence.enabled="true" \
     --set persistence.storageClass="rook-ceph-block" \
-    --version 9.4.1 \
+    --version 9.8.3 \
     bitnami/postgresql
 
     ### gitlab
