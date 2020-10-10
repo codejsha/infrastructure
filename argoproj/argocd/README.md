@@ -33,11 +33,7 @@ bash logout-server.sh
 
 ### yaml
 
-- [project.yaml](/argoproj/argocd/project.yaml)
-
-cf.
-
-- https://raw.githubusercontent.com/argoproj/argo-cd/master/docs/operator-manual/project.yaml
+- [project.yaml](/argoproj/argocd/project.yaml) (https://raw.githubusercontent.com/argoproj/argo-cd/master/docs/operator-manual/project.yaml)
 - [appproj.yaml](/tekton/pipeline-java/appproj.yaml) in tekton java pipeline
 
 ### command
@@ -49,11 +45,7 @@ cf.
 
 ### yaml
 
-- [application.yaml](/argoproj/argocd/application.yaml)
-
-cf.
-
-- https://raw.githubusercontent.com/argoproj/argo-cd/master/docs/operator-manual/application.yaml
+- [application.yaml](/argoproj/argocd/application.yaml) (https://raw.githubusercontent.com/argoproj/argo-cd/master/docs/operator-manual/application.yaml)
 - [app.yaml](/tekton/pipeline-java/app.yaml) in tekton java pipeline
 
 ### command
