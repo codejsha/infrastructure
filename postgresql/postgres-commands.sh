@@ -1,13 +1,26 @@
+######################################################################
+
 ### connect
+
 PGPASSWORD="${POSTGRES_PASSWORD}" psql -U postgres
+PGPASSWORD="${POSTGRES_PASSWORD}" psql -h postgres.example.com -p 5432 -U postgres -d postgres
+PGPASSWORD="${POSTGRES_PASSWORD}" \
+    psql \
+    --host=postgres-lb.example.com \
+    --port=5432 \
+    --username=postgres \
+    --dbname=postgres
 
 ######################################################################
 
 ### database list
 
-PGPASSWORD="${POSTGRES_PASSWORD}" psql -U postgres --list
-\l
-### postgres=# \l
+PGPASSWORD="${POSTGRES_PASSWORD}" \
+    psql \
+    --host=postgres-lb.example.com \
+    --port=5432 \
+    --username=postgres \
+    --command="\l"
 ###                                        List of databases
 ###         Name         |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges
 ### ---------------------+----------+----------+-------------+-------------+-----------------------
@@ -21,25 +34,49 @@ PGPASSWORD="${POSTGRES_PASSWORD}" psql -U postgres --list
 
 ######################################################################
 
+### create database
+
+PGPASSWORD="${POSTGRES_PASSWORD}" \
+    psql \
+    --host=postgres-lb.example.com \
+    --port=5432 \
+    --username=postgres \
+    --command="CREATE DTABASE ${DATABASE_NAME}"
+
+######################################################################
+
 ### switch database
 
-\c DATABASE_NAME
-### postgres=# \c postgres
+PGPASSWORD="${POSTGRES_PASSWORD}" \
+    psql \
+    --host=postgres-lb.example.com \
+    --port=5432 \
+    --username=postgres \
+    --command="\c postgres"
 ### You are now connected to database "postgres" as user "postgres".
 
 ######################################################################
 
 ### table list
 
-PGPASSWORD="${POSTGRES_PASSWORD}" psql -U postgres -d "postgres" -c "\dt"
-\dt
+PGPASSWORD="${POSTGRES_PASSWORD}" \
+    psql \
+    --host=postgres-lb.example.com \
+    --port=5432 \
+    --username=postgres \
+    --dbname=postgres \
+    --command="\dt"
 
 ######################################################################
 
 ### role
 
-\du
-### postgres=# \du
+PGPASSWORD="${POSTGRES_PASSWORD}" \
+    psql \
+    --host=postgres-lb.example.com \
+    --port=5432 \
+    --username=postgres \
+    --command="\du"
 ###                                    List of roles
 ###  Role name |                         Attributes                         | Member of
 ### -----------+------------------------------------------------------------+-----------

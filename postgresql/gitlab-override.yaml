@@ -12,6 +12,6 @@ initdbScripts:
 
     PGPASSWORD="${POSTGRES_PASSWORD}" \
         psql \
-        -d gitlabhq_production \
         -U postgres \
+        -d gitlabhq_production \
         -c "CREATE EXTENSION IF NOT EXISTS pg_trgm; CREATE EXTENSION IF NOT EXISTS btree_gist;"
