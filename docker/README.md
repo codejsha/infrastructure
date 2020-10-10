@@ -4,11 +4,15 @@
 
 ```bash
 # Docker
-bash install-docker.sh
+bash ./install-docker.sh
 # Docker Compose
-bash install-docker-compose.sh
-# Docker Registry Helm Chart
-bash helm-install-docker-registry.sh
+bash ./install-docker-compose.sh
+```
+
+### Docker Registry
+
+```bash
+bash ./helm-install-docker-registry.sh
 ```
 
 ## Configuration file
@@ -29,7 +33,7 @@ bash helm-install-docker-registry.sh
 [docker-service.sh](/docker/docker-service.sh)
 
 ```bash
-bash docker-service.sh
+bash ./docker-service.sh
 ```
 
 The `docker-service.sh` script create `/etc/systemd/system/docker.service.d/override.conf` file:
@@ -62,7 +66,7 @@ Requirements: Docker daemon socket
 ### Set environment
 
 ```bash
-bash docker-run-portainer.sh
+bash ./docker-run-portainer.sh
 ```
 
 Select Docker environment, and then set Name and Endpoint URL.
