@@ -35,7 +35,7 @@ envsubst < ./tomcat-users.xml > ${CATALINA_BASE}/conf/tomcat-users.xml
 # tidy_nowrap ${CATALINA_BASE}/conf/tomcat-users.xml
 
 ### change permission
-find ${CATALINA_BASE} -type f | xargs chmod 600 
+find ${CATALINA_BASE} -type f | xargs chmod 600
 
 ######################################################################
 
