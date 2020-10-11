@@ -1,5 +1,3 @@
-<!-- https://github.com/brettwooldridge/HikariCP/wiki/JNDI-DataSource-Factory-(Tomcat,-etc.) -->
-
 <!-- Driver-based -->
 <Resource name="jdbc/OracleHikari" auth="Container"
       factory="com.zaxxer.hikari.HikariJNDIFactory"
