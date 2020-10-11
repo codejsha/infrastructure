@@ -1,5 +1,16 @@
 # WebLogic
 
+## Install
+
+```bash
+bash ./install-weblogic.sh
+```
+
+## Configuration
+
+- Domain: [/weblogic/config](/weblogic/config)
+- JMS: [/weblogic/jms-config](/weblogic/jms-config)
+
 ## Deployment descriptor (web.xml)
 
 - https://cloud.google.com/appengine/docs/standard/java/config/webxml
@@ -7,9 +18,9 @@
 - https://docs.oracle.com/middleware/12213/wls/WBAPP/web_xml.htm
 - https://docs.oracle.com/middleware/12213/wls/WBAPP/app_events.htm
 
-## Sample Application
+## Sample application
 
-Add 'WebLogic Server/Server Examples' component to COMPONENT_PATHS in [silent.xml](/weblogic/silent.xml)
+Add 'WebLogic Server/Server Examples' component to COMPONENT_PATHS in [silent.xml](/weblogic/silent.xml).
 
 ```xml
         <data-value name="COMPONENT_PATHS" value="WebLogic Server/Core Application Server|WebLogic Server/Administration Console|WebLogic Server/Configuration Wizard and Upgrade Framework|WebLogic Server/Web 2.0 HTTP Pub-Sub Server|WebLogic Server/WebLogic JDBC Drivers|WebLogic Server/Third Party JDBC Drivers|WebLogic Server/WebLogic Server Clients|WebLogic Server/WebLogic Web Server Plugins|WebLogic Server/UDDI and Xquery Support|WebLogic Server/Server Examples" />
