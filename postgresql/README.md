@@ -1,6 +1,6 @@
 # PostgreSQL
 
-## Install PostgreSQL
+## Install
 
 ### On-Premises
 
