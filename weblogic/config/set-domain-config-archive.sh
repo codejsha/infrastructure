@@ -2,6 +2,8 @@
 
 source ./env-base.sh
 
+######################################################################
+
 export CONFIG_JVM_ARGS="${CONFIG_JVM_ARGS} -Djava.security.egd=file:///dev/urandom"
 if [ "${MAJOR_VERSION}" == "11g" ]; then
     ${MW_HOME}/wlserver_10.3/common/bin/wlst.sh set_domain_config_archive.py

@@ -95,3 +95,8 @@ DOMAIN_HOME="${DOMAIN_HOME}"
 \${DOMAIN_HOME}/bin/stopNodeManager.sh
 EOF
 fi
+
+######################################################################
+
+chmod 750 ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
+chmod 750 ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh

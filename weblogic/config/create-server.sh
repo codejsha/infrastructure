@@ -14,7 +14,11 @@ export SERVER_START_ROOT_DIR="${SERVER_START_ROOT_DIR}"
 export SERVER_START_ARGUMENTS="${SERVER_START_ARGUMENTS}"
 export SERVER_START_CLASSPATH="${SERVER_START_CLASSPATH}"
 
+######################################################################
+
 mkdir -p ${LOG_HOME}/${MANAGED_SERVER_NAME}
+
+######################################################################
 
 export CONFIG_JVM_ARGS="${CONFIG_JVM_ARGS} -Djava.security.egd=file:///dev/urandom"
 if [ "${MAJOR_VERSION}" == "11g" ]; then

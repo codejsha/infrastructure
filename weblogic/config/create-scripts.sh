@@ -4,6 +4,8 @@ source ./env-base.sh
 
 SERVER_NAME="${1}"
 
+######################################################################
+
 FILE_NAME_SUFFIX=""
 if [ "${SERVER_NAME}" == "${ADMIN_SERVER_NAME}" ]; then
     FILE_NAME_SUFFIX="admin"
@@ -122,3 +124,8 @@ cat <<EOF >> ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
 \${DOMAIN_HOME}/bin/stopManagedWebLogic.sh \${SERVER_NAME} \${ADMIN_URL} \${USERNAME} \${PASSWORD}
 EOF
 fi
+
+######################################################################
+
+chmod 750 ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
+chmod 750 ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh

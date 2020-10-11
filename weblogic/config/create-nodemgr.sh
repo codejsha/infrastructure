@@ -6,7 +6,11 @@ export NODEMGR_NAME=${1}
 export NODEMGR_LISTEN_ADDRESS=${2}
 export NODEMGR_LISTEN_PORT=${3}
 
+######################################################################
+
 mkdir -p ${LOG_HOME}/nodemanager
+
+######################################################################
 
 export CONFIG_JVM_ARGS="${CONFIG_JVM_ARGS} -Djava.security.egd=file:///dev/urandom"
 if [ "${MAJOR_VERSION}" == "11g" ]; then

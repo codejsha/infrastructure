@@ -2,6 +2,8 @@
 
 source ./env-base.sh
 
+######################################################################
+
 mkdir -p ${DOMAIN_HOME}/scripts
 
 ######################################################################
@@ -56,5 +58,7 @@ cat << EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 ${ORACLE_HOME}/oracle_common/common/bin/wlst.sh ${DOMAIN_HOME}/scripts/change_store_user_config.py
 EOF
 fi
+
+######################################################################
 
 chmod 750 ${DOMAIN_HOME}/scripts/change-store-user-config.sh

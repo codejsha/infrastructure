@@ -7,6 +7,8 @@ export TRANSMISSION=${2}             # unicast/multicast (possible: unicast, mul
 export MULTICAST_LISTEN_ADDRESS=${3} # optional (only multicast)
 export MULTICAST_LISTEN_PORT=${3}    # optional (only multicast)
 
+######################################################################
+
 export CONFIG_JVM_ARGS="${CONFIG_JVM_ARGS} -Djava.security.egd=file:///dev/urandom"
 if [ "${MAJOR_VERSION}" == "11g" ]; then
   ${MW_HOME}/wlserver_10.3/common/bin/wlst.sh create_cluster.py

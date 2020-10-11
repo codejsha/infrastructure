@@ -4,6 +4,8 @@ source ./env-base.sh
 
 MANAGED_SERVER_NAME="${1}"
 
+######################################################################
+
 mkdir -p ${DOMAIN_HOME}/scripts
 
 ######################################################################
@@ -57,5 +59,7 @@ cat << EOF >> ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
 ${ORACLE_HOME}/oracle_common/common/bin/wlst.sh ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.py
 EOF
 fi
+
+######################################################################
 
 chmod 750 ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh

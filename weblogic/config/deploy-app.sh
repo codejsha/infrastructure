@@ -6,10 +6,14 @@ APP_NAME="${1}"
 APP_PATH="${2}"
 APP_TARGET="${3}"
 
+######################################################################
+
 if [ ! -d "${APP_PATH}" ] && [ ! -f "${APP_PATH}" ] ; then
     echo "ERROR: The APP_PATH (${JAVA_HOME}) does not exist!"
     exit
 fi
+
+######################################################################
 
 export CONFIG_JVM_ARGS="${CONFIG_JVM_ARGS} -Djava.security.egd=file:///dev/urandom"
 if [ "${MAJOR_VERSION}" == "11g" ]; then

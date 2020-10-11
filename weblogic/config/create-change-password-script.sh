@@ -2,7 +2,11 @@
 
 source ./env-base.sh
 
+######################################################################
+
 mkdir -p ${DOMAIN_HOME}/scripts
+
+######################################################################
 
 cat << EOF > ${DOMAIN_HOME}/scripts/change-password.sh
 #!/usr/bin/bash
@@ -23,5 +27,7 @@ username=\${NEW_USERNAME}
 password=\${NEW_PASSWORD}
 EOF
 echo EOF >> ${DOMAIN_HOME}/scripts/change-password.sh
+
+######################################################################
 
 chmod 750 ${DOMAIN_HOME}/scripts/change-password.sh
