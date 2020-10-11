@@ -38,14 +38,19 @@ bash ./update-maven-group-repo.sh "maven-public" "default" "\"maven-central\",\"
 ### create-docker-proxy-repo.sh ${REPOSITORY_NAME} ${BLOBSTORE_NAME} ${REMOTE_URL} ${DOCKER_INDEX_TYPE}
 bash ./create-docker-proxy-repo.sh "docker-hub" "nexus-docker-hub" "https://registry-1.docker.io" "HUB"
 bash ./create-docker-proxy-repo.sh "docker-registry" "nexus-docker-registry" "http://my-docker-registry.registry-system:5000" "REGISTRY"
+# bash ./create-docker-proxy-repo.sh "docker-registry" "nexus-docker-registry" "http://registry.example.com" "REGISTRY"
 # bash ./create-docker-proxy-repo.sh "docker-kube-registry" "nexus-docker-kube-registry" "http://registry.kube-system:5000" "REGISTRY"
+# bash ./create-docker-proxy-repo.sh "docker-harbor" "nexus-docker-harbor" "https://core.harbor.example.com" "REGISTRY"
+# bash ./create-docker-proxy-repo.sh "docker-harbor" "nexus-docker-harbor" "https://my-harbor-harbor-registry.harbor-system:5000" "REGISTRY"
 
 ### create-docker-group-repo.sh ${REPOSITORY_NAME} ${BLOBSTORE_NAME} ${REPOSITORY_MEMBER_NAMES}
 bash ./create-docker-group-repo.sh "docker-group" "default" "\"docker-hub\",\"docker-registry\""
 # bash ./create-docker-group-repo.sh "docker-group" "default" "\"docker-hub\",\"docker-kube-registry\""
+# bash ./create-docker-group-repo.sh "docker-group" "default" "\"docker-hub\",\"docker-harbor\""
 
 ### update-docker-group-repo.sh ${REPOSITORY_NAME} ${BLOBSTORE_NAME} ${REPOSITORY_MEMBER_NAMES}
 # bash ./update-docker-group-repo.sh "docker-group" "default" "\"docker-hub\",\"docker-registry\",\"docker-kube-registry\""
+# bash ./update-docker-group-repo.sh "docker-group" "default" "\"docker-hub\",\"docker-harbor\""
 
 ### set-active-realms-list.sh ${REALM_IDS}
 bash ./set-active-realms-list.sh "\"NexusAuthenticatingRealm\", \"NexusAuthorizingRealm\", \"DockerToken\""
