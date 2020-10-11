@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/
 
-NAMESPACE="NAMESPACE"
+NAMESPACE="${1}"
 
 ### automatic sidecar injection
 kubectl label namespace ${NAMESPACE} istio-injection=enabled

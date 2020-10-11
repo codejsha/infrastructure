@@ -5,7 +5,7 @@ cd docker-images/OracleDatabase/SingleInstance/dockerfiles
 
 ######################################################################
 
-bash buildDockerImage.sh -v 11.2.0.2 -x -i
+# bash ./buildDockerImage.sh -v 11.2.0.2 -x -i
 docker run `
     --detach `
     --name oracledb11 `
@@ -18,7 +18,7 @@ docker run `
 
 ######################################################################
 
-bash buildDockerImage.sh -v 12.1.0.2 -e -i
+# bash ./buildDockerImage.sh -v 12.1.0.2 -e -i
 docker run `
     --detach `
     --name oracledb12 `
@@ -33,7 +33,7 @@ docker run `
 
 ######################################################################
 
-bash buildDockerImage.sh -v 12.2.0.1 -e -i
+# bash ./buildDockerImage.sh -v 12.2.0.1 -e -i
 docker run `
     --detach `
     --name oracledb12 `
@@ -63,7 +63,7 @@ docker run `
 
 ######################################################################
 
-bash buildDockerImage.sh -v 18.3.0 -e -i
+# bash ./buildDockerImage.sh -v 18.3.0 -e -i
 docker run `
     --detach `
     --name oracledb18 `
@@ -78,7 +78,7 @@ docker run `
 
 ######################################################################
 
-bash buildDockerImage.sh -v 19.3.0 -e -i
+# bash ./buildDockerImage.sh -v 19.3.0 -e -i
 docker run `
     --detach `
     --name oracledb19 `
