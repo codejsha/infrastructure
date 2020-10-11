@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-lb-slave-0
+  namespace: redis-system
+spec:
+  selector:
+    app: redis
+    role: slave
+    statefulset.kubernetes.io/pod-name: my-redis-slave-0
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379
+  loadBalancerIP: 10.10.10.87
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-lb-slave-1
+  namespace: redis-system
+spec:
+  selector:
+    app: redis
+    role: slave
+    statefulset.kubernetes.io/pod-name: my-redis-slave-1
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379
+  loadBalancerIP: 10.10.10.86
+  type: LoadBalancer

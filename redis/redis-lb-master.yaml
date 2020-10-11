@@ -1,14 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: redis-service
+  name: redis-lb-master-0
   namespace: redis-system
 spec:
   selector:
     app: redis
+    role: master
+    statefulset.kubernetes.io/pod-name: my-redis-master-0
   ports:
     - protocol: TCP
       port: 6379
       targetPort: 6379
-  loadBalancerIP: 10.10.10.89
+  loadBalancerIP: 10.10.10.88
   type: LoadBalancer
