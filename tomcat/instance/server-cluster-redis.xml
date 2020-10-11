@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Server port="8005"
+<Server port="${TOMCAT_SHUTDOWN_PORT}"
         shutdown="SHUTDOWN">
     <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
     <Listener className="org.apache.catalina.core.AprLifecycleListener"
@@ -14,10 +14,16 @@
                   description="User database that can be updated and saved"
                   factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
                   pathname="conf/tomcat-users.xml" />
+        <Resource name="bean/redisson"
+                  auth="Container"
+                  factory="org.redisson.JndiRedissonFactory"
+                  configPath="${catalina.base}/conf/redisson.yaml"
+                  closeMethod="shutdown" />
     </GlobalNamingResources>
     <Service name="Catalina">
-        <Connector port="8080"
+        <Connector port="${TOMCAT_HTTP_PORT}"
                    protocol="HTTP/1.1"
+                   address="${TOMCAT_ADDRESS}"
                    minSpareThreads="10"
                    maxThreads="200"
                    acceptCount="100"
@@ -26,9 +32,10 @@
                    maxKeepAliveRequests="100"
                    keepAliveTimeout="60000"
                    maxPostSize="-1"
-                   redirectPort="8443" />
-        <Connector port="8009"
+                   redirectPort="${TOMCAT_HTTPS_PORT}" />
+        <Connector port="${TOMCAT_AJP_PORT}"
                    protocol="AJP/1.3"
+                   address="${TOMCAT_ADDRESS}"
                    secretRequired="false"
                    minSpareThreads="10"
                    maxThreads="200"
@@ -38,18 +45,15 @@
                    maxKeepAliveRequests="100"
                    keepAliveTimeout="60000"
                    maxPostSize="-1"
-                   redirectPort="8443" />
+                   redirectPort="${TOMCAT_HTTPS_PORT}" />
         <Engine name="Catalina"
                 defaultHost="localhost"
-                jvmRoute="inst1">
+                jvmRoute="${JVM_ROUTE}">
             <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster"
                      channelSendOptions="8">
-                <Manager className="org.redisson.tomcat.RedissonSessionManager"
-                         configPath="${catalina.base}/conf/redisson.conf"
-                         readMode="REDIS"
-                         updateMode="DEFAULT"
-                         broadcastSessionEvents="false"
-                         keyPrefix=""/>
+                <Manager className="org.apache.catalina.ha.session.DeltaManager"
+                         expireSessionsOnShutdown="false"
+                         notifyListenersOnReplication="true" />
                 <Channel className="org.apache.catalina.tribes.group.GroupChannel">
                     <Membership className="org.apache.catalina.tribes.membership.McastService"
                                 address="228.0.0.4"
@@ -57,6 +61,7 @@
                                 frequency="500"
                                 dropTime="3000" />
                     <Receiver className="org.apache.catalina.tribes.transport.nio.NioReceiver"
+                              address="${TOMCAT_ADDRESS}"
                               port="4000"
                               autoBind="100"
                               selectorTimeout="5000"
@@ -82,7 +87,7 @@
                        resourceName="UserDatabase" />
             </Realm>
             <Host name="localhost"
-                  appBase="webapps"
+                  appBase="${APP_BASE}"
                   unpackWARs="true"
                   autoDeploy="false">
                 <Valve className="org.apache.catalina.valves.AccessLogValve"

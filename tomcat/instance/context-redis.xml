@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Context>
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource>
+    <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
+    <Manager className="org.redisson.tomcat.RedissonSessionManager"
+             configPath="${catalina.base}/conf/redisson.yaml"
+             readMode="REDIS"
+             updateMode="DEFAULT"
+             broadcastSessionEvents="false"
+             keyPrefix="" />
+    <ResourceLink name="bean/redisson"
+                  global="bean/redisson"
+                  type="org.redisson.api.RedissonClient" />
+    <Manager className="org.redisson.tomcat.JndiRedissonSessionManager"
+             readMode="REDIS"
+             jndiName="bean/redisson" />
+</Context>
