@@ -1,5 +1,12 @@
 # WebLogic
 
+## Deployment descriptor (web.xml)
+
+- https://cloud.google.com/appengine/docs/standard/java/config/webxml
+- https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html
+- https://docs.oracle.com/middleware/12213/wls/WBAPP/web_xml.htm
+- https://docs.oracle.com/middleware/12213/wls/WBAPP/app_events.htm
+
 ## Sample Application
 
 Add 'WebLogic Server/Server Examples' component to COMPONENT_PATHS in [silent.xml](/weblogic/silent.xml)

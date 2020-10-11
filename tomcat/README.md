@@ -1,33 +1,36 @@
 # Tomcat
 
-## Install
+## Logging
 
-### General
+```properties
+java.util.logging.ConsoleHandler.level = FINEST
 
-```bash
-### requirements
-### tidy package
-sudo yum install -y tidy
+### session
+org.apache.catalina.session.level = FINEST
 
-### usage
-### ./create-instance.sh ${INSTANCE_NAME} ${HTTP_PORT} ${HTTPS_PORT} ${SHUTDOWN_PORT}
-./create-instance.sh inst1 8080 8443 8005
-./create-instance.sh inst2 8081 8444 8006
+### cluster
+org.apache.catalina.tribes.level = FINEST
 ```
 
-### Cluster
+- https://tomcat.apache.org/tomcat-9.0-doc/cluster-howto.html
+- https://tomcat.apache.org/tomcat-9.0-doc/logging.html
 
-```bash
-### requirements
-### tidy package
-sudo yum install -y tidy
+## Datasource
 
-### usage
-### ./create-instance-cluster-full.sh ${INSTANCE_NAME} ${HTTP_PORT} ${HTTPS_PORT} ${SHUTDOWN_PORT} ${AJP_PORT}
-./create-instance-cluster-full.sh inst1 8080 8443 8005 8009
-./create-instance-cluster-full.sh inst2 8081 8444 8006 8010
-```
+### DBCP
 
-## web.xml
+- https://tomcat.apache.org/tomcat-9.0-doc/jndi-datasource-examples-howto.html
+- https://commons.apache.org/proper/commons-dbcp/configuration.html
+
+### HikariCP
+
+- https://github.com/brettwooldridge/HikariCP/wiki/JNDI-DataSource-Factory-(Tomcat,-etc.)
+
+## Deployment descriptor (web.xml)
+
+[web.xml](/tomcat/instance/web.xml)
+
+- https://cloud.google.com/appengine/docs/standard/java/config/webxml
+- https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html
 
 cf. [weblogic/web.xml](/weblogic/web.xml)
