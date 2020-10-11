@@ -28,7 +28,7 @@ bash ./create-instance-cluster-full.sh inst2 8081 8444 8006 8010
 
 ### With Redis
 
-Set redisson mode in [env-redisson.sh](/tomcat/instance/env-redisson.sh).
+Set redisson mode in [env-redisson.sh](/tomcat/instance/env-redisson.sh):
 
 ```bash
 # REDISSON_MODE="CLUSTER_MODE"
@@ -47,7 +47,9 @@ bash ./create-instance-cluster-redis.sh inst2 8081 8444 8006 8010
 
 Edit addresses in redisson.yaml. If Redis has a password, set password too.
 
-> **NOTE**: The Tomcat clustering with Redis is required Redisson libraries.
+Add libraries:
+
+Add redisson-all-xxx.jar, redisson-tomcat-xxx.jar into `${CATALINA_BASE}/lib` directory.
 
 https://github.com/redisson/redisson/tree/master/redisson-tomcat
 
