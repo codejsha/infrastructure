@@ -1,4 +1,4 @@
-# logging
+# Logging
 
 ## logrotate
 
@@ -22,7 +22,7 @@ missingok
 }
 ```
 
-## rotating log file in windows service
+## Rotating log file in Windows service
 
 - https://docs.oracle.com/middleware/12213/wls/START/winservice.htm
 
@@ -32,7 +32,7 @@ missingok
 -log:%LOG_PATH%
 ```
 
-### edit stdout log file
+### Edit stdout log file
 
 by time:
 

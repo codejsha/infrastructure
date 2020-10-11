@@ -6,10 +6,21 @@
 bash ./install-weblogic.sh
 ```
 
+## Domain
+
+```bash
+bash ./create-domain.sh
+```
+
 ## Configuration
 
-- Domain: [/weblogic/config](/weblogic/config)
-- JMS: [/weblogic/jms-config](/weblogic/jms-config)
+- Domain: [config](/weblogic/config)
+- JMS: [jms-config](/weblogic/jms-config)
+
+### Logging
+
+- [debug.sh](/weblogic/debug.sh)
+- [Logging](/weblogic/logging.md)
 
 ## Deployment descriptor (web.xml)
 
