@@ -36,7 +36,7 @@ EOF
 elif [[ ${JAVA_VERSION} =~ ^11 ]]; then
 cat <<EOF >> ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
 CATALINA_OPTS="\${CATALINA_OPTS} -Xms1024m -Xmx1024m"
-CATALINA_OPTS="\${CATALINA_OPTS} -Xlog:gc*=info:file=${GC_LOG_OUT}"
+CATALINA_OPTS="\${CATALINA_OPTS} -Xlog:gc*=info:file=${GC_LOG_OUT}:time,pid,tid,level,tags"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:+HeapDumpOnOutOfMemoryError"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:HeapDumpPath=${DUMP_LOG_DIR}"
 # CATALINA_OPTS="\${CATALINA_OPTS} -XX:+PrintFlagsFinal"
