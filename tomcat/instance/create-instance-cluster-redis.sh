@@ -18,11 +18,11 @@ mkdir -p "$(eval echo $(eval echo ${DUMP_LOG_DIR}))"
 
 ### copy config files
 envsubst < ./server-cluster-redis.xml > ${CATALINA_BASE}/conf/server.xml
-envsubst < ./context.xml > ${CATALINA_BASE}/conf/context.xml
+envsubst < ./context-redis.xml > ${CATALINA_BASE}/conf/context.xml
 envsubst < ./tomcat-users.xml > ${CATALINA_BASE}/conf/tomcat-users.xml
 
 # /usr/bin/cp -pf ./server-cluster-redis.xml ${CATALINA_BASE}/conf/server.xml
-# /usr/bin/cp -pf ./context.xml ${CATALINA_BASE}/conf/context.xml
+# /usr/bin/cp -pf ./context-redis.xml ${CATALINA_BASE}/conf/context.xml
 # /usr/bin/cp -pf ./tomcat-users.xml ${CATALINA_BASE}/conf/tomcat-users.xml
 
 ######################################################################
