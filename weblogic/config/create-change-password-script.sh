@@ -10,6 +10,7 @@ mkdir -p ${DOMAIN_HOME}/scripts
 
 cat << EOF > ${DOMAIN_HOME}/scripts/change-password.sh
 #!/usr/bin/bash
+
 JAVA_HOME="${JAVA_HOME}"
 DOMAIN_HOME="${DOMAIN_HOME}"
 WEBLOGIC_HOME="${WEBLOGIC_HOME}"

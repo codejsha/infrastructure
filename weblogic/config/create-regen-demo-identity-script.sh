@@ -10,6 +10,7 @@ mkdir -p ${DOMAIN_HOME}/scripts
 
 cat << EOF > ${DOMAIN_HOME}/scripts/regen-demo-identity.sh
 #!/usr/bin/bash
+
 WEBLOGIC_HOME="${WEBLOGIC_HOME}"
 DOMAIN_HOME="${DOMAIN_HOME}"
 

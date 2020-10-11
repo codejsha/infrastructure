@@ -80,6 +80,7 @@ EOF
 if [ "${MAJOR_VERSION}" == "11g" ]; then
 cat << EOF > ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
 #!/usr/bin/bash
+
 WL_HOME="${WL_HOME}"
 
 PID="\$(pgrep -xa java | grep \${WL_HOME} | grep NodeManager | awk '{print \$1}')"
@@ -90,6 +91,7 @@ EOF
 elif [ "${MAJOR_VERSION}" == "12c" ] && [ "${MAJOR_VERSION}" == "14c" ]; then
 cat << EOF > ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
 #!/usr/bin/bash
+
 DOMAIN_HOME="${DOMAIN_HOME}"
 
 \${DOMAIN_HOME}/bin/stopNodeManager.sh

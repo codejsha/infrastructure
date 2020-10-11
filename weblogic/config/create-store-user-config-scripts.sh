@@ -33,11 +33,13 @@ EOF
 if [ "${MAJOR_VERSION}" == "11g" ]; then
 cat << EOF > ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
 #!/usr/bin/bash
+
 MW_HOME="${MW_HOME}"
 EOF
 elif [ "${MAJOR_VERSION}" == "12c" ] && [ "${MAJOR_VERSION}" == "14c" ]; then
 cat << EOF > ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
 #!/usr/bin/bash
+
 ORACLE_HOME="${ORACLE_HOME}"
 EOF
 fi

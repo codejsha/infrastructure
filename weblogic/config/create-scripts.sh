@@ -21,6 +21,7 @@ fi
 
 cat <<EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 #!/usr/bin/bash
+
 SERVER_NAME="${SERVER_NAME}"
 EOF
 
@@ -100,6 +101,7 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
 #!/usr/bin/bash
+
 EOF
 
 if [ "${SERVER_NAME}" != "${ADMIN_SERVER_NAME}" ]; then
