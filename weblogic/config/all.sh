@@ -65,11 +65,15 @@ bash ./deploy-app.sh testweb /svc/app/testweb BaseCluster1
 ###     ${DS_TARGET_TYPE} ${DS_TARGET}
 ###
 
-bash ./create-datasource.sh BaseDataSource1 "baseds1" \
-    jdbc:oracle:thin:@192.168.137.1:1521:orclcdb \
-    oracle.jdbc.OracleDriver system PASSWORD 1 1 15
-    Cluster "BaseCluster1"
-# bash ./create-datasource.sh BaseDataSource1 "baseds1" \
-#     jdbc:oracle:thin:@192.168.137.1:1521:orclcdb \
-#     oracle.jdbc.OracleDriver system PASSWORD 1 1 15
-#     Server "ManagedServer1"
+bash ./create-datasource.sh BaseDataSource1 "baseds1" "jdbc:oracle:thin:@192.168.137.1:1521:orclcdb" \
+    oracle.jdbc.OracleDriver system PASSWORD 1 1 15 Cluster "BaseCluster1"
+# bash ./create-datasource.sh BaseDataSource1 "baseds1" "jdbc:oracle:thin:@192.168.137.1:1521:orclcdb" \
+#     oracle.jdbc.OracleDriver system PASSWORD 1 1 15 Server "ManagedServer1"
+# bash ./create-datasource.sh BaseDataSource2 "baseds2" "jdbc:mysql://192.168.137.1:3306/mysqldb" \
+#     com.mysql.cj.jdbc.Driver mysql PASSWORD 1 1 15 Cluster "BaseCluster1"
+# bash ./create-datasource.sh BaseDataSource2 "baseds2" "jdbc:mysql://192.168.137.1:3306/mysqldb" \
+#     com.mysql.cj.jdbc.Driver mysql PASSWORD 1 1 15 Server "ManagedServer1"
+# bash ./create-datasource.sh BaseDataSource3 "baseds3" "jdbc:sqlserver://192.168.137.1:1433;database=sqlserverdb" \
+#     com.microsoft.sqlserver.jdbc.SQLServerDriver sa PASSWORD 1 1 15 Cluster "BaseCluster1"
+# bash ./create-datasource.sh BaseDataSource3 "baseds3" "jdbc:sqlserver://192.168.137.1:1433;database=sqlserverdb" \
+#     com.microsoft.sqlserver.jdbc.SQLServerDriver sa PASSWORD 1 1 15 Server "ManagedServer1"
