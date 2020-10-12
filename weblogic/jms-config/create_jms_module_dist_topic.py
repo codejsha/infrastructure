@@ -10,7 +10,6 @@ jmsmodule_name = os.environ.get('JMSMODULE_NAME')
 disttopic_name = os.environ.get('DISTTOPIC_NAME')
 disttopic_jndi = os.environ.get('DISTTOPIC_JNDI')
 subdeploy_name = os.environ.get('SUBDEPLOY_NAME')
-subdeploy_target = os.environ.get('SUBDEPLOY_TARGET')
 
 
 ######################################################################
@@ -23,26 +22,13 @@ def create_jms_module_dist_topic(_jmsmodule_name, _disttopic_name):
 
 
 def set_jms_module_dist_topic_general_config(_jmsmodule_name, _disttopic_name, _disttopic_jndi,
-                                             _subdeploy_name, _subdeploy_target):
+                                             _subdeploy_name):
     cd('/JMSSystemResources/' + _jmsmodule_name + '/JMSResource/' + _jmsmodule_name +
        '/UniformDistributedTopics/' + _disttopic_name)
     cmo.setJNDIName(_disttopic_jndi)
     cmo.setForwardingPolicy('Replicated')
-    if _subdeploy_name != None:
+    if _subdeploy_name:
         cmo.setSubDeploymentName(_subdeploy_name)
-        cd('/SystemResources/' + _jmsmodule_name + '/SubDeployments/' + _subdeploy_name)
-        _objects = []
-        for target in _subdeploy_target:
-            _target_name = target['name']
-            if target in clusters.values():
-                _objects.append(ObjectName('com.bea:Name=' + _target_name + ',Type=Cluster'))
-            elif target in servers.values():
-                _objects.append(ObjectName('com.bea:Name=' + _target_name + ',Type=Server'))
-            elif target in jmsservers.values():
-                _objects.append(ObjectName('com.bea:Name=' + _target_name + ',Type=JMSServer'))
-            else:
-                pass
-        set('Targets', jarray.array(_objects, ObjectName))
     else:
         cmo.unSet('SubDeploymentName')
 
@@ -57,7 +43,7 @@ startEdit()
 
 create_jms_module_dist_topic(jmsmodule_name, disttopic_name)
 set_jms_module_dist_topic_general_config(jmsmodule_name, disttopic_name, disttopic_jndi,
-                                         subdeploy_name, subdeploy_target)
+                                         subdeploy_name)
 
 save()
 activate()

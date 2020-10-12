@@ -2,9 +2,9 @@
 
 source ./env-base.sh
 
-JMSMODULE_NAME="${1}"
+JMSSERVER_NAME="${1}"
 JMSSERVER_STORE="${2}"
-JMSMODULE_TARGET="${3}"
+JMSSERVER_TARGET="${3}"
 
 ######################################################################
 

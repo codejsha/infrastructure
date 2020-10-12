@@ -26,7 +26,7 @@ def set_jms_module_conn_factory_general_config(_jmsmodule_name, _connfactory_nam
     cd('/JMSSystemResources/' + _jmsmodule_name + '/JMSResource/' + _jmsmodule_name +
        '/ConnectionFactories/' + _connfactory_name)
     cmo.setJNDIName(_connfactory_jndi)
-    if _subdeploy_name != None:
+    if _subdeploy_name:
         cmo.setDefaultTargetingEnabled(False)
         cmo.setSubDeploymentName(_subdeploy_name)
     else:

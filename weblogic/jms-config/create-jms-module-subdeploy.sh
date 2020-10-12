@@ -5,6 +5,7 @@ source ./env-base.sh
 JMSMODULE_NAME="${1}"
 SUBDEPLOY_NAME="${2}"
 SUBDEPLOY_TARGET="${3}"
+SUBDEPLOY_TARGET_TYPE="${4}"
 
 ######################################################################
 

@@ -4,6 +4,7 @@ source ./env-base.sh
 
 JMSMODULE_NAME="${1}"
 JMSMODULE_TARGET="${2}"
+JMSMODULE_TARGET_TYPE="${3}"
 
 ######################################################################
 

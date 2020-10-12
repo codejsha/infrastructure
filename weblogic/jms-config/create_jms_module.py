@@ -8,6 +8,7 @@ admin_password = os.environ.get('ADMIN_PASSWORD')
 
 jmsmodule_name = os.environ.get('JMSMODULE_NAME')
 jmsmodule_target = os.environ.get('JMSMODULE_TARGET')
+jmsmodule_target_type = os.environ.get('JMSMODULE_TARGET_TYPE')
 
 
 ######################################################################
@@ -19,15 +20,16 @@ def create_jms_module(_jmsmodule_name):
         cmo.createJMSSystemResource(_jmsmodule_name)
 
 
-def set_jms_module_general_config(_jmsmodule_name, _jmsmodule_target):
+def set_jms_module_general_config(_jmsmodule_name, _jmsmodule_target,
+                                  _jmsmodule_target_type):
     cd('/SystemResources/' + _jmsmodule_name)
+    _target_list = [target.strip() for target in _jmsmodule_target.split(',')]
     _objects = []
-    for target in _jmsmodule_target:
-        _target_name = target['name']
-        if target in clusters.values():
-            _objects.append(ObjectName('com.bea:Name=' + _target_name + ',Type=Cluster'))
-        elif target in servers.values():
-            _objects.append(ObjectName('com.bea:Name=' + _target_name + ',Type=Server'))
+    for _target_name in _target_list:
+        if _jmsmodule_target_type == "Cluster":
+            _objects.append(ObjectName('com.bea:Name=' + _jmsmodule_target + ',Type=Cluster'))
+        elif _jmsmodule_target_type == "Server":
+            _objects.append(ObjectName('com.bea:Name=' + _jmsmodule_target + ',Type=Server'))
         else:
             pass
     set('Targets', jarray.array(_objects, ObjectName))
@@ -42,7 +44,8 @@ edit()
 startEdit()
 
 create_jms_module(jmsmodule_name)
-set_jms_module_general_config(jmsmodule_name, jmsmodule_target)
+set_jms_module_general_config(jmsmodule_name, jmsmodule_target,
+                              _jmsmodule_target_type)
 
 save()
 activate()

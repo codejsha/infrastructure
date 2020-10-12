@@ -6,7 +6,6 @@ JMSMODULE_NAME="${1}"
 DISTTOPIC_NAME="${2}"
 DISTTOPIC_JNDI="${3}"
 SUBDEPLOY_NAME="${4}"
-SUBDEPLOY_TARGET="${5}"
 
 ######################################################################
 

@@ -6,7 +6,6 @@ JMSMODULE_NAME="${1}"
 DISTQUEUE_NAME="${2}"
 DISTQUEUE_JNDI="${3}"
 SUBDEPLOY_NAME="${4}"
-SUBDEPLOY_TARGET="${5}"
 
 ######################################################################
 

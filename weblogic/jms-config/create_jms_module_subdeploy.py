@@ -9,6 +9,7 @@ admin_password = os.environ.get('ADMIN_PASSWORD')
 jmsmodule_name = os.environ.get('JMSMODULE_NAME')
 subdeploy_name = os.environ.get('SUBDEPLOY_NAME')
 subdeploy_target = os.environ.get('SUBDEPLOY_TARGET')
+subdeploy_target_type = os.environ.get('SUBDEPLOY_TARGET_TYPE')
 
 
 ######################################################################
@@ -20,16 +21,17 @@ def create_jms_module_subdeploy(_jmsmodule_name, _subdeploy_name):
         cmo.createSubDeployment(_subdeploy_name)
 
 
-def set_jms_module_subdeploy_general_config(_jmsmodule_name, _subdeploy_name, _subdeploy_target):
+def set_jms_module_subdeploy_general_config(_jmsmodule_name, _subdeploy_name, _subdeploy_target,
+                                            _subdeploy_target_type):
     cd('/SystemResources/' + _jmsmodule_name + '/SubDeployments/' + _subdeploy_name)
+    _target_list = [target.strip() for target in _subdeploy_target.split(',')]
     _objects = []
-    for target in _subdeploy_target:
-        _target_name = target['name']
-        if target in clusters.values():
+    for _target_name in _target_list:
+        if _subdeploy_target_type == "Cluster":
             _objects.append(ObjectName('com.bea:Name=' + _target_name + ',Type=Cluster'))
-        elif target in servers.values():
+        elif _subdeploy_target_type == "Server":
             _objects.append(ObjectName('com.bea:Name=' + _target_name + ',Type=Server'))
-        elif target in jmsservers.values():
+        elif _subdeploy_target_type == "JMSServer":
             _objects.append(ObjectName('com.bea:Name=' + _target_name + ',Type=JMSServer'))
         else:
             pass
@@ -45,7 +47,8 @@ edit()
 startEdit()
 
 create_jms_module_subdeploy(jmsmodule_name, subdeploy_name)
-set_jms_module_subdeploy_general_config(jmsmodule_name, subdeploy_name, subdeploy_target)
+set_jms_module_subdeploy_general_config(jmsmodule_name, subdeploy_name, subdeploy_target,
+                                        subdeploy_target_type)
 
 save()
 activate()
