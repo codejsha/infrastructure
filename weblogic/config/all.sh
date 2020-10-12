@@ -59,10 +59,8 @@ bash ./deploy-app.sh testweb /svc/app/testweb BaseCluster1
 ######################################################################
 
 ### CREATE DATASOURCE
-### bash ./create-datasource.sh ${DS_NAME} ${DS_JNDI} \
-###     ${DS_URL} \
-###     ${DS_DRIVER} ${DS_USER} ${DS_PASSWORD} ${DS_INIT} ${DS_MIN} ${DS_MAX}
-###     ${DS_TARGET_TYPE} ${DS_TARGET}
+### bash ./create-datasource.sh ${DS_NAME} ${DS_JNDI} ${DS_URL} \
+###     ${DS_DRIVER} ${DS_USER} ${DS_PASSWORD} ${DS_INIT} ${DS_MIN} ${DS_MAX} ${DS_TARGET_TYPE} ${DS_TARGET}
 ###
 
 bash ./create-datasource.sh BaseDataSource1 "baseds1" "jdbc:oracle:thin:@192.168.137.1:1521:orclcdb" \
