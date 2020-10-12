@@ -5,7 +5,7 @@ source ./env-base.sh
 export CLUSTER_NAME=${1}
 export TRANSMISSION=${2}             # unicast/multicast (possible: unicast, multicast)
 export MULTICAST_LISTEN_ADDRESS=${3} # optional (only multicast)
-export MULTICAST_LISTEN_PORT=${3}    # optional (only multicast)
+export MULTICAST_LISTEN_PORT=${4}    # optional (only multicast)
 
 ######################################################################
 
