@@ -1,6 +1,6 @@
 # WebLogic JMS Configuration
 
-## All
+## Configuration
 
 ```bash
 bash ./all.sh

@@ -6,7 +6,7 @@
 bash ./install-weblogic.sh
 ```
 
-## Domain
+## Create a domain
 
 ```bash
 bash ./create-domain.sh
@@ -30,6 +30,8 @@ bash ./create-domain.sh
 - https://docs.oracle.com/middleware/12213/wls/WBAPP/app_events.htm
 
 ## Sample application
+
+### 11g
 
 Add 'WebLogic Server/Server Examples' component to COMPONENT_PATHS in [silent.xml](/weblogic/silent.xml).
 

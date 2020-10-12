@@ -1,6 +1,6 @@
 # WebLogic Configuration
 
-## All
+## Configuration
 
 ```bash
 bash ./all.sh
