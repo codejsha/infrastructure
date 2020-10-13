@@ -54,7 +54,7 @@ USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+DisableExplicitGC"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+PrintGCDetails"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+PrintGCTimeStamps"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+PrintHeapAtGC"
-USER_MEM_ARGS="\${USER_MEM_ARGS} -Xloggc:\${LOG_HOME}/gc_\${SERVER_NAME}.log"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -Xloggc:\${LOG_HOME}/gc.\${SERVER_NAME}.log"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+HeapDumpOnOutOfMemoryError"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:HeapDumpPath=\${LOG_HOME}/dump"
 # USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+PrintFlagsFinal"
@@ -75,8 +75,8 @@ export JAVA_OPTIONS
 if [ -f \${LOG_HOME}/nohup.\${SERVER_NAME}.out ]; then
   mv \${LOG_HOME}/nohup.\${SERVER_NAME}.out \${LOG_HOME}/\${SERVER_NAME}/nohup.\${SERVER_NAME}.\${GET_DATE}.out
 fi
-if [ -f \${LOG_HOME}/gc_\${SERVER_NAME}.log ]; then
-  mv \${LOG_HOME}/gc_\${SERVER_NAME}.log \${LOG_HOME}/\${SERVER_NAME}/gc_\${SERVER_NAME}.\${GET_DATE}.log
+if [ -f \${LOG_HOME}/gc.\${SERVER_NAME}.log ]; then
+  mv \${LOG_HOME}/gc.\${SERVER_NAME}.log \${LOG_HOME}/\${SERVER_NAME}/gc.\${SERVER_NAME}.\${GET_DATE}.log
 fi
 touch \${LOG_HOME}/nohup.\${SERVER_NAME}.out
 EOF

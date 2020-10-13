@@ -53,8 +53,8 @@ export JAVA_OPTIONS
 if [ -f \${LOG_HOME}/nohup.NodeManager.out ]; then
   mv \${LOG_HOME}/nohup.NodeManager.out \${LOG_HOME}/nodemanager/nohup.NodeManager.\${GET_DATE}.out
 fi
-if [ -f \${LOG_HOME}/gc_NodeManager.log ]; then
-  mv \${LOG_HOME}/gc_NodeManager.log \${LOG_HOME}/nodemanager/gc_NodeManager.\${GET_DATE}.log
+if [ -f \${LOG_HOME}/gc.NodeManager.log ]; then
+  mv \${LOG_HOME}/gc.NodeManager.log \${LOG_HOME}/nodemanager/gc.NodeManager.\${GET_DATE}.log
 fi
 touch \${LOG_HOME}/nohup.NodeManager.out
 EOF
