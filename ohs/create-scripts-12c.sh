@@ -22,7 +22,7 @@ if [ -n "\${PID}" ]; then
 fi
 
 if [ -f ${LOG_HOME}/nohup.NodeManager.out ]; then
-  mv ${LOG_HOME}/nohup.NodeManager.out ${LOG_HOME}/NodeManager/nohup.NodeManager_\${GET_DATE}.out
+  mv ${LOG_HOME}/nohup.NodeManager.out ${LOG_HOME}/NodeManager/nohup.NodeManager.\${GET_DATE}.out
 fi
 
 touch ${LOG_HOME}/nohup.NodeManager.out

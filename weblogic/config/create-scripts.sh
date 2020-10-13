@@ -73,10 +73,10 @@ export JAVA_OPTIONS
 # export EXT_POST_CLASSPATH
 
 if [ -f \${LOG_HOME}/nohup.\${SERVER_NAME}.out ]; then
-  mv \${LOG_HOME}/nohup.\${SERVER_NAME}.out \${LOG_HOME}/\${SERVER_NAME}/nohup.\${SERVER_NAME}_\${GET_DATE}.out
+  mv \${LOG_HOME}/nohup.\${SERVER_NAME}.out \${LOG_HOME}/\${SERVER_NAME}/nohup.\${SERVER_NAME}.\${GET_DATE}.out
 fi
 if [ -f \${LOG_HOME}/gc_\${SERVER_NAME}.log ]; then
-  mv \${LOG_HOME}/gc_\${SERVER_NAME}.log \${LOG_HOME}/\${SERVER_NAME}/gc_\${SERVER_NAME}_\${GET_DATE}.log
+  mv \${LOG_HOME}/gc_\${SERVER_NAME}.log \${LOG_HOME}/\${SERVER_NAME}/gc_\${SERVER_NAME}.\${GET_DATE}.log
 fi
 touch \${LOG_HOME}/nohup.\${SERVER_NAME}.out
 EOF
