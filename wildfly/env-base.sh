@@ -2,7 +2,7 @@
 
 INSTANCE_NAME="${1:-inst1}"
 JAVA_HOME="/usr/lib/jvm/java-11"
-JBOSS_HOME="/svc/appsvr/wildfly20"
+JBOSS_HOME="/svc/appsvr/wildfly"
 JBOSS_BASE_DIR="${JBOSS_HOME}/instances/${INSTANCE_NAME}"
 JBOSS_CONFIG_DIR="${JBOSS_BASE_DIR}/configuration"
 
