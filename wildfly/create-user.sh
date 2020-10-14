@@ -1,12 +1,13 @@
 #!/usr/bin/bash
 
 source ./env-base.sh
-source ./env-inst.sh
+
+PASSWORD="<PASSWORD>"
 
 ### management user
-${WILDFLY_HOME}/bin/add-user.sh -u "admin" -p "${PASSWORD}" -sc ${INSTANCE_HOME}/configuration
-# ${WILDFLY_HOME}/bin/add-user.sh -u "admin" -p "${PASSWORD}"
+${JBOSS_HOME}/bin/add-user.sh --user "admin" --password "${PASSWORD}" -sc ${JBOSS_BASE_DIR}/configuration
+# ${JBOSS_HOME}/bin/add-user.sh --user "admin" --password "${PASSWORD}"
 
-### application usser
-# ${WILDFLY_HOME}/bin/add-user.sh -u "developer" -p "${PASSWORD}"
-# ${WILDFLY_HOME}/bin/add-user.sh -u "developer" -p "${PASSWORD}" -sc ${INSTANCE_HOME}/configuration
+### application user
+# ${JBOSS_HOME}/bin/add-user.sh --user "developer" --password "${PASSWORD}"
+# ${JBOSS_HOME}/bin/add-user.sh --user "developer" --password "${PASSWORD}" -sc ${JBOSS_BASE_DIR}/configuration
