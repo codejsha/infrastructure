@@ -1,10 +1,11 @@
 #!/usr/bin/bash
 
 source ./env-base.sh
+source ./env-app.sh
 
-APP_PATH="/svc/app/test"
-APP_NAME="test.war"
-APP_RUNTIME_NAME="test.war"
+APP_PATH="${1:-APP_PATH}"
+APP_NAME="${2:-APP_NAME}"
+APP_RUNTIME_NAME="${3:-APP_RUNTIME_NAME}"
 
 ######################################################################
 
@@ -12,7 +13,10 @@ function deploy_application {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="deploy ${APP_PATH} --name=${APP_NAME} --runtime-name=${APP_RUNTIME_NAME} --unmanaged"
+        --command="deploy ${APP_PATH} \
+            --name=${APP_NAME} \
+            --runtime-name=${APP_RUNTIME_NAME} \
+            --unmanaged"
 }
 
 function check_deployment_status {

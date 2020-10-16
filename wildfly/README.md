@@ -1,5 +1,78 @@
 # Wildfly / JBoss
 
-## Vault
+## Install
 
-https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.3/html-single/how_to_configure_server_security/index#password_vault
+```bash
+bash ./install-wildfly.sh
+```
+
+## Configuration
+
+```bash
+bash ./all.sh
+```
+
+## Create instances
+
+```bash
+### ./create-instance.sh ${INSTANCE_NAME} ${PORT_OFFSET}
+bash ./create-instance.sh inst1 0
+bash ./create-instance.sh inst2 1
+```
+
+## Password encryption
+
+### valut
+
+```bash
+bash ./encrypt-password-by-picketbox.sh
+```
+
+- https://access.redhat.com/solutions/2790371
+- https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.3/html-single/how_to_configure_server_security/index#password_vault
+
+### picketbox
+
+```bash
+bash ./encrypt-password-by-vault.sh
+```
+
+- https://access.redhat.com/solutions/184963
+
+## Datasource
+
+### Create JDBC driver
+
+```bash
+### by deployment
+bash ./create-jdbc-driver-by-deployment.sh
+
+### by module
+bash ./create-jdbc-driver-by-module.sh
+```
+
+### Create/Modify/Delete datasource
+
+```bash
+### Create
+bash ./create-datasource.sh
+
+### Modify
+bash ./set-datasource.sh
+
+### Delete
+bash ./delete-datasource.sh
+```
+
+## Application
+
+```bash
+### Deploy
+bash ./deploy-app.sh
+
+### Undeploy
+bash ./undeploy-app.sh
+
+### Redeploy
+bash ./redeploy-app.sh
+```

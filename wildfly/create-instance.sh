@@ -2,6 +2,9 @@
 
 source ./env-base.sh
 
+INSTANCE_NAME="${1:-INSTANCE_NAME}"
+PORT_OFFSET="${2:-PORT_OFFSET}"
+
 ######################################################################
 
 mkdir -p ${JBOSS_BASE_DIR}

@@ -1,25 +1,17 @@
 #!/usr/bin/bash
 
 source ./env-base.sh
-
-DATASOURCE_NAME="baseds1"
-DRIVER_NAME="oracle"
-
-JNDI_NAME="java:/base/ds1"
-ENABLED="true"
-CONNECTION_URL="jdbc:oracle:thin:@192.168.137.150:1521:orclcdb"
-MIN_POOL_SIZE="10"
-MAX_POOL_SIZE="10"
-USERNAME="system"
-PASSWORD="\${VAULT::datasource::password::1}"
+source ./env-jdbc-driver.sh
+source ./env-datasource.sh
 
 ######################################################################
 
-function create_datasource {
+function add_datasource {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="/subsystem=datasources/data-source=${DATASOURCE_NAME}:add(\
+        --command="/subsystem=datasources/data-source=${DATASOURCE_NAME}\
+            :add(\
             jndi-name=${JNDI_NAME},\
             enabled=${ENABLED},\
             connection-url=${CONNECTION_URL},\
@@ -30,7 +22,7 @@ function create_datasource {
             password=${PASSWORD})"
 }
 
-function reload {
+function reload_server {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
@@ -46,6 +38,6 @@ function test_connection_pool {
 
 ######################################################################
 
-create_datasource
-reload
+add_datasource
+reload_server
 test_connection_pool

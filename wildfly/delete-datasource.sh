@@ -2,7 +2,7 @@
 
 source ./env-base.sh
 
-DATASOURCE_NAME="baseds1"
+DATASOURCE_NAME="${1:-DATASOURCE_NAME}"
 
 ######################################################################
 
@@ -10,11 +10,12 @@ function disable_datasource {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="/subsystem=datasources/data-source=${DATASOURCE_NAME}:write-attribute(name=enabled,value=false)"
+        --command="/subsystem=datasources/data-source=${DATASOURCE_NAME}\
+            :write-attribute(name=enabled,value=false)"
 
 }
 
-function reload {
+function reload_server {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
@@ -31,5 +32,5 @@ function remove_datasource {
 ######################################################################
 
 disable_datasource
-reload
+reload_server
 remove_datasource
