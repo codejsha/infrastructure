@@ -44,11 +44,11 @@ bash ./encrypt-password-by-vault.sh ${PASSWORD}
 ### Create JDBC driver
 
 ```bash
-### by deployment
-bash ./create-jdbc-driver-by-deployment.sh
-
 ### by module
 bash ./create-jdbc-driver-by-module.sh
+
+### by deployment
+bash ./create-jdbc-driver-by-deployment.sh
 ```
 
 ### Datasource

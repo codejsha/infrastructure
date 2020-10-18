@@ -15,10 +15,19 @@ function add_datasource {
             enabled=${ENABLED}, \
             connection-url=${CONNECTION_URL}, \
             driver-name=${DRIVER_NAME}, \
+            initial-pool-size=${INITIAL_POOL_SIZE}, \
             min-pool-size=${MIN_POOL_SIZE}, \
             max-pool-size=${MAX_POOL_SIZE}, \
             user-name=${USERNAME}, \
-            password=${PASSWORD})"
+            password=${PASSWORD}, \
+            check-valid-connection-sql=\"${CHECK_VALID_CONNECTION_SQL}\", \
+            background-validation=${BACKGROUND_VALIDATION}, \
+            background-validation-millis=${BACKGROUND_VALIDATION_MILLIS}, \
+            blocking-timeout-wait-millis=${BLOCKING_TIMEOUT_WAIT_MILLIS}, \
+            query-timeout=${QUERY_TIMEOUT}, \
+            track-statements=${TRACK_STATEMENTS}, \
+            prepared-statements-cache-size=${PREPARED_STATEMENTS_CACHE_SIZE}, \
+            share-prepared-statements=${SHARE_PREPARED_STATEMENTS})"
 }
 
 function reload_server {
