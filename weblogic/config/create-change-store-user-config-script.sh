@@ -34,7 +34,7 @@ cat << EOF > ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 
 MW_HOME="${MW_HOME}"
 EOF
-elif [ "${MAJOR_VERSION}" == "12c" ] && [ "${MAJOR_VERSION}" == "14c" ]; then
+elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
 cat << EOF > ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 #!/usr/bin/bash
 
@@ -54,7 +54,7 @@ cat << EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 
 ${MW_HOME}/wlserver_10.3/common/bin/wlst.sh ${DOMAIN_HOME}/scripts/change_store_user_config.py
 EOF
-elif [ "${MAJOR_VERSION}" == "12c" ] && [ "${MAJOR_VERSION}" == "14c" ]; then
+elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
 cat << EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 
 ${ORACLE_HOME}/oracle_common/common/bin/wlst.sh ${DOMAIN_HOME}/scripts/change_store_user_config.py
