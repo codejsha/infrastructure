@@ -11,7 +11,7 @@ JAVA_HOME="${JAVA_HOME}"
 WEBLOGIC_HOME="${WEBLOGIC_HOME}"
 PLAINTEXT_PASSWORD="\${1}"
 
-ENCRYPTED_PASSWORD=\$(\${JAVA_HOME}/bin/java -cp \${WEBLOGIC_HOME}/server/lib/weblogic.jar weblogic.security.Encrypt \${PLAINTEXT_PASSWORD})
+ENCRYPTED_PASSWORD=\$(\${JAVA_HOME}/bin/java -classpath \${WEBLOGIC_HOME}/server/lib/weblogic.jar weblogic.security.Encrypt \${PLAINTEXT_PASSWORD})
 echo ${ENCRYPTED_PASSWORD}
 EOF
 

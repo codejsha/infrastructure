@@ -27,11 +27,15 @@ function install_weblogic_11g {
 
 function install_weblogic {
     ${JAVA_HOME}/bin/java \
+        -Djava.security.egd=file:///dev/urandom \
         -jar ${INSTALL_FILE_DIR}/${INSTALL_FILE} \
         -silent \
         -responseFile ${INSTALL_SCRIPT_DIR}/response.rsp \
         -invPtrLoc ${INSTALL_SCRIPT_DIR}/oraInst.loc \
-        -ignoreSysPrereqs
+        -jreLoc ${JAVA_HOME} \
+        -ignoreSysPrereqs \
+        -force \
+        -novalidation
 }
 
 # install_weblogic_11g

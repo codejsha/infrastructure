@@ -14,8 +14,8 @@ bash ./create-domain.sh
 
 ## Configuration
 
-- Domain: [config](/weblogic/config)
-- JMS: [jms-config](/weblogic/jms-config)
+- Domain: [config](/weblogic/config/README.md)
+- JMS: [jms-config](/weblogic/jms-config/README.md)
 
 ### Logging
 

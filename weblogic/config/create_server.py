@@ -45,12 +45,12 @@ def set_server_general_config(_domain_name, _domain_home, _server_name,
     cmo.setClientCertProxyEnabled(False)
     cmo.setJavaCompiler('javac')
     cmo.setWeblogicPluginEnabled(True)
-    if _nodemgr_name is not None:
-        cmo.setMachine(getMBean('/Machines/' + _server_nodemgr_name))
+    if (_nodemgr_name and _nodemgr_name.strip()):
+        cmo.setMachine(getMBean('/Machines/' + _nodemgr_name))
     else:
         cmo.setMachine(None)
-    if _cluster_name is not None:
-        cmo.setCluster(getMBean('/Clusters/' + _server_cluster_name))
+    if (_cluster_name and _cluster_name.strip()):
+        cmo.setCluster(getMBean('/Clusters/' + _cluster_name))
     else:
         cmo.setCluster(None)
     cmo.setStagingMode('nostage')
@@ -165,7 +165,7 @@ def set_server_datasource_log_config(_log_home, _server_name):
 
 def set_server_start_config(_server_name, _nodemgr_name, _java_home, _java_vendor,
                             _bea_home, _root_dir, _arguments, _classpath):
-    if _nodemgr_name is not None:
+    if (_nodemgr_name and _nodemgr_name.strip()):
         cd('/Servers/' + _server_name + '/ServerStart/' + _server_name)
         cmo.setJavaHome(_java_home)
         cmo.setJavaVendor(_java_vendor)
@@ -193,7 +193,7 @@ set_server_general_config(domain_name, domain_home, managed_server_name,
 # set_server_protocol_config(server_name)
 set_server_tunning_config(managed_server_name)
 set_server_ssl_config(managed_server_name)
-set_server_log_config(log_home, managed_server_name)
+set_server_log_config(domain_version, log_home, managed_server_name)
 set_server_access_log_config(log_home, managed_server_name)
 # set_server_datasource_log_config(log_home, server_name)
 set_server_start_config(managed_server_name, nodemgr_name, java_home, server_start_java_vendor,
