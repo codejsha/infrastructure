@@ -1,7 +1,6 @@
 #!/usr/bin/bash
 
 source ./env-base.sh
-source ./env-jdbc-driver.sh
 source ./env-datasource.sh
 
 ######################################################################
@@ -12,13 +11,13 @@ function add_datasource {
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
         --command="/subsystem=datasources/data-source=${DATASOURCE_NAME}\
             :add(\
-            jndi-name=${JNDI_NAME},\
-            enabled=${ENABLED},\
-            connection-url=${CONNECTION_URL},\
-            driver-name=${DRIVER_NAME},\
-            min-pool-size=${MIN_POOL_SIZE},\
-            max-pool-size=${MAX_POOL_SIZE},\
-            user-name=${USERNAME},\
+            jndi-name=${JNDI_NAME}, \
+            enabled=${ENABLED}, \
+            connection-url=${CONNECTION_URL}, \
+            driver-name=${DRIVER_NAME}, \
+            min-pool-size=${MIN_POOL_SIZE}, \
+            max-pool-size=${MAX_POOL_SIZE}, \
+            user-name=${USERNAME}, \
             password=${PASSWORD})"
 }
 

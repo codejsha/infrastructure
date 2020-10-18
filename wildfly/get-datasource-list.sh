@@ -2,25 +2,30 @@
 
 source ./env-base.sh
 
-APP_NAME="${1}"
-
 ######################################################################
 
-function undeploy_application {
+function get_datasource_resource {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="undeploy ${APP_NAME}"
+        --command="/subsystem=datasources:read-resource"
 }
 
-function check_deployment_status_all {
+function get_datasource_resource_json {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="deploy -l"
+        --command="/subsystem=datasources:read-resource" \
+        --output-json
+}
+
+function get_datasource_list {
+    DATASOURCES="$(get_datasource_resource_json | jq '.result."data-source"' | jq 'keys')"
+    echo ${DATASOURCES}
 }
 
 ######################################################################
 
-undeploy_application
-# check_deployment_status_all
+# get_datasource_resource
+# get_datasource_resource_json
+get_datasource_list

@@ -2,17 +2,17 @@
 
 source ./env-base.sh
 
-DRIVER_NAME="${1}"
+DATASOURCE_NAME="${1}"
 
 ######################################################################
 
-function remove_jdbc_driver {
+function test_connection_pool {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="/subsystem=datasources/jdbc-driver=${DRIVER_NAME}:remove"
+        --command="/subsystem=datasources/data-source=${DATASOURCE_NAME}:test-connection-in-pool"
 }
 
 ######################################################################
 
-remove_jdbc_driver
+test_connection_pool

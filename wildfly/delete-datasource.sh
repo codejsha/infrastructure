@@ -2,7 +2,7 @@
 
 source ./env-base.sh
 
-DATASOURCE_NAME="${1:-DATASOURCE_NAME}"
+DATASOURCE_NAME="${1}"
 
 ######################################################################
 
@@ -11,8 +11,7 @@ function disable_datasource {
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
         --command="/subsystem=datasources/data-source=${DATASOURCE_NAME}\
-            :write-attribute(name=enabled,value=false)"
-
+            :write-attribute(name=enabled, value=false)"
 }
 
 function reload_server {

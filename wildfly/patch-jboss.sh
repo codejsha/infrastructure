@@ -14,7 +14,14 @@ function apply_patch {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="patch apply ${PATCH_FILE_DIR}/${PATCH_FILE}"
+        --command="patch apply ${PATCH_FILE_DIR}/${PATCH_FILE} --override-all"
+}
+
+function rollback_patch {
+    ${JBOSS_HOME}/bin/jboss-cli.sh \
+        --connect \
+        --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --command="patch --patch-id=${PATCH_ID} --reset-configuration=false"
 }
 
 function restart_server {
@@ -27,4 +34,5 @@ function restart_server {
 ######################################################################
 
 apply_patch
+# rollback_patch
 restart_server

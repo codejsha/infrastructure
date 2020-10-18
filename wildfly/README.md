@@ -25,7 +25,7 @@ bash ./create-instance.sh inst2 1
 ### valut
 
 ```bash
-bash ./encrypt-password-by-picketbox.sh
+bash ./encrypt-password-by-picketbox.sh ${PASSWORD}
 ```
 
 - https://access.redhat.com/solutions/2790371
@@ -34,7 +34,7 @@ bash ./encrypt-password-by-picketbox.sh
 ### picketbox
 
 ```bash
-bash ./encrypt-password-by-vault.sh
+bash ./encrypt-password-by-vault.sh ${PASSWORD}
 ```
 
 - https://access.redhat.com/solutions/184963
@@ -51,28 +51,18 @@ bash ./create-jdbc-driver-by-deployment.sh
 bash ./create-jdbc-driver-by-module.sh
 ```
 
-### Create/Modify/Delete datasource
+### Datasource
 
 ```bash
-### Create
 bash ./create-datasource.sh
-
-### Modify
 bash ./set-datasource.sh
-
-### Delete
-bash ./delete-datasource.sh
+bash ./delete-datasource.sh ${DATASOURCE_NAME}
 ```
 
 ## Application
 
 ```bash
-### Deploy
-bash ./deploy-app.sh
-
-### Undeploy
-bash ./undeploy-app.sh
-
-### Redeploy
-bash ./redeploy-app.sh
+bash ./deploy-app.sh ${APP_PATH} ${APP_NAME} ${APP_RUNTIME_NAME}
+bash ./undeploy-app.sh ${APP_NAME}
+bash ./redeploy-app.sh ${APP_PATH} ${APP_NAME} ${APP_RUNTIME_NAME}
 ```

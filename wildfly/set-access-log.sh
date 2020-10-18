@@ -12,9 +12,9 @@ function add_access_log {
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
         --command="/subsystem=undertow/server=default-server/host=default-host/setting=access-log\
             :add(\
-            pattern=\"${LOG_FORMAT}\",\
-            relative-to=jboss.server.log.dir,\
-            prefix=access.,\
+            pattern=\"${LOG_FORMAT}\", \
+            relative-to=jboss.server.log.dir, \
+            prefix=access., \
             use-server-log=true)"
 }
 
@@ -26,13 +26,13 @@ function set_access_log {
 <<EOF
             batch
             /subsystem=undertow/server=default-server/host=default-host/setting=access-log\
-                :write-attribute(name=prefix,value=access.),\
+                :write-attribute(name=prefix, value=access.), \
             /subsystem=undertow/server=default-server/host=default-host/setting=access-log\
-                :write-attribute(name=relative-to,value=jboss.server.log.dir),\
+                :write-attribute(name=relative-to, value=jboss.server.log.dir), \
             /subsystem=undertow/server=default-server/host=default-host/setting=access-log\
-                :write-attribute(name=pattern,value=${LOG_FORMAT}),\
+                :write-attribute(name=pattern, value=${LOG_FORMAT}), \
             /subsystem=undertow/server=default-server/host=default-host/setting=access-log\
-                :write-attribute(name=use-server-log,value=true)
+                :write-attribute(name=use-server-log, value=true)
             run-batch
 EOF
 }

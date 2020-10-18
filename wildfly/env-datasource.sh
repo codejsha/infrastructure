@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 
 DATASOURCE_NAME="baseds1"
+DRIVER_NAME="oracle"
 JNDI_NAME="java:/base/ds1"
 ENABLED="true"
 CONNECTION_URL="jdbc:oracle:thin:@192.168.137.1:1521:orclcdb"
