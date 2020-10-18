@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-bash ../config/env-base.sh
+source ../config/env-base.sh
 
 ######################################################################
 
