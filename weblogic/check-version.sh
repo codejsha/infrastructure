@@ -3,6 +3,8 @@
 ORACLE_HOME="/usr/local/weblogic"
 MAJOR_VERSION="12c"    # (available: 11g, 12c, 14c)
 
+######################################################################
+
 function check_version {
     if [ "${MAJOR_VERSION}" == "11g" ]; then
         MW_HOME="${ORACLE_HOME}"
@@ -11,5 +13,7 @@ function check_version {
         grep "WebLogic Server" ${ORACLE_HOME}/inventory/registry.xml
     fi
 }
+
+######################################################################
 
 check_version

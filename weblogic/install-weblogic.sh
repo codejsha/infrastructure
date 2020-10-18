@@ -18,6 +18,8 @@ INSTALL_FILE="fmw_12.2.1.4.0_wls.jar"
 
 INSTALL_SCRIPT_DIR="/svc/infrastructure/weblogic"
 
+######################################################################
+
 function install_weblogic_11g {
     ${JAVA_HOME}/bin/java \
         -jar ${INSTALL_FILE_DIR}/${INSTALL_FILE} \
@@ -37,6 +39,8 @@ function install_weblogic {
         -force \
         -novalidation
 }
+
+######################################################################
 
 # install_weblogic_11g
 install_weblogic
