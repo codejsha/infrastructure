@@ -41,20 +41,20 @@ bash ./encrypt-password-by-vault.sh ${PASSWORD}
 
 ## Datasource
 
-### Create JDBC driver
+### JDBC driver
 
 ```bash
 ### by module
-bash ./create-jdbc-driver-by-module.sh
+bash ./add-jdbc-driver-by-module.sh
 
 ### by deployment
-bash ./create-jdbc-driver-by-deployment.sh
+bash ./add-jdbc-driver-by-deployment.sh
 ```
 
 ### Datasource
 
 ```bash
-bash ./create-datasource.sh
+bash ./add-datasource.sh
 bash ./set-datasource.sh
 bash ./delete-datasource.sh ${DATASOURCE_NAME}
 ```
