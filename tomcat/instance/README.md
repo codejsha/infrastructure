@@ -1,4 +1,4 @@
-# Create instance
+# Create instances
 
 Requirements: tidy package
 

@@ -25,7 +25,7 @@ bash ./create-instance.sh inst2 1
 ### valut
 
 ```bash
-bash ./encrypt-password-by-picketbox.sh ${PASSWORD}
+bash ./encrypt-password-by-vault.sh ${PASSWORD}
 ```
 
 - https://access.redhat.com/solutions/2790371
@@ -34,7 +34,7 @@ bash ./encrypt-password-by-picketbox.sh ${PASSWORD}
 ### picketbox
 
 ```bash
-bash ./encrypt-password-by-vault.sh ${PASSWORD}
+bash ./encrypt-password-by-picketbox.sh ${PASSWORD}
 ```
 
 - https://access.redhat.com/solutions/184963
