@@ -2,6 +2,9 @@
 .vscode/
 .idea/
 *.zip
+*.tar
+*.tar.gz
+*.tgz
 
 /temp/
 /kubernetes/install/kubespray/
