@@ -10,12 +10,13 @@ function add_access_log {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="/subsystem=undertow/server=default-server/host=default-host/setting=access-log\
-            :add(\
-            pattern=\"${LOG_FORMAT}\", \
-            relative-to=jboss.server.log.dir, \
-            prefix=access., \
-            use-server-log=true)"
+<<EOF
+batch
+/subsystem=undertow/server=default-server/host=default-host/setting=access-log\
+    :add(pattern="${LOG_FORMAT}",relative-to=jboss.server.log.dir,prefix=access.,use-server-log=true)
+run-batch
+quit
+EOF
 }
 
 ######################################################################

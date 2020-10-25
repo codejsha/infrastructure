@@ -15,16 +15,11 @@ function set_arguments {
         shift
         case "${ARGS}" in
             "--help")
-                print_help
-                exit
-                ;;
+                print_help; exit;;
             "--name")
-                APP_NAME="${1}"
-                shift
-                ;;
+                APP_NAME="${1}"; shift;;
             "--name="*)
-                APP_NAME="${ARGS#*=}"
-                ;;
+                APP_NAME="${ARGS#*=}";;
         esac
     done
 }

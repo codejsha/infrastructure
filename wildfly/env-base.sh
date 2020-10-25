@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+######################################################################
+
 ### function
 
 function print_help {
@@ -16,22 +18,15 @@ function set_arguments {
         shift
         case "${ARGS}" in
             "--help")
-                print_help
-                ;;
+                print_help;;
             "--instance")
-                INSTANCE_NAME="${1}"
-                shift
-                ;;
+                INSTANCE_NAME="${1}"; shift;;
             "--instance="*)
-                INSTANCE_NAME="${ARGS#*=}"
-                ;;
+                INSTANCE_NAME="${ARGS#*=}";;
             "--port-offset")
-                PORT_OFFSET="${1}"
-                shift
-                ;;
+                PORT_OFFSET="${1}"; shift;;
             "--port-offset="*)
-                PORT_OFFSET="${ARGS#*=}"
-                ;;
+                PORT_OFFSET="${ARGS#*=}";;
         esac
     done
 }

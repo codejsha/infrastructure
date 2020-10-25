@@ -15,16 +15,11 @@ function set_arguments {
         shift
         case "${ARGS}" in
             "--help")
-                print_help
-                exit
-                ;;
+                print_help; exit;;
             "--name")
-                MODULE_NAME="${1}"
-                shift
-                ;;
+                MODULE_NAME="${1}"; shift;;
             "--name="*)
-                MODULE_NAME="${ARGS#*=}"
-                ;;
+                MODULE_NAME="${ARGS#*=}";;
         esac
     done
 }

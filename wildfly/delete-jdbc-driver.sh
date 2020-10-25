@@ -15,16 +15,11 @@ function set_arguments {
         shift
         case "${ARGS}" in
             "--help")
-                print_help
-                exit
-                ;;
+                print_help; exit;;
             "--name")
-                DRIVER_NAME="${1}"
-                shift
-                ;;
+                DRIVER_NAME="${1}"; shift;;
             "--name="*)
-                DRIVER_NAME="${ARGS#*=}"
-                ;;
+                DRIVER_NAME="${ARGS#*=}";;
         esac
     done
 }

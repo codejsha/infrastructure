@@ -15,16 +15,11 @@ function set_arguments {
         shift
         case "${ARGS}" in
             "--help")
-                print_help
-                exit
-                ;;
+                print_help; exit;;
             "--name")
-                DATASOURCE_NAME="${1}"
-                shift
-                ;;
+                DATASOURCE_NAME="${1}"; shift;;
             "--name="*)
-                DATASOURCE_NAME="${ARGS#*=}"
-                ;;
+                DATASOURCE_NAME="${ARGS#*=}";;
         esac
     done
 }
