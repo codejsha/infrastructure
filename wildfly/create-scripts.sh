@@ -65,7 +65,7 @@ JAVA_OPTS="\${JAVA_OPTS} -Xms1024m -Xmx1024m"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.bind.address=\${BIND_ADDRESS}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.bind.address.management=\${BIND_ADDRESS_MGMT}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.bind.address.private=\${BIND_ADDRESS_PRIVATE}"
-JAVA_OPTS="\${JAVA_OPTS} -Djboss.socket.binding.port-offset=${PORT_OFFSET}"
+JAVA_OPTS="\${JAVA_OPTS} -Djboss.socket.binding.port-offset=\${PORT_OFFSET}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.server.config.dir=\${JBOSS_CONFIG_DIR}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.server.log.dir=\${JBOSS_LOG_DIR}"
 JAVA_OPTS="\${JAVA_OPTS} -Xlog:gc*=info:file=\${JBOSS_LOG_DIR}/gc.\${INSTANCE_NAME}.log:time,pid,tid,level,tags"
@@ -87,10 +87,6 @@ export JAVA_OPTS
 if [ -f \${JBOSS_LOG_DIR}/nohup.\${INSTANCE_NAME}.out ]; then
     mv \${JBOSS_LOG_DIR}/nohup.\${INSTANCE_NAME}.out \\
         \${JBOSS_LOG_DIR}/\${INSTANCE_NAME}/nohup.\${INSTANCE_NAME}.\${GET_DATE}.out
-fi
-if [ -f \${JBOSS_LOG_DIR}/server.log ]; then
-    mv \${JBOSS_LOG_DIR}/server.log \\
-        \${JBOSS_LOG_DIR}/\${INSTANCE_NAME}/server.\${INSTANCE_NAME}.\${GET_DATE}.log
 fi
 if [ -f \${JBOSS_LOG_DIR}/gc.\${INSTANCE_NAME}.log ]; then
     mv \${JBOSS_LOG_DIR}/gc.\${INSTANCE_NAME}.log \\

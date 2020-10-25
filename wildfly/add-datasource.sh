@@ -34,7 +34,7 @@ function reload_server {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command=":reload(use-current-server-config=false)"
+        --command=":reload"
 }
 
 function test_connection_pool {

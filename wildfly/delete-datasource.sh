@@ -11,14 +11,14 @@ function disable_datasource {
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
         --command="/subsystem=datasources/data-source=${DATASOURCE_NAME}\
-            :write-attribute(name=enabled, value=false)"
+            :write-attribute(name=enabled,value=false)"
 }
 
 function reload_server {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command=":reload(use-current-server-config=false)"
+        --command=":reload"
 }
 
 function remove_datasource {

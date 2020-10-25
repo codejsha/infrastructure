@@ -24,12 +24,12 @@ function set_access_log {
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
 <<EOF
 batch
-/subsystem=undertow/server=default-server/host=default-host/setting=access-log:write-attribute(name=prefix, value=access.)
-/subsystem=undertow/server=default-server/host=default-host/setting=access-log:write-attribute(name=pattern, value="${LOG_FORMAT}")
-/subsystem=undertow/server=default-server/host=default-host/setting=access-log:write-attribute(name=relative-to, value=jboss.server.log.dir)
-/subsystem=undertow/server=default-server/host=default-host/setting=access-log:write-attribute(name=use-server-log, value=true)
+/subsystem=undertow/server=default-server/host=default-host/setting=access-log:write-attribute(name=prefix,value=access.)
+/subsystem=undertow/server=default-server/host=default-host/setting=access-log:write-attribute(name=pattern,value="${LOG_FORMAT}")
+/subsystem=undertow/server=default-server/host=default-host/setting=access-log:write-attribute(name=relative-to,value=jboss.server.log.dir)
+/subsystem=undertow/server=default-server/host=default-host/setting=access-log:write-attribute(name=use-server-log,value=true)
 run-batch
-exit
+quit
 EOF
 }
 

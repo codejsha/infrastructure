@@ -18,11 +18,16 @@ bash ./all.sh
 ### ./create-instance.sh ${INSTANCE_NAME} ${PORT_OFFSET}
 bash ./create-instance.sh inst1 0
 bash ./create-instance.sh inst2 1
+### ./create-scripts.sh ${INSTANCE_NAME} ${PORT_OFFSET}
+bash create-scripts.sh inst1 0
+bash create-scripts.sh inst2 1
 ```
 
 ## Password encryption
 
-### valut
+### Credential Store
+
+### Password Valut
 
 ```bash
 bash ./encrypt-password-by-vault.sh ${PASSWORD}
@@ -31,7 +36,7 @@ bash ./encrypt-password-by-vault.sh ${PASSWORD}
 - https://access.redhat.com/solutions/2790371
 - https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.3/html-single/how_to_configure_server_security/index#password_vault
 
-### picketbox
+### PicketBox
 
 ```bash
 bash ./encrypt-password-by-picketbox.sh ${PASSWORD}
