@@ -5,7 +5,7 @@ commonLabels:
   owner: developer
   app: bookinfo
 resources:
-- bookinfo-gw.yaml
-- bookinfo-vs.yaml
-- dr-all.yaml
-- vs-all.yaml
+  - bookinfo-gw.yaml
+  - bookinfo-vs.yaml
+  - dr-all.yaml
+  - vs-all.yaml

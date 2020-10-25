@@ -127,7 +127,6 @@ JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
     --command=":shutdown"
 EOF
 
-
 ######################################################################
 
 ### change permission

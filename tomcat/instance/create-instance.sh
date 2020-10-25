@@ -3,6 +3,8 @@
 source ./env-base.sh
 source ./env-function.sh
 
+######################################################################
+
 ### create catalina base
 mkdir -p ${CATALINA_BASE}
 /usr/bin/cp -rpf ${CATALINA_HOME}/conf ${CATALINA_BASE}
