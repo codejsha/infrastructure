@@ -26,6 +26,8 @@ bash create-scripts.sh --instance=inst2 --port-offset=1
 
 ### Credential Store
 
+- https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.3/html-single/how_to_configure_server_security/index#credential_store
+
 ### Password Valut
 
 ```bash
@@ -60,7 +62,7 @@ bash ./add-jdbc-driver-by-deployment.sh --port-offset=0
 ```bash
 bash ./add-datasource.sh --port-offset=0
 bash ./set-datasource.sh --port-offset=0
-bash ./delete-datasource.sh  --port-offset=0 --name=baseds1
+bash ./delete-datasource.sh --port-offset=0 --name=baseds1
 ```
 
 ## Application

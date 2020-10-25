@@ -10,8 +10,8 @@ function add_filter {
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
 <<EOF
 batch
-/subsystem=undertow/configuration=filter/expression-filter=stuck:add(expression="blocking; stuck-thread-detector(600)")
-/subsystem=undertow/server=default-server/host=default-host/filter-ref=stuck:add()
+/subsystem=undertow/configuration=filter/expression-filter=samesite-cookie:add(expression="samesite-cookie(mode=none)")
+/subsystem=undertow/server=default-server/host=default-host/filter-ref=samesite-cookie:add()
 run-batch
 quit
 EOF
