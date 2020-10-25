@@ -2,11 +2,48 @@
 
 source ./env-base.sh
 
-APP_PATH="${1}"
-APP_NAME="${2}"
-APP_RUNTIME_NAME="${3}"
-
 ######################################################################
+
+function print_help {
+    echo "  --path|--path=                : set a application path."
+    echo "  --name|--name=                : set a application name."
+    echo "  --runtime-name|--runtime-name=  : set a application runtime name."
+}
+
+function set_arguments {
+    while [[ $# -gt 0 ]]
+    do
+        ARGS="${1}"
+        shift
+        case "${ARGS}" in
+            "--help")
+                print_help
+                exit
+                ;;
+            "--path")
+                APP_PATH="${1}"
+                shift
+                ;;
+            "--path="*)
+                APP_PATH="${ARGS#*=}"
+                ;;
+            "--name")
+                APP_NAME="${1}"
+                shift
+                ;;
+            "--name="*)
+                APP_NAME="${ARGS#*=}"
+                ;;
+            "--runtime-name")
+                APP_RUNTIME_NAME="${1}"
+                shift
+                ;;
+            "--runtime-name="*)
+                APP_RUNTIME_NAME="${ARGS#*=}"
+                ;;
+        esac
+    done
+}
 
 function deploy_application {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
@@ -33,6 +70,11 @@ function check_deployment_status_all {
 }
 
 ######################################################################
+
+APP_PATH="/svc/app/test"        # default
+APP_NAME="test.war"             # default
+APP_RUNTIME_NAME="test.war"     # default
+set_arguments ${@}
 
 deploy_application
 check_deployment_status

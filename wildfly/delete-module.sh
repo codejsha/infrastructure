@@ -2,9 +2,32 @@
 
 source ./env-base.sh
 
-MODULE_NAME="${1}"
-
 ######################################################################
+
+function print_help {
+    echo "  --name|--name=                : set a module name."
+}
+
+function set_arguments {
+    while [[ $# -gt 0 ]]
+    do
+        ARGS="${1}"
+        shift
+        case "${ARGS}" in
+            "--help")
+                print_help
+                exit
+                ;;
+            "--name")
+                MODULE_NAME="${1}"
+                shift
+                ;;
+            "--name="*)
+                MODULE_NAME="${ARGS#*=}"
+                ;;
+        esac
+    done
+}
 
 function remove_module {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
@@ -14,5 +37,8 @@ function remove_module {
 }
 
 ######################################################################
+
+MODULE_NAME="com.oracle"    # default
+set_arguments ${@}
 
 remove_module

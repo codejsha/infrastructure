@@ -1,7 +1,48 @@
 #!/usr/bin/bash
 
-INSTANCE_NAME="${1:-inst1}"
-PORT_OFFSET="${2:-0}"
+### function
+
+function print_help {
+    echo ""
+    echo "Usage:"
+    echo "  --instance|--instance=        : set a instance name."
+    echo "  --port-offset|--port-offset=  : set a port offset."
+}
+
+function set_arguments {
+    while [[ $# -gt 0 ]]
+    do
+        ARGS="${1}"
+        shift
+        case "${ARGS}" in
+            "--help")
+                print_help
+                ;;
+            "--instance")
+                INSTANCE_NAME="${1}"
+                shift
+                ;;
+            "--instance="*)
+                INSTANCE_NAME="${ARGS#*=}"
+                ;;
+            "--port-offset")
+                PORT_OFFSET="${1}"
+                shift
+                ;;
+            "--port-offset="*)
+                PORT_OFFSET="${ARGS#*=}"
+                ;;
+        esac
+    done
+}
+
+######################################################################
+
+### variables
+
+INSTANCE_NAME="inst1"   # default
+PORT_OFFSET="0"         # default
+set_arguments ${@}
 
 JAVA_HOME="/usr/lib/jvm/java-11"
 JBOSS_HOME="/usr/local/wildfly"
@@ -16,6 +57,7 @@ SERVER_CONFIG_FILE="standalone-ha.xml"
 BIND_ADDRESS="0.0.0.0"
 BIND_ADDRESS_MGMT="127.0.0.1"
 BIND_ADDRESS_PRIVATE="127.0.0.1"
+DEFAULT_MULTICAST_ADDRESS="230.0.0.4"
 
 JBOSS_HTTP_PORT="8080"
 JBOSS_HTTPS_PORT="8443"

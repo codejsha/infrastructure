@@ -32,6 +32,7 @@ GET_DATE="\$(date +'%Y%m%d_%H%M%S')"
 BIND_ADDRESS="${BIND_ADDRESS}"
 BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
 BIND_ADDRESS_PRIVATE="${BIND_ADDRESS_PRIVATE}"
+DEFAULT_MULTICAST_ADDRESS="${DEFAULT_MULTICAST_ADDRESS}"
 PORT_OFFSET="${PORT_OFFSET}"
 
 EOF
@@ -40,9 +41,11 @@ if [[ ${JAVA_VERSION} =~ ^1.8 ]]; then
 cat <<EOF >> ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
 JAVA_OPTS="\${JAVA_OPTS} -D\${INSTANCE_NAME}"
 JAVA_OPTS="\${JAVA_OPTS} -Xms1024m -Xmx1024m"
+JAVA_OPTS="\${JAVA_OPTS} -Djboss.node.name=\${INSTANCE_NAME}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.bind.address=\${BIND_ADDRESS}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.bind.address.management=\${BIND_ADDRESS_MGMT}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.bind.address.private=\${BIND_ADDRESS_PRIVATE}"
+JAVA_OPTS="\${JAVA_OPTS} -Djboss.default.multicast.address=\${DEFAULT_MULTICAST_ADDRESS}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.socket.binding.port-offset=${PORT_OFFSET}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.server.config.dir=\${JBOSS_CONFIG_DIR}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.server.log.dir=\${JBOSS_LOG_DIR}"
@@ -62,9 +65,11 @@ elif [[ ${JAVA_VERSION} =~ ^11 ]]; then
 cat <<EOF >> ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
 JAVA_OPTS="\${JAVA_OPTS} -D\${INSTANCE_NAME}"
 JAVA_OPTS="\${JAVA_OPTS} -Xms1024m -Xmx1024m"
+JAVA_OPTS="\${JAVA_OPTS} -Djboss.node.name=\${INSTANCE_NAME}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.bind.address=\${BIND_ADDRESS}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.bind.address.management=\${BIND_ADDRESS_MGMT}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.bind.address.private=\${BIND_ADDRESS_PRIVATE}"
+JAVA_OPTS="\${JAVA_OPTS} -Djboss.default.multicast.address=\${DEFAULT_MULTICAST_ADDRESS}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.socket.binding.port-offset=\${PORT_OFFSET}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.server.config.dir=\${JBOSS_CONFIG_DIR}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.server.log.dir=\${JBOSS_LOG_DIR}"

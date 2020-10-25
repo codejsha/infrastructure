@@ -2,9 +2,32 @@
 
 source ./env-base.sh
 
-DATASOURCE_NAME="${1}"
-
 ######################################################################
+
+function print_help {
+    echo "  --name|--name=                : set a datasource name."
+}
+
+function set_arguments {
+    while [[ $# -gt 0 ]]
+    do
+        ARGS="${1}"
+        shift
+        case "${ARGS}" in
+            "--help")
+                print_help
+                exit
+                ;;
+            "--name")
+                DATASOURCE_NAME="${1}"
+                shift
+                ;;
+            "--name="*)
+                DATASOURCE_NAME="${ARGS#*=}"
+                ;;
+        esac
+    done
+}
 
 function disable_datasource {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
@@ -29,6 +52,9 @@ function remove_datasource {
 }
 
 ######################################################################
+
+DATASOURCE_NAME="baseds1"   # default
+set_arguments ${@}
 
 disable_datasource
 reload_server

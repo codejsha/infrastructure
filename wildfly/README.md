@@ -15,12 +15,11 @@ bash ./all.sh
 ## Create instances
 
 ```bash
-### ./create-instance.sh ${INSTANCE_NAME} ${PORT_OFFSET}
-bash ./create-instance.sh inst1 0
-bash ./create-instance.sh inst2 1
-### ./create-scripts.sh ${INSTANCE_NAME} ${PORT_OFFSET}
-bash create-scripts.sh inst1 0
-bash create-scripts.sh inst2 1
+bash ./create-instance.sh --instance=inst1
+bash ./create-instance.sh --instance=inst2
+
+bash create-scripts.sh --instance=inst1 --port-offset=0
+bash create-scripts.sh --instance=inst2 --port-offset=1
 ```
 
 ## Password encryption
@@ -50,24 +49,24 @@ bash ./encrypt-password-by-picketbox.sh ${PASSWORD}
 
 ```bash
 ### by module
-bash ./add-jdbc-driver-by-module.sh
+bash ./add-jdbc-driver-by-module.sh --port-offset=0
 
 ### by deployment
-bash ./add-jdbc-driver-by-deployment.sh
+bash ./add-jdbc-driver-by-deployment.sh --port-offset=0
 ```
 
 ### Datasource
 
 ```bash
-bash ./add-datasource.sh
-bash ./set-datasource.sh
-bash ./delete-datasource.sh ${DATASOURCE_NAME}
+bash ./add-datasource.sh --port-offset=0
+bash ./set-datasource.sh --port-offset=0
+bash ./delete-datasource.sh  --port-offset=0 --name=baseds1
 ```
 
 ## Application
 
 ```bash
-bash ./deploy-app.sh ${APP_PATH} ${APP_NAME} ${APP_RUNTIME_NAME}
-bash ./undeploy-app.sh ${APP_NAME}
-bash ./redeploy-app.sh ${APP_PATH} ${APP_NAME} ${APP_RUNTIME_NAME}
+bash ./deploy-app.sh --port-offset=0 --path=/svc/app/test --name=test.war --runtime-name=test.war
+bash ./undeploy-app.sh --port-offset=0 --name=test.war
+bash ./redeploy-app.sh --port-offset=0 --path=/svc/app/test --name=test.war --runtime-name=test.war
 ```
