@@ -35,10 +35,6 @@ BIND_ADDRESS_PRIVATE="${BIND_ADDRESS_PRIVATE}"
 DEFAULT_MULTICAST_ADDRESS="${DEFAULT_MULTICAST_ADDRESS}"
 PORT_OFFSET="${PORT_OFFSET}"
 
-EOF
-
-if [[ ${JAVA_VERSION} =~ ^1.8 ]]; then
-cat <<EOF >> ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
 JAVA_OPTS="\${JAVA_OPTS} -D\${INSTANCE_NAME}"
 JAVA_OPTS="\${JAVA_OPTS} -Xms1024m -Xmx1024m"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.node.name=\${INSTANCE_NAME}"
@@ -46,9 +42,24 @@ JAVA_OPTS="\${JAVA_OPTS} -Djboss.bind.address=\${BIND_ADDRESS}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.bind.address.management=\${BIND_ADDRESS_MGMT}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.bind.address.private=\${BIND_ADDRESS_PRIVATE}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.default.multicast.address=\${DEFAULT_MULTICAST_ADDRESS}"
-JAVA_OPTS="\${JAVA_OPTS} -Djboss.socket.binding.port-offset=${PORT_OFFSET}"
+JAVA_OPTS="\${JAVA_OPTS} -Djboss.socket.binding.port-offset=\${PORT_OFFSET}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.server.config.dir=\${JBOSS_CONFIG_DIR}"
 JAVA_OPTS="\${JAVA_OPTS} -Djboss.server.log.dir=\${JBOSS_LOG_DIR}"
+JAVA_OPTS="\${JAVA_OPTS} -Djboss.tx.node.id=\${INSTANCE_NAME}"
+JAVA_OPTS="\${JAVA_OPTS} -Dwildfly.statistics-enabled=true"
+JAVA_OPTS="\${JAVA_OPTS} -Dwildfly.datasources.statistics-enabled=true"
+JAVA_OPTS="\${JAVA_OPTS} -Dwildfly.ejb3.statistics-enabled:=true"
+JAVA_OPTS="\${JAVA_OPTS} -Dwildfly.transactions.statistics-enabled:=true"
+JAVA_OPTS="\${JAVA_OPTS} -Dwildfly.undertow.statistics-enabled=true"
+JAVA_OPTS="\${JAVA_OPTS} -Dwildfly.webservices.statistics-enabled=true"
+
+JAVA_OPTS="\${JAVA_OPTS} -Djava.net.preferIPv4Stack=true"
+JAVA_OPTS="\${JAVA_OPTS} -Djava.net.preferIPv6Addresses=false"
+JAVA_OPTS="\${JAVA_OPTS} -Djava.security.egd=file:///dev/urandom"
+EOF
+
+if [[ ${JAVA_VERSION} =~ ^1.8 ]]; then
+cat <<EOF >> ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
 JAVA_OPTS="\${JAVA_OPTS} -Xloggc:\${JBOSS_LOG_DIR}/gc.\${INSTANCE_NAME}.log"
 JAVA_OPTS="\${JAVA_OPTS} -XX:+PrintGCDetails"
 JAVA_OPTS="\${JAVA_OPTS} -XX:+PrintTenuringDistribution"
@@ -63,16 +74,6 @@ JAVA_OPTS="\${JAVA_OPTS} -XX:HeapDumpPath=${VAR_DUMP_LOG_DIR}"
 EOF
 elif [[ ${JAVA_VERSION} =~ ^11 ]]; then
 cat <<EOF >> ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
-JAVA_OPTS="\${JAVA_OPTS} -D\${INSTANCE_NAME}"
-JAVA_OPTS="\${JAVA_OPTS} -Xms1024m -Xmx1024m"
-JAVA_OPTS="\${JAVA_OPTS} -Djboss.node.name=\${INSTANCE_NAME}"
-JAVA_OPTS="\${JAVA_OPTS} -Djboss.bind.address=\${BIND_ADDRESS}"
-JAVA_OPTS="\${JAVA_OPTS} -Djboss.bind.address.management=\${BIND_ADDRESS_MGMT}"
-JAVA_OPTS="\${JAVA_OPTS} -Djboss.bind.address.private=\${BIND_ADDRESS_PRIVATE}"
-JAVA_OPTS="\${JAVA_OPTS} -Djboss.default.multicast.address=\${DEFAULT_MULTICAST_ADDRESS}"
-JAVA_OPTS="\${JAVA_OPTS} -Djboss.socket.binding.port-offset=\${PORT_OFFSET}"
-JAVA_OPTS="\${JAVA_OPTS} -Djboss.server.config.dir=\${JBOSS_CONFIG_DIR}"
-JAVA_OPTS="\${JAVA_OPTS} -Djboss.server.log.dir=\${JBOSS_LOG_DIR}"
 JAVA_OPTS="\${JAVA_OPTS} -Xlog:gc*=info:file=\${JBOSS_LOG_DIR}/gc.\${INSTANCE_NAME}.log:time,pid,tid,level,tags"
 JAVA_OPTS="\${JAVA_OPTS} -XX:+HeapDumpOnOutOfMemoryError"
 JAVA_OPTS="\${JAVA_OPTS} -XX:HeapDumpPath=${VAR_DUMP_LOG_DIR}"
@@ -84,9 +85,6 @@ EOF
 fi
 
 cat <<EOF >> ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
-JAVA_OPTS="\${JAVA_OPTS} -Djava.net.preferIPv4Stack=true"
-JAVA_OPTS="\${JAVA_OPTS} -Djava.net.preferIPv6Addresses=false"
-JAVA_OPTS="\${JAVA_OPTS} -Djava.security.egd=file:///dev/urandom"
 export JAVA_OPTS
 
 if [ -f \${JBOSS_LOG_DIR}/nohup.\${INSTANCE_NAME}.out ]; then

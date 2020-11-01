@@ -28,7 +28,12 @@ function remove_jdbc_driver {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="/subsystem=datasources/jdbc-driver=${DRIVER_NAME}:remove"
+<<EOF
+batch
+/subsystem=datasources/jdbc-driver=${DRIVER_NAME}:remove
+run-batch
+quit
+EOF
 }
 
 ######################################################################

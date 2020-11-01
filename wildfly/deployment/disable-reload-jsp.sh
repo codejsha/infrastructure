@@ -4,38 +4,26 @@ source ../env-base.sh
 
 ######################################################################
 
-function get_datasource_resource {
+function disable_reload_jsp {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
 <<EOF
 batch
-/subsystem=datasources:read-resource
+/subsystem=undertow/servlet-container=default/setting=jsp:write-attribute(name=development,value=false)
 run-batch
 quit
 EOF
 }
 
-function get_datasource_resource_json {
+function reload_server {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --output-json \
-<<EOF
-batch
-/subsystem=datasources:read-resource
-run-batch
-quit
-EOF
-}
-
-function get_datasource_list {
-    DATASOURCES="$(get_datasource_resource_json | jq '.result."data-source"' | jq 'keys')"
-    echo ${DATASOURCES}
+        --command=":reload()"
 }
 
 ######################################################################
 
-# get_datasource_resource
-# get_datasource_resource_json
-get_datasource_list
+disable_reload_jsp
+reload_server

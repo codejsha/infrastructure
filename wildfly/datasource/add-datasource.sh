@@ -27,8 +27,11 @@ batch
         blocking-timeout-wait-millis=${BLOCKING_TIMEOUT_WAIT_MILLIS},\
         query-timeout=${QUERY_TIMEOUT},\
         track-statements=${TRACK_STATEMENTS},\
+        pool-prefill="${POOL_PREFILL}"
+        pool-use-strict-min="${POOL_USE_STRICT_MIN}"
         prepared-statements-cache-size=${PREPARED_STATEMENTS_CACHE_SIZE},\
-        share-prepared-statements=${SHARE_PREPARED_STATEMENTS})
+        share-prepared-statements=${SHARE_PREPARED_STATEMENTS},\
+        use-ccm="${USE_CCM}")
 run-batch
 quit
 EOF
@@ -45,7 +48,12 @@ function test_connection_pool {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="/subsystem=datasources/data-source=${DATASOURCE_NAME}:test-connection-in-pool"
+<<EOF
+batch
+/subsystem=datasources/data-source=${DATASOURCE_NAME}:test-connection-in-pool
+run-batch
+quit
+EOF
 }
 
 ######################################################################

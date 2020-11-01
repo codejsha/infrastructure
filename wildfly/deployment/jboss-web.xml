@@ -5,4 +5,11 @@
     xsi:schemaLocation="http://www.jboss.org/schema/jbossas
     http://www.jboss.org/schema/jbossas/jboss-web_7_2.xsd">
     <context-root>/test</context-root>
+    <replication-config>
+        <replication-trigger>SET</replication-trigger>
+        <replication-granularity>SESSION</replication-granularity>
+    </replication-config>
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
 </jboss-web>

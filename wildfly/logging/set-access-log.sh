@@ -25,7 +25,12 @@ function remove_access_log {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="/subsystem=undertow/server=default-server/host=default-host/setting=access-log:remove"
+<<EOF
+batch
+/subsystem=undertow/server=default-server/host=default-host/setting=access-log:remove
+run-batch
+quit
+EOF
 }
 
 ######################################################################

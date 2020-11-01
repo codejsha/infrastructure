@@ -38,24 +38,39 @@ function deploy_application {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="deploy ${APP_PATH} \
-            --name=${APP_NAME} \
-            --runtime-name=${APP_RUNTIME_NAME} \
-            --unmanaged"
+<<EOF
+batch
+deploy ${APP_PATH}\
+    --name=${APP_NAME}\
+    --runtime-name=${APP_RUNTIME_NAME}\
+    --unmanaged
+run-batch
+quit
+EOF
 }
 
 function check_deployment_status {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="deployment-info --name=${APP_NAME}"
+<<EOF
+batch
+deployment-info --name=${APP_NAME}
+run-batch
+quit
+EOF
 }
 
 function check_deployment_status_all {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="deploy -l"
+<<EOF
+batch
+deploy -l"
+run-batch
+quit
+EOF
 }
 
 ######################################################################

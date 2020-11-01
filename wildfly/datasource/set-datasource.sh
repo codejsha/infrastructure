@@ -26,8 +26,11 @@ batch
 /subsystem=datasources/data-source=${DATASOURCE_NAME}:write-attribute(name=blocking-timeout-wait-millis,value="${BLOCKING_TIMEOUT_WAIT_MILLIS}")
 /subsystem=datasources/data-source=${DATASOURCE_NAME}:write-attribute(name=query-timeout,value="${QUERY_TIMEOUT}")
 /subsystem=datasources/data-source=${DATASOURCE_NAME}:write-attribute(name=track-statements,value="${TRACK_STATEMENTS}")
+/subsystem=datasources/data-source=${DATASOURCE_NAME}:write-attribute(name=pool-prefill,value="${POOL_PREFILL}")
+/subsystem=datasources/data-source=${DATASOURCE_NAME}:write-attribute(name=pool-use-strict-min,value="${POOL_USE_STRICT_MIN}")
 /subsystem=datasources/data-source=${DATASOURCE_NAME}:write-attribute(name=prepared-statements-cache-size,value="${PREPARED_STATEMENTS_CACHE_SIZE}")
 /subsystem=datasources/data-source=${DATASOURCE_NAME}:write-attribute(name=share-prepared-statements,value="${SHARE_PREPARED_STATEMENTS}")
+/subsystem=datasources/data-source=${DATASOURCE_NAME}:write-attribute(name=use-ccm,value="${USE_CCM}")
 run-batch
 quit
 EOF
@@ -44,7 +47,12 @@ function test_connection_pool {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="/subsystem=datasources/data-source=${DATASOURCE_NAME}:test-connection-in-pool"
+<<EOF
+batch
+/subsystem=datasources/data-source=${DATASOURCE_NAME}:test-connection-in-pool
+run-batch
+quit
+EOF
 }
 
 ######################################################################

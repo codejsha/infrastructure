@@ -1,21 +1,16 @@
 #!/usr/bin/bash
 
-source ../env-base.sh
+source ./env-base.sh
 
 ######################################################################
 
-function check_clustering {
+function get_server_args {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-<<EOF
-batch
-/subsystem=jgroups/channel=ee:read-attribute(name=view)
-run-batch
-quit
-EOF
+        --command="/core-service=platform-mbean/type=runtime:read-attribute(name=input-arguments)"
 }
 
 ######################################################################
 
-check_clustering
+get_server_args

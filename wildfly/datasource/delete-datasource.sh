@@ -28,8 +28,13 @@ function disable_datasource {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="/subsystem=datasources/data-source=${DATASOURCE_NAME}\
-            :write-attribute(name=enabled,value=false)"
+<<EOF
+batch
+/subsystem=datasources/data-source=${DATASOURCE_NAME}\
+    :write-attribute(name=enabled,value=false)"
+run-batch
+quit
+EOF
 }
 
 function reload_server {
@@ -43,7 +48,12 @@ function remove_datasource {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="/subsystem=datasources/data-source=${DATASOURCE_NAME}:remove"
+<<EOF
+batch
+/subsystem=datasources/data-source=${DATASOURCE_NAME}:remove
+run-batch
+quit
+EOF
 }
 
 ######################################################################

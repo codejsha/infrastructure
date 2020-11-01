@@ -28,7 +28,12 @@ function test_connection_pool {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="/subsystem=datasources/data-source=${DATASOURCE_NAME}:test-connection-in-pool"
+<<EOF
+batch
+/subsystem=datasources/data-source=${DATASOURCE_NAME}:test-connection-in-pool
+run-batch
+quit
+EOF
 }
 
 ######################################################################

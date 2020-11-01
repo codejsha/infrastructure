@@ -23,38 +23,63 @@ function add_jdbc_driver_by_deployment {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="deploy ${DRIVER_FILE_DIR}/${DRIVER_FILE} \
-            --name=${DRIVER_NAME} \
-            --runtime-name=${DRIVER_RUNTIME_NAME} \
-            --unmanaged"
+<<EOF
+batch
+deploy ${DRIVER_FILE_DIR}/${DRIVER_FILE}\
+    --name=${DRIVER_NAME}\
+    --runtime-name=${DRIVER_RUNTIME_NAME}\
+    --unmanaged
+run-batch
+quit
+EOF
 }
 
 function check_deployment_status {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="deployment-info --name=${DRIVER_NAME}"
+<<EOF
+batch
+deployment-info --name=${DRIVER_NAME}
+run-batch
+quit
+EOF
 }
 
 function check_deployment_status_all {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="deploy -l"
+<<EOF
+batch
+deploy -l
+run-batch
+quit
+EOF
 }
 
 function get_installed_driver {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="/subsystem=datasources:get-installed-driver(driver-name=${DRIVER_NAME})"
+<<EOF
+batch
+/subsystem=datasources:get-installed-driver(driver-name=${DRIVER_NAME})
+run-batch
+quit
+EOF
 }
 
 function get_installed_driver_list {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="/subsystem=datasources:installed-drivers-list"
+<<EOF
+batch
+/subsystem=datasources:installed-drivers-list
+run-batch
+quit
+EOF
 }
 
 ######################################################################

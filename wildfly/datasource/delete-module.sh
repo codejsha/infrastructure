@@ -28,7 +28,12 @@ function remove_module {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="module remove --name=${MODULE_NAME}"
+<<EOF
+batch
+module remove --name=${MODULE_NAME}
+run-batch
+quit
+EOF
 }
 
 ######################################################################

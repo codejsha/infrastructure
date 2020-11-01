@@ -23,34 +23,54 @@ function add_jdbc_module {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="module add --name=${MODULE_NAME} \
-            --resources=${DRIVER_FILE_DIR}/${DRIVER_FILE} \
-            --dependencies=javax.api,javax.transaction.api"
+<<EOF
+batch
+module add --name=${MODULE_NAME}\
+    --resources=${DRIVER_FILE_DIR}/${DRIVER_FILE}\
+    --dependencies=javax.api,javax.transaction.api
+run-batch
+quit
+EOF
 }
 
 function add_jdbc_driver_by_module {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="/subsystem=datasources/jdbc-driver=${DRIVER_NAME}\
-            :add(\
-            driver-name=${DRIVER_NAME}, \
-            driver-module-name=${MODULE_NAME}, \
-            driver-xa-datasource-class-name=oracle.jdbc.xa.client.OracleXADataSource)"
+<<EOF
+batch
+/subsystem=datasources/jdbc-driver=${DRIVER_NAME}\
+    :add(\
+    driver-name=${DRIVER_NAME},\
+    driver-module-name=${MODULE_NAME},\
+    driver-xa-datasource-class-name=oracle.jdbc.xa.client.OracleXADataSource)
+run-batch
+quit
+EOF
 }
 
 function get_installed_driver {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="/subsystem=datasources:get-installed-driver(driver-name=${DRIVER_NAME})"
+<<EOF
+batch
+/subsystem=datasources:get-installed-driver(driver-name=${DRIVER_NAME})
+run-batch
+quit
+EOF
 }
 
 function get_installed_driver_list {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="/subsystem=datasources:installed-drivers-list"
+<<EOF
+batch
+/subsystem=datasources:installed-drivers-list
+run-batch
+quit
+EOF
 }
 
 ######################################################################
