@@ -51,24 +51,37 @@ bash ./encrypt-password-by-picketbox.sh ${PASSWORD}
 
 ```bash
 ### by module
-bash ./add-jdbc-driver-by-module.sh --port-offset=0
+bash ./add-jdbc-driver-by-module.sh
+bash ./delete-module.sh
 
 ### by deployment
-bash ./add-jdbc-driver-by-deployment.sh --port-offset=0
+bash ./add-jdbc-driver-by-deployment.sh
+
+bash ./delete-jdbc-driver.sh
 ```
 
 ### Datasource
 
 ```bash
-bash ./add-datasource.sh --port-offset=0
-bash ./set-datasource.sh --port-offset=0
-bash ./delete-datasource.sh --port-offset=0 --name=baseds1
+bash ./add-datasource.sh
+bash ./set-datasource.sh
+bash ./check-datasource.sh
+bash ./delete-datasource.sh --name=baseds1
 ```
 
-## Application
+## Deployemnt
 
 ```bash
-bash ./deploy-app.sh --port-offset=0 --path=/svc/app/test --name=test.war --runtime-name=test.war
-bash ./undeploy-app.sh --port-offset=0 --name=test.war
-bash ./redeploy-app.sh --port-offset=0 --path=/svc/app/test --name=test.war --runtime-name=test.war
+bash ./deploy-app.sh --path=/svc/app/test --name=test.war --runtime-name=test.war
+bash ./undeploy-app.sh --name=test.war
+bash ./redeploy-app.sh --path=/svc/app/test --name=test.war --runtime-name=test.war
+```
+
+## Filter
+
+```bash
+bash ./add-filter.sh
+bash ./add-samesite-filter.sh
+bash ./add-stuck-thread-detector.sh
+bash ./hide-server-info.sh
 ```

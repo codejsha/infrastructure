@@ -1,11 +1,11 @@
 #!/usr/bin/bash
 
-source ./env-base.sh
+source ../env-base.sh
 
 ######################################################################
 
 function print_help {
-    echo "  --name|--name=                : set a jdbc driver name."
+    echo "  --name|--name=                : set a module name."
 }
 
 function set_arguments {
@@ -17,23 +17,23 @@ function set_arguments {
             "--help")
                 print_help; exit;;
             "--name")
-                DRIVER_NAME="${1}"; shift;;
+                MODULE_NAME="${1}"; shift;;
             "--name="*)
-                DRIVER_NAME="${ARGS#*=}";;
+                MODULE_NAME="${ARGS#*=}";;
         esac
     done
 }
 
-function remove_jdbc_driver {
+function remove_module {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="/subsystem=datasources/jdbc-driver=${DRIVER_NAME}:remove"
+        --command="module remove --name=${MODULE_NAME}"
 }
 
 ######################################################################
 
-DRIVER_NAME="oracle"    # default
+MODULE_NAME="com.oracle"    # default
 set_arguments ${@}
 
-remove_jdbc_driver
+remove_module

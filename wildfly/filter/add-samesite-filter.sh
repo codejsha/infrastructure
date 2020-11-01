@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-source ./env-base.sh
+source ../env-base.sh
 
 ######################################################################
 
@@ -10,8 +10,8 @@ function add_filter {
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
 <<EOF
 batch
-/subsystem=undertow/configuration=filter/response-header=server-header:add(header-name=Server,header-value=WildFly)
-/subsystem=undertow/server=default-server/host=default-host/filter-ref=server-header:add()
+/subsystem=undertow/configuration=filter/expression-filter=samesite-cookie:add(expression="samesite-cookie(mode=none)")
+/subsystem=undertow/server=default-server/host=default-host/filter-ref=samesite-cookie:add()
 run-batch
 quit
 EOF

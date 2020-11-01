@@ -1,11 +1,11 @@
 #!/usr/bin/bash
 
-source ./env-base.sh
+source ../env-base.sh
 
 ######################################################################
 
 function print_help {
-    echo "  --name|--name=                : set a module name."
+    echo "  --name|--name=                : set a application name."
 }
 
 function set_arguments {
@@ -17,23 +17,31 @@ function set_arguments {
             "--help")
                 print_help; exit;;
             "--name")
-                MODULE_NAME="${1}"; shift;;
+                APP_NAME="${1}"; shift;;
             "--name="*)
-                MODULE_NAME="${ARGS#*=}";;
+                APP_NAME="${ARGS#*=}";;
         esac
     done
 }
 
-function remove_module {
+function undeploy_application {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="module remove --name=${MODULE_NAME}"
+        --command="undeploy ${APP_NAME}"
+}
+
+function check_deployment_status_all {
+    ${JBOSS_HOME}/bin/jboss-cli.sh \
+        --connect \
+        --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --command="deploy -l"
 }
 
 ######################################################################
 
-MODULE_NAME="com.oracle"    # default
+APP_NAME="test.war"     # default
 set_arguments ${@}
 
-remove_module
+undeploy_application
+# check_deployment_status_all

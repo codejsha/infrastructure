@@ -1,11 +1,11 @@
 #!/usr/bin/bash
 
-source ./env-base.sh
+source ../env-base.sh
 
 ######################################################################
 
 function print_help {
-    echo "  --name|--name=                : set a application name."
+    echo "  --name|--name=                : set a jdbc driver name."
 }
 
 function set_arguments {
@@ -17,31 +17,23 @@ function set_arguments {
             "--help")
                 print_help; exit;;
             "--name")
-                APP_NAME="${1}"; shift;;
+                DRIVER_NAME="${1}"; shift;;
             "--name="*)
-                APP_NAME="${ARGS#*=}";;
+                DRIVER_NAME="${ARGS#*=}";;
         esac
     done
 }
 
-function undeploy_application {
+function remove_jdbc_driver {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="undeploy ${APP_NAME}"
-}
-
-function check_deployment_status_all {
-    ${JBOSS_HOME}/bin/jboss-cli.sh \
-        --connect \
-        --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="deploy -l"
+        --command="/subsystem=datasources/jdbc-driver=${DRIVER_NAME}:remove"
 }
 
 ######################################################################
 
-APP_NAME="test.war"     # default
+DRIVER_NAME="oracle"    # default
 set_arguments ${@}
 
-undeploy_application
-# check_deployment_status_all
+remove_jdbc_driver

@@ -3,7 +3,7 @@
 ### Log levels:
 ### ALL, CONFIG, DEBUG, ERROR, FATAL, FINE, FINER, FINEST, INFO, OFF, SEVERE, TRACE, WARN, WARNING
 
-source ./env-base.sh
+source ../env-base.sh
 
 ######################################################################
 
@@ -26,7 +26,7 @@ function reload_server {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command=":reload"
+        --command=":reload()"
 }
 
 ##############################################s########################

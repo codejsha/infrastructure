@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-source ./env-base.sh
+source ../env-base.sh
 source ./env-datasource.sh
 
 ######################################################################
@@ -38,7 +38,7 @@ function reload_server {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command=":reload"
+        --command=":reload()"
 }
 
 function test_connection_pool {

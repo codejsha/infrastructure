@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-source ./env-base.sh
+source ../env-base.sh
 
 ######################################################################
 
@@ -60,9 +60,9 @@ function check_deployment_status_all {
 
 ######################################################################
 
-APP_PATH="/svc/app/test"        # default
-APP_NAME="test.war"             # default
-APP_RUNTIME_NAME="test.war"     # default
+APP_PATH="/svc/app/helloworld"        # default
+APP_NAME="helloworld.war"             # default
+APP_RUNTIME_NAME="helloworld.war"     # default
 set_arguments ${@}
 
 deploy_application

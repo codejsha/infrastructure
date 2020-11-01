@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-source ./env-base.sh
+source ../env-base.sh
 
 ######################################################################
 
@@ -24,26 +24,11 @@ function set_arguments {
     done
 }
 
-function disable_datasource {
+function test_connection_pool {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="/subsystem=datasources/data-source=${DATASOURCE_NAME}\
-            :write-attribute(name=enabled,value=false)"
-}
-
-function reload_server {
-    ${JBOSS_HOME}/bin/jboss-cli.sh \
-        --connect \
-        --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command=":reload"
-}
-
-function remove_datasource {
-    ${JBOSS_HOME}/bin/jboss-cli.sh \
-        --connect \
-        --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="/subsystem=datasources/data-source=${DATASOURCE_NAME}:remove"
+        --command="/subsystem=datasources/data-source=${DATASOURCE_NAME}:test-connection-in-pool"
 }
 
 ######################################################################
@@ -51,6 +36,4 @@ function remove_datasource {
 DATASOURCE_NAME="baseds1"   # default
 set_arguments ${@}
 
-disable_datasource
-reload_server
-remove_datasource
+test_connection_pool

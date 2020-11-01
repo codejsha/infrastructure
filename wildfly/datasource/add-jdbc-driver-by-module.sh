@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-source ./env-base.sh
+source ../env-base.sh
 
 # DRIVER_FILE_DIR="/mnt/share/oracle-database/11gr2/OJDBC-Full"
 # DRIVER_FILE_DIR="/mnt/share/oracle-database/12cr1/OJDBC-Full"
@@ -14,33 +14,29 @@ DRIVER_FILE_DIR="/mnt/share/oracle-database/19c/ojdbc10-full"
 # DRIVER_FILE="ojdbc8.jar"
 DRIVER_FILE="ojdbc10.jar"
 
-DRIVER_NAME="${DRIVER_FILE}"
-DRIVER_RUNTIME_NAME="${DRIVER_FILE}"
+DRIVER_NAME="oracle"
+MODULE_NAME="com.oracle"
 
 ######################################################################
 
-function add_jdbc_driver_by_deployment {
+function add_jdbc_module {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="deploy ${DRIVER_FILE_DIR}/${DRIVER_FILE} \
-            --name=${DRIVER_NAME} \
-            --runtime-name=${DRIVER_RUNTIME_NAME} \
-            --unmanaged"
+        --command="module add --name=${MODULE_NAME} \
+            --resources=${DRIVER_FILE_DIR}/${DRIVER_FILE} \
+            --dependencies=javax.api,javax.transaction.api"
 }
 
-function check_deployment_status {
+function add_jdbc_driver_by_module {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="deployment-info --name=${DRIVER_NAME}"
-}
-
-function check_deployment_status_all {
-    ${JBOSS_HOME}/bin/jboss-cli.sh \
-        --connect \
-        --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command="deploy -l"
+        --command="/subsystem=datasources/jdbc-driver=${DRIVER_NAME}\
+            :add(\
+            driver-name=${DRIVER_NAME}, \
+            driver-module-name=${MODULE_NAME}, \
+            driver-xa-datasource-class-name=oracle.jdbc.xa.client.OracleXADataSource)"
 }
 
 function get_installed_driver {
@@ -59,8 +55,7 @@ function get_installed_driver_list {
 
 ######################################################################
 
-add_jdbc_driver_by_deployment
-check_deployment_status
-# check_deployment_status_all
+add_jdbc_module
+add_jdbc_driver_by_module
 get_installed_driver
 # get_installed_driver_list

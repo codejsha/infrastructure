@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-source ./env-base.sh
+source ../env-base.sh
 source ./env-vault.sh
 
 PASSWORD="${1}"

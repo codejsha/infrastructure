@@ -84,9 +84,9 @@ EOF
 fi
 
 cat <<EOF >> ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
-JAVA_OPTS="\${JAVA_OPTS} -Djava.security.egd=file:///dev/urandom"
 JAVA_OPTS="\${JAVA_OPTS} -Djava.net.preferIPv4Stack=true"
 JAVA_OPTS="\${JAVA_OPTS} -Djava.net.preferIPv6Addresses=false"
+JAVA_OPTS="\${JAVA_OPTS} -Djava.security.egd=file:///dev/urandom"
 export JAVA_OPTS
 
 if [ -f \${JBOSS_LOG_DIR}/nohup.\${INSTANCE_NAME}.out ]; then
