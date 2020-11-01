@@ -23,7 +23,7 @@ DOMAIN_HOME="${DOMAIN_HOME}"
 LOG_HOME="${LOG_HOME}"
 
 PID="\$(pgrep -xa java | grep \${WL_HOME} | grep NodeManager | awk '{print \$1}')"
-if [ ! -z "\${PID}" ]; then
+if [ -n "\${PID}" ]; then
   echo "NodeManager (pid \${PID})" is already running!
   exit
 fi
@@ -36,7 +36,7 @@ DOMAIN_HOME="${DOMAIN_HOME}"
 LOG_HOME="${LOG_HOME}"
 
 PID="\$(pgrep -xa java | grep \${DOMAIN_HOME} | grep NodeManager | awk '{print \$1}')"
-if [ ! -z "\${PID}" ]; then
+if [ -n "\${PID}" ]; then
   echo "NodeManager (pid \${PID})" is already running!
   exit
 fi
@@ -84,7 +84,7 @@ cat << EOF > ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
 WL_HOME="${WL_HOME}"
 
 PID="\$(pgrep -xa java | grep \${WL_HOME} | grep NodeManager | awk '{print \$1}')"
-if [ ! -z "\${PID}" ]; then
+if [ -n "\${PID}" ]; then
   kill -9 \${PID}
 fi
 EOF
