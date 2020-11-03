@@ -7,7 +7,7 @@ export MW_HOME="${ORACLE_HOME}"
 
 export DOMAIN_NAME="base_domain"
 export DOMAIN_HOME="${ORACLE_HOME}/user_projects/domains/${DOMAIN_NAME}"
-export LOG_HOME="${DOMAIN_HOME}/logs"
+export LOG_DIR="${DOMAIN_HOME}/logs"
 
 export ADMIN_SERVER_NAME="AdminServer"
 export ADMIN_SERVER_LISTEN_ADDRESS="test.example.com"

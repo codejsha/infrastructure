@@ -4,7 +4,7 @@ MW_HOME="/usr/local/ohs"
 ORACLE_HOME="${MW_HOME}/oracle_wt1"
 INSTANCE_NAME="instance1"
 INSTANCE_HOME="${ORACLE_HOME}/instances/${INSTANCE_NAME}"
-LOG_HOME="${INSTANCE_HOME}/logs"
+LOG_DIR="${INSTANCE_HOME}/logs"
 COMPONENT_NAME="ohs1"
 
 ######################################################################
@@ -75,13 +75,13 @@ EOF
 
 ######################################################################
 
-mkdir -p ${LOG_HOME}
+mkdir -p ${LOG_DIR}
 
 ln -snf ${INSTANCE_HOME} ${MW_HOME}/${INSTANCE_NAME}
 ln -snf ${INSTANCE_HOME}/config/OHS/${COMPONENT_NAME} ${INSTANCE_HOME}/config/${COMPONENT_NAME}
 ln -snf ${INSTANCE_HOME}/config/OPMN/opmn ${INSTANCE_HOME}/config/opmn
-ln -snf ${INSTANCE_HOME}/diagnostics/logs/OPMN/opmn ${LOG_HOME}/opmn
-ln -snf ${INSTANCE_HOME}/diagnostics/logs/OHS/${COMPONENT_NAME} ${LOG_HOME}/${COMPONENT_NAME}
+ln -snf ${INSTANCE_HOME}/diagnostics/logs/OPMN/opmn ${LOG_DIR}/opmn
+ln -snf ${INSTANCE_HOME}/diagnostics/logs/OHS/${COMPONENT_NAME} ${LOG_DIR}/${COMPONENT_NAME}
 
 chmod 750 ${INSTANCE_HOME}/start-opmn.sh
 chmod 750 ${INSTANCE_HOME}/stop-opmn.sh

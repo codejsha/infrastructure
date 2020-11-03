@@ -33,7 +33,7 @@ fi
 
 cat <<EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 DOMAIN_HOME="${DOMAIN_HOME}"
-LOG_HOME="${LOG_HOME}"
+LOG_DIR="${LOG_DIR}"
 GET_DATE="\$(date +'%Y%m%d_%H%M%S')"
 
 PID="\$(pgrep -xa java | grep ${DOMAIN_HOME} | grep ${SERVER_NAME} | awk '{print $1}')"
@@ -52,9 +52,9 @@ USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+DisableExplicitGC"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+PrintGCDetails"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+PrintGCTimeStamps"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+PrintHeapAtGC"
-USER_MEM_ARGS="\${USER_MEM_ARGS} -Xloggc:\${LOG_HOME}/gc.\${SERVER_NAME}.log"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -Xloggc:\${LOG_DIR}/gc.\${SERVER_NAME}.log"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+HeapDumpOnOutOfMemoryError"
-USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:HeapDumpPath=\${LOG_HOME}/dump"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:HeapDumpPath=\${LOG_DIR}/dump"
 # USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+PrintFlagsFinal"
 export USER_MEM_ARGS
 
@@ -70,27 +70,27 @@ export JAVA_OPTIONS
 # export EXT_PRE_CLASSPATH
 # export EXT_POST_CLASSPATH
 
-if [ -f \${LOG_HOME}/nohup.\${SERVER_NAME}.out ]; then
-  mv \${LOG_HOME}/nohup.\${SERVER_NAME}.out \${LOG_HOME}/\${SERVER_NAME}/nohup.\${SERVER_NAME}.\${GET_DATE}.out
+if [ -f \${LOG_DIR}/nohup.\${SERVER_NAME}.out ]; then
+  mv \${LOG_DIR}/nohup.\${SERVER_NAME}.out \${LOG_DIR}/\${SERVER_NAME}/nohup.\${SERVER_NAME}.\${GET_DATE}.out
 fi
-if [ -f \${LOG_HOME}/gc.\${SERVER_NAME}.log ]; then
-  mv \${LOG_HOME}/gc.\${SERVER_NAME}.log \${LOG_HOME}/\${SERVER_NAME}/gc.\${SERVER_NAME}.\${GET_DATE}.log
+if [ -f \${LOG_DIR}/gc.\${SERVER_NAME}.log ]; then
+  mv \${LOG_DIR}/gc.\${SERVER_NAME}.log \${LOG_DIR}/\${SERVER_NAME}/gc.\${SERVER_NAME}.\${GET_DATE}.log
 fi
-touch \${LOG_HOME}/nohup.\${SERVER_NAME}.out
+touch \${LOG_DIR}/nohup.\${SERVER_NAME}.out
 EOF
 
 if [ "${SERVER_NAME}" == "${ADMIN_SERVER_NAME}" ]; then
 cat <<EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
-nohup \${DOMAIN_HOME}/bin/startWebLogic.sh > \${LOG_HOME}/nohup.\${SERVER_NAME}.out 2>&1 &
+nohup \${DOMAIN_HOME}/bin/startWebLogic.sh > \${LOG_DIR}/nohup.\${SERVER_NAME}.out 2>&1 &
 EOF
 else
 cat <<EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
-nohup \${DOMAIN_HOME}/bin/startManagedWebLogic.sh \${SERVER_NAME} \${ADMIN_URL} > \${LOG_HOME}/nohup.\${SERVER_NAME}.out 2>&1 &
+nohup \${DOMAIN_HOME}/bin/startManagedWebLogic.sh \${SERVER_NAME} \${ADMIN_URL} > \${LOG_DIR}/nohup.\${SERVER_NAME}.out 2>&1 &
 EOF
 fi
 
 cat <<EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
-tail -f \${LOG_HOME}/nohup.\${SERVER_NAME}.out
+tail -f \${LOG_DIR}/nohup.\${SERVER_NAME}.out
 EOF
 
 ######################################################################

@@ -2,7 +2,7 @@
 EXT_PRE_CLASSPATH="${EXT_PRE_CLASSPATH}:jdbc_g.jar"
 JAVA_OPTIONS="${JAVA_OPTIONS} -Doracle.jdbc.Trace=true"
 JAVA_OPTIONS="${JAVA_OPTIONS} -Djava.util.logging.config.file=${DOMAIN_HOME}/oracledb-logging.properties"
-# JAVA_OPTIONS="${JAVA_OPTIONS} -Doracle.jdbc.LogFile=${LOG_HOME}/jdbc.log"
+# JAVA_OPTIONS="${JAVA_OPTIONS} -Doracle.jdbc.LogFile=${LOG_DIR}/jdbc.log"
 
 cat <<EOF > ${DOMAIN_HOME}/oracledb-logging.properties
 # handlers=java.util.logging.ConsoleHandler

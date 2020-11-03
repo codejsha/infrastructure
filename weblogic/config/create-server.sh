@@ -16,7 +16,7 @@ export SERVER_START_CLASSPATH="${SERVER_START_CLASSPATH}"
 
 ######################################################################
 
-mkdir -p ${LOG_HOME}/${MANAGED_SERVER_NAME}
+mkdir -p ${LOG_DIR}/${MANAGED_SERVER_NAME}
 
 ######################################################################
 

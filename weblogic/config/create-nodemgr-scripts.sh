@@ -20,7 +20,7 @@ cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 
 WL_HOME="${WL_HOME}"
 DOMAIN_HOME="${DOMAIN_HOME}"
-LOG_HOME="${LOG_HOME}"
+LOG_DIR="${LOG_DIR}"
 
 PID="\$(pgrep -xa java | grep \${WL_HOME} | grep NodeManager | awk '{print \$1}')"
 if [ -n "\${PID}" ]; then
@@ -33,7 +33,7 @@ cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 #!/usr/bin/bash
 
 DOMAIN_HOME="${DOMAIN_HOME}"
-LOG_HOME="${LOG_HOME}"
+LOG_DIR="${LOG_DIR}"
 
 PID="\$(pgrep -xa java | grep \${DOMAIN_HOME} | grep NodeManager | awk '{print \$1}')"
 if [ -n "\${PID}" ]; then
@@ -47,30 +47,30 @@ cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 JAVA_OPTIONS="\${JAVA_OPTIONS} -DListenAddress=${NODEMGR_LISTEN_ADDRESS}"
 JAVA_OPTIONS="\${JAVA_OPTIONS} -DListenPort=${NODEMGR_LISTEN_PORT}"
 JAVA_OPTIONS="\${JAVA_OPTIONS} -DSecureListener=false"
-JAVA_OPTIONS="\${JAVA_OPTIONS} -DLogFile=\${LOG_HOME}/nodemanager/machine_NodeManager.out"
+JAVA_OPTIONS="\${JAVA_OPTIONS} -DLogFile=\${LOG_DIR}/nodemanager/machine_NodeManager.out"
 export JAVA_OPTIONS
 
-if [ -f \${LOG_HOME}/nohup.NodeManager.out ]; then
-  mv \${LOG_HOME}/nohup.NodeManager.out \${LOG_HOME}/nodemanager/nohup.NodeManager.\${GET_DATE}.out
+if [ -f \${LOG_DIR}/nohup.NodeManager.out ]; then
+  mv \${LOG_DIR}/nohup.NodeManager.out \${LOG_DIR}/nodemanager/nohup.NodeManager.\${GET_DATE}.out
 fi
-if [ -f \${LOG_HOME}/gc.NodeManager.log ]; then
-  mv \${LOG_HOME}/gc.NodeManager.log \${LOG_HOME}/nodemanager/gc.NodeManager.\${GET_DATE}.log
+if [ -f \${LOG_DIR}/gc.NodeManager.log ]; then
+  mv \${LOG_DIR}/gc.NodeManager.log \${LOG_DIR}/nodemanager/gc.NodeManager.\${GET_DATE}.log
 fi
-touch \${LOG_HOME}/nohup.NodeManager.out
+touch \${LOG_DIR}/nohup.NodeManager.out
 EOF
 
 if [ "${MAJOR_VERSION}" == "11g" ]; then
 cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
-\${WL_HOME}/server/bin/startNodeManager.sh >> \${LOG_HOME}/nohup.NodeManager.out 2>&1 &
+\${WL_HOME}/server/bin/startNodeManager.sh >> \${LOG_DIR}/nohup.NodeManager.out 2>&1 &
 EOF
 elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
 cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
-\${DOMAIN_HOME}/bin/startNodeManager.sh >> \${LOG_HOME}/nohup.NodeManager.out 2>&1 &
+\${DOMAIN_HOME}/bin/startNodeManager.sh >> \${LOG_DIR}/nohup.NodeManager.out 2>&1 &
 EOF
 fi
 
 cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
-tail -f \${LOG_HOME}/nohup.NodeManager.out
+tail -f \${LOG_DIR}/nohup.NodeManager.out
 EOF
 
 ######################################################################

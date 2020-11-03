@@ -4,7 +4,7 @@ java_home = os.environ.get('JAVA_HOME')
 oracle_home = os.environ.get('ORACLE_HOME')
 domain_name = os.environ.get('DOMAIN_NAME')
 domain_home = os.environ.get('DOMAIN_HOME')
-log_home = os.environ.get('LOG_HOME')
+log_dir = os.environ.get('LOG_DIR')
 admin_server_listen_address = os.environ.get('ADMIN_SERVER_LISTEN_ADDRESS')
 admin_server_listen_port = os.environ.get('ADMIN_SERVER_LISTEN_PORT')
 admin_username = os.environ.get('ADMIN_USERNAME')
@@ -93,10 +93,10 @@ def set_server_ssl_config(_server_name):
     # cmo.setLoginTimeoutMillis(25000)
 
 
-def set_server_log_config(_domain_version, _log_home, _server_name):
+def set_server_log_config(_domain_version, _log_dir, _server_name):
     cd('/Servers/' + _server_name + '/Log/' + _server_name)
     cmo.setDateFormatPattern('MMM d, yyyy h:mm:ss,SSS a z')
-    # cmo.setFileName(_log_home + '/' +  _server_name + '/'
+    # cmo.setFileName(_log_dir + '/' +  _server_name + '/'
     #                 'general_' + _server_name + '_%%yyyy%%%%MM%%%%dd%%_%%HH%%%%mm%%%%ss%%.log')
     cmo.setFileName('/dev/null')
     cmo.setRotationType('byTime')
@@ -130,9 +130,9 @@ def set_server_log_config(_domain_version, _log_home, _server_name):
         pass
 
 
-def set_server_access_log_config(_log_home, _server_name):
+def set_server_access_log_config(_log_dir, _server_name):
     cd('/Servers/' + _server_name + '/WebServer/' + _server_name + '/WebServerLog/' + _server_name)
-    # cmo.setFileName(_log_home + '/' +  _server_name + '/'
+    # cmo.setFileName(_log_dir + '/' +  _server_name + '/'
     #                 'access_' + _server_name + '_%%yyyy%%%%MM%%%%dd%%_%%HH%%%%mm%%%%ss%%.log')
     cmo.setFileName('/dev/null')
     cmo.setRotationType('byTime')
@@ -148,11 +148,11 @@ def set_server_access_log_config(_log_home, _server_name):
     cmo.setLogTimeInGMT(False)
 
 
-def set_server_datasource_log_config(_log_home, _server_name):
+def set_server_datasource_log_config(_log_dir, _server_name):
     cd('/Servers/' + _server_name + '/DataSource/' + _server_name)
     cmo.setRmiJDBCSecurity('Compatibility')
     cd('/Servers/' + _server_name + '/DataSource/' + _server_name + '/DataSourceLogFile/' + _server_name)
-    # cmo.setFileName(_log_home + '/' +  _server_name + '/'
+    # cmo.setFileName(_log_dir + '/' +  _server_name + '/'
     #                 'datasource_' + _server_name + '_%%yyyy%%%%MM%%%%dd%%_%%HH%%%%mm%%%%ss%%.log')
     cmo.setFileName('/dev/null')
     cmo.setRotationType('byTime')
@@ -193,9 +193,9 @@ set_server_general_config(domain_name, domain_home, managed_server_name,
 # set_server_protocol_config(server_name)
 set_server_tunning_config(managed_server_name)
 set_server_ssl_config(managed_server_name)
-set_server_log_config(domain_version, log_home, managed_server_name)
-set_server_access_log_config(log_home, managed_server_name)
-# set_server_datasource_log_config(log_home, server_name)
+set_server_log_config(domain_version, log_dir, managed_server_name)
+set_server_access_log_config(log_dir, managed_server_name)
+# set_server_datasource_log_config(log_dir, server_name)
 set_server_start_config(managed_server_name, nodemgr_name, java_home, server_start_java_vendor,
                         oracle_home, server_start_root_dir, server_start_arguments, server_start_classpath)
 
