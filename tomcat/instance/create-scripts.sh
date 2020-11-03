@@ -12,14 +12,15 @@ export CATALINA_HOME="${CATALINA_HOME}"
 export CATALINA_BASE="${CATALINA_BASE}"
 
 LOG_DIR="${LOG_DIR}"
+GET_DATE="\$(date +'%Y%m%d-%H%M%S')"
 export CATALINA_OUT="${CATALINA_OUT}"
 export CATALINA_PID="\${CATALINA_BASE}/tomcat.pid"
 
+CATALINA_OPTS="\${CATALINA_OPTS} -Xms1024m -Xmx1024m"
 EOF
 
 if [[ ${JAVA_VERSION} =~ ^1.8 ]]; then
 cat <<EOF >> ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
-CATALINA_OPTS="\${CATALINA_OPTS} -Xms1024m -Xmx1024m"
 CATALINA_OPTS="\${CATALINA_OPTS} -Xloggc:${GC_LOG_OUT}"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:+PrintGCDetails"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:+PrintTenuringDistribution"
@@ -35,7 +36,6 @@ export CATALINA_OPTS
 EOF
 elif [[ ${JAVA_VERSION} =~ ^11 ]]; then
 cat <<EOF >> ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
-CATALINA_OPTS="\${CATALINA_OPTS} -Xms1024m -Xmx1024m"
 CATALINA_OPTS="\${CATALINA_OPTS} -Xlog:gc*=info:file=${GC_LOG_OUT}:time,pid,tid,level,tags"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:+HeapDumpOnOutOfMemoryError"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:HeapDumpPath=${DUMP_LOG_DIR}"
