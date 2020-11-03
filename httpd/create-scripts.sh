@@ -3,99 +3,108 @@
 ### required package:
 ### sudo yum install -y links
 
-SERVER_ROOT="/usr/local/httpd"
+HTTPD_HOME="/usr/local/httpd"
 
-cat <<EOF > ${SERVER_ROOT}/start-httpd.sh
+cat <<EOF > ${HTTPD_HOME}/start-httpd.sh
 #!/usr/bin/bash
 
-SERVER_ROOT="${SERVER_ROOT}"
+HTTPD_HOME="${HTTPD_HOME}"
+# export LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
 
-\${SERVER_ROOT}/bin/apachectl -k start
+\${HTTPD_HOME}/bin/apachectl -k start
 EOF
 
-cat <<EOF > ${SERVER_ROOT}/restart-httpd.sh
+cat <<EOF > ${HTTPD_HOME}/restart-httpd.sh
 #!/usr/bin/bash
 
-SERVER_ROOT="${SERVER_ROOT}"
+HTTPD_HOME="${HTTPD_HOME}"
+# export LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
 
-\${SERVER_ROOT}/bin/apachectl -k restart
+\${HTTPD_HOME}/bin/apachectl -k restart
 EOF
 
-cat <<EOF > ${SERVER_ROOT}/stop-httpd.sh
+cat <<EOF > ${HTTPD_HOME}/stop-httpd.sh
 #!/usr/bin/bash
 
-SERVER_ROOT="${SERVER_ROOT}"
+HTTPD_HOME="${HTTPD_HOME}"
+# export LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
 
-\${SERVER_ROOT}/bin/apachectl -k stop
+\${HTTPD_HOME}/bin/apachectl -k stop
 EOF
 
-cat <<EOF > ${SERVER_ROOT}/check-config.sh
+cat <<EOF > ${HTTPD_HOME}/check-config.sh
 #!/usr/bin/bash
 
-SERVER_ROOT="${SERVER_ROOT}"
+HTTPD_HOME="${HTTPD_HOME}"
+# export LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
 
-\${SERVER_ROOT}/bin/apachectl -t
+\${HTTPD_HOME}/bin/apachectl -t
 EOF
 
-cat <<EOF > ${SERVER_ROOT}/get-version.sh
+cat <<EOF > ${HTTPD_HOME}/get-version.sh
 #!/usr/bin/bash
 
-SERVER_ROOT="${SERVER_ROOT}"
+HTTPD_HOME="${HTTPD_HOME}"
 
-\${SERVER_ROOT}/bin/apachectl -v
+\${HTTPD_HOME}/bin/apachectl -v
 EOF
 
-cat <<EOF > ${SERVER_ROOT}/get-compile-settings.sh
+cat <<EOF > ${HTTPD_HOME}/get-compile-settings.sh
 #!/usr/bin/bash
 
-SERVER_ROOT="${SERVER_ROOT}"
+HTTPD_HOME="${HTTPD_HOME}"
 
-\${SERVER_ROOT}/bin/apachectl -V
+\${HTTPD_HOME}/bin/apachectl -V
 EOF
 
-cat <<EOF > ${SERVER_ROOT}/get-dump-vhosts.sh
+cat <<EOF > ${HTTPD_HOME}/get-vhosts-settings.sh
 #!/usr/bin/bash
 
-SERVER_ROOT="${SERVER_ROOT}"
+HTTPD_HOME="${HTTPD_HOME}"
+# export LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
 
-\${SERVER_ROOT}/bin/apachectl -t -D DUMP_VHOSTS
+\${HTTPD_HOME}/bin/apachectl -t -D DUMP_VHOSTS
 EOF
 
-cat <<EOF > ${SERVER_ROOT}/get-dump-run-cfg.sh
+cat <<EOF > ${HTTPD_HOME}/get-run-settings.sh
 #!/usr/bin/bash
 
-SERVER_ROOT="${SERVER_ROOT}"
+HTTPD_HOME="${HTTPD_HOME}"
+# export LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
 
-\${SERVER_ROOT}/bin/apachectl -D DUMP_RUN_CFG
+\${HTTPD_HOME}/bin/apachectl -D DUMP_RUN_CFG
 EOF
 
-cat <<EOF > ${SERVER_ROOT}/get-dump-settings.sh
+cat <<EOF > ${HTTPD_HOME}/get-settings.sh
 #!/usr/bin/bash
 
-SERVER_ROOT="${SERVER_ROOT}"
+HTTPD_HOME="${HTTPD_HOME}"
+# export LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
 
-\${SERVER_ROOT}/bin/apachectl -S
-# \${SERVER_ROOT}/bin/apachectl -t -D DUMP_VHOSTS -D DUMP_RUN_CFG
+\${HTTPD_HOME}/bin/apachectl -S
+# \${HTTPD_HOME}/bin/apachectl -t -D DUMP_VHOSTS -D DUMP_RUN_CFG
 EOF
 
-cat <<EOF > ${SERVER_ROOT}/get-dump-modules.sh
+cat <<EOF > ${HTTPD_HOME}/get-load-modules.sh
 #!/usr/bin/bash
 
-SERVER_ROOT="${SERVER_ROOT}"
+HTTPD_HOME="${HTTPD_HOME}"
+# export LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
 
-\${SERVER_ROOT}/bin/apachectl -M
-# \${SERVER_ROOT}/bin/apachectl -t -D DUMP_MODULES
+\${HTTPD_HOME}/bin/apachectl -M
+# \${HTTPD_HOME}/bin/apachectl -t -D DUMP_MODULES
 EOF
 
-cat <<EOF > ${SERVER_ROOT}/get-dump-includes.sh
+cat <<EOF > ${HTTPD_HOME}/get-include-files.sh
 #!/usr/bin/bash
 
-SERVER_ROOT="${SERVER_ROOT}"
+HTTPD_HOME="${HTTPD_HOME}"
+# export LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
 
-\${SERVER_ROOT}/bin/apachectl -t -D DUMP_INCLUDES
+\${HTTPD_HOME}/bin/apachectl -t -D DUMP_INCLUDES
 EOF
 
-cat <<EOF > ${SERVER_ROOT}/get-links-dump.sh
+cat <<EOF > ${HTTPD_HOME}/get-links-status.sh
 #!/usr/bin/bash
 
 PORT="80"
@@ -103,15 +112,15 @@ PORT="80"
 links -dump http://127.0.0.1:\${PORT}/server-status
 EOF
 
-chmod 750 ${SERVER_ROOT}/start-httpd.sh
-chmod 750 ${SERVER_ROOT}/restart-httpd.sh
-chmod 750 ${SERVER_ROOT}/stop-httpd.sh
-chmod 750 ${SERVER_ROOT}/check-config.sh
-chmod 750 ${SERVER_ROOT}/get-version.sh
-chmod 750 ${SERVER_ROOT}/get-compile-settings.sh
-chmod 750 ${SERVER_ROOT}/get-dump-vhosts.sh
-chmod 750 ${SERVER_ROOT}/get-dump-run-cfg.sh
-chmod 750 ${SERVER_ROOT}/get-dump-settings.sh
-chmod 750 ${SERVER_ROOT}/get-dump-modules.sh
-chmod 750 ${SERVER_ROOT}/get-dump-includes.sh
-chmod 750 ${SERVER_ROOT}/get-links-dump.sh
+chmod 750 ${HTTPD_HOME}/start-httpd.sh
+chmod 750 ${HTTPD_HOME}/restart-httpd.sh
+chmod 750 ${HTTPD_HOME}/stop-httpd.sh
+chmod 750 ${HTTPD_HOME}/check-config.sh
+chmod 750 ${HTTPD_HOME}/get-version.sh
+chmod 750 ${HTTPD_HOME}/get-compile-settings.sh
+chmod 750 ${HTTPD_HOME}/get-vhosts-settings.sh
+chmod 750 ${HTTPD_HOME}/get-run-settings.sh
+chmod 750 ${HTTPD_HOME}/get-settings.sh
+chmod 750 ${HTTPD_HOME}/get-load-modules.sh
+chmod 750 ${HTTPD_HOME}/get-include-files.sh
+chmod 750 ${HTTPD_HOME}/get-server-status.sh
