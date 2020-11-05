@@ -2,8 +2,13 @@
 
 JAVA_HOME="/usr/java/java-1.8.0"
 # JAVA_HOME="/usr/java/java-11"
+
 ORACLE_HOME="/usr/local/weblogic"
+
+# PATCH_FILE_DIR="/mnt/share/oracle-weblogic-server/wls12.1.3"
 PATCH_FILE_DIR="/mnt/share/oracle-weblogic-server/wls12.2.1.3"
+# PATCH_FILE_DIR="/mnt/share/oracle-weblogic-server/wls12.2.1.4"
+# PATCH_FILE_DIR="/mnt/share/oracle-weblogic-server/wls14.1.1"
 
 ######################################################################
 
@@ -62,6 +67,7 @@ function opatch_apply {
 
 function opatch_lsinventory {
     ${ORACLE_HOME}/OPatch/opatch lsinventory
+
     # ${ORACLE_HOME}/OPatch/opatch lsinventory \
     #     -all \
     #     -oh ${ORACLE_HOME} \
@@ -75,8 +81,8 @@ function opatch_lsinventory {
 # export PATH="${ORACLE_HOME}/OPatch:${PATH}"
 
 check_requirement
-opatch_update "p28186730_139422_Generic.zip" "6880880"
+opatch_update "p28186730_139424_Generic.zip" "6880880"
 # opatch_rollback 30675853
-opatch_apply "p31101362_1394002_Generic.zip"
-opatch_apply "p30965714_122130_Generic.zip"
+# opatch_apply "p31101362_1394002_Generic.zip"
+opatch_apply "p31961038_122130_Generic.zip"
 opatch_lsinventory
