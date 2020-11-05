@@ -33,11 +33,18 @@ function install_weblogic {
         -jar ${INSTALL_FILE_DIR}/${INSTALL_FILE} \
         -silent \
         -responseFile ${INSTALL_SCRIPT_DIR}/response.rsp \
-        -invPtrLoc ${INSTALL_SCRIPT_DIR}/oraInst.loc \
-        -jreLoc ${JAVA_HOME} \
-        -ignoreSysPrereqs \
-        -force \
-        -novalidation
+        -invPtrLoc ${INSTALL_SCRIPT_DIR}/oraInst.loc
+
+    # ${JAVA_HOME}/bin/java \
+    #     -Djava.security.egd=file:///dev/urandom \
+    #     -jar ${INSTALL_FILE_DIR}/${INSTALL_FILE} \
+    #     -silent \
+    #     -responseFile ${INSTALL_SCRIPT_DIR}/response.rsp \
+    #     -invPtrLoc ${INSTALL_SCRIPT_DIR}/oraInst.loc \
+    #     -jreLoc ${JAVA_HOME} \
+    #     -ignoreSysPrereqs \
+    #     -force \
+    #     -novalidation
 }
 
 ######################################################################
