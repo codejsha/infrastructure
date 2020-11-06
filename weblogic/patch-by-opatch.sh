@@ -72,7 +72,7 @@ function opatch_lsinventory {
     #     -all \
     #     -oh ${ORACLE_HOME} \
     #     -invPtrLoc ${ORACLE_HOME}/oraInst.loc \
-    #     -jre ${ORACLE_HOME}/oracle_common/jdk/jre
+    #     -jre ${JAVA_HOME}/jre
 }
 
 ######################################################################
