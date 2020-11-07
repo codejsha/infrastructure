@@ -10,7 +10,7 @@ sudo usermod -a -G docker ${USER}
 sudo systemctl enable docker
 sudo systemctl start docker
 
-sudo sed -i -E '/^root\tALL=\(ALL\) \tALL$/ a ${USER}\tALL=(ALL) \tALL' /etc/sudoers
+# sudo sed -i -E '/^root\tALL=\(ALL\) \tALL$/ a ${USER}\tALL=(ALL) \tALL' /etc/sudoers
 exit
 
 ######################################################################
