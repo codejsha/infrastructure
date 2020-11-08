@@ -17,12 +17,12 @@ bash create-scripts.sh --instance=inst2 --port-offset=1
 ### Datasource
 cd datasource
 
-# bash ./add-jdbc-driver-by-module.sh
-bash ./add-jdbc-driver-by-module.sh --port-offset=0
-bash ./add-jdbc-driver-by-module.sh --port-offset=1
-# bash ./add-jdbc-driver-by-deployment.sh
-# bash ./add-jdbc-driver-by-deployment.sh --port-offset=0
-# bash ./add-jdbc-driver-by-deployment.sh --port-offset=1
+# bash ./add-jdbc-driver-with-module.sh
+bash ./add-jdbc-driver-with-module.sh --port-offset=0
+bash ./add-jdbc-driver-with-module.sh --port-offset=1
+# bash ./add-jdbc-driver-with-deployment.sh
+# bash ./add-jdbc-driver-with-deployment.sh --port-offset=0
+# bash ./add-jdbc-driver-with-deployment.sh --port-offset=1
 
 # bash ./add-datasource.sh
 bash ./add-datasource.sh --port-offset=0

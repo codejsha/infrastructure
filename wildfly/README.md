@@ -31,7 +31,7 @@ bash create-scripts.sh --instance=inst2 --port-offset=1
 ### Password Valut
 
 ```bash
-bash ./encrypt-password-by-vault.sh ${PASSWORD}
+bash ./encrypt-password-with-vault.sh ${PASSWORD}
 ```
 
 - https://access.redhat.com/solutions/2790371
@@ -40,7 +40,7 @@ bash ./encrypt-password-by-vault.sh ${PASSWORD}
 ### PicketBox
 
 ```bash
-bash ./encrypt-password-by-picketbox.sh ${PASSWORD}
+bash ./encrypt-password-with-picketbox.sh ${PASSWORD}
 ```
 
 - https://access.redhat.com/solutions/184963
@@ -51,11 +51,11 @@ bash ./encrypt-password-by-picketbox.sh ${PASSWORD}
 
 ```bash
 ### by module
-bash ./add-jdbc-driver-by-module.sh
+bash ./add-jdbc-driver-with-module.sh
 bash ./delete-module.sh
 
 ### by deployment
-bash ./add-jdbc-driver-by-deployment.sh
+bash ./add-jdbc-driver-with-deployment.sh
 
 bash ./delete-jdbc-driver.sh
 ```

@@ -12,9 +12,9 @@ cat <<EOF > ./credentials-domain.xml
 EOF
 
 ${JAVA_HOME}/bin/java -jar ${JENKINS_FILE_DIR}/jenkins-cli.jar -s ${JENKINS_URL} -webSocket -auth ${JENKINS_USER}:${JENKINS_API_TOKEN} \
-    create-credentials-domain-by-xml "SystemCredentialsProvider::SystemContextResolver::jenkins" < credentials-domain.xml
+    create-credentials-domain-with-xml "SystemCredentialsProvider::SystemContextResolver::jenkins" < credentials-domain.xml
 # ${JAVA_HOME}/bin/java -jar ${JENKINS_FILE_DIR}/jenkins-cli.jar -s ${JENKINS_URL} -webSocket -auth ${JENKINS_USER}:${JENKINS_API_TOKEN} \
-#     create-credentials-domain-by-xml "system::system::jenkins" < credentials-domain.xml
+#     create-credentials-domain-with-xml "system::system::jenkins" < credentials-domain.xml
 
 ### get-credentials-domain-as-xml
 # ${JAVA_HOME}/bin/java -jar ${JENKINS_FILE_DIR}/jenkins-cli.jar -s ${JENKINS_URL} -webSocket -auth ${JENKINS_USER}:${JENKINS_API_TOKEN} \

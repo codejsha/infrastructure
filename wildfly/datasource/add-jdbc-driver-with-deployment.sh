@@ -19,7 +19,7 @@ DRIVER_RUNTIME_NAME="${DRIVER_FILE}"
 
 ######################################################################
 
-function add_jdbc_driver_by_deployment {
+function add_jdbc_driver_with_deployment {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
@@ -84,7 +84,7 @@ EOF
 
 ######################################################################
 
-add_jdbc_driver_by_deployment
+add_jdbc_driver_with_deployment
 check_deployment_status
 # check_deployment_status_all
 get_installed_driver

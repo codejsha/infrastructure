@@ -33,7 +33,7 @@ quit
 EOF
 }
 
-function add_jdbc_driver_by_module {
+function add_jdbc_driver_with_module {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
@@ -76,6 +76,6 @@ EOF
 ######################################################################
 
 add_jdbc_module
-add_jdbc_driver_by_module
+add_jdbc_driver_with_module
 get_installed_driver
 # get_installed_driver_list
