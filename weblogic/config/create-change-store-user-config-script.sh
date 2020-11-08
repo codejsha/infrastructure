@@ -45,8 +45,8 @@ fi
 cat << EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 export DOMAIN_HOME="${DOMAIN_HOME}"
 export ADMIN_SERVER_URL="t3://${ADMIN_SERVER_LISTEN_ADDRESS}:${ADMIN_SERVER_LISTEN_PORT}"
-export ADMIN_USERNAME="\${1:-weblogic}"
-export ADMIN_PASSWORD="\${2:-welcome1}"
+export ADMIN_USERNAME="\${1:-"weblogic"}"
+export ADMIN_PASSWORD="\${2:-"welcome1"}"
 EOF
 
 if [ "${MAJOR_VERSION}" == "11g" ]; then

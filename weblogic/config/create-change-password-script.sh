@@ -15,8 +15,8 @@ JAVA_HOME="${JAVA_HOME}"
 DOMAIN_HOME="${DOMAIN_HOME}"
 WEBLOGIC_HOME="${WEBLOGIC_HOME}"
 GET_DATE="\$(date +'%Y%m%d_%H%M%S')"
-NEW_USERNAME="\${1:-weblogic}"
-NEW_PASSWORD="\${2:-welcome1}"
+NEW_USERNAME="\${1:-"weblogic"}"
+NEW_PASSWORD="\${2:-"welcome1"}"
 
 mv \${DOMAIN_HOME}/servers/AdminServer/data \${DOMAIN_HOME}/servers/AdminServer/data.\${GET_DATE}
 mv \${DOMAIN_HOME}/security/DefaultAuthenticatorInit.ldift \${DOMAIN_HOME}/security/DefaultAuthenticatorInit.ldift.\${GET_DATE}

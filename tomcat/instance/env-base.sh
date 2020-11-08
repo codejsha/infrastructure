@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-export INSTANCE_NAME="${1:-inst1}"
+export INSTANCE_NAME="${1:-"inst1"}"
 export JAVA_HOME="/usr/lib/jvm/java-11"
 export CATALINA_HOME="/usr/local/tomcat"
 export CATALINA_BASE="${CATALINA_HOME}/instances/${INSTANCE_NAME}"
