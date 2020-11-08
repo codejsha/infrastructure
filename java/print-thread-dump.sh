@@ -11,12 +11,12 @@ LOOP_COUNT=1
 INTERVAL_SECONDS=5
 
 if [ -z "${PID}" ]; then
-    echo "usage:  bash ./print-thread-dump.sh PID"
+    echo "Usage: bash ./print-thread-dump.sh PID"
     exit
 fi
 
 if [ -z "${JAVA_HOME}" ]; then
-    echo "ERROR: The JAVA_HOME (${JAVA_HOME}) does not exist!"
+    echo "[ERROR] The JAVA_HOME (${JAVA_HOME}) does not exist!"
     exit
 fi
 

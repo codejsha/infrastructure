@@ -11,7 +11,7 @@ PROJECT="myproject"
 REPOSITORY="myrepo"
 
 if [ -z "${SOURCE_IMAGE}" ]; then
-    echo "usage:  bash ./harbor-push-image.sh <SOURCE_IMAGE> [TAG]"
+    echo "Usage: bash ./harbor-push-image.sh <SOURCE_IMAGE> [TAG]"
     exit
 fi
 

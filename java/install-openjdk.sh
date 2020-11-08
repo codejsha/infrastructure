@@ -15,4 +15,4 @@ function install_openjdk_with_aptget {
 ######################################################################
 
 install_openjdk_with_yum
-install_openjdk_with_aptget
+# install_openjdk_with_aptget

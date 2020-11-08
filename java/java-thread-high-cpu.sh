@@ -12,18 +12,18 @@ TOP_THREAD_COUNT=5
 INTERVAL_SECONDS=5
 
 if [ -z "${PID}" ]; then
-    echo "usage:  bash ./java-thread-high-cpu.sh PID"
+    echo "Usage: bash ./java-thread-high-cpu.sh PID"
     exit
 fi
 
 if [ -z "${JAVA_HOME}" ]; then
-    echo "ERROR: The JAVA_HOME (${JAVA_HOME}) does not exist!"
+    echo "[ERROR] The JAVA_HOME (${JAVA_HOME}) does not exist!"
     exit
 fi
 
 for IDX1 in $(seq 1 ${LOOP_COUNT})
 do
-    echo "Print ${IDX1} times..."
+    echo "[INFO] Print ${IDX1} times..."
     ps -eLo pid,ppid,tid,pcpu,comm | grep ${PID} > ${PID}-ps-${IDX1}.out
     ${JAVA_HOME}/bin/jstack -l ${PID} > ${PID}-thread-${IDX1}.tdump
     top -p ${PID} -b -n 1 > ${PID}-top-${IDX1}.out

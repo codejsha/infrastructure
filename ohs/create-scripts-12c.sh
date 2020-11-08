@@ -17,7 +17,7 @@ GET_DATE="$(date +'%Y%m%d_%H%M%S')"
 
 PID="\$(pgrep -xa java | grep \${DOMAIN_HOME} | grep NodeManager | awk '{print \$1}')"
 if [ -n "\${PID}" ]; then
-  echo "NodeManager (pid $\{PID}) is already running!"
+  echo "[ERROR] NodeManager (pid $\{PID}) is already running!"
   exit
 fi
 

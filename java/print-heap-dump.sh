@@ -8,12 +8,12 @@ PID="${1}"
 JAVA_HOME="/usr/lib/jvm/java-11"
 
 if [ -z "${PID}" ]; then
-    echo "usage:  bash ./print-heap-dump.sh PID"
+    echo "Usage: bash ./print-heap-dump.sh PID"
     exit
 fi
 
 if [ -z "${JAVA_HOME}" ]; then
-    echo "ERROR: The JAVA_HOME (${JAVA_HOME}) does not exist!"
+    echo "[ERROR] The JAVA_HOME (${JAVA_HOME}) does not exist!"
     exit
 fi
 
