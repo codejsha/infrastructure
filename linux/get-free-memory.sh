@@ -1,3 +1,33 @@
 #!/usr/bin/bash
 
-free -h
+######################################################################
+
+function get-free-memory {
+    # free -t
+    free --total
+}
+
+function get-free-memory-human-readable {
+    # free -th
+    free --total --human
+}
+
+function get-free-memory-low-high-statistics {
+    # free -thl
+    free --total --human --lohi
+}
+
+function get-free-memory-repeat {
+    SECONDS="3"
+    COUNT=="5"
+
+    # free -th -s ${SECONDS} -c ${COUNT}
+    free --total --human --seconds ${SECONDS} --count ${COUNT}
+}
+
+######################################################################
+
+# get-free-memory
+get-free-memory-human-readable
+# get-free-memory-low-high-statistics
+# get-free-memory-repeat
