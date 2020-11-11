@@ -36,9 +36,9 @@ function set_arguments {
 
 ######################################################################
 
-APP_PATH="/svc/app/test"        # default
-APP_NAME="test.war"             # default
-APP_RUNTIME_NAME="test.war"     # default
+APP_PATH="/svc/app/helloworld"        # default
+APP_NAME="helloworld.war"             # default
+APP_RUNTIME_NAME="helloworld.war"     # default
 set_arguments ${@}
 
 bash ./undeploy-app.sh --name=${APP_NAME}

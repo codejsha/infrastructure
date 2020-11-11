@@ -51,7 +51,7 @@ function Add-ProxyHandler {
         -ConfigCollection $ConfigCollection `
         -ConfigAttribute @{ `
             Name            = "iisproxy"; `
-            Path            = "/helloworld"; `
+            Path            = "/failovertest"; `
             Verb            = "*"; `
             Modules         = "IsapiModule"; `
             ScriptProcessor = "$PluginHome\lib\iisproxy.dll" 
