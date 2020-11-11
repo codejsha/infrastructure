@@ -3,7 +3,7 @@
 MW_HOME="/usr/local/weblogic"
 PATCH_FILE_DIR="/mnt/share/oracle-weblogic-server/wls10.3.6"
 
-GET_DATE="$(date +'%Y%m%d-%H%M%S')"
+GET_DATE_YMD="$(date +'%Y%m%d')"
 
 ######################################################################
 
@@ -31,7 +31,7 @@ function change_bsu_mem_arg {
 }
 
 function backup_cache_dir {
-    mv ${MW_HOME}/utils/bsu/cache_dir ${MW_HOME}/utils/bsu/cache_dir_${GET_DATE}
+    mv ${MW_HOME}/utils/bsu/cache_dir ${MW_HOME}/utils/bsu/cache_dir_${GET_DATE_YMD}
 }
 
 function bsu_update {
@@ -94,6 +94,6 @@ check_middleware_home
 change_bsu_mem_arg "-Xms4096m -Xmx4096m"
 bsu_update "p27238412_1036_Generic.zip"
 # bsu_remove "p30463097_1036_Generic.zip" "JWEB"
-backup_cache_dir
+# backup_cache_dir
 bsu_install "p30857748_1036_Generic.zip" "Q3ZB"
 bsu_view_applied
