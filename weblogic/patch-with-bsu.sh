@@ -3,9 +3,11 @@
 MW_HOME="/usr/local/weblogic"
 PATCH_FILE_DIR="/mnt/share/oracle-weblogic-server/wls10.3.6"
 
+GET_DATE="$(date +'%Y%m%d-%H%M%S')"
+
 ######################################################################
 
-function check_requirement {
+function check_middleware_home {
     if [ ! -d "${MW_HOME}" ]; then
         echo "[ERROR] The MW_HOME (${MW_HOME}) does not exists!"
         exit
@@ -29,44 +31,66 @@ function change_bsu_mem_arg {
 }
 
 function backup_cache_dir {
-    mv ${MW_HOME}/utils/bsu/cache_dir ${MW_HOME}/utils/bsu/cache_dir_backup
+    mv ${MW_HOME}/utils/bsu/cache_dir ${MW_HOME}/utils/bsu/cache_dir_${GET_DATE}
 }
 
 function bsu_update {
     PATCH_FILE="${1}"
 
+    cd ${MW_HOME}/utils/bsu
     check_patch_file ${PATCH_FILE_DIR}/${PATCH_FILE}
     unzip -q -o ${PATCH_FILE_DIR}/${PATCH_FILE} -d ${MW_HOME}/utils/bsu
     chmod 750 ${MW_HOME}/utils/bsu/bsu_update.sh
     ${MW_HOME}/utils/bsu/bsu_update.sh install
+
+    STATUS="${?}"
+    if [ "${STATUS}" -ne "0" ]; then
+        echo "[ERROR] The update (${PATCH_ID}) not completed!"
+        exit
+    fi
 }
 
 function bsu_remove {
     PATCH_FILE="${1}"
     PATCH_LIST="${2}"
 
+    cd ${MW_HOME}/utils/bsu
     echo "[INFO] The patch (${PATCH_LIST}) is removing..."
     ${MW_HOME}/utils/bsu/bsu.sh -remove -patchlist=${PATCH_LIST} -prod_dir=${MW_HOME}/wlserver_10.3
+
+    STATUS="${?}"
+    if [ "${STATUS}" -ne "0" ]; then
+        echo "[ERROR] The rollback (${PATCH_LIST}) not completed!"
+        exit
+    fi
 }
 
 function bsu_install {
     PATCH_FILE="${1}"
     PATCH_LIST="${2}"
 
+    cd ${MW_HOME}/utils/bsu
     check_patch_file ${PATCH_FILE_DIR}/${PATCH_FILE}
     unzip -q -o ${PATCH_FILE_DIR}/${PATCH_FILE} -d ${MW_HOME}/utils/bsu/cache_dir
     echo "[INFO] The patch (${PATCH_LIST}) is installing..."
     ${MW_HOME}/utils/bsu/bsu.sh -install -patchlist=${PATCH_LIST} -prod_dir=${MW_HOME}/wlserver_10.3
+
+    STATUS="${?}"
+    if [ "${STATUS}" -ne "0" ]; then
+        echo "[ERROR] The patch (${PATCH_LIST}) not completed!"
+        exit
+    fi
 }
 
 function bsu_view_applied {
+    cd ${MW_HOME}/utils/bsu
     echo "[INFO] View applied patches..."
     ${MW_HOME}/utils/bsu/bsu.sh -view -status=applied -prod_dir=${MW_HOME}/wlserver_10.3
 }
 
 ######################################################################
 
-check_requirement
+check_middleware_home
 change_bsu_mem_arg "-Xms4096m -Xmx4096m"
 bsu_update "p27238412_1036_Generic.zip"
 # bsu_remove "p30463097_1036_Generic.zip" "JWEB"
