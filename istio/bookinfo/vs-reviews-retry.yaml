@@ -4,11 +4,11 @@ metadata:
   name: reviews
 spec:
   hosts:
-    - reviews
+    - reviews.bookinfo.svc.cluster.local
   http:
     - route:
         - destination:
-            host: reviews
+            host: reviews.bookinfo.svc.cluster.local
             port:
               number: 9080
       retries:

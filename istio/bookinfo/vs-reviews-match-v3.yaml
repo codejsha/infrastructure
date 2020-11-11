@@ -4,7 +4,7 @@ metadata:
   name: reviews
 spec:
   hosts:
-    - reviews
+    - reviews.bookinfo.svc.cluster.local
   http:
     - match:
         - headers:
@@ -14,9 +14,9 @@ spec:
             exact: GET
       route:
         - destination:
-            host: reviews
+            host: reviews.bookinfo.svc.cluster.local
             subset: v3
     - route:
         - destination:
-            host: reviews
+            host: reviews.bookinfo.svc.cluster.local
             subset: v1

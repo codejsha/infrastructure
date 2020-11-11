@@ -15,7 +15,7 @@ spec:
         uri: /api/v1/products
       route:
         - destination:
-            host: productpage
+            host: productpage.bookinfo.svc.cluster.local
             port:
               number: 9080
     - match:
@@ -31,6 +31,6 @@ spec:
         #     prefix: /api/v1/products
       route:
         - destination:
-            host: productpage
+            host: productpage.bookinfo.svc.cluster.local
             port:
               number: 9080

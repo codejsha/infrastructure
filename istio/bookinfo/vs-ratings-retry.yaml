@@ -4,11 +4,11 @@ metadata:
   name: ratings
 spec:
   hosts:
-    - ratings
+    - ratings.bookinfo.svc.cluster.local
   http:
     - route:
         - destination:
-            host: ratings
+            host: ratings.bookinfo.svc.cluster.local
             port:
               number: 9080
       retries:

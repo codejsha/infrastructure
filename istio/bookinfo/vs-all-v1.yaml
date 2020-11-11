@@ -4,11 +4,11 @@ metadata:
   name: productpage
 spec:
   hosts:
-    - productpage
+    - productpage.bookinfo.svc.cluster.local
   http:
     - route:
         - destination:
-            host: productpage
+            host: productpage.bookinfo.svc.cluster.local
             port:
               number: 9080
             subset: v1
@@ -19,11 +19,11 @@ metadata:
   name: reviews
 spec:
   hosts:
-    - reviews
+    - reviews.bookinfo.svc.cluster.local
   http:
     - route:
         - destination:
-            host: reviews
+            host: reviews.bookinfo.svc.cluster.local
             port:
               number: 9080
             subset: v1
@@ -34,11 +34,11 @@ metadata:
   name: ratings
 spec:
   hosts:
-    - ratings
+    - ratings.bookinfo.svc.cluster.local
   http:
     - route:
         - destination:
-            host: ratings
+            host: ratings.bookinfo.svc.cluster.local
             port:
               number: 9080
             subset: v1
@@ -49,11 +49,11 @@ metadata:
   name: details
 spec:
   hosts:
-    - details
+    - details.bookinfo.svc.cluster.local
   http:
     - route:
         - destination:
-            host: details
+            host: details.bookinfo.svc.cluster.local
             port:
               number: 9080
             subset: v1

@@ -3,7 +3,7 @@ kind: DestinationRule
 metadata:
   name: reviews
 spec:
-  host: reviews
+  host: reviews.bookinfo.svc.cluster.local
   trafficPolicy:
     loadBalancer:
       simple: RANDOM
