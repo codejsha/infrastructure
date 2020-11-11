@@ -1,7 +1,7 @@
 # https://hub.docker.com/_/microsoft-windows-servercore-iis
 
 $MountSrc = "F:\share"
-$MountDst = "C:\mnt\share"
+$MountDst = "$env:SystemDrive\mnt\share"
 $IISPublishPort = "8080"
 $SiteListenPort = "80"
 
