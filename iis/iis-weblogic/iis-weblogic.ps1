@@ -4,15 +4,15 @@ Import-Module WebAdministration
 $SiteName = "helloworld"
 $SiteHome = "$env:SystemDrive\inetpub\$SiteName"
 
-# $PluginFileDir="$env:SystemDrive\share\oracle-http-server\ohs11.1.1.9\ofm_wlsplugins_generic_11.1.1.9.0_disk1_1of1"
+# $PluginFileDir = "$env:SystemDrive\share\oracle-http-server\ohs11.1.1.9\ofm_wlsplugins_generic_11.1.1.9.0_disk1_1of1"
 $PluginFileDir = "$env:SystemDrive\share\oracle-http-server\ohs12.2.1.3\fmw_12.2.1.3.0_wlsplugins_Disk1_1of1"
-# $PluginFileDir="$env:SystemDrive\share\oracle-http-server\ohs12.2.1.4\fmw_12.2.1.4.0_wlsplugins_Disk1_1of1"
+# $PluginFileDir = "$env:SystemDrive\share\oracle-http-server\ohs12.2.1.4\fmw_12.2.1.4.0_wlsplugins_Disk1_1of1"
 
-# $PluginFile="WLSPlugin11g-64bit-IIS-win64-x64.zip"
+# $PluginFile = "WLSPlugin11g-64bit-IIS-win64-x64.zip"
 $PluginFile = "WLSPlugin12.2.1.3.0-IIS-Win64-12.2.1.3.0.zip"
-# $PluginFile="WLSPlugin12.2.1.4.0-IIS-Win64-12.2.1.4.0.zip"
+# $PluginFile = "WLSPlugin12.2.1.4.0-IIS-Win64-12.2.1.4.0.zip"
 
-$WebLogicPluginHome = "$SiteHome\weblogic-plugin"
+$PluginHome = "$SiteHome\weblogic-plugin"
 
 $ProxyIni = @"
 WebLogicCluster=test.example.com:7003,test.example.com:7004
@@ -28,15 +28,15 @@ function New-ShareSmbMapping {
 }
 
 function Copy-PluginFile {
-    New-Item $WebLogicPluginHome -ItemType Directory -Force
+    New-Item $PluginHome -ItemType Directory -Force
     Expand-Archive `
         -Path $PluginFileDir\$PluginFile `
-        -DestinationPath $WebLogicPluginHome
+        -DestinationPath $PluginHome
 }
 
 function New-ProxyInitialization {
-    New-Item $WebLogicPluginHome\lib\iisproxy.ini -ItemType File -Force
-    Add-Content $WebLogicPluginHome\lib\iisproxy.ini $ProxyIni
+    New-Item $PluginHome\lib\iisproxy.ini -ItemType File -Force
+    Add-Content $PluginHome\lib\iisproxy.ini $ProxyIni
 }
 
 function Add-ProxyHandler {
@@ -54,7 +54,7 @@ function Add-ProxyHandler {
             Path            = "/helloworld"; `
             Verb            = "*"; `
             Modules         = "IsapiModule"; `
-            ScriptProcessor = "$WebLogicPluginHome\lib\iisproxy.dll" 
+            ScriptProcessor = "$PluginHome\lib\iisproxy.dll" 
     }
     $ServerManager.CommitChanges()
 }
@@ -80,7 +80,7 @@ function Set-EnvironmentVariable {
     [System.Environment]::SetEnvironmentVariable
     (
         "Path", 
-        "$Env:Path;$WebLogicPluginHome\lib", 
+        "$Env:Path;$PluginHome\lib", 
         [System.EnvironmentVariableTarget]::Machine
     )
 }
