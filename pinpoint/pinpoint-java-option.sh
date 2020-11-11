@@ -1,9 +1,9 @@
-VERSION="2.0.4"
-AGENT_PATH="/svc/lib"
-AGENT_ID="agent1"
-APPLICATION_NAME="sample"
+PINPOINT_VERSION="2.1.0"
+PINPOINT_AGENT_PATH="/svc/lib"
+PINPOINT_AGENT_ID="agent1"
+PINPOINT_APP_NAME="hellowrold"
 
-JAVA_OPTIONS="${JAVA_OPTIONS} -javaagent:${AGENT_PATH}/pinpoint-bootstrap-${VERSION}.jar"
-JAVA_OPTIONS="${JAVA_OPTIONS} -Dpinpoint.agentId=${AGENT_ID}"
-JAVA_OPTIONS="${JAVA_OPTIONS} -Dpinpoint.applicationName=${APPLICATION_NAME}"
+JAVA_OPTIONS="${JAVA_OPTIONS} -javaagent:${PINPOINT_AGENT_PATH}/pinpoint-bootstrap-${PINPOINT_VERSION}.jar"
+JAVA_OPTIONS="${JAVA_OPTIONS} -Dpinpoint.agentId=${PINPOINT_AGENT_ID}"
+JAVA_OPTIONS="${JAVA_OPTIONS} -Dpinpoint.applicationName=${PINPOINT_APP_NAME}"
 export JAVA_OPTIONS
