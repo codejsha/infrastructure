@@ -29,8 +29,8 @@ function change_bsu_mem_arg {
 }
 
 function backup_cache_dir {
-    GET_DATE_YMD="$(date +'%Y%m%d')"
-    mv ${MW_HOME}/utils/bsu/cache_dir ${MW_HOME}/utils/bsu/cache_dir_${GET_DATE_YMD}
+    GET_DATE="$(date +'%Y%m%d_%H%M%S')"
+    mv ${MW_HOME}/utils/bsu/cache_dir ${MW_HOME}/utils/bsu/cache_dir_${GET_DATE}
 }
 
 function bsu_update {
