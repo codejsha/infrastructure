@@ -3,8 +3,6 @@
 MW_HOME="/usr/local/weblogic"
 PATCH_FILE_DIR="/mnt/share/oracle-weblogic-server/wls10.3.6"
 
-GET_DATE_YMD="$(date +'%Y%m%d')"
-
 ######################################################################
 
 function check_middleware_home {
@@ -31,6 +29,7 @@ function change_bsu_mem_arg {
 }
 
 function backup_cache_dir {
+    GET_DATE_YMD="$(date +'%Y%m%d')"
     mv ${MW_HOME}/utils/bsu/cache_dir ${MW_HOME}/utils/bsu/cache_dir_${GET_DATE_YMD}
 }
 
