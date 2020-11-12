@@ -91,8 +91,10 @@ function bsu_view_applied {
 
 check_middleware_home
 change_bsu_mem_arg "-Xms4096m -Xmx4096m"
+
 bsu_update "p27238412_1036_Generic.zip"
 # bsu_remove "p30463097_1036_Generic.zip" "JWEB"
 # backup_cache_dir
 bsu_install "p30857748_1036_Generic.zip" "Q3ZB"
+
 bsu_view_applied

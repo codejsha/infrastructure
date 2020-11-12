@@ -107,13 +107,13 @@ function opatch_apply {
 }
 
 function opatch_lsinventory {
-    ${ORACLE_HOME}/OPatch/opatch lsinventory
+    # ${ORACLE_HOME}/OPatch/opatch lsinventory
 
-    # ${ORACLE_HOME}/OPatch/opatch lsinventory \
-    #     -all \
-    #     -oh ${ORACLE_HOME} \
-    #     -invPtrLoc ${INVENTORY_FILE} \
-    #     -jre ${JAVA_HOME}/jre
+    ${ORACLE_HOME}/OPatch/opatch lsinventory \
+        -all \
+        -oh ${ORACLE_HOME} \
+        -invPtrLoc ${INVENTORY_FILE} \
+        -jre ${JAVA_HOME}/jre
 }
 
 ######################################################################
@@ -125,8 +125,10 @@ check_java_home
 check_oracle_home
 check_inventory_group
 check_inventory_location
+
 opatch_update "p28186730_139424_Generic.zip" "6880880"
 # opatch_rollback "30675853"
 # opatch_apply "p31101362_1394002_Generic.zip"
 opatch_apply "p31961038_122130_Generic.zip"
+
 opatch_lsinventory
