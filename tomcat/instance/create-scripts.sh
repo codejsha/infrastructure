@@ -2,6 +2,8 @@
 
 source ../env-base.sh
 
+######################################################################
+
 ### create start script
 cat <<EOF > ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
 #!/usr/bin/bash
@@ -72,6 +74,28 @@ export CATALINA_HOME="${CATALINA_HOME}"
 export CATALINA_BASE="${CATALINA_BASE}"
 
 \${CATALINA_HOME}/bin/shutdown.sh
+EOF
+
+######################################################################
+
+### create version script
+cat <<EOF > ${CATALINA_HOME}/bin/get-version.sh
+#!/usr/bin/bash
+
+export CATALINA_HOME="${CATALINA_HOME}"
+
+\${CATALINA_HOME}/bin/version.sh
+EOF
+
+######################################################################
+
+### create configtest script
+cat <<EOF > ${CATALINA_HOME}/bin/check-config.sh
+#!/usr/bin/bash
+
+export CATALINA_HOME="${CATALINA_HOME}"
+
+\${CATALINA_HOME}/bin/configtest.sh
 EOF
 
 ######################################################################
