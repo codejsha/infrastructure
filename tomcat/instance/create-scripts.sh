@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-source ./env-base.sh
+source ../env-base.sh
 
 ### create start script
 cat <<EOF > ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
