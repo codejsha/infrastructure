@@ -13,7 +13,7 @@ cat <<EOF > "${DOMAIN_HOME}/start-nodemanager.sh"
 
 DOMAIN_HOME="${DOMAIN_HOME}"
 LOG_DIR="${LOG_DIR}"
-GET_DATE="$(date +'%Y%m%d_%H%M%S')"
+GET_DATE="\$(date +'%Y%m%d_%H%M%S')"
 
 PID="\$(pgrep -xa java | grep \${DOMAIN_HOME} | grep NodeManager | awk '{print \$1}')"
 if [ -n "\${PID}" ]; then
