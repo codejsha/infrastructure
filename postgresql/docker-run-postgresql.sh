@@ -11,7 +11,7 @@ docker run \
     --env POSTGRES_PASSWORD="${PASSWORD}" \
     --env PGDATA=/var/lib/postgresql/data/pgdata \
     --mount type=volume,src=postgresql11vol,dst=/var/lib/postgresql/data \
-    postgres:11.6
+    postgres:11
 
 ######################################################################
 
@@ -26,4 +26,19 @@ docker run \
     --env POSTGRES_PASSWORD="${PASSWORD}" \
     --env PGDATA=/var/lib/postgresql/data/pgdata \
     --mount type=volume,src=postgresql12vol,dst=/var/lib/postgresql/data \
-    postgres:12.3
+    postgres:12
+
+######################################################################
+
+docker volume create postgresql13vol
+
+docker run \
+    --detach \
+    --name postgresql13 \
+    --publish 5432:5432 \
+    --env POSTGRES_DB=postgres \
+    --env POSTGRES_USER=postgres \
+    --env POSTGRES_PASSWORD="${PASSWORD}" \
+    --env PGDATA=/var/lib/postgresql/data/pgdata \
+    --mount type=volume,src=postgresql12vol,dst=/var/lib/postgresql/data \
+    postgres:13
