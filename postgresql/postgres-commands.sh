@@ -1,9 +1,15 @@
 ######################################################################
 
+sudo su - postgres -c "psql"
+# ALTER USER postgres PASSWORD ${POSTGRES_PASSWORD};
+
+######################################################################
+
 ### connect
 
 PGPASSWORD="${POSTGRES_PASSWORD}" psql -U postgres
 PGPASSWORD="${POSTGRES_PASSWORD}" psql -h postgres.example.com -p 5432 -U postgres -d postgres
+PGPASSWORD="${POSTGRES_PASSWORD}" psql --port=5432 --username=postgres --dbname=postgres
 PGPASSWORD="${POSTGRES_PASSWORD}" \
     psql \
     --host=postgres-lb.example.com \
@@ -41,7 +47,7 @@ PGPASSWORD="${POSTGRES_PASSWORD}" \
     --host=postgres-lb.example.com \
     --port=5432 \
     --username=postgres \
-    --command="CREATE DTABASE ${DATABASE_NAME}"
+    --command="CREATE DTABASE ${DATABASE_NAME};"
 
 ######################################################################
 
