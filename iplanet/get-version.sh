@@ -5,7 +5,7 @@ MAJOR_VERSION="7"    # (available: 6, 7)
 
 ######################################################################
 
-function check_version {
+function get_version {
     if [ "${MAJOR_VERSION}" == "7" ]; then
         ${IPLANET_HOME}/admin-server/bin/startserv -version
     elif [ "${MAJOR_VERSION}" == "6" ]; then
@@ -15,4 +15,4 @@ function check_version {
 
 ######################################################################
 
-check_version
+get_version

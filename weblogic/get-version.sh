@@ -5,7 +5,7 @@ MAJOR_VERSION="12c"    # (available: 11g, 12c, 14c)
 
 ######################################################################
 
-function check_version {
+function get_version {
     if [ "${MAJOR_VERSION}" == "11g" ]; then
         MW_HOME="${ORACLE_HOME}"
         grep "WebLogic Server" ${MW_HOME}/registry.xml
@@ -16,4 +16,4 @@ function check_version {
 
 ######################################################################
 
-check_version
+get_version
