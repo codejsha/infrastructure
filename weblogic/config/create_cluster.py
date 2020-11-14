@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
-domain_name = os.environ.get('DOMAIN_NAME')
-admin_server_listen_address = os.environ.get('ADMIN_SERVER_LISTEN_ADDRESS')
-admin_server_listen_port = os.environ.get('ADMIN_SERVER_LISTEN_PORT')
-admin_username = os.environ.get('ADMIN_USERNAME')
-admin_password = os.environ.get('ADMIN_PASSWORD')
+domain_name = os.environ['DOMAIN_NAME']
+admin_server_listen_address = os.environ['ADMIN_SERVER_LISTEN_ADDRESS']
+admin_server_listen_port = os.environ['ADMIN_SERVER_LISTEN_PORT']
+admin_username = os.environ['ADMIN_USERNAME']
+admin_password = os.environ['ADMIN_PASSWORD']
 
-cluster_name = os.environ.get('CLUSTER_NAME')
-transmission = os.environ.get('TRANSMISSION')
-multicast_listen_address = os.environ.get('MULTICAST_LISTEN_ADDRESS')
-multicast_listen_port = os.environ.get('MULTICAST_LISTEN_PORT')
+cluster_name = os.environ['CLUSTER_NAME']
+transmission = os.environ['TRANSMISSION']
+multicast_listen_address = os.environ['MULTICAST_LISTEN_ADDRESS']
+multicast_listen_port = os.environ['MULTICAST_LISTEN_PORT']
 
 
 ######################################################################

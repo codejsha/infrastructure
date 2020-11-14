@@ -11,10 +11,10 @@ mkdir -p ${DOMAIN_HOME}/scripts
 cat <<EOF > ${DOMAIN_HOME}/scripts/change_store_user_config.py
 #!/usr/bin/env python
 
-domain_home = os.environ.get('DOMAIN_HOME')
-admin_server_url = os.environ.get('ADMIN_SERVER_URL')
-admin_username = os.environ.get('ADMIN_USERNAME')
-admin_password = os.environ.get('ADMIN_PASSWORD')
+domain_home = os.environ['DOMAIN_HOME']
+admin_server_url = os.environ['ADMIN_SERVER_URL']
+admin_username = os.environ['ADMIN_USERNAME']
+admin_password = os.environ['ADMIN_PASSWORD']
 
 ######################################################################
 

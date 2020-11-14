@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 
-domain_name = os.environ.get('DOMAIN_NAME')
-admin_server_listen_address = os.environ.get('ADMIN_SERVER_LISTEN_ADDRESS')
-admin_server_listen_port = os.environ.get('ADMIN_SERVER_LISTEN_PORT')
-admin_username = os.environ.get('ADMIN_USERNAME')
-admin_password = os.environ.get('ADMIN_PASSWORD')
+domain_name = os.environ['DOMAIN_NAME']
+admin_server_listen_address = os.environ['ADMIN_SERVER_LISTEN_ADDRESS']
+admin_server_listen_port = os.environ['ADMIN_SERVER_LISTEN_PORT']
+admin_username = os.environ['ADMIN_USERNAME']
+admin_password = os.environ['ADMIN_PASSWORD']
 
-jmsmodule_name = os.environ.get('JMSMODULE_NAME')
-jmsmodule_target = os.environ.get('JMSMODULE_TARGET')
-jmsmodule_target_type = os.environ.get('JMSMODULE_TARGET_TYPE')
+jmsmodule_name = os.environ['JMSMODULE_NAME']
+jmsmodule_target = os.environ['JMSMODULE_TARGET']
+jmsmodule_target_type = os.environ['JMSMODULE_TARGET_TYPE']
 
 
 ######################################################################

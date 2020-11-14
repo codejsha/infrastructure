@@ -13,9 +13,9 @@ mkdir -p ${DOMAIN_HOME}/scripts
 cat << EOF > ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.py
 #!/usr/bin/env python
 
-domain_home = os.environ.get('DOMAIN_HOME')
-admin_server_url = os.environ.get('ADMIN_SERVER_URL')
-managed_server_name = os.environ.get('MANAGED_SERVER_NAME')
+domain_home = os.environ['DOMAIN_HOME']
+admin_server_url = os.environ['ADMIN_SERVER_URL']
+managed_server_name = os.environ['MANAGED_SERVER_NAME']
 
 ######################################################################
 

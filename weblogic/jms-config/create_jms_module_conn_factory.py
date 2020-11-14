@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
-domain_name = os.environ.get('DOMAIN_NAME')
-admin_server_listen_address = os.environ.get('ADMIN_SERVER_LISTEN_ADDRESS')
-admin_server_listen_port = os.environ.get('ADMIN_SERVER_LISTEN_PORT')
-admin_username = os.environ.get('ADMIN_USERNAME')
-admin_password = os.environ.get('ADMIN_PASSWORD')
+domain_name = os.environ['DOMAIN_NAME']
+admin_server_listen_address = os.environ['ADMIN_SERVER_LISTEN_ADDRESS']
+admin_server_listen_port = os.environ['ADMIN_SERVER_LISTEN_PORT']
+admin_username = os.environ['ADMIN_USERNAME']
+admin_password = os.environ['ADMIN_PASSWORD']
 
-jmsmodule_name = os.environ.get('JMSMODULE_NAME')
-connfactory_name = os.environ.get('CONNFACTORY_NAME')
-connfactory_jndi = os.environ.get('CONNFACTORY_JNDI')
-subdeploy_name = os.environ.get('SUBDEPLOY_NAME')
+jmsmodule_name = os.environ['JMSMODULE_NAME']
+connfactory_name = os.environ['CONNFACTORY_NAME']
+connfactory_jndi = os.environ['CONNFACTORY_JNDI']
+subdeploy_name = os.environ['SUBDEPLOY_NAME']
 
 
 ######################################################################

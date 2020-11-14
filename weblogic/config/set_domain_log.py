@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
-domain_name = os.environ.get('DOMAIN_NAME')
-log_dir = os.environ.get('LOG_DIR')
-admin_server_listen_address = os.environ.get('ADMIN_SERVER_LISTEN_ADDRESS')
-admin_server_listen_port = os.environ.get('ADMIN_SERVER_LISTEN_PORT')
-admin_username = os.environ.get('ADMIN_USERNAME')
-admin_password = os.environ.get('ADMIN_PASSWORD')
+domain_name = os.environ['DOMAIN_NAME']
+log_dir = os.environ['LOG_DIR']
+admin_server_listen_address = os.environ['ADMIN_SERVER_LISTEN_ADDRESS']
+admin_server_listen_port = os.environ['ADMIN_SERVER_LISTEN_PORT']
+admin_username = os.environ['ADMIN_USERNAME']
+admin_password = os.environ['ADMIN_PASSWORD']
 
 
 ######################################################################

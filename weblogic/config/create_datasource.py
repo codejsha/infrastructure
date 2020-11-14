@@ -1,22 +1,22 @@
 #!/usr/bin/env python
 
-domain_name = os.environ.get('DOMAIN_NAME')
-admin_server_listen_address = os.environ.get('ADMIN_SERVER_LISTEN_ADDRESS')
-admin_server_listen_port = os.environ.get('ADMIN_SERVER_LISTEN_PORT')
-admin_username = os.environ.get('ADMIN_USERNAME')
-admin_password = os.environ.get('ADMIN_PASSWORD')
+domain_name = os.environ['DOMAIN_NAME']
+admin_server_listen_address = os.environ['ADMIN_SERVER_LISTEN_ADDRESS']
+admin_server_listen_port = os.environ['ADMIN_SERVER_LISTEN_PORT']
+admin_username = os.environ['ADMIN_USERNAME']
+admin_password = os.environ['ADMIN_PASSWORD']
 
-ds_name = os.environ.get('DS_NAME')
-ds_jndi = os.environ.get('DS_JNDI')
-ds_url = os.environ.get('DS_URL')
-ds_driver = os.environ.get('DS_DRIVER')
-ds_user = os.environ.get('DS_USER')
-ds_password = os.environ.get('DS_PASSWORD')
-ds_init = os.environ.get('DS_INIT')
-ds_min = os.environ.get('DS_MIN')
-ds_max = os.environ.get('DS_MAX')
-ds_target_type = os.environ.get('DS_TARGET_TYPE')
-ds_target = os.environ.get('DS_TARGET')
+ds_name = os.environ['DS_NAME']
+ds_jndi = os.environ['DS_JNDI']
+ds_url = os.environ['DS_URL']
+ds_driver = os.environ['DS_DRIVER']
+ds_user = os.environ['DS_USER']
+ds_password = os.environ['DS_PASSWORD']
+ds_init = os.environ['DS_INIT']
+ds_min = os.environ['DS_MIN']
+ds_max = os.environ['DS_MAX']
+ds_target_type = os.environ['DS_TARGET_TYPE']
+ds_target = os.environ['DS_TARGET']
 
 
 ######################################################################

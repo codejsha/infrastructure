@@ -1,25 +1,25 @@
 #!/usr/bin/env python
 
-java_home = os.environ.get('JAVA_HOME')
-oracle_home = os.environ.get('ORACLE_HOME')
-domain_name = os.environ.get('DOMAIN_NAME')
-domain_home = os.environ.get('DOMAIN_HOME')
-log_dir = os.environ.get('LOG_DIR')
-admin_server_listen_address = os.environ.get('ADMIN_SERVER_LISTEN_ADDRESS')
-admin_server_listen_port = os.environ.get('ADMIN_SERVER_LISTEN_PORT')
-admin_username = os.environ.get('ADMIN_USERNAME')
-admin_password = os.environ.get('ADMIN_PASSWORD')
+java_home = os.environ['JAVA_HOME']
+oracle_home = os.environ['ORACLE_HOME']
+domain_name = os.environ['DOMAIN_NAME']
+domain_home = os.environ['DOMAIN_HOME']
+log_dir = os.environ['LOG_DIR']
+admin_server_listen_address = os.environ['ADMIN_SERVER_LISTEN_ADDRESS']
+admin_server_listen_port = os.environ['ADMIN_SERVER_LISTEN_PORT']
+admin_username = os.environ['ADMIN_USERNAME']
+admin_password = os.environ['ADMIN_PASSWORD']
 
-managed_server_name = os.environ.get('MANAGED_SERVER_NAME')
-managed_server_listen_address = os.environ.get('MANAGED_SERVER_LISTEN_ADDRESS')
-managed_server_listen_port = os.environ.get('MANAGED_SERVER_LISTEN_PORT')
-nodemgr_name = os.environ.get('NODEMGR_NAME')
-cluster_name = os.environ.get('CLUSTER_NAME')
+managed_server_name = os.environ['MANAGED_SERVER_NAME']
+managed_server_listen_address = os.environ['MANAGED_SERVER_LISTEN_ADDRESS']
+managed_server_listen_port = os.environ['MANAGED_SERVER_LISTEN_PORT']
+nodemgr_name = os.environ['NODEMGR_NAME']
+cluster_name = os.environ['CLUSTER_NAME']
 
-server_start_java_vendor = os.environ.get('SERVER_START_JAVA_VENDOR')
-server_start_root_dir = os.environ.get('SERVER_START_ROOT_DIR')
-server_start_arguments = os.environ.get('SERVER_START_ARGUMENTS')
-server_start_classpath = os.environ.get('SERVER_START_CLASSPATH')
+server_start_java_vendor = os.environ['SERVER_START_JAVA_VENDOR']
+server_start_root_dir = os.environ['SERVER_START_ROOT_DIR']
+server_start_arguments = os.environ['SERVER_START_ARGUMENTS']
+server_start_classpath = os.environ['SERVER_START_CLASSPATH']
 
 
 ######################################################################
