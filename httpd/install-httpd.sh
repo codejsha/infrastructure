@@ -11,7 +11,7 @@ function install_on_centos {
 ######################################################################
 
 function install_from_source {
-    HTTPD_VERSION="2.4.43"
+    HTTPD_VERSION="2.4.46"
     APR_VERSION="1.7.0"
     APRUTIL_VERSION="1.6.1"
     PREFIX="/usr/local/httpd"
@@ -22,13 +22,13 @@ function install_from_source {
     sudo yum install -y expat expat-devel
     sudo yum install -y openssl openssl-devel
 
-    curl -o ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}.tar.gz -LJO http://apache.tt.co.kr/httpd/httpd-${HTTPD_VERSION}.tar.gz
-    curl -o ${INSTALL_FILE_DIR}/apr-${APR_VERSION}.tar.gz -LJO http://apache.tt.co.kr/apr/apr-${APR_VERSION}.tar.gz
-    curl -o ${INSTALL_FILE_DIR}/apr-util-${APRUTIL_VERSION}.tar.gz -LJO http://apache.tt.co.kr/apr/apr-util-${APRUTIL_VERSION}.tar.gz
+    curl -o ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}.tar.gz -LJO http://archive.apache.org/dist/httpd/httpd-${HTTPD_VERSION}.tar.gz
+    curl -o ${INSTALL_FILE_DIR}/apr-${APR_VERSION}.tar.gz -LJO http://archive.apache.org/dist/apr/apr-${APR_VERSION}.tar.gz
+    curl -o ${INSTALL_FILE_DIR}/apr-util-${APRUTIL_VERSION}.tar.gz -LJO http://archive.apache.org/dist/apr/apr-util-${APRUTIL_VERSION}.tar.gz
 
-    tar -xvzf ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}.tar.gz -C ${INSTALL_FILE_DIR}
-    tar -xvzf ${INSTALL_FILE_DIR}/apr-${APR_VERSION}.tar.gz -C ${INSTALL_FILE_DIR}
-    tar -xvzf ${INSTALL_FILE_DIR}/apr-util-${APRUTIL_VERSION}.tar.gz -C ${INSTALL_FILE_DIR}
+    tar -xzf ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}.tar.gz -C ${INSTALL_FILE_DIR}
+    tar -xzf ${INSTALL_FILE_DIR}/apr-${APR_VERSION}.tar.gz -C ${INSTALL_FILE_DIR}
+    tar -xzf ${INSTALL_FILE_DIR}/apr-util-${APRUTIL_VERSION}.tar.gz -C ${INSTALL_FILE_DIR}
 
     mv ${INSTALL_FILE_DIR}/apr-${APR_VERSION} ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}/srclib/apr
     mv ${INSTALL_FILE_DIR}/apr-util-${APRUTIL_VERSION} ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}/srclib/apr-util
