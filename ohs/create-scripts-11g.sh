@@ -23,7 +23,7 @@ cat <<EOF > ${INSTANCE_HOME}/stop-opmn.sh
 INSTANCE_HOME="${INSTANCE_HOME}"
 
 \${INSTANCE_HOME}/bin/opmnctl stop
-EOF 
+EOF
 
 ######################################################################
 
