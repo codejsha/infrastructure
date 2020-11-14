@@ -104,7 +104,7 @@ HTTPD_HOME="${HTTPD_HOME}"
 \${HTTPD_HOME}/bin/apachectl -t -D DUMP_INCLUDES
 EOF
 
-cat <<EOF > ${HTTPD_HOME}/get-links-status.sh
+cat <<EOF > ${HTTPD_HOME}/get-server-status.sh
 #!/usr/bin/bash
 
 PORT="80"
