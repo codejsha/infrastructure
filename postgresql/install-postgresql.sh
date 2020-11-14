@@ -6,7 +6,6 @@ POSTGRESQL_VERSION="13"
 ######################################################################
 
 function install_postgresql_with_yum {
-
     ### Install the repository RPM:
     sudo yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 
