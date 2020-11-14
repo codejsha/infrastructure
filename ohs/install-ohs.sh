@@ -15,7 +15,35 @@ RESPONSE_FILE="response-sw-only.rsp"
 
 INSTALL_SCRIPT_DIR="/svc/infrastructure/ohs"
 
-${INSTALL_FILE_DIR}/${INSTALL_FILE} \
-    -silent \
-    -responseFile ${INSTALL_SCRIPT_DIR}/${RESPONSE_FILE} \
-    -invPtrLoc ${INSTALL_SCRIPT_DIR}/oraInst.loc
+######################################################################
+
+function install_prerequisite_packages {
+    sudo yum install -y \
+        binutils \
+        compat-libcap1 \
+        compat-libstdc++-33 \
+        libgcc \
+        libstdc++ \
+        libstdc++-devel \
+        sysstat \
+        gcc \
+        gcc-c++ \
+        ksh \
+        make \
+        glibc \
+        glibc-devel \
+        libaio \
+        libaio-devel
+}
+
+function install_ohs {
+    ${INSTALL_FILE_DIR}/${INSTALL_FILE} \
+        -silent \
+        -responseFile ${INSTALL_SCRIPT_DIR}/${RESPONSE_FILE} \
+        -invPtrLoc ${INSTALL_SCRIPT_DIR}/oraInst.loc
+}
+
+######################################################################
+
+install_prerequisite_packages
+install_ohs
