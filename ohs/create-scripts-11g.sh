@@ -27,7 +27,7 @@ EOF
 
 ######################################################################
 
-cat <<EOF > ${INSTANCE_HOME}/status.sh
+cat <<EOF > ${INSTANCE_HOME}/get-status.sh
 #!/usr/bin/bash
 
 INSTANCE_HOME="${INSTANCE_HOME}"
@@ -89,6 +89,6 @@ chmod 750 ${INSTANCE_HOME}/start-all.sh
 chmod 750 ${INSTANCE_HOME}/stop-all.sh
 chmod 750 ${INSTANCE_HOME}/start-${COMPONENT_NAME}.sh
 chmod 750 ${INSTANCE_HOME}/stop-${COMPONENT_NAME}.sh
-chmod 750 ${INSTANCE_HOME}/status.sh
+chmod 750 ${INSTANCE_HOME}/get-status.sh
 
 ######################################################################
