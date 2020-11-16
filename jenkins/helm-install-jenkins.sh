@@ -3,10 +3,10 @@
 PASSWORD="${PASSWORD}"
 
 NAMESPACE="jenkins-system"
-kubectl create namespace ${NAMESPACE}
 
 # helm install my-jenkins \
 helm upgrade --install my-jenkins \
+    --create-namespace \
     --namespace ${NAMESPACE} \
     --set master.adminUser="admin" \
     --set master.adminPassword="${PASSWORD}" \

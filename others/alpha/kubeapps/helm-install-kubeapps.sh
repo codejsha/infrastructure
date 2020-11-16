@@ -4,10 +4,10 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 
 NAMESPACE="kubeapps-system"
-kubectl create namespace ${NAMESPACE}
 
 # helm install my-kubeapps \
 helm upgrade --install my-kubeapps \
+    --create-namespace \
     --namespace ${NAMESPACE} \
     --set useHelm3="true" \
     --set ingress.enabled="true" \

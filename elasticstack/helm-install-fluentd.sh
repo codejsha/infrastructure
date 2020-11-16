@@ -1,10 +1,10 @@
 #!/usr/bin/bash
 
 NAMESPACE="elastic-system"
-kubectl create namespace ${NAMESPACE}
 
 # helm install my-fluentd \
 helm upgrade --install my-fluentd \
+    --create-namespace \
     --namespace ${NAMESPACE} \
     --set output.host="elasticsearch-master" \
     --set persistence.enabled="true" \

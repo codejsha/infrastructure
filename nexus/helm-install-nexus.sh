@@ -4,10 +4,10 @@ helm repo add oteemocharts https://oteemo.github.io/charts
 helm repo update
 
 NAMESPACE="nexus-system"
-kubectl create namespace ${NAMESPACE}
 
 # helm install my-nexus \
 helm upgrade --install my-nexus \
+    --create-namespace \
     --namespace ${NAMESPACE} \
     --set statefulset.enabled="false" \
     --set replicaCount="1" \

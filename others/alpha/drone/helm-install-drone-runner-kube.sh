@@ -14,6 +14,7 @@ NAMESPACE="drone-system"
 
 # helm install my-drone-runner \
 helm upgrade --install my-drone-runner \
+    --create-namespace \
     --namespace ${NAMESPACE} \
     --set ingress.enabled="true" \
     --set ingress.annotations."kubernetes\.io/ingress\.class"="nginx" \

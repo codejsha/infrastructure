@@ -1,10 +1,10 @@
 #!/usr/bin/bash
 
 NAMESPACE="elastic-system"
-kubectl create namespace ${NAMESPACE}
 
 # helm install my-logstash \
 helm upgrade --install my-logstash \
+    --create-namespace \
     --namespace ${NAMESPACE} \
     --set logstashJavaOpts="-Xms512m -Xmx512m" \
     --set service.type="ClusterIP" \

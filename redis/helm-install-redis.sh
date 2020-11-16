@@ -6,10 +6,10 @@ helm repo update
 PASSWORD="${PASSWORD}"
 
 NAMESPACE="redis-system"
-kubectl create namespace ${NAMESPACE}
 
 # helm install my-redis \
 helm upgrade --install my-redis \
+    --create-namespace \
     --namespace ${NAMESPACE} \
     --set password="${PASSWORD}" \
     --set ingress.enabled="true" \

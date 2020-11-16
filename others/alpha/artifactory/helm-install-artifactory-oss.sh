@@ -4,10 +4,10 @@ helm repo add jfrog https://charts.jfrog.io
 helm repo update
 
 NAMESPACE="artifactory-system"
-kubectl create namespace ${NAMESPACE}
 
 # helm install my-artifactory-oss \
 helm upgrade --install my-artifactory-oss \
+    --create-namespace \
     --namespace ${NAMESPACE} \
     --set artifactory.nginx.enabled="false" \
     --set artifactory.ingress.enabled="true" \

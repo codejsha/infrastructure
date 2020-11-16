@@ -4,10 +4,10 @@ helm repo add cetic https://cetic.github.io/helm-charts
 helm repo update
 
 NAMESPACE="kafka-system"
-kubectl create namespace ${NAMESPACE}
 
 # helm install my-nifi \
 helm upgrade --install my-nifi \
+    --create-namespace \
     --namespace ${NAMESPACE} \
     --set jvmMemory="1g" \
     --set zookeeper.enabled="false" \

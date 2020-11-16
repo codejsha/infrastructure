@@ -6,10 +6,10 @@ helm repo update
 PASSWORD="${PASSWORD}"
 
 NAMESPACE="postgres-system"
-kubectl create namespace ${NAMESPACE}
 
 # helm install my-postgres \
 helm upgrade --install my-postgres \
+    --create-namespace \
     --namespace ${NAMESPACE} \
     --set postgresqlUsername="postgres" \
     --set postgresqlPassword="${PASSWORD}" \

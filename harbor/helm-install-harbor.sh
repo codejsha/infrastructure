@@ -21,10 +21,10 @@ AWS_ACCESS_KEY="<AWS_ACCESS_KEY>"
 AWS_SECRET_KEY="<AWS_SECRET_KEY>"
 
 NAMESPACE="harbor-system"
-kubectl create namespace ${NAMESPACE}
 
 # helm install my-harbor \
 helm upgrade --install my-harbor \
+    --create-namespace \
     --namespace ${NAMESPACE} \
     --set harborAdminPassword="${HARBOR_ADMIN_PASSWORD}" \
     --set secretKey="${HARBOR_SECRET_KEY}" \

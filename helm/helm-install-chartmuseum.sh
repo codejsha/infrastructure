@@ -1,10 +1,10 @@
 #!/usr/bin/bash
 
 NAMESPACE="chart-system"
-kubectl create namespace ${NAMESPACE}
 
 # helm install my-chartmuseum \
 helm upgrade --install my-chartmuseum \
+    --create-namespace \
     --namespace ${NAMESPACE} \
     --set env.open.DISABLE_API="false" \
     --set ingress.enabled="true" \

@@ -1,10 +1,10 @@
 #!/usr/bin/bash
 
 NAMESPACE="cassandra-system"
-kubectl create namespace ${NAMESPACE}
 
 # helm install my-cassandra \
 helm upgrade --install my-cassandra \
+    --create-namespace \
     --namespace ${NAMESPACE} \
     --set config.cluster_size="3" \
     --set config.heap_new_size="512M" \

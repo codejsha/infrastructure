@@ -6,10 +6,10 @@ helm repo update
 PASSWORD="${PASSWORD}"
 
 NAMESPACE="influx-system"
-kubectl create namespace ${NAMESPACE}
 
 # helm install my-influxdb \
 helm upgrade --install my-influxdb \
+    --create-namespace \
     --namespace ${NAMESPACE} \
     --set adminUser.user="admin" \
     --set adminUser.password="${PASSWORD}" \

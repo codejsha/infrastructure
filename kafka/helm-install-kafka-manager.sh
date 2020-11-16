@@ -1,10 +1,10 @@
 #!/usr/bin/bash
 
 NAMESPACE="kafka-system"
-kubectl create namespace ${NAMESPACE}
 
 # helm install my-kafka-manager \
 helm upgrade --install my-kafka-manager \
+    --create-namespace \
     --namespace ${NAMESPACE} \
     --set zkHosts="my-kafka-zookeeper-headless:2181" \
     --set clusters[0].name="mycluster" \

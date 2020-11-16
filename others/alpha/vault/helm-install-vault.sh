@@ -4,10 +4,10 @@ helm repo add hashicorp https://helm.releases.hashicorp.com
 helm repo update
 
 NAMESPACE="vault-system"
-kubectl create namespace ${NAMESPACE}
 
 # helm install my-vault \
 helm upgrade --install my-vault \
+    --create-namespace \
     --namespace ${NAMESPACE} \
     --set server.standalone.enabled="true" \
     --set server.auditStorage.enabled="true" \

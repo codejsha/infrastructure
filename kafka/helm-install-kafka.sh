@@ -1,9 +1,10 @@
 #!/usr/bin/bash
 
 NAMESPACE="kafka-system"
-kubectl create namespace ${NAMESPACE}
 
-helm install my-kafka \
+# helm install my-kafka \
+helm upgrade --install my-kafka \
+    --create-namespace
     --namespace ${NAMESPACE} \
     --set persistence.enabled="true" \
     --set persistence.storageClass="rook-ceph-block" \

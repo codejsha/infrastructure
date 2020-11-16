@@ -1,9 +1,9 @@
 #!/usr/bin/bash
 
 NAMESPACE="zookeeper-system"
-kubectl create namespace ${NAMESPACE}
 
 # helm install my-zookeeper \
 helm upgrade --install my-zookeeper \
+    --create-namespace \
     --namespace ${NAMESPACE} \
     incubator/zookeeper

@@ -3,10 +3,10 @@
 PASSWORD="${PASSWORD}"
 
 NAMESPACE="mysql-system"
-kubectl create namespace ${NAMESPACE}
 
 # helm install my-mysql \
 helm upgrade --install my-mysql \
+    --create-namespace \
     --namespace ${NAMESPACE} \
     --set imageTag="8.0.21" \
     --set mysqlRootPassword="${PASSWORD}" \

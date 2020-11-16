@@ -6,10 +6,10 @@ helm repo update
 PASSWORD="${PASSWORD}"
 
 NAMESPACE="minio-system"
-kubectl create namespace ${NAMESPACE}
 
 # helm install my-minio \
 helm upgrade --install my-minio \
+    --create-namespace \
     --namespace ${NAMESPACE} \
     --set accessKey="admin" \
     --set secretKey="${PASSWORD}" \
