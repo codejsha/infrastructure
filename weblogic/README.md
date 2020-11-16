@@ -48,10 +48,10 @@ bash ./install-weblogic.sh
 For convenience, add symbolic links.
 
 ```bash
-# ln -snf ${DOMAIN_HOME} ${ORACLE_HOME}/${DOMAIN_NAME}
+# ln -snf ${DOMAIN_HOME} ${MW_HOME}/${DOMAIN_NAME}
 
-ORACLE_HOME="/usr/local/weblogic"
-ln -snf ${ORACLE_HOME}/wlserver_10.3/samples/domains/wl_server ${ORACLE_HOME}/wl_server
-ln -snf ${ORACLE_HOME}/wlserver_10.3/samples/domains/medrec ${ORACLE_HOME}/medrec
-ln -snf ${ORACLE_HOME}/wlserver_10.3/samples/domains/medrec-spring ${ORACLE_HOME}/medrec-spring
+MW_HOME="/usr/local/weblogic"
+ln -snf ${MW_HOME}/wlserver_10.3/samples/domains/wl_server ${MW_HOME}/wl_server
+ln -snf ${MW_HOME}/wlserver_10.3/samples/domains/medrec ${MW_HOME}/medrec
+ln -snf ${MW_HOME}/wlserver_10.3/samples/domains/medrec-spring ${MW_HOME}/medrec-spring
 ```
