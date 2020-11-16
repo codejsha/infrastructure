@@ -1,11 +1,12 @@
 #!/usr/bin/bash
 
 ORACLE_HOME="/usr/local/weblogic"
+MW_HOME="${ORACLE_HOME}"  # for 11g
+
 INSTALL_SCRIPT_DIR="/svc/infrastructure/weblogic"
 
 ######################################################################
 
-MW_HOME=${ORACLE_HOME}
 export CONFIG_JVM_ARGS="${CONFIG_JVM_ARGS} -Djava.security.egd=file:///dev/urandom"
 
 function weblogic_create_domain_11g {

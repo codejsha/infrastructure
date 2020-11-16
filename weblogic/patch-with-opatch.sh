@@ -34,7 +34,7 @@ function check_inventory_group {
     INST_GROUP="$(grep inst_group ${INVENTORY_FILE} | cut -d'=' -f 2)"
 
     if [[ "${ORACLE_HOME_GROUP}" != "${INST_GROUP}" ]]; then
-        echo "[ERROR] The group of ORACLE_HOME directory (${ORACLE_HOME_GROUP}) and the inst_group value (${INST_GROUP}) is not the same!"
+        echo "[ERROR] The group of ORACLE_HOME directory (${ORACLE_HOME_GROUP}) and the inst_group value (${INST_GROUP}) are not the same!"
         exit
     fi
 }
