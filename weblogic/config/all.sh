@@ -39,6 +39,7 @@ bash ./create-nodemgr-scripts.sh BaseMachine1 test.example.com 5556
 
 bash ./create-cluster.sh BaseCluster1 unicast
 # bash ./create-cluster.sh BaseCluster2 multicast 239.192.0.0 7001
+
 # bash ./create-cluster.sh BaseJmsCluster1 unicast
 # bash ./create-cluster.sh BaseJmsCluster2 multicast 239.192.0.0 7001
 
@@ -62,12 +63,13 @@ bash ./create-server.sh ManagedServer1 test.example.com 7003 BaseCluster1 BaseMa
 bash ./create-server.sh ManagedServer2 test.example.com 7004 BaseCluster1 BaseMachine1
 # bash ./create-server.sh ManagedServer3 test.example.com 7005 BaseCluster2 BaseMachine2
 # bash ./create-server.sh ManagedServer4 test.example.com 7006 BaseCluster2 BaseMachine2
-# bash ./create-server.sh JmsManagedServer1 test.example.com 7103 BaseJmsCluster1
-# bash ./create-server.sh JmsManagedServer2 test.example.com 7104 BaseJmsCluster1
 bash ./create-scripts.sh ManagedServer1
 bash ./create-scripts.sh ManagedServer2
 # bash ./create-scripts.sh ManagedServer3
 # bash ./create-scripts.sh ManagedServer4
+
+# bash ./create-server.sh JmsManagedServer1 test.example.com 7103 BaseJmsCluster1
+# bash ./create-server.sh JmsManagedServer2 test.example.com 7104 BaseJmsCluster1
 # bash ./create-scripts.sh JmsManagedServer1
 # bash ./create-scripts.sh JmsManagedServer2
 

@@ -27,11 +27,11 @@ def set_jms_module_subdeploy_general_config(_jmsmodule_name, _subdeploy_name, _s
     _target_list = [target.strip() for target in _subdeploy_target.split(',')]
     _objects = []
     for _target_name in _target_list:
-        if _subdeploy_target_type == "Cluster":
+        if _subdeploy_target_type == 'Cluster':
             _objects.append(ObjectName('com.bea:Name=' + _target_name + ',Type=Cluster'))
-        elif _subdeploy_target_type == "Server":
+        elif _subdeploy_target_type == 'Server':
             _objects.append(ObjectName('com.bea:Name=' + _target_name + ',Type=Server'))
-        elif _subdeploy_target_type == "JMSServer":
+        elif _subdeploy_target_type == 'JMSServer':
             _objects.append(ObjectName('com.bea:Name=' + _target_name + ',Type=JMSServer'))
         else:
             pass
