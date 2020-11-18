@@ -23,7 +23,7 @@ function check_patch_file {
     fi
 }
 
-function change_bsu_mem_arg {
+function change_bsu_mem_args {
     MEM_ARGS=${1:-"-Xms4096m -Xmx4096m"}
     sed -i "s/MEM_ARGS=.*/MEM_ARGS=\"${MEM_ARGS}\"/g" ${MW_HOME}/utils/bsu/bsu.sh
 }
@@ -90,7 +90,7 @@ function bsu_view_applied {
 ######################################################################
 
 check_middleware_home
-change_bsu_mem_arg "-Xms4096m -Xmx4096m"
+change_bsu_mem_args "-Xms4096m -Xmx4096m"
 
 bsu_update "p27238412_1036_Generic.zip"
 # bsu_remove "p30463097_1036_Generic.zip" "JWEB"
