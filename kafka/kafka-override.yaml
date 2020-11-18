@@ -1,0 +1,6 @@
+# kafka
+heapOpts: -Xmx512m -Xms512m
+---
+# zookeeper
+zookeeper:
+  heapSize: 512
