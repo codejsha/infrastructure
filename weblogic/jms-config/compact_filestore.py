@@ -6,7 +6,7 @@ admin_server_listen_port = os.environ['ADMIN_SERVER_LISTEN_PORT']
 admin_username = os.environ['ADMIN_USERNAME']
 admin_password = os.environ['ADMIN_PASSWORD']
 
-store_dir = os.environ['STORE_DIR']
+filestore_dir = os.environ['FILESTORE_DIR']
 temp_dir = os.environ['TEMP_DIR']
 
 
@@ -18,7 +18,7 @@ connect(admin_username, admin_password, admin_server_url)
 edit()
 startEdit()
 
-compactstore(store_dir, temp_dir)
+compactstore(filestore_dir, temp_dir)
 
 save()
 activate()

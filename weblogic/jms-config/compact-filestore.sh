@@ -2,8 +2,8 @@
 
 source ./env-base.sh
 
-STORE_DIR="${1}"
-TEMP_DIR="${2}"
+export FILESTORE_DIR="${1}"
+export TEMP_DIR="${2}"
 
 ######################################################################
 
