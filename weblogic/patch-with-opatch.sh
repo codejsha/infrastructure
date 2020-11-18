@@ -66,7 +66,7 @@ function opatch_update {
     ${JAVA_HOME}/bin/java \
         -jar ${ORACLE_HOME}/OPatch/patch_files/${PATCH_ID}/opatch_generic.jar \
         -silent oracle_home=${ORACLE_HOME} \
-        -invPtrLoc ${INVENTORY_FILE}
+        -invPtrLoc ${INVENTORY_FILE} \
         -ignoreSysPrereqs
 
     STATUS="${?}"
