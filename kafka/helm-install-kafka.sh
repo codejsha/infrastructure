@@ -4,14 +4,19 @@ NAMESPACE="kafka-system"
 
 # helm install my-kafka \
 helm upgrade --install my-kafka \
-    --create-namespace
+    --create-namespace \
     --namespace ${NAMESPACE} \
+    --set replicaCount="3" \
     --set persistence.enabled="true" \
     --set persistence.storageClass="rook-ceph-block" \
+    --set zookeeper.replicaCount="3" \
     --set zookeeper.persistence.enabled="true" \
     --set zookeeper.persistence.storageClass="rook-ceph-block" \
-    --version 0.21.2 \
-    incubator/kafka
+    --values kafka-override.yaml \
+    --version 12.1.0 \
+    bitnami/kafka
+
+######################################################################
 
 ### confluent kafka chart
 # helm repo add confluentinc https://confluentinc.github.io/cp-helm-charts
