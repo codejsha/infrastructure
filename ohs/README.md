@@ -30,7 +30,7 @@ bash create-scripts.sh
 bash create-httpd-scripts.sh
 bash create-metric-scripts.sh
 
-bash get-version-12c.sh
+bash get-version.sh
 ```
 
 ### 12cr2
@@ -44,7 +44,7 @@ bash create-scripts.sh
 bash create-httpd-scripts.sh
 bash create-metric-scripts.sh
 
-bash get-version-12c.sh
+bash get-version.sh
 ```
 
 ## Metrics (12c)
