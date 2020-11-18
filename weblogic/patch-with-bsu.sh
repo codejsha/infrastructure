@@ -44,7 +44,7 @@ function bsu_update {
 
     STATUS="${?}"
     if [ "${STATUS}" -ne "0" ]; then
-        echo "[ERROR] The update (${PATCH_ID}) not completed!"
+        echo "[ERROR] The update (${PATCH_ID}) is not completed!"
         exit
     fi
 }
@@ -59,7 +59,7 @@ function bsu_remove {
 
     STATUS="${?}"
     if [ "${STATUS}" -ne "0" ]; then
-        echo "[ERROR] The rollback (${PATCH_LIST}) not completed!"
+        echo "[ERROR] The rollback (${PATCH_LIST}) is not completed!"
         exit
     fi
 }
@@ -76,7 +76,7 @@ function bsu_install {
 
     STATUS="${?}"
     if [ "${STATUS}" -ne "0" ]; then
-        echo "[ERROR] The patch (${PATCH_LIST}) not completed!"
+        echo "[ERROR] The patch (${PATCH_LIST}) is not completed!"
         exit
     fi
 }

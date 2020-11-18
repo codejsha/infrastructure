@@ -71,7 +71,7 @@ function opatch_update {
 
     STATUS="${?}"
     if [ "${STATUS}" -ne "0" ]; then
-        echo "[ERROR] The update (${PATCH_ID}) not completed!"
+        echo "[ERROR] The update (${PATCH_ID}) is not completed!"
         exit
     fi
 }
@@ -83,7 +83,7 @@ function opatch_rollback {
 
     STATUS="${?}"
     if [ "${STATUS}" -ne "0" ]; then
-        echo "[ERROR] The rollback (${PATCH_ID}) not completed!"
+        echo "[ERROR] The rollback (${PATCH_ID}) is not completed!"
         exit
     fi
 }
@@ -102,7 +102,7 @@ function opatch_apply {
 
     STATUS="${?}"
     if [ "${STATUS}" -ne "0" ]; then
-        echo "[ERROR] The patch (${PATCH_ID}) not completed!"
+        echo "[ERROR] The patch (${PATCH_ID}) is not completed!"
         exit
     fi
 }
