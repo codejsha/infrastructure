@@ -74,7 +74,7 @@ bash ./create-scripts.sh ManagedServer2
 ### DEPLOY APPLICATION
 ### bash ./deploy-app.sh ${APP_NAME} ${APP_PATH} ${APP_TARGET}
 
-bash ./deploy-app.sh testweb /svc/app/testweb BaseCluster1
+bash ./deploy-app.sh failovertest /svc/app/failovertest BaseCluster1
 # bash ./deploy-app.sh sample1 /svc/app/sample1 ManagedServer1
 # bash ./deploy-app.sh sample2 /svc/app/sample2 ManagedServer2
 
