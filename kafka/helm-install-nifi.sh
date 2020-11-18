@@ -11,7 +11,7 @@ helm upgrade --install my-nifi \
     --namespace ${NAMESPACE} \
     --set jvmMemory="1g" \
     --set zookeeper.enabled="false" \
-    --set zookeeper.url="zookeeper.example.com" \
+    --set zookeeper.url="my-kafka-zookeeper" \
     --set service.type="ClusterIP" \
     --set ingress.enabled="true" \
     --set ingress.annotations."kubernetes\.io/ingress\.class"="nginx" \
