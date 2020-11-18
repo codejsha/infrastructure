@@ -1,7 +1,9 @@
 #!/usr/bin/bash
 
-ORACLE_HOME="/usr/local/weblogic"
-MAJOR_VERSION="12c"    # (available: 11g, 12c, 14c)
+source ./env-base.sh
+
+ORACLE_HOME="${ORACLE_HOME}"
+MAJOR_VERSION="${MAJOR_VERSION}"    # (available: 11g, 12c, 14c)
 
 ######################################################################
 

@@ -1,9 +1,11 @@
 #!/usr/bin/bash
 
-ORACLE_HOME="/usr/local/weblogic"
-MW_HOME="${ORACLE_HOME}"  # for 11g
+source ./env-base.sh
 
-INSTALL_SCRIPT_DIR="/svc/infrastructure/weblogic"
+ORACLE_HOME="${ORACLE_HOME}"   # for 12g, 14c
+MW_HOME="${MW_HOME}"           # for 11g
+
+INSTALL_SCRIPT_DIR="${INSTALL_SCRIPT_DIR}"
 
 ######################################################################
 

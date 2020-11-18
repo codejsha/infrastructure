@@ -16,6 +16,9 @@ class ansifgcolor(object):
     light_cyan = '\033[96m'
 
 
+######################################################################
+
+
 def print_status_header(_server_names, _header):
     print(ansiformat.bold + '%-30s' % _header + ansiformat.reset + '|'),
     for _server_name in _server_names:

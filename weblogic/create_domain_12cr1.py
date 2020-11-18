@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
-oracle_home = '/usr/local/weblogic'
-domain_home = oracle_home + '/user_projects/domains/base_domain'
-admin_server_name = 'AdminServer'
-admin_server_listen_address = 'test.example.com'
-admin_server_listen_port = '7001'
-admin_username = 'weblogic'
-admin_password = 'welcome1'
+oracle_home = os.environ['ORACLE_HOME']
+domain_home = os.environ['DOMAIN_HOME']
+admin_server_name = os.environ['ADMIN_SERVER_NAME']
+admin_server_listen_address = os.environ['ADMIN_SERVER_LISTEN_ADDRESS']
+admin_server_listen_port = os.environ['ADMIN_SERVER_LISTEN_PORT']
+admin_username = os.environ['ADMIN_USERNAME']
+admin_password = os.environ['ADMIN_PASSWORD']
 
 ######################################################################
 

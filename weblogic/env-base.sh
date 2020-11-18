@@ -15,6 +15,8 @@ export ADMIN_SERVER_LISTEN_PORT="7001"
 export ADMIN_USERNAME="weblogic"
 export ADMIN_PASSWORD="welcome1"
 
+INSTALL_SCRIPT_DIR="/svc/infrastructure/weblogic"
+
 ######################################################################
 
 if [ "${MAJOR_VERSION}" == "11g" ]; then

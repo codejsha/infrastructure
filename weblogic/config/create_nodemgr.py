@@ -14,7 +14,7 @@ nodemgr_listen_port = os.environ['NODEMGR_LISTEN_PORT']
 ######################################################################
 
 
-def set_nodemanager_user(_domain_name, _admin_username, _admin_password):
+def set_node_manager_user(_domain_name, _admin_username, _admin_password):
     cd('/SecurityConfiguration/' + _domain_name)
     cmo.setNodeManagerUsername(_admin_username)
     cmo.setNodeManagerPassword(_admin_password)
@@ -26,7 +26,7 @@ def create_nodemanager(_nodemgr_name):
         cmo.createMachine(_nodemgr_name)
 
 
-def set_nodemanager_config(_domain_name, _admin_username, _admin_password,
+def set_node_manager_config(_domain_name, _admin_username, _admin_password,
                            _nodemgr_name, _nodemgr_listen_address, _nodemgr_listen_port):
     cd('/Machines/' + _nodemgr_name + '/NodeManager/' + _nodemgr_name)
     cmo.setNMType('Plain')
@@ -43,9 +43,9 @@ connect(admin_username, admin_password, admin_server_url)
 edit()
 startEdit()
 
-set_nodemanager_user(domain_name, admin_username, admin_password)
+set_node_manager_user(domain_name, admin_username, admin_password)
 create_nodemanager(nodemgr_name)
-set_nodemanager_config(domain_name, admin_username, admin_password,
+set_node_manager_config(domain_name, admin_username, admin_password,
                        nodemgr_name, nodemgr_listen_address, nodemgr_listen_port)
 
 save()
