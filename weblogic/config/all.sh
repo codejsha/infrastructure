@@ -13,6 +13,8 @@ bash create-store-user-config-scripts.sh ManagedServer2
 ######################################################################
 
 bash conf-domain.sh
+bash ./create-server.sh AdminServer test.example.com 7001
+bash ./create-scripts.sh AdminServer
 # bash set-connection-filter.sh
 bash set-domain-config-archive.sh
 bash set-domain-cookie-name.sh
