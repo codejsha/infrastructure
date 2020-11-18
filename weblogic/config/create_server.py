@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 java_home = os.environ['JAVA_HOME']
-oracle_home = os.environ['ORACLE_HOME']
+oracle_home = os.environ['MW_HOME']
 domain_name = os.environ['DOMAIN_NAME']
 domain_home = os.environ['DOMAIN_HOME']
 log_dir = os.environ['LOG_DIR']

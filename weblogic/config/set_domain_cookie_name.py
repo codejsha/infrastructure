@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-oracle_home = os.environ['ORACLE_HOME']
+oracle_home = os.environ['MW_HOME']
 domain_name = os.environ['DOMAIN_NAME']
 admin_server_listen_address = os.environ['ADMIN_SERVER_LISTEN_ADDRESS']
 admin_server_listen_port = os.environ['ADMIN_SERVER_LISTEN_PORT']
