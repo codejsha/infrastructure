@@ -18,6 +18,10 @@ ds_max = os.environ['DS_MAX']
 ds_target_type = os.environ['DS_TARGET_TYPE']
 ds_target = os.environ['DS_TARGET']
 
+######################################################################
+
+ds_jndi = ds_jndi.split(',')
+ds_target = ds_target.split(',')
 
 ######################################################################
 
@@ -86,12 +90,13 @@ def set_generic_datasource_param_config(_domain_version, _ds_name, _ds_jndi, _ds
     # cmo.setProfileType(4) # Profile Connection Leak
     cd('/JDBCSystemResources/' + _ds_name)
     _objects = []
-    if _ds_target_type == 'Cluster':
-        _objects.append(ObjectName('com.bea:Name=' + _ds_target + ',Type=Cluster'))
-    elif _ds_target_type == 'Server':
-        _objects.append(ObjectName('com.bea:Name=' + _ds_target + ',Type=Server'))
-    else:
-        pass
+    for _target_name in _ds_target:
+        if _ds_target_type == 'Cluster':
+            _objects.append(ObjectName('com.bea:Name=' + _target_name + ',Type=Cluster'))
+        elif _ds_target_type == 'Server':
+            _objects.append(ObjectName('com.bea:Name=' + _target_name + ',Type=Server'))
+        else:
+            pass
     set('Targets', jarray.array(_objects, ObjectName))
 
 

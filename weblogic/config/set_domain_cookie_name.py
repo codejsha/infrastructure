@@ -26,7 +26,7 @@ connect(admin_username, admin_password, admin_server_url)
 edit()
 startEdit()
 
-set_domain_cookie_name(_oracle_home, domain_name)
+set_domain_cookie_name(oracle_home, domain_name)
 
 save()
 activate()
