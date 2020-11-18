@@ -10,6 +10,14 @@ mkdir -p ${DOMAIN_HOME}/scripts
 
 ######################################################################
 
+### transform variables
+TEMP="\${MW_HOME}"
+VAR_DOMAIN_HOME_11="${DOMAIN_HOME/${MW_HOME}/${TEMP}}"
+TEMP="\${ORACLE_HOME}"
+VAR_DOMAIN_HOME="${DOMAIN_HOME/${ORACLE_HOME}/${TEMP}}"
+
+######################################################################
+
 cat << EOF > ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.py
 #!/usr/bin/env python
 
@@ -35,17 +43,18 @@ cat << EOF > ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
 #!/usr/bin/bash
 
 MW_HOME="${MW_HOME}"
+export DOMAIN_HOME="${VAR_DOMAIN_HOME_11}"
 EOF
 elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
 cat << EOF > ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
 #!/usr/bin/bash
 
 ORACLE_HOME="${ORACLE_HOME}"
+export DOMAIN_HOME="${VAR_DOMAIN_HOME}"
 EOF
 fi
 
 cat <<EOF >> ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
-export DOMAIN_HOME="${DOMAIN_HOME}"
 export ADMIN_SERVER_URL="t3://${ADMIN_SERVER_LISTEN_ADDRESS}:${ADMIN_SERVER_LISTEN_PORT}"
 export MANAGED_SERVER_NAME="${MANAGED_SERVER_NAME}"
 EOF

@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
-export JAVA_HOME="/usr/java/default"
-export MAJOR_VERSION="12c"                  # (available: 11g, 12c, 14c)
+export JAVA_HOME="/usr/java/current"
+export MAJOR_VERSION="12c"              # (available: 11g, 12c, 14c)
 
 ORACLE_HOME="/usr/local/weblogic"
 export MW_HOME="${ORACLE_HOME}"

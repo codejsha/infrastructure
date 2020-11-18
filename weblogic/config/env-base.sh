@@ -1,10 +1,10 @@
 #!/usr/bin/bash
 
-export JAVA_HOME="/usr/java/default"
+export JAVA_HOME="/usr/java/current"
 export MAJOR_VERSION="12c"              # (available: 11g, 12c, 14c)
 
 ORACLE_HOME="/usr/local/weblogic"
-export MW_HOME="${ORACLE_HOME}"          
+export MW_HOME="${ORACLE_HOME}"
 
 export DOMAIN_NAME="base_domain"
 export DOMAIN_HOME="${ORACLE_HOME}/user_projects/domains/${DOMAIN_NAME}"
