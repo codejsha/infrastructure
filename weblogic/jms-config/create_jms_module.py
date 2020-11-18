@@ -26,10 +26,10 @@ def set_jms_module_general_config(_jmsmodule_name, _jmsmodule_target,
     _target_list = [target.strip() for target in _jmsmodule_target.split(',')]
     _objects = []
     for _target_name in _target_list:
-        if _jmsmodule_target_type == "Cluster":
-            _objects.append(ObjectName('com.bea:Name=' + _jmsmodule_target + ',Type=Cluster'))
-        elif _jmsmodule_target_type == "Server":
-            _objects.append(ObjectName('com.bea:Name=' + _jmsmodule_target + ',Type=Server'))
+        if _jmsmodule_target_type == 'Cluster':
+            _objects.append(ObjectName('com.bea:Name=' + _target_name + ',Type=Cluster'))
+        elif _jmsmodule_target_type == 'Server':
+            _objects.append(ObjectName('com.bea:Name=' + _target_name + ',Type=Server'))
         else:
             pass
     set('Targets', jarray.array(_objects, ObjectName))
@@ -45,7 +45,7 @@ startEdit()
 
 create_jms_module(jmsmodule_name)
 set_jms_module_general_config(jmsmodule_name, jmsmodule_target,
-                              _jmsmodule_target_type)
+                              jmsmodule_target_type)
 
 save()
 activate()
