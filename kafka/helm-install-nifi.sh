@@ -9,7 +9,7 @@ NAMESPACE="kafka-system"
 helm upgrade --install my-nifi \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --set jvmMemory="1g" \
+    --set jvmMemory="512m" \
     --set zookeeper.enabled="false" \
     --set zookeeper.url="my-kafka-zookeeper" \
     --set service.type="ClusterIP" \
