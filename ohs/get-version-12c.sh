@@ -1,6 +1,8 @@
 #!/usr/bin/bash
 
-ORACLE_HOME="/usr/local/ohs"
+source ./env-base.sh
+
+ORACLE_HOME="${ORACLE_HOME}"
 
 ######################################################################
 

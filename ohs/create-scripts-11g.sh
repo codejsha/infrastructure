@@ -1,11 +1,13 @@
 #!/usr/bin/bash
 
-MW_HOME="/usr/local/ohs"
-ORACLE_HOME="${MW_HOME}/oracle_wt1"
-INSTANCE_NAME="instance1"
-INSTANCE_HOME="${ORACLE_HOME}/instances/${INSTANCE_NAME}"
-LOG_DIR="${INSTANCE_HOME}/logs"
-COMPONENT_NAME="ohs1"
+source ./env-base-11g.sh
+source ./env-component-11g.sh
+
+MW_HOME="${MW_HOME}"
+INSTANCE_NAME="${INSTANCE_NAME}"
+INSTANCE_HOME="${INSTANCE_HOME}"
+LOG_DIR="${LOG_DIR}"
+COMPONENT_NAME="${COMPONENT_NAME}"
 
 ######################################################################
 

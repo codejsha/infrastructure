@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
-oracle_home = '/usr/local/ohs'
-domain_name = 'base_domain'
-domain_home = oracle_home + '/user_projects/domains/' + domain_name
-nodemanager_name = 'localmachine'
-component_name = 'ohs1'
-component_admin_listen_address = '127.0.0.1'
-component_admin_listen_port = '9999'
-component_listen_address = ''
-component_listen_port = '7777'
-component_ssl_listen_port = '4443'
+oracle_home = os.environ['ORACLE_HOME']
+domain_name = os.environ['DOMAIN_NAME']
+domain_home = os.environ['DOMAIN_HOME']
+node_manager_name = os.environ['NODE_MANAGER_NAME']
+component_name = os.environ['COMPONENT_NAME']
+component_admin_listen_address = os.environ['COMPONENT_ADMIN_LISTEN_ADDRESS']
+component_admin_listen_port = os.environ['COMPONENT_ADMIN_LISTEN_PORT']
+component_listen_address = os.environ['COMPONENT_LISTEN_ADDRESS']
+component_listen_port = os.environ['COMPONENT_LISTEN_PORT']
+component_ssl_listen_port = os.environ['COMPONENT_SSL_LISTEN_PORT']
 
 ######################################################################
 
@@ -19,7 +19,7 @@ cd('/')
 create(component_name, 'SystemComponent')
 cd('/SystemComponent/' + component_name)
 cmo.setComponentType('OHS')
-set('Machine', nodemanager_name)
+set('Machine', node_manager_name)
 
 cd('/OHS/' + component_name)
 cmo.setAdminHost(component_admin_listen_address)

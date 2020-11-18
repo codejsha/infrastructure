@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-oracle_home = '/usr/local/ohs'
-domain_name = 'base_domain'
-domain_home = oracle_home + '/user_projects/domains/' + domain_name
-component_name = 'ohs1'
+oracle_home = os.environ['ORACLE_HOME']
+domain_name = os.environ['DOMAIN_NAME']
+domain_home = os.environ['DOMAIN_HOME']
+component_name = os.environ['COMPONENT_NAME']
 
 ######################################################################
 

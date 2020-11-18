@@ -15,6 +15,8 @@ bash create-instance-11g.sh
 bash create-component-11g.sh
 
 bash create-scripts-11g.sh
+
+bash get-version-11g.sh
 ```
 
 ### 12cr1
@@ -23,9 +25,12 @@ bash create-scripts-11g.sh
 bash create-domain.sh
 bash create-component.sh
 
+bash create-nodemgr-scripts.sh
 bash create-scripts.sh
 bash create-httpd-scripts.sh
 bash create-metric-scripts.sh
+
+bash get-version-12c.sh
 ```
 
 ### 12cr2
@@ -34,9 +39,12 @@ bash create-metric-scripts.sh
 bash create-domain.sh
 bash create-component.sh
 
+bash create-nodemgr-scripts.sh
 bash create-scripts.sh
 bash create-httpd-scripts.sh
 bash create-metric-scripts.sh
+
+bash get-version-12c.sh
 ```
 
 ## Metrics (12c)

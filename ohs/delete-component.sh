@@ -1,7 +1,9 @@
 #!/usr/bin/bash
 
-ORACLE_HOME="/usr/local/ohs"
-INSTALL_SCRIPT_DIR="/svc/infrastructure/ohs"
+source ./env-base.sh
+
+ORACLE_HOME="${ORACLE_HOME}"
+INSTALL_SCRIPT_DIR="${INSTALL_SCRIPT_DIR}"
 
 export CONFIG_JVM_ARGS="${CONFIG_JVM_ARGS} -Djava.security.egd=file:///dev/urandom"
 

@@ -1,9 +1,12 @@
 #!/usr/bin/bash
 
-ORACLE_HOME="/usr/local/ohs"
-DOMAIN_NAME="base_domain"
-DOMAIN_HOME="${ORACLE_HOME}/user_projects/domains/${DOMAIN_NAME}"
-COMPONENT_NAME="ohs1"
+source ./env-base.sh
+source ./env-component.sh
+
+ORACLE_HOME="${ORACLE_HOME}"
+DOMAIN_NAME="${DOMAIN_NAME}"
+DOMAIN_HOME="${DOMAIN_HOME}"
+COMPONENT_NAME="${COMPONENT_NAME}"
 
 ######################################################################
 
