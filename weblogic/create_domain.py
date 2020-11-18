@@ -10,17 +10,17 @@ admin_password = 'welcome1'
 
 ######################################################################
 
-print('Select the WebLogic domain template')
+print('[INFO] Select the WebLogic domain template')
 selectTemplate('Basic WebLogic Server Domain')
 loadTemplates()
 setOption('ServerStartMode', 'prod')
 
-print('Set administration username and password')
+print('[INFO] Set administration username and password')
 cd('/Security/base_domain/User/weblogic')
 cmo.setName(admin_username)
 cmo.setPassword(admin_password)
 
-print('Set name, address and port for administration server')
+print('[INFO] Set name, address and port for administration server')
 cd('/Servers/AdminServer')
 cmo.setName(admin_server_name)
 cmo.setListenAddress(admin_server_listen_address)
@@ -28,7 +28,7 @@ cmo.setListenPort(int(admin_server_listen_port))
 cmo.setWeblogicPluginEnabled(True)
 cmo.setStagingMode('nostage')
 
-print('Create a domain')
+print('[INFO] Create a domain')
 cd('/')
 writeDomain(domain_home)
 closeTemplate()

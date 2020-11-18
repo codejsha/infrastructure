@@ -50,11 +50,11 @@ bash ./encrypt-password-with-picketbox.sh ${PASSWORD}
 ### JDBC driver
 
 ```bash
-### by module
+### with module
 bash ./add-jdbc-driver-with-module.sh
 bash ./delete-module.sh
 
-### by deployment
+### with deployment
 bash ./add-jdbc-driver-with-deployment.sh
 
 bash ./delete-jdbc-driver.sh
