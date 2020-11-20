@@ -2,17 +2,17 @@
 
 source ./env-base.sh
 
-INSTALL_FILE_DIR="/mnt/share/wildfly"
+INSTALL_FILE_DIR="/mnt/share/redhat-jboss-eap"
 
-# INSTALL_FILE="wildfly-17.0.1.Final.zip"
-# INSTALL_FILE="wildfly-19.0.0.Final.zip"
-# INSTALL_FILE="wildfly-20.0.0.Final.zip"
-INSTALL_FILE="wildfly-20.0.1.Final.tar.gz"
+# INSTALL_FILE="jboss-eap-7.0.0.zip"
+# INSTALL_FILE="jboss-eap-7.1.0.zip"
+# INSTALL_FILE="jboss-eap-7.2.0.zip"
+INSTALL_FILE="jboss-eap-7.3.0.zip"
 
 ######################################################################
 
 PARENT_JBOSS_HOME="$(readlink --canonicalize-missing ${JBOSS_HOME}/../)"
-JBOSS_DIR_NAME=${INSTALL_FILE/\.tar\.gz/}
+JBOSS_DIR_NAME=${INSTALL_FILE/\.0\.zip/}
 
 ######################################################################
 
@@ -35,5 +35,5 @@ function check_install_file {
 check_jboss_home
 check_install_file
 
-tar -C ${PARENT_JBOSS_HOME} -xzf ${INSTALL_FILE_DIR}/${INSTALL_FILE}
+unzip -q -o ${INSTALL_FILE_DIR}/${INSTALL_FILE} -d ${PARENT_JBOSS_HOME}
 mv ${PARENT_JBOSS_HOME}/${JBOSS_DIR_NAME} ${JBOSS_HOME}

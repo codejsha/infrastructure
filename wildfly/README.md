@@ -4,6 +4,7 @@
 
 ```bash
 bash ./install-wildfly.sh
+bash ./install-jboss.sh
 ```
 
 ## Configuration
