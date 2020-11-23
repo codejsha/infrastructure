@@ -11,13 +11,17 @@ mkdir -p ${HOME}/.config/nvim
 cat <<EOF > ${HOME}/.config/nvim/init.vim
 syntax on
 set termguicolors
-set background=dark
+set background=dark         # "dark" or "light", used for highlight colors
+set autoread=on             # autom. read file when changed outside of Vim
 
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set expandtab
-set pastetoggle=<F11>
+set autoindent=on           # take indent for new line from previous line
+set shiftwidth=4            # number of spaces to use for (auto)indent step
+
+set tabstop=4               # number of spaces that <Tab> in file uses
+set softtabstop=4           # number of spaces that <Tab> uses while editing
+set expandtab               # use spaces when <Tab> is inserted
+
+set pastetoggle=<F11>       # key code that causes 'paste' to toggle
 EOF
 
 GREP_VAR="$(grep -q nvim ${HOME}/.bashrc)"
