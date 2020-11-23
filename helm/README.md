@@ -22,7 +22,7 @@ bash ./install-helm-push-plugin.sh
 
 Requirements: MinIO storage
 
-[override.yaml](/helm/override.yaml):
+[values.yaml](/helm/values.yaml):
 
 ```yaml
 env:
