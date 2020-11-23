@@ -1,8 +1,8 @@
 #!/usr/bin/bash
 
 docker run \
-    --rm \
-    --name dnstools \
     --interactive \
     --tty \
+    --rm \
+    --name dnstools \
     infoblox/dnstools:latest

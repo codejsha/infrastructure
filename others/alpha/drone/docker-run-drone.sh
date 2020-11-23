@@ -49,7 +49,8 @@ docker run \
 
 docker pull drone/drone-runner-docker:1
 
-docker run -d \
+docker run \
+    --detach \
     --name runner \
     --restart unless-stopped \
     --publish 3000:3000 \

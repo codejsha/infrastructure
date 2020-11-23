@@ -2,6 +2,8 @@
 
 COREDNS_HOME="/svc/infrastructure/coredns"
 
+######################################################################
+
 function start_coredns {
     sudo /usr/local/bin/coredns \
         -conf ${COREDNS_HOME}/corefile-server.conf \
@@ -16,6 +18,8 @@ function start_coredns_nohup {
     sleep 1
     sudo chown $(id -un):$(id -gn) ${COREDNS_HOME}/coredns.pid
 }
+
+######################################################################
 
 # start_coredns
 start_coredns_nohup
