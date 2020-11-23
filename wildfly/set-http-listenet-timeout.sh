@@ -10,8 +10,8 @@ function set_listener_timeout {
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
 <<EOF
 batch
- /subsystem/undertow/server=default-server/http-listener=default:write-attribute(name=no-request-timeout,value=60000)
- run-batch
+/subsystem/undertow/server=default-server/http-listener=default:write-attribute(name=no-request-timeout,value=60000)
+run-batch
 quit
 EOF
 }
