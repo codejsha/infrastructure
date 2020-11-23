@@ -2,6 +2,28 @@
 
 source ./env-base.sh
 
+JBOSS_HOME="${JBOSS_HOME}"
+BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
+JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
+
+COMMAND=""   # default
+
+######################################################################
+
+function connect_jboss_cli {
+    if [ -z "${COMMAND}" ]; then
+        ${JBOSS_HOME}/bin/jboss-cli.sh \
+            --connect \
+            --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}"
+    else
+        COMMAND="${1}"
+        ${JBOSS_HOME}/bin/jboss-cli.sh \
+            --connect \
+            --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+            --command="${COMMAND}"
+    fi
+}
+
 ######################################################################
 
 function print_help {
@@ -24,23 +46,8 @@ function set_arguments {
     done
 }
 
-function connect_jboss_cli {
-    if [ -z "${COMMAND}" ]; then
-        ${JBOSS_HOME}/bin/jboss-cli.sh \
-            --connect \
-            --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}"
-    else
-        COMMAND="${1}"
-        ${JBOSS_HOME}/bin/jboss-cli.sh \
-            --connect \
-            --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-            --command="${COMMAND}"
-    fi
-}
-
 ######################################################################
 
-COMMAND=""   # default
 set_arguments ${@}
 
 connect_jboss_cli ${COMMAND}

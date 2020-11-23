@@ -2,6 +2,9 @@
 
 source ../env-base.sh
 
+JAVA_HOME="${JAVA_HOME}"
+JBOSS_HOME="${JBOSS_HOME}"
+
 PASSWORD="${1}"
 
 ${JAVA_HOME}/bin/java \

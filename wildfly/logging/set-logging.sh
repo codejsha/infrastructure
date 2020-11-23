@@ -5,6 +5,10 @@
 
 source ../env-base.sh
 
+JBOSS_HOME="${JBOSS_HOME}"
+BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
+JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
+
 ######################################################################
 
 function set_logging {

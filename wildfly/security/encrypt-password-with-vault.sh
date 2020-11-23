@@ -3,6 +3,9 @@
 source ../env-base.sh
 source ./env-vault.sh
 
+JBOSS_HOME="${JBOSS_HOME}"
+KEYSTORE_PASSWORD="<KEYSTORE_PASSWORD>"
+
 PASSWORD="${1}"
 VAULT_BLOCK="datasource"
 SALT="1234abcd"

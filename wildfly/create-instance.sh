@@ -2,6 +2,12 @@
 
 source ./env-base.sh
 
+INSTANCE_NAME="${INSTANCE_NAME}"
+JBOSS_HOME="${JBOSS_HOME}"
+JBOSS_BASE_DIR="${JBOSS_BASE_DIR}"
+JBOSS_LOG_DIR="${JBOSS_LOG_DIR}"
+DUMP_LOG_DIR="${DUMP_LOG_DIR}"
+
 ######################################################################
 
 mkdir -p ${JBOSS_BASE_DIR}

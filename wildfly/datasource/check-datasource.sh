@@ -2,6 +2,26 @@
 
 source ../env-base.sh
 
+JBOSS_HOME="${JBOSS_HOME}"
+BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
+JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
+
+DATASOURCE_NAME="baseds1"   # default
+
+######################################################################
+
+function test_connection_pool {
+    ${JBOSS_HOME}/bin/jboss-cli.sh \
+        --connect \
+        --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+<<EOF
+batch
+/subsystem=datasources/data-source=${DATASOURCE_NAME}:test-connection-in-pool
+run-batch
+quit
+EOF
+}
+
 ######################################################################
 
 function print_help {
@@ -24,21 +44,8 @@ function set_arguments {
     done
 }
 
-function test_connection_pool {
-    ${JBOSS_HOME}/bin/jboss-cli.sh \
-        --connect \
-        --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-<<EOF
-batch
-/subsystem=datasources/data-source=${DATASOURCE_NAME}:test-connection-in-pool
-run-batch
-quit
-EOF
-}
-
 ######################################################################
 
-DATASOURCE_NAME="baseds1"   # default
 set_arguments ${@}
 
 test_connection_pool

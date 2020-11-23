@@ -2,6 +2,10 @@
 
 source ../env-base.sh
 
+JBOSS_HOME="${JBOSS_HOME}"
+BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
+JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
+
 # DRIVER_FILE_DIR="/mnt/share/oracle-database/11gr2/OJDBC-Full"
 # DRIVER_FILE_DIR="/mnt/share/oracle-database/12cr1/OJDBC-Full"
 # DRIVER_FILE_DIR="/mnt/share/oracle-database/12cr2/OJDBC-Full"

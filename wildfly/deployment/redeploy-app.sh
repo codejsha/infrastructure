@@ -2,6 +2,14 @@
 
 source ../env-base.sh
 
+JBOSS_HOME="${JBOSS_HOME}"
+BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
+JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
+
+APP_PATH="/svc/app/failovertest"        # default
+APP_NAME="failovertest.war"             # default
+APP_RUNTIME_NAME="failovertest.war"     # default
+
 ######################################################################
 
 function print_help {
@@ -36,9 +44,6 @@ function set_arguments {
 
 ######################################################################
 
-APP_PATH="/svc/app/helloworld"        # default
-APP_NAME="helloworld.war"             # default
-APP_RUNTIME_NAME="helloworld.war"     # default
 set_arguments ${@}
 
 bash ./undeploy-app.sh --name=${APP_NAME}

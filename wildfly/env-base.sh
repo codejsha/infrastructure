@@ -1,43 +1,7 @@
 #!/usr/bin/bash
 
-######################################################################
-
-### function
-
-function print_help {
-    echo ""
-    echo "Usage:"
-    echo "  --instance|--instance=        : set a instance name."
-    echo "  --port-offset|--port-offset=  : set a port offset."
-}
-
-function set_arguments {
-    while [[ $# -gt 0 ]]
-    do
-        ARGS="${1}"
-        shift
-        case "${ARGS}" in
-            "--help")
-                print_help;;
-            "--instance")
-                INSTANCE_NAME="${1}"; shift;;
-            "--instance="*)
-                INSTANCE_NAME="${ARGS#*=}";;
-            "--port-offset")
-                PORT_OFFSET="${1}"; shift;;
-            "--port-offset="*)
-                PORT_OFFSET="${ARGS#*=}";;
-        esac
-    done
-}
-
-######################################################################
-
-### variables
-
 INSTANCE_NAME="inst1"   # default
 PORT_OFFSET="0"         # default
-set_arguments ${@}
 
 JAVA_HOME="/usr/lib/jvm/java-11"
 JBOSS_HOME="/usr/local/wildfly"
@@ -73,3 +37,36 @@ JBOSS_HTTPS_PORT="$(( ${JBOSS_HTTPS_PORT} + ${PORT_OFFSET} ))"
 JBOSS_AJP_PORT="$(( ${JBOSS_AJP_PORT} + ${PORT_OFFSET} ))"
 JBOSS_MGMT_HTTP_PORT="$(( ${JBOSS_MGMT_HTTP_PORT} + ${PORT_OFFSET} ))"
 JBOSS_MGMT_HTTPS_PORT="$(( ${JBOSS_MGMT_HTTPS_PORT} + ${PORT_OFFSET} ))"
+
+######################################################################
+
+function print_help {
+    echo ""
+    echo "Usage:"
+    echo "  --instance|--instance=        : set a instance name."
+    echo "  --port-offset|--port-offset=  : set a port offset."
+}
+
+function set_arguments {
+    while [[ $# -gt 0 ]]
+    do
+        ARGS="${1}"
+        shift
+        case "${ARGS}" in
+            "--help")
+                print_help;;
+            "--instance")
+                INSTANCE_NAME="${1}"; shift;;
+            "--instance="*)
+                INSTANCE_NAME="${ARGS#*=}";;
+            "--port-offset")
+                PORT_OFFSET="${1}"; shift;;
+            "--port-offset="*)
+                PORT_OFFSET="${ARGS#*=}";;
+        esac
+    done
+}
+
+######################################################################
+
+set_arguments ${@}

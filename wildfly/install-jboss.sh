@@ -2,6 +2,10 @@
 
 source ./env-base.sh
 
+JBOSS_HOME="${JBOSS_HOME}"
+BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
+JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
+
 INSTALL_FILE_DIR="/mnt/share/redhat-jboss-eap"
 
 # INSTALL_FILE="jboss-eap-7.0.0.zip"

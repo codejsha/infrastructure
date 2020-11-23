@@ -2,6 +2,26 @@
 
 source ../env-base.sh
 
+JBOSS_HOME="${JBOSS_HOME}"
+BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
+JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
+
+MODULE_NAME="com.oracle"    # default
+
+######################################################################
+
+function remove_module {
+    ${JBOSS_HOME}/bin/jboss-cli.sh \
+        --connect \
+        --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+<<EOF
+batch
+module remove --name=${MODULE_NAME}
+run-batch
+quit
+EOF
+}
+
 ######################################################################
 
 function print_help {
@@ -24,21 +44,8 @@ function set_arguments {
     done
 }
 
-function remove_module {
-    ${JBOSS_HOME}/bin/jboss-cli.sh \
-        --connect \
-        --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-<<EOF
-batch
-module remove --name=${MODULE_NAME}
-run-batch
-quit
-EOF
-}
-
 ######################################################################
 
-MODULE_NAME="com.oracle"    # default
 set_arguments ${@}
 
 remove_module

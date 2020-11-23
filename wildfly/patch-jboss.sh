@@ -2,6 +2,10 @@
 
 source ./env-base.sh
 
+JBOSS_HOME="${JBOSS_HOME}"
+BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
+JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
+
 PATCH_FILE_DIR="/mnt/share/redhat-jboss-eap"
 
 # PATCH_FILE="jboss-eap-7.2.8-patch.zip"
@@ -18,6 +22,8 @@ function apply_patch {
 }
 
 function rollback_patch {
+    PATCH_ID="${1}"
+
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
@@ -34,5 +40,5 @@ function restart_server {
 ######################################################################
 
 apply_patch
-# rollback_patch
+# rollback_patch jboss-eap-7.2.8.CP
 restart_server

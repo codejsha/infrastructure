@@ -2,6 +2,9 @@
 
 source ./env-base.sh
 
+JBOSS_HOME="${JBOSS_HOME}"
+JBOSS_BASE_DIR="${JBOSS_BASE_DIR}"
+
 PASSWORD="${PASSWORD}"
 
 ${JBOSS_HOME}/bin/add-user.sh --user "admin" --password "${PASSWORD}" -sc ${JBOSS_BASE_DIR}/configuration
