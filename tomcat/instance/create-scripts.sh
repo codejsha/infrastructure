@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 source ../env-base.sh
 
@@ -6,7 +6,7 @@ source ../env-base.sh
 
 ### create start script
 cat <<EOF > ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
-#!/usr/bin/bash
+#!/bin/bash
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export JAVA_HOME="${JAVA_HOME}"
@@ -66,7 +66,7 @@ EOF
 
 ### create stop script
 cat <<EOF > ${CATALINA_BASE}/stop-${INSTANCE_NAME}.sh
-#!/usr/bin/bash
+#!/bin/bash
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export JAVA_HOME="${JAVA_HOME}"
@@ -80,7 +80,7 @@ EOF
 
 ### create version script
 cat <<EOF > ${CATALINA_HOME}/bin/get-version.sh
-#!/usr/bin/bash
+#!/bin/bash
 
 export CATALINA_HOME="${CATALINA_HOME}"
 
@@ -91,7 +91,7 @@ EOF
 
 ### create configtest script
 cat <<EOF > ${CATALINA_HOME}/bin/check-config.sh
-#!/usr/bin/bash
+#!/bin/bash
 
 export CATALINA_HOME="${CATALINA_HOME}"
 

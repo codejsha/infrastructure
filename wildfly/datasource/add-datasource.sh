@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 source ../env-base.sh
 source ./env-datasource.sh

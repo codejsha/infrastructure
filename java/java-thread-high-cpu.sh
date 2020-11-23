@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 # usage:
 # bash ./java-thread-high-cpu.sh <PID>

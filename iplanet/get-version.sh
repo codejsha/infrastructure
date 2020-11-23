@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 IPLANET_HOME="/usr/local/iplanet"
 MAJOR_VERSION="7"    # (available: 6, 7)

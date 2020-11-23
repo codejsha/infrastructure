@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 GIT_VERSION="2.28.0"
 

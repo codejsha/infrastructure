@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 MYSQL_PORT_3306_TCP_ADDR="mysql"
 MYSQL_PORT_3306_TCP_PORT="3306"

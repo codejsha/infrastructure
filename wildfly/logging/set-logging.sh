@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 ### Log levels:
 ### ALL, CONFIG, DEBUG, ERROR, FATAL, FINE, FINER, FINEST, INFO, OFF, SEVERE, TRACE, WARN, WARNING

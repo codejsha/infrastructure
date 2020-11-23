@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 function register_mysql_connector {
     curl \

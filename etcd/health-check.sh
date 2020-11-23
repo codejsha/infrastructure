@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 export ETCDCTL_API=3
 /usr/local/bin/etcdctl \

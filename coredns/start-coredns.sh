@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 COREDNS_HOME="/svc/infrastructure/coredns"
 

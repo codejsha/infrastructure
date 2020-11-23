@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 JAVA_HOME="/usr/java/java-1.8.0"
 # JAVA_HOME="/usr/java/java-11"

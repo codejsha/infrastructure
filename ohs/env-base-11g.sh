@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 export MW_HOME="/usr/local/ohs"
 export ORACLE_HOME="${MW_HOME}/oracle_wt1"

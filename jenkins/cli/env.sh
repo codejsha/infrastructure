@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 JENKINS_USER="admin"
 JENKINS_API_TOKEN="JENKINS_API_TOKEN"

@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 source ./env-base.sh
 
@@ -40,7 +40,7 @@ EOF
 
 if [ "${MAJOR_VERSION}" == "11g" ]; then
 cat << EOF > ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
-#!/usr/bin/bash
+#!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 MW_HOME="${MW_HOME}"
@@ -48,7 +48,7 @@ export DOMAIN_HOME="${VAR_DOMAIN_HOME_11}"
 EOF
 elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
 cat << EOF > ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
-#!/usr/bin/bash
+#!/bin/bash
 
 ORACLE_HOME="${ORACLE_HOME}"
 export DOMAIN_HOME="${VAR_DOMAIN_HOME}"

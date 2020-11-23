@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://hub.docker.com/_/httpd
 # https://hub.docker.com/r/centos/httpd-24-centos7
 

@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 helm repo add minio https://helm.min.io
 helm repo update

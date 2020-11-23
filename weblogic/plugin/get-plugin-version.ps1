@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 PluginHome="$env:SystemDrive/lib/weblogic-plugin"
 

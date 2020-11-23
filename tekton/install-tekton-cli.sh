@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 TEKTON_CLI_VERSION="0.11.0"
 

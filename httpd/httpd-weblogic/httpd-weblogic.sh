@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 HTTPD_HOME="/usr/local/httpd"
 PLUGIN_HOME="${HTTPD_HOME}/modules/weblogic-plugin"

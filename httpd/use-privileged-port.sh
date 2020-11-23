@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 HTTPD_HOME="/usr/local/httpd"
 

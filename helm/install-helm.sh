@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 HELM_VERSION="3.3.1"
 curl -LJO https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz

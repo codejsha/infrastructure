@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 kubectl config set-context --current --namespace=myproject
 

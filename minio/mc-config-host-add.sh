@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 MINIO_ALIAS="myminio"
 MINIO_URL="http://minio.example.com"

@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 helm repo add jfrog https://charts.jfrog.io
 helm repo update

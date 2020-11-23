@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 NAMESPACE="tomcat-system"
 kubectl create namespace ${NAMESPACE}

@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 source ./env-base.sh
 
@@ -40,7 +40,7 @@ VAR_DUMP_LOG_DIR="${DUMP_LOG_DIR/${JBOSS_LOG_DIR}/${TEMP}}"
 
 ### start script
 cat <<EOF > ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
-#!/usr/bin/bash
+#!/bin/bash
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export JAVA_HOME="${JAVA_HOME}"
@@ -129,7 +129,7 @@ EOF
 
 ### stop script
 cat <<EOF > ${JBOSS_BASE_DIR}/stop-${INSTANCE_NAME}.sh
-#!/usr/bin/bash
+#!/bin/bash
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export JAVA_HOME="${JAVA_HOME}"

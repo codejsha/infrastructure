@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://www.postgresql.org/download/linux/redhat/
 
 POSTGRESQL_VERSION="13"

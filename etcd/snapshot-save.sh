@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 GET_DATE="$(date +'%Y%m%d-%H%M%S')"
 FILENAME="etcd-snapshot-${GET_DATE}"

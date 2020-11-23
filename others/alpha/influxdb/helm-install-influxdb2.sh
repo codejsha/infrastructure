@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 helm repo add influxdata https://helm.influxdata.com
 helm repo update

@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 helm repo add cmak-operator https://eshepelyuk.github.io/cmak-operator
 

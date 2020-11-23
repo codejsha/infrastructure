@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 sudo yum install -y nfs-utils
 

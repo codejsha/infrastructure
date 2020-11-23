@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 kubectl krew install ctx
 kubectl krew install ns

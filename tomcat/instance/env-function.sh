@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 function tidy_indent {
     XML_FILE="${1}"

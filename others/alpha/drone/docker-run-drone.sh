@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 if [ ! -f SHARED_SECRET.txt ]; then
     echo "$(openssl rand -hex 16)" > SHARED_SECRET.txt

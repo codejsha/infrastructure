@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://docs.gitlab.com/charts
 # https://gitlab.com/gitlab-org/charts/gitlab
 # https://hub.docker.com/r/gitlab/gitlab-ce

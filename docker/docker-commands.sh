@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 ### build
 # https://docs.docker.com/engine/reference/commandline/build/

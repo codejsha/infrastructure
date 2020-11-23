@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 # usage:
 # bash ./harbor-push-image.sh <SOURCE_IMAGE> [TAG]

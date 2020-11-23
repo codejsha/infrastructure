@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 cat <<EOF | sudo tee /etc/systemd/system/docker.service.d/override.conf
 [Service]

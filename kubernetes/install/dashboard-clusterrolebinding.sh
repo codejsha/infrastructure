@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 kubectl create clusterrolebinding kubernetes-dashboard-admin \
     --clusterrole=cluster-admin \

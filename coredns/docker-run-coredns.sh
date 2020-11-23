@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 COREDNS_VOLUME_DIR="/mnt/volume/coredns"
 sudo mkdir -p ${COREDNS_VOLUME_DIR}

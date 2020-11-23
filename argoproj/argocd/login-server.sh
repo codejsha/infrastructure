@@ -1,3 +1,3 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 argocd login --insecure argocd.example.com

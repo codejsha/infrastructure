@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://istio.io/latest/docs/tasks/observability/gateways/
 
 INGRESS_DOMAIN="${INGRESS_DOMAIN:-example.com}"

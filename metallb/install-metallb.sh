@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://metallb.universe.tf/installation/
 
 NAMESPACE="metallb-system"

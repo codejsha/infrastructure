@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://istio.io/latest/docs/setup/install/operator/
 
 ### clean up resources

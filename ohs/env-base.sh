@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 export ORACLE_HOME="/usr/local/ohs"
 export DOMAIN_NAME="base_domain"

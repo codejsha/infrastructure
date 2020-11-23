@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 # usage:
 # bash ./print-heap-dump.sh <PID>

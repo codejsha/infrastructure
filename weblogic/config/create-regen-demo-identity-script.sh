@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 source ./env-base.sh
 
@@ -9,7 +9,7 @@ mkdir -p ${DOMAIN_HOME}/scripts
 ######################################################################
 
 cat << EOF > ${DOMAIN_HOME}/scripts/regen-demo-identity.sh
-#!/usr/bin/bash
+#!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 WEBLOGIC_HOME="${WEBLOGIC_HOME}"

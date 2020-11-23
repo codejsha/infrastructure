@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 source ./env-base.sh
 
@@ -16,7 +16,7 @@ FILE_NAME_SUFFIX=${FILE_NAME_SUFFIX/machine/nodemanager}
 
 if [ "${MAJOR_VERSION}" == "11g" ]; then
 cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
-#!/usr/bin/bash
+#!/bin/bash
 
 WL_HOME="${WL_HOME}"
 DOMAIN_HOME="${DOMAIN_HOME}"
@@ -30,7 +30,7 @@ fi
 EOF
 elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
 cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
-#!/usr/bin/bash
+#!/bin/bash
 
 DOMAIN_HOME="${DOMAIN_HOME}"
 LOG_DIR="${LOG_DIR}"
@@ -79,7 +79,7 @@ EOF
 
 if [ "${MAJOR_VERSION}" == "11g" ]; then
 cat << EOF > ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
-#!/usr/bin/bash
+#!/bin/bash
 
 WL_HOME="${WL_HOME}"
 
@@ -90,7 +90,7 @@ fi
 EOF
 elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
 cat << EOF > ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
-#!/usr/bin/bash
+#!/bin/bash
 
 DOMAIN_HOME="${DOMAIN_HOME}"
 

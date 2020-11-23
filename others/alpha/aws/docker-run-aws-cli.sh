@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-docker.html
 
 docker run --rm -it amazon/aws-cli --version

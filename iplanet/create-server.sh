@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 IPLANET_HOME="/usr/local/iplanet"
 IPLANET_HOST="test.example.com"

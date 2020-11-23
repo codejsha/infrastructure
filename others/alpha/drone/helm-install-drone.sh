@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 helm repo add drone https://charts.drone.io
 helm repo update

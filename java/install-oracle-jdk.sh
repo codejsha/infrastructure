@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 INSTALL_FILE_DIR="/mnt/share/oracle-jdk/7"
 INSTALL_FILE_DIR="/mnt/share/oracle-jdk/8"

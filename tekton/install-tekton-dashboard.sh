@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://github.com/tektoncd/dashboard
 
 NAMESPACE="tekton-pipelines"

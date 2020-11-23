@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 export COMPONENT_NAME="ohs1"
 export COMPONENT_ADMIN_LISTEN_ADDRESS="127.0.0.1"

@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 export INSTANCE_NAME="${1:-"inst1"}"
 export JAVA_HOME="/usr/lib/jvm/java-11"

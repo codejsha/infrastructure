@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://istio.io/latest/docs/setup/install/istioctl/
 # https://istio.io/latest/docs/setup/install/operator/
 # https://istio.io/latest/docs/setup/additional-setup/config-profiles/

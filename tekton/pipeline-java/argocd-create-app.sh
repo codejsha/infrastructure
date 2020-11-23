@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 argocd app create myproject \
     --project myproject \

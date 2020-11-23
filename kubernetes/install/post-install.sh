@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 mkdir -p ${HOME}/.kube
 sudo scp root@controlplane1:/root/.kube/config ${HOME}/.kube/config

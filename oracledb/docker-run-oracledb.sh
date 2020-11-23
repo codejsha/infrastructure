@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://github.com/oracle/docker-images
 
 git clone https://github.com/oracle/docker-images.git

@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://hub.docker.com/_/centos
 
 docker run \

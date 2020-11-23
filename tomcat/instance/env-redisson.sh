@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 # REDISSON_MODE="CLUSTER_MODE"
 REDISSON_MODE="MASTER_SLAVE_MODE"

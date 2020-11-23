@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 ARGO_EVENTS_VERSION="v1.0.0"
 

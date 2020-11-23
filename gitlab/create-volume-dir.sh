@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 GITLAB_VOLUME_DIR="/mnt/volume/gitlab"
 sudo rm -rf ${GITLAB_VOLUME_DIR}

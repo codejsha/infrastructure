@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 PLUGIN_HOME="/svc/lib/weblogic-plugin"
 

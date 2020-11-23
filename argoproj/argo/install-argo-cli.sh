@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://github.com/argoproj/argo
 
 ARGO_VERSION="v2.11.0"

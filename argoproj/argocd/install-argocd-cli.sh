@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://github.com/argoproj/argo-cd
 
 ARGOCD_VERSION="v1.7.7"

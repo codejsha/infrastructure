@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 ### if you use nodemanager
 export SERVER_START_JAVA_VENDOR="Oracle"

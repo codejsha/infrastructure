@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 NEXUS_URL="https://nexus.example.com"
 NEXUS_USER="admin"

@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 export JAVA_HOME="/usr/java/current"
 export MAJOR_VERSION="12c"              # (available: 11g, 12c, 14c)

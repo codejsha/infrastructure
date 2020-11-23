@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 # TOMCAT_MAJOR_VERSION="8"
 # TOMCAT_VERSION="8.5.59"

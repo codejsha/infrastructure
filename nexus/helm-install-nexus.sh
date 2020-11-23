@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 helm repo add oteemocharts https://oteemo.github.io/charts
 helm repo update

@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 ARGO_ROLLOUTS_VERSION="v0.9.1"
 

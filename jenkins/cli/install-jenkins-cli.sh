@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://www.jenkins.io/doc/book/managing/cli
 
 source ./env.sh

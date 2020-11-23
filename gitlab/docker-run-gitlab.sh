@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://hub.docker.com/r/gitlab/gitlab-ce
 
 GITLAB_VOLUME_DIR="/mnt/volume/gitlab"

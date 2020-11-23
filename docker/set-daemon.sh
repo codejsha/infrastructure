@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 cat <<EOF | sudo tee /etc/docker/daemon.json
 {

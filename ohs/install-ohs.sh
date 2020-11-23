@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 # INSTALL_FILE_DIR="/mnt/share/oracle-http-server/ohs11.1.1.9/ofm_webtier_linux_11.1.1.9.0_64_disk1_1of1"
 # INSTALL_FILE_DIR="/mnt/share/oracle-http-server/ohs12.1.3/fmw_12.1.3.0.0_ohs_linux64"

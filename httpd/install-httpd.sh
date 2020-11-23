@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # http://httpd.apache.org/docs/current/install.html
 
 ### Installing on Fedora/CentOS/Red Hat Enterprise Linux

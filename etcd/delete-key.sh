@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 KEY="${1}"
 

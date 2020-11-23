@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 source ./env-base.sh
 
@@ -20,7 +20,7 @@ fi
 ### start script
 
 cat <<EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
-#!/usr/bin/bash
+#!/bin/bash
 
 SERVER_NAME="${SERVER_NAME}"
 EOF
@@ -98,7 +98,7 @@ EOF
 ### stop script
 
 cat <<EOF > ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
-#!/usr/bin/bash
+#!/bin/bash
 
 EOF
 

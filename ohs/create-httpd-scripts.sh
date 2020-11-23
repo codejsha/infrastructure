@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 source ./env-base.sh
 source ./env-component.sh
@@ -11,7 +11,7 @@ COMPONENT_NAME="${COMPONENT_NAME}"
 ######################################################################
 
 cat <<EOF > ${DOMAIN_HOME}/check-config.sh
-#!/usr/bin/bash
+#!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 ORACLE_HOME="${ORACLE_HOME}"
@@ -32,7 +32,7 @@ EOF
 ######################################################################
 
 cat <<EOF > ${DOMAIN_HOME}/get-version.sh
-#!/usr/bin/bash
+#!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 ORACLE_HOME="${ORACLE_HOME}"
@@ -53,7 +53,7 @@ EOF
 ######################################################################
 
 cat <<EOF > ${DOMAIN_HOME}/get-compile-settings.sh
-#!/usr/bin/bash
+#!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 ORACLE_HOME="${ORACLE_HOME}"
@@ -74,7 +74,7 @@ EOF
 ######################################################################
 
 cat <<EOF > ${DOMAIN_HOME}/get-dump-vhosts.sh
-#!/usr/bin/bash
+#!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 ORACLE_HOME="${ORACLE_HOME}"
@@ -95,7 +95,7 @@ EOF
 ######################################################################
 
 cat <<EOF > ${DOMAIN_HOME}/get-dump-run-cfg.sh
-#!/usr/bin/bash
+#!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 ORACLE_HOME="${ORACLE_HOME}"
@@ -116,7 +116,7 @@ EOF
 ######################################################################
 
 cat <<EOF > ${DOMAIN_HOME}/get-dump-settings.sh
-#!/usr/bin/bash
+#!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 ORACLE_HOME="${ORACLE_HOME}"
@@ -138,7 +138,7 @@ EOF
 ######################################################################
 
 cat <<EOF > ${DOMAIN_HOME}/get-dump-modules.sh
-#!/usr/bin/bash
+#!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 ORACLE_HOME="${ORACLE_HOME}"
@@ -160,7 +160,7 @@ EOF
 ######################################################################
 
 cat <<EOF > ${DOMAIN_HOME}/get-dump-includes.sh
-#!/usr/bin/bash
+#!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 ORACLE_HOME="${ORACLE_HOME}"
@@ -181,7 +181,7 @@ EOF
 ######################################################################
 
 cat <<EOF > ${DOMAIN_HOME}/get-links-dump.sh
-#!/usr/bin/bash
+#!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 # HOSTNAME_IP_ADDRESS="$(hostname -i)"

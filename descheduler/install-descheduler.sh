@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://github.com/kubernetes-sigs/descheduler
 
 git clone --single-branch --branch release-1.18 https://github.com/kubernetes-sigs/descheduler.git

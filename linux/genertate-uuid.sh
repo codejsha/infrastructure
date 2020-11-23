@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 UUID="$(uuidgen)"
 echo "UUID: ${UUID}"

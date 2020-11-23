@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 MW_HOME="/usr/local/weblogic"
 PATCH_FILE_DIR="/mnt/share/oracle-weblogic-server/wls10.3.6"

@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 source ./env-base.sh
 source ./env-component.sh
@@ -69,7 +69,7 @@ exit()
 EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-${COMPONENT_NAME}.sh
-#!/usr/bin/bash
+#!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 export METRIC_TABLE_NAME="${1}"
@@ -111,7 +111,7 @@ exit()
 EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/get-dump-metrics-${COMPONENT_NAME}.sh
-#!/usr/bin/bash
+#!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 export ORACLE_HOME="${ORACLE_HOME}"

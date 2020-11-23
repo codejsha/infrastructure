@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 MAVEN_VERSION="3.6.3"
 

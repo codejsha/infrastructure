@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 KIALI_PODNAME="$(kubectl get pods -l app="kiali" -o custom-columns=:metadata.name)"
 

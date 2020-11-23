@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 source ./env-base.sh
 
@@ -14,7 +14,7 @@ VAR_LOG_DIR="${LOG_DIR/${DOMAIN_HOME}/${TEMP}}"
 ######################################################################
 
 cat <<EOF > ${DOMAIN_HOME}/start-nodemanager.sh
-#!/usr/bin/bash
+#!/bin/bash
 
 DOMAIN_HOME="${DOMAIN_HOME}"
 LOG_DIR="${VAR_LOG_DIR}"
@@ -38,7 +38,7 @@ tail -f ${LOG_DIR}/nohup.NodeManager.out
 EOF
 
 cat <<EOF > ${DOMAIN_HOME}/stop-nodemanager.sh
-#!/usr/bin/bash
+#!/bin/bash
 
 DOMAIN_HOME="${DOMAIN_HOME}"
 

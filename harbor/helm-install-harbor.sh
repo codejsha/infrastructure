@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://goharbor.io/
 # https://github.com/goharbor/harbor
 

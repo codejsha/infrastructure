@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 COREDNS_VERSION="1.7.1"
 

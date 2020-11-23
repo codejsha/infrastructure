@@ -1,11 +1,11 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 source ./env-base.sh
 
 ######################################################################
 
 cat << EOF > ${DOMAIN_HOME}/scripts/encrypt-password-script.sh
-#!/usr/bin/bash
+#!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 JAVA_HOME="${JAVA_HOME}"

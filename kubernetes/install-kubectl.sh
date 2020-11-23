@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://kubernetes.io/docs/tasks/tools/install-kubectl
 
 ### Install kubectl binary with curl on Linux

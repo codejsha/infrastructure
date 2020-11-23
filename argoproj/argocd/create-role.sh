@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://argoproj.github.io/argo-cd/user-guide/projects/
 
 PROJECT="myproject"

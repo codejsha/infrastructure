@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 VERSION="1.15.5"
 OS="linux"

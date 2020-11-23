@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://github.com/nodesource/distributions/blob/master/README.md
 
 ### As root

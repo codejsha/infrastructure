@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 INSTANCE_NAME="inst1"   # default
 PORT_OFFSET="0"         # default

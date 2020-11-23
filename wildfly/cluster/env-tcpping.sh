@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 INSTANCE_NAME1="inst1"
 INSTANCE_NAME2="inst2"

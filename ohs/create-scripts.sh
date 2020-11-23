@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 source ./env-base.sh
 source ./env-component.sh
@@ -16,7 +16,7 @@ VAR_LOG_DIR="${LOG_DIR/${DOMAIN_HOME}/${TEMP}}"
 ######################################################################
 
 cat <<EOF > ${DOMAIN_HOME}/start-${COMPONENT_NAME}.sh
-#!/usr/bin/bash
+#!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 DOMAIN_HOME="${DOMAIN_HOME}"
@@ -27,7 +27,7 @@ export CONFIG_JVM_ARGS="\${CONFIG_JVM_ARGS} -Djava.security.egd=file:///dev/uran
 EOF
 
 cat <<EOF > ${DOMAIN_HOME}/stop-${COMPONENT_NAME}.sh
-#!/usr/bin/bash
+#!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 DOMAIN_HOME="${DOMAIN_HOME}"

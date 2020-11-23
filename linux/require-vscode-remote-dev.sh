@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://code.visualstudio.com/docs/remote/linux
 # https://code.visualstudio.com/docs/remote/troubleshooting
 

@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 if [ "${1}" == "a" ]; then
     hostnamectl set-hostname kubeaccess

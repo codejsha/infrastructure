@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # https://rook.github.io/docs/rook/v1.4/ceph-quickstart.html
 # https://rook.github.io/docs/rook/v1.4/ceph-block.html
 # https://rook.github.io/docs/rook/v1.4/ceph-csi-drivers.html

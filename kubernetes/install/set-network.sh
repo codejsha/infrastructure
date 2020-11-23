@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 declare -A NODES=(
     [10.10.10.10]="kubeaccess"

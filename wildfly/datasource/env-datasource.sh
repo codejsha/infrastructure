@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 DATASOURCE_NAME="baseds1"
 DRIVER_NAME="oracle"
