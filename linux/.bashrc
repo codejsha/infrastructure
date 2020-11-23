@@ -24,7 +24,7 @@ alias sshnode3="ssh root@node3"
 alias sudo-shell="sudo --shell"
 
 # location
-function cdp() { DIRECTORY="${1}"; echo "+ cd -P ${@}">&2; command cd -P ${DIRECTORY}; STATUS="${?}"; if [ "${STATUS}" -eq "0" ]; then printf "\x1b[38;2;216;160;223mLOCATION: $(pwd)\x1b[0m\n"; ls --almost-all -l; fi; }
+function cdp() { DIRECTORY="${1}"; echo "+ cd -P ${@}">&2; command cd -P ${DIRECTORY}; STATUS="${?}"; if [ "${STATUS}" -eq "0" ]; then printf "\e[38;2;216;160;223mLOCATION: $(pwd)\e[0m\n"; ls --almost-all -l; fi; }
 function goapp() { DIRECTORY="/svc/app"; echo "+ cd ${DIRECTORY}">&2; command cd ${DIRECTORY}; STATUS="${?}"; if [ "${STATUS}" -eq "0" ]; then ls --almost-all -l; fi; }
 function goappsvr() { DIRECTORY="/svc/appsvr"; echo "+ cd ${DIRECTORY}">&2; command cd ${DIRECTORY}; STATUS="${?}"; if [ "${STATUS}" -eq "0" ]; then ls --almost-all -l; fi; }
 function gohttpd() { DIRECTORY="/etc/httpd"; echo "+ cd ${DIRECTORY}">&2; command cd ${DIRECTORY}; STATUS="${?}"; if [ "${STATUS}" -eq "0" ]; then ls --almost-all -l; fi; }
@@ -177,7 +177,8 @@ alias git-status="git status"
 # docker
 function docker() { echo "+ docker ${@}">&2; command docker ${@}; }
 alias dcattach="docker container attach"
-alias dclo="docker container logs -f"
+alias dclo="docker container logs --follow"
+alias dclof="docker container logs --follow --tail"
 alias dcls="docker container ls"
 alias dclsall="docker container ls --all"
 alias dcstart="docker container start"
@@ -288,6 +289,7 @@ alias kns-myproject="kubectl-ns myproject"
 alias kns-minio="kubectl-ns minio-system"
 alias kns-nexus="kubectl-ns nexus-system"
 alias kns-postgres="kubectl-ns postgres-system"
+alias kns-prometheus="kubectl-ns prometheus-system"
 alias kns-redis="kubectl-ns redis-system"
 alias kns-registry="kubectl-ns registry-system"
 alias kns-rook-ceph="kubectl-ns rook-ceph"
@@ -314,6 +316,7 @@ alias helm-repo-update="helm repo update"
 alias helm-search-repo="helm search repo"
 alias helm-search-repo-all="helm search repo --versions"
 alias helm-search-repo-chartmuseum="helm search repo chartmuseum/"
+alias helm-show-values="helm show values"
 alias helm-status="helm status"
 alias helm-uninstall="helm uninstall"
 alias helm-upgrade="helm upgrade"
@@ -485,17 +488,17 @@ alias vim="nvim"
 alias vimdiff="nvim -d"
 
 # color
-LS_COLORS="${LS_COLORS}:di=\x1b[38;2;86;156;214"        # directory
-LS_COLORS="${LS_COLORS}:ex=\x1b[38;2;87;166;74"         # executable file
-LS_COLORS="${LS_COLORS}:ln=\x1b[38;2;78;201;176"        # symbolic link
-LS_COLORS="${LS_COLORS}:or=\x1b[38;2;255;0;0"           # orphan symbolic link
-LS_COLORS="${LS_COLORS}:so=\x1b[38;2;216;160;223"       # socket
-LS_COLORS="${LS_COLORS}:*.gz=\x1b[38;2;214;157;133"
-LS_COLORS="${LS_COLORS}:*.jar=\x1b[38;2;214;157;133"
-LS_COLORS="${LS_COLORS}:*.tar=\x1b[38;2;214;157;133"
-LS_COLORS="${LS_COLORS}:*.tgz=\x1b[38;2;214;157;133"
-LS_COLORS="${LS_COLORS}:*.war=\x1b[38;2;214;157;133"
-LS_COLORS="${LS_COLORS}:*.zip=\x1b[38;2;214;157;133"
+LS_COLORS="${LS_COLORS}:di=\e[38;2;86;156;214"        # directory
+LS_COLORS="${LS_COLORS}:ex=\e[38;2;87;166;74"         # executable file
+LS_COLORS="${LS_COLORS}:ln=\e[38;2;78;201;176"        # symbolic link
+LS_COLORS="${LS_COLORS}:or=\e[38;2;255;0;0"           # orphan symbolic link
+LS_COLORS="${LS_COLORS}:so=\e[38;2;216;160;223"       # socket
+LS_COLORS="${LS_COLORS}:*.gz=\e[38;2;214;157;133"
+LS_COLORS="${LS_COLORS}:*.jar=\e[38;2;214;157;133"
+LS_COLORS="${LS_COLORS}:*.tar=\e[38;2;214;157;133"
+LS_COLORS="${LS_COLORS}:*.tgz=\e[38;2;214;157;133"
+LS_COLORS="${LS_COLORS}:*.war=\e[38;2;214;157;133"
+LS_COLORS="${LS_COLORS}:*.zip=\e[38;2;214;157;133"
 export LS_COLORS
 
 # path
