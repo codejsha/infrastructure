@@ -9,5 +9,5 @@ fi
 helm upgrade --install my-kraken \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --values override.yaml \
+    --values values.yaml \
     ./kraken/helm

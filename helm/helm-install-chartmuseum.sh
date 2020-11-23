@@ -14,7 +14,7 @@ helm upgrade --install my-chartmuseum \
     --set ingress.hosts[0].tls="false" \
     --set persistence.enabled="true" \
     --set persistence.storageClass="rook-ceph-block" \
-    --values override.yaml \
+    --values values.yaml \
     --version 2.13.3 \
     stable/chartmuseum
 

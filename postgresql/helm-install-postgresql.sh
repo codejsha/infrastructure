@@ -21,4 +21,4 @@ helm upgrade --install my-postgres \
     bitnami/postgresql
 
     ### gitlab
-    # --values gitlab-override.yaml \
+    # --values gitlab-values.yaml \
