@@ -13,6 +13,7 @@ COMPONENT_NAME="${COMPONENT_NAME}"
 
 cat <<EOF > ${INSTANCE_HOME}/start-opmn.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 INSTANCE_HOME="${INSTANCE_HOME}"
 
@@ -21,6 +22,7 @@ EOF
 
 cat <<EOF > ${INSTANCE_HOME}/stop-opmn.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 INSTANCE_HOME="${INSTANCE_HOME}"
 
@@ -31,6 +33,7 @@ EOF
 
 cat <<EOF > ${INSTANCE_HOME}/get-status.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 INSTANCE_HOME="${INSTANCE_HOME}"
 
@@ -41,6 +44,7 @@ EOF
 
 cat <<EOF > ${INSTANCE_HOME}/start-all.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 INSTANCE_HOME="${INSTANCE_HOME}"
 
@@ -49,6 +53,7 @@ EOF
 
 cat <<EOF > ${INSTANCE_HOME}/stop-all.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 INSTANCE_HOME="${INSTANCE_HOME}"
 
@@ -59,6 +64,7 @@ EOF
 
 cat <<EOF > ${INSTANCE_HOME}/start-${COMPONENT_NAME}.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 INSTANCE_HOME="${INSTANCE_HOME}"
 COMPONENT_NAME="${COMPONENT_NAME}"
@@ -68,6 +74,7 @@ EOF
 
 cat <<EOF > ${INSTANCE_HOME}/stop-${COMPONENT_NAME}.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 INSTANCE_HOME="${INSTANCE_HOME}"
 COMPONENT_NAME="${COMPONENT_NAME}"

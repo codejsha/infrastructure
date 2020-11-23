@@ -70,6 +70,7 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-${COMPONENT_NAME}.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 export METRIC_TABLE_NAME="${1}"
 
@@ -91,6 +92,7 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/get-dump-metrics.py
 #!/usr/bin/env python
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 domain_name = os.environ['DOMAIN_NAME']
 component_name = os.environ['COMPONENT_NAME']
@@ -110,6 +112,7 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/get-dump-metrics-${COMPONENT_NAME}.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 export ORACLE_HOME="${ORACLE_HOME}"
 export DOMAIN_NAME="${DOMAIN_NAME}"

@@ -17,6 +17,7 @@ VAR_LOG_DIR="${LOG_DIR/${DOMAIN_HOME}/${TEMP}}"
 
 cat <<EOF > ${DOMAIN_HOME}/start-${COMPONENT_NAME}.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 DOMAIN_HOME="${DOMAIN_HOME}"
 COMPONENT_NAME="${COMPONENT_NAME}"
@@ -27,6 +28,7 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/stop-${COMPONENT_NAME}.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 DOMAIN_HOME="${DOMAIN_HOME}"
 COMPONENT_NAME="${COMPONENT_NAME}"

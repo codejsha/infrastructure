@@ -7,6 +7,7 @@ HTTPD_HOME="/usr/local/httpd"
 
 cat <<EOF > ${HTTPD_HOME}/start-httpd.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 HTTPD_HOME="${HTTPD_HOME}"
 # export LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
@@ -16,6 +17,7 @@ EOF
 
 cat <<EOF > ${HTTPD_HOME}/restart-httpd.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 HTTPD_HOME="${HTTPD_HOME}"
 # export LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
@@ -25,6 +27,7 @@ EOF
 
 cat <<EOF > ${HTTPD_HOME}/stop-httpd.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 HTTPD_HOME="${HTTPD_HOME}"
 # export LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
@@ -34,6 +37,7 @@ EOF
 
 cat <<EOF > ${HTTPD_HOME}/check-config.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 HTTPD_HOME="${HTTPD_HOME}"
 # export LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
@@ -43,6 +47,7 @@ EOF
 
 cat <<EOF > ${HTTPD_HOME}/get-version.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 HTTPD_HOME="${HTTPD_HOME}"
 
@@ -51,6 +56,7 @@ EOF
 
 cat <<EOF > ${HTTPD_HOME}/get-compile-settings.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 HTTPD_HOME="${HTTPD_HOME}"
 
@@ -59,6 +65,7 @@ EOF
 
 cat <<EOF > ${HTTPD_HOME}/get-vhosts-settings.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 HTTPD_HOME="${HTTPD_HOME}"
 # export LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
@@ -68,6 +75,7 @@ EOF
 
 cat <<EOF > ${HTTPD_HOME}/get-run-settings.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 HTTPD_HOME="${HTTPD_HOME}"
 # export LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
@@ -77,6 +85,7 @@ EOF
 
 cat <<EOF > ${HTTPD_HOME}/get-settings.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 HTTPD_HOME="${HTTPD_HOME}"
 # export LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
@@ -87,6 +96,7 @@ EOF
 
 cat <<EOF > ${HTTPD_HOME}/get-load-modules.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 HTTPD_HOME="${HTTPD_HOME}"
 # export LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
@@ -97,6 +107,7 @@ EOF
 
 cat <<EOF > ${HTTPD_HOME}/get-include-files.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 HTTPD_HOME="${HTTPD_HOME}"
 # export LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
@@ -106,6 +117,7 @@ EOF
 
 cat <<EOF > ${HTTPD_HOME}/get-server-status.sh
 #!/usr/bin/bash
+export PS4="\e[33;1m+ \e[0m"; set -x
 
 PORT="80"
 
