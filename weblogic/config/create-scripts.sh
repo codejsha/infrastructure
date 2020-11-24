@@ -67,6 +67,32 @@ JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.system.BootIdentityFile=\${DOMAIN_HOME
 JAVA_OPTIONS="\${JAVA_OPTIONS} -Djava.security.egd=file:///dev/urandom"
 export JAVA_OPTIONS
 
+### verbose
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -verbose:class"
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -verbose:gc"
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -verbose:jni"
+### debug
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.log.StdoutSeverity=Debug"
+### debug all
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.log.StdoutSeverity=Debug"
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.log.LogSeverity=Debug"
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.log.LoggerSeverity=Debug"
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.StdoutDebugEnabled=true"
+### ssl debug
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -Djavax.net.debug=all"
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -Dssl.debug=true"
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.StdoutDebugEnabled=true"
+### jta xa debug
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.log.StdoutSeverity=Debug"
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.debug.DebugJTA2PC=true"
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.debug.DebugJTAXA=true"
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.debug.DebugJTAJDBC=true"
+### jta non-xa debug
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.log.StdoutSeverity=Debug"
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.debug.DebugJTANonXA=true"
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.debug.DebugJTAJDBC=true"
+export JAVA_OPTIONS
+
 # export EXT_PRE_CLASSPATH
 # export EXT_POST_CLASSPATH
 
