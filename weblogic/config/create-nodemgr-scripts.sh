@@ -29,7 +29,7 @@ if [ -n "\${PID}" ]; then
 fi
 EOF
 elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
-cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
+cat << EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
 
 DOMAIN_HOME="${DOMAIN_HOME}"
@@ -43,7 +43,7 @@ fi
 EOF
 fi
 
-cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
+cat << EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 JAVA_OPTIONS="\${JAVA_OPTIONS} -DListenAddress=${NODEMGR_LISTEN_ADDRESS}"
 JAVA_OPTIONS="\${JAVA_OPTIONS} -DListenPort=${NODEMGR_LISTEN_PORT}"
 JAVA_OPTIONS="\${JAVA_OPTIONS} -DSecureListener=false"
@@ -60,16 +60,16 @@ touch \${LOG_DIR}/nohup.NodeManager.out
 EOF
 
 if [ "${MAJOR_VERSION}" == "11g" ]; then
-cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
+cat << EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 \${WL_HOME}/server/bin/startNodeManager.sh >> \${LOG_DIR}/nohup.NodeManager.out 2>&1 &
 EOF
 elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
-cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
+cat << EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 \${DOMAIN_HOME}/bin/startNodeManager.sh >> \${LOG_DIR}/nohup.NodeManager.out 2>&1 &
 EOF
 fi
 
-cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
+cat << EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 tail -f \${LOG_DIR}/nohup.NodeManager.out
 EOF
 
@@ -89,7 +89,7 @@ if [ -n "\${PID}" ]; then
 fi
 EOF
 elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
-cat << EOF > ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
+cat << EOF >> ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
 
 DOMAIN_HOME="${DOMAIN_HOME}"
