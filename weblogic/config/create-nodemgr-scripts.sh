@@ -47,14 +47,14 @@ cat << EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 JAVA_OPTIONS="\${JAVA_OPTIONS} -DListenAddress=${NODEMGR_LISTEN_ADDRESS}"
 JAVA_OPTIONS="\${JAVA_OPTIONS} -DListenPort=${NODEMGR_LISTEN_PORT}"
 JAVA_OPTIONS="\${JAVA_OPTIONS} -DSecureListener=false"
-JAVA_OPTIONS="\${JAVA_OPTIONS} -DLogFile=\${LOG_DIR}/nodemanager/machine_NodeManager.out"
+JAVA_OPTIONS="\${JAVA_OPTIONS} -DLogFile=\${LOG_DIR}/NodeManager/machine.NodeManager.out"
 export JAVA_OPTIONS
 
 if [ -f \${LOG_DIR}/nohup.NodeManager.out ]; then
-  mv \${LOG_DIR}/nohup.NodeManager.out \${LOG_DIR}/nodemanager/nohup.NodeManager.\${GET_DATE}.out
+  mv \${LOG_DIR}/nohup.NodeManager.out \${LOG_DIR}/NodeManager/nohup.NodeManager.\${GET_DATE}.out
 fi
 if [ -f \${LOG_DIR}/gc.NodeManager.log ]; then
-  mv \${LOG_DIR}/gc.NodeManager.log \${LOG_DIR}/nodemanager/gc.NodeManager.\${GET_DATE}.log
+  mv \${LOG_DIR}/gc.NodeManager.log \${LOG_DIR}/NodeManager/gc.NodeManager.\${GET_DATE}.log
 fi
 touch \${LOG_DIR}/nohup.NodeManager.out
 EOF
