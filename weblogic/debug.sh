@@ -32,7 +32,7 @@ JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.debug.DebugJTAXA=true"
 JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.debug.DebugJTAJDBC=true"
 ### JDBCXADebugLevel=20  # connection pool properties
 
-### non xa
+### non-xa
 JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.log.StdoutSeverity=Debug"
 JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.debug.DebugJTANonXA=true"
 JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.debug.DebugJTAJDBC=true"
