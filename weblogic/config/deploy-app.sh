@@ -2,9 +2,9 @@
 
 source ./env-base.sh
 
-APP_NAME="${1}"
-APP_PATH="${2}"
-APP_TARGET="${3}"
+export APP_NAME="${1}"
+export APP_PATH="${2}"
+export APP_TARGET="${3}"
 
 ######################################################################
 
