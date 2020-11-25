@@ -3,8 +3,8 @@
 source ./env-base.sh
 
 export JMSMODULE_NAME="${1}"
-export JMSMODULE_TARGET="${2}"
-export JMSMODULE_TARGET_TYPE="${3}"
+export JMSMODULE_TARGET_TYPE="${2}"
+export JMSMODULE_TARGET="${3}"
 
 ######################################################################
 

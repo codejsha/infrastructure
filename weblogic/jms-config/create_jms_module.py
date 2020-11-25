@@ -7,8 +7,8 @@ admin_username = os.environ['ADMIN_USERNAME']
 admin_password = os.environ['ADMIN_PASSWORD']
 
 jmsmodule_name = os.environ['JMSMODULE_NAME']
-jmsmodule_target = os.environ['JMSMODULE_TARGET']
 jmsmodule_target_type = os.environ['JMSMODULE_TARGET_TYPE']
+jmsmodule_target = os.environ['JMSMODULE_TARGET']
 
 
 ######################################################################
@@ -20,8 +20,8 @@ def create_jms_module(_jmsmodule_name):
         cmo.createJMSSystemResource(_jmsmodule_name)
 
 
-def set_jms_module_general_config(_jmsmodule_name, _jmsmodule_target,
-                                  _jmsmodule_target_type):
+def set_jms_module_general_config(_jmsmodule_name, _jmsmodule_target_type,
+                                  _jmsmodule_target):
     cd('/SystemResources/' + _jmsmodule_name)
     _target_list = [target.strip() for target in _jmsmodule_target.split(',')]
     _objects = []
@@ -44,8 +44,8 @@ edit()
 startEdit()
 
 create_jms_module(jmsmodule_name)
-set_jms_module_general_config(jmsmodule_name, jmsmodule_target,
-                              jmsmodule_target_type)
+set_jms_module_general_config(jmsmodule_name, jmsmodule_target_type,
+                              jmsmodule_target)
 
 save()
 activate()

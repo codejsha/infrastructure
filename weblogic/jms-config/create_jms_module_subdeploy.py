@@ -8,8 +8,8 @@ admin_password = os.environ['ADMIN_PASSWORD']
 
 jmsmodule_name = os.environ['JMSMODULE_NAME']
 subdeploy_name = os.environ['SUBDEPLOY_NAME']
-subdeploy_target = os.environ['SUBDEPLOY_TARGET']
 subdeploy_target_type = os.environ['SUBDEPLOY_TARGET_TYPE']
+subdeploy_target = os.environ['SUBDEPLOY_TARGET']
 
 
 ######################################################################
@@ -21,8 +21,8 @@ def create_jms_module_subdeploy(_jmsmodule_name, _subdeploy_name):
         cmo.createSubDeployment(_subdeploy_name)
 
 
-def set_jms_module_subdeploy_general_config(_jmsmodule_name, _subdeploy_name, _subdeploy_target,
-                                            _subdeploy_target_type):
+def set_jms_module_subdeploy_general_config(_jmsmodule_name, _subdeploy_name, _subdeploy_target_type,
+                                            _subdeploy_target):
     cd('/SystemResources/' + _jmsmodule_name + '/SubDeployments/' + _subdeploy_name)
     _target_list = [target.strip() for target in _subdeploy_target.split(',')]
     _objects = []
@@ -47,8 +47,8 @@ edit()
 startEdit()
 
 create_jms_module_subdeploy(jmsmodule_name, subdeploy_name)
-set_jms_module_subdeploy_general_config(jmsmodule_name, subdeploy_name, subdeploy_target,
-                                        subdeploy_target_type)
+set_jms_module_subdeploy_general_config(jmsmodule_name, subdeploy_name, subdeploy_target_type,
+                                        subdeploy_target)
 
 save()
 activate()

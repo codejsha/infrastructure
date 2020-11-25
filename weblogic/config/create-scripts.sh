@@ -6,6 +6,10 @@ SERVER_NAME="${1}"
 
 ######################################################################
 
+### transform variables
+TEMP="\${DOMAIN_HOME}"
+VAR_LOG_DIR="${LOG_DIR/${DOMAIN_HOME}/${TEMP}}"
+
 FILE_NAME_SUFFIX=""
 if [ "${SERVER_NAME}" == "${ADMIN_SERVER_NAME}" ]; then
     FILE_NAME_SUFFIX="admin"
@@ -33,7 +37,7 @@ fi
 
 cat <<EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 DOMAIN_HOME="${DOMAIN_HOME}"
-LOG_DIR="${LOG_DIR}"
+LOG_DIR="${VAR_LOG_DIR}"
 GET_DATE="\$(date +'%Y%m%d_%H%M%S')"
 
 PID="\$(pgrep -xa java | grep \${DOMAIN_HOME} | grep \${SERVER_NAME} | awk '{print \$1}')"

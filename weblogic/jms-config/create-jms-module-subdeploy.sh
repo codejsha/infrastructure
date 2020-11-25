@@ -4,8 +4,8 @@ source ./env-base.sh
 
 export JMSMODULE_NAME="${1}"
 export SUBDEPLOY_NAME="${2}"
-export SUBDEPLOY_TARGET="${3}"
-export SUBDEPLOY_TARGET_TYPE="${4}"
+export SUBDEPLOY_TARGET_TYPE="${3}"
+export SUBDEPLOY_TARGET="${4}"
 
 ######################################################################
 

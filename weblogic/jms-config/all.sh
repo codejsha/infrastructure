@@ -21,30 +21,30 @@ bash ./create-jms-server.sh BaseJmsServer2 BaseFileStore2 JmsManagedServer2
 ######################################################################
 
 ### CREATE JMSMODULE
-### bash ./create-jms-module.sh ${JMSMODULE_NAME} ${JMSMODULE_TARGET} ${JMSMODULE_TARGET_TYPE}
+### bash ./create-jms-module.sh ${JMSMODULE_NAME} ${JMSMODULE_TARGET_TYPE} ${JMSMODULE_TARGET}
 
-bash ./create-jms-module.sh BaseSystemModule1 "BaseJmsCluster1" Cluster
-# bash ./create-jms-module.sh BaseSystemModule1 "BaseJmsCluster2" Cluster
-# bash ./create-jms-module.sh BaseSystemModule1 "BaseJmsCluster1,BaseJmsCluster2" Cluster
-# bash ./create-jms-module.sh BaseSystemModule1 "JmsManagedServer1" Server
-# bash ./create-jms-module.sh BaseSystemModule1 "JmsManagedServer2" Server
-# bash ./create-jms-module.sh BaseSystemModule1 "JmsManagedServer1,JmsManagedServer2" Server
+bash ./create-jms-module.sh BaseSystemModule1 Cluster "BaseJmsCluster1"
+# bash ./create-jms-module.sh BaseSystemModule1 Cluster "BaseJmsCluster2"
+# bash ./create-jms-module.sh BaseSystemModule1 Cluster "BaseJmsCluster1,BaseJmsCluster2"
+# bash ./create-jms-module.sh BaseSystemModule1 Server "JmsManagedServer1"
+# bash ./create-jms-module.sh BaseSystemModule1 Server "JmsManagedServer2"
+# bash ./create-jms-module.sh BaseSystemModule1 Server "JmsManagedServer1,JmsManagedServer2"
 
 ######################################################################
 
 ### CREATE JMSMODULE SUBDEPLOY
-### bash ./create-jms-module-subdeploy.sh ${JMSMODULE_NAME} ${SUBDEPLOY_NAME} ${SUBDEPLOY_TARGET} ${SUBDEPLOY_TARGET_TYPE}
+### bash ./create-jms-module-subdeploy.sh ${JMSMODULE_NAME} ${SUBDEPLOY_NAME} ${SUBDEPLOY_TARGET_TYPE} ${SUBDEPLOY_TARGET}
 
 bash ./create-jms-module-subdeploy.sh BaseSystemModule1 BaseSubdeployment1
-# bash ./create-jms-module-subdeploy.sh BaseSystemModule1 BaseSubdeployment1 "BaseJmsCluster1,BaseJmsCluster2" Cluster
-# bash ./create-jms-module-subdeploy.sh BaseSystemModule1 BaseSubdeployment1 "BaseJmsCluster1" Cluster
-# bash ./create-jms-module-subdeploy.sh BaseSystemModule1 BaseSubdeployment1 "BaseJmsCluster2" Cluster
-# bash ./create-jms-module-subdeploy.sh BaseSystemModule1 BaseSubdeployment1 "JmsManagedServer1,JmsManagedServer2" Server
-# bash ./create-jms-module-subdeploy.sh BaseSystemModule1 BaseSubdeployment1 "JmsManagedServer1" Server
-# bash ./create-jms-module-subdeploy.sh BaseSystemModule1 BaseSubdeployment1 "JmsManagedServer2" Server
-bash ./create-jms-module-subdeploy.sh BaseSystemModule1 BaseSubdeployment1 "BaseJmsServer1,BaseJmsServer2" JMSServer
-# bash ./create-jms-module-subdeploy.sh BaseSystemModule1 BaseSubdeployment1 "BaseJmsServer1" JMSServer
-# bash ./create-jms-module-subdeploy.sh BaseSystemModule1 BaseSubdeployment1 "BaseJmsServer2" JMSServer
+# bash ./create-jms-module-subdeploy.sh BaseSystemModule1 BaseSubdeployment1 Cluster "BaseJmsCluster1,BaseJmsCluster2"
+# bash ./create-jms-module-subdeploy.sh BaseSystemModule1 BaseSubdeployment1 Cluster "BaseJmsCluster1"
+# bash ./create-jms-module-subdeploy.sh BaseSystemModule1 BaseSubdeployment1 Cluster "BaseJmsCluster2"
+# bash ./create-jms-module-subdeploy.sh BaseSystemModule1 BaseSubdeployment1 Server "JmsManagedServer1,JmsManagedServer2"
+# bash ./create-jms-module-subdeploy.sh BaseSystemModule1 BaseSubdeployment1 Server "JmsManagedServer1"
+# bash ./create-jms-module-subdeploy.sh BaseSystemModule1 BaseSubdeployment1 Server "JmsManagedServer2"
+bash ./create-jms-module-subdeploy.sh BaseSystemModule1 BaseSubdeployment1 JMSServer "BaseJmsServer1,BaseJmsServer2"
+# bash ./create-jms-module-subdeploy.sh BaseSystemModule1 BaseSubdeployment1 JMSServer "BaseJmsServer1"
+# bash ./create-jms-module-subdeploy.sh BaseSystemModule1 BaseSubdeployment1 JMSServer "BaseJmsServer2"
 
 ######################################################################
 
