@@ -13,4 +13,4 @@ PLUGIN_FILE="WLSPlugin12.2.1.3.0-Apache2.2-Apache2.4-Linux_x86_64-12.2.1.3.0.zip
 
 ######################################################################
 
-tar -C ${PLUGIN_HOME} -xzf ${PLUGIN_FILE_DIR}/${PLUGIN_FILE}
+unzip -d ${PLUGIN_HOME} ${PLUGIN_FILE_DIR}/${PLUGIN_FILE}
