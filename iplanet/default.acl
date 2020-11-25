@@ -1,0 +1,13 @@
+# disable directory index
+
+version 3.0;
+acl "default";
+authenticate (user, group) {
+  prompt = "Oracle iPlanet Web Server";
+};
+allow (read, execute, info) user = "anyone";
+allow (write, delete) user = "all";
+
+acl "es-internal";
+allow (read, execute, info) user = "anyone";
+deny (list, write, delete) user = "anyone";
