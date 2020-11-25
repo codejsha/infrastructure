@@ -2,23 +2,23 @@
 
 ######################################################################
 
-bash create-boot-properties.sh
-bash create-change-password-script.sh
-bash create-change-store-user-config-script.sh
-bash create-encrypt-password-script.sh
-bash create-regen-demo-identity-script.sh
-bash create-store-user-config-scripts.sh ManagedServer1
-bash create-store-user-config-scripts.sh ManagedServer2
+bash ./create-boot-properties.sh
+bash ./create-change-password-script.sh
+bash ./create-change-store-user-config-script.sh
+bash ./create-encrypt-password-script.sh
+bash ./create-regen-demo-identity-script.sh
+bash ./create-store-user-config-scripts.sh ManagedServer1
+bash ./create-store-user-config-scripts.sh ManagedServer2
 
 ######################################################################
 
-bash conf-domain.sh
+bash ./conf-domain.sh
 bash ./create-server.sh AdminServer test.example.com 7001
 bash ./create-scripts.sh AdminServer
-# bash set-connection-filter.sh
-bash set-domain-config-archive.sh
-bash set-domain-cookie-name.sh
-bash set-domain-log.sh
+# bash ./set-connection-filter.sh
+bash ./set-domain-config-archive.sh
+bash ./set-domain-cookie-name.sh
+bash ./set-domain-log.sh
 
 ######################################################################
 
