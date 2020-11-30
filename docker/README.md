@@ -71,4 +71,4 @@ bash ./docker-run-portainer.sh
 
 Select Docker environment, and then set Name and Endpoint URL.
 
-![portainer-endpoint](/others/images/portainer-add-endpoint.jpg)
+![portainer-endpoint](/contents/images/portainer-add-endpoint.jpg)

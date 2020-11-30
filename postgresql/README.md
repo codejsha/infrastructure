@@ -27,4 +27,4 @@ DVD Rental database (https://www.postgresqltutorial.com/postgresql-sample-databa
 
 DVD Rental ER Model:
 
-![dvd-rental-erd](/others/images/dvd-rental-sample-database-diagram.png)
+![dvd-rental-erd](/contents/images/dvd-rental-sample-database-diagram.png)
