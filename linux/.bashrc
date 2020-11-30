@@ -217,8 +217,8 @@ alias dcp="docker-compose"
 alias dcpbuild="docker-compose build"
 alias dcpconfig="docker-compose config"
 alias dcpdown="docker-compose down"
-alias dcpexecbash="docker-compose down"
-alias dcpexecsh="docker-compose down"
+function dcpexecbash() { CONTAINER_NAME="${1}"; if [ -n "${CONTAINER_NAME}" ]; then docker-compose exec --detach ${1} /bin/bash -c ${2}; fi; }
+function dcpexecsh() { CONTAINER_NAME="${1}"; if [ -n "${CONTAINER_NAME}" ]; then docker-compose exec --detach ${1} /bin/sh -c ${2}; fi; }
 alias dcpkill="docker-compose kill"
 alias dcplo="docker-compose logs --follow"
 function dcplotail() { LINES="${1}"; docker-compose logs --follow --tail="${LINES}"; }
