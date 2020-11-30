@@ -18,8 +18,13 @@ export ADMIN_PASSWORD="welcome1"
 
 ######################################################################
 
+WL_HOME=""
 if [ "${MAJOR_VERSION}" == "11g" ]; then
-    export WEBLOGIC_HOME="${MW_HOME}/wlserver_10.3"
+    export WL_HOME="${MW_HOME}/wlserver_10.3"
 elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
-    export WEBLOGIC_HOME="${ORACLE_HOME}/wlserver"
+    export WL_HOME="${ORACLE_HOME}/wlserver"
+fi
+if [ ! -d "${WL_HOME}" ]; then
+    echo "[ERROR] The WL_HOME (${WL_HOME}) does not exists!"
+    exit
 fi
