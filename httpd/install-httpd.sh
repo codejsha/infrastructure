@@ -36,8 +36,9 @@ function install_from_source {
     cd ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}
     ./configure --prefix=${PREFIX} \
         --with-included-apr \
-        --enable-modules=most
-        # --enable-modules=all
+        --enable-mpms-shared=all \
+        --enable-modules=all
+        # --enable-modules=most
 
     make
     make install
