@@ -8,6 +8,16 @@ mkdir -p ${DOMAIN_HOME}/scripts
 
 ######################################################################
 
+### transform variables
+TEMP="\${MW_HOME}"
+VAR_DOMAIN_HOME_11="${DOMAIN_HOME/${MW_HOME}/${TEMP}}"
+TEMP="\${ORACLE_HOME}"
+VAR_DOMAIN_HOME="${DOMAIN_HOME/${ORACLE_HOME}/${TEMP}}"
+TEMP="\${DOMAIN_HOME}"
+VAR_LOG_DIR="${LOG_DIR/${DOMAIN_HOME}/${TEMP}}"
+
+######################################################################
+
 cat <<EOF > ${DOMAIN_HOME}/scripts/change_store_user_config.py
 #!/usr/bin/env python
 
@@ -28,36 +38,37 @@ EOF
 
 ######################################################################
 
-if [ "${MAJOR_VERSION}" == "11g" ]; then
 cat << EOF > ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 #!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
-MW_HOME="${MW_HOME}"
-EOF
-elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
-cat << EOF > ${DOMAIN_HOME}/scripts/change-store-user-config.sh
-#!/bin/bash
-
-ORACLE_HOME="${ORACLE_HOME}"
-EOF
-fi
-
-cat << EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
-export DOMAIN_HOME="${DOMAIN_HOME}"
-export ADMIN_SERVER_URL="t3://${ADMIN_SERVER_LISTEN_ADDRESS}:${ADMIN_SERVER_LISTEN_PORT}"
-export ADMIN_USERNAME="\${1:-"weblogic"}"
-export ADMIN_PASSWORD="\${2:-"welcome1"}"
 EOF
 
 if [ "${MAJOR_VERSION}" == "11g" ]; then
 cat << EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
+MW_HOME="${MW_HOME}"
+export DOMAIN_HOME="${VAR_DOMAIN_HOME_11}"
+EOF
+elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
+cat << EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
+ORACLE_HOME="${ORACLE_HOME}"
+export DOMAIN_HOME="${VAR_DOMAIN_HOME}"
+EOF
+fi
 
+cat << EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
+export ADMIN_SERVER_URL="t3://${ADMIN_SERVER_LISTEN_ADDRESS}:${ADMIN_SERVER_LISTEN_PORT}"
+export ADMIN_USERNAME="\${1:-"weblogic"}"
+export ADMIN_PASSWORD="\${2:-"welcome1"}"
+
+EOF
+
+if [ "${MAJOR_VERSION}" == "11g" ]; then
+cat << EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 ${MW_HOME}/wlserver_10.3/common/bin/wlst.sh ${DOMAIN_HOME}/scripts/change_store_user_config.py
 EOF
 elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
 cat << EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
-
 ${ORACLE_HOME}/oracle_common/common/bin/wlst.sh ${DOMAIN_HOME}/scripts/change_store_user_config.py
 EOF
 fi
