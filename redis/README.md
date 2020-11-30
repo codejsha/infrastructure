@@ -25,3 +25,8 @@ Run:
 kubectl apply --filename redis-lb-master.yaml
 kubectl apply --filename redis-lb-slave.yaml
 ```
+
+## Docker Compose
+
+- https://github.com/bitnami/bitnami-docker-redis
+- https://github.com/bitnami/bitnami-docker-redis-cluster
