@@ -24,7 +24,7 @@ function check_patch_file {
 }
 
 function change_bsu_mem_args {
-    MEM_ARGS=${1:-"-Xms4096m -Xmx4096m"}
+    MEM_ARGS="${1:-"-Xms4096m -Xmx4096m"}"
     sed -i "s/MEM_ARGS=.*/MEM_ARGS=\"${MEM_ARGS}\"/g" ${MW_HOME}/utils/bsu/bsu.sh
 }
 

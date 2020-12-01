@@ -66,8 +66,17 @@ function opatch_update {
     ${JAVA_HOME}/bin/java \
         -jar ${ORACLE_HOME}/OPatch/patch_files/${PATCH_ID}/opatch_generic.jar \
         -silent oracle_home=${ORACLE_HOME} \
-        -invPtrLoc ${INVENTORY_FILE} \
-        -ignoreSysPrereqs
+        -invPtrLoc ${INVENTORY_FILE}
+    # ${JAVA_HOME}/bin/java \
+    #     -jar ${ORACLE_HOME}/OPatch/patch_files/${PATCH_ID}/opatch_generic.jar \
+    #     -silent oracle_home=${ORACLE_HOME} \
+    #     -invPtrLoc ${INVENTORY_FILE} \
+    #     -ignoreSysPrereqs
+    # ${JAVA_HOME}/bin/java \
+    #     -jar ${ORACLE_HOME}/OPatch/patch_files/${PATCH_ID}/opatch_generic.jar \
+    #     -Djava.io.tmpdir=/tmp \
+    #     -silent oracle_home=${ORACLE_HOME} \
+    #     -invPtrLoc ${INVENTORY_FILE}
 
     STATUS="${?}"
     if [ "${STATUS}" -ne "0" ]; then
@@ -109,7 +118,6 @@ function opatch_apply {
 
 function opatch_lsinventory {
     # ${ORACLE_HOME}/OPatch/opatch lsinventory
-
     ${ORACLE_HOME}/OPatch/opatch lsinventory \
         -all \
         -oh ${ORACLE_HOME} \
