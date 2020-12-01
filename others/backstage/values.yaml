@@ -1,0 +1,21 @@
+postgresql:
+  enabled: true
+  persistence:
+    storageClass: rook-ceph-block
+    accessModes:
+      - ReadWriteOnce
+    size: 8Gi
+
+appConfig:
+  app:
+    baseUrl: https://backstage.example.com
+    title: Backstage
+  backend:
+    baseUrl: https://backstage.example.com
+    cors:
+      origin: https://backstage.example.com
+  lighthouse:
+    baseUrl: https://backstage.example.com/lighthouse-api
+  techdocs:
+    storageUrl: https://backstage.example.com/api/techdocs/static/docs
+    requestUrl: https://backstage.example.com/api/techdocs
