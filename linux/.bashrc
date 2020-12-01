@@ -189,8 +189,9 @@ alias dcrmall-force="docker container rm --force \$(docker container ls --all --
 alias dcrm-force="docker container rm --force"
 alias dcrmunused="docker container prune --force"
 alias dcrun="docker container run"
-function dexecbash() { CONTAINER_NAME="${1}"; if [ -n "${CONTAINER_NAME}" ]; then docker exec --interactive --tty ${1} bash; fi; }
-function dexecsh() { CONTAINER_NAME="${1}"; if [ -n "${CONTAINER_NAME}" ]; then docker exec --interactive --tty ${1} sh; fi; }
+function dexecbash() { CONTAINER_NAME="${1}"; if [ -n "${CONTAINER_NAME}" ]; then docker exec --interactive --tty ${1} /bin/bash; fi; }
+function dexecsh() { CONTAINER_NAME="${1}"; if [ -n "${CONTAINER_NAME}" ]; then docker exec --interactive --tty ${1} /bin/sh; fi; }
+alias dhistory="docker history"
 function dhubimtags() { curl --silent "https://registry.hub.docker.com/v2/repositories/library/${1}/tags/" | jq '."results"[]["name"]' | tr -d '"'; }
 alias dimls="docker image ls"
 alias dimrm="docker image rm"
