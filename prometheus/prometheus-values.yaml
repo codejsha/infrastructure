@@ -1,0 +1,74 @@
+alertmanager:
+  enabled: true
+  name: alertmanager
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+      - alertmanager.example.com
+  persistentVolume:
+    enabled: true
+    size: 2Gi
+    storageClass: "rook-ceph-block"
+  replicaCount: 1
+  service:
+    type: ClusterIP
+
+configmapReload:
+  prometheus:
+    enabled: true
+    name: configmap-reload
+  alertmanager:
+    enabled: true
+    name: configmap-reload
+
+kubeStateMetrics:
+  enabled: true
+
+nodeExporter:
+  enabled: true
+  hostNetwork: true
+  hostPID: true
+  name: node-exporter
+  service:
+    annotations:
+      prometheus.io/scrape: "true"
+    clusterIP: None
+    type: ClusterIP
+
+server:
+  enabled: true
+  name: server
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+      - prometheus-server.example.com
+  persistentVolume:
+    enabled: true
+    size: 8Gi
+    storageClass: "rook-ceph-block"
+  replicaCount: 1
+  service:
+    type: ClusterIP
+
+pushgateway:
+  enabled: true
+  name: pushgateway
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+      - pushgateway.example.com
+  replicaCount: 1
+  service:
+    annotations:
+      prometheus.io/probe: pushgateway
+    type: ClusterIP
+  persistentVolume:
+    enabled: true
+    size: 2Gi
+    storageClass: "rook-ceph-block"
