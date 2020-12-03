@@ -1,0 +1,127 @@
+watchNamespaces: []
+watchAnyNamespace: false
+
+image:
+  registry: quay.io
+  repository: strimzi
+  name: operator
+  tag: latest
+logVolume: co-config-volume
+logConfigMap: strimzi-cluster-operator
+logLevel: ${env:STRIMZI_LOG_LEVEL:-INFO}
+fullReconciliationIntervalMs: 120000
+operationTimeoutMs: 300000
+kubernetesServiceDnsDomain: cluster.local
+
+tolerations: []
+affinity: {}
+nodeSelector: {}
+
+zookeeper:
+  image:
+    registry: quay.io
+    repository: strimzi
+    name: kafka
+    tagPrefix: latest
+kafka:
+  image:
+    registry: quay.io
+    repository: strimzi
+    name: kafka
+    tagPrefix: latest
+kafkaConnect:
+  image:
+    registry: quay.io
+    repository: strimzi
+    name: kafka
+    tagPrefix: latest
+kafkaConnects2i:
+  image:
+    registry: quay.io
+    repository: strimzi
+    name: kafka
+    tagPrefix: latest
+topicOperator:
+  image:
+    registry: quay.io
+    repository: strimzi
+    name: operator
+    tag: latest
+userOperator:
+  image:
+    registry: quay.io
+    repository: strimzi
+    name: operator
+    tag: latest
+kafkaInit:
+  image:
+    registry: quay.io
+    repository: strimzi
+    name: operator
+    tag: latest
+tlsSidecarEntityOperator:
+  image:
+    registry: quay.io
+    repository: strimzi
+    name: kafka
+    tagPrefix: latest
+kafkaMirrorMaker:
+  image:
+    registry: quay.io
+    repository: strimzi
+    name: kafka
+    tagPrefix: latest
+kafkaBridge:
+  image:
+    registry: quay.io
+    repository: strimzi
+    name: kafka-bridge
+    tag: 0.19.0
+kafkaExporter:
+  image:
+    registry: quay.io
+    repository: strimzi
+    name: kafka
+    tagPrefix: latest
+jmxTrans:
+  image:
+    registry: quay.io
+    repository: strimzi
+    name: jmxtrans
+    tag: latest
+kafkaMirrorMaker2:
+  image:
+    registry: quay.io
+    repository: strimzi
+    name: kafka
+    tagPrefix: latest
+cruiseControl:
+  image:
+    registry: quay.io
+    repository: strimzi
+    name: kafka
+    tagPrefix: latest
+tlsSidecarCruiseControl:
+  image:
+    registry: quay.io
+    repository: strimzi
+    name: kafka
+    tagPrefix: latest
+resources:
+  limits:
+    memory: 384Mi
+    cpu: 1000m
+  requests:
+    memory: 384Mi
+    cpu: 200m
+livenessProbe:
+  initialDelaySeconds: 10
+  periodSeconds: 30
+readinessProbe:
+  initialDelaySeconds: 10
+  periodSeconds: 30
+
+imageRegistryOverride: ""
+imageRepositoryOverride: ""
+imageTagOverride: ""
+createGlobalResources: true

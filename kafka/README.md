@@ -18,6 +18,7 @@ CMAK operator creates Kubernetes Jobs for configuring CMAK. Kubernetes Jobs are 
 Enable feature gates:
 
 ```bash
+# kubelet.service EnvironmentFile
 sudo vi /etc/kubernetes/kubelet.env
 ```
 

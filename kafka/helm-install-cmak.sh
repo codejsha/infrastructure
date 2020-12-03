@@ -1,6 +1,7 @@
 #!/bin/bash
 
 helm repo add cmak-operator https://eshepelyuk.github.io/cmak-operator
+helm repo update
 
 NAMESPACE="kafka-system"
 

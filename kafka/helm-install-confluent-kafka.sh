@@ -1,0 +1,16 @@
+#!/bin/bash
+
+helm repo add confluentinc https://confluentinc.github.io/cp-helm-charts
+helm repo update
+
+NAMESPACE="kafka-system"
+
+# helm install my-cp-kafka \
+helm upgrade --install my-cp-kafka \
+    --create-namespace \
+    --namespace ${NAMESPACE} \
+    --set cp-zookeeper.persistence.dataDirStorageClass="rook-ceph-block" \
+    --set cp-zookeeper.persistence.dataLogDirStorageClass="rook-ceph-block" \
+    --set cp-kafka.persistence.storageClass="rook-ceph-block" \
+    --version 0.5.0 \
+    confluentinc/cp-helm-charts
