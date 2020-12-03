@@ -15,10 +15,10 @@ export TOMCAT_SHUTDOWN_PORT="${4:-8005}"
 export TOMCAT_AJP_PORT="${5:-8009}"
 export TOMCAT_JMX_PORT="8686"
 
-export LOG_DIR="\${CATALINA_BASE}/logs"
-export DUMP_LOG_DIR="\${LOG_DIR}/dump"
-export CATALINA_OUT="\${LOG_DIR}/catalina.out"
-export GC_LOG_OUT="\${LOG_DIR}/gc.\${INSTANCE_NAME}.log"
+export LOG_DIR="${CATALINA_BASE}/logs"
+export DUMP_LOG_DIR="${LOG_DIR}/dump"
+export CATALINA_OUT="${LOG_DIR}/catalina.out"
+export GC_LOG_OUT="${LOG_DIR}/gc.${INSTANCE_NAME}.log"
 
 ######################################################################
 

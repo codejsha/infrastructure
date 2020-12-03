@@ -12,8 +12,8 @@ mkdir -p ${CATALINA_BASE}
 /usr/bin/cp -rpf ${CATALINA_HOME}/temp ${CATALINA_BASE}
 /usr/bin/cp -rpf ${CATALINA_HOME}/work ${CATALINA_BASE}
 mkdir -p ${CATALINA_BASE}/webapps/ROOT
-mkdir -p "$(eval echo ${LOG_DIR})"
-mkdir -p "$(eval echo $(eval echo ${DUMP_LOG_DIR}))"
+mkdir -p ${LOG_DIR}
+mkdir -p ${DUMP_LOG_DIR}
 
 ######################################################################
 
