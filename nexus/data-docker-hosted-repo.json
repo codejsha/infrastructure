@@ -1,0 +1,16 @@
+{
+  "name": "${REPOSITORY_NAME}",
+  "online": true,
+  "storage": {
+    "blobStoreName": "${BLOBSTORE_NAME}",
+    "strictContentTypeValidation": true,
+    "writePolicy": "ALLOW"
+  },
+  "cleanup": null,
+  "docker": {
+    "v1Enabled": false,
+    "forceBasicAuth": false,
+    "httpPort": null,
+    "httpsPort": null
+  }
+}

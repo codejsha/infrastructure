@@ -1,0 +1,41 @@
+{
+  "name": "${REPOSITORY_NAME}",
+  "online": true,
+  "storage": {
+    "blobStoreName": "${BLOBSTORE_NAME}",
+    "strictContentTypeValidation": true
+  },
+  "cleanup": null,
+  "proxy": {
+    "remoteUrl": "${REMOTE_URL}",
+    "contentMaxAge": 1440,
+    "metadataMaxAge": 1440
+  },
+  "negativeCache": {
+    "enabled": true,
+    "timeToLive": 1440
+  },
+  "httpClient": {
+    "blocked": false,
+    "autoBlock": false,
+    "connection": {
+      "retries": null,
+      "userAgentSuffix": null,
+      "timeout": null,
+      "enableCircularRedirects": false,
+      "enableCookies": false
+    },
+    "authentication": null
+  },
+  "routingRule": null,
+  "docker": {
+    "v1Enabled": false,
+    "forceBasicAuth": false,
+    "httpPort": null,
+    "httpsPort": null
+  },
+  "dockerProxy": {
+    "indexType": "${DOCKER_INDEX_TYPE}",
+    "indexUrl": null
+  }
+}

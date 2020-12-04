@@ -1,0 +1,17 @@
+{
+  "name": "${REPOSITORY_NAME}",
+  "online": true,
+  "storage": {
+    "blobStoreName": "${BLOBSTORE_NAME}",
+    "strictContentTypeValidation": true
+  },
+  "group": {
+    "memberNames": ["${REPOSITORY_MEMBER_NAMES}"]
+  },
+  "docker": {
+    "v1Enabled": false,
+    "forceBasicAuth": false,
+    "httpPort": 5003,
+    "httpsPort": null
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "userId": "${USER_ID}",
+  "firstName": "${USER_FIRSTNAME}",
+  "lastName": "${USER_LASTNAME}",
+  "emailAddress": "${USER_EMAIL}",
+  "password": "${USER_PASSWORD}",
+  "status": "active",
+  "roles": ["${USER_ROLES}"]
+}

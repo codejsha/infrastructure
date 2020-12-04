@@ -1,12 +1,14 @@
 #!/bin/bash
 
-NEXUS_URL="https://nexus.example.com"
-NEXUS_USER="admin"
-NEXUS_PASSWORD="admin123"
-REPOSITORY_NAME="${1}"
-BLOBSTORE_NAME="${2}"
-REMOTE_URL="${3}"
-DOCKER_INDEX_TYPE="${4}"
+export NEXUS_URL="https://nexus.example.com"
+export NEXUS_USER="admin"
+export NEXUS_PASSWORD="admin123"
+export REPOSITORY_NAME="${1}"
+export BLOBSTORE_NAME="${2}"
+export REMOTE_URL="${3}"
+export DOCKER_INDEX_TYPE="${4}"
+
+envsubst < ./data-docker-proxy-repo.json > ./data-docker-proxy-repo-temp.json
 
 function create_docker_proxy_repository {
     curl --insecure \
@@ -14,48 +16,7 @@ function create_docker_proxy_repository {
         -X POST "${NEXUS_URL}/service/rest/beta/repositories/docker/proxy" \
         -H "accept: application/json" \
         -H "Content-Type: application/json" \
-        -d \
-        "{ \
-          \"name\": \"${REPOSITORY_NAME}\", \
-          \"online\": true, \
-          \"storage\": { \
-            \"blobStoreName\": \"${BLOBSTORE_NAME}\", \
-            \"strictContentTypeValidation\": true \
-          }, \
-          \"cleanup\": null, \
-          \"proxy\": { \
-            \"remoteUrl\": \"${REMOTE_URL}\", \
-            \"contentMaxAge\": 1440, \
-            \"metadataMaxAge\": 1440 \
-          }, \
-          \"negativeCache\": { \
-            \"enabled\": true, \
-            \"timeToLive\": 1440 \
-          }, \
-          \"httpClient\": { \
-            \"blocked\": false, \
-            \"autoBlock\": false, \
-            \"connection\": { \
-              \"retries\": null, \
-              \"userAgentSuffix\": null, \
-              \"timeout\": null, \
-              \"enableCircularRedirects\": false, \
-              \"enableCookies\": false \
-            }, \
-            \"authentication\": null \
-          }, \
-          \"routingRule\": null, \
-          \"docker\": { \
-            \"v1Enabled\": false, \
-            \"forceBasicAuth\": false, \
-            \"httpPort\": null, \
-            \"httpsPort\": null \
-          }, \
-          \"dockerProxy\": { \
-            \"indexType\": \"${DOCKER_INDEX_TYPE}\", \
-            \"indexUrl\": null \
-          } \
-        }"
+        -d @data-docker-proxy-repo-temp.json
 }
 
 create_docker_proxy_repository

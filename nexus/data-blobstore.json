@@ -1,0 +1,23 @@
+{
+  "name": "${BLOBSTORE_NAME}",
+  "softQuota": null,
+  "bucketConfiguration": {
+    "bucket": {
+      "region": "us-east-1",
+      "name": "${BUCKET_NAME}",
+      "prefix": "",
+      "expiration": 3
+    },
+    "bucketSecurity": {
+      "accessKeyId": "${AWS_ACCESS_KEY_ID}",
+      "secretAccessKey": "${AWS_SECRET_ACCESS_KEY}",
+      "role": "",
+      "sessionToken": ""
+    },
+    "advancedBucketConnection": {
+      "endpoint": "${AWS_ENDPOINT_URL}",
+      "signerType": "AWSS3V4SignerType",
+      "forcePathStyle": true
+    }
+  }
+}

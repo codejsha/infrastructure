@@ -1,11 +1,13 @@
 #!/bin/bash
 
-NEXUS_URL="https://nexus.example.com"
-NEXUS_USER="admin"
-NEXUS_PASSWORD="admin123"
-REPOSITORY_NAME="${1}"
-BLOBSTORE_NAME="${2}"
-REPOSITORY_MEMBER_NAMES="${3}"
+export NEXUS_URL="https://nexus.example.com"
+export NEXUS_USER="admin"
+export NEXUS_PASSWORD="admin123"
+export REPOSITORY_NAME="${1}"
+export BLOBSTORE_NAME="${2}"
+export REPOSITORY_MEMBER_NAMES="${3}"
+
+envsubst < ./data-docker-group-repo.json > ./data-docker-group-repo-temp.json
 
 function create_docker_group_repository {
     curl --insecure \
@@ -13,24 +15,7 @@ function create_docker_group_repository {
         -X POST "${NEXUS_URL}/service/rest/beta/repositories/docker/group" \
         -H "accept: application/json" \
         -H "Content-Type: application/json" \
-        -d \
-        "{ \
-          \"name\": \"${REPOSITORY_NAME}\", \
-          \"online\": true, \
-          \"storage\": { \
-            \"blobStoreName\": \"${BLOBSTORE_NAME}\", \
-            \"strictContentTypeValidation\": true \
-          }, \
-          \"group\": { \
-            \"memberNames\": [${REPOSITORY_MEMBER_NAMES}] \
-          }, \
-          \"docker\": { \
-            \"v1Enabled\": false, \
-            \"forceBasicAuth\": false, \
-            \"httpPort\": 5003, \
-            \"httpsPort\": null \
-          } \
-        }"
+        -d @data-docker-group-repo-temp.json
 }
 
 create_docker_group_repository

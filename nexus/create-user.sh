@@ -1,15 +1,17 @@
 #!/bin/bash
 
-NEXUS_URL="https://nexus.example.com"
-NEXUS_USER="admin"
-NEXUS_PASSWORD="admin123"
+export NEXUS_URL="https://nexus.example.com"
+export NEXUS_USER="admin"
+export NEXUS_PASSWORD="admin123"
 
-USER_ID="${1}"
-USER_PASSWORD="${2}"
-USER_FIRSTNAME="${USER_ID}"
-USER_LASTNAME="${USER_ID}"
-USER_EMAIL="${USER_ID}@example.org"
-USER_ROLES="nx-admin"
+export USER_ID="${1}"
+export USER_PASSWORD="${2}"
+export USER_FIRSTNAME="${USER_ID}"
+export USER_LASTNAME="${USER_ID}"
+export USER_EMAIL="${USER_ID}@example.org"
+export USER_ROLES="nx-admin"
+
+envsubst < ./data-user.json > ./data-user-temp.json
 
 function create_user {
     curl --insecure \
@@ -17,16 +19,7 @@ function create_user {
         -X POST "${NEXUS_URL}/service/rest/beta/security/users" \
         -H "accept: application/json" \
         -H "Content-Type: application/json" \
-        -d \
-        "{ \
-          \"userId\": \"${USER_ID}\", \
-          \"firstName\": \"${USER_FIRSTNAME}\", \
-          \"lastName\": \"${USER_LASTNAME}\", \
-          \"emailAddress\": \"${USER_EMAIL}\", \
-          \"password\": \"${USER_PASSWORD}\", \
-          \"status\": \"active\", \
-          \"roles\": [\"${USER_ROLES}\"] \
-        }"
+        -d @data-user.json
 }
 
 create_user
