@@ -11,7 +11,7 @@ function create_strimzi_namespaces {
     kubectl create namespace ${STRIMZI_NAMESPACE}
 }
 
-function download_strimzi_operator_file {
+function download_strimzi_operator_install_file {
     curl \
         --output strimzi-${STRIMZI_VERSION}.tar.gz \
         --location \
@@ -20,7 +20,7 @@ function download_strimzi_operator_file {
         https://github.com/strimzi/strimzi-kafka-operator/releases/download/${STRIMZI_VERSION}/strimzi-${STRIMZI_VERSION}.tar.gz
 }
 
-function extract_strimzi_operator_file {
+function extract_strimzi_operator_install_file {
     tar -xzf strimzi-${STRIMZI_VERSION}.tar.gz
 }
 
@@ -53,8 +53,8 @@ function create_kafka_cluster {
 ######################################################################
 
 create_strimzi_namespaces
-download_strimzi_operator_file
-extract_strimzi_operator_file
+download_strimzi_operator_install_file
+extract_strimzi_operator_install_file
 deploy_strimzi_resources
 give_permission_to_strimzi_operator
 create_kafka_cluster

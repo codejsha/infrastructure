@@ -1,9 +1,11 @@
 #!/bin/bash
 
+NEOVIM_VERSION="0.4.4"
+
 sudo yum install -y fuse fuse-sshfs
 
 if [ ! -e "/usr/local/bin/nvim" ]; then
-    sudo curl -o /usr/local/bin/nvim -LJO https://github.com/neovim/neovim/releases/download/v0.4.4/nvim.appimage
+    sudo curl -o /usr/local/bin/nvim -LJO https://github.com/neovim/neovim/releases/download/v${NEOVIM_VERSION}/nvim.appimage
     sudo chmod 755 /usr/local/bin/nvim
 fi
 

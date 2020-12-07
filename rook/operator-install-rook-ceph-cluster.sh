@@ -1,11 +1,12 @@
 #!/bin/bash
 
 /usr/bin/cp -f cluster.yaml rook/cluster/examples/kubernetes/ceph/cluster.yaml
+
 kubectl create -f rook/cluster/examples/kubernetes/ceph/cluster.yaml
 kubectl create -f rook/cluster/examples/kubernetes/ceph/toolbox.yaml
 # kubectl create -f rook/cluster/examples/kubernetes/ceph/dashboard-ingress-https.yaml
 # kubectl create -f rook/cluster/examples/kubernetes/ceph/dashboard-loadbalancer.yaml
-kubectl apply -f dashboard-ingress.yaml
+kubectl create -f dashboard-ingress.yaml
 kubectl create -f rook/cluster/examples/kubernetes/ceph/csi/rbd/storageclass.yaml
 
 ### get dashboard password

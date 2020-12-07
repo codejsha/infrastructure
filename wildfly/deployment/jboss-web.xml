@@ -4,7 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.jboss.org/schema/jbossas
     http://www.jboss.org/schema/jbossas/jboss-web_7_2.xsd">
-    <context-root>/test</context-root>
+    <context-root>/</context-root>
     <replication-config>
         <replication-trigger>SET</replication-trigger>
         <replication-granularity>SESSION</replication-granularity>

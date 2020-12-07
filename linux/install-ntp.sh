@@ -4,10 +4,14 @@
 
 function install_ntp_with_yum {
     sudo yum install -y ntp
+    sudo systemctl enable ntpd
+    sudo systemctl start ntpd
 }
 
 function install_ntp_with_dnf {
     sudo dnf install -y ntp
+    sudo systemctl enable ntpd
+    sudo systemctl start ntpd
 }
 
 function install_ntp_with_aptget {

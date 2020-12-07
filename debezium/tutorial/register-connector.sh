@@ -16,14 +16,16 @@ function get_connector_list {
 }
 
 function get_connector_task {
+    CONNECTOR_NAME="${1}"
+
     curl \
         --include \
         --header "Accept:application/json" \
-        --request GET localhost:8083/connectors/inventory-connector
+        --request GET kafka-connect.example.com:8083/connectors/${CONNECTOR_NAME}
 }
 
 ######################################################################
 
 register_mysql_connector
 get_connector_list
-get_connector_task
+get_connector_task "inventory-connector"

@@ -5,8 +5,8 @@ helm repo update
 
 NAMESPACE="cert-manager"
 
-# helm install cert-manager \
-helm upgrade --install cert-manager \
+# helm install my-cert-manager \
+helm upgrade --install my-cert-manager \
     --create-namespace \
     --namespace ${NAMESPACE} \
     --set installCRDs="true" \
