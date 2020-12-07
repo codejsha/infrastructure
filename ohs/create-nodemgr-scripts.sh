@@ -7,7 +7,7 @@ LOG_DIR="${LOG_DIR}"
 
 ######################################################################
 
-### transform variable
+### substitute variables
 TEMP="\${DOMAIN_HOME}"
 VAR_LOG_DIR="${LOG_DIR/${DOMAIN_HOME}/${TEMP}}"
 

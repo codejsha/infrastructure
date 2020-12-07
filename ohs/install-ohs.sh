@@ -17,7 +17,7 @@ INSTALL_SCRIPT_DIR="/svc/infrastructure/ohs"
 
 ######################################################################
 
-function install_prerequisite_packages {
+function install_required_packages {
     sudo yum install -y \
         binutils \
         compat-libcap1 \
@@ -45,5 +45,5 @@ function install_ohs {
 
 ######################################################################
 
-install_prerequisite_packages
+install_required_packages
 install_ohs

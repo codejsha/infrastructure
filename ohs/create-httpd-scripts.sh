@@ -10,13 +10,21 @@ COMPONENT_NAME="${COMPONENT_NAME}"
 
 ######################################################################
 
+### substitute variables
+TEMP="\${ORACLE_HOME}"
+VAR_DOMAIN_HOME="${INSTANCE_HOME/${ORACLE_HOME}/${TEMP}}"
+TEMP="\${DOMAIN_NAME}"
+VAR_DOMAIN_HOME="${INSTANCE_HOME/${DOMAIN_NAME}/${TEMP}}"
+
+######################################################################
+
 cat <<EOF > ${DOMAIN_HOME}/check-config.sh
 #!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 ORACLE_HOME="${ORACLE_HOME}"
 DOMAIN_NAME="${DOMAIN_NAME}"
-DOMAIN_HOME="\${ORACLE_HOME}/user_projects/domains/\${DOMAIN_NAME}"
+DOMAIN_HOME="${VAR_DOMAIN_HOME}"
 COMPONENT_NAME="${COMPONENT_NAME}"
 
 PRODUCT_HOME="\${ORACLE_HOME}/ohs"
@@ -37,7 +45,7 @@ export PS4="\e[33;1m+ \e[0m"; set -x
 
 ORACLE_HOME="${ORACLE_HOME}"
 DOMAIN_NAME="${DOMAIN_NAME}"
-DOMAIN_HOME="\${ORACLE_HOME}/user_projects/domains/\${DOMAIN_NAME}"
+DOMAIN_HOME="${VAR_DOMAIN_HOME}"
 COMPONENT_NAME="${COMPONENT_NAME}"
 
 PRODUCT_HOME="\${ORACLE_HOME}/ohs"
@@ -58,7 +66,7 @@ export PS4="\e[33;1m+ \e[0m"; set -x
 
 ORACLE_HOME="${ORACLE_HOME}"
 DOMAIN_NAME="${DOMAIN_NAME}"
-DOMAIN_HOME="\${ORACLE_HOME}/user_projects/domains/\${DOMAIN_NAME}"
+DOMAIN_HOME="${VAR_DOMAIN_HOME}"
 COMPONENT_NAME="${COMPONENT_NAME}"
 
 PRODUCT_HOME="\${ORACLE_HOME}/ohs"
@@ -73,13 +81,13 @@ EOF
 
 ######################################################################
 
-cat <<EOF > ${DOMAIN_HOME}/get-dump-vhosts.sh
+cat <<EOF > ${DOMAIN_HOME}/get-vhosts-settings.sh
 #!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 ORACLE_HOME="${ORACLE_HOME}"
 DOMAIN_NAME="${DOMAIN_NAME}"
-DOMAIN_HOME="\${ORACLE_HOME}/user_projects/domains/\${DOMAIN_NAME}"
+DOMAIN_HOME="${VAR_DOMAIN_HOME}"
 COMPONENT_NAME="${COMPONENT_NAME}"
 
 PRODUCT_HOME="\${ORACLE_HOME}/ohs"
@@ -94,13 +102,13 @@ EOF
 
 ######################################################################
 
-cat <<EOF > ${DOMAIN_HOME}/get-dump-run-cfg.sh
+cat <<EOF > ${DOMAIN_HOME}/get-run-settings.sh
 #!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 ORACLE_HOME="${ORACLE_HOME}"
 DOMAIN_NAME="${DOMAIN_NAME}"
-DOMAIN_HOME="\${ORACLE_HOME}/user_projects/domains/\${DOMAIN_NAME}"
+DOMAIN_HOME="${VAR_DOMAIN_HOME}"
 COMPONENT_NAME="${COMPONENT_NAME}"
 
 PRODUCT_HOME="\${ORACLE_HOME}/ohs"
@@ -115,13 +123,13 @@ EOF
 
 ######################################################################
 
-cat <<EOF > ${DOMAIN_HOME}/get-dump-settings.sh
+cat <<EOF > ${DOMAIN_HOME}/get-settings.sh
 #!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 ORACLE_HOME="${ORACLE_HOME}"
 DOMAIN_NAME="${DOMAIN_NAME}"
-DOMAIN_HOME="\${ORACLE_HOME}/user_projects/domains/\${DOMAIN_NAME}"
+DOMAIN_HOME="${VAR_DOMAIN_HOME}"
 COMPONENT_NAME="${COMPONENT_NAME}"
 
 PRODUCT_HOME="\${ORACLE_HOME}/ohs"
@@ -137,13 +145,13 @@ EOF
 
 ######################################################################
 
-cat <<EOF > ${DOMAIN_HOME}/get-dump-modules.sh
+cat <<EOF > ${DOMAIN_HOME}/get-load-modules.sh
 #!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 ORACLE_HOME="${ORACLE_HOME}"
 DOMAIN_NAME="${DOMAIN_NAME}"
-DOMAIN_HOME="\${ORACLE_HOME}/user_projects/domains/\${DOMAIN_NAME}"
+DOMAIN_HOME="${VAR_DOMAIN_HOME}"
 COMPONENT_NAME="${COMPONENT_NAME}"
 
 PRODUCT_HOME="\${ORACLE_HOME}/ohs"
@@ -159,13 +167,13 @@ EOF
 
 ######################################################################
 
-cat <<EOF > ${DOMAIN_HOME}/get-dump-includes.sh
+cat <<EOF > ${DOMAIN_HOME}/get-include-files.sh
 #!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 ORACLE_HOME="${ORACLE_HOME}"
 DOMAIN_NAME="${DOMAIN_NAME}"
-DOMAIN_HOME="\${ORACLE_HOME}/user_projects/domains/\${DOMAIN_NAME}"
+DOMAIN_HOME="${VAR_DOMAIN_HOME}"
 COMPONENT_NAME="${COMPONENT_NAME}"
 
 PRODUCT_HOME="\${ORACLE_HOME}/ohs"
@@ -180,25 +188,11 @@ EOF
 
 ######################################################################
 
-cat <<EOF > ${DOMAIN_HOME}/get-links-dump.sh
-#!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -x
-
-# HOSTNAME_IP_ADDRESS="$(hostname -i)"
-LISTEN_ADDRESS="127.0.0.1"
-LISTEN_PORT="80"
-
-links -dump http://\${LISTEN_ADDRESS}:\${LISTEN_PORT}/server-status
-EOF
-
-######################################################################
-
 chmod 750 ${DOMAIN_HOME}/check-config.sh
 chmod 750 ${DOMAIN_HOME}/get-version.sh
 chmod 750 ${DOMAIN_HOME}/get-compile-settings.sh
-chmod 750 ${DOMAIN_HOME}/get-dump-vhosts.sh
-chmod 750 ${DOMAIN_HOME}/get-dump-run-cfg.sh
-chmod 750 ${DOMAIN_HOME}/get-dump-settings.sh
-chmod 750 ${DOMAIN_HOME}/get-dump-modules.sh
-chmod 750 ${DOMAIN_HOME}/get-dump-includes.sh
-chmod 750 ${DOMAIN_HOME}/get-links-dump.sh
+chmod 750 ${DOMAIN_HOME}/get-vhosts-settings.sh
+chmod 750 ${DOMAIN_HOME}/get-run-settings.sh
+chmod 750 ${DOMAIN_HOME}/get-settings.sh
+chmod 750 ${DOMAIN_HOME}/get-load-modules.sh
+chmod 750 ${DOMAIN_HOME}/get-include-files.sh
