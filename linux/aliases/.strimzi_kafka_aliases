@@ -1,0 +1,23 @@
+# strimzi kafka
+
+alias kdkb="kubectl describe kafkabridges"
+alias kdkctr="kubectl describe kafkaconnectors"
+alias kdkc="kubectl describe kafkaconnects"
+alias kdkcs2i="kubectl describe kafkaconnects2is"
+alias kdkmm2="kubectl describe kafkamirrormaker2s"
+alias kdkmm="kubectl describe kafkamirrormakers"
+alias kdkr="kubectl describe kafkarebalances"
+alias kdk="kubectl describe kafkas"
+alias kdkt="kubectl describe kafkatopics"
+alias kdku="kubectl describe kafkausers"
+
+alias kgkb="kubectl get kafkabridges"
+alias kgkctr="kubectl get kafkaconnectors"
+alias kgkc="kubectl get kafkaconnects"
+alias kgkcs2i="kubectl get kafkaconnects2is"
+alias kgkmm2="kubectl get kafkamirrormaker2s"
+alias kgkmm="kubectl get kafkamirrormakers"
+alias kgkr="kubectl get kafkarebalances"
+alias kgk="kubectl get kafkas"
+alias kgkt="kubectl get kafkatopics"
+alias kgku="kubectl get kafkausers"

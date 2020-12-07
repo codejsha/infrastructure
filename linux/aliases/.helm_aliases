@@ -1,0 +1,23 @@
+# helm
+
+function helm() { echo "+ helm ${@}">&2; command helm ${@}; }
+
+alias helm-install="helm install"
+alias helm-list="helm list"
+alias helm-plugin-list="helm plugin list"
+alias helm-pull="helm pull"
+alias helm-push="helm push"
+alias helm-push-chartmuseum="helm push ${1} chartmuseum"
+alias helm-repo-add="helm repo add"
+alias helm-repo-list="helm repo list"
+alias helm-repo-update="helm repo update"
+alias helm-search-repo="helm search repo"
+alias helm-search-repo-all="helm search repo --versions"
+alias helm-search-repo-chartmuseum="helm search repo chartmuseum/"
+alias helm-show-chart="helm show chart"
+alias helm-show-readme="helm show readme"
+alias helm-show-values="helm show values"
+alias helm-status="helm status"
+alias helm-uninstall="helm uninstall"
+alias helm-upgrade="helm upgrade"
+alias helm-upgrade-install="helm upgrade --install"

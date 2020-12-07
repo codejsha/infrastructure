@@ -1,0 +1,58 @@
+# systemctl
+
+alias sc-daemon-reload="sudo systemctl daemon-reload"
+
+alias sc-disable="sudo systemctl disable"
+
+alias sc-edit="sudo systemctl edit"
+alias sc-edit-docker="sudo systemctl edit docker"
+
+alias sc-enable="sudo systemctl enable"
+
+alias sc-isact="sudo systemctl is-active"
+alias sc-isenabled="sudo systemctl is-enabled"
+
+alias sc-restart="sudo systemctl restart"
+alias sc-restart-docker="sudo systemctl restart docker"
+alias sc-restart-haproxy="sudo systemctl restart haproxy"
+alias sc-restart-httpd="sudo systemctl restart httpd"
+alias sc-restart-net="sudo systemctl restart network"
+alias sc-restart-nginx="sudo systemctl restart nginx"
+alias sc-restart-nm="sudo systemctl restart NetworkManager"
+alias sc-restart-sysstat="sudo systemctl restart sysstat"
+alias sc-restart-vnstat="sudo systemctl restart vnstat"
+
+alias sc-service-failed="sudo systemctl list-units --type=service --state=failed"
+alias sc-service-running="sudo systemctl list-units --type=service --state=running"
+
+alias sc-start="sudo systemctl start"
+alias sc-start-docker="sudo systemctl start docker"
+alias sc-start-haproxy="sudo systemctl start haproxy"
+alias sc-start-httpd="sudo systemctl start httpd"
+alias sc-start-net="sudo systemctl start network"
+alias sc-start-nginx="sudo systemctl start nginx"
+alias sc-start-nm="sudo systemctl start NetworkManager"
+alias sc-start-sysstat="sudo systemctl start sysstat"
+alias sc-start-vnstat="sudo systemctl start vnstat"
+
+alias sc-status="sudo systemctl status"
+alias sc-status-docker="sudo systemctl status docker"
+alias sc-status-haproxy="sudo systemctl status haproxy"
+alias sc-status-httpd="sudo systemctl status httpd"
+alias sc-status-net="sudo systemctl status network"
+alias sc-status-nginx="sudo systemctl status nginx"
+alias sc-status-nm="sudo systemctl status NetworkManager"
+alias sc-status-sysstat="sudo systemctl status sysstat"
+alias sc-status-vnstat="sudo systemctl status vnstat"
+alias sc-statusfull="sudo systemctl status --no-pager --full"
+alias sc-statusfull-docker="sudo systemctl status --no-pager --full docker"
+
+alias sc-stop="sudo systemctl stop"
+alias sc-stop-docker="sudo systemctl stop docker"
+alias sc-stop-haproxy="sudo systemctl stop haproxy"
+alias sc-stop-httpd="sudo systemctl stop httpd"
+alias sc-stop-net="sudo systemctl stop network"
+alias sc-stop-nginx="sudo systemctl stop nginx"
+alias sc-stop-nm="sudo systemctl stop NetworkManager"
+alias sc-stop-sysstat="sudo systemctl stop sysstat"
+alias sc-stop-vnstat="sudo systemctl stop vnstat"

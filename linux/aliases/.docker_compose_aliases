@@ -1,0 +1,20 @@
+# docker compose
+
+function docker-compose() { echo "+ docker-compose ${@}">&2; command docker-compose ${@}; }
+
+alias dcp="docker-compose"
+alias dcpbuild="docker-compose build"
+alias dcpconfig="docker-compose config"
+alias dcpdown="docker-compose down"
+function dcpexecbash() { CONTAINER_NAME="${1}"; if [ -n "${CONTAINER_NAME}" ]; then docker-compose exec --detach ${1} /bin/bash -c ${2}; fi; }
+function dcpexecsh() { CONTAINER_NAME="${1}"; if [ -n "${CONTAINER_NAME}" ]; then docker-compose exec --detach ${1} /bin/sh -c ${2}; fi; }
+alias dcpkill="docker-compose kill"
+alias dcplo="docker-compose logs --follow"
+function dcplotail() { LINES="${1}"; docker-compose logs --follow --tail="${LINES}"; }
+alias dcpps="docker-compose ps"
+alias dcpup="docker-compose up"
+alias dcprm="docker-compose rm"
+alias dcprestart="docker-compose restart"
+alias dcpstart="docker-compose start"
+alias dcpstop="docker-compose stop"
+alias dcptop="docker-compose top"

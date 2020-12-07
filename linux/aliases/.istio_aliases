@@ -1,0 +1,23 @@
+# istio
+
+function istioctl() { echo "+ istioctl ${@}">&2; command istioctl ${@}; }
+
+alias istioctl-proxy-status="istioctl proxy-status"
+
+alias kddr="kubectl describe destinationrules"
+alias kdgw="kubectl describe gateways"
+alias kdse="kubectl describe serviceentries"
+alias kdvs="kubectl describe virtualservices"
+alias kdwe="kubectl describe workloadentries"
+
+alias kgdr="kubectl get destinationrules"
+alias kggw="kubectl get gateways"
+alias kgnslc-istio="kubectl get namespace -L istio-injection"
+alias kgse="kubectl get serviceentries"
+alias kgtm="kubectl get gw,vs,dr,se"
+alias kgvs="kubectl get virtualservices"
+alias kgwe="kubectl get workloadentries"
+
+function klbns-istio() { NAMESPACE="${1}"; kubectl label namespace ${1} istio-injection=enabled; }
+
+alias krmtm="kubectl delete gw,vs,dr,se --all"

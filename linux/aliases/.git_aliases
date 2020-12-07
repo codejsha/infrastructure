@@ -1,0 +1,34 @@
+# git
+
+eval "$(gh completion --shell bash)"
+
+function gh() { echo "+ gh ${@}">&2; command gh ${@}; }
+function git() { echo "+ git ${@}">&2; command git ${@}; }
+
+alias gh-auth-login="gh auth login"
+alias gh-auth-logout="gh auth logout"
+alias gh-auth-status="gh auth status"
+alias gh-config-get="gh config get"
+alias gh-config-get-git-protocol="gh config get git_protocol"
+alias gh-config-set="gh config set"
+alias gh-config-set-git-protocol-https="gh config set git_protocol https"
+alias gh-config-set-git-protocol-ssh="gh config set git_protocol ssh"
+alias gh-repo-clone="gh repo clone"
+alias gh-repo-create="gh repo create"
+alias gh-repo-create-private="gh repo create --private"
+alias gh-repo-create-public="gh repo create --public"
+alias gh-repo-view="gh repo view"
+
+alias git-add-all="git add --all"
+alias git-add-no-all="git add --no-all"
+alias git-add-update="git add --update"
+alias git-commit-message="git commit --message"
+alias git-fetch-all="git fetch --all"
+alias git-pull-origin="git pull origin"
+alias git-pull-origin-master="git pull origin master"
+alias git-push="git push"
+alias git-push-origin="git push origin"
+alias git-push-origin-master="git push origin master"
+alias git-reset-hard="git reset --hard"
+alias git-reset-hard-master="git reset --hard origin/master"
+alias git-status="git status"

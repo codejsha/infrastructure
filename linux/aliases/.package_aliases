@@ -1,0 +1,28 @@
+# package
+
+alias dnf-install="sudo dnf install -y"
+alias dnf-list-installed="sudo dnf list installed"
+alias dnf-list-updates="sudo dnf list updates"
+alias dnf-remove="sudo dnf remove -y"
+alias dnf-search="sudo dnf search"
+
+alias rpm-install="sudo rpm -ivh"
+alias rpm-query-doc="sudo rpm -qd"
+alias rpm-query-info="sudo rpm -qi"
+alias rpm-query-list="sudo rpm --query --list"
+alias rpm-verify-package="sudo rpm --verify --package"
+alias rpm-update="sudo rpm -Uvh"
+
+alias yum-clean-all="sudo yum clean all"
+alias yum-erase="sudo yum erase -y"
+alias yum-deplist="sudo yum deplist"
+alias yum-history="sudo yum history"
+alias yum-history-info="sudo yum history info"
+alias yum-info="sudo yum info"
+alias yum-install="sudo yum install -y"
+alias yum-list="sudo yum list --showduplicate"
+alias yum-list-installed="sudo yum list installed"
+alias yum-provides="sudo yum provides"
+alias yum-repolist="sudo yum repolist"
+alias yum-search="sudo yum search"
+alias yum-update="sudo yum update -y"

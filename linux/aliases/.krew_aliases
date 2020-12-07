@@ -1,0 +1,60 @@
+# krew
+
+function kubectl-ctx() { echo "+ kubectl-ctx ${@}">&2; command kubectl-ctx ${@}; }      # kctx
+function kubectl-krew() { echo "+ kubectl-krew ${@}">&2; command kubectl-krew ${@}; }   # krew
+function kubectl-ns() { echo "+ kubectl-ns ${@}">&2; command kubectl-ns ${@}; }         # kns
+function kubectl-tail() { echo "+ kubectl-tail ${@}">&2; command kubectl-tail ${@}; }   # ktail
+function kubectl-tree() { echo "+ kubectl-tree ${@}">&2; command kubectl-tree ${@}; }   # ktree
+
+alias kctx="kubectl-ctx"
+
+alias kns="kubectl-ns"
+alias kns-argo="kubectl-ns argo"
+alias kns-argo-events="kubectl-ns argo-events"
+alias kns-argo-rollouts="kubectl-ns argo-rollouts"
+alias kns-argocd="kubectl-ns argocd"
+alias kns-artifactory="kubectl-ns artifactory-system"
+alias kns-backstage="kubectl-ns backstage-system"
+alias kns-bookinfo="kubectl-ns bookinfo"
+alias kns-default="kubectl-ns default"
+alias kns-drone="kubectl-ns drone-system"
+alias kns-cassandra="kubectl-ns cassandra-system"
+alias kns-chart="kubectl-ns chart-system"
+alias kns-elastic="kubectl-ns elastic-system"
+alias kns-gitlab="kubectl-ns gitlab-system"
+alias kns-harbor="kubectl-ns harbor-system"
+alias kns-influx="kubectl-ns influx-system"
+alias kns-ingress="kubectl-ns ingress-nginx"
+alias kns-istio="kubectl-ns istio-system"
+alias kns-istio-operator="kubectl-ns istio-operator"
+alias kns-jenkins="kubectl-ns jenkins-system"
+alias kns-kafka="kubectl-ns kafka-system"
+alias kns-kafka-operator="kubectl-ns kafka-operator"
+alias kns-kube-node-lease="kubectl-ns kube-node-lease"
+alias kns-kube-public="kubectl-ns kube-public"
+alias kns-kube-system="kubectl-ns kube-system"
+alias kns-kraken="kubectl-ns kraken-system"
+alias kns-metallb="kubectl-ns metallb-system"
+alias kns-mongo="kubectl-ns mongo-system"
+alias kns-mssql="kubectl-ns mssql-system"
+alias kns-myproject="kubectl-ns myproject"
+alias kns-minio="kubectl-ns minio-system"
+alias kns-nexus="kubectl-ns nexus-system"
+alias kns-postgres="kubectl-ns postgres-system"
+alias kns-prometheus="kubectl-ns prometheus-system"
+alias kns-redis="kubectl-ns redis-system"
+alias kns-registry="kubectl-ns registry-system"
+alias kns-rook-ceph="kubectl-ns rook-ceph"
+alias kns-tomcat="kubectl-ns tomcat-system"
+alias kns-tekton="kubectl-ns tekton-pipelines"
+alias kns-vault="kubectl-ns vault-system"
+
+alias krew="kubectl-krew"
+
+alias ktail="kubectl-tail"
+
+alias ktree="kubectl-tree"
+alias ktreedep="kubectl-tree deployments"
+alias ktreerc="kubectl-tree replicationcontrollers"
+alias ktreers="kubectl-tree replicasets"
+alias ktreests="kubectl-tree statefulsets"
