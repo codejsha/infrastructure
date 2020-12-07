@@ -1,7 +1,6 @@
 #!/bin/bash
-# https://www.jenkins.io/doc/book/managing/cli
 
-source ./env.sh
+source ./env-base.sh
 
 if [ ! -f ${JENKINS_FILE_DIR}/jenkins-cli.jar ]; then
     mkdir -p ${JENKINS_FILE_DIR}

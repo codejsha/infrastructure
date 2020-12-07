@@ -1,6 +1,17 @@
 #!/bin/bash
 
-source ./env.sh
+source ./env-base.sh
 
-${JAVA_HOME}/bin/java -jar ${JENKINS_FILE_DIR}/jenkins-cli.jar -s ${JENKINS_URL} -webSocket -auth ${JENKINS_USER}:${JENKINS_API_TOKEN} \
-    list-credentials "SystemCredentialsProvider::SystemContextResolver::jenkins"
+######################################################################
+
+function list_credentials {
+    ${JAVA_HOME}/bin/java -jar ${JENKINS_FILE_DIR}/jenkins-cli.jar \
+        -s ${JENKINS_URL} \
+        -webSocket \
+        -auth ${JENKINS_USER}:${JENKINS_API_TOKEN} \
+        list-credentials "SystemCredentialsProvider::SystemContextResolver::jenkins"
+}
+
+######################################################################
+
+list_credentials

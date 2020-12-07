@@ -2,5 +2,5 @@
 
 JENKINS_JOB_NAME="app-example-cicd"
 
-# delete build records
+# for delete build records (delete-builds)
 JENKINS_JOB_RANGE=""

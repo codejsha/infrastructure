@@ -1,32 +1,45 @@
 #!/bin/bash
 
-source ./env.sh
+source ./env-base.sh
+source ./env-credentials.sh
 
-CREDENTIAL_DOMAIN="cicd"
-CREDENTIAL_USERNAME="username"
-CREDENTIAL_PASSWORD="${PASSWORD}"
-CREDENTIAL_DESCRIPTION=""
+CREDENTIALS_DOMAIN="${CREDENTIALS_DOMAIN}"
+CREDENTIALS_USERNAME="${USERNAME}"
+CREDENTIALS_PASSWORD="${PASSWORD}"
+CREDENTIALS_DESCRIPTION="${CREDENTIALS_DESCRIPTION}"
+CREDENTIALS_UUID=$(uuidgen)
 
-CREDENTIAL_UUID=$(uuidgen)
-echo "UUID: ${CREDENTIAL_UUID}"
+echo "UUID: ${CREDENTIALS_UUID}"
 
+######################################################################
+
+if [ ! -f credentials.xml ]; then
 cat <<EOF > ./credentials.xml
 <com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl plugin="credentials@2.3.12">
     <scope>GLOBAL</scope>
-    <id>${CREDENTIAL_UUID}</id>
-    <description>${CREDENTIAL_DESCRIPTION}</description>
-    <username>${CREDENTIAL_USERNAME}</username>
-    <password>${CREDENTIAL_PASSWORD}</password>
+    <id>${CREDENTIALS_UUID}</id>
+    <description>${CREDENTIALS_DESCRIPTION}</description>
+    <username>${CREDENTIALS_USERNAME}</username>
+    <password>${CREDENTIALS_PASSWORD}</password>
 </com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>
 EOF
+fi
 
-${JAVA_HOME}/bin/java -jar ${JENKINS_FILE_DIR}/jenkins-cli.jar -s ${JENKINS_URL} -webSocket -auth ${JENKINS_USER}:${JENKINS_API_TOKEN} \
-    create-credentials-with-xml "SystemCredentialsProvider::SystemContextResolver::jenkins" "${CREDENTIAL_DOMAIN}" < credentials.xml
-# ${JAVA_HOME}/bin/java -jar ${JENKINS_FILE_DIR}/jenkins-cli.jar -s ${JENKINS_URL} -webSocket -auth ${JENKINS_USER}:${JENKINS_API_TOKEN} \
-#     create-credentials-with-xml "system::system::jenkins" "${CREDENTIAL_DOMAIN}" < credentials.xml
+######################################################################
 
-### get-credentials-as-xml
-# ${JAVA_HOME}/bin/java -jar ${JENKINS_FILE_DIR}/jenkins-cli.jar -s ${JENKINS_URL} -webSocket -auth ${JENKINS_USER}:${JENKINS_API_TOKEN} \
-#     get-credentials-as-xml "SystemCredentialsProvider::SystemContextResolver::jenkins" "${CREDENTIAL_DOMAIN}" "${CREDENTIAL_UUID}"
-# ${JAVA_HOME}/bin/java -jar ${JENKINS_FILE_DIR}/jenkins-cli.jar -s ${JENKINS_URL} -webSocket -auth ${JENKINS_USER}:${JENKINS_API_TOKEN} \
-#     get-credentials-as-xml "system::system::jenkins" "${CREDENTIAL_DOMAIN}" "${CREDENTIAL_UUID}"
+function create_credentials_with_xml {
+    ${JAVA_HOME}/bin/java -jar ${JENKINS_FILE_DIR}/jenkins-cli.jar \
+        -s ${JENKINS_URL} \
+        -webSocket \
+        -auth ${JENKINS_USER}:${JENKINS_API_TOKEN} \
+        create-credentials-with-xml "SystemCredentialsProvider::SystemContextResolver::jenkins" "${CREDENTIALS_DOMAIN}" < credentials.xml
+    # ${JAVA_HOME}/bin/java -jar ${JENKINS_FILE_DIR}/jenkins-cli.jar \
+    #    -s ${JENKINS_URL} \
+    #    -webSocket \
+    #    -auth ${JENKINS_USER}:${JENKINS_API_TOKEN} \
+    #     create-credentials-with-xml "system::system::jenkins" "${CREDENTIALS_DOMAIN}" < credentials.xml
+}
+
+######################################################################
+
+create_credentials_with_xml
