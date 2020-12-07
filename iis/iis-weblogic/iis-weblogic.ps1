@@ -23,10 +23,6 @@ WLLogFile=$env:SystemDrive\inetpub\$SiteName\logs\wl-proxy.log
 
 ######################################################################
 
-function New-ShareSmbMapping {
-    New-SmbMapping -LocalPath $env:SystemDrive\share -RemotePath "\\192.168.137.1\share"
-}
-
 function Copy-PluginFile {
     New-Item $PluginHome -ItemType Directory -Force
     Expand-Archive `
@@ -54,7 +50,7 @@ function Add-ProxyHandler {
             Path            = "/failovertest"; `
             Verb            = "*"; `
             Modules         = "IsapiModule"; `
-            ScriptProcessor = "$PluginHome\lib\iisproxy.dll" 
+            ScriptProcessor = "$PluginHome\lib\iisproxy.dll"
     }
     $ServerManager.CommitChanges()
 }
@@ -65,22 +61,22 @@ function Add-JspMimeType {
     $ConfigSection = $WebConfig.GetSection("system.webServer/staticContent")
     $ConfigCollection = Get-IISConfigCollection -ConfigElement $ConfigSection
     # $ConfigCollection = $WebConfig.GetSection("system.webServer/staticContent") | Get-IISConfigCollection
-    
+
     New-IISConfigCollectionElement `
         -AddAt 0 `
         -ConfigCollection $ConfigCollection `
         -ConfigAttribute @{ `
             fileExtension = ".jsp"; `
-            mimeType      = "text/jsp" 
-    } 
+            mimeType      = "text/jsp"
+    }
     $ServerManager.CommitChanges()
 }
 
 function Set-EnvironmentVariable {
     [System.Environment]::SetEnvironmentVariable
     (
-        "Path", 
-        "$Env:Path;$PluginHome\lib", 
+        "Path",
+        "$Env:Path;$PluginHome\lib",
         [System.EnvironmentVariableTarget]::Machine
     )
 }
@@ -89,7 +85,6 @@ function Set-EnvironmentVariable {
 
 Start-IISCommitDelay
 
-New-ShareSmbMapping
 Copy-PluginFile
 New-ProxyInitialization
 Add-ProxyHandler
