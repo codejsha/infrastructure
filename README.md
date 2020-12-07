@@ -16,7 +16,7 @@ git fetch --all
 git reset --hard origin/master
 ```
 
-## Directory Architecture
+## Directory Structure
 
 ```txt
 ├─── ...            # s/w

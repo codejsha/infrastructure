@@ -3,10 +3,7 @@
 ## Install
 
 ```bash
-# Docker
 bash ./install-docker.sh
-# Docker Compose
-bash ./install-docker-compose.sh
 ```
 
 ### Docker Registry
@@ -18,6 +15,12 @@ bash ./helm-install-docker-registry.sh
 ## Docker compose
 
 - https://github.com/docker/compose
+
+### Install
+
+```bash
+bash ./install-docker-compose.sh
+```
 
 ## Docker build
 

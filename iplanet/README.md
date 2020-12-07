@@ -29,7 +29,7 @@ bash ./delete-virtual-server.sh
 
 ## Others
 
-- `check-version.sh`
+- `get-version.sh`
 - `create-links.sh`
 - `disable-java.sh`
 - `set-self-signed-cert.sh`

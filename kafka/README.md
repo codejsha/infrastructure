@@ -11,8 +11,8 @@ bash ./helm-install-strimzi-kafka.sh
 ### strimzi operator
 bash ./operator-install-strimzi-kafka.sh
 
-### nifi
-bash ./helm-install-nifi.sh
+### confluent
+bash ./helm-install-confluent-kafka.sh
 ```
 
 ## CMAK (Cluster Manager for Apache Kafka) Operator
@@ -51,4 +51,14 @@ sudo systemctl restart kubelet
 ```bash
 bash ./helm-install-cmak.sh
 kubectl apply --filename cmak-ingress.yaml
+```
+
+## NiFi
+
+- https://github.com/cetic/helm-nifi
+
+### Install
+
+```bash
+bash ./helm-install-nifi.sh
 ```
