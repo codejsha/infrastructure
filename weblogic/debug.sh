@@ -1,3 +1,5 @@
+######################################################################
+
 ### verbose
 JAVA_OPTIONS="${JAVA_OPTIONS} -verbose:class"
 JAVA_OPTIONS="${JAVA_OPTIONS} -verbose:gc"

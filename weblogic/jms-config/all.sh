@@ -1,5 +1,8 @@
 #!/bin/bash
 
+### Requiremets:
+### Servers and Clusters (for JMS configurations)
+
 source ./env-base.sh
 
 ######################################################################

@@ -10,7 +10,7 @@ mkdir -p ${DOMAIN_HOME}/scripts
 
 ######################################################################
 
-### transform variables
+### substitute variables
 TEMP="\${MW_HOME}"
 VAR_DOMAIN_HOME_11="${DOMAIN_HOME/${MW_HOME}/${TEMP}}"
 TEMP="\${ORACLE_HOME}"

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# prerequisites: kubernetes cluster, kubectl, tkn
+### requirements:
+### kubernetes cluster, kubectl, tkn
 
 NAMESPACE="tekton-pipelines"
 kubectl create namespace ${NAMESPACE}
