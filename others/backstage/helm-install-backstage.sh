@@ -1,6 +1,7 @@
 #!/bin/bash
 
 git clone https://github.com/spotify/backstage.git
+# gh repo clone spotify/backstage
 
 NAMESPACE="backstage-system"
 

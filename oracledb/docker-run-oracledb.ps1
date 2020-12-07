@@ -1,5 +1,6 @@
-
 git clone https://github.com/oracle/docker-images.git
+# gh repo clone oracle/docker-images
+
 cd docker-images/OracleDatabase/SingleInstance/dockerfiles
 
 ######################################################################
