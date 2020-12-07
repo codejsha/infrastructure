@@ -1,7 +1,8 @@
 #!/bin/bash
 
-git clone --single-branch --branch release-1.4 https://github.com/rook/rook.git
+git clone --single-branch --branch v1.5.3 https://github.com/rook/rook.git
 
+kubectl create -f rook/cluster/examples/kubernetes/ceph/crds.yaml
 kubectl create -f rook/cluster/examples/kubernetes/ceph/common.yaml
 kubectl create -f rook/cluster/examples/kubernetes/ceph/operator.yaml
 
