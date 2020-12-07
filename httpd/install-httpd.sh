@@ -14,7 +14,7 @@ function install_from_source {
     HTTPD_VERSION="2.4.46"
     APR_VERSION="1.7.0"
     APRUTIL_VERSION="1.6.1"
-    PREFIX="/usr/local/httpd"
+    HTTPD_HOME="/usr/local/httpd"
     INSTALL_FILE_DIR="/svc/install"
 
     sudo yum install -y gcc
@@ -34,7 +34,7 @@ function install_from_source {
     mv ${INSTALL_FILE_DIR}/apr-util-${APRUTIL_VERSION} ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}/srclib/apr-util
 
     cd ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}
-    ./configure --prefix=${PREFIX} \
+    ./configure --prefix=${HTTPD_HOME} \
         --with-included-apr \
         --enable-mpms-shared=all \
         --enable-modules=all
