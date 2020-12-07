@@ -1,12 +1,16 @@
 #!/bin/bash
-# https://kubernetes.io/docs/tasks/tools/install-kubectl
 
-### Install kubectl binary with curl on Linux
-# curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.8/bin/linux/amd64/kubectl
-# chmod +x ./kubectl
-# sudo mv ./kubectl /usr/local/bin/kubectl
+KUBECTL_VERSION="1.18.8"
 
-### Install using native package management
+######################################################################
+
+function install_kubectl_with_download {
+    curl -LO https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
+    chmod +x ./kubectl
+    sudo mv ./kubectl /usr/local/bin/kubectl
+}
+
+function install_kubectl_with_yum {
 cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
@@ -16,6 +20,13 @@ gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOF
-# sudo yum --showduplicate list kubectl
-sudo yum install -y kubectl-1.18.8
-sudo yum install -y bash-completion
+
+    # sudo yum --showduplicate list kubectl
+    sudo yum install -y kubectl-${KUBECTL_VERSION}
+    sudo yum install -y bash-completion
+}
+
+######################################################################
+
+# install_kubectl_with_download
+install_kubectl_with_yum
