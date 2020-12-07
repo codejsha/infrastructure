@@ -9,7 +9,7 @@ INSTANCE_HOME="${INSTANCE_HOME}"
 
 ######################################################################
 
-### substitute variables
+### replace pattern with string
 TEMP="\${ORACLE_HOME}"
 VAR_INSTANCE_HOME="${INSTANCE_HOME/${ORACLE_HOME}/${TEMP}}"
 TEMP="\${INSTANCE_NAME}"

@@ -6,7 +6,7 @@ SERVER_NAME="${1}"
 
 ######################################################################
 
-### substitute variables
+### replace pattern with string
 TEMP="\${DOMAIN_HOME}"
 VAR_LOG_DIR="${LOG_DIR/${DOMAIN_HOME}/${TEMP}}"
 

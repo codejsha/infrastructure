@@ -26,7 +26,7 @@ JAVA_VERSION="${JAVA_VERSION}"
 
 ######################################################################
 
-### substitute variables
+### replace pattern with string
 TEMP="\${JBOSS_HOME}"
 VAR_JBOSS_BASE_DIR="${JBOSS_BASE_DIR/${JBOSS_HOME}/${TEMP}}"
 TEMP="\${JBOSS_BASE_DIR}"

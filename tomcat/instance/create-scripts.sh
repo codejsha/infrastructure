@@ -4,7 +4,7 @@ source ./env-base.sh
 
 ######################################################################
 
-### substitute variables
+### replace pattern with string
 TEMP="\${CATALINA_HOME}"
 VAR_CATALINA_BASE="${CATALINA_BASE/${CATALINA_HOME}/${TEMP}}"
 TEMP="\${CATALINA_BASE}"

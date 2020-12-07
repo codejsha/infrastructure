@@ -9,7 +9,7 @@ COMPONENT_NAME="${COMPONENT_NAME}"
 
 ######################################################################
 
-### substitute variables
+### replace pattern with string
 TEMP="\${DOMAIN_HOME}"
 VAR_LOG_DIR="${LOG_DIR/${DOMAIN_HOME}/${TEMP}}"
 

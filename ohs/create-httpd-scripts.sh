@@ -10,7 +10,7 @@ COMPONENT_NAME="${COMPONENT_NAME}"
 
 ######################################################################
 
-### substitute variables
+### replace pattern with string
 TEMP="\${ORACLE_HOME}"
 VAR_DOMAIN_HOME="${INSTANCE_HOME/${ORACLE_HOME}/${TEMP}}"
 TEMP="\${DOMAIN_NAME}"
