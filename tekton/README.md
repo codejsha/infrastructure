@@ -1,5 +1,10 @@
 # Tekton
 
+- https://github.com/tektoncd/pipeline
+- https://github.com/tektoncd/dashboard
+- https://github.com/tektoncd/triggers
+- https://github.com/tektoncd/operator
+
 ## Install
 
 ```bash

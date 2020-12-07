@@ -1,5 +1,3 @@
-# https://hub.docker.com/r/gitlab/gitlab-ce
-
 $GitLabVolumeDir="$env:USERPROFILE\volume\gitlab"
 New-Item -Path $GitLabVolumeDir\config -ItemType Directory -Force
 New-Item -Path $GitLabVolumeDir\logs -ItemType Directory -Force

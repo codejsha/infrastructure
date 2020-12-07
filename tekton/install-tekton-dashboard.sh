@@ -1,5 +1,4 @@
 #!/bin/bash
-# https://github.com/tektoncd/dashboard
 
 NAMESPACE="tekton-pipelines"
 kubectl create namespace ${NAMESPACE}

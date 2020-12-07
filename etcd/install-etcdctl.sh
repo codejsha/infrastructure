@@ -1,5 +1,4 @@
 #!/bin/bash
-# https://github.com/etcd-io/etcd
 
 ETCD_VER=v3.4.13
 

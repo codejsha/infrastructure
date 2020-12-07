@@ -1,5 +1,4 @@
 #!/bin/bash
-# https://www.nginx.com/resources/wiki/start/topics/tutorials/install
 
 cat > /etc/yum.repos.d/nginx.repo <<EOF 
 [nginx]

@@ -1,5 +1,4 @@
 #!/bin/bash
-# https://github.com/naver/pinpoint-docker
 
 PINPOINT_VERSION="2.1.0"
 

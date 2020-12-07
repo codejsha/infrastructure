@@ -1,5 +1,6 @@
 #!/bin/bash
-# https://docs.microsoft.com/en-us/sql/relational-databases/security/password-policy
+
+PASSWORD="${PASSWORD}"
 
 docker run \
     --detach \

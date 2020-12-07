@@ -19,15 +19,21 @@ bash ./create-domain.sh
 
 ### Logging
 
-- [debug.sh](/weblogic/debug.sh)
 - [Logging](/weblogic/logging.md)
+- [debug.sh](/weblogic/debug.sh)
 
-## Deployment descriptor (web.xml)
+## Deployment descriptor
+
+web.xml:
 
 - https://cloud.google.com/appengine/docs/standard/java/config/webxml
 - https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html
 - https://docs.oracle.com/middleware/12213/wls/WBAPP/web_xml.htm
 - https://docs.oracle.com/middleware/12213/wls/WBAPP/app_events.htm
+
+weblogic.xml:
+
+- https://docs.oracle.com/middleware/12213/wls/WBAPP/weblogic_xml.htm
 
 ## Sample application
 

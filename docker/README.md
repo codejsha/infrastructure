@@ -15,6 +15,14 @@ bash ./install-docker-compose.sh
 bash ./helm-install-docker-registry.sh
 ```
 
+## Docker compose
+
+- https://github.com/docker/compose
+
+## Docker build
+
+- https://docs.docker.com/engine/reference/commandline/build/
+
 ## Configuration file
 
 `${HOME}/.docker/config.json`: [config.json](/docker/config.json)
@@ -26,9 +34,9 @@ bash ./helm-install-docker-registry.sh
 
 `/etc/docker/daemon.json`: [daemon.json](/docker/daemon.json)
 
-## Expose Docker daemon socket
+### Expose Docker daemon socket
 
-### Configure Service
+#### Configure Service
 
 [docker-service.sh](/docker/docker-service.sh)
 
@@ -44,7 +52,7 @@ ExecStart=
 ExecStart=/usr/bin/dockerd --host unix:///var/run/docker.sock --host tcp://0.0.0.0:2375
 ```
 
-### Restart Docker daemon
+#### Restart Docker daemon
 
 ```bash
 systemctl daemon-reload

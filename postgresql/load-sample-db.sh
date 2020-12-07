@@ -1,5 +1,4 @@
 #!/bin/bash
-# https://www.postgresqltutorial.com/postgresql-sample-database/
 
 SAMPLE_DB_FILE_DIR="/mnt/share/postgresql"
 

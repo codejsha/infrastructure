@@ -1,5 +1,4 @@
 #!/bin/bash
-# https://rook.github.io/docs/rook/v1.4/ceph-quickstart.html
 
 git clone --single-branch --branch release-1.4 https://github.com/rook/rook.git
 

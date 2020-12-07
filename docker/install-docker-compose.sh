@@ -1,5 +1,4 @@
 #!/bin/bash
-# https://github.com/docker/compose
 
 DOCKER_COMPOSE_VERSION="1.27.4"
 

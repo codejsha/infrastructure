@@ -1,5 +1,4 @@
 #!/bin/bash
-# https://hub.docker.com/_/mysql
 
 docker run \
     --detach \

@@ -3,7 +3,15 @@
 ## Install
 
 ```bash
+### bitnami
 bash ./helm-install-kafka.sh
+
+### strimzi
+bash ./helm-install-strimzi-kafka.sh
+### strimzi operator
+bash ./operator-install-strimzi-kafka.sh
+
+### nifi
 bash ./helm-install-nifi.sh
 ```
 
@@ -18,7 +26,7 @@ CMAK operator creates Kubernetes Jobs for configuring CMAK. Kubernetes Jobs are 
 Enable feature gates:
 
 ```bash
-# kubelet.service EnvironmentFile
+### kubelet.service EnvironmentFile
 sudo vi /etc/kubernetes/kubelet.env
 ```
 

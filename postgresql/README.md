@@ -4,6 +4,8 @@
 
 ### On-Premises
 
+- https://www.postgresql.org/download/linux/redhat/
+
 [install-postgresql.sh](/postgresql/install-postgresql.sh)
 
 ### Docker

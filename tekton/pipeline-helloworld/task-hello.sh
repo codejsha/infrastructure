@@ -1,5 +1,4 @@
 #!/bin/bash
-# https://tekton.dev/docs/getting-started/
 
 cat <<EOF > ./task-hello.yaml
 apiVersion: tekton.dev/v1beta1

@@ -1,7 +1,6 @@
 #!/bin/bash
 
 ### build
-# https://docs.docker.com/engine/reference/commandline/build/
 
 docker build .
 docker build -f Dockerfile.dev .

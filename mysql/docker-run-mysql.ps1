@@ -1,5 +1,3 @@
-# https://hub.docker.com/_/mysql
-
 docker run `
     --detach `
     --name mysql8 `

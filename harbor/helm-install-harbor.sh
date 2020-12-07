@@ -1,6 +1,4 @@
 #!/bin/bash
-# https://goharbor.io/
-# https://github.com/goharbor/harbor
 
 ### requirements:
 ### sudo yum install -y httpd-tools

@@ -1,6 +1,3 @@
-# https://metallb.universe.tf/configuration/
-# https://github.com/metallb/metallb
----
 apiVersion: v1
 kind: ConfigMap
 metadata:

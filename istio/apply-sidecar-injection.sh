@@ -1,5 +1,4 @@
 #!/bin/bash
-# https://istio.io/latest/docs/setup/additional-setup/sidecar-injection/
 
 NAMESPACE="${1}"
 

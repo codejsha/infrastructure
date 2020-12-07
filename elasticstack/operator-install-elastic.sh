@@ -1,7 +1,4 @@
 #!/bin/bash
-# https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-deploy-eck.html
-# https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-deploy-elasticsearch.html
-# https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-volume-claim-templates.html
 
 kubectl apply -f https://download.elastic.co/downloads/eck/1.1.2/all-in-one.yaml
 kubectl logs -f statefulset.apps/elastic-operator -n elastic-system

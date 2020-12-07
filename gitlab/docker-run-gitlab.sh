@@ -1,5 +1,4 @@
 #!/bin/bash
-# https://hub.docker.com/r/gitlab/gitlab-ce
 
 GITLAB_VOLUME_DIR="/mnt/volume/gitlab"
 sudo rm -rf ${GITLAB_VOLUME_DIR}

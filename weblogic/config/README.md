@@ -9,10 +9,10 @@ bash ./all.sh
 ## Domain
 
 - [conf-domain.sh](/weblogic/config/conf-domain.sh)
-- [set-connection-filter.sh](/weblogic/config/set-connection-filter.sh)
-- [set-domain-config-archive.sh](/weblogic/config/set-domain-config-archive.sh)
-- [set-domain-cookie-name.sh](/weblogic/config/set-domain-cookie-name.sh)
-- [set-domain-log.sh](/weblogic/config/set-domain-log.sh)
+- [set-connection-filter.sh](/weblogic/config/set-connection-filter.sh) - [set_connection_filter.py](/weblogic/config/set_connection_filter.py)
+- [set-domain-config-archive.sh](/weblogic/config/set-domain-config-archive.sh) - [set_domain_config_archive.py](/weblogic/config/set_domain_config_archive.py)
+- [set-domain-cookie-name.sh](/weblogic/config/set-domain-cookie-name.sh) - [set_domain_cookie_name.py](/weblogic/config/set_domain_cookie_name.py)
+- [set-domain-log.sh](/weblogic/config/set-domain-log.sh) - [set_domain_log.py](/weblogic/config/set_domain_log.py)
 
 ## Identity
 
@@ -24,23 +24,23 @@ bash ./all.sh
 
 ## Server
 
-- [create-server.sh](/weblogic/config/create-server.sh)
+- [create-server.sh](/weblogic/config/create-server.sh) - [create_server.py](/weblogic/config/create_server.py)
 - [create-scripts.sh](/weblogic/config/create-scripts.sh)
 
 ## Cluster
 
-- [create-cluster.sh](/weblogic/config/create-cluster.sh)
+- [create-cluster.sh](/weblogic/config/create-cluster.sh) - [create_cluster.py](/weblogic/config/create_cluster.py)
 
 ## Data source
 
-- [create-datasource.sh](/weblogic/config/create-datasource.sh)
+- [create-datasource.sh](/weblogic/config/create-datasource.sh) - [create_datasource.py](/weblogic/config/create_datasource.py)
 
 ## Node manager
 
-- [create-nodemgr.sh](/weblogic/config/create-nodemgr.sh)
+- [create-nodemgr.sh](/weblogic/config/create-nodemgr.sh) - [create_nodemgr.py](/weblogic/config/create_nodemgr.py)
 - [create-nodemgr-scripts.sh](/weblogic/config/create-nodemgr-scripts.sh)
 - [create-regen-demo-identity-script.sh](/weblogic/config/create-regen-demo-identity-script.sh)
 
 ## Application
 
-- [deploy-app.sh](/weblogic/config/deploy-app.sh)
+- [deploy-app.sh](/weblogic/config/deploy-app.sh) - [deploy_app.py](/weblogic/config/deploy_app.py)

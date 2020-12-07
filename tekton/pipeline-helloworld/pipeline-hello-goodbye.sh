@@ -1,5 +1,4 @@
 #!/bin/bash
-# https://tekton.dev/docs/getting-started/
 
 cat <<EOF > ./pipeline-hello-goodbye.yaml
 apiVersion: tekton.dev/v1beta1

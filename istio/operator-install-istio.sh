@@ -1,7 +1,4 @@
 #!/bin/bash
-# https://istio.io/latest/docs/setup/install/istioctl/
-# https://istio.io/latest/docs/setup/install/operator/
-# https://istio.io/latest/docs/setup/additional-setup/config-profiles/
 
 curl -sL https://istio.io/downloadIstioctl | sh -
 export PATH=$PATH:$HOME/.istioctl/bin

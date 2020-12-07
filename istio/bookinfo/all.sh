@@ -1,6 +1,4 @@
 #!/bin/bash
-# https://github.com/istio/istio/tree/master/samples/bookinfo
-# https://istio.io/latest/docs/examples/bookinfo/
 
 NAMESPACE="bookinfo"
 kubectl create namespace ${NAMESPACE}

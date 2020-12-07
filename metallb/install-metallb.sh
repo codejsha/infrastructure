@@ -1,5 +1,4 @@
 #!/bin/bash
-# https://metallb.universe.tf/installation/
 
 NAMESPACE="metallb-system"
 kubectl create namespace ${NAMESPACE}
