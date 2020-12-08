@@ -1,6 +1,6 @@
 # Local RPM Package Repository Server
 
-Requirements: yum-utils
+Requirements: yum-utils, createrepo
 
 ## Create repository
 
