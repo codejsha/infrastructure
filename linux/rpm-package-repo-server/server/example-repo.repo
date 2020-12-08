@@ -1,0 +1,5 @@
+[example-repo]
+name=Example Package Repository
+baseurl=file:///var/www/html/example-repo
+enabled=1
+gpgcheck=0

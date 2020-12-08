@@ -1,0 +1,6 @@
+[example-repo]
+name=Example Package Repository
+baseurl=http://test.example.com:8888/example-repo
+enabled=1
+gpgcheck=0
+priority=1
