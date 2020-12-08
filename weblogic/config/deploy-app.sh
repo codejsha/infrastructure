@@ -9,7 +9,7 @@ export APP_TARGET="${3}"
 ######################################################################
 
 if [ ! -d "${APP_PATH}" ] && [ ! -f "${APP_PATH}" ] ; then
-    echo "[ERROR] The APP_PATH (${JAVA_HOME}) does not exist!"
+    echo "[ERROR] The APP_PATH (${APP_PATH}) does not exist!"
     exit
 fi
 
