@@ -11,8 +11,8 @@ function get_version_with_directory {
 }
 
 function get_version_with_httpd {
-    export ORACLE_HOME=${ORACLE_HOME}
-    export LD_LIBRARY_PATH=${ORACLE_HOME}/lib:${ORACLE_HOME}/ohs/lib:${ORACLE_HOME}
+    export ORACLE_HOME="${ORACLE_HOME}"
+    export LD_LIBRARY_PATH="${ORACLE_HOME}/lib:${ORACLE_HOME}/ohs/lib:${ORACLE_HOME}"
     ${ORACLE_HOME}/ohs/bin/httpd -V
 }
 

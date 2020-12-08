@@ -16,7 +16,7 @@ INSTALL_FILE="jboss-eap-7.3.0.zip"
 ######################################################################
 
 PARENT_JBOSS_HOME="$(readlink --canonicalize-missing ${JBOSS_HOME}/../)"
-JBOSS_DIR_NAME=${INSTALL_FILE/\.0\.zip/}
+JBOSS_DIR_NAME="${INSTALL_FILE/\.0\.zip/}"
 
 ######################################################################
 

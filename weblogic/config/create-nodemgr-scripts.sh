@@ -2,16 +2,16 @@
 
 source ./env-base.sh
 
-NODEMGR_NAME=${1}
-NODEMGR_LISTEN_ADDRESS=${2}
-NODEMGR_LISTEN_PORT=${3}
+NODEMGR_NAME="${1}"
+NODEMGR_LISTEN_ADDRESS="${2}"
+NODEMGR_LISTEN_PORT="${3}"
 
 ######################################################################
 
 ### replace pattern with string
-FILE_NAME_SUFFIX=${NODEMGR_NAME,,}
-FILE_NAME_SUFFIX=${FILE_NAME_SUFFIX/base/}
-FILE_NAME_SUFFIX=${FILE_NAME_SUFFIX/machine/nodemanager}
+FILE_NAME_SUFFIX="${NODEMGR_NAME,,}"
+FILE_NAME_SUFFIX="${FILE_NAME_SUFFIX/base/}"
+FILE_NAME_SUFFIX="${FILE_NAME_SUFFIX/machine/nodemanager}"
 
 ######################################################################
 

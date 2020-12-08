@@ -16,7 +16,7 @@ INSTALL_FILE="wildfly-20.0.1.Final.tar.gz"
 ######################################################################
 
 PARENT_JBOSS_HOME="$(readlink --canonicalize-missing ${JBOSS_HOME}/../)"
-JBOSS_DIR_NAME=${INSTALL_FILE/\.tar\.gz/}
+JBOSS_DIR_NAME="${INSTALL_FILE/\.tar\.gz/}"
 
 ######################################################################
 

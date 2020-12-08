@@ -14,9 +14,9 @@ FILE_NAME_SUFFIX=""
 if [ "${SERVER_NAME}" == "${ADMIN_SERVER_NAME}" ]; then
     FILE_NAME_SUFFIX="admin"
 else
-    FILE_NAME_SUFFIX=${SERVER_NAME,,}
-    FILE_NAME_SUFFIX=${FILE_NAME_SUFFIX/base/}
-    FILE_NAME_SUFFIX=${FILE_NAME_SUFFIX/server/}
+    FILE_NAME_SUFFIX="${SERVER_NAME,,}"
+    FILE_NAME_SUFFIX="${FILE_NAME_SUFFIX/base/}"
+    FILE_NAME_SUFFIX="${FILE_NAME_SUFFIX/server/}"
 fi
 
 ######################################################################

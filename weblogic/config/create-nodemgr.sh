@@ -2,9 +2,9 @@
 
 source ./env-base.sh
 
-export NODEMGR_NAME=${1}
-export NODEMGR_LISTEN_ADDRESS=${2}
-export NODEMGR_LISTEN_PORT=${3}
+export NODEMGR_NAME="${1}"
+export NODEMGR_LISTEN_ADDRESS="${2}"
+export NODEMGR_LISTEN_PORT="${3}"
 
 ######################################################################
 
