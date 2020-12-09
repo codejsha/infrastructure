@@ -12,11 +12,9 @@ bash ./install-docker.sh
 bash ./helm-install-docker-registry.sh
 ```
 
-## Docker compose
+### Docker compose
 
 - https://github.com/docker/compose
-
-### Install
 
 ```bash
 bash ./install-docker-compose.sh
@@ -68,23 +66,11 @@ systemctl restart docker.service
 - `docker-commands.sh`
 - `docker-mount-option.sh`
 
-## Portainer
-
-https://www.portainer.io/installation/
-
-Requirements: Docker daemon socket
-
-### Set environment
-
-```bash
-bash ./docker-run-portainer.sh
-```
-
-Select Docker environment, and then set Name and Endpoint URL.
-
-![portainer-endpoint](/contents/images/portainer-add-endpoint.jpg)
-
 ## Examples
 
 - [FTP Server README](/linux/ftp-server/README.md)
 - [RPM Package Repository Server README](/linux/rpm-package-repo-server/README.md)
+
+## Portainer
+
+- [Portainer README](/docker/portainer.md)
