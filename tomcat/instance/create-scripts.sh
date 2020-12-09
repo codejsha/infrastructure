@@ -100,7 +100,7 @@ EOF
 ######################################################################
 
 ### create configtest script
-cat <<EOF > ${CATALINA_BASE}/bin/check-config.sh
+cat <<EOF > ${CATALINA_BASE}/check-config.sh
 #!/bin/bash
 
 export CATALINA_HOME="${CATALINA_HOME}"
@@ -112,7 +112,7 @@ EOF
 ######################################################################
 
 ### create version script
-cat <<EOF > ${CATALINA_BASE}/bin/get-version.sh
+cat <<EOF > ${CATALINA_BASE}/get-version.sh
 #!/bin/bash
 
 export CATALINA_HOME="${CATALINA_HOME}"
@@ -126,6 +126,8 @@ EOF
 ### change permission
 chmod 750 ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
 chmod 750 ${CATALINA_BASE}/stop-${INSTANCE_NAME}.sh
+chmod 750 ${CATALINA_BASE}/check-config.sh
+chmod 750 ${CATALINA_BASE}/get-version.sh
 
 ### create symbolic link
 ln -snf ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh \
