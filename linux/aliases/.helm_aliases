@@ -2,6 +2,7 @@
 
 function helm() { echo "+ helm ${@}">&2; command helm ${@}; }
 
+alias helm-dependency-update="helm dependency update"
 alias helm-install="helm install"
 alias helm-list="helm list"
 alias helm-plugin-list="helm plugin list"
