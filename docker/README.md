@@ -50,7 +50,7 @@ The `docker-service.sh` script create `/etc/systemd/system/docker.service.d/over
 ```conf
 [Service]
 ExecStart=
-ExecStart=/usr/bin/dockerd --host unix:///var/run/docker.sock --host tcp://0.0.0.0:2375
+ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --host tcp://0.0.0.0:2375
 ```
 
 #### Restart Docker daemon
@@ -66,8 +66,9 @@ systemctl restart docker.service
 - `docker-commands.sh`
 - `docker-mount-option.sh`
 
-## Examples
+## Dockerfile Examples
 
+- [Kustomize README](/Kustomize/README.md)
 - [FTP Server README](/linux/ftp-server/README.md)
 - [RPM Package Repository Server README](/linux/rpm-package-repo-server/README.md)
 
