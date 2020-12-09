@@ -4,11 +4,6 @@
          id="WebApp_ID"
          version="3.0">
 
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-        <welcome-file>index.html</welcome-file>
-    </welcome-file-list>
-
     <jsp-config>
         <jsp-property-group>
             <url-pattern>*.jsp</url-pattern>
@@ -16,49 +11,13 @@
         </jsp-property-group>
     </jsp-config>
 
-    <!-- servlet -->
-    <servlet>
-        <description></description>
-        <display-name>TestServlet</display-name>
-        <servlet-name>TestServlet</servlet-name>
-        <servlet-class>com.example.TestServlet</servlet-class>
-        <load-on-startup>2</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>TestServlet</servlet-name>
-        <url-pattern>/TestServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>TestServlet</servlet-name>
-        <url-pattern>/test/*</url-pattern>
-    </servlet-mapping>
-
-    <!-- filter -->
-    <filter>
-        <filter-name>logSpecial</filter-name>
-        <filter-class>com.example.LogFilterImpl</filter-class>
-        <init-param>
-            <param-name>logType</param-name>
-            <param-value>special</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>logSpecial</filter-name>
-        <url-pattern>*.special</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>logSpecial</filter-name>
-        <servlet-name>TestServlet</servlet-name>
-    </filter-mapping>
-
-    <!-- error page -->
-    <error-page>
-        <error-code>500</error-code>
-        <location>/error.jsp</location>
-    </error-page>
     <error-page>
         <error-code>404</error-code>
-        <location>/error.jsp</location>
+        <location>/error.html</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error.html</location>
     </error-page>
 
 </web-app>
