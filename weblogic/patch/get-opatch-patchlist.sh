@@ -1,19 +1,19 @@
 #!/bin/bash
 
-source ./env-base.sh
+JAVA_HOME="/usr/java/java-1.8.0"
+# JAVA_HOME="/usr/java/java-11"
 
-JAVA_HOME="${JAVA_HOME}"
-ORACLE_HOME="${ORACLE_HOME}"
+ORACLE_HOME="/usr/local/weblogic"
+INVENTORY_FILE="${ORACLE_HOME}/oraInst.loc"
 
 ######################################################################
 
 function opatch_lsinventory {
     # ${ORACLE_HOME}/OPatch/opatch lsinventory
-
     ${ORACLE_HOME}/OPatch/opatch lsinventory \
         -all \
         -oh ${ORACLE_HOME} \
-        -invPtrLoc ${ORACLE_HOME}/oraInst.loc \
+        -invPtrLoc ${INVENTORY_FILE} \
         -jre ${JAVA_HOME}/jre
 }
 

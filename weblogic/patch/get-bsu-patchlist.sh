@@ -1,8 +1,6 @@
 #!/bin/bash
 
-source ./env-base.sh
-
-MW_HOME="${MW_HOME}"
+MW_HOME="/usr/local/weblogic"
 
 ######################################################################
 
