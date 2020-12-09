@@ -20,8 +20,13 @@ INSTALL_SCRIPT_DIR="/svc/infrastructure/weblogic"
 
 ######################################################################
 
+WL_HOME=""
 if [ "${MAJOR_VERSION}" == "11g" ]; then
     export WL_HOME="${MW_HOME}/wlserver_10.3"
 elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
     export WL_HOME="${ORACLE_HOME}/wlserver"
+fi
+if [ ! -d "${WL_HOME}" ]; then
+    echo "[ERROR] The WL_HOME (${WL_HOME}) does not exists!"
+    exit
 fi
