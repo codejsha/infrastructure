@@ -47,12 +47,13 @@ if [ -n "\${PID}" ]; then
 fi
 
 USER_MEM_ARGS="-D\${SERVER_NAME}"
-USER_MEM_ARGS="\${USER_MEM_ARGS} -Xms1024m"
-USER_MEM_ARGS="\${USER_MEM_ARGS} -Xmx1024m"
-USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:NewSize=384m"
-USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:MaxNewSize=384m"
-USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:PermSize=256m"
-USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:MaxPermSize=256m"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -Xms1024m -Xmx1024m"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:NewSize=384m -XX:MaxNewSize=384m"
+EOF
+
+if [[ ${JAVA_VERSION} =~ ^1.7 ]]; then
+cat <<EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
+USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:PermSize=256m -XX:MaxPermSize=256m"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:-UseAdaptiveSizePolicy"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+DisableExplicitGC"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+PrintGCDetails"
@@ -61,23 +62,64 @@ USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+PrintHeapAtGC"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -Xloggc:\${LOG_DIR}/gc.\${SERVER_NAME}.log"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+HeapDumpOnOutOfMemoryError"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:HeapDumpPath=\${LOG_DIR}/dump"
-# USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+PrintFlagsFinal"
 export USER_MEM_ARGS
+EOF
+elif [[ ${JAVA_VERSION} =~ ^1.8 ]]; then
+cat <<EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
+USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:-UseAdaptiveSizePolicy"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+DisableExplicitGC"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+PrintGCDetails"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+PrintGCTimeStamps"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+PrintHeapAtGC"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -Xloggc:\${LOG_DIR}/gc.\${SERVER_NAME}.log"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+HeapDumpOnOutOfMemoryError"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:HeapDumpPath=\${LOG_DIR}/dump"
+export USER_MEM_ARGS
+EOF
+elif [[ ${JAVA_VERSION} =~ ^11 ]]; then
+cat <<EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
+USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -Xlog:gc*=info:file=${VAR_GC_LOG_OUT}:time,pid,tid,level,tags"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+HeapDumpOnOutOfMemoryError"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:HeapDumpPath=\${LOG_DIR}/dump"
+export USER_MEM_ARGS
+EOF
+fi
+
+cat <<EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 
 JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.SocketReaders=4"
-JAVA_OPTIONS="\${JAVA_OPTIONS} -Dcom.bea.wlw.netui.disableInstrumentation=true"
 JAVA_OPTIONS="\${JAVA_OPTIONS} -D_Offline_FileDataArchive=true"
+JAVA_OPTIONS="\${JAVA_OPTIONS} -Dcom.bea.wlw.netui.disableInstrumentation=true"
+JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.connector.ConnectionPoolProfilingEnabled=true"
 JAVA_OPTIONS="\${JAVA_OPTIONS} -Djava.net.preferIPv4Stack=true"
 JAVA_OPTIONS="\${JAVA_OPTIONS} -Djava.net.preferIPv6Addresses=false"
 JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.system.BootIdentityFile=\${DOMAIN_HOME}/boot.properties"
 JAVA_OPTIONS="\${JAVA_OPTIONS} -Djava.security.egd=file:///dev/urandom"
 export JAVA_OPTIONS
 
-# JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.log.StdoutSeverity=Debug"
-# JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.log.LogSeverity=Debug"
-# JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.log.LoggerSeverity=Debug"
-# JAVA_OPTIONS="\${JAVA_OPTIONS} -Dweblogic.StdoutDebugEnabled=true"
-export JAVA_OPTIONS
+EOF
+
+if [[ ${JAVA_VERSION} =~ ^1.7|^1.8 ]]; then
+cat <<EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -XX:+PrintFlagsFinal"
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -verbose:class"
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -verbose:module"
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -verbose:jni"
+# export JAVA_OPTIONS
+EOF
+elif [[ ${JAVA_VERSION} =~ ^11 ]]; then
+cat <<EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -XX:+PrintFlagsFinal"
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -Xlog:class+load=info,class+unload=info:stdout:time,level,tags"
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -Xlog:module*=info:stdout:time,level,tags"
+# JAVA_OPTIONS="\${JAVA_OPTIONS} -verbose:jni"
+# export JAVA_OPTIONS
+EOF
+fi
+
+cat <<EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 
 # export EXT_PRE_CLASSPATH
 # export EXT_POST_CLASSPATH

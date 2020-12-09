@@ -18,6 +18,9 @@ export ADMIN_PASSWORD="welcome1"
 
 ######################################################################
 
+JAVA_VERSION="$(${JAVA_HOME}/bin/java -version 2>&1 /dev/null \
+        | grep version | awk '{print $3}' | tr -d '"')"
+
 WL_HOME=""
 if [ "${MAJOR_VERSION}" == "11g" ]; then
     export WL_HOME="${MW_HOME}/wlserver_10.3"
