@@ -7,6 +7,8 @@ source ./env-base.sh
 ### replace pattern with string
 TEMP="\${CATALINA_HOME}"
 VAR_CATALINA_BASE="${CATALINA_BASE/${CATALINA_HOME}/${TEMP}}"
+TEMP="\${INSTANCE_NAME}"
+VAR_CATALINA_BASE="${CATALINA_BASE/${INSTANCE_NAME}/${TEMP}}"
 TEMP="\${CATALINA_BASE}"
 VAR_LOG_DIR="${LOG_DIR/${CATALINA_BASE}/${TEMP}}"
 TEMP="\${LOG_DIR}"
@@ -97,24 +99,26 @@ EOF
 
 ######################################################################
 
-### create version script
-cat <<EOF > ${CATALINA_HOME}/bin/get-version.sh
+### create configtest script
+cat <<EOF > ${CATALINA_BASE}/bin/check-config.sh
 #!/bin/bash
 
 export CATALINA_HOME="${CATALINA_HOME}"
+export CATALINA_BASE="${VAR_CATALINA_BASE}"
 
-\${CATALINA_HOME}/bin/version.sh
+\${CATALINA_HOME}/bin/configtest.sh
 EOF
 
 ######################################################################
 
-### create configtest script
-cat <<EOF > ${CATALINA_HOME}/bin/check-config.sh
+### create version script
+cat <<EOF > ${CATALINA_BASE}/bin/get-version.sh
 #!/bin/bash
 
 export CATALINA_HOME="${CATALINA_HOME}"
+export CATALINA_BASE="${VAR_CATALINA_BASE}"
 
-\${CATALINA_HOME}/bin/configtest.sh
+\${CATALINA_BASE}/bin/version.sh
 EOF
 
 ######################################################################
