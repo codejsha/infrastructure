@@ -8,7 +8,7 @@
 
 ### Create Hyper-V VMs
 
-[create-kube-vm.ps1](/kubernetes/install/create-kube-vm.ps1)
+[create-kube-vm.ps1](/kubernetes/kubespray/create-kube-vm.ps1)
 
 ```powershell
 create-kube-vm.ps1
@@ -20,7 +20,7 @@ manually install linux (CentOS)
 
 ### Requirements
 
-[require-all-node.sh](/kubernetes/install/require-all-node.sh)
+[require-all-node.sh](/kubernetes/kubespray/require-all-node.sh)
 
 ```bash
 bash ./require-all-node.sh
@@ -28,12 +28,12 @@ bash ./require-all-node.sh
 
 ### Add scripts
 
-- [set-hostname.sh](/kubernetes/install/set-hostname.sh)
-- [set-network.sh](/kubernetes/install/set-network.sh)
+- [set-hostname.sh](/kubernetes/kubespray/set-hostname.sh)
+- [set-network.sh](/kubernetes/kubespray/set-network.sh)
 
 ### Copy vhd
 
-[convert-kube-vhd.ps1](/kubernetes/install/convert-kube-vhd.ps1)
+[convert-kube-vhd.ps1](/kubernetes/kubespray/convert-kube-vhd.ps1)
 
 ```powershell
 convert-kube-vhd.ps1
@@ -43,7 +43,7 @@ convert-kube-vhd.ps1
 
 ### Hostname and network
 
-[set-hostname.sh](/kubernetes/install/set-hostname.sh)
+[set-hostname.sh](/kubernetes/kubespray/set-hostname.sh)
 
 ```bash
 # controlplane1
@@ -60,7 +60,7 @@ bash ./set-hostname.sh n2
 bash ./set-hostname.sh n3
 ```
 
-[set-network.sh](/kubernetes/install/set-network.sh)
+[set-network.sh](/kubernetes/kubespray/set-network.sh)
 
 ```bash
 # all hosts
@@ -69,8 +69,8 @@ bash ./set-network.sh
 
 ### Copy ssh keys
 
-- [pre-copy-ssh-key.sh](/kubernetes/install/pre-copy-ssh-key.sh)
-- [copy-ssh-key.sh](/kubernetes/install/copy-ssh-key.sh)
+- [pre-copy-ssh-key.sh](/kubernetes/kubespray/pre-copy-ssh-key.sh)
+- [copy-ssh-key.sh](/kubernetes/kubespray/copy-ssh-key.sh)
 
 ```bash
 bash ./pre-copy-ssh-key.sh
@@ -82,14 +82,14 @@ bash ./copy-ssh-key.sh
 
 ### Configure
 
-- [all.yaml](/kubernetes/install/all.yaml)
-- [docker.yaml](/kubernetes/install/docker.yaml)
-- [addons.yaml](/kubernetes/install/addons.yaml)
-- [k8s-cluster.yaml](/kubernetes/install/k8s-cluster.yaml)
+- [all.yaml](/kubernetes/kubespray/all.yaml)
+- [docker.yaml](/kubernetes/kubespray/docker.yaml)
+- [addons.yaml](/kubernetes/kubespray/addons.yaml)
+- [k8s-cluster.yaml](/kubernetes/kubespray/k8s-cluster.yaml)
 
 ### Run playbook
 
-[install-k8s-kubespray.sh](/kubernetes/install/install-k8s-kubespray.sh)
+[install-k8s-kubespray.sh](/kubernetes/kubespray/install-k8s-kubespray.sh)
 
 ```bash
 export PASSWORD="<PASSWORD>"
@@ -100,7 +100,7 @@ bash ./install-k8s-kubespray.sh
 
 ### Copy config and cert files
 
-[post-install.sh](/kubernetes/install/post-install.sh)
+[post-install.sh](/kubernetes/kubespray/post-install.sh)
 
 ```bash
 bash ./post-install.sh
@@ -108,8 +108,8 @@ bash ./post-install.sh
 
 ### Dashboard
 
-- [dashboard-clusterrolebinding.sh](/kubernetes/install/dashboard-clusterrolebinding.sh)
-- [dashboard-ingress.yaml](/kubernetes/install/dashboard-ingress.yaml)
+- [dashboard-clusterrolebinding.sh](/kubernetes/kubespray/dashboard-clusterrolebinding.sh)
+- [dashboard-ingress.yaml](/kubernetes/kubespray/dashboard-ingress.yaml)
 
 ```bash
 bash ./dashboard-clusterrolebinding.sh
@@ -118,7 +118,7 @@ kubectl apply -filename dashboard-ingress.yaml
 
 ### Netchecker
 
-[netchecker-ingress.yaml](/kubernetes/install/netchecker-ingress.yaml)
+[netchecker-ingress.yaml](/kubernetes/kubespray/netchecker-ingress.yaml)
 
 ```bash
 kubectl apply -filename netchecker-ingress.yaml

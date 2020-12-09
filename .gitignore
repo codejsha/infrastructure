@@ -7,7 +7,7 @@
 *.tgz
 
 /temp/
-/kubernetes/install/kubespray/
+/kubernetes/kubespray/kubespray/
 /kraken/kraken/
 /oracledb/docker-images/OracleDatabase/SingleInstance/dockerfiles/
 /rook/rook/

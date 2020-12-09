@@ -2,7 +2,7 @@
 
 ## Install
 
-[Installing Kubernetes with Kubespray README](/kubernetes/install/README.md)
+[Installing Kubernetes with Kubespray README](/kubernetes/kubespray/README.md)
 
 ## kubectl
 
