@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cat > /etc/yum.repos.d/nginx.repo <<EOF 
+cat <<EOF | sudo tee /etc/yum.repos.d/nginx.repo
 [nginx]
 name=nginx repo
 baseurl=https://nginx.org/packages/centos/$releasever/$basearch/
