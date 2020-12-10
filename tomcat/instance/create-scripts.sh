@@ -118,7 +118,7 @@ cat <<EOF > ${CATALINA_BASE}/get-version.sh
 export CATALINA_HOME="${CATALINA_HOME}"
 export CATALINA_BASE="${VAR_CATALINA_BASE}"
 
-\${CATALINA_BASE}/bin/version.sh
+\${CATALINA_HOME}/bin/version.sh
 EOF
 
 ######################################################################
