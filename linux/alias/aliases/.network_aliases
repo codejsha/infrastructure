@@ -1,0 +1,6 @@
+# network
+
+function curl() { echo "+ curl ${@}">&2; command curl ${@}; }
+function netstat() { echo "+ netstat ${@}">&2; command netstat ${@}; }
+
+alias netstat-tunlp="sudo netstat --tcp --udp --numeric --listening --programs"

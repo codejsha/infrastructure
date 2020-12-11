@@ -39,6 +39,7 @@ function goinfra() { DIRECTORY="/svc/infrastructure"; echo "+ cd ${DIRECTORY}">&
 function goinstall() { DIRECTORY="/svc/install"; echo "+ cd ${DIRECTORY}">&2; command cd ${DIRECTORY}; STATUS="${?}"; if [ "${STATUS}" -eq "0" ]; then ls --almost-all -l; fi; }
 function goiplanet() { DIRECTORY="/usr/local/iplanet"; echo "+ cd ${DIRECTORY}">&2; command cd ${DIRECTORY}; STATUS="${?}"; if [ "${STATUS}" -eq "0" ]; then ls --almost-all -l; fi; }
 function gojava() { DIRECTORY="/usr/lib/jvm"; echo "+ cd ${DIRECTORY}">&2; command cd ${DIRECTORY}; STATUS="${?}"; if [ "${STATUS}" -eq "0" ]; then ls --almost-all -l; fi; }
+function gojboss() { DIRECTORY="/usr/local/jboss"; echo "+ cd ${DIRECTORY}">&2; command cd ${DIRECTORY}; STATUS="${?}"; if [ "${STATUS}" -eq "0" ]; then ls --almost-all -l; fi; }
 function golib() { DIRECTORY="/svc/lib"; echo "+ cd ${DIRECTORY}">&2; command cd ${DIRECTORY}; STATUS="${?}"; if [ "${STATUS}" -eq "0" ]; then ls --almost-all -l; fi; }
 function gonginx() { DIRECTORY="/etc/nginx"; echo "+ cd ${DIRECTORY}">&2; command cd ${DIRECTORY}; STATUS="${?}"; if [ "${STATUS}" -eq "0" ]; then ls --almost-all -l; fi; }
 function goohs() { DIRECTORY="/usr/local/ohs"; echo "+ cd ${DIRECTORY}">&2; command cd ${DIRECTORY}; STATUS="${?}"; if [ "${STATUS}" -eq "0" ]; then ls --almost-all -l; fi; }
@@ -50,58 +51,21 @@ function gowebsvr() { DIRECTORY="/svc/websvr"; echo "+ cd ${DIRECTORY}">&2; comm
 function gowildfly() { DIRECTORY="/usr/local/wildfly"; echo "+ cd ${DIRECTORY}">&2; command cd ${DIRECTORY}; STATUS="${?}"; if [ "${STATUS}" -eq "0" ]; then ls --almost-all -l; fi; }
 function readlinkpwd() { echo "+ readlink --canonicalize .">&2; command readlink --canonicalize .; }
 
-# systemctl
 [ -f ~/.aliases/.systemctl_aliases ] && source ~/.aliases/.systemctl_aliases
-
-# package
 [ -f ~/.aliases/.package_aliases ] && source ~/.aliases/.package_aliases
-
-# network
-function curl() { echo "+ curl ${@}">&2; command curl ${@}; }
-function netstat() { echo "+ netstat ${@}">&2; command netstat ${@}; }
-alias netstat-tunlp="sudo netstat --tcp --udp --numeric --listening --programs"
-
-# alternative
-alias alternatives-config-java="sudo alternatives --config java"
-alias alternatives-list="sudo alternatives --list"
-
-# process
+[ -f ~/.aliases/.network_aliases ] && source ~/.aliases/.network_aliases
 [ -f ~/.aliases/.process_aliases ] && source ~/.aliases/.process_aliases
-
-# git
 [ -f ~/.aliases/.git_aliases ] && source ~/.aliases/.git_aliases
-
-# docker
 [ -f ~/.aliases/.docker_aliases ] && source ~/.aliases/.docker_aliases
-
-# docker compose
 [ -f ~/.aliases/.docker_compose_aliases ] && source ~/.aliases/.docker_compose_aliases
-
-# kubernetes
 [ -f ~/.aliases/.kubernetes_aliases ] && source ~/.aliases/.kubernetes_aliases
-
-# krew
 [ -f ~/.aliases/.krew_aliases ] && source ~/.aliases/.krew_aliases
-
-# helm
 [ -f ~/.aliases/.helm_aliases ] && source ~/.aliases/.helm_aliases
-
-# tekton
 [ -f ~/.aliases/.tekton_aliases ] && source ~/.aliases/.tekton_aliases
-
-# minio
 [ -f ~/.aliases/.minio_aliases ] && source ~/.aliases/.minio_aliases
-
-# istio
 [ -f ~/.aliases/.istio_aliases ] && source ~/.aliases/.istio_aliases
-
-# argo
 [ -f ~/.aliases/.argo_aliases ] && source ~/.aliases/.argo_aliases
-
-# strimzi kafka
 [ -f ~/.aliases/.strimzi_aliases ] && source ~/.aliases/.strimzi_aliases
-
-# jdk
 [ -f ~/.aliases/.jdk_aliases ] && source ~/.aliases/.jdk_aliases
 
 # others
@@ -109,6 +73,8 @@ function aws() { echo "+ aws ${@}">&2; command aws ${@}; }
 function descheduler() { echo "+ descheduler ${@}">&2; command descheduler ${@}; }
 function kustomize() { echo "+ kustomize ${@}">&2; command kustomize ${@}; }
 function tidy() { echo "+ tidy ${@}">&2; command tidy ${@}; }
+alias alternatives-config-java="sudo alternatives --config java"
+alias alternatives-list="sudo alternatives --list"
 alias aws="docker run --rm -it -v ~/.aws:/root/.aws -v \$(pwd):/aws amazon/aws-cli"
 alias descheduler="docker run --rm -it k8s.gcr.io/descheduler/descheduler:v0.19.0 descheduler"
 alias rook-ceph-password="kubectl get secrets rook-ceph-dashboard-password -n rook-ceph -o jsonpath=\"{['data']['password']}\" | base64 --decode && echo"
