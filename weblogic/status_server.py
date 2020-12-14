@@ -19,27 +19,33 @@ class ansifgcolor(object):
 ######################################################################
 
 
-def print_status_header(_server_names, _header):
+def print_status_header(_header, _server_names):
     print(ansiformat.bold + '%-30s' % _header + ansiformat.reset + '|'),
     for _server_name in _server_names:
         print('%15s' % _server_name),
     print('')
-    print('-' * (31 + 16 * len(_server_names)))
+    print('-' * (31 + (16 * len(_server_names))))
 
 
 def print_status_value(_items, _values):
-    _trans_values = list(map(list, zip(*_values)))
+    _transposed_values = list(map(list, zip(*_values)))
 
     for _idx in range(len(_items)):
-        print('%-30s' % _items[_idx] + '|'),
-        if isinstance(_trans_values[_idx][0], bool):
-            print(''.join([str('%15r' % v) for v in _trans_values[_idx]])),
-        elif isinstance(_trans_values[_idx][0], int):
-            print(''.join([str('%15i' % v) for v in _trans_values[_idx]])),
-        elif isinstance(_trans_values[_idx][0], float):
-            print(''.join([str('%15.4f' % v) for v in _trans_values[_idx]])),
+        print('%-30s' % _items[_idx][0] + '|'),
+        if _items[_idx][1] == 'bool':
+            for v in _transposed_values[_idx]:
+                if v == 0:
+                    print(''.join(str('%15s' % 'False'))),
+                else:
+                    print(''.join(str('%15s' % 'True'))),
+        elif _items[_idx][1] == 'int':
+            print(' '.join([str('%15i' % v) for v in _transposed_values[_idx]])),
+        elif _items[_idx][1] == 'long':
+            print(' '.join([str('%15i' % v) for v in _transposed_values[_idx]])),
+        elif _items[_idx][1] == 'double':
+            print(' '.join([str('%15.4f' % v) for v in _transposed_values[_idx]])),
         else:
-            print(''.join([str('%15s' % v) for v in _trans_values[_idx]])),
+            print(' '.join([str('%15s' % v) for v in _transposed_values[_idx]])),
         print('')
     print('\n')
 
@@ -68,10 +74,10 @@ def get_server_heap_status(_servers):
     _server_names = [server.getName() for server in _servers]
 
     _heap_items = [
-        'HeapSizeMax',
-        'HeapSizeCurrent',
-        'HeapFreeCurrent',
-        'HeapFreePercent'
+        ('HeapSizeMax', 'long'),
+        ('HeapSizeCurrent', 'long'),
+        ('HeapFreeCurrent', 'long'),
+        ('HeapFreePercent', 'int')
     ]
 
     _heap_values = []
@@ -83,28 +89,35 @@ def get_server_heap_status(_servers):
             _server.getJVMRuntime().getHeapFreePercent(),
         ])
 
-    print_status_header(_server_names, 'HEAP')
+    print_status_header('HEAP', _server_names)
     print_status_value(_heap_items, _heap_values)
 
 
-def get_server_threadpool_status(_servers):
+def get_server_threadpool_status(_domain_version, _servers):
     _server_names = [server.getName() for server in _servers]
     _is_ver_1212_or_later = False
+    if ('12.' in _domain_version) or ('14.' in _domain_version):
+        _is_ver_1212_or_later = True
+        if '12.1.1' in _domain_version:
+            _is_ver_1212_or_later = False
 
     _threadpool_items = [
-        'CompletedRequestCount',
-        'ExecuteThreadIdleCount',
-        'ExecuteThreadTotalCount',
-        'HoggingThreadCount',
-        'MinThreadsConstraintsCompleted',
-        'MinThreadsConstraintsPending',
-        'PendingUserRequestCount',
-        'QueueLength',
-        'SharedCapacityForWorkManagers',
-        'StandbyThreadCount',
-        'Throughput',
-        'Suspended'
+        ('CompletedRequestCount', 'long'),
+        ('ExecuteThreadIdleCount', 'int'),
+        ('ExecuteThreadTotalCount', 'int'),
+        ('HoggingThreadCount', 'int'),
+        ('MinThreadsConstraintsCompleted', 'long'),
+        ('MinThreadsConstraintsPending', 'int'),
+        ('PendingUserRequestCount', 'int'),
+        ('QueueLength', 'int'),
+        ('SharedCapacityForWorkManagers', 'int'),
+        ('StandbyThreadCount', 'int'),
+        ('Throughput', 'double'),
+        ('Suspended', 'bool')
     ]
+    if _is_ver_1212_or_later:
+        _threadpool_items.append(('OverloadRejectedRequestsCount', 'int'))
+        _threadpool_items.append(('StuckThreadCount', 'int'))
 
     _threadpool_values = []
     for _server in _servers:
@@ -122,32 +135,33 @@ def get_server_threadpool_status(_servers):
             _server.getThreadPoolRuntime().getThroughput(),
             _server.getThreadPoolRuntime().isSuspended(),
         ]
-        if ('12.' in _server.getWeblogicVersion()) and ('14.' in _server.getWeblogicVersion()):
-            _is_ver_1212_or_later = True
+        if _is_ver_1212_or_later:
             _list.append(_server.getThreadPoolRuntime().getOverloadRejectedRequestsCount())
             _list.append(_server.getThreadPoolRuntime().getStuckThreadCount())
         _threadpool_values.append(_list)
 
-    if _is_ver_1212_or_later:
-        _threadpool_items.append('OverloadRejectedRequestsCount')
-        _threadpool_items.append('StuckThreadCount')
-
-    print_status_header(_server_names, 'THREADPOOL')
+    print_status_header('THREADPOOL', _server_names)
     print_status_value(_threadpool_items, _threadpool_values)
 
 
 ######################################################################
 
 
-admin_server_url = 't3://test.example.com:7001'
-username = 'weblogic'
-password = 'welcome1'
-connect(username, password, admin_server_url)
+admin_server_listen_address = 'test.example.com'
+admin_server_listen_port = '7001'
+admin_username = 'weblogic'
+admin_password = 'welcome1'
 
+admin_server_url = 't3://' + admin_server_listen_address + ':' + admin_server_listen_port
+connect(admin_username, admin_password, admin_server_url)
+
+domain_version = cmo.getDomainVersion()
 domainRuntime()
 
 servers = domainRuntimeService.getServerRuntimes()
-if (len(servers) > 0):
+if len(servers) > 0:
     get_server_general_status(servers)
     get_server_heap_status(servers)
-    get_server_threadpool_status(servers)
+    get_server_threadpool_status(domain_version, servers)
+
+exit()
