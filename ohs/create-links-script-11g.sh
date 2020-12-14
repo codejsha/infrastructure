@@ -1,6 +1,6 @@
 #!/bin/bash
 
-### required package:
+### requirement:
 ### sudo yum install -y links
 
 source ./env-base-11g.sh
