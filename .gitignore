@@ -9,5 +9,5 @@
 /temp/
 /kubernetes/kubespray/kubespray/
 /kraken/kraken/
-/oracledb/docker-images/OracleDatabase/SingleInstance/dockerfiles/
+/oracledb/docker-images/
 /rook/rook/
