@@ -35,6 +35,18 @@ weblogic.xml:
 
 - https://docs.oracle.com/middleware/12213/wls/WBAPP/weblogic_xml.htm
 
+### Connect WLST
+
+```py
+admin_server_listen_address = 'test.example.com'
+admin_server_listen_port = '7001'
+admin_username = 'weblogic'
+admin_password = 'welcome1'
+
+admin_server_url = 't3://' + admin_server_listen_address + ':' + admin_server_listen_port
+connect(admin_username, admin_password, admin_server_url)
+```
+
 ## Sample application
 
 ### 11g
