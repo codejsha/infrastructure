@@ -103,6 +103,7 @@ EOF
 cat <<EOF > ${CATALINA_BASE}/check-config.sh
 #!/bin/bash
 
+INSTANCE_NAME="${INSTANCE_NAME}"
 export CATALINA_HOME="${CATALINA_HOME}"
 export CATALINA_BASE="${VAR_CATALINA_BASE}"
 
@@ -115,6 +116,7 @@ EOF
 cat <<EOF > ${CATALINA_BASE}/get-version.sh
 #!/bin/bash
 
+INSTANCE_NAME="${INSTANCE_NAME}"
 export CATALINA_HOME="${CATALINA_HOME}"
 export CATALINA_BASE="${VAR_CATALINA_BASE}"
 
