@@ -3,7 +3,10 @@
 ## Install
 
 ```bash
+### helm chart
 bash ./helm-install-nexus.sh
+### docker container
+bash ./docker-run-nexus.sh
 ```
 
 ## Configuration
