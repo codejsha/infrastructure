@@ -1,0 +1,17 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: bookinfo
+  namespace: bookinfo
+  annotations:
+    openshift.io/host.generated: "true"
+  labels:
+    app: bookinfo
+spec:
+  host: bookinfo-bookinfo.apps.ocp.example.io
+  port:
+    targetPort: http
+  to:
+    kind: Service
+    name: productpage
+    weight: 100
