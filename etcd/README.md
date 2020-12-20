@@ -24,7 +24,7 @@ bash ./delete-key.sh <KEY>
 ## Snapshot
 
 ```bash
-bash ./snapshot-save.sh
-bash ./snapshot-status.sh <FILENAME>
-bash ./snapshot-restore.sh <FILENAME>
+bash ./save-snapshot.sh
+bash ./get-snapshot-status.sh ${FILENAME}
+bash ./restore-snapshot.sh ${FILENAME}
 ```
