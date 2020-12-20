@@ -8,6 +8,20 @@ bash ./install-docker.sh
 
 ### Docker Registry
 
+#### Container
+
+- https://docs.docker.com/registry/deploying/
+
+```bash
+bash ./docker-run-docker-registry.sh
+```
+
+#### Helm chart
+
+Deprecated chart
+
+https://github.com/helm/charts#%EF%B8%8F-deprecation-and-archive-notice
+
 ```bash
 bash ./helm-install-docker-registry.sh
 ```

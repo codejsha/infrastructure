@@ -2,8 +2,8 @@
 
 USERNAME="admin"
 PASSWORD="${PASSWORD}"
-AWS_ACCESS_KEY="<ACCESS_KEY>"
-AWS_SECRET_KEY="<SECRET_KEY>"
+AWS_ACCESS_KEY="${AWS_ACCESS_KEY}"
+AWS_SECRET_KEY="${AWS_SECRET_KEY}"
 
 NAMESPACE="registry-system"
 
@@ -29,7 +29,7 @@ helm upgrade --install my-docker-registry \
     --set ingress.path="/" \
     --set persistence.enabled="true" \
     --set persistence.storageClass="rook-ceph-block" \
-    --version 1.9.4 \
+    --version 1.9.6 \
     stable/docker-registry
 
     ### for ip address
