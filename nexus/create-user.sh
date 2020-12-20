@@ -8,7 +8,7 @@ export USER_ID="${1}"
 export USER_PASSWORD="${2}"
 export USER_FIRSTNAME="${USER_ID}"
 export USER_LASTNAME="${USER_ID}"
-export USER_EMAIL="${USER_ID}@example.org"
+export USER_EMAIL="${USER_ID}@example.com"
 export USER_ROLES="nx-admin"
 
 envsubst < ./data-user.json > ./data-user-temp.json
@@ -19,7 +19,7 @@ function create_user {
         -X POST "${NEXUS_URL}/service/rest/beta/security/users" \
         -H "accept: application/json" \
         -H "Content-Type: application/json" \
-        -d @data-user.json
+        -d @data-user-temp.json
 }
 
 create_user
