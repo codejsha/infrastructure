@@ -1,7 +1,7 @@
 #!/bin/bash
 
 IPLANET_HOME="/usr/local/iplanet"
-IPLANET_SERVER="server1"
+IPLANET_SERVER="${1}"
 
 if [ "${IPLANET_SERVER}" == "admin-server" ]; then
     ln -snf ${IPLANET_HOME}/admin-server/bin/startserv ${IPLANET_HOME}/start-admin.sh

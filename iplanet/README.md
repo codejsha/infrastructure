@@ -4,12 +4,14 @@
 
 ```bash
 bash ./install-iplanet.sh
+bash ./create-links.sh admin-server
 ```
 
 ## Server
 
 ```bash
 bash ./create-server.sh
+bash ./create-links.sh ${IPLANET_SERVER}
 bash ./delete-server.sh
 ```
 
@@ -33,3 +35,7 @@ bash ./delete-virtual-server.sh
 - `create-links.sh`
 - `disable-java.sh`
 - `set-self-signed-cert.sh`
+
+## Log Rotation
+
+- https://docs.oracle.com/cd/E19146-01/821-1828/gbrqz/index.html
