@@ -1,0 +1,42 @@
+accessKey: "admin"
+secretKey: "${PASSWORD}"
+
+persistence:
+  enabled: true
+  storageClass: "rook-ceph-block"
+  accessMode: ReadWriteOnce
+  size: 500Gi
+
+service:
+  type: ClusterIP
+  # type: LoadBalancer
+
+ingress:
+  enabled: true
+  labels:
+    node-role.kubernetes.io/ingress: platform
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+  path: /
+  hosts:
+    - minio.example.com
+
+resources:
+  requests:
+    memory: 1Gi
+
+defaultBucket:
+  enabled: true
+  name: default
+  policy: none
+  purge: false
+
+buckets:
+  []
+  # - name: bucket1
+  #   policy: none
+  #   purge: false
+  # - name: bucket2
+  #   policy: none
+  #   purge: false

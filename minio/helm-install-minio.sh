@@ -5,25 +5,14 @@ helm repo update
 
 PASSWORD="${PASSWORD}"
 
+envsubst < ./chart-values.yaml > ./chart-values-temp.yaml
+
 NAMESPACE="minio-system"
 
 # helm install my-minio \
 helm upgrade --install my-minio \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --set accessKey="admin" \
-    --set secretKey="${PASSWORD}" \
-    --set service.type="ClusterIP" \
-    --set ingress.enabled="true" \
-    --set ingress.labels."node-role\.kubernetes\.io/ingress"="platform" \
-    --set ingress.annotations."kubernetes\.io/ingress\.class"="nginx" \
-    --set-string ingress.annotations."nginx\.ingress\.kubernetes\.io/proxy-body-size"="0" \
-    --set ingress.hosts={"minio.example.com"} \
-    --set persistence.enabled="true" \
-    --set persistence.storageClass="rook-ceph-block" \
-    --set persistence.accessMode="ReadWriteOnce" \
-    --version 7.0.1 \
+    --values chart-values-temp.yaml \
+    --version 8.0.8 \
     minio/minio
-
-    ### for loadbalancer
-    # --set service.type="LoadBalancer" \
