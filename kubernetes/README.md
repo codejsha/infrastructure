@@ -4,7 +4,9 @@
 
 [Installing Kubernetes with Kubespray README](/kubernetes/kubespray/README.md)
 
-## kubectl
+## CLI Tools
+
+### kubectl
 
 https://kubernetes.io/docs/tasks/tools/install-kubectl
 
@@ -12,7 +14,7 @@ https://kubernetes.io/docs/tasks/tools/install-kubectl
 bash ./install-kubectl.sh
 ```
 
-## kubectl-aliases
+### kubectl-aliases
 
 https://github.com/ahmetb/kubectl-aliases
 
@@ -20,7 +22,7 @@ https://github.com/ahmetb/kubectl-aliases
 bash ./install-kubectl-aliases.sh
 ```
 
-## Krew
+### Krew
 
 https://krew.sigs.k8s.io/
 

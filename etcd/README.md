@@ -17,8 +17,8 @@ bash ./health-check.sh
 ## Key
 
 ```bash
-bash ./get-key.sh <KEYWORD>
-bash ./delete-key.sh <KEY>
+bash ./get-key.sh ${KEYWORD}
+bash ./delete-key.sh ${KEY}
 ```
 
 ## Snapshot

@@ -51,9 +51,7 @@ bash ./install-docker-compose.sh
 
 ### Expose Docker daemon socket
 
-#### Configure Service
-
-[docker-service.sh](/docker/docker-service.sh)
+Configure Service:
 
 ```bash
 bash ./docker-service.sh
@@ -67,7 +65,7 @@ ExecStart=
 ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --host tcp://0.0.0.0:2375
 ```
 
-#### Restart Docker daemon
+Restart Docker daemon:
 
 ```bash
 systemctl daemon-reload

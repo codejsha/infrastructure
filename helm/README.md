@@ -21,7 +21,15 @@ bash ./install-helm-push-plugin.sh
 
 ## ChartMuseum
 
-### Install chart (Deprecated)
+### Container
+
+```bash
+bash ./docker-run-chartmuseum.sh
+```
+
+### Helm chart
+
+Deprecated chart
 
 https://github.com/helm/charts#%EF%B8%8F-deprecation-and-archive-notice
 
