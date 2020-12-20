@@ -1,0 +1,6 @@
+mysql:
+  enable: true
+  mysqlRootPassword: ${MYSQL_ROOT_PASSWORD}
+  mysqlUser: ${MYSQL_USERNAME}
+  mysqlPassword: ${MYSQL_PASSWORD}
+  mysqlDatabase: pinpoint
