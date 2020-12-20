@@ -12,6 +12,6 @@ helm upgrade --install my-kafka \
     --set zookeeper.replicaCount="3" \
     --set zookeeper.persistence.enabled="true" \
     --set zookeeper.persistence.storageClass="rook-ceph-block" \
-    --values kafka-values.yaml \
+    --values kafka-chart-values.yaml \
     --version 12.1.0 \
     bitnami/kafka
