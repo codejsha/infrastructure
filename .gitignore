@@ -5,9 +5,11 @@
 *.tar
 *.tar.gz
 *.tgz
+*-temp.json
+*-temp.yaml
 
-/temp/
 /kubernetes/kubespray/kubespray/
 /kraken/kraken/
 /oracledb/docker-images/
 /rook/rook/
+/temp/
