@@ -25,6 +25,12 @@
 - https://httpd.apache.org/docs/current/mod/mod_deflate.html
 - https://httpd.apache.org/docs/current/filter.html
 
+test:
+
+```bash
+curl -I -H "Accept-Encoding:gzip,deflate" http://test.example.com
+```
+
 ## Logging
 
 - https://httpd.apache.org/docs/current/logs.html
