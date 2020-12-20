@@ -1,0 +1,51 @@
+service:
+  type: ClusterIP
+  # type: LoadBalancer
+  port: 9042
+  thriftPort: 9160
+  metricsPort: 8080
+  # loadBalancerIP:
+
+persistence:
+  enabled: true
+  storageClass: "rook-ceph-block"
+  accessModes:
+    - ReadWriteOnce
+  size: 8Gi
+
+cluster:
+  name: cassandra
+  seedCount: 1
+  numTokens: 256
+  datacenter: dc1
+  rack: rack1
+  enableRPC: true
+  endpointSnitch: SimpleSnitch
+  internodeEncryption: none
+  clientEncryption: false
+
+jvm:
+  extraOpts:
+  maxHeapSize: 1G
+  newHeapSize: 384M
+
+dbUser:
+  user: cassandra
+  forcePassword: false
+
+replicaCount: 1
+
+updateStrategy: RollingUpdate
+
+resources:
+  limits: {}
+  #   cpu: 2
+  #   memory: 4Gi
+  requests: {}
+  #   cpu: 2
+  #   memory: 4Gi
+
+pdb:
+  create: false
+  minAvailable: 1
+  # maxUnavailable: 1
