@@ -13,7 +13,7 @@ alias dcrm="docker container rm"
 alias dcrmall="docker container rm \$(docker container ls --all --quiet)"
 alias dcrmall-force="docker container rm --force \$(docker container ls --all --quiet)"
 alias dcrm-force="docker container rm --force"
-alias dcrmunused="docker container prune --force"
+alias dcrm-unused="docker container prune --force"
 alias dcrun="docker container run"
 
 function dexecbash() { CONTAINER_NAME="${1}"; if [ -n "${CONTAINER_NAME}" ]; then docker exec --interactive --tty ${1} /bin/bash; fi; }
@@ -25,24 +25,24 @@ function dhubimtags() { curl --silent "https://registry.hub.docker.com/v2/reposi
 
 alias dimls="docker image ls"
 alias dimrm="docker image rm"
+alias dimrm-dangling="docker image rm \$(docker image ls --all --quiet --filter dangling=true)"
+alias dimrm-unused="docker image prune --force"
 alias dimrmall="docker image rm \$(docker image ls --all --quiet)"
 alias dimrmall-force="docker image rm --force \$(docker image ls --all --quiet)"
-alias dimrmdangling="docker image rm \$(docker image ls --all --quiet --filter dangling=true)"
-alias dimrmunused="docker image prune --force"
 
 alias dinspect="docker inspect"
 
 alias dnetcreate="docker network create"
 alias dnetls="docker network ls"
 alias dnetrm="docker network rm"
-alias dnetrmunused="docker network prune --force"
+alias dnetrm-unused="docker network prune --force"
 
 alias dpull="docker pull"
 
 alias dsearch="docker search"
-alias dsearchofficial="docker search --filter=is-official=true"
+alias dsearch-official="docker search --filter=is-official=true"
 
 alias dvolcreate="docker volume create"
 alias dvolls="docker volume ls"
 alias dvolrm="docker volume rm"
-alias dvolrmunused="docker volume prune --force"
+alias dvolrm-unused="docker volume prune --force"
