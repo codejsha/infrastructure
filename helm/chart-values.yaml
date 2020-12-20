@@ -1,0 +1,33 @@
+replicaCount: 1
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxUnavailable: 0
+
+env:
+  open:
+    STORAGE: amazon
+    STORAGE_AMAZON_BUCKET: mychart-storage
+    # STORAGE_AMAZON_PREFIX:
+    # STORAGE_AMAZON_REGION:
+    STORAGE_AMAZON_ENDPOINT: "http://minio.example.com"
+    DISABLE_API: false
+  secret:
+    AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY}"
+    AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_KEY}"
+
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 8Gi
+  storageClass: rook-ceph-block
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+  hosts:
+    - name: chartmuseum.example.com
+      path: /
+      tls: false

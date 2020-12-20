@@ -21,25 +21,45 @@ bash ./install-helm-push-plugin.sh
 
 ## ChartMuseum
 
-Requirements: MinIO storage
+### Install chart (Deprecated)
 
-[values.yaml](/helm/values.yaml):
+https://github.com/helm/charts#%EF%B8%8F-deprecation-and-archive-notice
+
+configure blob storage:
 
 ```yaml
 env:
   open:
     STORAGE: "amazon"
-    STORAGE_AMAZON_BUCKET: "mychart"
+    STORAGE_AMAZON_BUCKET: "mychart-storage"
     # STORAGE_AMAZON_PREFIX:
     # STORAGE_AMAZON_REGION:
     STORAGE_AMAZON_ENDPOINT: "http://minio.example.com"
   secret:
-    AWS_ACCESS_KEY_ID: "<ACCESS_KEY>"
-    AWS_SECRET_ACCESS_KEY: "<SECRET_KEY>"
+    AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY}"
+    AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_KEY}"
 ```
 
-Install:
+create bucket:
+
+```bash
+mc mb myminio/mychart-storage
+```
+
+install:
 
 ```bash
 bash ./helm-install-chartmuseum.sh
+```
+
+### Health check
+
+```bash
+curl --insecure --verbose http://chartmuseum.example.com/health
+```
+
+### Add repo
+
+```bash
+helm repo add chartmuseum http://chartmuseum.example.com
 ```
