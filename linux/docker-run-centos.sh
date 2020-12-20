@@ -1,29 +1,37 @@
 #!/bin/bash
 
-docker run \
-    --interactive \
-    --tty \
-    --name centos8 \
-    --mount type=bind,src=/mnt/share,dst=/mnt/share \
-    --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
-    centos:8.2.2004
+function docker_run_centos8 {
+    docker run \
+        --interactive \
+        --tty \
+        --name centos8 \
+        --mount type=bind,src=/mnt/share,dst=/mnt/share \
+        --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
+        centos:8.2.2004
+}
+
+function docker_run_centos7 {
+    docker run \
+        --interactive \
+        --tty \
+        --name centos7 \
+        --mount type=bind,src=/mnt/share,dst=/mnt/share \
+        --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
+        centos:7.8.2003
+}
+
+function docker_run_centos6 {
+    docker run \
+        --interactive \
+        --tty \
+        --name centos6 \
+        --mount type=bind,src=/mnt/share,dst=/mnt/share \
+        --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
+        centos:6.10
+}
 
 ######################################################################
 
-docker run \
-    --interactive \
-    --tty \
-    --name centos7 \
-    --mount type=bind,src=/mnt/share,dst=/mnt/share \
-    --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
-    centos:7.8.2003
-
-######################################################################
-
-docker run \
-    --interactive \
-    --tty \
-    --name centos6 \
-    --mount type=bind,src=/mnt/share,dst=/mnt/share \
-    --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
-    centos:6.10
+# docker_run_centos8
+docker_run_centos7
+# docker_run_centos6
