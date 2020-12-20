@@ -10,5 +10,4 @@ fi
 helm upgrade --install my-kraken \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --values values.yaml \
     ./kraken/helm
