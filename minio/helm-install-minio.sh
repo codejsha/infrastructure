@@ -3,7 +3,7 @@
 helm repo add minio https://helm.min.io
 helm repo update
 
-PASSWORD="${PASSWORD}"
+export PASSWORD="${PASSWORD}"
 
 envsubst < ./chart-values.yaml > ./chart-values-temp.yaml
 

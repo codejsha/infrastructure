@@ -1,8 +1,3 @@
-# admin:admin123
-#   "auth": "YWRtaW46YWRtaW4xMjM="
-# developer:developer
-#   "auth": "ZGV2ZWxvcGVyOmRldmVsb3Blcg=="
----
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -12,16 +7,16 @@ data:
     {
       "auths": {
         "registry.example.com": {
-          "auth": "ZGV2ZWxvcGVyOmRldmVsb3Blcg=="
+          "auth": "${AUTH}"
         },
         "core.harbor.example.com": {
-          "auth": "ZGV2ZWxvcGVyOmRldmVsb3Blcg=="
+          "auth": "${AUTH}"
         },
         "my-docker-registry.registry-system:5000": {
-          "auth": "ZGV2ZWxvcGVyOmRldmVsb3Blcg=="
+          "auth": "${AUTH}"
         },
         "sonatype-nexus-service.nexus-system:5003": {
-          "auth": "ZGV2ZWxvcGVyOmRldmVsb3Blcg=="
+          "auth": "${AUTH}"
         }
       }
     }

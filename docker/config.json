@@ -1,7 +1,7 @@
 {
   "auths": {
     "registry.example.com": {
-      "auth": "AUTH"
+      "auth": "${AUTH}"
     }
   }
 }
