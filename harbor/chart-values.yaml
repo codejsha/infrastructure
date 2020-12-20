@@ -1,0 +1,100 @@
+expose:
+  type: ingress
+  # type: loadBalancer
+  tls:
+    enabled: true
+    certSource: auto
+    auto:
+      commonName: ""
+      ### for loadbalancer
+      # commonName: "core.harbor.example.com"
+  ingress:
+    hosts:
+      core: core.harbor.example.com
+      notary: notary.harbor.example.com
+    annotations:
+      kubernetes.io/ingress.class: "nginx"
+      ingress.kubernetes.io/ssl-redirect: "true"
+      ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+  # loadBalancer:
+  #   name: harbor
+  #   IP: ""
+  #   ports:
+  #     httpPort: 80
+  #     httpsPort: 443
+  #     notaryPort: 4443
+
+externalURL: https://core.harbor.example.com
+
+persistence:
+  enabled: true
+  resourcePolicy: "keep"
+  persistentVolumeClaim:
+    registry:
+      storageClass: rook-ceph-block
+      accessMode: ReadWriteOnce
+      size: 5Gi
+    chartmuseum:
+      storageClass: rook-ceph-block
+      accessMode: ReadWriteOnce
+      size: 5Gi
+    jobservice:
+      storageClass: rook-ceph-block
+      accessMode: ReadWriteOnce
+      size: 1Gi
+    database:
+      storageClass: rook-ceph-block
+      accessMode: ReadWriteOnce
+      size: 1Gi
+    redis:
+      storageClass: rook-ceph-block
+      accessMode: ReadWriteOnce
+      size: 1Gi
+    trivy:
+      storageClass: rook-ceph-block
+      accessMode: ReadWriteOnce
+      size: 5Gi
+  imageChartStorage:
+    disableredirect: true
+    type: s3
+    s3:
+      region: us-west-1
+      bucket: harbor-storage
+      accesskey: ${AWS_ACCESS_KEY}
+      secretkey: ${AWS_SECRET_KEY}
+      regionendpoint: http://minio.example.com
+      #encrypt: false
+      #keyid: mykeyid
+      #secure: true
+      #skipverify: false
+      #v4auth: true
+      #chunksize: "5242880"
+      #rootdirectory: /s3/object/name/prefix
+      #storageclass: STANDARD
+      #multipartcopychunksize: "33554432"
+      #multipartcopymaxconcurrency: 100
+      #multipartcopythresholdsize: "33554432"
+
+updateStrategy:
+  type: RollingUpdate
+
+harborAdminPassword: "${HARBOR_ADMIN_PASSWORD}"
+
+secretKey: "${HARBOR_SECRET_KEY}"
+
+registry:
+  replicas: 1
+  credentials:
+    username: "${REGISTRY_USERNAME}"
+    password: "${REGISTRY_PASSWORD}"
+    htpasswd: "${REGISTRY_HTPASSWD}"
+
+database:
+  type: internal
+  internal:
+    password: "${INTERNAL_DATABASE_PASSWORD}"
+  external:
+    username: "${EXTERNAL_DATABASE_USERNAME}"
+    password: "${EXTERNAL_DATABASE_PASSWORD}"
