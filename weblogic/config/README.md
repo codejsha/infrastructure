@@ -36,26 +36,6 @@ bash ./all.sh
 
 - [create-datasource.sh](/weblogic/config/create-datasource.sh) - [create_datasource.py](/weblogic/config/create_datasource.py)
 
-### Diagnostics Profile Type
-
-(Data Source) > Configuration > Diagnostics
-
-set profile type to sum of bit
-
-| Name                                      |  Bit |
-| ----------------------------------------- | ---: |
-| Profile Connection Usage                  |    1 |
-| Profile Connection Reservation Wait       |    2 |
-| Profile Connection Leak                   |    4 |
-| Profile Connection Reservation Failed     |    8 |
-| Profile Statement Cache Entry             |   16 |
-| Profile Statement Usage                   |   32 |
-| Profile Connection Last Usage             |   64 |
-| Profile Connection Multithreaded Usage    |  128 |
-| Profile Connection Unwrap                 |  256 |
-| Profile Connection Local Transaction Leak |  512 |
-| Profile Closed Usage                      | 1024 |
-
 ## Node manager
 
 - [create-nodemgr.sh](/weblogic/config/create-nodemgr.sh) - [create_nodemgr.py](/weblogic/config/create_nodemgr.py)

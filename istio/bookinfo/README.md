@@ -9,12 +9,6 @@
 bash ./all.sh
 ```
 
-for openshift:
-
-```bash
-bash ./deploy-bookinfo-openshift.sh
-```
-
 ## Traffic managemet
 
 ### Virtual services

@@ -5,3 +5,7 @@
 ## Red Hat CodeReady Containers
 
 - [Red Hat CodeReady Containers](/openshift/crc/README.md)
+
+## Istio
+
+- [Istio OpenShift README](/istio/bookinfo-openshift/README.md)
