@@ -4,7 +4,7 @@ function docker() { echo "+ docker ${@}">&2; command docker ${@}; }
 
 alias dcattach="docker container attach"
 alias dclo="docker container logs --follow"
-alias dclof="docker container logs --follow --tail"
+alias dclon="docker container logs --follow --tail"
 alias dcls="docker container ls"
 alias dclsall="docker container ls --all"
 alias dcstart="docker container start"
