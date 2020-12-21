@@ -2,7 +2,7 @@
 
 SAMPLE_DB_FILE_DIR="/mnt/share/postgresql"
 
-POSTGRES_PASSWORD="<POSTGRES_PASSWORD>"
+POSTGRES_PASSWORD="${POSTGRES_PASSWORD}"
 PGPASSWORD="${POSTGRES_PASSWORD}" \
     psql \
     --host=postgres-lb.example.com \
