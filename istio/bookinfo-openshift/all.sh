@@ -2,8 +2,8 @@
 
 oc new-project bookinfo
 
-oc apply -f bookinfo-smcp.yaml
-oc apply -f bookinfo-smmr.yaml
+oc apply -f smcp.yaml
+oc apply -f smmr.yaml
 oc apply -n bookinfo -f https://raw.githubusercontent.com/Maistra/istio/maistra-1.1/samples/bookinfo/platform/kube/bookinfo.yaml
 oc apply -n bookinfo -f https://raw.githubusercontent.com/Maistra/istio/maistra-1.1/samples/bookinfo/networking/bookinfo-gateway.yaml
 oc apply -n bookinfo -f https://raw.githubusercontent.com/Maistra/istio/maistra-1.1/samples/bookinfo/networking/destination-rule-all.yaml
