@@ -47,15 +47,26 @@ def set_generic_datasource_param_config(_domain_version, _ds_name, _ds_jndi, _ds
     cmo.setUrl(_ds_url)
     cmo.setDriverName(_ds_driver)
     cmo.setPassword(_ds_password)
+
+    ### oracle.jdbc.ReadTimeout
+    # cd('/JDBCSystemResources/' + _ds_name + '/JDBCResource/' + _ds_name +
+    #    '/JDBCDriverParams/' + _ds_name + '/Properties/' + _ds_name)
+    # cmo.createProperty('oracle.jdbc.ReadTimeout')
+    # cd('/JDBCSystemResources/' + _ds_name + '/JDBCResource/' + _ds_name +
+    #    '/JDBCDriverParams/' + _ds_name + '/Properties/' + _ds_name + '/Properties/oracle.jdbc.ReadTimeout')
+    # cmo.setValue('30000')
+
     cd('/JDBCSystemResources/' + _ds_name + '/JDBCResource/' + _ds_name +
        '/JDBCDriverParams/' + _ds_name + '/Properties/' + _ds_name + '/Properties/user')
     cmo.setValue(_ds_user)
+
     cd('/JDBCSystemResources/' + _ds_name + '/JDBCResource/' + _ds_name +
        '/JDBCDataSourceParams/' + _ds_name)
     cmo.setJNDINames(_ds_jndi)
     cmo.setGlobalTransactionsProtocol('OnePhaseCommit')
     # cmo.setRowPrefetch(False)
     # cmo.setStreamChunkSize(256)
+
     cd('/JDBCSystemResources/' + _ds_name + '/JDBCResource/' + _ds_name +
        '/JDBCConnectionPoolParams/' + _ds_name)
     cmo.setInitialCapacity(int(_ds_init))
@@ -75,10 +86,10 @@ def set_generic_datasource_param_config(_domain_version, _ds_name, _ds_jndi, _ds
     # cmo.setShrinkFrequencySeconds(900)
     # cmo.setConnectionCreationRetryFrequencySeconds(0)
     # cmo.setLoginDelaySeconds(0)
-    # cmo.setInactiveConnectionTimeoutSeconds(0)
-    # cmo.setHighestNumWaiters(2147483647)
+    cmo.setInactiveConnectionTimeoutSeconds(0)
+    cmo.setHighestNumWaiters(2147483647)
     # cmo.setConnectionReserveTimeoutSeconds(10)
-    # cmo.setStatementTimeout(-1)
+    cmo.setStatementTimeout(-1)
     # cmo.setIgnoreInUseConnectionsEnabled(True)
     # cmo.setPinnedToThread(False)
     # cmo.setRemoveInfectedConnections(True)
@@ -87,7 +98,11 @@ def set_generic_datasource_param_config(_domain_version, _ds_name, _ds_jndi, _ds
     # cmo.setConnectionHarvestTriggerCount(-1)
     # cmo.setCountOfRefreshFailuresTillDisable(2)
     # cmo.setCountOfTestFailuresTillFlush(2)
-    # cmo.setProfileType(4) # Profile Connection Leak
+
+    ### Diagnostics Profile
+    # cmo.setProfileType(0)     # default
+    # cmo.setProfileType(4)     # Profile Connection Leak
+
     cd('/JDBCSystemResources/' + _ds_name)
     _objects = []
     for _target_name in _ds_target:

@@ -2,22 +2,25 @@
 
 ######################################################################
 
+### CREATE SCRIPTS
+
 bash ./create-boot-properties.sh
 bash ./create-change-password-script.sh
 bash ./create-change-store-user-config-script.sh
 bash ./create-encrypt-password-script.sh
 bash ./create-regen-demo-identity-script.sh
-bash ./create-store-user-config-scripts.sh ManagedServer1
-bash ./create-store-user-config-scripts.sh ManagedServer2
 
 ######################################################################
+
+### CONFIG DOMAIN
 
 bash ./conf-domain.sh
 bash ./create-server.sh AdminServer test.example.com 7001
 bash ./create-scripts.sh AdminServer
-# bash ./set-connection-filter.sh
 bash ./set-domain-config-archive.sh
+# bash ./set-domain-connection-filter.sh
 bash ./set-domain-cookie-name.sh
+bash ./set-domain-jta.sh
 bash ./set-domain-log.sh
 
 ######################################################################
@@ -53,6 +56,7 @@ bash ./create-cluster.sh BaseCluster1 unicast
 ### bash ./create-server.sh ${MANAGED_SERVER_NAME} ${MANAGED_SERVER_ADDRESS} ${MANAGED_SERVER_PORT} ${CLUSTER_NAME}
 ### bash ./create-server.sh ${MANAGED_SERVER_NAME} ${MANAGED_SERVER_ADDRESS} ${MANAGED_SERVER_PORT} ${CLUSTER_NAME} ${NODEMGR_NAME}
 ### bash ./create-scripts.sh ${SERVER_NAME}
+### bash ./create-store-user-config-scripts.sh ${SERVER_NAME}
 
 # bash ./create-server.sh ManagedServer1 test.example.com 7003
 # bash ./create-server.sh ManagedServer2 test.example.com 7004
@@ -66,18 +70,26 @@ bash ./create-server.sh ManagedServer1 test.example.com 7003 BaseCluster1 BaseMa
 bash ./create-server.sh ManagedServer2 test.example.com 7004 BaseCluster1 BaseMachine1
 # bash ./create-server.sh ManagedServer3 test.example.com 7005 BaseCluster2 BaseMachine2
 # bash ./create-server.sh ManagedServer4 test.example.com 7006 BaseCluster2 BaseMachine2
+
 bash ./create-scripts.sh ManagedServer1
 bash ./create-scripts.sh ManagedServer2
 # bash ./create-scripts.sh ManagedServer3
 # bash ./create-scripts.sh ManagedServer4
+bash ./create-store-user-config-scripts.sh ManagedServer1
+bash ./create-store-user-config-scripts.sh ManagedServer2
+# bash ./create-store-user-config-scripts.sh ManagedServer3
+# bash ./create-store-user-config-scripts.sh ManagedServer4
 
 ######################################################################
 
 ### CREATE SERVER - JMS
+
 # bash ./create-server.sh JmsManagedServer1 test.example.com 7103 BaseJmsCluster1
 # bash ./create-server.sh JmsManagedServer2 test.example.com 7104 BaseJmsCluster1
 # bash ./create-scripts.sh JmsManagedServer1
 # bash ./create-scripts.sh JmsManagedServer2
+# bash ./create-store-user-config-scripts.sh ManagedServer1
+# bash ./create-store-user-config-scripts.sh ManagedServer2
 
 ######################################################################
 
