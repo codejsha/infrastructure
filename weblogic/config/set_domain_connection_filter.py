@@ -13,11 +13,13 @@ conn_filters = os.environ['CONN_FILTERS']
 
 
 def set_connection_filter(_domain_name, _conn_filters):
-    if len(_conn_filters) != 0:
+    if (_conn_filters and _conn_filters.strip()):
+        _conn_filter_list = [conn_filter.strip() for conn_filter in _conn_filters.split(',')]
+
         cd('/SecurityConfiguration/' + _domain_name)
         cmo.setConnectionLoggerEnabled(True)
         cmo.setConnectionFilter('weblogic.security.net.ConnectionFilterImpl')
-        cmo.setConnectionFilterRules(_conn_filters)
+        cmo.setConnectionFilterRules(_conn_filter_list)
 
 
 ######################################################################

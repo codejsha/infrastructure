@@ -18,10 +18,6 @@ ds_max = os.environ['DS_MAX']
 ds_target_type = os.environ['DS_TARGET_TYPE']
 ds_target = os.environ['DS_TARGET']
 
-######################################################################
-
-ds_jndi = ds_jndi.split(',')
-ds_target = ds_target.split(',')
 
 ######################################################################
 
@@ -42,6 +38,9 @@ def create_generic_datasource(_domain_version, _ds_name):
 def set_generic_datasource_param_config(_domain_version, _ds_name, _ds_jndi, _ds_url,
                                         _ds_driver, _ds_user, _ds_password,
                                         _ds_init, _ds_min, _ds_max, _ds_target_type, _ds_target):
+    _ds_jndi_list = [jndi.strip() for jndi in _ds_jndi.split(',')]
+    _ds_target_list = [target.strip() for target in _ds_target.split(',')]
+
     cd('/JDBCSystemResources/' + _ds_name + '/JDBCResource/' + _ds_name +
        '/JDBCDriverParams/' + _ds_name)
     cmo.setUrl(_ds_url)
@@ -62,7 +61,7 @@ def set_generic_datasource_param_config(_domain_version, _ds_name, _ds_jndi, _ds
 
     cd('/JDBCSystemResources/' + _ds_name + '/JDBCResource/' + _ds_name +
        '/JDBCDataSourceParams/' + _ds_name)
-    cmo.setJNDINames(_ds_jndi)
+    cmo.setJNDINames(_ds_jndi_list)
     cmo.setGlobalTransactionsProtocol('OnePhaseCommit')
     # cmo.setRowPrefetch(False)
     # cmo.setStreamChunkSize(256)
@@ -105,7 +104,7 @@ def set_generic_datasource_param_config(_domain_version, _ds_name, _ds_jndi, _ds
 
     cd('/JDBCSystemResources/' + _ds_name)
     _objects = []
-    for _target_name in _ds_target:
+    for _target_name in _ds_target_list:
         if _ds_target_type == 'Cluster':
             _objects.append(ObjectName('com.bea:Name=' + _target_name + ',Type=Cluster'))
         elif _ds_target_type == 'Server':

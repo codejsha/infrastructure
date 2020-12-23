@@ -61,7 +61,7 @@ def set_server_general_config(_domain_name, _domain_home, _server_name,
 
 
 def set_server_protocol_config(_server_name):
-    cd('/Servers/' + _server_name + 'WebServer' + _server_name)
+    cd('/Servers/' + _server_name + '/WebServer/' + _server_name)
     cmo.setPostTimeoutSecs(30)
     cmo.setMaxPostSize(-1)
     cmo.setKeepAliveEnabled(True)
@@ -205,7 +205,7 @@ create_server(managed_server_name)
 set_server_general_config(domain_name, domain_home, managed_server_name,
                           managed_server_listen_address, managed_server_listen_port,
                           nodemgr_name, cluster_name)
-set_server_protocol_config(server_name)
+set_server_protocol_config(managed_server_name)
 set_server_tunning_config(managed_server_name)
 set_server_ssl_config(managed_server_name)
 set_server_log_config(domain_version, log_dir, managed_server_name)
