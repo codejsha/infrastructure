@@ -6,15 +6,16 @@ admin_server_listen_port = os.environ['ADMIN_SERVER_LISTEN_PORT']
 admin_username = os.environ['ADMIN_USERNAME']
 admin_password = os.environ['ADMIN_PASSWORD']
 
-conn_filters = os.environ['CONN_FILTERS']
+connection_filter = os.environ['CONNECTION_FILTER']
 
 
 ######################################################################
 
 
-def set_connection_filter(_domain_name, _conn_filters):
-    if (_conn_filters and _conn_filters.strip()):
-        _conn_filter_list = [conn_filter.strip() for conn_filter in _conn_filters.split(',')]
+def set_connection_filter(_domain_name, _conn_filter):
+    if (_conn_filter and _conn_filter.strip()):
+        _conn_filter_list = [conn_filter.strip() for conn_filter in _conn_filter.split(',')
+                             if (conn_filter and conn_filter.strip())]
 
         cd('/SecurityConfiguration/' + _domain_name)
         cmo.setConnectionLoggerEnabled(True)
@@ -30,7 +31,7 @@ connect(admin_username, admin_password, admin_server_url)
 edit()
 startEdit()
 
-set_connection_filter(domain_name, conn_filters)
+set_connection_filter(domain_name, connection_filter)
 
 save()
 activate()

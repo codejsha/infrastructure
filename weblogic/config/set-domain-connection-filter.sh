@@ -2,9 +2,9 @@
 
 source ./env-base.sh
 
-CONN_FILTERS="${CONN_FILTERS},192.168.137.0/24 test.example.com 7001 allow"
-CONN_FILTERS="${CONN_FILTERS},0.0.0.0/0 * * deny"
-export CONN_FILTERS
+CONNECTION_FILTER="${CONNECTION_FILTER}, 192.168.137.0/24 test.example.com 7001 allow"
+CONNECTION_FILTER="${CONNECTION_FILTER}, 0.0.0.0/0 * * deny"
+export CONNECTION_FILTER
 
 ######################################################################
 
