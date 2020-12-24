@@ -19,3 +19,12 @@ alias change-orcljdk11="ln -snf /usr/java/java-11 /usr/java/current"
 # alias change-orcljdk7="ln -snf /usr/java/java-1.7.0 /usr/java/current; export PATH=\"\${PATH}:\${JAVA_HOME}/bin\""
 # alias change-orcljdk8="ln -snf /usr/java/java-1.8.0 /usr/java/current; export PATH=\"\${PATH}:\${JAVA_HOME}/bin\""
 # alias change-orcljdk11="ln -snf /usr/java/java-11 /usr/java/current; export PATH=\"\${PATH}:\${JAVA_HOME}/bin\""
+
+alias orcljava="/usr/java/current/bin/java"
+alias orcljar="/usr/java/current/bin/jar"
+alias orcljcmd="/usr/java/current/bin/jcmd"
+alias orcljps="/usr/java/current/bin/jps"
+alias orcljstack="/usr/java/current/bin/jstack"
+
+alias openjdk-version="java -version"
+alias orcljdk-version="/usr/java/current/bin/java -version"
