@@ -22,6 +22,8 @@ bash ./set-domain-config-archive.sh
 bash ./set-domain-cookie-name.sh
 bash ./set-domain-jta.sh
 bash ./set-domain-log.sh
+# bash ./set-domain-output-compression.sh
+bash ./set-domain-web-app.sh
 
 ######################################################################
 

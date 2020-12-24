@@ -14,6 +14,8 @@ bash ./all.sh
 - [set-domain-cookie-name.sh](/weblogic/config/set-domain-cookie-name.sh) - [set_domain_cookie_name.py](/weblogic/config/set_domain_cookie_name.py)
 - [set-domain-jta.sh](/weblogic/config/set-domain-jta.sh) - [set_domain_jta.py](/weblogic/config/set_domain_jta.py)
 - [set-domain-log.sh](/weblogic/config/set-domain-log.sh) - [set_domain_log.py](/weblogic/config/set_domain_log.py)
+- [set-domain-output-compression.sh](/weblogic/config/set-domain-output-compression.sh) - [set_domain_output_compression.py](/weblogic/config/set_domain_output_compression.py)
+- [set-domain-web-app.sh](/weblogic/config/set-domain-web-app.sh) - [set_domain_web_app.py](/weblogic/config/set_domain_web_app.py)
 
 ## Identity
 
