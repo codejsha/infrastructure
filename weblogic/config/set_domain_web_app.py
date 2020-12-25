@@ -10,7 +10,7 @@ admin_password = os.environ['ADMIN_PASSWORD']
 ######################################################################
 
 
-def set_domain_web_app(_domain_name, _compress_content_type):
+def set_domain_web_app(_domain_name):
     cd('/WebAppContainer/' + _domain_name)
     # cmo.setReloginEnabled(false)
     # cmo.setAllowAllRoles(false)
@@ -43,7 +43,7 @@ connect(admin_username, admin_password, admin_server_url)
 edit()
 startEdit()
 
-set_domain_web_app(domain_name, compress_content_type)
+set_domain_web_app(domain_name)
 
 save()
 activate()
