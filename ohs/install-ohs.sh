@@ -10,10 +10,10 @@ INSTALL_FILE_DIR="/mnt/share/oracle-http-server/ohs12.2.1.4/fmw_12.2.1.4.0_ohs_l
 # INSTALL_FILE="fmw_12.2.1.3.0_ohs_linux64.bin"
 INSTALL_FILE="fmw_12.2.1.4.0_ohs_linux64.bin"
 
+INSTALL_SCRIPT_DIR="/svc/infrastructure/ohs"
+
 # RESPONSE_FILE="response-sw-only-11g.rsp"
 RESPONSE_FILE="response-sw-only.rsp"
-
-INSTALL_SCRIPT_DIR="/svc/infrastructure/ohs"
 
 ######################################################################
 

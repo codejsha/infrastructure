@@ -26,15 +26,15 @@ if [ -n "\${PID}" ]; then
   exit
 fi
 
-if [ -f ${LOG_DIR}/nohup.NodeManager.out ]; then
-  mv ${LOG_DIR}/nohup.NodeManager.out ${LOG_DIR}/NodeManager/nohup.NodeManager.\${GET_DATE}.out
+if [ -f \${LOG_DIR}/nohup.NodeManager.out ]; then
+  mv \${LOG_DIR}/nohup.NodeManager.out \${LOG_DIR}/nodemanager/nohup.NodeManager.\${GET_DATE}.out
 fi
 
 export CONFIG_JVM_ARGS="\${CONFIG_JVM_ARGS} -Djava.security.egd=file:///dev/urandom"
 
-touch ${LOG_DIR}/nohup.NodeManager.out
-nohup \${DOMAIN_HOME}/bin/startNodeManager.sh > ${LOG_DIR}/nohup.NodeManager.out 2>&1 &
-tail -f ${LOG_DIR}/nohup.NodeManager.out
+touch \${LOG_DIR}/nohup.NodeManager.out
+nohup \${DOMAIN_HOME}/bin/startNodeManager.sh > \${LOG_DIR}/nohup.NodeManager.out 2>&1 &
+tail -f \${LOG_DIR}/nohup.NodeManager.out
 EOF
 
 cat <<EOF > ${DOMAIN_HOME}/stop-nodemanager.sh
@@ -48,9 +48,7 @@ EOF
 
 ######################################################################
 
-mkdir -p ${LOG_DIR}/NodeManager
+mkdir -p ${LOG_DIR}/nodemanager
 
 chmod 750 ${DOMAIN_HOME}/start-nodemanager.sh
 chmod 750 ${DOMAIN_HOME}/stop-nodemanager.sh
-
-######################################################################

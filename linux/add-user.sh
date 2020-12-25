@@ -5,6 +5,7 @@ USER_NAME="prouser"
 GROUP_ID="1000"
 GROUP_NAME="progroup"
 HOME_DIRECTORY="/home/prouser"
+PASSWORD="${PASSWORD}"
 
 ######################################################################
 
