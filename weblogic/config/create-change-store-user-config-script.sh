@@ -44,12 +44,12 @@ export PS4="\e[33;1m+ \e[0m"; set -x
 
 EOF
 
-if [ "${MAJOR_VERSION}" == "11g" ]; then
+if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
 cat << EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 MW_HOME="${MW_HOME}"
 export DOMAIN_HOME="${VAR_DOMAIN_HOME_11}"
 EOF
-elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
+elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
 cat << EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 ORACLE_HOME="${ORACLE_HOME}"
 export DOMAIN_HOME="${VAR_DOMAIN_HOME}"
@@ -63,11 +63,11 @@ export ADMIN_PASSWORD="\${2:-"welcome1"}"
 
 EOF
 
-if [ "${MAJOR_VERSION}" == "11g" ]; then
+if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
 cat << EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 ${MW_HOME}/wlserver_10.3/common/bin/wlst.sh ${DOMAIN_HOME}/scripts/change_store_user_config.py
 EOF
-elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
+elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
 cat << EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 ${ORACLE_HOME}/oracle_common/common/bin/wlst.sh ${DOMAIN_HOME}/scripts/change_store_user_config.py
 EOF

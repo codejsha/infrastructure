@@ -181,13 +181,18 @@ def set_server_datasource_log_config(_log_dir, _server_name):
 def set_server_start_config(_server_name, _nodemgr_name, _java_home, _java_vendor,
                             _bea_home, _root_dir, _arguments, _classpath):
     if (_nodemgr_name and _nodemgr_name.strip()):
+        _arguments = _arguments.replace('  ', ' ').strip()
+        _classpath_list = [classpath.strip() for classpath in _classpath.split(';')
+                           if (classpath and classpath.strip())]
+        _classpath_str = ';'.join(_classpath_list)
+
         cd('/Servers/' + _server_name + '/ServerStart/' + _server_name)
         cmo.setJavaHome(_java_home)
         cmo.setJavaVendor(_java_vendor)
         cmo.setBeaHome(_bea_home)
         cmo.setRootDirectory(_root_dir)
         cmo.setArguments(_arguments)
-        cmo.setClassPath(_classpath)
+        cmo.setClassPath(_classpath_str)
         cmo.setUsername(admin_username)
         cmo.setPassword(admin_password)
 

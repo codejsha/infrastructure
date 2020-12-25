@@ -17,7 +17,7 @@ FILE_NAME_SUFFIX="${FILE_NAME_SUFFIX/machine/nodemanager}"
 
 ### start script
 
-if [ "${MAJOR_VERSION}" == "11g" ]; then
+if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
 cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
 
@@ -31,7 +31,7 @@ if [ -n "\${PID}" ]; then
   exit
 fi
 EOF
-elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
+elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
 cat << EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
 
@@ -62,11 +62,11 @@ fi
 touch \${LOG_DIR}/nohup.NodeManager.out
 EOF
 
-if [ "${MAJOR_VERSION}" == "11g" ]; then
+if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
 cat << EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 \${WL_HOME}/server/bin/startNodeManager.sh >> \${LOG_DIR}/nohup.NodeManager.out 2>&1 &
 EOF
-elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
+elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
 cat << EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 \${DOMAIN_HOME}/bin/startNodeManager.sh >> \${LOG_DIR}/nohup.NodeManager.out 2>&1 &
 EOF
@@ -80,7 +80,7 @@ EOF
 
 ### stop script
 
-if [ "${MAJOR_VERSION}" == "11g" ]; then
+if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
 cat << EOF > ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
 
@@ -91,7 +91,7 @@ if [ -n "\${PID}" ]; then
   kill -9 \${PID}
 fi
 EOF
-elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
+elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
 cat << EOF >> ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
 

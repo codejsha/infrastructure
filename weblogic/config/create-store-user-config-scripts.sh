@@ -38,7 +38,7 @@ EOF
 
 ######################################################################
 
-if [ "${MAJOR_VERSION}" == "11g" ]; then
+if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
 cat << EOF > ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
 #!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
@@ -46,7 +46,7 @@ export PS4="\e[33;1m+ \e[0m"; set -x
 MW_HOME="${MW_HOME}"
 export DOMAIN_HOME="${VAR_DOMAIN_HOME_11}"
 EOF
-elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
+elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
 cat << EOF > ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
 #!/bin/bash
 
@@ -60,12 +60,12 @@ export ADMIN_SERVER_URL="t3://${ADMIN_SERVER_LISTEN_ADDRESS}:${ADMIN_SERVER_LIST
 export MANAGED_SERVER_NAME="${MANAGED_SERVER_NAME}"
 EOF
 
-if [ "${MAJOR_VERSION}" == "11g" ]; then
+if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
 cat << EOF >> ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
 
 ${MW_HOME}/wlserver_10.3/common/bin/wlst.sh ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.py
 EOF
-elif [ "${MAJOR_VERSION}" == "12c" ] || [ "${MAJOR_VERSION}" == "14c" ]; then
+elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
 cat << EOF >> ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
 
 ${ORACLE_HOME}/oracle_common/common/bin/wlst.sh ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.py
