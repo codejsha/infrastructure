@@ -2,18 +2,17 @@
 
 ### build
 
-docker build .
-docker build -f Dockerfile.dev .
-docker build -t example/apache:2.0 .
-docker build -f Dockerfile.dev -t example/apache:2.0 .
+docker image build .
+docker image build --tag example/tomcat:9 .
+docker image build --file Dockerfile.dev --tag example/tomcat:9 .
 
 ######################################################################
 
 ### tag and push
 
 docker login registry.example.com
-docker tag centos:latest registry.example.com/example/centos:latest
-docker push registry.example.com/example/centos:latest
+docker image tag centos:latest registry.example.com/centos:latest
+docker image push registry.example.com/centos:latest
 
 ######################################################################
 
@@ -21,12 +20,10 @@ docker push registry.example.com/example/centos:latest
 
 ### remove all containers
 docker container rm $(docker container ls --all --quiet)
-docker container rm $(docker container ls --all --quiet --filter status=exited)
-docker rm $(docker container ls --all --quiet)
-docker rm $(docker container ls --all --quiet --filter status=exited)
 
-### remove unused containers
+### remove stopped containers
 docker container prune --force
+docker container rm $(docker container ls --all --quiet --filter status=exited)
 
 ######################################################################
 
@@ -34,14 +31,13 @@ docker container prune --force
 
 ### remove all images
 docker image rm $(docker image ls --all --quiet)
-docker rmi $(docker image ls --all --quiet)
 
 ### remove dangling images
+docker image prune --force
 docker image rm $(docker image ls --all --quiet --filter dangling=true)
-docker rmi $(docker image ls --all --quiet --filter dangling=true)
 
 ### remove unused images
-docker image prune --force
+docker image prune --all --force
 
 ######################################################################
 
