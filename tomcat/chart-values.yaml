@@ -1,0 +1,56 @@
+# nameOverride:
+# fullnameOverride:
+
+tomcatUsername: user
+tomcatPassword:
+
+extraEnvVars: []
+extraEnvVarsCM: []
+extraEnvVarsSecret: []
+
+replicaCount: 3
+containerPort: 8080
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 1Gi
+  requests:
+    cpu: 300m
+    memory: 512Mi
+
+podAffinityPreset: ""
+podAntiAffinityPreset: soft
+nodeAffinityPreset:
+  type: ""
+  key: ""
+  values: []
+affinity: {}
+nodeSelector: {}
+tolerations: []
+
+extraVolumes: []
+extraVolumeMounts: []
+
+persistence:
+  enabled: true
+  storageClass: "rook-ceph-block"
+  accessModes:
+    - ReadWriteOnce
+  size: 8Gi
+
+service:
+  type: ClusterIP
+  # type: LoadBalancer
+  port: 80
+  # loadBalancerIP:
+
+ingress:
+  enabled: true
+  certManager: false
+  hostname: tomcat.example.com
+  annotations: {}
+  tls: false
+  # extraHosts:
+  #   - name: tomcat.example.com
+  #     path: /

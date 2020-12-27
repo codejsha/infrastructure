@@ -8,19 +8,6 @@ kubectl label namespace ${NAMESPACE} istio-injection=enabled
 helm upgrade --install my-tomcat \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --set ingress.enabled="true" \
-    --set ingress.annotations."kubernetes\.io/ingress\.class"="nginx" \
-    --set ingress.hosts[0].name="tomcat.example.com" \
-    --set ingress.hosts[0].path="/" \
-    --set persistence.enabled="true" \
-    --set persistence.storageClass="rook-ceph-block" \
-    --version 6.3.10 \
+    --values chart-values.yaml \
+    --version 8.0.0 \
     bitnami/tomcat
-
-    ### custom image
-    # --set image.registry="registry.example.com"
-    # --set image.repository="tomcat"
-    # --set image.tag="latest"
-
-    ### for loadbalancer
-    # --set service.loadBalancerIP="10.10.10.50" \
