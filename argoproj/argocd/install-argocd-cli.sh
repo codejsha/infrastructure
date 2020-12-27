@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ARGOCD_VERSION="v1.7.7"
+ARGOCD_VERSION="v1.8.1"
 
 sudo curl -o /usr/local/bin/argocd -LJO https://github.com/argoproj/argo-cd/releases/download/${ARGOCD_VERSION}/argocd-linux-amd64
 sudo chmod +x /usr/local/bin/argocd
