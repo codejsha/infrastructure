@@ -15,5 +15,5 @@ NAMESPACE="pinpoint-system"
 helm upgrade --install my-pinpoint \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --values chart-values.yaml \
+    --values chart-values-temp.yaml \
     ./pinpoint

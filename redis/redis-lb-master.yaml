@@ -12,5 +12,5 @@ spec:
     - protocol: TCP
       port: 6379
       targetPort: 6379
-  loadBalancerIP: 10.10.10.88
+  loadBalancerIP: 10.10.10.71
   type: LoadBalancer

@@ -14,7 +14,7 @@ function install_ntp_with_dnf {
     sudo systemctl start ntpd
 }
 
-function install_ntp_with_aptget {
+function install_ntp_with_apt {
     sudo apt-get install ntp
 }
 
@@ -22,4 +22,4 @@ function install_ntp_with_aptget {
 
 install_ntp_with_yum
 # install_ntp_with_dnf
-# install_ntp_with_aptget
+# install_ntp_with_apt

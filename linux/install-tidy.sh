@@ -10,7 +10,7 @@ function install_tidy_with_dnf {
     sudo dnf install -y tidy
 }
 
-function install_tidy_with_aptget {
+function install_tidy_with_apt {
     sudo apt-get install -y tidy
 }
 
@@ -18,4 +18,4 @@ function install_tidy_with_aptget {
 
 install_tidy_with_yum
 # install_tidy_with_dnf
-# install_tidy_with_aptget
+# install_tidy_with_apt

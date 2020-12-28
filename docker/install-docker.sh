@@ -69,7 +69,7 @@ function install_docker_with_dnf {
     exit
 }
 
-function install_docker_with_aptget {
+function install_docker_with_apt {
     curl -fsSL https://get.docker.com | sudo sh
 
     sudo usermod -a -G docker ${USER}
@@ -79,4 +79,4 @@ function install_docker_with_aptget {
 
 install_docker_with_yum
 # install_docker_with_dnf
-# install_docker_with_aptget
+# install_docker_with_apt

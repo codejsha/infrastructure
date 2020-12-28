@@ -12,7 +12,7 @@ spec:
     - protocol: TCP
       port: 6379
       targetPort: 6379
-  loadBalancerIP: 10.10.10.87
+  loadBalancerIP: 10.10.10.72
   type: LoadBalancer
 ---
 apiVersion: v1
@@ -29,5 +29,5 @@ spec:
     - protocol: TCP
       port: 6379
       targetPort: 6379
-  loadBalancerIP: 10.10.10.86
+  loadBalancerIP: 10.10.10.73
   type: LoadBalancer

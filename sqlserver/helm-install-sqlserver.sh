@@ -15,6 +15,6 @@ helm upgrade --install my-mssql \
     --set persistence.enabled="true" \
     --set persistence.storageClass="rook-ceph-block" \
     --set service.type="LoadBalancer" \
-    --set service.loadBalancerIP="10.10.10.98" \
+    --set service.loadBalancerIP="10.10.10.91" \
     --version 0.11.2 \
     stable/mssql-linux
