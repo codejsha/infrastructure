@@ -13,7 +13,7 @@ images:
   - name: core.harbor.example.com/library/tomcat-starter
     newTag: "latest"
 configMapGenerator:
-  - name: server-configmap
+  - name: server-config
     envs:
       - server.env
 # secretGenerator:
