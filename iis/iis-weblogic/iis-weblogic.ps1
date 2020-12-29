@@ -16,6 +16,15 @@ $PluginHome = "$SiteHome\weblogic-plugin"
 
 $ProxyIni = @"
 WebLogicCluster=test.example.com:7003,test.example.com:7004
+WLCookieName=JSESSIONID-test
+ConnectTimeoutSecs=10
+ConnectRetrySecs=2
+Idempotent=OFF
+WLIOTimeoutSecs=300
+DynamicServerList=OFF
+KeepAliveEnabled=ON
+KeepAliveSecs=20
+ErrorPage=http://test.example.com/503.html
 DebugConfigInfo=ON
 Debug=ALL
 WLLogFile=$env:SystemDrive\inetpub\$SiteName\logs\wl-proxy.log
