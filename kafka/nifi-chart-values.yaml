@@ -1,0 +1,76 @@
+replicaCount: 1
+
+# secrets:
+# configmaps:
+
+service:
+  type: ClusterIP
+  httpPort: 8080
+  httpsPort: 9443
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+  hosts:
+    - nifi.example.com
+  path: /
+
+jvmMemory: 512Mi
+
+persistence:
+  enabled: true
+  storageClass: "rook-ceph-block"
+  accessModes: [ReadWriteOnce]
+  configStorage:
+    size: 100Mi
+  authconfStorage:
+    size: 100Mi
+  dataStorage:
+    size: 1Gi
+  flowfileRepoStorage:
+    size: 10Gi
+  contentRepoStorage:
+    size: 10Gi
+  provenanceRepoStorage:
+    size: 10Gi
+  logStorage:
+    size: 5Gi
+
+resources:
+  limits:
+   cpu: 100m
+   memory: 128Mi
+  requests:
+   cpu: 100m
+   memory: 128Mi
+
+nodeSelector: {}
+tolerations: []
+
+extraVolumeMounts: []
+extraVolumes: []
+
+openshift:
+  scc:
+    enabled: false
+  route:
+    enabled: false
+    #host: www.test.com
+    #path: /nifi
+
+zookeeper:
+  enabled: false
+  url: "my-kafka-zookeeper"
+  port: 2181
+
+registry:
+  enabled: true
+  url: ""
+  port: 80
+  persistence:
+    enabled: true
+    database:
+      storageClass: "rook-ceph-block"
+    flowStorage:
+      storageClass: "rook-ceph-block"
