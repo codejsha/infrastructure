@@ -54,19 +54,19 @@ bash ./get-version.sh
 ## Metrics (12c)
 
 ```bash
-bash ./get-metrics-${COMPONENT_NAME}.sh OHSWebLogic
-bash ./get-metrics-${COMPONENT_NAME}.sh dms_cProcessInfo
-bash ./get-metrics-${COMPONENT_NAME}.sh ohs_module
-bash ./get-metrics-${COMPONENT_NAME}.sh ohs_moduleSet
-bash ./get-metrics-${COMPONENT_NAME}.sh ohs_responses
-bash ./get-metrics-${COMPONENT_NAME}.sh ohs_server
-bash ./get-metrics-${COMPONENT_NAME}.sh ohs_vhostSet
-bash ./get-metrics-${COMPONENT_NAME}.sh ohs_virtualHost
-bash ./get-metrics-${COMPONENT_NAME}.sh ohs_virtualHostAddr
-bash ./get-metrics-${COMPONENT_NAME}.sh ohs_virtualHostAddrs
-bash ./get-metrics-${COMPONENT_NAME}.sh system
-bash ./get-metrics-${COMPONENT_NAME}.sh system_host
-bash ./get-metrics-${COMPONENT_NAME}.sh system_process
+${DOMAIN_HOME}/scripts/get-dump-metrics-${COMPONENT_NAME}.sh
 
-bash ./get-dump-metrics-${COMPONENT_NAME}.sh
+${DOMAIN_HOME}/scripts/get-metrics-plugin-${COMPONENT_NAME}.sh
+${DOMAIN_HOME}/scripts/get-metrics-process-info-${COMPONENT_NAME}.sh
+${DOMAIN_HOME}/scripts/get-metrics-module-${COMPONENT_NAME}.sh
+${DOMAIN_HOME}/scripts/get-metrics-moduleset-${COMPONENT_NAME}.sh
+${DOMAIN_HOME}/scripts/get-metrics-response-${COMPONENT_NAME}.sh
+${DOMAIN_HOME}/scripts/get-metrics-server-${COMPONENT_NAME}.sh
+${DOMAIN_HOME}/scripts/get-metrics-vhostset-${COMPONENT_NAME}.sh
+${DOMAIN_HOME}/scripts/get-metrics-vhost-${COMPONENT_NAME}.sh
+${DOMAIN_HOME}/scripts/get-metrics-vhostaddr-${COMPONENT_NAME}.sh
+${DOMAIN_HOME}/scripts/get-metrics-vhostaddrs-${COMPONENT_NAME}.sh
+${DOMAIN_HOME}/scripts/get-metrics-system-${COMPONENT_NAME}.sh
+${DOMAIN_HOME}/scripts/get-metrics-system-host-${COMPONENT_NAME}.sh
+${DOMAIN_HOME}/scripts/get-metrics-system-process-${COMPONENT_NAME}.sh
 ```
