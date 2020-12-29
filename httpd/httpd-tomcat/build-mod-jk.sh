@@ -1,7 +1,14 @@
 #!/bin/bash
 
 HTTPD_HOME="/usr/local/httpd"
-JK_VERSION="1.2.48"
+
+INSTALL_FILE_DIR="/mnt/share/apache-tomcat"
+INSTALL_FILE="tomcat-connectors-1.2.48-src.tar.gz"
+INSTALL_SCRIPT_DIR="/svc/infrastructure/tomcat"
+
+######################################################################
+
+TOMCAT_CONNECTORS_DIR="$(echo ${INSTALL_FILE} | grep -o -E "(.*[^\.tar\.gz])")"
 
 ######################################################################
 
@@ -9,12 +16,14 @@ function install_required_packages {
     sudo yum install -y libtool automake autoconf
 }
 
-function extract_jk_archive_file {
-    tar -xzf tomcat-connectors-${JK_VERSION}-src.tar.gz
+function extract_install_file {
+    /usr/bin/cp -f ${INSTALL_FILE_DIR}/${INSTALL_FILE} ${INSTALL_SCRIPT_DIR}/httpd-tomcat
+    cd ${INSTALL_SCRIPT_DIR}/httpd-tomcat
+    tar -xzf ${INSTALL_FILE}
 }
 
 function build_mod_jk {
-    cd tomcat-connectors-${JK_VERSION}-src/native
+    cd ${INSTALL_SCRIPT_DIR}/httpd-tomcat/${TOMCAT_CONNECTORS_DIR}/native
     ./configure --with-apxs=${HTTPD_HOME}/bin/apxs
 }
 
@@ -24,9 +33,15 @@ function install_mod_jk {
     make install
 }
 
+function delete_install_file {
+    rm -f ${INSTALL_SCRIPT_DIR}/httpd-tomcat/${INSTALL_FILE}
+    rm -rf ${INSTALL_SCRIPT_DIR}/httpd-tomcat/${TOMCAT_CONNECTORS_DIR}
+}
+
 ######################################################################
 
 install_required_packages
-extract_jk_archive_file
+extract_install_file
 build_mod_jk
 install_mod_jk
+# delete_install_file

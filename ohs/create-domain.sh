@@ -5,18 +5,17 @@ source ./env-base.sh
 ORACLE_HOME="${ORACLE_HOME}"
 DOMAIN_NAME="${DOMAIN_NAME}"
 DOMAIN_HOME="${DOMAIN_HOME}"
-INSTALL_SCRIPT_DIR="${INSTALL_SCRIPT_DIR}"
 
 ######################################################################
 
 export CONFIG_JVM_ARGS="${CONFIG_JVM_ARGS} -Djava.security.egd=file:///dev/urandom"
 
 function ohs_create_domain_12cr1 {
-    ${ORACLE_HOME}/oracle_common/common/bin/wlst.sh ${INSTALL_SCRIPT_DIR}/create_domain_12cr1.py
+    ${ORACLE_HOME}/oracle_common/common/bin/wlst.sh create_domain_12cr1.py
 }
 
 function ohs_create_domain {
-    ${ORACLE_HOME}/oracle_common/common/bin/wlst.sh ${INSTALL_SCRIPT_DIR}/create_domain.py
+    ${ORACLE_HOME}/oracle_common/common/bin/wlst.sh create_domain.py
 }
 
 ln -snf ${DOMAIN_HOME} ${ORACLE_HOME}/${DOMAIN_NAME}
