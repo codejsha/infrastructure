@@ -1,4 +1,4 @@
-# disable directory index
+# Service method="(GET|HEAD)" type="magnus-internal/directory" fn="send-error" path="/usr/local/iplanet/docs/error.html"
 
 version 3.0;
 acl "default";
