@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomcat-starter
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tomcat-starter
+  template:
+    metadata:
+      labels:
+        app: tomcat-starter
+    spec:
+      containers:
+        - name: tomcat-starter
+          image: core.harbor.example.com/library/tomcat-starter:latest
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "1024Mi"
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: JAVA_OPTS
+              valueFrom:
+                configMapKeyRef:
+                  key: java_opts
+                  name: server-config

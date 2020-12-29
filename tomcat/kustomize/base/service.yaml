@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: starter
+  name: tomcat-starter
 spec:
+  type: ClusterIP
   selector:
-    app: starter
+    app: tomcat-starter
   ports:
     - name: http
       port: 8080
       targetPort: 8080
-  type: ClusterIP

@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: myproject
+commonLabels:
+  owner: developer
+  app: tomcat-starter
+resources:
+  - deployment.yaml
+  - ingress.yaml
+  - service.yaml
+
+images:
+  - name: core.harbor.example.com/library/tomcat-starter
+    newTag: "latest"
+configMapGenerator:
+  - name: server-configmap
+    envs:
+      - server.env
+# secretGenerator:
+generatorOptions:
+  disableNameSuffixHash: true
