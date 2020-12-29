@@ -28,7 +28,7 @@ sudo createrepo --update ${PACKAGE_REPO_VOLUME_DIR}
 ## Build image
 
 ```bash
-docker build -t example-repo-server .
+docker image build --tag example-repo-server .
 ```
 
 ## Run

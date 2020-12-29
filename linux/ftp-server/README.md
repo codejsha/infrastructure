@@ -3,7 +3,7 @@
 ## Build image
 
 ```bash
-docker build -t ftp-server .
+docker image build --tag ftp-server .
 ```
 
 ## Run

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-docker build --tag registry.example.com/kustomize-cli:latest .
-docker push registry.example.com/kustomize-cli:latest
+docker image build --tag registry.example.com/kustomize-cli:latest .
+docker image push registry.example.com/kustomize-cli:latest
 
-# docker build --tag core.harbor.example.com/kustomize-cli:latest .
-# docker push core.harbor.example.com/kustomize-cli:latest
+# docker image build --tag core.harbor.example.com/library/kustomize-cli:latest .
+# docker image push core.harbor.example.com/library/kustomize-cli:latest
