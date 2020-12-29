@@ -1,5 +1,17 @@
 #!/bin/bash
 
+export ARGOCD_USERNAME="${ARGOCD_USERNAME}"
+export ARGOCD_PASSWORD="${ARGOCD_PASSWORD}"
+export ARGOCD_AUTH_TOKEN="${ARGOCD_AUTH_TOKEN}"
+
+export GITLAB_CD_USERNAME="${GITLAB_CD_USERNAME}"
+export GITLAB_CD_PASSWORD="${GITLAB_CD_PASSWORD}"
+export GITLAB_CI_SECRET_TOKEN="${GITLAB_CI_SECRET_TOKEN}"
+
+envsubst < ./argocd-secret.yaml > ./argocd-secret-temp.yaml
+envsubst < ./gitlab-cd-secret.yaml > ./gitlab-cd-secret-temp.yaml
+envsubst < ./gitlab-ci-secret.yaml > ./gitlab-ci-secret-temp.yaml
+
 kubectl config set-context --current --namespace=myproject
 
 kubectl apply --filename https://raw.githubusercontent.com/tektoncd/catalog/master/task/git-clone/0.2/git-clone.yaml
@@ -16,10 +28,10 @@ kubectl apply --filename maven-configmap.yaml
 kubectl apply --filename input-asset-configmap.yaml
 kubectl apply --filename kube-configmap.yaml
 kubectl apply --filename argocd-configmap.yaml
-kubectl apply --filename argocd-secret.yaml
-kubectl apply --filename gitlab-cd-secret.yaml
+kubectl apply --filename argocd-secret-temp.yaml
+kubectl apply --filename gitlab-cd-secret-temp.yaml
 kubectl apply --filename gitlab-cd-serviceaccount.yaml
-kubectl apply --filename gitlab-ci-secret.yaml
+kubectl apply --filename gitlab-ci-secret-temp.yaml
 kubectl apply --filename gitlab-ci-serviceaccount.yaml
 kubectl apply --filename gitlab-ci-role.yaml
 kubectl apply --filename gitlab-ci-rolebinding.yaml

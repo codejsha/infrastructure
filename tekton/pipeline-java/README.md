@@ -46,15 +46,15 @@ kaniko params in PR:
 ```yaml
           ### kaniko params
           - name: kaniko-image
-            value: registry.example.com/starter:$(tt.params.git-revision)
-            # value: core.harbor.example.com/starter:$(tt.params.git-revision)
+            # value: registry.example.com/tomcat-starter:$(tt.params.git-revision)
+            value: core.harbor.example.com/library/tomcat-starter:$(tt.params.git-revision)
 # // ...
           - name: kaniko-extra-args
             value:
-              - --destination=registry.example.com/starter:latest
-              - --insecure-registry=registry.example.com
-              # - --destination=core.harbor.example.com/starter:latest
-              # - --insecure-registry=core.harbor.example.com
+              # - --destination=registry.example.com/tomcat-starter:latest
+              # - --insecure-registry=registry.example.com
+              - --destination=core.harbor.example.com/library/tomcat-starter:latest
+              - --insecure-registry=core.harbor.example.com
               - --insecure-registry=sonatype-nexus-service.nexus-system:5003
               - --registry-mirror=sonatype-nexus-service.nexus-system:5003
               - --verbosity=info
@@ -74,8 +74,8 @@ kustomize params in PR:
               tree base
               kustomize cfg tree base
               cd base
-              kustomize edit set image registry.example.com/starter:$(tt.params.git-revision)
-              # kustomize edit set image core.harbor.example.com/starter:$(tt.params.git-revision)
+              # kustomize edit set image registry.example.com/tomcat-starter:$(tt.params.git-revision)
+              kustomize edit set image core.harbor.example.com/library/tomcat-starter:$(tt.params.git-revision)
           - name: kustomize-args
             value:
               - ""
@@ -83,7 +83,7 @@ kustomize params in PR:
 
 ## Kustomize
 
-File structure:
+Tomcat directory structure:
 
 ```txt
 kustomize
@@ -91,6 +91,7 @@ kustomize
 │   ├── deployment.yaml
 │   ├── ingress.yaml
 │   ├── kustomization.yaml
+│   └── server.env
 │   └── service.yaml
 └── overlays
     ├── development
@@ -104,10 +105,10 @@ Resource structure:
 ```txt
 kustomize
 └── base
-    ├── [deployment.yaml]  Deployment starter
-    ├── [ingress.yaml]  Ingress starter
+    ├── [deployment.yaml]  Deployment tomcat-starter
+    ├── [ingress.yaml]  Ingress tomcat-starter
     ├── [kustomization.yaml]  Kustomization
-    └── [service.yaml]  Service starter
+    └── [service.yaml]  Service tomcat-starter
 ```
 
 ## Application details
@@ -126,8 +127,8 @@ Sync Policy:        Automated (Prune)
 Sync Status:        Synced to HEAD (3ec1d74)
 Health Status:      Healthy
 
-GROUP              KIND        NAMESPACE  NAME     STATUS  HEALTH   HOOK  MESSAGE
-                   Service     myproject  starter  Synced  Healthy        service/starter created
-apps               Deployment  myproject  starter  Synced  Healthy        deployment.apps/starter created
-networking.k8s.io  Ingress     myproject  starter  Synced  Healthy        ingress.networking.k8s.io/starter created
+GROUP              KIND        NAMESPACE  NAME            STATUS  HEALTH   HOOK  MESSAGE
+                   Service     myproject  tomcat-starter  Synced  Healthy        service/tomcat-starter created
+apps               Deployment  myproject  tomcat-starter  Synced  Healthy        deployment.apps/tomcat-starter created
+networking.k8s.io  Ingress     myproject  tomcat-starter  Synced  Healthy        ingress.networking.k8s.io/tomcat-starter created
 ```

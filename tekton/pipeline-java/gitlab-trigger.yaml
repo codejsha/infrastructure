@@ -99,18 +99,18 @@ spec:
 
           ### kaniko params
           - name: kaniko-image
-            value: registry.example.com/starter:$(tt.params.git-revision)
-            # value: core.harbor.example.com/starter:$(tt.params.git-revision)
+            # value: registry.example.com/tomcat-starter:$(tt.params.git-revision)
+            value: core.harbor.example.com/library/tomcat-starter:$(tt.params.git-revision)
           - name: kaniko-dockerfile
             value: ./Dockerfile
           - name: kaniko-context
             value: ./
           - name: kaniko-extra-args
             value:
-              - --destination=registry.example.com/starter:latest
-              - --insecure-registry=registry.example.com
-              # - --destination=core.harbor.example.com/starter:latest
-              # - --insecure-registry=core.harbor.example.com
+              # - --destination=registry.example.com/tomcat-starter:latest
+              # - --insecure-registry=registry.example.com
+              - --destination=core.harbor.example.com/library/tomcat-starter:latest
+              - --insecure-registry=core.harbor.example.com
               - --insecure-registry=sonatype-nexus-service.nexus-system:5003
               - --registry-mirror=sonatype-nexus-service.nexus-system:5003
               - --verbosity=info
@@ -134,8 +134,8 @@ spec:
               tree base
               kustomize cfg tree base
               cd base
-              kustomize edit set image registry.example.com/starter:$(tt.params.git-revision)
-              # kustomize edit set image core.harbor.example.com/starter:$(tt.params.git-revision)
+              # kustomize edit set image registry.example.com/tomcat-starter:$(tt.params.git-revision)
+              kustomize edit set image core.harbor.example.com/library/tomcat-starter:$(tt.params.git-revision)
           - name: kustomize-args
             value:
               - ""

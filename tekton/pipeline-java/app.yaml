@@ -12,9 +12,10 @@ spec:
     targetRevision: HEAD
     path: base
     # kustomize:
-    #   nameSuffix: -dev
+    #   namePrefix: dev-
     #   images:
-    #     - registry.example.com/starter:latest
+    #     - registry.example.com/tomcat-starter:latest
+    #     - core.harbor.example.com/library/tomcat-starter:latest
   destination:
     server: https://10.10.10.11:6443
     namespace: myproject
