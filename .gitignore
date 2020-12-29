@@ -6,6 +6,7 @@
 *.tar.gz
 *.tgz
 *-temp.json
+*-temp.xml
 *-temp.yaml
 
 /kubernetes/kubespray/kubespray/
