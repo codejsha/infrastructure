@@ -1,0 +1,59 @@
+# nameOverride:
+# fullnameOverride:
+
+cluster:
+  enabled: true
+  slaveCount: 2
+
+usePassword: true
+password: "${PASSWORD}"
+usePasswordFile: false
+
+redisPort: 6379
+
+master:
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 100m
+  # nodeSelector: {"beta.kubernetes.io/arch": "amd64"}
+  # tolerations: []
+  affinity: {}
+  service:
+    type: ClusterIP
+    # type: LoadBalancer
+    port: 6379
+    # loadBalancerIP:
+  persistence:
+    enabled: true
+    storageClass: "rook-ceph-block"
+    accessModes:
+      - ReadWriteOnce
+    size: 8Gi
+
+slave:
+  service:
+    type: ClusterIP
+    # type: LoadBalancer
+    port: 6379
+    # loadBalancerIP:
+  port: 6379
+  # nodeSelector: {"beta.kubernetes.io/arch": "amd64"}
+  affinity: {}
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 100m
+  # tolerations: []
+  persistence:
+    enabled: true
+    storageClass: "rook-ceph-block"
+    accessModes:
+      - ReadWriteOnce
+    size: 8Gi
+
+configmap: |-
+  # Enable AOF https://redis.io/topics/persistence#append-only-file
+  appendonly yes
+  # Disable RDB persistence, AOF persistence already enabled.
+  save ""
