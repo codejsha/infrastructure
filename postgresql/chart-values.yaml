@@ -1,0 +1,32 @@
+# nameOverride:
+# fullnameOverride:
+
+# postgresqlPostgresPassword:
+postgresqlUsername: postgres
+postgresqlPassword: "${PASSWORD}"
+
+# postgresqlDatabase:
+# postgresqlInitdbArgs:
+# initdbScriptsConfigMap:
+# initdbScriptsSecret:
+# initdbUser:
+# initdbPassword:
+
+service:
+  type: ClusterIP
+  # type: LoadBalancer
+  # clusterIP: None
+  port: 5432
+  # loadBalancerIP: 10.10.10.90
+
+persistence:
+  enabled: true
+  storageClass: "rook-ceph-block"
+  accessModes:
+    - ReadWriteOnce
+  size: 8Gi
+
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 250m
