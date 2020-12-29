@@ -9,7 +9,7 @@ helm repo update
 helm upgrade --install my-kafka-operator \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --version 0.20.0 \
+    --version 0.20.1 \
     strimzi/strimzi-kafka-operator
 
     # --values strimzi-chart-values.yaml \
