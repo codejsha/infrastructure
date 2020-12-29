@@ -110,56 +110,53 @@ def set_server_ssl_config(_server_name):
 
 def set_server_log_config(_domain_version, _log_dir, _server_name):
     cd('/Servers/' + _server_name + '/Log/' + _server_name)
-    cmo.setDateFormatPattern('MMM d, yyyy h:mm:ss,SSS a z')
-    # cmo.setFileName(_log_dir + '/' +  _server_name + '/'
-    #                 'general_' + _server_name + '_%%yyyy%%%%MM%%%%dd%%_%%HH%%%%mm%%%%ss%%.log')
-    cmo.setFileName('/dev/null')
+    cmo.setFileName(_log_dir + '/' +  _server_name + '/'
+                    'general_' + _server_name + '_%%yyyy%%%%MM%%%%dd%%_%%HH%%%%mm%%%%ss%%.log')
+    # cmo.setFileName('/dev/null')
     cmo.setRotationType('byTime')
+    cmo.setRotationTime('00:00')
+    cmo.setFileTimeSpan(24)
     cmo.setNumberOfFilesLimited(True)
     cmo.setFileCount(30)
-    cmo.setFileTimeSpan(24)
-    cmo.setRotationTime('00:00')
     cmo.setRotateLogOnStartup(False)
-    cmo.setBufferSizeKB(0)
+    cmo.setDateFormatPattern('MMM d, yyyy h:mm:ss,SSS a z')
     cmo.setLoggerSeverity('Info')
-    cmo.setLogFileSeverity('Info')
-    cmo.setStdoutSeverity('Info')
-    cmo.setStdoutFormat('standard')
-    cmo.setStdoutLogStack(True)
-    cmo.setStacktraceDepth(5)
-    cmo.setDomainLogBroadcastSeverity('Info')
     cmo.setRedirectStdoutToServerLogEnabled(True)
     cmo.setRedirectStderrToServerLogEnabled(True)
-    cmo.setDomainLogBroadcasterBufferSize(10)
     if ('12.2' in _domain_version) or ('14.' in _domain_version):
         cmo.setLogMonitoringEnabled(True)
         cmo.setLogMonitoringIntervalSecs(30)
         cmo.setLogMonitoringThrottleThreshold(1500)
         cmo.setLogMonitoringThrottleMessageLength(50)
         cmo.setLogMonitoringMaxThrottleMessageSignatureCount(1000)
-    elif '12.1' in _domain_version:
-        pass
-    elif '10.3' in _domain_version:
+    cmo.setLogFileSeverity('Info')
+    cmo.setBufferSizeKB(0)
+    cmo.setStdoutSeverity('Info')
+    cmo.setDomainLogBroadcastSeverity('Info')
+    cmo.setDomainLogBroadcasterBufferSize(10)
+    cmo.setStdoutLogStack(True)
+    if '10.3' in _domain_version:
         cmo.setMemoryBufferSeverity('Info')
-    else:
-        pass
+    cmo.setStacktraceDepth(5)
+    cmo.setStdoutFormat('standard')
 
 
 def set_server_access_log_config(_log_dir, _server_name):
     cd('/Servers/' + _server_name + '/WebServer/' + _server_name + '/WebServerLog/' + _server_name)
-    # cmo.setFileName(_log_dir + '/' +  _server_name + '/'
-    #                 'access_' + _server_name + '_%%yyyy%%%%MM%%%%dd%%_%%HH%%%%mm%%%%ss%%.log')
-    cmo.setFileName('/dev/null')
+    cmo.setLoggingEnabled(True)
+    cmo.setFileName(_log_dir + '/' +  _server_name + '/'
+                    'access_' + _server_name + '_%%yyyy%%%%MM%%%%dd%%_%%HH%%%%mm%%%%ss%%.log')
+    # cmo.setFileName('/dev/null')
     cmo.setRotationType('byTime')
+    cmo.setRotationTime('00:00')
+    cmo.setFileTimeSpan(24)
     cmo.setNumberOfFilesLimited(True)
     cmo.setFileCount(30)
-    cmo.setFileTimeSpan(24)
-    cmo.setRotationTime('00:00')
     cmo.setRotateLogOnStartup(False)
-    cmo.setBufferSizeKB(0)
-    cmo.setLoggingEnabled(True)
-    cmo.setELFFields('date time cs-method cs-uri sc-status')
     cmo.setLogFileFormat('common')
+    # cmo.setLogFileFormat('extended')
+    cmo.setELFFields('date time cs-method cs-uri sc-status')
+    cmo.setBufferSizeKB(0)
     cmo.setLogTimeInGMT(False)
 
 
@@ -167,14 +164,14 @@ def set_server_datasource_log_config(_log_dir, _server_name):
     cd('/Servers/' + _server_name + '/DataSource/' + _server_name)
     cmo.setRmiJDBCSecurity('Compatibility')
     cd('/Servers/' + _server_name + '/DataSource/' + _server_name + '/DataSourceLogFile/' + _server_name)
-    # cmo.setFileName(_log_dir + '/' +  _server_name + '/'
-    #                 'datasource_' + _server_name + '_%%yyyy%%%%MM%%%%dd%%_%%HH%%%%mm%%%%ss%%.log')
-    cmo.setFileName('/dev/null')
+    cmo.setFileName(_log_dir + '/' +  _server_name + '/'
+                    'datasource_' + _server_name + '_%%yyyy%%%%MM%%%%dd%%_%%HH%%%%mm%%%%ss%%.log')
+    # cmo.setFileName('/dev/null')
     cmo.setRotationType('byTime')
-    cmo.setFileCount(30)
+    cmo.setRotationTime('00:00')
     cmo.setFileTimeSpan(24)
     cmo.setNumberOfFilesLimited(True)
-    cmo.setRotationTime('00:00')
+    cmo.setFileCount(30)
     cmo.setRotateLogOnStartup(False)
 
 

@@ -19,4 +19,4 @@ helm upgrade --install my-mysql \
     --namespace ${NAMESPACE} \
     --values chart-values-temp.yaml \
     --version 8.2.3 \
-    bitnami/mysql --dry-run
+    bitnami/mysql
