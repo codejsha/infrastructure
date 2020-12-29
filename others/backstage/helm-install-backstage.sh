@@ -10,7 +10,7 @@ function helm_install_backstage {
         --create-namespace \
         --namespace ${NAMESPACE} \
         --dependency-update \
-        --values values.yaml \
+        --values chart-values.yaml \
         ./backstage/contrib/chart/backstage
 }
 
@@ -18,7 +18,7 @@ function helm_upgrade_install_backstage {
     helm upgrade --install my-backstage \
         --create-namespace \
         --namespace ${NAMESPACE} \
-        --values values.yaml \
+        --values chart-values.yaml \
         ./backstage/contrib/chart/backstage
 }
 

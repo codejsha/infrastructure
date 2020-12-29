@@ -34,7 +34,7 @@ helm upgrade --install my-vault \
     ### ha mode
     # --set server.ha.enabled="true" \
     # --set server.ha.replicas="3" \
-    # --values values-ha.yaml \
+    # --values chart-values-ha.yaml \
 
 # mkdir -p .vault
 # kubectl exec -it my-vault-0 -- vault operator init > .vault/unseal_keys_and_root_token.txt
