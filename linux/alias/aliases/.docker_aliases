@@ -23,12 +23,15 @@ alias dhistory="docker history"
 
 function dhubimtags() { curl --silent "https://registry.hub.docker.com/v2/repositories/library/${1}/tags/" | jq '."results"[]["name"]' | tr -d '"'; }
 
+alias dimbuild="docker image build"
 alias dimls="docker image ls"
 alias dimrm="docker image rm"
 alias dimrm-dangling="docker image rm \$(docker image ls --all --quiet --filter dangling=true)"
 alias dimrm-unused="docker image prune --force"
 alias dimrmall="docker image rm \$(docker image ls --all --quiet)"
 alias dimrmall-force="docker image rm --force \$(docker image ls --all --quiet)"
+alias dimpush="docker image push"
+alias dimtag="docker image tag"
 
 alias dinspect="docker inspect"
 

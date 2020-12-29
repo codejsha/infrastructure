@@ -2,5 +2,10 @@
 
 function curl() { echo "+ curl ${@}">&2; command curl ${@}; }
 function netstat() { echo "+ netstat ${@}">&2; command netstat ${@}; }
+function ss() { echo "+ ss ${@}">&2; command ss ${@}; }
 
 alias netstat-tunlp="sudo netstat --tcp --udp --numeric --listening --programs"
+
+alias ssalntu="sudo ss --all --listening --numeric --tcp --udp"
+alias ssalntum="sudo ss --all --listening --numeric --tcp --udp --memory"
+alias ssalntup="sudo ss --all --listening --numeric --tcp --udp --processes"
