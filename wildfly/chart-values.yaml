@@ -1,0 +1,51 @@
+# nameOverride:
+# fullnameOverride:
+
+wildflyUsername: user
+wildflyPassword: "${PASSWORD}"
+
+extraEnvVars: []
+extraEnvVarsCM:
+extraEnvVarsSecret:
+
+replicaCount: 1
+
+containerPorts:
+  http: 8080
+  mgmt: 9990
+
+resources:
+  limits: 
+    cpu: 500m
+    memory: 1Gi
+  requests:
+    cpu: 300m
+    memory: 512Mi
+
+affinity: {}
+nodeSelector: {}
+tolerations: []
+
+extraVolumes: []
+extraVolumeMounts: []
+
+persistence:
+  enabled: true
+  storageClass: "rook-ceph-block"
+  accessModes:
+    - ReadWriteOnce
+  size: 8Gi
+
+service:
+  # type: LoadBalancer
+  type: ClusterIP
+  port: 80
+  mgmtPort: 9990
+  # loadBalancerIP:
+
+ingress:
+  enabled: true
+  certManager: false
+  hostname: wildfly.example.com
+  tls: false
+  extraHosts: []
