@@ -1,6 +1,57 @@
-# kafka
-heapOpts: -Xmx512m -Xms512m
----
-# zookeeper
+# nameOverride:
+# fullnameOverride:
+
+# existingConfigmap:
+# existingLog4jConfigMap:
+heapOpts: -Xmx1024m -Xms1024m
+
+extraEnvVars: []
+extraVolumes: []
+extraVolumeMounts: []
+
+replicaCount: 3
+
+affinity: {}
+nodeSelector: {}
+tolerations: []
+
+resources:
+  limits:
+    cpu: 250m
+    memory: 1Gi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+service:
+  type: ClusterIP
+  port: 9092
+  internalPort: 9093
+  externalPort: 9094
+  # loadBalancerIP:
+
+externalAccess:
+  enabled: false
+  autoDiscovery:
+    enabled: false
+  service:
+    type: LoadBalancer
+    port: 9094
+    loadBalancerIPs: []
+      # - 10.10.10.81
+      # - 10.10.10.82
+      # - 10.10.10.83
+
+persistence:
+  enabled: true
+  storageClass: "rook-ceph-block"
+  accessModes:
+    - ReadWriteOnce
+  size: 8Gi
+
 zookeeper:
-  heapSize: 512
+  enabled: true
+  replicaCount: 3
+  persistence:
+    enabled: true
+    storageClass: "rook-ceph-block"
