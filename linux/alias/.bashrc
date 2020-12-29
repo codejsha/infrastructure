@@ -11,7 +11,6 @@ fi
 # User specific aliases and functions
 
 # shell
-function grep() { echo "+ grep ${@}">&2; command grep ${@}; }
 function ssh() { echo "+ ssh ${@}">&2; command ssh ${@}; }
 function sudo() { echo "+ sudo ${@}">&2; command sudo ${@}; }
 function xargs() { echo "+ xargs ${@}">&2; command xargs ${@}; }
