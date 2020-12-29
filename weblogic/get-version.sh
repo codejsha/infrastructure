@@ -3,7 +3,7 @@
 source ./env-base.sh
 
 ORACLE_HOME="${ORACLE_HOME}"
-MAJOR_VERSION="${MAJOR_VERSION}"    # (available: 11g, 12c, 14c)
+WEBLOGIC_VERSION="${WEBLOGIC_VERSION}"
 
 ######################################################################
 
