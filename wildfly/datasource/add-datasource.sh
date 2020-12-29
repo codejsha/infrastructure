@@ -53,8 +53,8 @@ batch
         blocking-timeout-wait-millis=${BLOCKING_TIMEOUT_WAIT_MILLIS},\
         query-timeout=${QUERY_TIMEOUT},\
         track-statements=${TRACK_STATEMENTS},\
-        pool-prefill="${POOL_PREFILL}"
-        pool-use-strict-min="${POOL_USE_STRICT_MIN}"
+        pool-prefill="${POOL_PREFILL}",\
+        pool-use-strict-min="${POOL_USE_STRICT_MIN}",\
         prepared-statements-cache-size=${PREPARED_STATEMENTS_CACHE_SIZE},\
         share-prepared-statements=${SHARE_PREPARED_STATEMENTS},\
         use-ccm="${USE_CCM}")
