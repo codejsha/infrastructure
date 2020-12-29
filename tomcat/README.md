@@ -2,6 +2,8 @@
 
 ## Logging
 
+### java.util.logging
+
 ```properties
 java.util.logging.ConsoleHandler.level = FINEST
 
@@ -14,6 +16,12 @@ org.apache.catalina.tribes.level = FINEST
 
 - https://tomcat.apache.org/tomcat-9.0-doc/cluster-howto.html
 - https://tomcat.apache.org/tomcat-9.0-doc/logging.html
+
+### Log4j
+
+- `log4j/log4j2-tomcat.xml`
+- `log4j/set-log4j-logging.sh`
+- `log4j/setenv.sh`
 
 ## Datasource
 
