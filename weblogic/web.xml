@@ -11,6 +11,18 @@
         </jsp-property-group>
     </jsp-config>
 
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>NoAccess</web-resource-name>
+            <url-pattern>/*</url-pattern>
+            <http-method>PUT</http-method>
+            <http-method>DELETE</http-method>
+            <http-method>TRACE</http-method>
+            <http-method>OPTIONS</http-method>
+        </web-resource-collection>
+        <auth-constraint/>
+    </security-constraint>
+
     <error-page>
         <error-code>404</error-code>
         <location>/error.html</location>
