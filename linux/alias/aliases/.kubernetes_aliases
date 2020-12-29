@@ -3,7 +3,6 @@
 source <(kubectl completion bash)
 
 function kubectl() { echo "+ kubectl ${@}">&2; command kubectl ${@}; }
-function kustomize() { echo "+ kustomize ${@}">&2; command kustomize ${@}; }
 
 [ -f ~/.aliases/.kubectl_aliases ] && source ~/.aliases/.kubectl_aliases
 
@@ -26,9 +25,6 @@ alias kgjob="kubectl get jobs"
 alias kgpv="kubectl get persistentvolumes"
 alias kgpvc="kubectl get persistentvolumeclaims"
 alias kgpvcall="kubectl get persistentvolumeclaims --all-namespaces"
-
-alias kkka="kubectl kustomize | kubectl apply --recursive --filename -"
-alias kkkrmf="kubectl kustomize | kubectl delete --filename -"
 
 alias krmjob-force="kubectl delete jobs --grace-period=0 --force"
 alias krmjoball="kubectl delete jobs --all"

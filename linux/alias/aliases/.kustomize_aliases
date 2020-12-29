@@ -1,0 +1,13 @@
+# kustomize
+
+function kustomize() { echo "+ kustomize ${@}">&2; command kustomize ${@}; }
+
+alias kkka="kubectl kustomize | kubectl apply --recursive --filename -"
+alias kkkrmf="kubectl kustomize | kubectl delete --filename -"
+
+alias kmb="kustomize build"
+alias kmbka="kustomize build . | kubectl apply --filename -"
+function kmbkaurl { URL="${1}"; kustomize build ${1}; kustomize build ${1} | kubectl apply --filename -; }
+alias kmbkrmf="kustomize build . | kubectl delete --filename -"
+# function kmbkrmfurl { URL="${1}"; kustomize build ${1}; kustomize build ${1} | kubectl delete --filename -; }
+function kmbkrmfurl { URL="${1}"; kustomize build ${1} | kubectl delete --filename -; }

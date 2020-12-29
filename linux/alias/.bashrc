@@ -64,6 +64,7 @@ function readlinkpwd() { echo "+ readlink --canonicalize .">&2; command readlink
 [ -f ~/.aliases/.istio_aliases ] && source ~/.aliases/.istio_aliases
 [ -f ~/.aliases/.jdk_aliases ] && source ~/.aliases/.jdk_aliases
 [ -f ~/.aliases/.krew_aliases ] && source ~/.aliases/.krew_aliases
+[ -f ~/.aliases/.kustomize_aliases ] && source ~/.aliases/.kustomize_aliases
 [ -f ~/.aliases/.kubernetes_aliases ] && source ~/.aliases/.kubernetes_aliases
 [ -f ~/.aliases/.minio_aliases ] && source ~/.aliases/.minio_aliases
 [ -f ~/.aliases/.network_aliases ] && source ~/.aliases/.network_aliases
