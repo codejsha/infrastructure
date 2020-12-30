@@ -30,7 +30,8 @@ spec:
         - "help"
     - name: image
       description: Kustomize wrapper image
-      default: registry.example.com/kustomize-cli:latest
+      # default: registry.example.com/kustomize-cli:latest
+      default: core.harbor.example.com/kustomize-cli:latest
   steps:
     - name: kustomize
       image: $(params.image)
