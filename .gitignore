@@ -1,13 +1,15 @@
 .vs/
 .vscode/
 .idea/
-*.zip
+
+*.jar
 *.tar
 *.tar.gz
 *.tgz
 *-temp.json
 *-temp.xml
 *-temp.yaml
+*.zip
 
 /kubernetes/kubespray/kubespray/
 /kraken/kraken/
