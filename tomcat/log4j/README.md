@@ -15,5 +15,5 @@ bash ./set-log4j-logging.sh
 
 ## Appenders
 
-- `log4j2-tomcat-console.xml`
+- `log4j2-tomcat.xml`
 - `log4j2-tomcat-kafka.xml`

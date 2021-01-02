@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="OFF">
+    <Appenders>
+        <Kafka name="Kafka" topic="my-topic">
+            <PatternLayout pattern="%date %message"/>
+            <Property name="bootstrap.servers">node1.example.com:9094,node2.example.com:9094,node3.example.com:9094</Property>
+        </Kafka>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Kafka"/>
+        </Root>
+        <Logger name="org.apache.kafka" level="info" />
+    </Loggers>
+</Configuration>
