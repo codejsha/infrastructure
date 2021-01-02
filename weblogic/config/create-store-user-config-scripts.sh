@@ -63,12 +63,12 @@ EOF
 if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
 cat << EOF >> ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
 
-${MW_HOME}/wlserver_10.3/common/bin/wlst.sh ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.py
+\${MW_HOME}/wlserver_10.3/common/bin/wlst.sh \${DOMAIN_HOME}/scripts/shutdown-\${MANAGED_SERVER_NAME}.py
 EOF
 elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
 cat << EOF >> ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
 
-${ORACLE_HOME}/oracle_common/common/bin/wlst.sh ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.py
+\${ORACLE_HOME}/oracle_common/common/bin/wlst.sh \${DOMAIN_HOME}/scripts/shutdown-\${MANAGED_SERVER_NAME}.py
 EOF
 fi
 

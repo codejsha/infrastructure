@@ -2,7 +2,8 @@
 
 source ./env-base.sh
 
-SERVER_NAME="${1}"
+ADMIN_SERVER_NAME="${1}"
+SERVER_NAME="${ADMIN_SERVER_NAME}"
 
 ######################################################################
 
@@ -10,9 +11,7 @@ SERVER_NAME="${1}"
 TEMP="\${DOMAIN_HOME}"
 VAR_LOG_DIR="${LOG_DIR/${DOMAIN_HOME}/${TEMP}}"
 
-FILE_NAME_SUFFIX="${SERVER_NAME,,}"
-FILE_NAME_SUFFIX="${FILE_NAME_SUFFIX/base/}"
-FILE_NAME_SUFFIX="${FILE_NAME_SUFFIX/server/}"
+FILE_NAME_SUFFIX="admin"
 
 ######################################################################
 
@@ -22,6 +21,7 @@ cat <<EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
 
 SERVER_NAME="${SERVER_NAME}"
+ADMIN_URL="t3://${ADMIN_SERVER_LISTEN_ADDRESS}:${ADMIN_SERVER_LISTEN_PORT}"
 DOMAIN_HOME="${DOMAIN_HOME}"
 LOG_DIR="${VAR_LOG_DIR}"
 GET_DATE="\$(date +'%Y%m%d_%H%M%S')"
@@ -39,8 +39,8 @@ if [ -n "\${PID}" ]; then
 fi
 
 USER_MEM_ARGS="-D\${SERVER_NAME}"
-USER_MEM_ARGS="\${USER_MEM_ARGS} -Xms1024m -Xmx1024m"
-USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:NewSize=384m -XX:MaxNewSize=384m"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -Xms512m -Xmx512m"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:NewSize=192m -XX:MaxNewSize=192m"
 EOF
 
 if [[ ${JAVA_VERSION} =~ ^1.7 ]]; then
@@ -135,7 +135,7 @@ if [ -f \${LOG_DIR}/gc.\${SERVER_NAME}.log ]; then
 fi
 
 touch \${LOG_DIR}/nohup.\${SERVER_NAME}.out
-nohup \${DOMAIN_HOME}/bin/startManagedWebLogic.sh \${SERVER_NAME} \${ADMIN_URL} > \${LOG_DIR}/nohup.\${SERVER_NAME}.out 2>&1 &
+nohup \${DOMAIN_HOME}/bin/startWebLogic.sh > \${LOG_DIR}/nohup.\${SERVER_NAME}.out 2>&1 &
 tail -f \${LOG_DIR}/nohup.\${SERVER_NAME}.out
 EOF
 
@@ -146,13 +146,12 @@ EOF
 cat <<EOF > ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
 
-SERVER_NAME="${SERVER_NAME}"
 ADMIN_URL="t3://${ADMIN_SERVER_LISTEN_ADDRESS}:${ADMIN_SERVER_LISTEN_PORT}"
 DOMAIN_HOME="${DOMAIN_HOME}"
 USERNAME="${ADMIN_USERNAME}"
 PASSWORD="${ADMIN_PASSWORD}"
 
-\${DOMAIN_HOME}/bin/stopManagedWebLogic.sh \${SERVER_NAME} \${ADMIN_URL} \${USERNAME} \${PASSWORD}
+\${DOMAIN_HOME}/bin/stopWebLogic.sh \${USERNAME} \${PASSWORD} \${ADMIN_URL}
 EOF
 
 ######################################################################

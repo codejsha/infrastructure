@@ -111,7 +111,7 @@ def set_server_ssl_config(_server_name):
 def set_server_log_config(_domain_version, _log_dir, _server_name):
     cd('/Servers/' + _server_name + '/Log/' + _server_name)
     cmo.setFileName(_log_dir + '/' +  _server_name + '/'
-                    'general_' + _server_name + '_%%yyyy%%%%MM%%%%dd%%_%%HH%%%%mm%%%%ss%%.log')
+                    'general.' + _server_name + '.%%yyyy%%%%MM%%%%dd%%_%%HH%%%%mm%%%%ss%%.log')
     # cmo.setFileName('/dev/null')
     cmo.setRotationType('byTime')
     cmo.setRotationTime('00:00')
@@ -145,7 +145,7 @@ def set_server_access_log_config(_log_dir, _server_name):
     cd('/Servers/' + _server_name + '/WebServer/' + _server_name + '/WebServerLog/' + _server_name)
     cmo.setLoggingEnabled(True)
     cmo.setFileName(_log_dir + '/' +  _server_name + '/'
-                    'access_' + _server_name + '_%%yyyy%%%%MM%%%%dd%%_%%HH%%%%mm%%%%ss%%.log')
+                    'access.' + _server_name + '.%%yyyy%%%%MM%%%%dd%%_%%HH%%%%mm%%%%ss%%.log')
     # cmo.setFileName('/dev/null')
     cmo.setRotationType('byTime')
     cmo.setRotationTime('00:00')
@@ -165,7 +165,7 @@ def set_server_datasource_log_config(_log_dir, _server_name):
     cmo.setRmiJDBCSecurity('Compatibility')
     cd('/Servers/' + _server_name + '/DataSource/' + _server_name + '/DataSourceLogFile/' + _server_name)
     cmo.setFileName(_log_dir + '/' +  _server_name + '/'
-                    'datasource_' + _server_name + '_%%yyyy%%%%MM%%%%dd%%_%%HH%%%%mm%%%%ss%%.log')
+                    'datasource.' + _server_name + '.%%yyyy%%%%MM%%%%dd%%_%%HH%%%%mm%%%%ss%%.log')
     # cmo.setFileName('/dev/null')
     cmo.setRotationType('byTime')
     cmo.setRotationTime('00:00')

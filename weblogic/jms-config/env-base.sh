@@ -34,6 +34,10 @@ fi
 
 ######################################################################
 
+### registry file
+### 11g: ${MW_HOME}/registry.xml
+### 12c, 14c: ${ORACLE_HOME}/inventory/registry.xml
+
 WEBLOGIC_VERSION=""
 if [ -f ${MW_HOME}/registry.xml ]; then
     WEBLOGIC_VERSION="$(grep "name=\"WebLogic Server\"" ${MW_HOME}/registry.xml \
@@ -48,15 +52,16 @@ fi
 
 ######################################################################
 
+### properties file
+### 11g: ${MW_HOME}/wlserver_10.3/.product.properties
+### 12c, 14c: ${ORACLE_HOME}/oui/.globalEnv.properties
+
 JAVA_HOME_FROM_PROPERTIES=""
 if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
-    JAVA_HOME_FROM_PROPERTIES="$(grep -e "^JAVA_HOME=" ${MW_HOME}/wlserver_10.3/.product.properties \
+    JAVA_HOME_FROM_PROPERTIES="$(grep -e "^JAVA_HOME" -m -1 ${MW_HOME}/wlserver_10.3/.product.properties \
         | grep -o -E "/.*$")"
-elif [[ ${WEBLOGIC_VERSION} =~ ^12.1 ]]; then
-    JAVA_HOME_FROM_PROPERTIES="$(grep -e "^JAVA_HOME=" ${ORACLE_HOME}/oui/.globalEnv.properties \
-        | grep -o -E "/.*$")"
-elif [[ ${WEBLOGIC_VERSION} =~ ^12.2|^14.1 ]]; then
-    JAVA_HOME_FROM_PROPERTIES="$(grep -e "^JAVA_HOME=" ${ORACLE_HOME}/oui/.globalEnv.properties \
+elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
+    JAVA_HOME_FROM_PROPERTIES="$(grep -e "^JAVA_HOME" -m -1 ${ORACLE_HOME}/oui/.globalEnv.properties \
         | grep -o -E "/.*$")"
     # JAVA_HOME_FROM_PROPERTIES="$(${ORACLE_HOME}/oui/bin/getProperty.sh JAVA_HOME")"
 fi

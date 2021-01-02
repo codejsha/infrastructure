@@ -25,6 +25,12 @@ WL_HOME="${WL_HOME}"
 DOMAIN_HOME="${DOMAIN_HOME}"
 LOG_DIR="${LOG_DIR}"
 
+CURRENT_USER="\$(id -un)"
+if [ "\${CURRENT_USER}" == "root" ]; then
+  echo "[ERROR] The current user is root!"
+  exit
+fi
+
 PID="\$(pgrep -xa java | grep \${WL_HOME} | grep NodeManager | awk '{print \$1}')"
 if [ -n "\${PID}" ]; then
   echo "[ERROR] NodeManager (pid \${PID})" is already running!

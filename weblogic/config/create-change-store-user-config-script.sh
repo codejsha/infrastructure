@@ -65,11 +65,11 @@ EOF
 
 if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
 cat << EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
-${MW_HOME}/wlserver_10.3/common/bin/wlst.sh ${DOMAIN_HOME}/scripts/change_store_user_config.py
+\${MW_HOME}/wlserver_10.3/common/bin/wlst.sh \${DOMAIN_HOME}/scripts/change_store_user_config.py
 EOF
 elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
 cat << EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
-${ORACLE_HOME}/oracle_common/common/bin/wlst.sh ${DOMAIN_HOME}/scripts/change_store_user_config.py
+\${ORACLE_HOME}/oracle_common/common/bin/wlst.sh \${DOMAIN_HOME}/scripts/change_store_user_config.py
 EOF
 fi
 

@@ -97,7 +97,7 @@ def get_server_datasource_status(_servers):
         ('WaitingForConnectionHighCount', 'int'),
         ('WaitingForConnectionSuccessTotal', 'long'),
         ('WaitingForConnectionTotal', 'int'),
-        ('WaitSecondsHighCoun', 'int')
+        ('WaitSecondsHighCount', 'int')
     ]
 
     _datasource_values = []
