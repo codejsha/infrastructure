@@ -32,5 +32,5 @@ alias krmjoball-force="kubectl delete jobs --all --grace-period=0 --force"
 alias krmpo-force="kubectl delete pods --grace-period=0 --force"
 alias krmpoall-force="kubectl delete pods --all --grace-period=0 --force"
 
-alias ktopn="kubectl top nodes"
+alias ktopno="kubectl top nodes"
 alias ktoppo="kubectl top pods"
