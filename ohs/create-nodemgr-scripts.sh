@@ -20,6 +20,12 @@ DOMAIN_HOME="${DOMAIN_HOME}"
 LOG_DIR="${VAR_LOG_DIR}"
 GET_DATE="\$(date +'%Y%m%d_%H%M%S')"
 
+CURRENT_USER="\$(id -un)"
+if [ "\${CURRENT_USER}" == "root" ]; then
+  echo "[ERROR] The current user is root!"
+  exit
+fi
+
 PID="\$(pgrep -xa java | grep \${DOMAIN_HOME} | grep NodeManager | awk '{print \$1}')"
 if [ -n "\${PID}" ]; then
   echo "[ERROR] NodeManager (pid ${PID}) is already running!"

@@ -22,6 +22,12 @@ export PS4="\e[33;1m+ \e[0m"; set -x
 DOMAIN_HOME="${DOMAIN_HOME}"
 COMPONENT_NAME="${COMPONENT_NAME}"
 
+CURRENT_USER="\$(id -un)"
+if [ "\${CURRENT_USER}" == "root" ]; then
+  echo "[ERROR] The current user is root!"
+  exit
+fi
+
 export CONFIG_JVM_ARGS="\${CONFIG_JVM_ARGS} -Djava.security.egd=file:///dev/urandom"
 \${DOMAIN_HOME}/bin/startComponent.sh \${COMPONENT_NAME} storeUserConfig
 EOF
@@ -46,5 +52,3 @@ ln -snf ${DOMAIN_HOME}/config/fmwconfig/components/OHS/instances/${COMPONENT_NAM
 
 chmod 750 ${DOMAIN_HOME}/start-${COMPONENT_NAME}.sh
 chmod 750 ${DOMAIN_HOME}/stop-${COMPONENT_NAME}.sh
-
-######################################################################

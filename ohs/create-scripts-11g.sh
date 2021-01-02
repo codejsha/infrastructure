@@ -99,5 +99,3 @@ chmod 750 ${INSTANCE_HOME}/stop-all.sh
 chmod 750 ${INSTANCE_HOME}/start-${COMPONENT_NAME}.sh
 chmod 750 ${INSTANCE_HOME}/stop-${COMPONENT_NAME}.sh
 chmod 750 ${INSTANCE_HOME}/get-status.sh
-
-######################################################################
