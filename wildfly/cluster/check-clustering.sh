@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../env-base.sh
+source ./env-base.sh
 
 JBOSS_HOME="${JBOSS_HOME}"
 BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"

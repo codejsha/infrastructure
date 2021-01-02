@@ -1,33 +1,33 @@
 #!/bin/bash
 
 source ./env-base.sh
+source ./env-jdbc-driver.sh
 
 JBOSS_HOME="${JBOSS_HOME}"
 BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
 JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
 
-######################################################################
-
-function set_listener_timeout {
-    ${JBOSS_HOME}/bin/jboss-cli.sh \
-        --connect \
-        --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-<<EOF
-batch
-/subsystem/undertow/server=default-server/ajp-listener=ajp:write-attribute(name=no-request-timeout,value=60000)
-run-batch
-quit
-EOF
-}
-
-function reload_server {
-    ${JBOSS_HOME}/bin/jboss-cli.sh \
-        --connect \
-        --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --command=":reload()"
-}
+DRIVER_NAME="${DRIVER_NAME}"
 
 ######################################################################
 
-set_listener_timeout
-reload_server
+function get_installed_driver {
+    ${JBOSS_HOME}/bin/jboss-cli.sh \
+        --connect \
+        --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --echo-command \
+        --command="/subsystem=datasources:get-installed-driver(driver-name=${DRIVER_NAME})"
+}
+
+function get_installed_driver_list {
+    ${JBOSS_HOME}/bin/jboss-cli.sh \
+        --connect \
+        --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --echo-command \
+        --command="/subsystem=datasources:installed-drivers-list"
+}
+
+######################################################################
+
+get_installed_driver
+# get_installed_driver_list

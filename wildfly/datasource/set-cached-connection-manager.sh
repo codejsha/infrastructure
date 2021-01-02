@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../env-base.sh
+source ./env-base.sh
 
 JBOSS_HOME="${JBOSS_HOME}"
 BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
@@ -14,7 +14,7 @@ function set_cached_connection_manager {
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
 <<EOF
 batch
-/subsystem=jca/cached-connection-manager/cached-connection-manager:write-attribute(name=error,value=true)
+/subsystem=jca/cached-connection-manager=cached-connection-manager:write-attribute(name=error,value=true)
 run-batch
 quit
 EOF
@@ -24,6 +24,7 @@ function reload_server {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --echo-command \
         --command=":reload()"
 }
 

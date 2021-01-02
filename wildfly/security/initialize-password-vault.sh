@@ -1,11 +1,10 @@
 #!/bin/bash
 
-source ../env-base.sh
-source ./env-vault.sh
+source ./env-base.sh
+source ./env-password-vault.sh
 
 JBOSS_HOME="${JBOSS_HOME}"
-BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
-JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
+KEYSTORE_PASSWORD="${KEYSTORE_PASSWORD}"
 
 if [ ! -f "${JBOSS_HOME}/vault/vault.keystore" ]; then
     echo "[INFO] The keystore is created."

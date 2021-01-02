@@ -1,0 +1,6 @@
+#!/bin/bash
+
+PASSWORD="${1}"
+
+CREDENTIAL_ALIAS="baseds1-password"
+CREDENTIAL_SECRET_VALUE="${PASSWORD}"

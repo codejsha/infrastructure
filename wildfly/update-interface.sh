@@ -7,7 +7,7 @@ BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
 JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
 
 UPDATE_BIND_ADDRESS="0.0.0.0"
-UPDATE_BIND_ADDRESS_MGMT="127.0.0.1"
+UPDATE_BIND_ADDRESS_MGMT="0.0.0.0"
 
 ######################################################################
 

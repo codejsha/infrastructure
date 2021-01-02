@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../env-base.sh
+source ./env-base.sh
 
 JAVA_HOME="${JAVA_HOME}"
 JBOSS_HOME="${JBOSS_HOME}"

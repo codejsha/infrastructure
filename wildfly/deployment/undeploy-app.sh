@@ -1,12 +1,12 @@
 #!/bin/bash
 
-source ../env-base.sh
+source ./env-base.sh
 
 JBOSS_HOME="${JBOSS_HOME}"
 BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
 JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
 
-APP_NAME="failovertest.war"     # default
+APP_NAME="${APP_NAME}"
 
 ######################################################################
 
@@ -22,7 +22,7 @@ quit
 EOF
 }
 
-function check_deployment_status_all {
+function get_deployment_status_all {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
@@ -36,29 +36,5 @@ EOF
 
 ######################################################################
 
-function print_help {
-    echo "  --name|--name=                : set a application name."
-}
-
-function set_arguments {
-    while [[ $# -gt 0 ]]
-    do
-        ARGS="${1}"
-        shift
-        case "${ARGS}" in
-            "--help")
-                print_help; exit;;
-            "--name")
-                APP_NAME="${1}"; shift;;
-            "--name="*)
-                APP_NAME="${ARGS#*=}";;
-        esac
-    done
-}
-
-######################################################################
-
-set_arguments ${@}
-
 undeploy_application
-# check_deployment_status_all
+# get_deployment_status_all

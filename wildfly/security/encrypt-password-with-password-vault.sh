@@ -1,7 +1,7 @@
 #!/bin/bash
 
-source ../env-base.sh
-source ./env-vault.sh
+source ./env-base.sh
+source ./env-password-vault.sh
 
 JBOSS_HOME="${JBOSS_HOME}"
 KEYSTORE_PASSWORD="${KEYSTORE_PASSWORD}"

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../env-base.sh
+source ./env-base.sh
 
 JBOSS_HOME="${JBOSS_HOME}"
 BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
@@ -31,7 +31,7 @@ function remove_access_log {
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
 <<EOF
 batch
-/subsystem=undertow/server=default-server/host=default-host/setting=access-log:remove
+/subsystem=undertow/server=default-server/host=default-host/setting=access-log:remove()
 run-batch
 quit
 EOF

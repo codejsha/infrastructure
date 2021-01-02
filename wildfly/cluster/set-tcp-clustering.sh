@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../env-base.sh
+source ./env-base.sh
 source ./env-tcpping.sh
 
 JBOSS_HOME="${JBOSS_HOME}"
@@ -87,6 +87,7 @@ function reload_server {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --echo-command \
         --command=":reload()"
 }
 

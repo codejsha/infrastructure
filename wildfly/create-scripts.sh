@@ -39,6 +39,7 @@ VAR_DUMP_LOG_DIR="${DUMP_LOG_DIR/${JBOSS_LOG_DIR}/${TEMP}}"
 ######################################################################
 
 ### start script
+
 cat <<EOF > ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
 #!/bin/bash
 
@@ -56,6 +57,18 @@ BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
 BIND_ADDRESS_PRIVATE="${BIND_ADDRESS_PRIVATE}"
 DEFAULT_MULTICAST_ADDRESS="${DEFAULT_MULTICAST_ADDRESS}"
 PORT_OFFSET="${PORT_OFFSET}"
+
+CURRENT_USER="\$(id -un)"
+if [ "\${CURRENT_USER}" == "root" ]; then
+  echo "[ERROR] The current user is root!"
+  exit
+fi
+
+PID="\$(pgrep -xa java | grep \${INSTANCE_NAME} | awk '{print \$1}')"
+if [ -n "\${PID}" ]; then
+  echo "[ERROR] \${INSTANCE_NAME} (pid \${PID})" is already running!
+  exit
+fi
 
 JAVA_OPTS="\${JAVA_OPTS} -D\${INSTANCE_NAME}"
 JAVA_OPTS="\${JAVA_OPTS} -Xms1024m -Xmx1024m"
@@ -128,6 +141,7 @@ EOF
 ######################################################################
 
 ### stop script
+
 cat <<EOF > ${JBOSS_BASE_DIR}/stop-${INSTANCE_NAME}.sh
 #!/bin/bash
 
