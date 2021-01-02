@@ -19,9 +19,7 @@ org.apache.catalina.tribes.level = FINEST
 
 ### Log4j
 
-- `log4j/log4j2-tomcat.xml`
-- `log4j/set-log4j-logging.sh`
-- `log4j/setenv.sh`
+- [Log4j README](https://link)
 
 ## Datasource
 
