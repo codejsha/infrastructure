@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source ./env-base.sh
+source ./env-component.sh
 
 ORACLE_HOME="${ORACLE_HOME}"
 
