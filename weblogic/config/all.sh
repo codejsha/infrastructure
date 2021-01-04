@@ -18,7 +18,7 @@ bash ./create-regen-demo-identity-script.sh
 
 bash ./conf-domain.sh
 bash ./create-server.sh AdminServer test.example.com 7001
-bash ./create-scripts.sh AdminServer
+bash ./create-admin-scripts.sh AdminServer
 bash ./set-domain-config-archive.sh
 # bash ./set-domain-connection-filter.sh
 bash ./set-domain-cookie-name.sh

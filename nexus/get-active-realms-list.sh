@@ -8,7 +8,7 @@ function get_active_realms_list {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
         -X GET "${NEXUS_URL}/service/rest/beta/security/realms/active" \
-        -H "accept: application/json"
+        -H "Accept:application/json"
 }
 
 get_active_realms_list

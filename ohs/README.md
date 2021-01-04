@@ -42,6 +42,7 @@ bash ./create-metric-scripts.sh
 
 ```bash
 bash ./create-domain.sh
+bash ./delete-component.sh
 bash ./create-component.sh
 
 bash ./create-nodemgr-scripts.sh

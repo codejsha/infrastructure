@@ -13,7 +13,7 @@ function create_maven_group_repository {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
         -X POST "${NEXUS_URL}/service/rest/beta/repositories/maven/group" \
-        -H "accept: application/json" \
+        -H "Accept:application/json" \
         -H "Content-Type: application/json" \
         -d @data-maven-group-repo-temp.json
 }

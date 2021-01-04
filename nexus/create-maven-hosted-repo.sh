@@ -12,7 +12,7 @@ function create_maven_hosted_repository {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
         -X POST "${NEXUS_URL}/service/rest/beta/repositories/maven/hosted" \
-        -H "accept: application/json" \
+        -H "Accept:application/json" \
         -H "Content-Type: application/json" \
         -d @data-maven-hosted-repo-temp.json
 }

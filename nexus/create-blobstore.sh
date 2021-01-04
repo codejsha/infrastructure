@@ -17,7 +17,7 @@ function create_s3_blob_store {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
         -X POST "${NEXUS_URL}/service/rest/beta/blobstores/s3" \
-        -H "accept: application/json" \
+        -H "Accept:application/json" \
         -H "Content-Type: application/json" \
         -d @data-blobstore-temp.json
 }

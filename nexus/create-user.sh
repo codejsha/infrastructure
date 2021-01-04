@@ -17,7 +17,7 @@ function create_user {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
         -X POST "${NEXUS_URL}/service/rest/beta/security/users" \
-        -H "accept: application/json" \
+        -H "Accept:application/json" \
         -H "Content-Type: application/json" \
         -d @data-user-temp.json
 }
