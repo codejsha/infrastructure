@@ -25,6 +25,7 @@ function all_12cr1 {
 
 function all_12cr2 {
     bash ./create-domain.sh
+    bash ./delete-component.sh
     bash ./create-component.sh
 
     bash ./create-nodemgr-scripts.sh

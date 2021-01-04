@@ -47,7 +47,7 @@ JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.utils.classloaders.GenericClassLoader.V
 JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.utils.classloaders.FilteringClassLoader.Verbose=true"
 JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.utils.classloaders.ChangeAwareClassLoader.Verbose=true"
 
-### 12.1.3 and higher
+### 12.1.3 and later
 JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.debug.DebugClassLoadingVerbose=true"
 JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.debug.DebugClassLoadingContextualTrace=true"
 

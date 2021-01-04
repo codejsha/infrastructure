@@ -26,7 +26,7 @@ missingok
 
 - https://docs.oracle.com/middleware/12213/wls/START/winservice.htm
 
-### edit arguments
+### Edit argument
 
 ```cmd
 -log:%LOG_PATH%
