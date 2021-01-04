@@ -1,5 +1,15 @@
 # Tomcat
 
+## Install
+
+```bash
+### pre-install
+bash ./helper.sh
+
+### install
+bash ./install-tomcat.sh
+```
+
 ## Logging
 
 ### java.util.logging
@@ -19,7 +29,7 @@ org.apache.catalina.tribes.level = FINEST
 
 ### Log4j
 
-- [Log4j README](https://link)
+- [Log4j README](/tomcat/log4j/README.md)
 
 ## Datasource
 

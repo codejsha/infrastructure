@@ -1,6 +1,8 @@
 #!/bin/bash
 
-CATALINA_HOME="/usr/local/tomcat"
+source ./env-base.sh
+
+CATALINA_HOME="${CATALINA_HOME}"
 
 INSTALL_FILE_DIR="/mnt/share/apache-tomcat"
 
@@ -10,7 +12,6 @@ INSTALL_FILE="apache-tomcat-9.0.39.tar.gz"
 
 ######################################################################
 
-CATALINA_HOME_DIR_NAME="$(echo ${CATALINA_HOME} | grep -E "([^\/]+$)")"
 PARENT_CATALINA_HOME="$(readlink --canonicalize-missing ${CATALINA_HOME}/../)"
 TOMCAT_VERSION="$(echo ${INSTALL_FILE} | grep -o -E "([^apache-tomcat-].*[^\.tar\.gz])")"
 TOMCAT_MAJOR_VERSION="$(echo ${TOMCAT_VERSION} | grep -o -E "^[0-9]{1,3}")"
@@ -24,24 +25,32 @@ function check_catalina_home {
     fi
 }
 
+function check_install_file {
+    if [ ! -f "${INSTALL_FILE_DIR}/${INSTALL_FILE}" ]; then
+        echo "[ERROR] The INSTALL_FILE (${INSTALL_FILE_DIR}/${INSTALL_FILE}) does not exists!"
+        exit
+    fi
+}
+
 function install_from_online {
-    curl -o ${PARENT_CATALINA_HOME}/${INSTALL_FILE} \
-        -LJO http://mirror.apache-kr.org/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_VERSION}/bin/${INSTALL_FILE}
-    cd ${PARENT_CATALINA_HOME}
+    if [ ! -f "${INSTALL_FILE}" ]; then
+        curl -LJO https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_VERSION}/bin/${INSTALL_FILE}
+    fi
+
     tar -xzf ${INSTALL_FILE} -C ${PARENT_CATALINA_HOME}
-    mv ${PARENT_CATALINA_HOME}/apache-tomcat-${TOMCAT_VERSION} ${PARENT_CATALINA_HOME}/${CATALINA_HOME_DIR_NAME}
-    rm -f ${PARENT_CATALINA_HOME}/${INSTALL_FILE}
+    mv ${PARENT_CATALINA_HOME}/apache-tomcat-${TOMCAT_VERSION} ${CATALINA_HOME}
 }
 
 function install_from_storage {
-    /usr/bin/cp -f ${INSTALL_FILE_DIR}/${INSTALL_FILE} ${PARENT_CATALINA_HOME}
-    cd ${PARENT_CATALINA_HOME}
+    check_install_file
+
+    /usr/bin/cp -f ${INSTALL_FILE_DIR}/${INSTALL_FILE} .
     tar -xzf ${INSTALL_FILE} -C ${PARENT_CATALINA_HOME}
-    mv ${PARENT_CATALINA_HOME}/apache-tomcat-${TOMCAT_VERSION} ${PARENT_CATALINA_HOME}/${CATALINA_HOME_DIR_NAME}
+    mv ${PARENT_CATALINA_HOME}/apache-tomcat-${TOMCAT_VERSION} ${CATALINA_HOME}
 }
 
 function delete_install_file {
-    rm -f ${PARENT_CATALINA_HOME}/${INSTALL_FILE}
+    rm -f ${INSTALL_FILE}
 }
 
 ######################################################################

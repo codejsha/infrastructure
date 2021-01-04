@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source ./env-base.sh
+source ./env-instance.sh
 source ./env-function.sh
 
 ######################################################################

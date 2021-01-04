@@ -1,6 +1,6 @@
 # Create instances
 
-Requirements: tidy package
+Requirement: tidy package
 
 ## Instance
 
@@ -46,7 +46,7 @@ bash ./create-instance-cluster-redis.sh inst1 8080 8443 8005 8009
 bash ./create-instance-cluster-redis.sh inst2 8081 8444 8006 8010
 ```
 
-Edit addresses in redisson.yaml. If Redis has a password, set password too.
+Set addresses and password(If Redis has a password) in redisson.yaml.
 
 Add libraries:
 
