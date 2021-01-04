@@ -58,10 +58,10 @@ fi
 
 JAVA_HOME_FROM_PROPERTIES=""
 if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
-    JAVA_HOME_FROM_PROPERTIES="$(grep -e "^JAVA_HOME" -m -1 ${MW_HOME}/wlserver_10.3/.product.properties \
+    JAVA_HOME_FROM_PROPERTIES="$(grep -e "^JAVA_HOME" -m 1 ${MW_HOME}/wlserver_10.3/.product.properties \
         | grep -o -E "/.*$")"
 elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
-    JAVA_HOME_FROM_PROPERTIES="$(grep -e "^JAVA_HOME" -m -1 ${ORACLE_HOME}/oui/.globalEnv.properties \
+    JAVA_HOME_FROM_PROPERTIES="$(grep -e "^JAVA_HOME" -m 1 ${ORACLE_HOME}/oui/.globalEnv.properties \
         | grep -o -E "/.*$")"
     # JAVA_HOME_FROM_PROPERTIES="$(${ORACLE_HOME}/oui/bin/getProperty.sh JAVA_HOME")"
 fi
