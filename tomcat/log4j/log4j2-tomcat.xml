@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="warn" name="MyApp" packages="">
+<Configuration status="error">
     <Appenders>
-        <Console name="STDOUT" target="SYSTEM_OUT">
-            <PatternLayout pattern="%m%n"/>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%date] [%level] [%thread] [%class.%method] %message%n"/>
         </Console>
     </Appenders>
     <Loggers>
-        <Root level="error">
-            <AppenderRef ref="STDOUT"/>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
         </Root>
+        <Logger name="org.apache.catalina.session" level="info" />
+        <Logger name="org.apache.catalina.tribes" level="info" />
     </Loggers>
 </Configuration>
