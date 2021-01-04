@@ -2,16 +2,24 @@
 
 ## Getting Started
 
+### Clone repository
+
 ```bash
-# Clone
 git clone https://github.com/codejsha/infrastructure.git
-# Clone (with GitHub CLI)
+### with GitHub CLI
 gh repo clone codejsha/infrastructure
+```
 
-# Pull master branch
+### Pull master branch
+
+```bash
 git pull origin master
+```
 
-# Overwrite master branch
+### Overwrite master branch
+
+```bash
+git stash
 git fetch --all
 git reset --hard origin/master
 ```
