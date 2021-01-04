@@ -163,24 +163,24 @@ function gowebsvr() { DIRECTORY="/svc/websvr"; echo "+ cd ${DIRECTORY}">&2; comm
 function gowildfly() { DIRECTORY="/usr/local/wildfly"; echo "+ cd ${DIRECTORY}">&2; command cd ${DIRECTORY}; STATUS="${?}"; if [ "${STATUS}" -eq "0" ]; then ls --almost-all -l; fi; }
 function readlinkpwd() { echo "+ readlink --canonicalize .">&2; command readlink --canonicalize .; }
 
-[ -f ~/.aliases/.argo_aliases ] && source ~/.aliases/.argo_aliases
-[ -f ~/.aliases/.cloud_aliases ] && source ~/.aliases/.cloud_aliases
-[ -f ~/.aliases/.docker_aliases ] && source ~/.aliases/.docker_aliases
-[ -f ~/.aliases/.docker_compose_aliases ] && source ~/.aliases/.docker_compose_aliases
-[ -f ~/.aliases/.git_aliases ] && source ~/.aliases/.git_aliases
-[ -f ~/.aliases/.helm_aliases ] && source ~/.aliases/.helm_aliases
-[ -f ~/.aliases/.istio_aliases ] && source ~/.aliases/.istio_aliases
-[ -f ~/.aliases/.jdk_aliases ] && source ~/.aliases/.jdk_aliases
-[ -f ~/.aliases/.krew_aliases ] && source ~/.aliases/.krew_aliases
-[ -f ~/.aliases/.kustomize_aliases ] && source ~/.aliases/.kustomize_aliases
-[ -f ~/.aliases/.kubernetes_aliases ] && source ~/.aliases/.kubernetes_aliases
-[ -f ~/.aliases/.minio_aliases ] && source ~/.aliases/.minio_aliases
-[ -f ~/.aliases/.network_aliases ] && source ~/.aliases/.network_aliases
-[ -f ~/.aliases/.package_aliases ] && source ~/.aliases/.package_aliases
-[ -f ~/.aliases/.process_aliases ] && source ~/.aliases/.process_aliases
-[ -f ~/.aliases/.strimzi_aliases ] && source ~/.aliases/.strimzi_aliases
-[ -f ~/.aliases/.systemctl_aliases ] && source ~/.aliases/.systemctl_aliases
-[ -f ~/.aliases/.tekton_aliases ] && source ~/.aliases/.tekton_aliases
+[ -f ~/.aliases/argo_aliases ] && source ~/.aliases/argo_aliases
+[ -f ~/.aliases/cloud_aliases ] && source ~/.aliases/cloud_aliases
+[ -f ~/.aliases/docker_aliases ] && source ~/.aliases/docker_aliases
+[ -f ~/.aliases/docker_compose_aliases ] && source ~/.aliases/docker_compose_aliases
+[ -f ~/.aliases/git_aliases ] && source ~/.aliases/git_aliases
+[ -f ~/.aliases/helm_aliases ] && source ~/.aliases/helm_aliases
+[ -f ~/.aliases/istio_aliases ] && source ~/.aliases/istio_aliases
+[ -f ~/.aliases/jdk_aliases ] && source ~/.aliases/jdk_aliases
+[ -f ~/.aliases/krew_aliases ] && source ~/.aliases/krew_aliases
+[ -f ~/.aliases/kustomize_aliases ] && source ~/.aliases/kustomize_aliases
+[ -f ~/.aliases/kubernetes_aliases ] && source ~/.aliases/kubernetes_aliases
+[ -f ~/.aliases/minio_aliases ] && source ~/.aliases/minio_aliases
+[ -f ~/.aliases/network_aliases ] && source ~/.aliases/network_aliases
+[ -f ~/.aliases/package_aliases ] && source ~/.aliases/package_aliases
+[ -f ~/.aliases/process_aliases ] && source ~/.aliases/process_aliases
+[ -f ~/.aliases/strimzi_aliases ] && source ~/.aliases/strimzi_aliases
+[ -f ~/.aliases/systemctl_aliases ] && source ~/.aliases/systemctl_aliases
+[ -f ~/.aliases/tekton_aliases ] && source ~/.aliases/tekton_aliases
 
 # others
 function descheduler() { echo "+ descheduler ${@}">&2; command descheduler ${@}; }
