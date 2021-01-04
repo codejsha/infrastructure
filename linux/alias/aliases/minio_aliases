@@ -8,7 +8,7 @@ alias mccat="mc cat"
 alias mccp="mc cp"
 alias mccpa="mc cp --preserve"
 alias mccpnewer="mc cp --newer-than"
-alias mccporder="mc cp --older-than"
+alias mccpolder="mc cp --older-than"
 alias mccpr="mc cp --recursive"
 
 alias mcdu="mc du"
@@ -20,7 +20,7 @@ alias mcmb="mc mb"
 alias mcmv="mc mv"
 alias mcmva="mc mv --preserve"
 alias mcmvnewer="mc mv --newer-than"
-alias mcmvorder="mc mv --older-than"
+alias mcmvolder="mc mv --older-than"
 alias mcmvr="mc mv --recursive"
 
 # remove bucket
@@ -30,7 +30,7 @@ alias mcrb=-force="mc rb --force"
 # remove object
 alias mcrm="mc rm"
 alias mcrmnewer="mc rm --newer-than"
-alias mcrmorder="mc rm --older-than"
+alias mcrmolder="mc rm --older-than"
 alias mcrmr="mc rm --recursive"
 alias mcrmr=-force="mc rm --recursive --force"
 
