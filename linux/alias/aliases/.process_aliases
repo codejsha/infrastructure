@@ -11,6 +11,8 @@ alias pseftomcat="sudo ps -ef | grep tomcat"
 alias psefweblogic="sudo ps -ef | grep weblogic"
 
 alias pxhttpd="sudo pgrep --exact --list-full httpd | grep httpd"
+alias pxdockerd="sudo pgrep --exact --list-full dockerd | grep dockerd"
+alias pxdockerproxy="sudo pgrep --exact --list-full docker-proxy | grep docker-proxy"
 alias pxjava="sudo pgrep --exact --list-full java | grep java"
 alias pxjavajboss="sudo pgrep --exact --list-full java | grep jboss"
 alias pxjavatomcat="sudo pgrep --exact --list-full java | grep tomcat"

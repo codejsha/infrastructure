@@ -6,6 +6,10 @@ function ss() { echo "+ ss ${@}">&2; command ss ${@}; }
 
 alias netstat-tunlp="sudo netstat --tcp --udp --numeric --listening --programs"
 
-alias ssalntu="sudo ss --all --listening --numeric --tcp --udp"
-alias ssalntum="sudo ss --all --listening --numeric --tcp --udp --memory"
-alias ssalntup="sudo ss --all --listening --numeric --tcp --udp --processes"
+# alias ssalntu="sudo ss --all --listening --numeric --tcp --udp"
+# alias ssalntum="sudo ss --all --listening --numeric --tcp --udp --memory"
+alias ssalntup="sudo ss --all --listening --numeric --tcp --udp --processes --no-header | column -t"
+alias ssdocker="sudo ss --all --listening --numeric --tcp --udp --processes --no-header | column -t | grep docker"
+alias sshttpd="sudo ss --all --listening --numeric --tcp --udp --processes --no-header | column -t | grep httpd"
+alias ssjava="sudo ss --all --listening --numeric --tcp --udp --processes --no-header | column -t | grep java"
+alias ssnode="sudo ss --all --listening --numeric --tcp --udp --processes --no-header | column -t | grep node"
