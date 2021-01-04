@@ -15,10 +15,10 @@ su - ${NORMAL_USERNAME} -c "echo `id -ng`: bind  > /tmp/cap.ora"
 chown root ${ORACLE_HOME}/oracle_common/bin/hasbind
 chmod 4755 ${ORACLE_HOME}/oracle_common/bin/hasbind
 
-if [ -f /etc/cap.ora ]; then
-    cp /tmp/cap.ora /etc/cap.ora
-else
+if [ -f "/etc/cap.ora" ]; then
     cat /tmp/cap.ora >> /etc/cap.ora
+else
+    cp /tmp/cap.ora /etc/cap.ora
 fi
 
 chmod 644 /etc/cap.ora
