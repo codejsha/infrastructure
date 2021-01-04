@@ -32,7 +32,7 @@ if [ -n "\${PID}" ]; then
   exit
 fi
 
-if [ -f \${LOG_DIR}/nohup.NodeManager.out ]; then
+if [ -f "\${LOG_DIR}/nohup.NodeManager.out" ]; then
   mv \${LOG_DIR}/nohup.NodeManager.out \${LOG_DIR}/nodemanager/nohup.NodeManager.\${GET_DATE}.out
 fi
 

@@ -2,7 +2,7 @@
 
 https://www.portainer.io/installation/
 
-Requirements: Docker daemon socket
+Requirement: Docker daemon socket
 
 ## Set environment
 

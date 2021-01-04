@@ -1,6 +1,6 @@
 #!/bin/bash
 
-INGRESS_DOMAIN="${INGRESS_DOMAIN:-example.com}"
+INGRESS_DOMAIN="${INGRESS_DOMAIN:-"example.com"}"
 
 cat <<EOF | kubectl apply -f -
 apiVersion: networking.istio.io/v1alpha3

@@ -13,7 +13,7 @@ echo "UUID: ${CREDENTIALS_UUID}"
 
 ######################################################################
 
-if [ ! -f credentials.xml ]; then
+if [ ! -f "credentials.xml" ]; then
 cat <<EOF > ./credentials.xml
 <com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl plugin="credentials@2.3.12">
     <scope>GLOBAL</scope>

@@ -59,10 +59,10 @@ JAVA_OPTIONS="\${JAVA_OPTIONS} -DSecureListener=false"
 JAVA_OPTIONS="\${JAVA_OPTIONS} -DLogFile=\${LOG_DIR}/nodemanager/machine.NodeManager.out"
 export JAVA_OPTIONS
 
-if [ -f \${LOG_DIR}/nohup.NodeManager.out ]; then
+if [ -f "\${LOG_DIR}/nohup.NodeManager.out" ]; then
   mv \${LOG_DIR}/nohup.NodeManager.out \${LOG_DIR}/nodemanager/nohup.NodeManager.\${GET_DATE}.out
 fi
-if [ -f \${LOG_DIR}/gc.NodeManager.log ]; then
+if [ -f "\${LOG_DIR}/gc.NodeManager.log" ]; then
   mv \${LOG_DIR}/gc.NodeManager.log \${LOG_DIR}/nodemanager/gc.NodeManager.\${GET_DATE}.log
 fi
 touch \${LOG_DIR}/nohup.NodeManager.out

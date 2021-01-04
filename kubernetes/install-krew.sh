@@ -1,6 +1,6 @@
 #!/bin/bash
 
-### requirements:
+### requirement:
 ### git
 
 (
@@ -12,5 +12,5 @@
 )
 
 ### add path
-# PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+# PATH="${KREW_ROOT:-"$HOME/.krew"}/bin:$PATH"
 # export PATH

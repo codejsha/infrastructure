@@ -39,10 +39,10 @@ fi
 ### 12c, 14c: ${ORACLE_HOME}/inventory/registry.xml
 
 WEBLOGIC_VERSION=""
-if [ -f ${MW_HOME}/registry.xml ]; then
+if [ -f "${MW_HOME}/registry.xml" ]; then
     WEBLOGIC_VERSION="$(grep "name=\"WebLogic Server\"" ${MW_HOME}/registry.xml \
         | grep -o -E "[0-9]{2}\.[0-9]\.[0-9]\.[0-9]")"
-elif [ -f ${ORACLE_HOME}/inventory/registry.xml ]; then
+elif [ -f "${ORACLE_HOME}/inventory/registry.xml" ]; then
     WEBLOGIC_VERSION="$(grep "name=\"WebLogic Server\"" ${ORACLE_HOME}/inventory/registry.xml \
         | grep -o -E "[0-9]{2}\.[0-9]\.[0-9]\.[0-9]\.[0-9]")"
 else

@@ -3,7 +3,7 @@
 helm repo add drone https://charts.drone.io
 helm repo update
 
-if [ ! -f SHARED_SECRET.txt ]; then
+if [ ! -f "SHARED_SECRET.txt" ]; then
     echo "[ERROR] The SHARED_SECRET file does not exists!"
     exit
 fi

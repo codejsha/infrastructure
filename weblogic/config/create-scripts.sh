@@ -127,10 +127,10 @@ cat <<EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 # export EXT_PRE_CLASSPATH
 # export EXT_POST_CLASSPATH
 
-if [ -f \${LOG_DIR}/nohup.\${SERVER_NAME}.out ]; then
+if [ -f "\${LOG_DIR}/nohup.\${SERVER_NAME}.out" ]; then
   mv \${LOG_DIR}/nohup.\${SERVER_NAME}.out \${LOG_DIR}/\${SERVER_NAME}/nohup.\${SERVER_NAME}.\${GET_DATE}.out
 fi
-if [ -f \${LOG_DIR}/gc.\${SERVER_NAME}.log ]; then
+if [ -f "\${LOG_DIR}/gc.\${SERVER_NAME}.log" ]; then
   mv \${LOG_DIR}/gc.\${SERVER_NAME}.log \${LOG_DIR}/\${SERVER_NAME}/gc.\${SERVER_NAME}.\${GET_DATE}.log
 fi
 

@@ -7,7 +7,7 @@ CREDENTIALS_DOMAIN="${CREDENTIALS_DOMAIN}"
 
 ######################################################################
 
-if [ ! -f credentials-domain.xml ]; then
+if [ ! -f "credentials-domain.xml" ]; then
 cat <<EOF > ./credentials-domain.xml
 <com.cloudbees.plugins.credentials.domains.Domain plugin="credentials@2.3.12">
     <name>${CREDENTIALS_DOMAIN}</name>

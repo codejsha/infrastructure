@@ -13,7 +13,7 @@ echo "UUID: ${CREDENTIALS_UUID}"
 
 ######################################################################
 
-if [ ! -f credentials-aws.xml ]; then
+if [ ! -f "credentials-aws.xml" ]; then
 cat <<EOF > ./credentials-aws.xml
 <com.cloudbees.jenkins.plugins.awscredentials.AWSCredentialsImpl plugin="aws-credentials@1.28">
     <scope>GLOBAL</scope>
