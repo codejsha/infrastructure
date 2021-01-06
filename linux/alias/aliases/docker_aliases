@@ -3,6 +3,8 @@
 function docker() { echo "+ docker ${@}">&2; command docker ${@}; }
 
 alias dcattach="docker container attach"
+function dcexecbash() { CONTAINER_NAME="${1}"; if [ -n "${CONTAINER_NAME}" ]; then docker container exec --interactive --tty ${1} /bin/bash; fi; }
+function dcexecsh() { CONTAINER_NAME="${1}"; if [ -n "${CONTAINER_NAME}" ]; then docker container exec --interactive --tty ${1} /bin/sh; fi; }
 alias dclo="docker container logs --follow"
 alias dclon="docker container logs --follow --tail"
 alias dcls="docker container ls"
@@ -15,9 +17,6 @@ alias dcrmall-force="docker container rm --force \$(docker container ls --all --
 alias dcrm-force="docker container rm --force"
 alias dcrm-unused="docker container prune --force"
 alias dcrun="docker container run"
-
-function dexecbash() { CONTAINER_NAME="${1}"; if [ -n "${CONTAINER_NAME}" ]; then docker exec --interactive --tty ${1} /bin/bash; fi; }
-function dexecsh() { CONTAINER_NAME="${1}"; if [ -n "${CONTAINER_NAME}" ]; then docker exec --interactive --tty ${1} /bin/sh; fi; }
 
 alias dhistory="docker history"
 
