@@ -23,7 +23,7 @@ bash ./create-domain.sh
 
 ### Logging
 
-- [Logging](/weblogic/logging.md)
+- [Logging](/weblogic/logging/logging.md)
 - [debug.sh](/weblogic/debug.sh)
 
 ## Deployment descriptor
