@@ -107,7 +107,15 @@ function opatch_apply {
 
     check_patch_file ${PATCH_FILE_DIR}/${PATCH_FILE}
     unzip -q -o ${PATCH_FILE_DIR}/${PATCH_FILE} -d ${ORACLE_HOME}/OPatch/patch_files
-    ${ORACLE_HOME}/OPatch/opatch apply -silent ${ORACLE_HOME}/OPatch/patch_files/${PATCH_ID}
+    # ${ORACLE_HOME}/OPatch/opatch apply \
+    #     -silent \
+    #     ${ORACLE_HOME}/OPatch/patch_files/${PATCH_ID}
+    ${ORACLE_HOME}/OPatch/opatch apply \
+        -silent \
+        -oh ${ORACLE_HOME} \
+        -invPtrLoc ${ORACLE_HOME}/${INVENTORY_FILE} \
+        -jre ${JAVA_HOME}/jre \
+        ${ORACLE_HOME}/OPatch/patch_files/${PATCH_ID}
 
     STATUS="${?}"
     if [ "${STATUS}" -ne "0" ]; then
