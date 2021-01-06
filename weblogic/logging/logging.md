@@ -25,8 +25,11 @@ missingok
 ## Rotating log file in Windows service
 
 - https://docs.oracle.com/middleware/12213/wls/START/winservice.htm
+- https://docs.oracle.com/en/middleware/standalone/weblogic-server/14.1.1.0/start/winservice.html
 
 ### Edit argument
+
+At the end of the wlsvc command, append the following command option:
 
 ```cmd
 -log:%LOG_PATH%
@@ -47,5 +50,5 @@ by size:
 ```log
 # ROTATION_TYPE = SIZE
 # SIZE_KB = FILE_SIZE_IN_KILOBYTES
-# SIZE_TRIGGER_INTERVAL_MINS = POLLING_INTERVAL
+# SIZE_TRIGGER_INTERVAL_MINS = NUMBER_OF_MINUTES
 ```
