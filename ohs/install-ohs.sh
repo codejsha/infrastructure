@@ -14,6 +14,7 @@ INSTALL_SCRIPT_DIR="/svc/infrastructure/ohs"
 
 # RESPONSE_FILE="response-sw-only-11g.rsp"
 RESPONSE_FILE="response-sw-only.rsp"
+INVENTORY_FILE="oraInst.loc"
 
 ######################################################################
 
@@ -33,7 +34,7 @@ function install_ohs {
     ${INSTALL_FILE_DIR}/${INSTALL_FILE} \
         -silent \
         -responseFile ${INSTALL_SCRIPT_DIR}/${RESPONSE_FILE} \
-        -invPtrLoc ${INSTALL_SCRIPT_DIR}/oraInst.loc
+        -invPtrLoc ${INSTALL_SCRIPT_DIR}/${INVENTORY_FILE}
 }
 
 ######################################################################

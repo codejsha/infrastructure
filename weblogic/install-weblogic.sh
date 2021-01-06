@@ -17,6 +17,9 @@ INSTALL_FILE="fmw_12.2.1.4.0_wls.jar"
 # INSTALL_FILE="fmw_14.1.1.0.0_wls.jar"
 
 INSTALL_SCRIPT_DIR="/svc/infrastructure/weblogic"
+# SILENT_FILE="silent.xml"
+RESPONSE_FILE="response.rsp"
+INVENTORY_FILE="oraInst.loc"
 
 ######################################################################
 
@@ -44,7 +47,7 @@ function install_weblogic_11g {
     ${JAVA_HOME}/bin/java \
         -jar ${INSTALL_FILE_DIR}/${INSTALL_FILE} \
         -mode=silent \
-        -silent_xml=${INSTALL_SCRIPT_DIR}/silent.xml
+        -silent_xml=${INSTALL_SCRIPT_DIR}/${SILENT_FILE}
 }
 
 function install_weblogic {
@@ -52,15 +55,15 @@ function install_weblogic {
         -Djava.security.egd=file:///dev/urandom \
         -jar ${INSTALL_FILE_DIR}/${INSTALL_FILE} \
         -silent \
-        -responseFile ${INSTALL_SCRIPT_DIR}/response.rsp \
-        -invPtrLoc ${INSTALL_SCRIPT_DIR}/oraInst.loc
+        -responseFile ${INSTALL_SCRIPT_DIR}/${RESPONSE_FILE} \
+        -invPtrLoc ${INSTALL_SCRIPT_DIR}/${INVENTORY_FILE}
 
     # ${JAVA_HOME}/bin/java \
     #     -Djava.security.egd=file:///dev/urandom \
     #     -jar ${INSTALL_FILE_DIR}/${INSTALL_FILE} \
     #     -silent \
-    #     -responseFile ${INSTALL_SCRIPT_DIR}/response.rsp \
-    #     -invPtrLoc ${INSTALL_SCRIPT_DIR}/oraInst.loc \
+    #     -responseFile ${INSTALL_SCRIPT_DIR}/${RESPONSE_FILE} \
+    #     -invPtrLoc ${INSTALL_SCRIPT_DIR}/${INVENTORY_FILE} \
     #     -jreLoc ${JAVA_HOME} \
     #     -ignoreSysPrereqs \
     #     -force \

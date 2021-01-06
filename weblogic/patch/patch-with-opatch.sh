@@ -4,7 +4,7 @@ JAVA_HOME="/usr/java/java-1.8.0"
 # JAVA_HOME="/usr/java/java-11"
 
 ORACLE_HOME="/usr/local/weblogic"
-INVENTORY_FILE="${ORACLE_HOME}/oraInst.loc"
+INVENTORY_FILE="oraInst.loc"
 
 # PATCH_FILE_DIR="/mnt/share/oracle-weblogic-server/wls12.1.3"
 PATCH_FILE_DIR="/mnt/share/oracle-weblogic-server/wls12.2.1.3"
@@ -31,7 +31,7 @@ function check_oracle_home {
 
 function check_inventory_group {
     ORACLE_HOME_GROUP="$(stat -c '%G' ${ORACLE_HOME})"
-    INST_GROUP="$(grep inst_group ${INVENTORY_FILE} | cut -d'=' -f 2)"
+    INST_GROUP="$(grep inst_group ${ORACLE_HOME}/${INVENTORY_FILE} | cut -d'=' -f 2)"
 
     if [[ "${ORACLE_HOME_GROUP}" != "${INST_GROUP}" ]]; then
         echo "[ERROR] The group of ORACLE_HOME directory (${ORACLE_HOME_GROUP}) and the inst_group value (${INST_GROUP}) are not the same!"
@@ -40,7 +40,7 @@ function check_inventory_group {
 }
 
 function check_inventory_location {
-    INVENTORY_LOC="$(grep inventory_loc ${INVENTORY_FILE} | cut -d'=' -f 2)"
+    INVENTORY_LOC="$(grep inventory_loc ${ORACLE_HOME}/${INVENTORY_FILE} | cut -d'=' -f 2)"
 
     if [ ! -d "${INVENTORY_LOC}" ]; then
         echo "[ERROR] The Oracle Inventory directory (${INVENTORY_LOC}) does not exists!"
@@ -66,17 +66,17 @@ function opatch_update {
     ${JAVA_HOME}/bin/java \
         -jar ${ORACLE_HOME}/OPatch/patch_files/${PATCH_ID}/opatch_generic.jar \
         -silent oracle_home=${ORACLE_HOME} \
-        -invPtrLoc ${INVENTORY_FILE}
+        -invPtrLoc ${ORACLE_HOME}/${INVENTORY_FILE}
     # ${JAVA_HOME}/bin/java \
     #     -jar ${ORACLE_HOME}/OPatch/patch_files/${PATCH_ID}/opatch_generic.jar \
     #     -silent oracle_home=${ORACLE_HOME} \
-    #     -invPtrLoc ${INVENTORY_FILE} \
+    #     -invPtrLoc ${ORACLE_HOME}/${INVENTORY_FILE} \
     #     -ignoreSysPrereqs
     # ${JAVA_HOME}/bin/java \
     #     -jar ${ORACLE_HOME}/OPatch/patch_files/${PATCH_ID}/opatch_generic.jar \
     #     -Djava.io.tmpdir=/tmp \
     #     -silent oracle_home=${ORACLE_HOME} \
-    #     -invPtrLoc ${INVENTORY_FILE}
+    #     -invPtrLoc ${ORACLE_HOME}/${INVENTORY_FILE}
 
     STATUS="${?}"
     if [ "${STATUS}" -ne "0" ]; then
@@ -129,7 +129,7 @@ function opatch_lsinventory {
     ${ORACLE_HOME}/OPatch/opatch lsinventory \
         -all \
         -oh ${ORACLE_HOME} \
-        -invPtrLoc ${INVENTORY_FILE} \
+        -invPtrLoc ${ORACLE_HOME}/${INVENTORY_FILE} \
         -jre ${JAVA_HOME}/jre
 }
 
