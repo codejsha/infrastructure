@@ -1,32 +1,76 @@
-version: '3.1'
+version: "3.8"
 
 services:
-  zookeeper-0:
-    image: zookeeper
-    restart: always
-    hostname: zookeeper-0
+  zookeeper1:
+    restart: unless-stopped
+    image: zookeeper:latest
+    hostname: zookeeper1
+    networks:
+      - stream-network
     ports:
-      - 2181:2181
+      - 2181
     environment:
+      ZOO_TICK_TIME: 2000
+      ZOO_INIT_LIMIT: 10
+      ZOO_SYNC_LIMIT: 5
+      ZOO_MAX_CLIENT_CNXNS: 0
+      # ZOO_AUTOPURGE_SNAPRETAINCOUNT: 3
+      # ZOO_AUTOPURGE_PURGEINTERVAL: 1
       ZOO_MY_ID: 1
-      ZOO_SERVERS: server.1=0.0.0.0:2888:3888;2181 server.2=zookeeper-1:2888:3888;2181 server.3=zookeeper-2:2888:3888;2181
+      ZOO_SERVERS: server.1=0.0.0.0:2888:3888;2181 server.2=zookeeper2:2888:3888;2181 server.3=zookeeper3:2888:3888;2181
+    volumes:
+      # - /mnt/volume/zookeeper/zookeeper1/zoo.cfg:/conf/zoo.cfg
+      - /mnt/volume/zookeeper/zookeeper1/data:/data
+      - /mnt/volume/zookeeper/zookeeper1/datalog:/datalog
+      - /mnt/volume/zookeeper/zookeeper1/logs:/logs
 
-  zookeeper-1:
-    image: zookeeper
-    restart: always
-    hostname: zookeeper-1
+  zookeeper2:
+    restart: unless-stopped
+    image: zookeeper:latest
+    hostname: zookeeper2
+    networks:
+      - stream-network
     ports:
-      - 2182:2181
+      - 2181
     environment:
+      ZOO_TICK_TIME: 2000
+      ZOO_INIT_LIMIT: 10
+      ZOO_SYNC_LIMIT: 5
+      ZOO_MAX_CLIENT_CNXNS: 0
+      # ZOO_AUTOPURGE_SNAPRETAINCOUNT: 3
+      # ZOO_AUTOPURGE_PURGEINTERVAL: 1
       ZOO_MY_ID: 2
-      ZOO_SERVERS: server.1=zookeeper-0:2888:3888;2181 server.2=0.0.0.0:2888:3888;2181 server.3=zookeeper-2:2888:3888;2181
+      ZOO_SERVERS: server.1=zookeeper1:2888:3888;2181 server.2=0.0.0.0:2888:3888;2181 server.3=zookeeper3:2888:3888;2181
+    volumes:
+      # - /mnt/volume/zookeeper/zookeeper2/zoo.cfg:/conf/zoo.cfg
+      - /mnt/volume/zookeeper/zookeeper2/data:/data
+      - /mnt/volume/zookeeper/zookeeper2/datalog:/datalog
+      - /mnt/volume/zookeeper/zookeeper2/logs:/logs
 
-  zookeeper-2:
-    image: zookeeper
-    restart: always
-    hostname: zookeeper-2
+  zookeeper3:
+    restart: unless-stopped
+    image: zookeeper:latest
+    hostname: zookeeper3
+    networks:
+      - stream-network
     ports:
-      - 2183:2181
+      - 2181
     environment:
+      ZOO_TICK_TIME: 2000
+      ZOO_INIT_LIMIT: 10
+      ZOO_SYNC_LIMIT: 5
+      ZOO_MAX_CLIENT_CNXNS: 0
+      # ZOO_AUTOPURGE_SNAPRETAINCOUNT: 3
+      # ZOO_AUTOPURGE_PURGEINTERVAL: 1
       ZOO_MY_ID: 3
-      ZOO_SERVERS: server.1=zookeeper-0:2888:3888;2181 server.2=zookeeper-1:2888:3888;2181 server.3=0.0.0.0:2888:3888;2181
+      ZOO_SERVERS: server.1=zookeeper1:2888:3888;2181 server.2=zookeeper2:2888:3888;2181 server.3=0.0.0.0:2888:3888;2181
+    volumes:
+      # - /mnt/volume/zookeeper/zookeeper3/zoo.cfg:/conf/zoo.cfg
+      - /mnt/volume/zookeeper/zookeeper3/data:/data
+      - /mnt/volume/zookeeper/zookeeper3/datalog:/datalog
+      - /mnt/volume/zookeeper/zookeeper3/logs:/logs
+
+networks:
+  stream-network:
+    external:
+      name: stream-network
