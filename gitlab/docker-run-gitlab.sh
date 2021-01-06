@@ -6,7 +6,7 @@ sudo mkdir -p ${GITLAB_VOLUME_DIR}/config
 sudo mkdir -p ${GITLAB_VOLUME_DIR}/logs
 sudo mkdir -p ${GITLAB_VOLUME_DIR}/data
 
-docker run \
+docker container run \
     --detach \
     --name my-gitlab \
     --restart unless-stopped \

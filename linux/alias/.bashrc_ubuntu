@@ -186,7 +186,7 @@ function readlinkpwd() { echo "+ readlink --canonicalize .">&2; command readlink
 # others
 function descheduler() { echo "+ descheduler ${@}">&2; command descheduler ${@}; }
 function tidy() { echo "+ tidy ${@}">&2; command tidy ${@}; }
-alias descheduler="docker run --rm -it k8s.gcr.io/descheduler/descheduler:v0.19.0 descheduler"
+alias descheduler="docker container run --rm -it k8s.gcr.io/descheduler/descheduler:v0.19.0 descheduler"
 alias rook-ceph-password="kubectl get secrets rook-ceph-dashboard-password -n rook-ceph -o jsonpath=\"{['data']['password']}\" | base64 --decode && echo"
 alias tidy-indent="tidy -modify --indent auto --indent-spaces 4 --indent-attributes true --input-xml true --output-xml true --quote-nbsp false --quiet true --hide-comments true --wrap 80"
 alias tidy-nowrap="tidy -modify --indent auto --indent-spaces 4 --indent-attributes false --input-xml true --output-xml true --quote-nbsp false --quiet true --hide-comments true --wrap 0"

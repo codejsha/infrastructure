@@ -3,7 +3,7 @@ New-Item -Path $GitLabVolumeDir\config -ItemType Directory -Force
 New-Item -Path $GitLabVolumeDir\logs -ItemType Directory -Force
 New-Item -Path $GitLabVolumeDir\data -ItemType Directory -Force
 
-docker run `
+docker container run `
     --detach `
     --name my-gitlab `
     --restart unless-stopped `

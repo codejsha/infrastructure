@@ -17,7 +17,7 @@ function docker_run_oracledb11 {
     sudo mkdir -p /mnt/volume/oracledb11
     sudo chmod 777 /mnt/volume/oracledb11
 
-    docker run \
+    docker container run \
         --detach \
         --name oracledb11 \
         --shm-size=1g \
@@ -37,7 +37,7 @@ function docker_run_oracledb12_r1 {
     sudo mkdir -p /mnt/volume/oracledb12
     sudo chmod 777 /mnt/volume/oracledb12
 
-    docker run \
+    docker container run \
         --detach \
         --name oracledb12 \
         --publish 1521:1521 \
@@ -58,7 +58,7 @@ function docker_run_oracledb12_r2 {
     sudo mkdir -p /mnt/volume/oracledb12
     sudo chmod 777 /mnt/volume/oracledb12
 
-    docker run \
+    docker container run \
         --detach \
         --name oracledb12 \
         --publish 1521:1521 \
@@ -76,7 +76,7 @@ function docker_run_oracledb12_r2_official_volume {
 
     docker volume create oracledb12vol
 
-    docker run \
+    docker container run \
         --detach \
         --name oracledb12 \
         --publish 1521:1521 \
@@ -90,7 +90,7 @@ function docker_run_oracledb12_r2_official {
     sudo mkdir -p /mnt/volume/oracledb12
     sudo chmod 777 /mnt/volume/oracledb12
 
-    docker run \
+    docker container run \
         --detach \
         --name oracledb12 \
         --publish 1521:1521 \
@@ -106,7 +106,7 @@ function docker_run_oracledb18 {
     sudo mkdir -p /mnt/volume/oracledb18
     sudo chmod 777 /mnt/volume/oracledb18
 
-    docker run \
+    docker container run \
         --detach \
         --name oracledb18 \
         --publish 1521:1521 \
@@ -127,7 +127,7 @@ function docker_run_oracledb19 {
     sudo mkdir -p /mnt/volume/oracledb19
     sudo chmod 777 /mnt/volume/oracledb19
 
-    docker run \
+    docker container run \
         --detach \
         --name oracledb19 \
         --publish 1521:1521 \

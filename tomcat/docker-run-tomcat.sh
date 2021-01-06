@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker run \
+docker container run \
     --detach \
     --name tomcat9 \
     --publish 8080:8080 \

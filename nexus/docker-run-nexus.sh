@@ -3,7 +3,7 @@
 NEXUS_VOLUME_DIR="/mnt/volume/nexus"
 sudo mkdir -p ${NEXUS_VOLUME_DIR}
 
-docker run \
+docker container run \
     --detach \
     --name nexus \
     --publish 8081:8081 \

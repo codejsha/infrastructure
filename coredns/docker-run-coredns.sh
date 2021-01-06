@@ -4,7 +4,7 @@ COREDNS_VOLUME_DIR="/mnt/volume/coredns"
 sudo mkdir -p ${COREDNS_VOLUME_DIR}
 sudo /usr/bin/cp -f corefile-server.conf ${COREDNS_VOLUME_DIR}/Corefile
 
-docker run \
+docker container run \
     --detach \
     --name coredns \
     --restart=unless-stopped \

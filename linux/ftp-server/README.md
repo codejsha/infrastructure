@@ -9,7 +9,7 @@ docker image build --tag ftp-server .
 ## Run
 
 ```bash
-docker run \
+docker container run \
     --detach \
     --name ftp-server \
     --publish 21:21 \

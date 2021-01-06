@@ -34,7 +34,7 @@ docker image build --tag example-repo-server .
 ## Run
 
 ```bash
-docker run \
+docker container run \
     --detach \
     --name example-repo-server \
     --publish 8888:8888 \

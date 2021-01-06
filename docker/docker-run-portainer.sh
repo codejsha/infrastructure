@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker run \
+docker container run \
     --detach \
     --restart unless-stopped \
     --name portainer-server \

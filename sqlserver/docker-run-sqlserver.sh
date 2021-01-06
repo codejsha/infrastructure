@@ -2,7 +2,7 @@
 
 PASSWORD="${PASSWORD}"
 
-docker run \
+docker container run \
     --detach \
     --name sqlserver2017 \
     --publish 1433:1433 \

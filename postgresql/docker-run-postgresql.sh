@@ -7,7 +7,7 @@ PASSWORD="${PASSWORD}"
 function docker_run_postgresql11 {
     docker volume create postgresql11vol
 
-    docker run \
+    docker container run \
         --detach \
         --name postgresql11 \
         --publish 5432:5432 \
@@ -22,7 +22,7 @@ function docker_run_postgresql11 {
 function docker_run_postgresql12 {
     docker volume create postgresql12vol
 
-    docker run \
+    docker container run \
         --detach \
         --name postgresql12 \
         --publish 5432:5432 \
@@ -37,7 +37,7 @@ function docker_run_postgresql12 {
 function docker_run_postgresql13 {
     docker volume create postgresql13vol
 
-    docker run \
+    docker container run \
         --detach \
         --name postgresql13 \
         --publish 5432:5432 \

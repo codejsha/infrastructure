@@ -8,7 +8,7 @@ sudo mkdir -p ${REGISTRY_VOLUME_DIR}
 
 sudo htpasswd -cB -b ${REGISTRY_VOLUME_DIR}/htpasswd ${USERNAME} ${PASSWORD}
 
-docker run \
+docker container run \
     --detach \
     --restart unless-stopped \
     --name registry-server \

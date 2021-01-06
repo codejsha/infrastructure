@@ -13,7 +13,7 @@ bash ./install-kustomize.sh
 Docker image:
 
 ```bash
-docker run k8s.gcr.io/kustomize/kustomize:v3.8.7 version
+docker container run k8s.gcr.io/kustomize/kustomize:v3.8.7 version
 ```
 
 Chocolatey:

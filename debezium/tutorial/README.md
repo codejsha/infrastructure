@@ -39,5 +39,5 @@ bash ./docker-run-debezium-kafka-watch-topic.sh
 ## Cleaning up
 
 ```bash
-docker stop mysqlterm watcher connect mysql kafka zookeeper
+docker container stop mysqlterm watcher connect mysql kafka zookeeper
 ```

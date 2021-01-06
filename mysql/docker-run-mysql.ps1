@@ -3,7 +3,7 @@ $password = "$password"
 ######################################################################
 
 function New-DockerRunMySQL8 {
-    docker run `
+    docker container run `
         --detach `
         --name mysql8 `
         --publish 3306:3306 `
@@ -14,7 +14,7 @@ function New-DockerRunMySQL8 {
 }
 
 function New-DockerRunMySQL5 {
-    docker run `
+    docker container run `
         --detach `
         --name mysql5 `
         --publish 3306:3306 `

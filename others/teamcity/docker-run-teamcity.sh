@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker run \
+docker container run \
     --interactive \
     --tty \
     --name teamcity-server-instance \

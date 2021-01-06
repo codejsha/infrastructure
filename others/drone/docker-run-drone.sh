@@ -15,7 +15,7 @@ docker pull drone/drone:1
 DRONE_SERVER_HOST="drone.example.com"
 DRONE_SERVER_PROTO="http"
 
-docker run \
+docker container run \
     --detach \
     --name drone \
     --restart unless-stopped \
@@ -49,7 +49,7 @@ docker run \
 
 docker pull drone/drone-runner-docker:1
 
-docker run \
+docker container run \
     --detach \
     --name runner \
     --restart unless-stopped \

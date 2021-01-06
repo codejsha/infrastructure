@@ -4,7 +4,7 @@ function docker_run_chartmuseum_with_local_storage {
     CHARTMUSEUM_VOLUME_DIR="/mnt/volume/chartmuseum"
     sudo mkdir -p ${CHARTMUSEUM_VOLUME_DIR}
 
-    docker run \
+    docker container run \
         --detach \
         --rm \
         --name chartmuseum \
@@ -19,7 +19,7 @@ function docker_run_chartmuseum_with_local_storage {
 function docker_run_chartmuseum_with_s3_storage {
     # mc mb myminio/chart-storage
 
-    docker run \
+    docker container run \
         --detach \
         --rm \
         --name chartmuseum \

@@ -4,7 +4,7 @@ $IISPublishPort = "8080"
 $SiteListenPort = "80"
 
 ### run iis container
-docker run `
+docker container run `
     --detach `
     --name winiis `
     --publish $IISPublishPort\:$SiteListenPort `

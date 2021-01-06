@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker run \
+docker container run \
     --detach \
     --rm \
     --name connect \

@@ -5,7 +5,7 @@ $password="$password"
 function New-DockerRunPostgreSQL11 {
     docker volume create postgresql11vol
 
-    docker run `
+    docker container run `
         --detach `
         --name postgresql11 `
         --publish 5432:5432 `
@@ -20,7 +20,7 @@ function New-DockerRunPostgreSQL11 {
 function New-DockerRunPostgreSQL12 {
     docker volume create postgresql12vol
 
-    docker run `
+    docker container run `
         --detach `
         --name postgresql12 `
         --publish 5432:5432 `
@@ -35,7 +35,7 @@ function New-DockerRunPostgreSQL12 {
 function New-DockerRunPostgreSQL13 {
     docker volume create postgresql13vol
 
-    docker run `
+    docker container run `
         --detach `
         --name postgresql13 `
         --publish 5432:5432 `

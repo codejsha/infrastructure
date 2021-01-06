@@ -7,7 +7,7 @@ AWS_SECRET_KEY="${AWS_SECRET_KEY}"
 
 NAMESPACE="registry-system"
 
-docker run --entrypoint htpasswd registry:2.7.0 -Bbn ${USERNAME} ${PASSWORD} > ./htpasswd
+docker container run --entrypoint htpasswd registry:2.7.0 -Bbn ${USERNAME} ${PASSWORD} > ./htpasswd
 
 # helm install my-docker-registry \
 helm upgrade --install my-docker-registry \

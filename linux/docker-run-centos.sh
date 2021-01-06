@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function docker_run_centos8 {
-    docker run \
+    docker container run \
         --interactive \
         --tty \
         --name centos8 \
@@ -11,7 +11,7 @@ function docker_run_centos8 {
 }
 
 function docker_run_centos7 {
-    docker run \
+    docker container run \
         --interactive \
         --tty \
         --name centos7 \
@@ -21,7 +21,7 @@ function docker_run_centos7 {
 }
 
 function docker_run_centos6 {
-    docker run \
+    docker container run \
         --interactive \
         --tty \
         --name centos6 \

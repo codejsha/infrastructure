@@ -3,7 +3,7 @@
 PASSWORD="${PASSWORD}"
 
 function docker_run_mysql8 {
-    docker run \
+    docker container run \
         --detach \
         --name mysql8 \
         --publish 3306:3306 \
@@ -14,7 +14,7 @@ function docker_run_mysql8 {
 }
 
 function docker_run_mysql5 {
-    docker run \
+    docker container run \
         --detach \
         --name mysql5 \
         --publish 3306:3306 \

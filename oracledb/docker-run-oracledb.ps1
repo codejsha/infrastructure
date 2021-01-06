@@ -14,7 +14,7 @@ function New-DockerRunOracleDB11 {
 
     New-Item -Path $env:USERPROFILE\volume\oracledb11 -ItemType Directory -Force
 
-    docker run `
+    docker container run `
         --detach `
         --name oracledb11 `
         --shm-size=1g `
@@ -33,7 +33,7 @@ function New-DockerRunOracleDB12R1 {
 
     New-Item -Path $env:USERPROFILE\volume\oracledb12 -ItemType Directory -Force
 
-    docker run `
+    docker container run `
         --detach `
         --name oracledb12 `
         --publish 1521:1521 `
@@ -53,7 +53,7 @@ function New-DockerRunOracleDB12R2 {
 
     New-Item -Path $env:USERPROFILE\volume\oracledb12 -ItemType Directory -Force
 
-    docker run `
+    docker container run `
         --detach `
         --name oracledb12 `
         --publish 1521:1521 `
@@ -71,7 +71,7 @@ function New-DockerRunOracleDB12R2OfficialVolume {
 
     docker volume create oracledb12vol
 
-    docker run `
+    docker container run `
         --detach `
         --name oracledb12 `
         --publish 1521:1521 `
@@ -84,7 +84,7 @@ function New-DockerRunOracleDB12R2Official {
 
     New-Item -Path $env:USERPROFILE\volume\oracledb12 -ItemType Directory -Force
 
-    docker run `
+    docker container run `
         --detach `
         --name oracledb12 `
         --publish 1521:1521 `
@@ -99,7 +99,7 @@ function New-DockerRunOracleDB18 {
 
     New-Item -Path $env:USERPROFILE\volume\oracledb18 -ItemType Directory -Force
 
-    docker run `
+    docker container run `
         --detach `
         --name oracledb18 `
         --publish 1521:1521 `
@@ -119,7 +119,7 @@ function New-DockerRunOracleDB19 {
 
     New-Item -Path $env:USERPROFILE\volume\oracledb19 -ItemType Directory -Force
 
-    docker run `
+    docker container run `
         --detach `
         --name oracledb19 `
         --publish 1521:1521 `

@@ -5,7 +5,7 @@ sudo mkdir -p /mnt/volume/httpd/htdocs
 ######################################################################
 
 function docker_run_httpd {
-    docker run \
+    docker container run \
         --detach \
         --name httpd24 \
         --publish 8080:80 \
@@ -16,7 +16,7 @@ function docker_run_httpd {
 }
 
 function docker_run_httpd_centos {
-    docker run \
+    docker container run \
         --detach \
         --name httpd24 \
         --publish 8080:80 \

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function docker_run_ubuntu20 {
-    docker run \
+    docker container run \
         --interactive \
         --tty \
         --name ubuntu20 \
