@@ -59,7 +59,11 @@ cat << EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 JAVA_OPTIONS="\${JAVA_OPTIONS} -DListenAddress=${NODEMGR_LISTEN_ADDRESS}"
 JAVA_OPTIONS="\${JAVA_OPTIONS} -DListenPort=${NODEMGR_LISTEN_PORT}"
 JAVA_OPTIONS="\${JAVA_OPTIONS} -DSecureListener=false"
+JAVA_OPTIONS="\${JAVA_OPTIONS} -DCrashRecoveryEnabled=false"
 JAVA_OPTIONS="\${JAVA_OPTIONS} -DLogFile=\${LOG_DIR}/nodemanager/machine.NodeManager.out"
+JAVA_OPTIONS="\${JAVA_OPTIONS} -DLogLevel=INFO"
+JAVA_OPTIONS="\${JAVA_OPTIONS} -DLogLimit=0"
+JAVA_OPTIONS="\${JAVA_OPTIONS} -DLogCount=1"
 export JAVA_OPTIONS
 
 if [ -f "\${LOG_DIR}/nohup.NodeManager.out" ]; then
