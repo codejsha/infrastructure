@@ -9,6 +9,9 @@ NODEMGR_LISTEN_PORT="${3}"
 ######################################################################
 
 ### replace pattern with string
+TEMP="\${DOMAIN_HOME}"
+VAR_LOG_DIR="${LOG_DIR/${DOMAIN_HOME}/${TEMP}}"
+
 FILE_NAME_SUFFIX="${NODEMGR_NAME,,}"
 FILE_NAME_SUFFIX="${FILE_NAME_SUFFIX/base/}"
 FILE_NAME_SUFFIX="${FILE_NAME_SUFFIX/machine/nodemanager}"
@@ -23,7 +26,7 @@ cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 
 WL_HOME="${WL_HOME}"
 DOMAIN_HOME="${DOMAIN_HOME}"
-LOG_DIR="${LOG_DIR}"
+LOG_DIR="${VAR_LOG_DIR}"
 
 CURRENT_USER="\$(id -un)"
 if [ "\${CURRENT_USER}" == "root" ]; then
@@ -42,7 +45,7 @@ cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
 
 DOMAIN_HOME="${DOMAIN_HOME}"
-LOG_DIR="${LOG_DIR}"
+LOG_DIR="${VAR_LOG_DIR}"
 
 PID="\$(pgrep -xa java | grep \${DOMAIN_HOME} | grep NodeManager | awk '{print \$1}')"
 if [ -n "\${PID}" ]; then
@@ -65,6 +68,7 @@ fi
 if [ -f "\${LOG_DIR}/gc.NodeManager.log" ]; then
   mv \${LOG_DIR}/gc.NodeManager.log \${LOG_DIR}/nodemanager/gc.NodeManager.\${GET_DATE}.log
 fi
+
 touch \${LOG_DIR}/nohup.NodeManager.out
 EOF
 
