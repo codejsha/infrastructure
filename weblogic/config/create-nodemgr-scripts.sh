@@ -38,7 +38,7 @@ if [ -n "\${PID}" ]; then
 fi
 EOF
 elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
-cat << EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
+cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
 
 DOMAIN_HOME="${DOMAIN_HOME}"
@@ -98,7 +98,7 @@ if [ -n "\${PID}" ]; then
 fi
 EOF
 elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
-cat << EOF >> ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
+cat << EOF > ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
 
 DOMAIN_HOME="${DOMAIN_HOME}"
