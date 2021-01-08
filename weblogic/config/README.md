@@ -28,6 +28,7 @@ bash ./all.sh
 ## Server
 
 - [create-server.sh](/weblogic/config/create-server.sh) - [create_server.py](/weblogic/config/create_server.py)
+- [create-admin-scripts.sh](/weblogic/config/create-admin-scripts.sh)
 - [create-scripts.sh](/weblogic/config/create-scripts.sh)
 
 ## Cluster
