@@ -47,7 +47,7 @@ weblogic.xml:
 
 example:
 
-- `restful-management.sh`
+- `restful-management-commands.sh`
 
 ## WLST (WebLogic Scripting Tool)
 
