@@ -90,8 +90,8 @@ HTTPD_HOME="${HTTPD_HOME}"
 # LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
 # export LD_LIBRARY_PATH
 
-\${HTTPD_HOME}/bin/apachectl -d \${HTTPD_HOME} -f \${HTTPD_HOME}/conf/httpd.conf -M
-# \${HTTPD_HOME}/bin/apachectl -d \${HTTPD_HOME} -f \${HTTPD_HOME}/conf/httpd.conf -t -D DUMP_MODULES
+# \${HTTPD_HOME}/bin/apachectl -d \${HTTPD_HOME} -f \${HTTPD_HOME}/conf/httpd.conf -M
+\${HTTPD_HOME}/bin/apachectl -d \${HTTPD_HOME} -f \${HTTPD_HOME}/conf/httpd.conf -t -D DUMP_MODULES
 EOF
 
 ######################################################################
