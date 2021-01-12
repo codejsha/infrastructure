@@ -25,7 +25,6 @@ JBOSS_MGMT_HTTP_PORT="9990"
 JBOSS_MGMT_HTTPS_PORT="9993"
 
 JBOSS_LOG_DIR="${JBOSS_BASE_DIR}/logs"
-DUMP_LOG_DIR="${JBOSS_LOG_DIR}/dump"
 
 ######################################################################
 
