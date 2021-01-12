@@ -19,6 +19,16 @@ JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.StdoutDebugEnabled=true"
 
 ######################################################################
 
+### node manager
+
+### nodemanager.properties
+LogLevel=FINEST
+
+### start script
+JAVA_OPTIONS="${JAVA_OPTIONS} -DLogLevel=FINEST"
+
+######################################################################
+
 ### deployment
 JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.debug.DebugDeployment=true"
 JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.debug.DebugDeploymentServiceInternal=true"

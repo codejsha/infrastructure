@@ -101,6 +101,9 @@ bash ./create-store-user-config-scripts.sh ManagedServer2
 ### bash ./deploy-app.sh ${APP_NAME} ${APP_PATH} ${APP_TARGET}
 
 bash ./deploy-app.sh failovertest /svc/app/failovertest BaseCluster1
+bash ./deploy-app.sh cachetest /svc/app/cachetest BaseCluster1
+bash ./deploy-app.sh jdbcdrivertest /svc/app/jdbcdrivertest BaseCluster1
+# bash ./deploy-app.sh weblogic-versioned /svc/app/weblogic-versioned/deployversion1/sample.war BaseCluster1
 # bash ./deploy-app.sh sample1 /svc/app/sample1 ManagedServer1
 # bash ./deploy-app.sh sample2 /svc/app/sample2 ManagedServer2
 
@@ -110,15 +113,15 @@ bash ./deploy-app.sh failovertest /svc/app/failovertest BaseCluster1
 ### bash ./create-datasource.sh ${DS_NAME} ${DS_JNDI} ${DS_URL} \
 ###     ${DS_DRIVER} ${DS_USER} ${DS_PASSWORD} ${DS_INIT} ${DS_MIN} ${DS_MAX} ${DS_TARGET_TYPE} ${DS_TARGET}
 
-bash ./create-datasource.sh BaseDataSource1 "baseds1" "jdbc:oracle:thin:@192.168.137.1:1521:orclcdb" \
+bash ./create-datasource.sh BaseDataSource1 "baseds1" "jdbc:oracle:thin:@test.example.com:1521:orclcdb" \
     oracle.jdbc.OracleDriver system PASSWORD 1 1 15 Cluster "BaseCluster1"
-# bash ./create-datasource.sh BaseDataSource1 "baseds1" "jdbc:oracle:thin:@192.168.137.1:1521:orclcdb" \
+# bash ./create-datasource.sh BaseDataSource1 "baseds1" "jdbc:oracle:thin:@test.example.com:1521:orclcdb" \
 #     oracle.jdbc.OracleDriver system PASSWORD 1 1 15 Server "ManagedServer1"
-# bash ./create-datasource.sh BaseDataSource2 "baseds2" "jdbc:mysql://192.168.137.1:3306/mysqldb" \
+# bash ./create-datasource.sh BaseDataSource2 "baseds2" "jdbc:mysql://test.example.com:3306/mysqldb" \
 #     com.mysql.cj.jdbc.Driver mysql PASSWORD 1 1 15 Cluster "BaseCluster1"
-# bash ./create-datasource.sh BaseDataSource2 "baseds2" "jdbc:mysql://192.168.137.1:3306/mysqldb" \
+# bash ./create-datasource.sh BaseDataSource2 "baseds2" "jdbc:mysql://test.example.com:3306/mysqldb" \
 #     com.mysql.cj.jdbc.Driver mysql PASSWORD 1 1 15 Server "ManagedServer1"
-# bash ./create-datasource.sh BaseDataSource3 "baseds3" "jdbc:sqlserver://192.168.137.1:1433;database=sqlserverdb" \
+# bash ./create-datasource.sh BaseDataSource3 "baseds3" "jdbc:sqlserver://test.example.com:1433;database=sqlserverdb" \
 #     com.microsoft.sqlserver.jdbc.SQLServerDriver sa PASSWORD 1 1 15 Cluster "BaseCluster1"
-# bash ./create-datasource.sh BaseDataSource3 "baseds3" "jdbc:sqlserver://192.168.137.1:1433;database=sqlserverdb" \
+# bash ./create-datasource.sh BaseDataSource3 "baseds3" "jdbc:sqlserver://test.example.com:1433;database=sqlserverdb" \
 #     com.microsoft.sqlserver.jdbc.SQLServerDriver sa PASSWORD 1 1 15 Server "ManagedServer1"

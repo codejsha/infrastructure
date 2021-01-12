@@ -18,7 +18,7 @@ FILE_NAME_SUFFIX="${FILE_NAME_SUFFIX/machine/nodemanager}"
 
 ######################################################################
 
-### start script
+### create start script
 
 if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
 cat << EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
@@ -69,9 +69,9 @@ export JAVA_OPTIONS
 if [ -f "\${LOG_DIR}/nohup.NodeManager.out" ]; then
   mv \${LOG_DIR}/nohup.NodeManager.out \${LOG_DIR}/nodemanager/nohup.NodeManager.\${GET_DATE}.out
 fi
-if [ -f "\${LOG_DIR}/gc.NodeManager.log" ]; then
-  mv \${LOG_DIR}/gc.NodeManager.log \${LOG_DIR}/nodemanager/gc.NodeManager.\${GET_DATE}.log
-fi
+# if [ -f "\${LOG_DIR}/gc.NodeManager.log" ]; then
+#   mv \${LOG_DIR}/gc.NodeManager.log \${LOG_DIR}/nodemanager/gc.NodeManager.\${GET_DATE}.log
+# fi
 
 touch \${LOG_DIR}/nohup.NodeManager.out
 EOF
@@ -92,7 +92,7 @@ EOF
 
 ######################################################################
 
-### stop script
+### create stop script
 
 if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
 cat << EOF > ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
@@ -117,5 +117,6 @@ fi
 
 ######################################################################
 
+### change file permissions
 chmod 750 ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 chmod 750 ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh

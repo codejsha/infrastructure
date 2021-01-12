@@ -15,7 +15,7 @@ FILE_NAME_SUFFIX="admin"
 
 ######################################################################
 
-### start script
+### create start script
 
 cat <<EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
@@ -46,6 +46,7 @@ EOF
 if [[ ${JAVA_VERSION} =~ ^1.7 ]]; then
 cat <<EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:PermSize=256m -XX:MaxPermSize=256m"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+UseParallelGC"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:-UseAdaptiveSizePolicy"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+DisableExplicitGC"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+PrintGCDetails"
@@ -64,6 +65,7 @@ EOF
 elif [[ ${JAVA_VERSION} =~ ^1.8 ]]; then
 cat <<EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+UseParallelGC"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:-UseAdaptiveSizePolicy"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+DisableExplicitGC"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+PrintGCDetails"
@@ -82,8 +84,12 @@ EOF
 elif [[ ${JAVA_VERSION} =~ ^11 ]]; then
 cat <<EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
-USER_MEM_ARGS="\${USER_MEM_ARGS} -Xlog:gc*=info:file=${VAR_GC_LOG_OUT}:time,pid,tid,level,tags"
-# USER_MEM_ARGS="\${USER_MEM_ARGS} -Xlog:gc*=info:file=${VAR_GC_LOG_OUT}:time,pid,tid,level,tags:filecount=30,filesize=8K"
+# USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+UseParallelGC"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+UseG1GC"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:MaxGCPauseMillis=200"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:InitiatingHeapOccupancyPercent=45"
+USER_MEM_ARGS="\${USER_MEM_ARGS} -Xlog:gc*=info:file=\${LOG_DIR}/gc.\${SERVER_NAME}.log:time,pid,tid,level,tags"
+# USER_MEM_ARGS="\${USER_MEM_ARGS} -Xlog:gc*=info:file=\${LOG_DIR}/gc.\${SERVER_NAME}.log:time,pid,tid,level,tags:filecount=30,filesize=8K"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+HeapDumpOnOutOfMemoryError"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:HeapDumpPath=\${LOG_DIR}/dump"
 export USER_MEM_ARGS
@@ -141,7 +147,7 @@ EOF
 
 ######################################################################
 
-### stop script
+### create stop script
 
 cat <<EOF > ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
@@ -156,5 +162,6 @@ EOF
 
 ######################################################################
 
+### change file permissions
 chmod 750 ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 chmod 750 ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh

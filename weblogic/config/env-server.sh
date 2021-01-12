@@ -13,6 +13,7 @@ USER_MEM_ARGS="${USER_MEM_ARGS} -XX:NewSize=384m -XX:MaxNewSize=384m"
 
 if [[ ${JAVA_VERSION} =~ ^1.7 ]]; then
     USER_MEM_ARGS="${USER_MEM_ARGS} -XX:PermSize=256m -XX:MaxPermSize=256m"
+    USER_MEM_ARGS="${USER_MEM_ARGS} -XX:+UseParallelGC"
     USER_MEM_ARGS="${USER_MEM_ARGS} -XX:-UseAdaptiveSizePolicy"
     USER_MEM_ARGS="${USER_MEM_ARGS} -XX:+DisableExplicitGC"
     USER_MEM_ARGS="${USER_MEM_ARGS} -XX:+PrintGCDetails"
@@ -28,6 +29,7 @@ if [[ ${JAVA_VERSION} =~ ^1.7 ]]; then
     USER_MEM_ARGS="${USER_MEM_ARGS} -XX:HeapDumpPath=${LOG_DIR}/dump"
 elif [[ ${JAVA_VERSION} =~ ^1.8 ]]; then
     USER_MEM_ARGS="${USER_MEM_ARGS} -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
+    USER_MEM_ARGS="${USER_MEM_ARGS} -XX:+UseParallelGC"
     USER_MEM_ARGS="${USER_MEM_ARGS} -XX:-UseAdaptiveSizePolicy"
     USER_MEM_ARGS="${USER_MEM_ARGS} -XX:+DisableExplicitGC"
     USER_MEM_ARGS="${USER_MEM_ARGS} -XX:+PrintGCDetails"
@@ -43,8 +45,12 @@ elif [[ ${JAVA_VERSION} =~ ^1.8 ]]; then
     USER_MEM_ARGS="${USER_MEM_ARGS} -XX:HeapDumpPath=${LOG_DIR}/dump"
 elif [[ ${JAVA_VERSION} =~ ^11 ]]; then
     USER_MEM_ARGS="${USER_MEM_ARGS} -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
-    USER_MEM_ARGS="${USER_MEM_ARGS} -Xlog:gc*=info:file=${VAR_GC_LOG_OUT}:time,pid,tid,level,tags"
-    # USER_MEM_ARGS="${USER_MEM_ARGS} -Xlog:gc*=info:file=${VAR_GC_LOG_OUT}:time,pid,tid,level,tags:filecount=30,filesize=8K"
+    # USER_MEM_ARGS="${USER_MEM_ARGS} -XX:+UseParallelGC"
+    USER_MEM_ARGS="${USER_MEM_ARGS} -XX:+UseG1GC"
+    USER_MEM_ARGS="${USER_MEM_ARGS} -XX:MaxGCPauseMillis=200"
+    USER_MEM_ARGS="${USER_MEM_ARGS} -XX:InitiatingHeapOccupancyPercent=45"
+    USER_MEM_ARGS="${USER_MEM_ARGS} -Xlog:gc*=info:file=${LOG_DIR}/gc.${SERVER_NAME}.log:time,pid,tid,level,tags"
+    # USER_MEM_ARGS="${USER_MEM_ARGS} -Xlog:gc*=info:file=${LOG_DIR}/gc.${SERVER_NAME}.log:time,pid,tid,level,tags:filecount=30,filesize=8K"
     USER_MEM_ARGS="${USER_MEM_ARGS} -XX:+HeapDumpOnOutOfMemoryError"
     USER_MEM_ARGS="${USER_MEM_ARGS} -XX:HeapDumpPath=${LOG_DIR}/dump"
 fi

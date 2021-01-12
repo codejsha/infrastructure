@@ -93,7 +93,7 @@ curl --user weblogic:welcome1 \
     -H "Accept:application/json" \
     http://test.example.com:7001/management/tenant-monitoring/datasources/BaseDataSource1 | jq
 
-### application
+### Application
 curl --user weblogic:welcome1 \
     -X GET \
     -H "Accept:application/json" \
