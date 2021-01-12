@@ -12,7 +12,7 @@ HTTPD_HOME="${HTTPD_HOME}"
 # LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
 # export LD_LIBRARY_PATH
 
-\${HTTPD_HOME}/bin/apachectl -k start
+\${HTTPD_HOME}/bin/apachectl -d \${HTTPD_HOME} -f \${HTTPD_HOME}/conf/httpd.conf -k start
 EOF
 
 ######################################################################
@@ -25,7 +25,7 @@ HTTPD_HOME="${HTTPD_HOME}"
 # LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
 # export LD_LIBRARY_PATH
 
-\${HTTPD_HOME}/bin/apachectl -k restart
+\${HTTPD_HOME}/bin/apachectl -d \${HTTPD_HOME} -f \${HTTPD_HOME}/conf/httpd.conf -k restart
 EOF
 
 ######################################################################
@@ -38,7 +38,7 @@ HTTPD_HOME="${HTTPD_HOME}"
 # LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
 # export LD_LIBRARY_PATH
 
-\${HTTPD_HOME}/bin/apachectl -k stop
+\${HTTPD_HOME}/bin/apachectl -d \${HTTPD_HOME} -f \${HTTPD_HOME}/conf/httpd.conf -k stop
 EOF
 
 ######################################################################
@@ -51,7 +51,7 @@ HTTPD_HOME="${HTTPD_HOME}"
 # LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
 # export LD_LIBRARY_PATH
 
-\${HTTPD_HOME}/bin/apachectl -t
+\${HTTPD_HOME}/bin/apachectl -d \${HTTPD_HOME} -f \${HTTPD_HOME}/conf/httpd.conf -t
 EOF
 
 ######################################################################
@@ -64,7 +64,7 @@ HTTPD_HOME="${HTTPD_HOME}"
 # LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
 # export LD_LIBRARY_PATH
 
-\${HTTPD_HOME}/bin/apachectl -V
+\${HTTPD_HOME}/bin/apachectl -d \${HTTPD_HOME} -f \${HTTPD_HOME}/conf/httpd.conf -V
 EOF
 
 ######################################################################
@@ -77,7 +77,7 @@ HTTPD_HOME="${HTTPD_HOME}"
 # LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
 # export LD_LIBRARY_PATH
 
-\${HTTPD_HOME}/bin/apachectl -t -D DUMP_INCLUDES
+\${HTTPD_HOME}/bin/apachectl -d \${HTTPD_HOME} -f \${HTTPD_HOME}/conf/httpd.conf -t -D DUMP_INCLUDES
 EOF
 
 ######################################################################
@@ -90,8 +90,8 @@ HTTPD_HOME="${HTTPD_HOME}"
 # LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
 # export LD_LIBRARY_PATH
 
-\${HTTPD_HOME}/bin/apachectl -M
-# \${HTTPD_HOME}/bin/apachectl -t -D DUMP_MODULES
+\${HTTPD_HOME}/bin/apachectl -d \${HTTPD_HOME} -f \${HTTPD_HOME}/conf/httpd.conf -M
+# \${HTTPD_HOME}/bin/apachectl -d \${HTTPD_HOME} -f \${HTTPD_HOME}/conf/httpd.conf -t -D DUMP_MODULES
 EOF
 
 ######################################################################
@@ -104,7 +104,7 @@ HTTPD_HOME="${HTTPD_HOME}"
 # LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
 # export LD_LIBRARY_PATH
 
-\${HTTPD_HOME}/bin/apachectl -D DUMP_RUN_CFG
+\${HTTPD_HOME}/bin/apachectl -d \${HTTPD_HOME} -f \${HTTPD_HOME}/conf/httpd.conf -D DUMP_RUN_CFG
 EOF
 
 ######################################################################
@@ -117,8 +117,8 @@ HTTPD_HOME="${HTTPD_HOME}"
 # LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
 # export LD_LIBRARY_PATH
 
-# \${HTTPD_HOME}/bin/apachectl -S
-\${HTTPD_HOME}/bin/apachectl -t -D DUMP_VHOSTS -D DUMP_RUN_CFG
+# \${HTTPD_HOME}/bin/apachectl -d \${HTTPD_HOME} -f \${HTTPD_HOME}/conf/httpd.conf -S
+\${HTTPD_HOME}/bin/apachectl -d \${HTTPD_HOME} -f \${HTTPD_HOME}/conf/httpd.conf -t -D DUMP_VHOSTS -D DUMP_RUN_CFG
 EOF
 
 ######################################################################
@@ -129,7 +129,7 @@ export PS4="\e[33;1m+ \e[0m"; set -x
 
 HTTPD_HOME="${HTTPD_HOME}"
 
-\${HTTPD_HOME}/bin/apachectl -v
+\${HTTPD_HOME}/bin/apachectl -d \${HTTPD_HOME} -f \${HTTPD_HOME}/conf/httpd.conf -v
 EOF
 
 ######################################################################
@@ -142,7 +142,7 @@ HTTPD_HOME="${HTTPD_HOME}"
 # LD_LIBRARY_PATH="\${LD_LIBRARY_PATH}:\${HTTPD_HOME}/modules/weblogic-plugin/lib"
 # export LD_LIBRARY_PATH
 
-\${HTTPD_HOME}/bin/apachectl -t -D DUMP_VHOSTS
+\${HTTPD_HOME}/bin/apachectl -d \${HTTPD_HOME} -f \${HTTPD_HOME}/conf/httpd.conf -t -D DUMP_VHOSTS
 EOF
 
 ######################################################################
