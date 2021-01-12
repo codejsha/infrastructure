@@ -45,6 +45,7 @@ EOF
 
 if [[ ${JAVA_VERSION} =~ ^1.8 ]]; then
 cat <<EOF >> ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
+CATALINA_OPTS="\${CATALINA_OPTS} -XX:+UseParallelGC"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:-UseAdaptiveSizePolicy"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:+DisableExplicitGC"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:+PrintGCDetails"
@@ -66,6 +67,10 @@ export CATALINA_OPTS
 EOF
 elif [[ ${JAVA_VERSION} =~ ^11 ]]; then
 cat <<EOF >> ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
+# CATALINA_OPTS="\${CATALINA_OPTS} -XX:+UseParallelGC"
+CATALINA_OPTS="\${CATALINA_OPTS} -XX:+UseG1GC"
+CATALINA_OPTS="\${CATALINA_OPTS} -XX:MaxGCPauseMillis=200"
+CATALINA_OPTS="\${CATALINA_OPTS} -XX:InitiatingHeapOccupancyPercent=45"
 CATALINA_OPTS="\${CATALINA_OPTS} -Xlog:gc*=info:file=${VAR_GC_LOG_OUT}:time,pid,tid,level,tags"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:+HeapDumpOnOutOfMemoryError"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:HeapDumpPath=${VAR_DUMP_LOG_DIR}"
@@ -132,7 +137,7 @@ EOF
 
 ######################################################################
 
-### change permission
+### change file permissions
 chmod 750 ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
 chmod 750 ${CATALINA_BASE}/stop-${INSTANCE_NAME}.sh
 chmod 750 ${CATALINA_BASE}/check-config.sh
