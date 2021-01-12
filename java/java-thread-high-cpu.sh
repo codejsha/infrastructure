@@ -12,7 +12,7 @@ TOP_THREAD_COUNT=5
 INTERVAL_SECONDS=5
 
 if [ -z "${PID}" ]; then
-    echo "Usage: bash ./java-thread-high-cpu.sh PID"
+    echo "Usage: bash ./java-thread-high-cpu.sh <PID>"
     exit
 fi
 
