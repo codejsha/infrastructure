@@ -133,50 +133,50 @@
       <!--For clustering, please take a look at documentation at:
           /docs/cluster-howto.html  (simple how to)
           /docs/config/cluster.html (reference documentation) -->
-        <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster"
-                 channelSendOptions="8">
+      <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster"
+               channelSendOptions="8">
 
-          <!--
-          <Manager className="org.apache.catalina.ha.session.BackupManager"
-                   expireSessionsOnShutdown="false"
-                   notifyListenersOnReplication="true"/>
-          -->
-          <Manager className="org.apache.catalina.ha.session.DeltaManager"
-                   expireSessionsOnShutdown="false"
-                   notifyListenersOnReplication="true"/>
+        <!--
+        <Manager className="org.apache.catalina.ha.session.BackupManager"
+                 expireSessionsOnShutdown="false"
+                 notifyListenersOnReplication="true"/>
+        -->
+        <Manager className="org.apache.catalina.ha.session.DeltaManager"
+                 expireSessionsOnShutdown="false"
+                 notifyListenersOnReplication="true"/>
 
-          <Channel className="org.apache.catalina.tribes.group.GroupChannel">
-            <Membership className="org.apache.catalina.tribes.membership.McastService"
-                        address="228.0.0.4"
-                        port="45564"
-                        frequency="500"
-                        dropTime="3000"/>
-            <Receiver className="org.apache.catalina.tribes.transport.nio.NioReceiver"
-                      address="${TOMCAT_ADDRESS}"
-                      port="4000"
-                      autoBind="100"
-                      selectorTimeout="5000"
-                      maxThreads="6"/>
+        <Channel className="org.apache.catalina.tribes.group.GroupChannel">
+          <Membership className="org.apache.catalina.tribes.membership.McastService"
+                      address="228.0.0.4"
+                      port="45564"
+                      frequency="500"
+                      dropTime="3000"/>
+          <Receiver className="org.apache.catalina.tribes.transport.nio.NioReceiver"
+                    address="${TOMCAT_ADDRESS}"
+                    port="4000"
+                    autoBind="100"
+                    selectorTimeout="5000"
+                    maxThreads="6"/>
 
-            <Sender className="org.apache.catalina.tribes.transport.ReplicationTransmitter">
-              <Transport className="org.apache.catalina.tribes.transport.nio.PooledParallelSender"/>
-            </Sender>
-            <Interceptor className="org.apache.catalina.tribes.group.interceptors.TcpFailureDetector"/>
-            <Interceptor className="org.apache.catalina.tribes.group.interceptors.MessageDispatchInterceptor"/>
-          </Channel>
+          <Sender className="org.apache.catalina.tribes.transport.ReplicationTransmitter">
+            <Transport className="org.apache.catalina.tribes.transport.nio.PooledParallelSender"/>
+          </Sender>
+          <Interceptor className="org.apache.catalina.tribes.group.interceptors.TcpFailureDetector"/>
+          <Interceptor className="org.apache.catalina.tribes.group.interceptors.MessageDispatchInterceptor"/>
+        </Channel>
 
-          <Valve className="org.apache.catalina.ha.tcp.ReplicationValve"
-                 filter=""/>
-          <Valve className="org.apache.catalina.ha.session.JvmRouteBinderValve"/>
+        <Valve className="org.apache.catalina.ha.tcp.ReplicationValve"
+               filter=""/>
+        <Valve className="org.apache.catalina.ha.session.JvmRouteBinderValve"/>
 
-          <Deployer className="org.apache.catalina.ha.deploy.FarmWarDeployer"
-                    tempDir="/tmp/war-temp/"
-                    deployDir="/tmp/war-deploy/"
-                    watchDir="/tmp/war-listen/"
-                    watchEnabled="false"/>
+        <Deployer className="org.apache.catalina.ha.deploy.FarmWarDeployer"
+                  tempDir="/tmp/war-temp/"
+                  deployDir="/tmp/war-deploy/"
+                  watchDir="/tmp/war-listen/"
+                  watchEnabled="false"/>
 
-          <ClusterListener className="org.apache.catalina.ha.session.ClusterSessionListener"/>
-        </Cluster>
+        <ClusterListener className="org.apache.catalina.ha.session.ClusterSessionListener"/>
+      </Cluster>
 
       <!-- Use the LockOutRealm to prevent attempts to guess user passwords
            via a brute-force attack -->

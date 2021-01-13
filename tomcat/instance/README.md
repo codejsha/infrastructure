@@ -15,8 +15,6 @@ bash ./create-instance.sh inst2 8081 8444 8006
 
 ### General (Multicast)
 
-Create:
-
 ```bash
 ### params: ${INSTANCE_NAME} ${HTTP_PORT} ${HTTPS_PORT} ${SHUTDOWN_PORT} ${AJP_PORT}
 
@@ -37,7 +35,7 @@ REDISSON_MODE="MASTER_SLAVE_MODE"
 # REDISSON_MODE="SINGLE_MODE"
 ```
 
-Create:
+Create instances:
 
 ```bash
 ### params: ${INSTANCE_NAME} ${HTTP_PORT} ${HTTPS_PORT} ${SHUTDOWN_PORT} ${AJP_PORT}
