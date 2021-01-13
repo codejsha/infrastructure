@@ -76,6 +76,9 @@ JAVA_OPTS="\${JAVA_OPTS} -XX:+PrintGCDateStamps"
 JAVA_OPTS="\${JAVA_OPTS} -XX:+PrintGCTimeStamps"
 JAVA_OPTS="\${JAVA_OPTS} -XX:+PrintHeapAtGC"
 JAVA_OPTS="\${JAVA_OPTS} -Xloggc:\${JBOSS_LOG_DIR}/gc.\${INSTANCE_NAME}.log"
+# JAVA_OPTS="\${JAVA_OPTS} -XX:+UseGCLogFileRotation"
+# JAVA_OPTS="\${JAVA_OPTS} -XX:+NumberOfGCLogFiles=30"
+# JAVA_OPTS="\${JAVA_OPTS} -XX:+GCLogFileSize=8K"
 JAVA_OPTS="\${JAVA_OPTS} -XX:+HeapDumpOnOutOfMemoryError"
 JAVA_OPTS="\${JAVA_OPTS} -XX:HeapDumpPath=\${JBOSS_LOG_DIR}/dump"
 export JAVA_OPTS
@@ -120,6 +123,7 @@ JAVA_OPTS="\${JAVA_OPTS} -Dwildfly.transactions.statistics-enabled=true"
 JAVA_OPTS="\${JAVA_OPTS} -Dwildfly.undertow.statistics-enabled=true"
 JAVA_OPTS="\${JAVA_OPTS} -Dwildfly.webservices.statistics-enabled=true"
 export JAVA_OPTS
+
 EOF
 
 if [[ ${JAVA_VERSION} =~ ^1.8 ]]; then

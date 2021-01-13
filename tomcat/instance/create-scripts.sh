@@ -12,14 +12,6 @@ TEMP="\${INSTANCE_NAME}"
 VAR_CATALINA_BASE="${VAR_CATALINA_BASE/${INSTANCE_NAME}/${TEMP}}"
 TEMP="\${CATALINA_BASE}"
 VAR_LOG_DIR="${LOG_DIR/${CATALINA_BASE}/${TEMP}}"
-TEMP="\${LOG_DIR}"
-VAR_DUMP_LOG_DIR="${DUMP_LOG_DIR/${LOG_DIR}/${TEMP}}"
-TEMP="\${LOG_DIR}"
-VAR_CATALINA_OUT="${CATALINA_OUT/${LOG_DIR}/${TEMP}}"
-TEMP="\${LOG_DIR}"
-VAR_GC_LOG_OUT="${GC_LOG_OUT/${LOG_DIR}/${TEMP}}"
-TEMP="\${INSTANCE_NAME}"
-VAR_GC_LOG_OUT="${VAR_GC_LOG_OUT/${INSTANCE_NAME}/${TEMP}}"
 
 ######################################################################
 
@@ -34,8 +26,14 @@ export CATALINA_BASE="${VAR_CATALINA_BASE}"
 
 LOG_DIR="${VAR_LOG_DIR}"
 GET_DATE="\$(date +'%Y%m%d-%H%M%S')"
-export CATALINA_OUT="${VAR_CATALINA_OUT}"
+export CATALINA_OUT="\${LOG_DIR}/catalina.out"
 export CATALINA_PID="\${CATALINA_BASE}/tomcat.pid"
+
+CURRENT_USER="\$(id -un)"
+if [ "\${CURRENT_USER}" == "root" ]; then
+  echo "[ERROR] The current user is root!"
+  exit
+fi
 
 CATALINA_OPTS="\${CATALINA_OPTS} -D\${INSTANCE_NAME}"
 CATALINA_OPTS="\${CATALINA_OPTS} -Xms1024m -Xmx1024m"
@@ -53,16 +51,12 @@ CATALINA_OPTS="\${CATALINA_OPTS} -XX:+PrintGCDateStamps"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:+PrintGCTimeStamps"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:+PrintHeapAtGC"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:+PrintTenuringDistribution"
-CATALINA_OPTS="\${CATALINA_OPTS} -Xloggc:${VAR_GC_LOG_OUT}"
+CATALINA_OPTS="\${CATALINA_OPTS} -Xloggc:\${LOG_DIR}/gc.\${INSTANCE_NAME}.log"
 # CATALINA_OPTS="\${CATALINA_OPTS} -XX:+UseGCLogFileRotation"
 # CATALINA_OPTS="\${CATALINA_OPTS} -XX:+NumberOfGCLogFiles=30"
 # CATALINA_OPTS="\${CATALINA_OPTS} -XX:+GCLogFileSize=8K"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:+HeapDumpOnOutOfMemoryError"
-CATALINA_OPTS="\${CATALINA_OPTS} -XX:HeapDumpPath=${VAR_DUMP_LOG_DIR}"
-# CATALINA_OPTS="\${CATALINA_OPTS} -XX:+PrintFlagsFinal"
-# CATALINA_OPTS="\${CATALINA_OPTS} -verbose:class"
-# CATALINA_OPTS="\${CATALINA_OPTS} -verbose:module"
-# CATALINA_OPTS="\${CATALINA_OPTS} -verbose:jni"
+CATALINA_OPTS="\${CATALINA_OPTS} -XX:HeapDumpPath=\${LOG_DIR}/dump"
 export CATALINA_OPTS
 EOF
 elif [[ ${JAVA_VERSION} =~ ^11 ]]; then
@@ -71,14 +65,38 @@ cat <<EOF >> ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:+UseG1GC"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:MaxGCPauseMillis=200"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:InitiatingHeapOccupancyPercent=45"
-CATALINA_OPTS="\${CATALINA_OPTS} -Xlog:gc*=info:file=${VAR_GC_LOG_OUT}:time,pid,tid,level,tags"
+CATALINA_OPTS="\${CATALINA_OPTS} -Xlog:gc*=info:file=\${LOG_DIR}/gc.\${INSTANCE_NAME}.log:time,pid,tid,level,tags"
+# CATALINA_OPTS="\${CATALINA_OPTS} -Xlog:gc*=info:file=\${LOG_DIR}/gc.\${INSTANCE_NAME}.log:time,pid,tid,level,tags:filecount=30,filesize=8K"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:+HeapDumpOnOutOfMemoryError"
-CATALINA_OPTS="\${CATALINA_OPTS} -XX:HeapDumpPath=${VAR_DUMP_LOG_DIR}"
+CATALINA_OPTS="\${CATALINA_OPTS} -XX:HeapDumpPath=\${LOG_DIR}/dump"
+export CATALINA_OPTS
+EOF
+fi
+
+cat <<EOF >> ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
+
+CATALINA_OPTS="\${CATALINA_OPTS} -Djava.net.preferIPv4Stack=true"
+CATALINA_OPTS="\${CATALINA_OPTS} -Djava.net.preferIPv6Addresses=false"
+CATALINA_OPTS="\${CATALINA_OPTS} -Djava.security.egd=file:///dev/urandom"
+export CATALINA_OPTS
+
+EOF
+
+if [[ ${JAVA_VERSION} =~ ^1.8 ]]; then
+cat <<EOF >> ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
+# CATALINA_OPTS="\${CATALINA_OPTS} -XX:+PrintFlagsFinal"
+# CATALINA_OPTS="\${CATALINA_OPTS} -verbose:class"
+# CATALINA_OPTS="\${CATALINA_OPTS} -verbose:module"
+# CATALINA_OPTS="\${CATALINA_OPTS} -verbose:jni"
+# export CATALINA_OPTS
+EOF
+elif [[ ${JAVA_VERSION} =~ ^11 ]]; then
+cat <<EOF >> ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
 # CATALINA_OPTS="\${CATALINA_OPTS} -XX:+PrintFlagsFinal"
 # CATALINA_OPTS="\${CATALINA_OPTS} -Xlog:class+load=info,class+unload=info:stdout:time,level,tags"
 # CATALINA_OPTS="\${CATALINA_OPTS} -Xlog:module*=info:stdout:time,level,tags"
 # CATALINA_OPTS="\${CATALINA_OPTS} -verbose:jni"
-export CATALINA_OPTS
+# export CATALINA_OPTS
 EOF
 fi
 
@@ -88,7 +106,7 @@ cat <<EOF >> ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
 # CATALINA_OPTS="\${CATALINA_OPTS} -Dcom.sun.management.jmxremote.port=${TOMCAT_JMX_PORT}"
 # CATALINA_OPTS="\${CATALINA_OPTS} -Dcom.sun.management.jmxremote.ssl=false"
 # CATALINA_OPTS="\${CATALINA_OPTS} -Dcom.sun.management.jmxremote.authenticate=false"
-export CATALINA_OPTS
+# export CATALINA_OPTS
 
 touch \${CATALINA_OUT}
 \${CATALINA_HOME}/bin/startup.sh
