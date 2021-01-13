@@ -45,7 +45,7 @@ function docker_run_postgresql13 {
         --env POSTGRES_USER=postgres \
         --env POSTGRES_PASSWORD="${PASSWORD}" \
         --env PGDATA=/var/lib/postgresql/data/pgdata \
-        --mount type=volume,src=postgresql12vol,dst=/var/lib/postgresql/data \
+        --mount type=volume,src=postgresql13vol,dst=/var/lib/postgresql/data \
         postgres:13
 }
 
