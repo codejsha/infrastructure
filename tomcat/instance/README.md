@@ -1,6 +1,6 @@
 # Create instances
 
-Requirement: tidy package
+Requirement: tidy package (if you use it)
 
 ## Instance
 

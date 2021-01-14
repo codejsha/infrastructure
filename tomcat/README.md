@@ -10,6 +10,10 @@ bash ./helper.sh
 bash ./install-tomcat.sh
 ```
 
+### Create instances
+
+- [Instance README](/tomcat/instance/README.md)
+
 ## Logging
 
 ### java.util.logging
