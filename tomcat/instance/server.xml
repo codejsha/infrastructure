@@ -72,7 +72,7 @@
     -->
     <!-- A "Connector" using the shared thread pool-->
     <Connector executor="httpThreadPool" port="${TOMCAT_HTTP_PORT}" protocol="HTTP/1.1"
-               address="${TOMCAT_ADDRESS}" acceptCount="100" maxConnections="10000" connectionTimeout="10000"
+               address="${TOMCAT_ADDRESS}" acceptCount="100" maxConnections="10000" connectionTimeout="60000"
                maxKeepAliveRequests="100" keepAliveTimeout="60000" maxPostSize="-1"
                enableLookups="false" redirectPort="${TOMCAT_HTTPS_PORT}" />
 
@@ -115,7 +115,7 @@
 
     <!-- Define an AJP 1.3 Connector on port 8009 -->
     <Connector executor="ajpThreadPool" port="${TOMCAT_AJP_PORT}" protocol="AJP/1.3"
-               address="${TOMCAT_ADDRESS}" acceptCount="100" maxConnections="10000" connectionTimeout="10000"
+               address="${TOMCAT_ADDRESS}" acceptCount="100" maxConnections="10000" connectionTimeout="60000"
                keepAliveTimeout="60000" maxPostSize="-1" secretRequired="false" redirectPort="${TOMCAT_HTTPS_PORT}" />
 
     <!-- An Engine represents the entry point (within Catalina) that processes

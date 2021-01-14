@@ -4,24 +4,24 @@
 
 <!-- Shared resource -->
 <GlobalNamingResources>
-  <Resource name="jdbc/postgres" auth="Container" type="javax.sql.DataSource"
-            username="postgres" password="postgres" driverClassName="org.postgresql.Driver"
-            url="jdbc:postgresql://test.example.com:5432/postgres"
-            initialSize="30" minIdle="30" maxTotal="30" maxIdle="30" maxWaitMillis="10000"
-            testOnBorrow="true" testWhileIdle="true" validationQuery="SELECT 1" validationInterval="100000"
-            removeAbandonedOnBorrow="true" removeAbandonedOnMaintenance="true" removeAbandonedTimeout="300" logAbandoned="true"
-            jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.StatementCache(prepared=true,max=50)" />
+    <Resource name="jdbc/postgres" auth="Container" type="javax.sql.DataSource"
+              username="postgres" password="postgres" driverClassName="org.postgresql.Driver"
+              url="jdbc:postgresql://test.example.com:5432/postgres"
+              initialSize="30" minIdle="30" maxTotal="30" maxIdle="30" maxWaitMillis="10000"
+              testOnBorrow="true" testWhileIdle="true" validationQuery="SELECT 1" validationInterval="100000"
+              removeAbandonedOnBorrow="true" removeAbandonedOnMaintenance="true" removeAbandonedTimeout="300" logAbandoned="true"
+              jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.StatementCache(prepared=true,max=50)" />
 </GlobalNamingResources>
 
 <!-- Application-specific resource -->
 <Context>
-  <Resource name="jdbc/postgres" auth="Container" type="javax.sql.DataSource"
-            username="postgres" password="postgres" driverClassName="org.postgresql.Driver"
-            url="jdbc:postgresql://test.example.com:5432/postgres"
-            initialSize="30" minIdle="30" maxTotal="30" maxIdle="30" maxWaitMillis="10000"
-            testOnBorrow="true" testWhileIdle="true" validationQuery="SELECT 1" validationInterval="100000"
-            removeAbandonedOnBorrow="true" removeAbandonedOnMaintenance="true" removeAbandonedTimeout="300" logAbandoned="true"
-            jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.StatementCache(prepared=true,max=50)" />
+    <Resource name="jdbc/postgres" auth="Container" type="javax.sql.DataSource"
+              username="postgres" password="postgres" driverClassName="org.postgresql.Driver"
+              url="jdbc:postgresql://test.example.com:5432/postgres"
+              initialSize="30" minIdle="30" maxTotal="30" maxIdle="30" maxWaitMillis="10000"
+              testOnBorrow="true" testWhileIdle="true" validationQuery="SELECT 1" validationInterval="100000"
+              removeAbandonedOnBorrow="true" removeAbandonedOnMaintenance="true" removeAbandonedTimeout="300" logAbandoned="true"
+              jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.StatementCache(prepared=true,max=50)" />
 </Context>
 
 <!-- web.xml -->
