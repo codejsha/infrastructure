@@ -13,16 +13,16 @@ admin_password = os.environ['ADMIN_PASSWORD']
 
 def set_domain_log_config(_domain_name, _log_dir):
     cd('/Log/' + _domain_name)
-    cmo.setDateFormatPattern('MMM d, yyyy h:mm:ss,SSS a z')
-    # cmo.setFileName(_log_dir + '/domain/'
-    #                 'domain_' + '_domain_name' + '_%%yyyy%%%%MM%%%%dd%%_%%HH%%%%mm%%%%ss%%.log')
-    cmo.setFileName('/dev/null')
+    cmo.setFileName(_log_dir + '/domain/'
+                    'domain_' + '_domain_name' + '_%%yyyy%%%%MM%%%%dd%%_%%HH%%%%mm%%%%ss%%.log')
+    # cmo.setFileName('/dev/null')
     cmo.setRotationType('byTime')
+    cmo.setRotationTime('00:00')
+    cmo.setFileTimeSpan(24)
     cmo.setNumberOfFilesLimited(True)
     cmo.setFileCount(30)
-    cmo.setFileTimeSpan(24)
-    cmo.setRotationTime('00:00')
     cmo.setRotateLogOnStartup(False)
+    cmo.setDateFormatPattern('MMM d, yyyy h:mm:ss,SSS a z')
     cmo.setBufferSizeKB(0)
 
 
