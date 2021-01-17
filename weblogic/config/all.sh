@@ -115,14 +115,14 @@ bash ./deploy-app.sh jdbcdrivertest /svc/app/jdbcdrivertest BaseCluster1
 ###     ${DS_DRIVER} ${DS_USER} ${DS_PASSWORD} ${DS_INIT} ${DS_MIN} ${DS_MAX} ${DS_TARGET_TYPE} ${DS_TARGET}
 
 bash ./create-datasource.sh BaseDataSource1 "baseds1" "jdbc:oracle:thin:@test.example.com:1521:orclcdb" \
-    oracle.jdbc.OracleDriver system PASSWORD 1 1 15 Cluster "BaseCluster1"
+    oracle.jdbc.OracleDriver system PASSWORD 30 30 30 Cluster "BaseCluster1"
 # bash ./create-datasource.sh BaseDataSource1 "baseds1" "jdbc:oracle:thin:@test.example.com:1521:orclcdb" \
-#     oracle.jdbc.OracleDriver system PASSWORD 1 1 15 Server "ManagedServer1"
+#     oracle.jdbc.OracleDriver system PASSWORD 30 30 30 Server "ManagedServer1"
 # bash ./create-datasource.sh BaseDataSource2 "baseds2" "jdbc:mysql://test.example.com:3306/mysqldb" \
-#     com.mysql.cj.jdbc.Driver mysql PASSWORD 1 1 15 Cluster "BaseCluster1"
+#     com.mysql.cj.jdbc.Driver mysql PASSWORD 30 30 30 Cluster "BaseCluster1"
 # bash ./create-datasource.sh BaseDataSource2 "baseds2" "jdbc:mysql://test.example.com:3306/mysqldb" \
-#     com.mysql.cj.jdbc.Driver mysql PASSWORD 1 1 15 Server "ManagedServer1"
+#     com.mysql.cj.jdbc.Driver mysql PASSWORD 30 30 30 Server "ManagedServer1"
 # bash ./create-datasource.sh BaseDataSource3 "baseds3" "jdbc:sqlserver://test.example.com:1433;database=sqlserverdb" \
-#     com.microsoft.sqlserver.jdbc.SQLServerDriver sa PASSWORD 1 1 15 Cluster "BaseCluster1"
+#     com.microsoft.sqlserver.jdbc.SQLServerDriver sa PASSWORD 30 30 30 Cluster "BaseCluster1"
 # bash ./create-datasource.sh BaseDataSource3 "baseds3" "jdbc:sqlserver://test.example.com:1433;database=sqlserverdb" \
-#     com.microsoft.sqlserver.jdbc.SQLServerDriver sa PASSWORD 1 1 15 Server "ManagedServer1"
+#     com.microsoft.sqlserver.jdbc.SQLServerDriver sa PASSWORD 30 30 30 Server "ManagedServer1"
