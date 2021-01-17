@@ -50,6 +50,7 @@ bash ./create-cluster.sh BaseCluster1 unicast
 ######################################################################
 
 ### CREATE CLUSTER - JMS
+
 # bash ./create-cluster.sh BaseJmsCluster1 unicast
 # bash ./create-cluster.sh BaseJmsCluster2 multicast 239.192.0.0 7001
 

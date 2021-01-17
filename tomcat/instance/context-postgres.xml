@@ -29,7 +29,7 @@
     <Manager pathname="" />
     -->
 
-    <!-- PostgreSQL -->
+    <!-- PostgreSQL DataSource -->
     <Resource name="jdbc/postgres" auth="Container" type="javax.sql.DataSource"
               username="postgres" password="postgres" driverClassName="org.postgresql.Driver"
               url="jdbc:postgresql://test.example.com:5432/postgres"
