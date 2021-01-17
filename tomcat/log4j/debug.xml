@@ -1,0 +1,10 @@
+<!-- ###################################################################### -->
+
+<!-- session -->
+<Logger name="org.apache.catalina.session" level="info" />
+
+<!-- cluster -->
+<Logger name="org.apache.catalina.tribes" level="info" />
+
+<!-- PostgreSQL DataSource -->
+<Logger name="org.postgresql.Driver" level="info" />

@@ -16,17 +16,7 @@ bash ./install-tomcat.sh
 
 ## Logging
 
-### java.util.logging
-
-```properties
-java.util.logging.ConsoleHandler.level = FINEST
-
-### session
-org.apache.catalina.session.level = FINEST
-
-### cluster
-org.apache.catalina.tribes.level = FINEST
-```
+[debug.sh](/tomcat/debug.sh)
 
 - https://tomcat.apache.org/tomcat-9.0-doc/cluster-howto.html
 - https://tomcat.apache.org/tomcat-9.0-doc/logging.html
@@ -34,6 +24,7 @@ org.apache.catalina.tribes.level = FINEST
 ### Log4j
 
 - [Log4j README](/tomcat/log4j/README.md)
+- [debug.xml](/tomcat/log4j/debug.xml)
 
 ## Datasource
 
