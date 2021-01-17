@@ -11,8 +11,10 @@
 *-temp.yaml
 *.zip
 
+/kafka/cmak/cmak-*/
 /kubernetes/kubespray/kubespray/
 /kraken/kraken/
 /oracledb/docker-images/
 /rook/rook/
 /temp/
+/tomcat/log4j/apache-log4j-*-bin/
