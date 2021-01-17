@@ -16,13 +16,13 @@ bash ./create-instance.sh inst2 8081 8444 8006
 ### General (Multicast)
 
 ```bash
-### params: ${INSTANCE_NAME} ${HTTP_PORT} ${HTTPS_PORT} ${SHUTDOWN_PORT} ${AJP_PORT}
+### params: ${INSTANCE_NAME} ${HTTP_PORT} ${HTTPS_PORT} ${SHUTDOWN_PORT} ${AJP_PORT} ${JMX_PORT}
 
-bash ./create-instance-cluster.sh inst1 8080 8443 8005 8009
-bash ./create-instance-cluster.sh inst2 8081 8444 8006 8010
+bash ./create-instance-cluster.sh inst1 8080 8443 8005 8009 8050
+bash ./create-instance-cluster.sh inst2 8081 8444 8006 8010 8051
 
-bash ./create-instance-cluster-full.sh inst1 8080 8443 8005 8009
-bash ./create-instance-cluster-full.sh inst2 8081 8444 8006 8010
+bash ./create-instance-cluster-full.sh inst1 8080 8443 8005 8009 8050
+bash ./create-instance-cluster-full.sh inst2 8081 8444 8006 8010 8051
 ```
 
 ### With Redis
@@ -38,10 +38,10 @@ REDISSON_MODE="MASTER_SLAVE_MODE"
 Create instances:
 
 ```bash
-### params: ${INSTANCE_NAME} ${HTTP_PORT} ${HTTPS_PORT} ${SHUTDOWN_PORT} ${AJP_PORT}
+### params: ${INSTANCE_NAME} ${HTTP_PORT} ${HTTPS_PORT} ${SHUTDOWN_PORT} ${AJP_PORT} ${JMX_PORT}
 
-bash ./create-instance-cluster-redis.sh inst1 8080 8443 8005 8009
-bash ./create-instance-cluster-redis.sh inst2 8081 8444 8006 8010
+bash ./create-instance-cluster-redis.sh inst1 8080 8443 8005 8009 8050
+bash ./create-instance-cluster-redis.sh inst2 8081 8444 8006 8010 8051
 ```
 
 Set addresses and password(If Redis has a password) in redisson.yaml.

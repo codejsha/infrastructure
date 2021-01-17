@@ -12,7 +12,7 @@ export TOMCAT_HTTP_PORT="${2:-"8080"}"
 export TOMCAT_HTTPS_PORT="${3:-"8443"}"
 export TOMCAT_SHUTDOWN_PORT="${4:-"8005"}"
 export TOMCAT_AJP_PORT="${5:-"8009"}"
-export TOMCAT_JMX_PORT="8686"
+export TOMCAT_JMX_PORT="${6:-"8050"}"
 
 export LOG_DIR="${CATALINA_BASE}/logs"
 export DUMP_LOG_DIR="${LOG_DIR}/dump"
