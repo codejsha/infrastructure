@@ -24,6 +24,14 @@ git fetch --all
 git reset --hard origin/master
 ```
 
+### Stash
+
+```bash
+git stash list
+git stash show
+git restore -s stash@{0} -- ${FILENAME}
+```
+
 ## Directory Structure
 
 ```txt
