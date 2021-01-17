@@ -11,11 +11,12 @@ admin_password = os.environ['ADMIN_PASSWORD']
 ######################################################################
 
 
-def set_domain_cookie_name(_oracle_home, _domain_name):
+def set_domain_cookie_name(_oracle_home, _domain_version, _domain_name):
     cd('/AdminConsole/' + _domain_name)
-    _oracle_home_upper = _oracle_home.replace('/', '_').upper()
-    _domain_upper = _domain_name.replace('_', '').upper()
-    cmo.setCookieName(_oracle_home_upper + '_' + _domain_upper + 'SESSION')
+    # _prefix = _oracle_home.replace('/', '_').upper()
+    _prefix = 'WLS_' + domain_version.replace('.', '').upper()
+    _domain_upper = _domain_name.replace('_', '').replace('-', '').upper()
+    cmo.setCookieName(_prefix + '_' + _domain_upper + '_SESSION')
 
 
 ######################################################################
@@ -25,8 +26,9 @@ admin_server_url = 't3://' + admin_server_listen_address + ':' + admin_server_li
 connect(admin_username, admin_password, admin_server_url)
 edit()
 startEdit()
+domain_version = cmo.getDomainVersion()
 
-set_domain_cookie_name(oracle_home, domain_name)
+set_domain_cookie_name(oracle_home, domain_version, domain_name)
 
 save()
 activate()
