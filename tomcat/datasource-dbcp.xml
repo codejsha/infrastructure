@@ -1,8 +1,8 @@
 <!-- ###################################################################### -->
 
-<!-- PostgreSQL -->
+<!-- PostgreSQL Shared Resource-->
 
-<!-- Shared resource -->
+<!-- server.xml -->
 <GlobalNamingResources>
     <Resource name="jdbc/postgres" auth="Container" type="javax.sql.DataSource"
               username="postgres" password="postgres" driverClassName="org.postgresql.Driver"
@@ -13,7 +13,24 @@
               jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.StatementCache(prepared=true,max=50)" />
 </GlobalNamingResources>
 
-<!-- Application-specific resource -->
+<!-- context.xml -->
+<Context>
+    <ResourceLink name="jdbc/postgres" global="jdbc/postgres" type="javax.sql.DataSource" />
+</Context>
+
+<!-- web.xml -->
+<resource-ref>
+    <description>PostgreSQL DataSource Example</description>
+    <res-ref-name>jdbc/postgres</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+</resource-ref>
+
+<!-- ###################################################################### -->
+
+<!-- PostgreSQL Application-specific Resource -->
+
+<!-- context.xml -->
 <Context>
     <Resource name="jdbc/postgres" auth="Container" type="javax.sql.DataSource"
               username="postgres" password="postgres" driverClassName="org.postgresql.Driver"
