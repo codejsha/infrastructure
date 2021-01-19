@@ -21,7 +21,7 @@ mkdir -p ${DUMP_LOG_DIR}
 
 ### copy config files
 envsubst < ./server-cluster-full.xml > ${CATALINA_BASE}/conf/server.xml
-envsubst < ./context-redis.xml > ${CATALINA_BASE}/conf/context.xml
+envsubst < ./context-redis.xml > ${CATALINA_BASE}/conf/Catalina/localhost/ROOT.xml
 envsubst < ./tomcat-users.xml > ${CATALINA_BASE}/conf/tomcat-users.xml
 
 # /usr/bin/cp -pf ./server-cluster-redis.xml ${CATALINA_BASE}/conf/server.xml
