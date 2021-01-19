@@ -1,0 +1,34 @@
+<!-- ###################################################################### -->
+
+<!-- ${CATALINA_BASE}/conf/server.xml -->
+
+<!-- ###################################################################### -->
+
+<!-- webapps -->
+      <Host name="localhost"  appBase="webapps"
+            unpackWARs="true" autoDeploy="false">
+      </Host>
+
+<!-- ###################################################################### -->
+
+<!-- webapps + contexts -->
+      <Host name="localhost"  appBase="webapps"
+            unpackWARs="true" autoDeploy="false">
+
+        <Context path="/cache" docBase="/svc/app/cachetest" reloadable="false"/>
+        <Context path="/jdbcdriver" docBase="/svc/app/jdbcdrivertest" reloadable="false"/>
+        <Context path="/failover" docBase="/svc/app/failovertest" reloadable="false"/>
+
+      </Host>
+
+<!-- ###################################################################### -->
+
+<!-- contexts -->
+      <Host name="localhost"  appBase="webapps"
+            unpackWARs="true" autoDeploy="false" deployOnStartup="false">
+
+        <Context path="/cache" docBase="/svc/app/cachetest" reloadable="false"/>
+        <Context path="/jdbcdriver" docBase="/svc/app/jdbcdrivertest" reloadable="false"/>
+        <Context path="/failover" docBase="/svc/app/failovertest" reloadable="false"/>
+
+      </Host>
