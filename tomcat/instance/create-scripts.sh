@@ -21,6 +21,7 @@ cat <<EOF > ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export JAVA_HOME="${JAVA_HOME}"
+export JRE_HOME="${JRE_HOME}"
 export CATALINA_HOME="${CATALINA_HOME}"
 export CATALINA_BASE="${VAR_CATALINA_BASE}"
 
@@ -103,6 +104,7 @@ fi
 cat <<EOF >> ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
 
 # CATALINA_OPTS="\${CATALINA_OPTS} -Dcom.sun.management.jmxremote"
+# CATALINA_OPTS="\${CATALINA_OPTS} -Dcom.sun.management.jmxremote.host=${TOMCAT_ADDRESS}"
 # CATALINA_OPTS="\${CATALINA_OPTS} -Dcom.sun.management.jmxremote.port=${TOMCAT_JMX_PORT}"
 # CATALINA_OPTS="\${CATALINA_OPTS} -Dcom.sun.management.jmxremote.ssl=false"
 # CATALINA_OPTS="\${CATALINA_OPTS} -Dcom.sun.management.jmxremote.authenticate=false"
