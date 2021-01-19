@@ -1,0 +1,120 @@
+<!-- ###################################################################### -->
+
+
+<!-- SQL Server Shared Resource (DBCP) -->
+
+
+<!-- server.xml -->
+<GlobalNamingResources>
+    <!-- SQL Server DataSource -->
+    <Resource name="jdbc/mssql" auth="Container" type="javax.sql.DataSource"
+              username="sa" password="PASSWORD" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+              url="jdbc:sqlserver://test.example.com:1433;database=sqlserverdb"
+              initialSize="30" minIdle="30" maxTotal="30" maxIdle="30" maxWaitMillis="10000"
+              testOnBorrow="true" testWhileIdle="true" validationQuery="SELECT 1" validationInterval="120000"
+              removeAbandonedOnBorrow="true" removeAbandonedOnMaintenance="true" removeAbandonedTimeout="60" logAbandoned="true"
+              jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.StatementCache(prepared=true,max=50)" />
+</GlobalNamingResources>
+
+
+<!-- context.xml -->
+<Context>
+    <!-- SQL Server DataSource -->
+    <ResourceLink name="jdbc/mssql" global="jdbc/mssql" type="javax.sql.DataSource" />
+</Context>
+
+
+<!-- web.xml -->
+<resource-ref>
+    <description>SQL Server DataSource</description>
+    <res-ref-name>jdbc/mssql</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+</resource-ref>
+
+
+<!-- ###################################################################### -->
+
+
+<!-- SQL Server Application-specific Resource (DBCP) -->
+
+
+<!-- context.xml -->
+<Context>
+    <!-- SQL Server DataSource -->
+    <Resource name="jdbc/mssql" auth="Container" type="javax.sql.DataSource"
+              username="sa" password="PASSWORD" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+              url="jdbc:sqlserver://test.example.com:1433;database=sqlserverdb"
+              initialSize="30" minIdle="30" maxTotal="30" maxIdle="30" maxWaitMillis="10000"
+              testOnBorrow="true" testWhileIdle="true" validationQuery="SELECT 1" validationInterval="120000"
+              removeAbandonedOnBorrow="true" removeAbandonedOnMaintenance="true" removeAbandonedTimeout="60" logAbandoned="true"
+              jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.StatementCache(prepared=true,max=50)" />
+</Context>
+
+
+<!-- web.xml -->
+<resource-ref>
+    <description>SQL Server DataSource</description>
+    <res-ref-name>jdbc/mssql</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+</resource-ref>
+
+
+<!-- ###################################################################### -->
+
+
+<!-- SQL Server Shared Resource (HikariCP) -->
+
+
+<!-- server.xml -->
+<GlobalNamingResources>
+    <!-- SQL Server DataSource -->
+    <Resource name="jdbc/mssql" auth="Container" type="javax.sql.DataSource" factory="com.zaxxer.hikari.HikariJNDIFactory"
+              dataSource.user="sa" dataSource.password="PASSWORD" dataSourceClassName="oracle.jdbc.pool.OracleDataSource"
+              dataSource.url="jdbc:sqlserver://test.example.com:1433;database=sqlserverdb"
+              minimumIdle="30" maximumPoolSize="30" connectionTimeout="10000"
+              validationTimeout="5000" leakDetectionThreshold="60000" />
+</GlobalNamingResources>
+
+
+<!-- context.xml -->
+<Context>
+    <!-- SQL Server DataSource -->
+    <ResourceLink name="jdbc/mssql" global="jdbc/mssql" type="javax.sql.DataSource" />
+</Context>
+
+
+<!-- web.xml -->
+<resource-ref>
+    <description>SQL Server DataSource</description>
+    <res-ref-name>jdbc/mssql</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+</resource-ref>
+
+
+<!-- ###################################################################### -->
+
+
+<!-- SQL Server Application-specific Resource (HikariCP) -->
+
+
+<!-- context.xml -->
+<Context>
+    <!-- SQL Server DataSource -->
+    <Resource name="jdbc/mssql" auth="Container" type="javax.sql.DataSource" factory="com.zaxxer.hikari.HikariJNDIFactory"
+              dataSource.user="sa" dataSource.password="PASSWORD" dataSourceClassName="oracle.jdbc.pool.OracleDataSource"
+              dataSource.url="jdbc:sqlserver://test.example.com:1433;database=sqlserverdb"
+              minimumIdle="30" maximumPoolSize="30" connectionTimeout="10000"
+              validationTimeout="5000" leakDetectionThreshold="60000" />
+</Context>
+
+
+<!-- web.xml -->
+<resource-ref>
+    <description>SQL Server DataSource</description>
+    <res-ref-name>jdbc/mssql</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+</resource-ref>

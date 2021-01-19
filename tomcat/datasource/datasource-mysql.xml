@@ -1,0 +1,120 @@
+<!-- ###################################################################### -->
+
+
+<!-- MySQL Shared Resource (DBCP) -->
+
+
+<!-- server.xml -->
+<GlobalNamingResources>
+    <!-- MySQL DataSource -->
+    <Resource name="jdbc/mysql" auth="Container" type="javax.sql.DataSource"
+              username="mysql" password="PASSWORD" driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://test.example.com:3306/mysqldb"
+              initialSize="30" minIdle="30" maxTotal="30" maxIdle="30" maxWaitMillis="10000"
+              testOnBorrow="true" testWhileIdle="true" validationQuery="SELECT 1" validationInterval="120000"
+              removeAbandonedOnBorrow="true" removeAbandonedOnMaintenance="true" removeAbandonedTimeout="60" logAbandoned="true"
+              jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.StatementCache(prepared=true,max=50)" />
+</GlobalNamingResources>
+
+
+<!-- context.xml -->
+<Context>
+    <!-- MySQL DataSource -->
+    <ResourceLink name="jdbc/mysql" global="jdbc/mysql" type="javax.sql.DataSource" />
+</Context>
+
+
+<!-- web.xml -->
+<resource-ref>
+    <description>MySQL DataSource</description>
+    <res-ref-name>jdbc/mysql</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+</resource-ref>
+
+
+<!-- ###################################################################### -->
+
+
+<!-- MySQL Application-specific Resource (DBCP) -->
+
+
+<!-- context.xml -->
+<Context>
+    <!-- MySQL DataSource -->
+    <Resource name="jdbc/mysql" auth="Container" type="javax.sql.DataSource"
+              username="mysql" password="PASSWORD" driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://test.example.com:3306/mysqldb"
+              initialSize="30" minIdle="30" maxTotal="30" maxIdle="30" maxWaitMillis="10000"
+              testOnBorrow="true" testWhileIdle="true" validationQuery="SELECT 1" validationInterval="120000"
+              removeAbandonedOnBorrow="true" removeAbandonedOnMaintenance="true" removeAbandonedTimeout="60" logAbandoned="true"
+              jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.StatementCache(prepared=true,max=50)" />
+</Context>
+
+
+<!-- web.xml -->
+<resource-ref>
+    <description>MySQL DataSource</description>
+    <res-ref-name>jdbc/mysql</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+</resource-ref>
+
+
+<!-- ###################################################################### -->
+
+
+<!-- MySQL Shared Resource (HikariCP) -->
+
+
+<!-- server.xml -->
+<GlobalNamingResources>
+    <!-- MySQL DataSource -->
+    <Resource name="jdbc/mysql" auth="Container" type="javax.sql.DataSource" factory="com.zaxxer.hikari.HikariJNDIFactory"
+              dataSource.user="postgres" dataSource.password="PASSWORD"
+              jdbcUrl="jdbc:mysql://test.example.com:3306/mysqldb"
+              minimumIdle="30" maximumPoolSize="30" connectionTimeout="10000"
+              validationTimeout="5000" leakDetectionThreshold="60000" />
+</GlobalNamingResources>
+
+
+<!-- context.xml -->
+<Context>
+    <!-- MySQL DataSource -->
+    <ResourceLink name="jdbc/mysql" global="jdbc/mysql" type="javax.sql.DataSource" />
+</Context>
+
+
+<!-- web.xml -->
+<resource-ref>
+    <description>MySQL DataSource</description>
+    <res-ref-name>jdbc/mysql</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+</resource-ref>
+
+
+<!-- ###################################################################### -->
+
+
+<!-- MySQL Application-specific Resource (HikariCP) -->
+
+
+<!-- context.xml -->
+<Context>
+    <!-- MySQL DataSource -->
+    <Resource name="jdbc/mysql" auth="Container" type="javax.sql.DataSource" factory="com.zaxxer.hikari.HikariJNDIFactory"
+              dataSource.user="postgres" dataSource.password="PASSWORD"
+              jdbcUrl="jdbc:mysql://test.example.com:3306/mysqldb"
+              minimumIdle="30" maximumPoolSize="30" connectionTimeout="10000"
+              validationTimeout="5000" leakDetectionThreshold="60000" />
+</Context>
+
+
+<!-- web.xml -->
+<resource-ref>
+    <description>MySQL DataSource</description>
+    <res-ref-name>jdbc/mysql</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+</resource-ref>
