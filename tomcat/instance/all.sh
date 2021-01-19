@@ -23,8 +23,10 @@ function create_instance_cluster_redis {
 }
 
 function create_scripts {
-    bash ./create-scripts.sh inst1
-    bash ./create-scripts.sh inst2
+    # bash ./create-scripts.sh inst1 8080 8443 8005
+    # bash ./create-scripts.sh inst2 8081 8444 8006
+    bash ./create-scripts.sh inst1 8080 8443 8005 8009 8050
+    bash ./create-scripts.sh inst2 8081 8444 8006 8010 8051
 }
 
 ######################################################################
