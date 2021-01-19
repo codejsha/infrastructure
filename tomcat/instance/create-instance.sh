@@ -12,6 +12,7 @@ mkdir -p ${CATALINA_BASE}
 /usr/bin/cp -rpf ${CATALINA_HOME}/lib ${CATALINA_BASE}
 /usr/bin/cp -rpf ${CATALINA_HOME}/temp ${CATALINA_BASE}
 /usr/bin/cp -rpf ${CATALINA_HOME}/work ${CATALINA_BASE}
+mkdir -p ${CATALINA_BASE}/conf/Catalina/localhost
 mkdir -p ${CATALINA_BASE}/webapps/ROOT
 mkdir -p ${LOG_DIR}
 mkdir -p ${DUMP_LOG_DIR}
