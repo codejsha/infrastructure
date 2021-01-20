@@ -1,6 +1,7 @@
 <!-- ###################################################################### -->
 
 <!-- ${CATALINA_BASE}/conf/[enginename]/[hostname]/<context>.xml -->
+<!-- Requirement: deployOnStartup="true" in the Host element (default: true) -->
 
 <!-- ROOT.xml -->
 <Context docBase="/svc/app/basic" reloadable="false">

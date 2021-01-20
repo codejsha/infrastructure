@@ -16,10 +16,9 @@ bash ./install-tomcat.sh
 
 ## Logging
 
-[debug.sh](/tomcat/debug.sh)
-
-- https://tomcat.apache.org/tomcat-9.0-doc/cluster-howto.html
+- [debug.sh](/tomcat/debug.sh)
 - https://tomcat.apache.org/tomcat-9.0-doc/logging.html
+- https://tomcat.apache.org/tomcat-9.0-doc/cluster-howto.html
 
 ### Log4j
 
