@@ -10,18 +10,18 @@ git clone https://github.com/codejsha/infrastructure.git
 gh repo clone codejsha/infrastructure
 ```
 
-### Pull master branch
+### Pull main branch
 
 ```bash
-git pull origin master
+git pull origin main
 ```
 
-### Overwrite master branch
+### Overwrite main branch
 
 ```bash
 git stash
 git fetch --all
-git reset --hard origin/master
+git reset --hard origin/main
 ```
 
 ### Stash
