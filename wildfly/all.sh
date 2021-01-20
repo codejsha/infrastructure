@@ -1,9 +1,29 @@
 #!/bin/bash
 
-# bash ./create-instance.sh
-bash ./create-instance.sh --instance=inst1
-bash ./create-instance.sh --instance=inst2
+cd cluster
+bash ./all.sh
+cd ..
 
-# bash create-scripts.sh
-bash create-scripts.sh --instance=inst1 --port-offset=0
-bash create-scripts.sh --instance=inst2 --port-offset=1
+cd security
+bash ./all.sh
+cd ..
+
+cd datasource
+bash ./all.sh
+cd ..
+
+cd deployment
+bash ./all.sh
+cd ..
+
+cd filter
+bash ./all.sh
+cd ..
+
+cd listener
+bash ./all.sh
+cd ..
+
+cd logging
+bash ./all.sh
+cd ..
