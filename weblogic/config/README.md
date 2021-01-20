@@ -10,7 +10,7 @@ bash ./all.sh
 
 - [conf-domain.sh](/weblogic/config/conf-domain.sh)
 - [set-domain-config-archive.sh](/weblogic/config/set-domain-config-archive.sh) - [set_domain_config_archive.py](/weblogic/config/set_domain_config_archive.py)
-- [set-domain-connection-filter.sh](/weblogic/config/set-connection-filter.sh) - [set_connection_filter.py](/weblogic/config/set_connection_filter.py)
+- [set-domain-connection-filter.sh](/weblogic/config/set-domain-connection-filter.sh) - [set_domain_connection_filter.py](/weblogic/config/set_domain_connection_filter.py)
 - [set-domain-cookie-name.sh](/weblogic/config/set-domain-cookie-name.sh) - [set_domain_cookie_name.py](/weblogic/config/set_domain_cookie_name.py)
 - [set-domain-jta.sh](/weblogic/config/set-domain-jta.sh) - [set_domain_jta.py](/weblogic/config/set_domain_jta.py)
 - [set-domain-log.sh](/weblogic/config/set-domain-log.sh) - [set_domain_log.py](/weblogic/config/set_domain_log.py)
