@@ -1,11 +1,15 @@
 #!/bin/bash
 
-JAVA_HOME="\/usr\/java\/current"
-ORACLE_HOME="\/usr\/local\/weblogic"
+JAVA_HOME="/usr/java/current"
+ORACLE_HOME="/usr/local/weblogic"
 DOMAIN_NAME="base_domain"
 ADMIN_SERVER_LISTEN_ADDRESS="test.example.com"
 ADMIN_SERVER_LISTEN_PORT="7001"
-INSTALL_SCRIPT_DIR="\/svc\/infrastructure\/weblogic"
+INSTALL_SCRIPT_DIR="/svc/infrastructure/weblogic"
+
+JAVA_HOME="${JAVA_HOME//\//\/}"
+ORACLE_HOME="${ORACLE_HOME//\//\/}"
+INSTALL_SCRIPT_DIR="${INSTALL_SCRIPT_DIR//\//\/}"
 
 find . -type f -name "env-base.sh" | xargs perl -pi -e "s/JAVA_HOME=.*/JAVA_HOME=\"${JAVA_HOME}\"/"
 find . -type f -name "env-base.sh" | xargs perl -pi -e "s/ORACLE_HOME=.*/ORACLE_HOME=\"${ORACLE_HOME}\"/"
