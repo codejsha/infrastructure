@@ -1,5 +1,7 @@
 <!-- ###################################################################### -->
 
+<!-- log4j -->
+
 <!-- session -->
 <Logger name="org.apache.catalina.session" level="info" />
 
