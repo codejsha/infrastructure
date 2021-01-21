@@ -1,0 +1,4 @@
+# confluent platform
+
+PATH="${PATH}:/usr/local/confluent/bin"
+source /etc/bash_completion.d/confluent
