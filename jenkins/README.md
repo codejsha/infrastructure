@@ -1,5 +1,7 @@
-# Jenkins CLI
+# Jenkins
 
-## Install
+## Jenkins CLI
+
+### Install
 
 - https://www.jenkins.io/doc/book/managing/cli
