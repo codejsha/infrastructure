@@ -6,6 +6,6 @@ NAMESPACE="kafka-system"
 helm upgrade --install my-kafka \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --values kafka-chart-values.yaml \
+    --values helm-chart-values-kafka.yaml \
     --version 12.4.3 \
     bitnami/kafka

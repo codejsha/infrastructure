@@ -8,4 +8,4 @@ helm upgrade --install my-descheduler \
     --version 0.19.1 \
     descheduler/descheduler-helm-chart
 
-    # --values chart-values.yaml \
+    # --values helm-chart-values.yaml \

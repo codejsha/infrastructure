@@ -18,7 +18,7 @@ export EXTERNAL_DATABASE_PASSWORD="${PASSWORD}"
 export AWS_ACCESS_KEY="${AWS_ACCESS_KEY}"
 export AWS_SECRET_KEY="${AWS_SECRET_KEY}"
 
-envsubst < ./chart-values.yaml > ./chart-values-temp.yaml
+envsubst < ./helm-chart-values.yaml > ./helm-chart-values-temp.yaml
 
 NAMESPACE="harbor-system"
 
@@ -26,6 +26,6 @@ NAMESPACE="harbor-system"
 helm upgrade --install my-harbor \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --values chart-values-temp.yaml \
+    --values helm-chart-values-temp.yaml \
     --version 1.5.2 \
     harbor/harbor

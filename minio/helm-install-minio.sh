@@ -5,7 +5,7 @@ helm repo update
 
 export PASSWORD="${PASSWORD}"
 
-envsubst < ./chart-values.yaml > ./chart-values-temp.yaml
+envsubst < ./helm-chart-values.yaml > ./helm-chart-values-temp.yaml
 
 NAMESPACE="minio-system"
 
@@ -13,6 +13,6 @@ NAMESPACE="minio-system"
 helm upgrade --install my-minio \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --values chart-values-temp.yaml \
+    --values helm-chart-values-temp.yaml \
     --version 8.0.8 \
     minio/minio

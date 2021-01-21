@@ -9,7 +9,7 @@ export PASSWORD="${PASSWORD}"
 export REPLICATION_USERNAME="${REPLICATION_USERNAME}"
 export REPLICATION_PASSWORD="${REPLICATION_PASSWORD}"
 
-envsubst < ./chart-values.yaml > ./chart-values-temp.yaml
+envsubst < ./helm-chart-values.yaml > ./helm-chart-values-temp.yaml
 
 NAMESPACE="mysql-system"
 
@@ -17,6 +17,6 @@ NAMESPACE="mysql-system"
 helm upgrade --install my-mysql \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --values chart-values-temp.yaml \
+    --values helm-chart-values-temp.yaml \
     --version 8.2.3 \
     bitnami/mysql
