@@ -4,7 +4,7 @@ source <(kubectl completion bash)
 
 function kubectl() { echo "+ kubectl ${@}">&2; command kubectl ${@}; }
 
-[ -f ~/.aliases/.kubectl_aliases ] && source ~/.aliases/.kubectl_aliases
+[ -f ~/.aliases/kubectl_aliases ] && source ~/.aliases/kubectl_aliases
 
 alias dashboard-password="kubectl describe secrets kubernetes-dashboard-token -n kube-system | grep token: | awk '{print \$2}'"
 alias kaeof="cat <<EOF | kubectl apply --filename -"

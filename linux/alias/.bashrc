@@ -57,16 +57,18 @@ function gowildfly() { DIRECTORY="/usr/local/wildfly"; echo "+ cd ${DIRECTORY}">
 function readlinkpwd() { echo "+ readlink --canonicalize .">&2; command readlink --canonicalize .; }
 
 [ -f ~/.aliases/argo_aliases ] && source ~/.aliases/argo_aliases
-[ -f ~/.aliases/docker_aliases ] && source ~/.aliases/docker_aliases
+[ -f ~/.aliases/cloud_aliases ] && source ~/.aliases/cloud_aliases
 [ -f ~/.aliases/confluent_aliases ] && source ~/.aliases/confluent_aliases
+[ -f ~/.aliases/docker_aliases ] && source ~/.aliases/docker_aliases
 [ -f ~/.aliases/docker_compose_aliases ] && source ~/.aliases/docker_compose_aliases
 [ -f ~/.aliases/git_aliases ] && source ~/.aliases/git_aliases
 [ -f ~/.aliases/helm_aliases ] && source ~/.aliases/helm_aliases
 [ -f ~/.aliases/istio_aliases ] && source ~/.aliases/istio_aliases
 [ -f ~/.aliases/jdk_aliases ] && source ~/.aliases/jdk_aliases
 [ -f ~/.aliases/krew_aliases ] && source ~/.aliases/krew_aliases
-[ -f ~/.aliases/kustomize_aliases ] && source ~/.aliases/kustomize_aliases
 [ -f ~/.aliases/kubernetes_aliases ] && source ~/.aliases/kubernetes_aliases
+[ -f ~/.aliases/kustomize_aliases ] && source ~/.aliases/kustomize_aliases
+[ -f ~/.aliases/minikube_aliases ] && source ~/.aliases/minikube_aliases
 [ -f ~/.aliases/minio_aliases ] && source ~/.aliases/minio_aliases
 [ -f ~/.aliases/network_aliases ] && source ~/.aliases/network_aliases
 [ -f ~/.aliases/other_aliases ] && source ~/.aliases/other_aliases
@@ -97,8 +99,5 @@ export LS_COLORS
 
 # path
 PATH="${PATH}:/usr/local/go/bin"
-PATH="${PATH}:${JAVA_HOME}/bin"
-PATH="${PATH}:${KREW_ROOT:-"${HOME}/.krew"}/bin"
-PATH="${PATH}:${HOME}/.istioctl/bin"
 PATH="${PATH}:/usr/local/maven/bin"
 export PATH

@@ -1,5 +1,7 @@
 # istio
 
+export PATH="${PATH}:${HOME}/.istioctl/bin"
+
 function istioctl() { echo "+ istioctl ${@}">&2; command istioctl ${@}; }
 
 alias istioctl-proxy-status="istioctl proxy-status"

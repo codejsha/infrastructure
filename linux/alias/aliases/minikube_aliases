@@ -1,0 +1,10 @@
+# minikube
+
+alias mk="minikube"
+alias mkdashboard="minikube dashboard"
+alias mkip="minikube ip"
+alias mkk="minikube kubectl"
+alias mklo="minikube logs"
+alias mkstart="minikube start"
+alias mkstatus="minikube status"
+alias mkstop="minikube stop"
