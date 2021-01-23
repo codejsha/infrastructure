@@ -2,13 +2,11 @@
 
 source ./env-base.sh
 
-export CLUSTER_NAME="${1}"
-
 ######################################################################
 
 export CONFIG_JVM_ARGS="${CONFIG_JVM_ARGS} -Djava.security.egd=file:///dev/urandom"
 if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
-  ${MW_HOME}/wlserver_10.3/common/bin/wlst.sh create_cluster.py
+    ${MW_HOME}/wlserver_10.3/common/bin/wlst.sh set_domain_restful_mgmt_service.py
 elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
-  ${ORACLE_HOME}/oracle_common/common/bin/wlst.sh create_cluster.py
+    ${ORACLE_HOME}/oracle_common/common/bin/wlst.sh set_domain_restful_mgmt_service.py
 fi

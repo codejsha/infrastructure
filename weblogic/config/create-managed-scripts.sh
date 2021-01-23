@@ -6,6 +6,10 @@ SERVER_NAME="${1}"
 
 ######################################################################
 
+mkdir -p ${LOG_DIR}/${MANAGED_SERVER_NAME}
+
+######################################################################
+
 ### replace pattern with string
 TEMP="\${DOMAIN_HOME}"
 VAR_LOG_DIR="${LOG_DIR/${DOMAIN_HOME}/${TEMP}}"

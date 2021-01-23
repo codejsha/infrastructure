@@ -8,6 +8,10 @@ NODEMGR_LISTEN_PORT="${3}"
 
 ######################################################################
 
+mkdir -p ${LOG_DIR}/nodemanager
+
+######################################################################
+
 ### replace pattern with string
 TEMP="\${DOMAIN_HOME}"
 VAR_LOG_DIR="${LOG_DIR/${DOMAIN_HOME}/${TEMP}}"

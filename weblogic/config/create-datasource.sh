@@ -3,16 +3,6 @@
 source ./env-base.sh
 
 export DS_NAME="${1}"
-export DS_JNDI="${2}"
-export DS_URL="${3}"
-export DS_DRIVER="${4}"
-export DS_USER="${5}"
-export DS_PASSWORD="${6}"
-export DS_INIT="${7}"
-export DS_MIN="${8}"
-export DS_MAX="${9}"
-export DS_TARGET_TYPE="${10}"
-export DS_TARGET="${11}"
 
 ######################################################################
 
