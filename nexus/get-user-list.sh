@@ -7,8 +7,9 @@ NEXUS_PASSWORD="admin123"
 function get_user_list {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
-        -X GET "${NEXUS_URL}/service/rest/beta/security/users" \
-        -H "Accept:application/json"
+        -X GET \
+        -H "Accept:application/json" \
+        ${NEXUS_URL}/service/rest/beta/security/users
 }
 
 get_user_list

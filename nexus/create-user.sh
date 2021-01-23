@@ -16,10 +16,11 @@ envsubst < ./data-user.json > ./data-user-temp.json
 function create_user {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
-        -X POST "${NEXUS_URL}/service/rest/beta/security/users" \
+        -X POST \
         -H "Accept:application/json" \
         -H "Content-Type: application/json" \
-        -d @data-user-temp.json
+        -d @data-user-temp.json \
+        ${NEXUS_URL}/service/rest/beta/security/users
 }
 
 create_user

@@ -8,15 +8,17 @@ function status {
     curl --insecure \
         --head \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
-        -X GET "${NEXUS_URL}/service/rest/v1/status" \
-        -H "Accept:application/json"
+        -X GET \
+        -H "Accept:application/json" \
+        ${NEXUS_URL}/service/rest/v1/status
 }
 
 function status_check {
     # curl --insecure \
     #     --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
-    #     -X GET "${NEXUS_URL}/service/rest/v1/status/check" \
-    #     -H "Accept:application/json"
+    #     -X GET \
+    #     -H "Accept:application/json" \
+    #     ${NEXUS_URL}/service/rest/v1/status/check
 }
 
 status

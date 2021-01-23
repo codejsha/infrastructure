@@ -12,10 +12,11 @@ envsubst < ./data-helm-proxy-repo.json > ./data-helm-proxy-repo-temp.json
 function create_helm_proxy_repository {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
-        -X POST "${NEXUS_URL}/service/rest/beta/repositories/helm/proxy" \
+        -X POST \
         -H "Accept:application/json" \
         -H "Content-Type: application/json" \
-        -d @data-helm-proxy-repo-temp.json
+        -d @data-helm-proxy-repo-temp.json \
+        ${NEXUS_URL}/service/rest/beta/repositories/helm/proxy
 }
 
 create_helm_proxy_repository

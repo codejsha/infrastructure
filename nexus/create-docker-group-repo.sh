@@ -12,10 +12,11 @@ envsubst < ./data-docker-group-repo.json > ./data-docker-group-repo-temp.json
 function create_docker_group_repository {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
-        -X POST "${NEXUS_URL}/service/rest/beta/repositories/docker/group" \
+        -X POST \
         -H "Accept:application/json" \
         -H "Content-Type: application/json" \
-        -d @data-docker-group-repo-temp.json
+        -d @data-docker-group-repo-temp.json \
+        ${NEXUS_URL}/service/rest/beta/repositories/docker/group
 }
 
 create_docker_group_repository

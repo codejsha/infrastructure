@@ -8,11 +8,11 @@ REALM_IDS="${1}"
 function set_active_realms_list {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
-        -X PUT "${NEXUS_URL}/service/rest/beta/security/realms/active" \
+        -X PUT \
         -H "Accept:application/json" \
         -H "Content-Type: application/json" \
-        -d \
-        "[${REALM_IDS}]"
+        -d "[${REALM_IDS}]" \
+        ${NEXUS_URL}/service/rest/beta/security/realms/active
 }
 
 set_active_realms_list

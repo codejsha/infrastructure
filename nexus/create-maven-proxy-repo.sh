@@ -12,10 +12,11 @@ envsubst < ./data-maven-proxy-repo.json > ./data-maven-proxy-repo-temp.json
 function create_maven_proxy_repository {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
-        -X POST "${NEXUS_URL}/service/rest/beta/repositories/maven/proxy" \
+        -X POST \
         -H "Accept:application/json" \
         -H "Content-Type: application/json" \
-        -d @data-maven-proxy-repo-temp.json
+        -d @data-maven-proxy-repo-temp.json \
+        ${NEXUS_URL}/service/rest/beta/repositories/maven/proxy
 }
 
 create_maven_proxy_repository

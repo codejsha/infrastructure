@@ -13,10 +13,11 @@ envsubst < ./data-docker-proxy-repo.json > ./data-docker-proxy-repo-temp.json
 function create_docker_proxy_repository {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
-        -X POST "${NEXUS_URL}/service/rest/beta/repositories/docker/proxy" \
+        -X POST \
         -H "Accept:application/json" \
         -H "Content-Type: application/json" \
-        -d @data-docker-proxy-repo-temp.json
+        -d @data-docker-proxy-repo-temp.json \
+        ${NEXUS_URL}/service/rest/beta/repositories/docker/proxy
 }
 
 create_docker_proxy_repository

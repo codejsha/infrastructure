@@ -12,10 +12,11 @@ envsubst < ./data-maven-group-repo.json > ./data-maven-group-repo-temp.json
 function update_maven_group_repository {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
-        -X PUT "${NEXUS_URL}/service/rest/beta/repositories/maven/group/${REPOSITORY_NAME}" \
+        -X PUT \
         -H "Accept:application/json" \
         -H "Content-Type: application/json" \
-        -d @data-maven-group-repo-temp.json
+        -d @data-maven-group-repo-temp.json \
+        ${NEXUS_URL}/service/rest/beta/repositories/maven/group/${REPOSITORY_NAME}
 }
 
 update_maven_group_repository

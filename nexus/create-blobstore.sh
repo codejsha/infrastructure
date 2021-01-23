@@ -16,10 +16,11 @@ envsubst < ./data-blobstore.json > ./data-blobstore-temp.json
 function create_s3_blob_store {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
-        -X POST "${NEXUS_URL}/service/rest/beta/blobstores/s3" \
+        -X POST \
         -H "Accept:application/json" \
         -H "Content-Type: application/json" \
-        -d @data-blobstore-temp.json
+        -d @data-blobstore-temp.json \
+        ${NEXUS_URL}/service/rest/beta/blobstores/s3
 }
 
 create_s3_blob_store

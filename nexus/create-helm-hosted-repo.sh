@@ -11,10 +11,11 @@ envsubst < ./data-helm-hosted-repo.json > ./data-helm-hosted-repo-temp.json
 function create_helm_hosted_repository {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
-        -X POST "${NEXUS_URL}/service/rest/beta/repositories/helm/hosted" \
+        -X POST \
         -H "Accept:application/json" \
         -H "Content-Type: application/json" \
-        -d @data-helm-hosted-repo-temp.json
+        -d @data-helm-hosted-repo-temp.json \
+        ${NEXUS_URL}/service/rest/beta/repositories/helm/hosted
 }
 
 create_helm_hosted_repository
