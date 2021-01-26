@@ -29,6 +29,16 @@ ${JAVA_HOME}/bin/jinfo ${PID}
 
 ######################################################################
 
+### heap usage
+
+### jdk7, jdk8
+${JAVA_HOME}/bin/jmap -heap ${PID}
+
+### jdk11
+${JAVA_HOME}/bin/jhsdb jmap --heap --pid ${PID}
+
+######################################################################
+
 ### heap dump
 
 ### live objects
