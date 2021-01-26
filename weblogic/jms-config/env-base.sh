@@ -20,7 +20,7 @@ INSTALL_SCRIPT_DIR="/svc/infrastructure/weblogic"
 ######################################################################
 
 if [ ! -d "${JAVA_HOME}" ]; then
-    echo "[ERROR] The JAVA_HOME (${JAVA_HOME}) does not exists!"
+    echo "[ERROR] The JAVA_HOME (${JAVA_HOME}) does not exist!"
     exit
 fi
 
@@ -28,7 +28,7 @@ JAVA_VERSION="$(${JAVA_HOME}/bin/java -version 2>&1 /dev/null \
         | grep version | awk '{print $3}' | tr -d '"')"
 
 if [ ! -d "${MW_HOME}" ]; then
-    echo "[ERROR] The ORACLE_HOME or MW_HOME (${MW_HOME}) does not exists!"
+    echo "[ERROR] The ORACLE_HOME or MW_HOME (${MW_HOME}) does not exist!"
     exit
 fi
 
@@ -81,6 +81,6 @@ elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
 fi
 
 if [ ! -d "${WL_HOME}" ]; then
-    echo "[ERROR] The WL_HOME (${WL_HOME}) does not exists!"
+    echo "[ERROR] The WL_HOME (${WL_HOME}) does not exist!"
     exit
 fi

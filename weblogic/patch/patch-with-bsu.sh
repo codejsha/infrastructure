@@ -7,7 +7,7 @@ PATCH_FILE_DIR="/mnt/share/oracle-weblogic-server/wls10.3.6"
 
 function check_middleware_home {
     if [ ! -d "${MW_HOME}" ]; then
-        echo "[ERROR] The MW_HOME (${MW_HOME}) does not exists!"
+        echo "[ERROR] The MW_HOME (${MW_HOME}) does not exist!"
         exit
     fi
 
@@ -18,7 +18,7 @@ function check_patch_file {
     PATCH_FILE_PATH="${1}"
 
     if [ ! -f "${PATCH_FILE_PATH}" ]; then
-        echo "[ERROR] The PATCH_FILE (${PATCH_FILE_PATH}) does not exists!"
+        echo "[ERROR] The PATCH_FILE (${PATCH_FILE_PATH}) does not exist!"
         exit
     fi
 }

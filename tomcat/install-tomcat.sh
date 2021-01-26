@@ -27,7 +27,7 @@ function check_catalina_home {
 
 function check_install_file {
     if [ ! -f "${INSTALL_FILE_DIR}/${INSTALL_FILE}" ]; then
-        echo "[ERROR] The INSTALL_FILE (${INSTALL_FILE_DIR}/${INSTALL_FILE}) does not exists!"
+        echo "[ERROR] The INSTALL_FILE (${INSTALL_FILE_DIR}/${INSTALL_FILE}) does not exist!"
         exit
     fi
 }

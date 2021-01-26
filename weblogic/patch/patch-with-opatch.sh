@@ -15,14 +15,14 @@ PATCH_FILE_DIR="/mnt/share/oracle-weblogic-server/wls12.2.1.3"
 
 function check_java_home {
     if [ ! -d "${JAVA_HOME}" ]; then
-        echo "[ERROR] The JAVA_HOME (${JAVA_HOME}) does not exists!"
+        echo "[ERROR] The JAVA_HOME (${JAVA_HOME}) does not exist!"
         exit
     fi
 }
 
 function check_oracle_home {
     if [ ! -d "${ORACLE_HOME}" ]; then
-        echo "[ERROR] The ORACLE_HOME (${ORACLE_HOME}) does not exists!"
+        echo "[ERROR] The ORACLE_HOME (${ORACLE_HOME}) does not exist!"
         exit
     fi
 
@@ -43,7 +43,7 @@ function check_inventory_location {
     INVENTORY_LOC="$(grep inventory_loc ${ORACLE_HOME}/${INVENTORY_FILE} | cut -d'=' -f 2)"
 
     if [ ! -d "${INVENTORY_LOC}" ]; then
-        echo "[ERROR] The Oracle Inventory directory (${INVENTORY_LOC}) does not exists!"
+        echo "[ERROR] The Oracle Inventory directory (${INVENTORY_LOC}) does not exist!"
         exit
     fi
 }
@@ -52,7 +52,7 @@ function check_patch_file {
     PATCH_FILE_PATH="${1}"
 
     if [ ! -f "${PATCH_FILE_PATH}" ]; then
-        echo "[ERROR] The PATCH_FILE (${PATCH_FILE_PATH}) does not exists!"
+        echo "[ERROR] The PATCH_FILE (${PATCH_FILE_PATH}) does not exist!"
         exit
     fi
 }
