@@ -10,10 +10,11 @@ bash ./helm-install-kafka.sh
 bash ./helm-install-strimzi-kafka.sh
 ### strimzi operator
 bash ./operator-install-strimzi-kafka.sh
-
-### confluent
-bash ./helm-install-confluent-kafka.sh
 ```
+
+## Confluent Kafka
+
+[Confluent Kafka README](/kafka/confluent/README.md)
 
 ## CMAK (Cluster Manager for Apache Kafka)
 
