@@ -22,6 +22,8 @@ def create_generic_datasource(_domain_version, _ds_name):
         cd('/JDBCSystemResources/' + _ds_name + '/JDBCResource/' + _ds_name +
            '/JDBCDriverParams/' + _ds_name + '/Properties/' + _ds_name)
         cmo.createProperty('user')
+    else:
+        print('[ERROR] The datasource (' + ds_name + ') already exists!')
 
 
 ######################################################################

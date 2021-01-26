@@ -15,6 +15,8 @@ def create_cluster(_cluster_name):
     cd('/')
     if _cluster_name not in [cluster.getName() for cluster in cmo.getClusters()]:
         cmo.createCluster(_cluster_name)
+    else:
+        print('[ERROR] The cluster (' + cluster_name + ') already exists!')
 
 
 ######################################################################

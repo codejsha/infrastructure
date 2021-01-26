@@ -15,6 +15,8 @@ def create_server(_server_name):
     cd('/')
     if _server_name not in [server.getName() for server in cmo.getServers()]:
         cmo.createServer(_server_name)
+    else:
+        print('[ERROR] The managed server (' + managed_server_name + ') already exists!')
 
 
 ######################################################################

@@ -22,6 +22,8 @@ def create_node_manager(_nodemgr_name):
     cd('/')
     if _nodemgr_name not in [machine.getName() for machine in cmo.getMachines()]:
         cmo.createMachine(_nodemgr_name)
+    else:
+        print('[ERROR] The node manager (' + nodemgr_name + ') already exists!')
 
 
 ######################################################################
