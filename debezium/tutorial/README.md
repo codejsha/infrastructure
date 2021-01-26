@@ -26,7 +26,7 @@ bash ./docker-run-debezium-kafka-connect.sh
 
 ```bash
 # Registering a connector to monitor
-bash ./register-mysql-connector.sh
+bash ./register-connector.sh
 ```
 
 ## Viewing change events

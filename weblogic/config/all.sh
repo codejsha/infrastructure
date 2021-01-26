@@ -17,8 +17,6 @@ bash ./create-regen-demo-identity-script.sh
 ### CONFIG DOMAIN
 
 bash ./conf-domain.sh
-bash ./create-server.sh AdminServer test.example.com 7001
-bash ./create-admin-scripts.sh AdminServer
 bash ./set-domain-config-archive.sh
 # bash ./set-domain-connection-filter.sh
 bash ./set-domain-cookie-name.sh
@@ -26,6 +24,13 @@ bash ./set-domain-jta.sh
 bash ./set-domain-log.sh
 # bash ./set-domain-output-compression.sh
 bash ./set-domain-web-app.sh
+
+######################################################################
+
+### CONFIG ADMIN SERVER
+
+bash ./set-server-config.sh AdminServer test.example.com 7001
+bash ./create-admin-scripts.sh AdminServer
 
 ######################################################################
 
@@ -50,7 +55,7 @@ bash ./create-nodemgr-scripts.sh BaseMachine1 test.example.com 5556
 ### bash ./set-cluster-config.sh ${CLUSTER_NAME} ${MULTICAST} ${MULTICAST_ADDRESS} ${MULTICAST_PORT}
 
 bash ./create-cluster.sh BaseCluster1
-# bash ./create-cluster.sh BaseCluster1
+# bash ./create-cluster.sh BaseCluster2
 bash ./set-cluster-config.sh BaseCluster1 unicast
 # bash ./set-cluster-config.sh BaseCluster2 unicast
 # bash ./set-cluster-config.sh BaseCluster1 multicast 239.192.0.0 7001
@@ -63,7 +68,7 @@ bash ./set-cluster-config.sh BaseCluster1 unicast
 # bash ./create-cluster.sh BaseJmsCluster1
 # bash ./create-cluster.sh BaseJmsCluster2
 # bash ./set-cluster-config.sh BaseJmsCluster1 unicast
-# bash ./set-cluster-config.sh BaseJmsCluster1 unicast
+# bash ./set-cluster-config.sh BaseJmsCluster2 unicast
 # bash ./set-cluster-config.sh BaseJmsCluster1 multicast 239.192.0.0 7001
 # bash ./set-cluster-config.sh BaseJmsCluster2 multicast 239.192.0.0 7001
 
@@ -74,7 +79,7 @@ bash ./set-cluster-config.sh BaseCluster1 unicast
 ### bash ./set-server-config.sh ${MANAGED_SERVER_NAME} ${MANAGED_SERVER_ADDRESS} ${MANAGED_SERVER_PORT}
 ### bash ./set-server-config.sh ${MANAGED_SERVER_NAME} ${MANAGED_SERVER_ADDRESS} ${MANAGED_SERVER_PORT} ${CLUSTER_NAME}
 ### bash ./set-server-config.sh ${MANAGED_SERVER_NAME} ${MANAGED_SERVER_ADDRESS} ${MANAGED_SERVER_PORT} ${CLUSTER_NAME} ${NODEMGR_NAME}
-### bash ./create-scripts.sh ${SERVER_NAME}
+### bash ./create-managed-scripts.sh ${SERVER_NAME}
 ### bash ./create-store-user-config-scripts.sh ${SERVER_NAME}
 
 bash ./create-server.sh ManagedServer1
@@ -94,10 +99,10 @@ bash ./set-server-config.sh ManagedServer2 test.example.com 7004 BaseCluster1 Ba
 # bash ./set-server-config.sh ManagedServer3 test.example.com 7005 BaseCluster2 BaseMachine2
 # bash ./set-server-config.sh ManagedServer4 test.example.com 7006 BaseCluster2 BaseMachine2
 
-bash ./create-scripts.sh ManagedServer1
-bash ./create-scripts.sh ManagedServer2
-# bash ./create-scripts.sh ManagedServer3
-# bash ./create-scripts.sh ManagedServer4
+bash ./create-managed-scripts.sh ManagedServer1
+bash ./create-managed-scripts.sh ManagedServer2
+# bash ./create-managed-scripts.sh ManagedServer3
+# bash ./create-managed-scripts.sh ManagedServer4
 bash ./create-store-user-config-scripts.sh ManagedServer1
 bash ./create-store-user-config-scripts.sh ManagedServer2
 # bash ./create-store-user-config-scripts.sh ManagedServer3
@@ -111,8 +116,9 @@ bash ./create-store-user-config-scripts.sh ManagedServer2
 # bash ./create-server.sh JmsManagedServer2
 # bash ./set-server-config.sh JmsManagedServer1 test.example.com 7103 BaseJmsCluster1
 # bash ./set-server-config.sh JmsManagedServer2 test.example.com 7104 BaseJmsCluster1
-# bash ./create-scripts.sh JmsManagedServer1
-# bash ./create-scripts.sh JmsManagedServer2
+
+# bash ./create-managed-scripts.sh JmsManagedServer1
+# bash ./create-managed-scripts.sh JmsManagedServer2
 # bash ./create-store-user-config-scripts.sh ManagedServer1
 # bash ./create-store-user-config-scripts.sh ManagedServer2
 
