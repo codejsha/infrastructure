@@ -49,7 +49,8 @@ function create_server {
         -H "Content-Type:application/json" \
         -H "X-Requested-By:MyClient" \
         -d @server-temp.json \
-        ${ADMIN_SERVER_URL}/management/weblogic/latest/edit/servers
+        ${ADMIN_SERVER_URL}/management/weblogic/latest/edit/servers \
+        | jq
 }
 
 ######################################################################

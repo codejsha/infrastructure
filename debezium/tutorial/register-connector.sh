@@ -3,16 +3,17 @@
 function register_mysql_connector {
     curl \
         --include \
-        --request POST localhost:8083/connectors/ \
+        --request POST \
         --header "Accept:application/json" \
         --header "Content-Type:application/json" \
-        --data @data-mysql.json
+        --data @data-mysql.json \
+        localhost:8083/connectors
 }
 
 function get_connector_list {
     curl \
         --header "Accept:application/json" \
-        localhost:8083/connectors/
+        localhost:8083/connectors
 }
 
 function get_connector_task {
@@ -21,7 +22,8 @@ function get_connector_task {
     curl \
         --include \
         --header "Accept:application/json" \
-        --request GET kafka-connect.example.com:8083/connectors/${CONNECTOR_NAME}
+        --request GET \
+        kafka-connect.example.com:8083/connectors/${CONNECTOR_NAME}
 }
 
 ######################################################################
