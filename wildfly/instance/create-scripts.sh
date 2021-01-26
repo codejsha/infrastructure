@@ -57,7 +57,7 @@ fi
 
 PID="\$(pgrep -xa java | grep \${INSTANCE_NAME} | awk '{print \$1}')"
 if [ -n "\${PID}" ]; then
-  echo "[ERROR] \${INSTANCE_NAME} (pid \${PID})" is already running!
+  echo "[ERROR] The \${INSTANCE_NAME} (pid \${PID})" is already running!
   exit
 fi
 

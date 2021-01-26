@@ -40,7 +40,7 @@ fi
 
 PID="\$(pgrep -xa java | grep \${WL_HOME} | grep NodeManager | awk '{print \$1}')"
 if [ -n "\${PID}" ]; then
-  echo "[ERROR] NodeManager (pid \${PID})" is already running!
+  echo "[ERROR] The NodeManager (pid \${PID})" is already running!
   exit
 fi
 EOF
@@ -53,13 +53,14 @@ LOG_DIR="${VAR_LOG_DIR}"
 
 PID="\$(pgrep -xa java | grep \${DOMAIN_HOME} | grep NodeManager | awk '{print \$1}')"
 if [ -n "\${PID}" ]; then
-  echo "[ERROR] NodeManager (pid \${PID})" is already running!
+  echo "[ERROR] The NodeManager (pid \${PID})" is already running!
   exit
 fi
 EOF
 fi
 
 cat << EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
+
 JAVA_OPTIONS="\${JAVA_OPTIONS} -DListenAddress=${NODEMGR_LISTEN_ADDRESS}"
 JAVA_OPTIONS="\${JAVA_OPTIONS} -DListenPort=${NODEMGR_LISTEN_PORT}"
 JAVA_OPTIONS="\${JAVA_OPTIONS} -DSecureListener=false"
