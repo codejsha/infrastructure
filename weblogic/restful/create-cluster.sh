@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export MANAGED_SERVER_NAME="${1}"
+export CLUSTER_NAME="${1}"
 
 ADMIN_SERVER_URL="http://test.example.com:7001"
 
@@ -36,25 +36,25 @@ function activate {
         ${ADMIN_SERVER_URL}/management/weblogic/latest/edit/changeManager/activate
 }
 
-function create_server {
+function create_cluster {
     curl \
         --user weblogic:welcome1 \
         --request POST \
         --header "Accept:application/json" \
         --header "Content-Type:application/json" \
         --header "X-Requested-By:MyClient" \
-        --data '{"name":'"${MANAGED_SERVER_NAME}"'}' \
-        ${ADMIN_SERVER_URL}/management/weblogic/latest/edit/servers
+        --data '{"name":'"${CLUSTER_NAME}"'}' \
+        ${ADMIN_SERVER_URL}/management/weblogic/latest/edit/clusters
 
-    # envsubst < ./server.json > ./server-temp.json
+    # envsubst < ./cluster.json > ./cluster-temp.json
     # curl \
     #     --user weblogic:welcome1 \
     #     --request POST \
     #     --header "Accept:application/json" \
     #     --header "Content-Type:application/json" \
     #     --header "X-Requested-By:MyClient" \
-    #     --data @server-temp.json \
-    #     ${ADMIN_SERVER_URL}/management/weblogic/latest/edit/servers
+    #     --data @cluster-temp.json \
+    #     ${ADMIN_SERVER_URL}/management/weblogic/latest/edit/clusters
 }
 
 ######################################################################
@@ -62,6 +62,6 @@ function create_server {
 start_edit
 # cancel_edit
 
-create_server
+create_cluster
 
 activate

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export MANAGED_SERVER_NAME="${1}"
+export NODE_MANAGER_NAME="${1}"
 
 ADMIN_SERVER_URL="http://test.example.com:7001"
 
@@ -36,25 +36,25 @@ function activate {
         ${ADMIN_SERVER_URL}/management/weblogic/latest/edit/changeManager/activate
 }
 
-function create_server {
+function create_node_manager {
     curl \
         --user weblogic:welcome1 \
         --request POST \
         --header "Accept:application/json" \
         --header "Content-Type:application/json" \
         --header "X-Requested-By:MyClient" \
-        --data '{"name":'"${MANAGED_SERVER_NAME}"'}' \
-        ${ADMIN_SERVER_URL}/management/weblogic/latest/edit/servers
+        --data '{"name":'"${NODE_MANAGER_NAME}"'}' \
+        ${ADMIN_SERVER_URL}/management/weblogic/latest/edit/machines
 
-    # envsubst < ./server.json > ./server-temp.json
+    # envsubst < ./nodemgr.json > ./nodemgr-temp.json
     # curl \
     #     --user weblogic:welcome1 \
     #     --request POST \
     #     --header "Accept:application/json" \
     #     --header "Content-Type:application/json" \
     #     --header "X-Requested-By:MyClient" \
-    #     --data @server-temp.json \
-    #     ${ADMIN_SERVER_URL}/management/weblogic/latest/edit/servers
+    #     --data @nodemgr-temp.json \
+    #     ${ADMIN_SERVER_URL}/management/weblogic/latest/edit/machines
 }
 
 ######################################################################
@@ -62,6 +62,6 @@ function create_server {
 start_edit
 # cancel_edit
 
-create_server
+create_node_manager
 
 activate
