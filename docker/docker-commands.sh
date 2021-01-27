@@ -43,6 +43,12 @@ docker image rm $(docker image ls --all --quiet --filter dangling=true)
 ### remove unused images
 docker image prune --all --force
 
+### save
+docker save --output ${IMAGE_FILE} ${IMAGE}:${TAG}
+
+### load
+docker load --input ${IMAGE_FILE}
+
 ######################################################################
 
 ### network
