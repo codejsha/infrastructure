@@ -11,6 +11,7 @@ bash ./create-change-password-script.sh
 bash ./create-change-store-user-config-script.sh
 bash ./create-encrypt-password-script.sh
 bash ./create-regen-demo-identity-script.sh
+bash ./create-store-user-config-admin-scripts.sh AdminServer
 
 ######################################################################
 
@@ -81,7 +82,7 @@ bash ./set-cluster-config.sh BaseCluster1 unicast
 ### bash ./set-server-config.sh ${MANAGED_SERVER_NAME} ${MANAGED_SERVER_ADDRESS} ${MANAGED_SERVER_PORT} ${CLUSTER_NAME}
 ### bash ./set-server-config.sh ${MANAGED_SERVER_NAME} ${MANAGED_SERVER_ADDRESS} ${MANAGED_SERVER_PORT} ${CLUSTER_NAME} ${NODEMGR_NAME}
 ### bash ./create-managed-scripts.sh ${SERVER_NAME}
-### bash ./create-store-user-config-scripts.sh ${SERVER_NAME}
+### bash ./create-store-user-config-managed-scripts.sh ${SERVER_NAME}
 
 bash ./create-server.sh ManagedServer1
 bash ./create-server.sh ManagedServer2
@@ -104,10 +105,10 @@ bash ./create-managed-scripts.sh ManagedServer1
 bash ./create-managed-scripts.sh ManagedServer2
 # bash ./create-managed-scripts.sh ManagedServer3
 # bash ./create-managed-scripts.sh ManagedServer4
-bash ./create-store-user-config-scripts.sh ManagedServer1
-bash ./create-store-user-config-scripts.sh ManagedServer2
-# bash ./create-store-user-config-scripts.sh ManagedServer3
-# bash ./create-store-user-config-scripts.sh ManagedServer4
+bash ./create-store-user-config-managed-scripts.sh ManagedServer1
+bash ./create-store-user-config-managed-scripts.sh ManagedServer2
+# bash ./create-store-user-config-managed-scripts.sh ManagedServer3
+# bash ./create-store-user-config-managed-scripts.sh ManagedServer4
 
 ######################################################################
 
@@ -120,8 +121,8 @@ bash ./create-store-user-config-scripts.sh ManagedServer2
 
 # bash ./create-managed-scripts.sh JmsManagedServer1
 # bash ./create-managed-scripts.sh JmsManagedServer2
-# bash ./create-store-user-config-scripts.sh ManagedServer1
-# bash ./create-store-user-config-scripts.sh ManagedServer2
+# bash ./create-store-user-config-managed-scripts.sh ManagedServer1
+# bash ./create-store-user-config-managed-scripts.sh ManagedServer2
 
 ######################################################################
 
