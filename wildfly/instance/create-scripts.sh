@@ -128,7 +128,6 @@ EOF
 
 if [[ ${JAVA_VERSION} =~ ^1.8 ]]; then
 cat <<EOF >> ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
-# JAVA_OPTS="\${JAVA_OPTS} -XX:+PrintFlagsFinal"
 # JAVA_OPTS="\${JAVA_OPTS} -verbose:class"
 # JAVA_OPTS="\${JAVA_OPTS} -verbose:module"
 # JAVA_OPTS="\${JAVA_OPTS} -verbose:jni"
@@ -136,7 +135,6 @@ cat <<EOF >> ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
 EOF
 elif [[ ${JAVA_VERSION} =~ ^11 ]]; then
 cat <<EOF >> ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
-# JAVA_OPTS="\${JAVA_OPTS} -XX:+PrintFlagsFinal"
 # JAVA_OPTS="\${JAVA_OPTS} -Xlog:class+load=info,class+unload=info:stdout:time,level,tags"
 # JAVA_OPTS="\${JAVA_OPTS} -Xlog:module*=info:stdout:time,level,tags"
 # JAVA_OPTS="\${JAVA_OPTS} -verbose:jni"

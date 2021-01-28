@@ -85,7 +85,6 @@ EOF
 
 if [[ ${JAVA_VERSION} =~ ^1.8 ]]; then
 cat <<EOF >> ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
-# CATALINA_OPTS="\${CATALINA_OPTS} -XX:+PrintFlagsFinal"
 # CATALINA_OPTS="\${CATALINA_OPTS} -verbose:class"
 # CATALINA_OPTS="\${CATALINA_OPTS} -verbose:module"
 # CATALINA_OPTS="\${CATALINA_OPTS} -verbose:jni"
@@ -93,7 +92,6 @@ cat <<EOF >> ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
 EOF
 elif [[ ${JAVA_VERSION} =~ ^11 ]]; then
 cat <<EOF >> ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
-# CATALINA_OPTS="\${CATALINA_OPTS} -XX:+PrintFlagsFinal"
 # CATALINA_OPTS="\${CATALINA_OPTS} -Xlog:class+load=info,class+unload=info:stdout:time,level,tags"
 # CATALINA_OPTS="\${CATALINA_OPTS} -Xlog:module*=info:stdout:time,level,tags"
 # CATALINA_OPTS="\${CATALINA_OPTS} -verbose:jni"

@@ -116,7 +116,6 @@ EOF
 
 if [[ ${JAVA_VERSION} =~ ^1.7|^1.8 ]]; then
 cat <<EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
-# JAVA_OPTIONS="\${JAVA_OPTIONS} -XX:+PrintFlagsFinal"
 # JAVA_OPTIONS="\${JAVA_OPTIONS} -verbose:class"
 # JAVA_OPTIONS="\${JAVA_OPTIONS} -verbose:module"
 # JAVA_OPTIONS="\${JAVA_OPTIONS} -verbose:jni"
@@ -124,7 +123,6 @@ cat <<EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 EOF
 elif [[ ${JAVA_VERSION} =~ ^11 ]]; then
 cat <<EOF >> ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
-# JAVA_OPTIONS="\${JAVA_OPTIONS} -XX:+PrintFlagsFinal"
 # JAVA_OPTIONS="\${JAVA_OPTIONS} -Xlog:class+load=info,class+unload=info:stdout:time,level,tags"
 # JAVA_OPTIONS="\${JAVA_OPTIONS} -Xlog:module*=info:stdout:time,level,tags"
 # JAVA_OPTIONS="\${JAVA_OPTIONS} -verbose:jni"
