@@ -3,10 +3,10 @@
 <!-- log4j -->
 
 <!-- session -->
-<Logger name="org.apache.catalina.session" level="info" />
+<Logger name="org.apache.catalina.session" level="debug" />
 
 <!-- cluster -->
-<Logger name="org.apache.catalina.tribes" level="info" />
+<Logger name="org.apache.catalina.tribes" level="debug" />
 
 <!-- PostgreSQL DataSource -->
-<Logger name="org.postgresql.Driver" level="info" />
+<Logger name="org.postgresql.Driver" level="debug" />
