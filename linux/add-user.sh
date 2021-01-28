@@ -22,7 +22,7 @@ function add_user_with_usergroup {
 }
 
 function add_user_with_password {
-    useradd --uid ${USER_ID} --gid ${GROUP_ID} --create-home --home-dir ${HOME_DIRECTORY} ${USER_NAME} --password ${PASSWORD}
+    useradd --uid ${USER_ID} --gid ${GROUP_ID} --create-home --home-dir ${HOME_DIRECTORY} ${USER_NAME} --password ${PASSWORD} --shell /bin/bash
 }
 
 ######################################################################
