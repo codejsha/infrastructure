@@ -22,8 +22,9 @@ bash ./all.sh
 
 - [create-boot-properties.sh](/weblogic/config/create-boot-properties.sh)
 - [create-change-password-script.sh](/weblogic/config/create-change-password-script.sh)
-- [create-store-user-config-scripts.sh](/weblogic/config/create-store-user-config-scripts.sh)
 - [create-change-store-user-config-script.sh](/weblogic/config/create-change-store-user-config-script.sh)
+- [create-store-user-config-admin-scripts.sh](/weblogic/config/create-store-user-config-admin-scripts.sh)
+- [create-store-user-config-managed-scripts.sh](/weblogic/config/create-store-user-config-managed-scripts.sh)
 - [create-encrypt-password-script.sh](/weblogic/config/create-encrypt-password-script.sh)
 
 ## Server
