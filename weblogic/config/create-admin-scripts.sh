@@ -34,7 +34,7 @@ fi
 
 PID="\$(pgrep -xa java | grep \${DOMAIN_HOME} | grep \${SERVER_NAME} | awk '{print \$1}')"
 if [ -n "\${PID}" ]; then
-  echo "[ERROR] The \${SERVER_NAME} (pid \${PID})" is already running!
+  echo "[ERROR] The \${SERVER_NAME} (pid \${PID}) is already running!"
   exit
 fi
 
