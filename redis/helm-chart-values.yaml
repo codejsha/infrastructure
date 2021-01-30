@@ -26,7 +26,8 @@ master:
     # loadBalancerIP:
   persistence:
     enabled: true
-    storageClass: "rook-ceph-block"
+    storageClass: "local-path"
+    # storageClass: "rook-ceph-block"
     accessModes:
       - ReadWriteOnce
     size: 8Gi
@@ -47,7 +48,8 @@ slave:
   # tolerations: []
   persistence:
     enabled: true
-    storageClass: "rook-ceph-block"
+    storageClass: "local-path"
+    # storageClass: "rook-ceph-block"
     accessModes:
       - ReadWriteOnce
     size: 8Gi

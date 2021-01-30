@@ -14,5 +14,8 @@ helm upgrade --install my-influxdb \
     --set adminUser.user="admin" \
     --set adminUser.password="${PASSWORD}" \
     --set persistence.enabled="true" \
-    --set persistence.storageClass="rook-ceph-block" \
+    --set persistence.storageClass="local-path" \
     influxdata/influxdb2
+
+    ### rook ceph
+    # --set persistence.storageClass="rook-ceph-block" \

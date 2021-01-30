@@ -22,7 +22,8 @@ nexusProxy:
 persistence:
   enabled: true
   accessMode: ReadWriteOnce
-  storageClass: rook-ceph-block
+  storageClass: local-path
+  # storageClass: rook-ceph-block
   storageSize: 100Gi
 
 ingress:

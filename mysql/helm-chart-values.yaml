@@ -56,7 +56,8 @@ primary:
       memory: 256Mi
   persistence:
     enabled: true
-    storageClass: "rook-ceph-block"
+    storageClass: "local-path"
+    # storageClass: "rook-ceph-block"
     accessModes:
       - ReadWriteOnce
     size: 8Gi
@@ -106,7 +107,8 @@ secondary:
       memory: 256Mi
   persistence:
     enabled: true
-    storageClass: "rook-ceph-block"
+    storageClass: "local-path"
+    # storageClass: "rook-ceph-block"
     accessModes:
       - ReadWriteOnce
     size: 8Gi

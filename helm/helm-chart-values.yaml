@@ -20,7 +20,8 @@ persistence:
   enabled: true
   accessMode: ReadWriteOnce
   size: 8Gi
-  storageClass: rook-ceph-block
+  storageClass: local-path
+  # storageClass: rook-ceph-block
 
 ingress:
   enabled: true

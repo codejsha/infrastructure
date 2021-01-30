@@ -19,7 +19,7 @@ helm upgrade --install my-drone \
     --set ingress.annotations."kubernetes\.io/ingress\.class"="nginx" \
     --set ingress.hosts[0].host="drone.example.com" \
     --set ingress.hosts[0].paths[0]="/" \
-    --set persistentVolume.storageClass="rook-ceph-block" \
+    --set persistentVolume.storageClass="local-path" \
     --set env.DRONE_SERVER_HOST="drone.example.com" \
     --set env.DRONE_RPC_SECRET="${SHARED_SECRET}" \
     --version 0.1.6 \
@@ -36,3 +36,6 @@ helm upgrade --install my-drone \
     # --set env.DRONE_GITLAB_CLIENT_ID="" \
     # --set env.DRONE_GITLAB_CLIENT_SECRET="" \
     # --set env.DRONE_GITLAB_SERVER="" \
+
+    ### rook ceph
+    # --set persistentVolume.storageClass="rook-ceph-block" \

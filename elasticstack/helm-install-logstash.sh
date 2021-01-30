@@ -17,6 +17,9 @@ helm upgrade --install my-logstash \
     --set service.ports[1].protocol="TCP" \
     --set service.ports[1].targetPort="8080" \
     --set persistence.enabled="true" \
-    --set volumeClaimTemplate.storageClassName="rook-ceph-block" \
+    --set volumeClaimTemplate.storageClassName="local-path" \
     --version 7.8.0 \
     elastic/logstash
+
+    ### rook ceph
+    # --set volumeClaimTemplate.storageClassName="rook-ceph-block" \

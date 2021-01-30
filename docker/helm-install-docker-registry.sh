@@ -28,9 +28,12 @@ helm upgrade --install my-docker-registry \
     --set ingress.hosts={"registry.example.com"} \
     --set ingress.path="/" \
     --set persistence.enabled="true" \
-    --set persistence.storageClass="rook-ceph-block" \
+    --set persistence.storageClass="local-path" \
     --version 1.9.6 \
     stable/docker-registry
 
     ### for ip address
     # --set s3.regionEndpoint="http://10.10.10.52:9000" \
+
+    ### rook ceph
+    # --set persistence.storageClass="rook-ceph-block" \

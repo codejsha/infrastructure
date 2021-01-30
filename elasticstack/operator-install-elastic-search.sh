@@ -24,5 +24,6 @@ spec:
         resources:
           requests:
             storage: 5Gi
-        storageClassName: rook-ceph-block
+        storageClassName: local-path
+        # storageClassName: rook-ceph-block
 EOF
