@@ -13,29 +13,29 @@ bash ./all.sh
 
 ### Virtual services
 
-- bookinfo-vs-rewrite.yaml
-- bookinfo-vs.yaml
-- vs-all-v1.yaml
-- vs-all.yaml
-- vs-ratings-abort-fault.yaml
-- vs-ratings-delay-fault.yaml
-- vs-ratings-retry.yaml
-- vs-reviews-80-20.yaml
-- vs-reviews-match-v2.yaml
-- vs-reviews-match-v3.yaml
-- vs-reviews-retry.yaml
-- vs-reviews-v1.yaml
+- `bookinfo-vs-rewrite.yaml`
+- `bookinfo-vs.yaml`
+- `vs-all-v1.yaml`
+- `vs-all.yaml`
+- `vs-ratings-abort-fault.yaml`
+- `vs-ratings-delay-fault.yaml`
+- `vs-ratings-retry.yaml`
+- `vs-reviews-80-20.yaml`
+- `vs-reviews-match-v2.yaml`
+- `vs-reviews-match-v3.yaml`
+- `vs-reviews-retry.yaml`
+- `vs-reviews-v1.yaml`
 
 ### Destination rules
 
-- dr-all.yaml
-- dr-reviews-conn-pool.yaml
-- dr-reviews-least-conn.yaml
-- dr-reviews-outlier.yaml
-- dr-reviews-random.yaml
-- dr-reviews-round-robin.yaml
-- dr-reviews-timeout.yaml
+- `dr-all.yaml`
+- `dr-reviews-conn-pool.yaml`
+- `dr-reviews-least-conn.yaml`
+- `dr-reviews-outlier.yaml`
+- `dr-reviews-random.yaml`
+- `dr-reviews-round-robin.yaml`
+- `dr-reviews-timeout.yaml`
 
 ### Gateways
 
-- bookinfo-gw.yaml
+- `bookinfo-gw.yaml`

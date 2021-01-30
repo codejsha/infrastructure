@@ -1,4 +1,4 @@
-# Wildfly / JBoss
+# WildFly / JBoss EAP
 
 ## Install
 
@@ -9,7 +9,7 @@ bash ./helper.sh
 ### install wildfly
 bash ./install-wildfly.sh
 
-### install jboss
+### install jboss eap
 bash ./install-jboss.sh
 ```
 
