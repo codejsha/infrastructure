@@ -26,7 +26,6 @@ export CATALINA_HOME="${CATALINA_HOME}"
 export CATALINA_BASE="${VAR_CATALINA_BASE}"
 
 LOG_DIR="${VAR_LOG_DIR}"
-GET_DATE="\$(date +'%Y%m%d-%H%M%S')"
 export CATALINA_OUT="\${LOG_DIR}/catalina.out"
 export CATALINA_PID="\${CATALINA_BASE}/tomcat.pid"
 

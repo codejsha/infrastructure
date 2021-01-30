@@ -7,7 +7,6 @@ export CATALINA_HOME="/usr/local/tomcat"
 export CATALINA_BASE="${CATALINA_HOME}/instances/${INSTANCE_NAME}"
 
 LOG_DIR="${CATALINA_BASE}/logs"
-GET_DATE="$(date +'%Y%m%d-%H%M%S')"
 export CATALINA_OUT="${LOG_DIR}/catalina.out"
 export CATALINA_PID="${CATALINA_BASE}/tomcat.pid"
 
