@@ -1,4 +1,6 @@
+# $GitLabVolumeDir="C:\volume\gitlab"
 $GitLabVolumeDir="$env:USERPROFILE\volume\gitlab"
+New-Item -Path $GitLabVolumeDir -ItemType Directory -Force
 New-Item -Path $GitLabVolumeDir\config -ItemType Directory -Force
 New-Item -Path $GitLabVolumeDir\logs -ItemType Directory -Force
 New-Item -Path $GitLabVolumeDir\data -ItemType Directory -Force

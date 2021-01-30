@@ -12,7 +12,9 @@ function New-DockerRunOracleDB11 {
     # bash ./buildDockerImage.sh -v 11.2.0.2 -x -i
     # rm -f 11.2.0.2/*.zip
 
-    New-Item -Path $env:USERPROFILE\volume\oracledb11 -ItemType Directory -Force
+    # $OracleDBVolumeDir="C:\volume\oracledb11"
+    $OracleDBVolumeDir="$env:USERPROFILE\volume\oracledb11"
+    New-Item -Path $OracleDBVolumeDir -ItemType Directory -Force
 
     docker container run `
         --detach `
@@ -21,7 +23,7 @@ function New-DockerRunOracleDB11 {
         --publish 1521:1521 `
         --publish 5500:8080 `
         --env ORACLE_PWD="$password" `
-        --mount type=bind,src=$env:USERPROFILE\volume\oracledb11,dst=/u01/app/oracle/oradata `
+        --mount type=bind,src=$OracleDBVolumeDir,dst=/u01/app/oracle/oradata `
         oracle/database:11.2.0.2-xe
 }
 
@@ -31,7 +33,9 @@ function New-DockerRunOracleDB12R1 {
     # bash ./buildDockerImage.sh -v 12.1.0.2 -e -i
     # rm -f 12.1.0.2/*.zip
 
-    New-Item -Path $env:USERPROFILE\volume\oracledb12 -ItemType Directory -Force
+    # $OracleDBVolumeDir="C:\volume\oracledb12"
+    $OracleDBVolumeDir="$env:USERPROFILE\volume\oracledb12"
+    New-Item -Path $OracleDBVolumeDir -ItemType Directory -Force
 
     docker container run `
         --detach `
@@ -42,7 +46,7 @@ function New-DockerRunOracleDB12R1 {
         --env ORACLE_PDB=ORCLPDB1 `
         --env ORACLE_PWD="$password" `
         --env ORACLE_CHARACTERSET=AL32UTF8 `
-        --mount type=bind,src=$env:USERPROFILE\volume\oracledb12,dst=/opt/oracle/oradata `
+        --mount type=bind,src=$OracleDBVolumeDir,dst=/opt/oracle/oradata `
         oracle/database:12.1.0.2-ee
 }
 
@@ -51,7 +55,9 @@ function New-DockerRunOracleDB12R2 {
     # bash ./buildDockerImage.sh -v 12.2.0.1 -e -i
     # rm -f 12.2.0.1/*.zip
 
-    New-Item -Path $env:USERPROFILE\volume\oracledb12 -ItemType Directory -Force
+    # $OracleDBVolumeDir="C:\volume\oracledb12"
+    $OracleDBVolumeDir="$env:USERPROFILE\volume\oracledb12"
+    New-Item -Path $OracleDBVolumeDir -ItemType Directory -Force
 
     docker container run `
         --detach `
@@ -62,7 +68,7 @@ function New-DockerRunOracleDB12R2 {
         --env ORACLE_PDB=ORCLPDB1 `
         --env ORACLE_PWD="$password" `
         --env ORACLE_CHARACTERSET=AL32UTF8 `
-        --mount type=bind,src=$env:USERPROFILE\volume\oracledb12,dst=/opt/oracle/oradata `
+        --mount type=bind,src=$OracleDBVolumeDir,dst=/opt/oracle/oradata `
         oracle/database:12.2.0.1-ee
 }
 
@@ -82,13 +88,15 @@ function New-DockerRunOracleDB12R2OfficialVolume {
 function New-DockerRunOracleDB12R2Official {
     docker pull store/oracle/database-enterprise:12.2.0.1
 
-    New-Item -Path $env:USERPROFILE\volume\oracledb12 -ItemType Directory -Force
+    # $OracleDBVolumeDir="C:\volume\oracledb12"
+    $OracleDBVolumeDir="$env:USERPROFILE\volume\oracledb12"
+    New-Item -Path $OracleDBVolumeDir -ItemType Directory -Force
 
     docker container run `
         --detach `
         --name oracledb12 `
         --publish 1521:1521 `
-        --mount type=bind,src=$env:USERPROFILE\volume\oracledb12,dst=/ORCL `
+        --mount type=bind,src=$OracleDBVolumeDir,dst=/ORCL `
         store/oracle/database-enterprise:12.2.0.1
 }
 
@@ -97,7 +105,9 @@ function New-DockerRunOracleDB18 {
     # bash ./buildDockerImage.sh -v 18.3.0 -e -i
     # rm -f 18.3.0/*.zip
 
-    New-Item -Path $env:USERPROFILE\volume\oracledb18 -ItemType Directory -Force
+    # $OracleDBVolumeDir="C:\volume\oracledb18"
+    $OracleDBVolumeDir="$env:USERPROFILE\volume\oracledb18"
+    New-Item -Path $OracleDBVolumeDir -ItemType Directory -Force
 
     docker container run `
         --detach `
@@ -108,7 +118,7 @@ function New-DockerRunOracleDB18 {
         --env ORACLE_PDB=ORCLPDB1 `
         --env ORACLE_PWD="$password" `
         --env ORACLE_CHARACTERSET=AL32UTF8 `
-        --mount type=bind,src=$env:USERPROFILE\volume\oracledb18,dst=/opt/oracle/oradata `
+        --mount type=bind,src=$OracleDBVolumeDir,dst=/opt/oracle/oradata `
         oracle/database:18.3.0-ee
 }
 
@@ -117,7 +127,9 @@ function New-DockerRunOracleDB19 {
     # bash ./buildDockerImage.sh -v 19.3.0 -e -i
     # rm -f 19.3.0/*.zip
 
-    New-Item -Path $env:USERPROFILE\volume\oracledb19 -ItemType Directory -Force
+    # $OracleDBVolumeDir="C:\volume\oracledb19"
+    $OracleDBVolumeDir="$env:USERPROFILE\volume\oracledb19"
+    New-Item -Path $OracleDBVolumeDir -ItemType Directory -Force
 
     docker container run `
         --detach `
@@ -128,7 +140,7 @@ function New-DockerRunOracleDB19 {
         --env ORACLE_PDB=ORCLPDB1 `
         --env ORACLE_PWD="$password" `
         --env ORACLE_CHARACTERSET=AL32UTF8 `
-        --mount type=bind,src=$env:USERPROFILE\volume\oracledb19,dst=/opt/oracle/oradata `
+        --mount type=bind,src=$OracleDBVolumeDir,dst=/opt/oracle/oradata `
         oracle/database:19.3.0-ee
 }
 
