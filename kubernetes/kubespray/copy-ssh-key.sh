@@ -2,12 +2,12 @@
 
 PASSWORD="${PASSWORD}"
 declare -A NODES=(
-    [10.10.10.11]="controlplane1"
-    [10.10.10.12]="controlplane2"
-    [10.10.10.13]="controlplane3"
-    [10.10.10.21]="node1"
-    [10.10.10.22]="node2"
-    [10.10.10.23]="node3"
+    [controlplane1]="192.168.140.11"
+    [controlplane2]="192.168.140.12"
+    [controlplane3]="192.168.140.13"
+    [node1]="192.168.140.21"
+    [node2]="192.168.140.22"
+    [node3]="192.168.140.23"
 )
 
 rm --force ~/.ssh/id_rsa
@@ -17,8 +17,9 @@ rm --force ~/.ssh/known_hosts
 
 ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
 
-for ADDRESS in "${!NODES[@]}"
+for NODE_NAME in "${!NODES[@]}"
 do
-    ssh-keyscan -H ${ADDRESS},${NODES[$ADDRESS]} >> ~/.ssh/known_hosts
-    sshpass -p "${PASSWORD}" ssh-copy-id -i ~/.ssh/id_rsa.pub root@${NODES[$ADDRESS]}
+    ssh-keyscan -H ${NODES[${NODE_NAME}]},${NODE_NAME} >> ~/.ssh/known_hosts
+    sshpass -p ${PASSWORD} ssh-copy-id -i ~/.ssh/id_rsa.pub root@${NODES[${NODE_NAME}]}
+    # sshpass -p ${PASSWORD} ssh-copy-id -i ~/.ssh/id_rsa.pub prouser@${NODES[${NODE_NAME}]}
 done

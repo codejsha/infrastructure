@@ -4,7 +4,7 @@
 dashboard_enabled: true
 
 # Helm deployment
-helm_enabled: false
+helm_enabled: true
 
 # Registry deployment
 registry_enabled: false
@@ -19,20 +19,24 @@ metrics_server_metric_resolution: 60s
 metrics_server_kubelet_preferred_address_types: "InternalIP"
 
 # Rancher Local Path Provisioner
-local_path_provisioner_enabled: false
-# local_path_provisioner_namespace: "local-path-storage"
-# local_path_provisioner_storage_class: "local-path"
-# local_path_provisioner_reclaim_policy: Delete
-# local_path_provisioner_claim_root: /opt/local-path-provisioner/
-# local_path_provisioner_debug: false
-# local_path_provisioner_image_repo: "rancher/local-path-provisioner"
-# local_path_provisioner_image_tag: "v0.0.14"
-# local_path_provisioner_helper_image_repo: "busybox"
-# local_path_provisioner_helper_image_tag: "latest"
+local_path_provisioner_enabled: true
+local_path_provisioner_namespace: "local-path-storage"
+local_path_provisioner_storage_class: "local-path"
+local_path_provisioner_reclaim_policy: Delete
+local_path_provisioner_claim_root: /opt/local-path-provisioner/
+local_path_provisioner_debug: false
+local_path_provisioner_image_repo: "rancher/local-path-provisioner"
+local_path_provisioner_image_tag: "v0.0.19"
+local_path_provisioner_helper_image_repo: "busybox"
+local_path_provisioner_helper_image_tag: "latest"
 
 # Local volume provisioner deployment
 local_volume_provisioner_enabled: false
 # local_volume_provisioner_namespace: kube-system
+# local_volume_provisioner_nodelabels:
+#   - kubernetes.io/hostname
+#   - topology.kubernetes.io/region
+#   - topology.kubernetes.io/zone
 # local_volume_provisioner_storage_classes:
 #   local-storage:
 #     host_dir: /mnt/disks
@@ -95,7 +99,7 @@ ingress_nginx_insecure_port: 80
 ingress_nginx_secure_port: 443
 # ingress_nginx_configmap:
 #   map-hash-bucket-size: "128"
-#   ssl-protocols: "SSLv2"
+#   ssl-protocols: "TLSv1.2 TLSv1.3"
 # ingress_nginx_configmap_tcp_services:
 #   9000: "default/example-go:8080"
 # ingress_nginx_configmap_udp_services:
@@ -123,7 +127,7 @@ cert_manager_namespace: "cert-manager"
 # MetalLB deployment
 metallb_enabled: true
 metallb_ip_range:
-  - "10.10.10.50-10.10.10.149"
+  - "192.168.140.50-192.168.140.149"
 metallb_version: v0.9.3
 metallb_protocol: "layer2"
 metallb_port: "7472"

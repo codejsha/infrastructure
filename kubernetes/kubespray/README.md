@@ -4,40 +4,55 @@
 - https://github.com/kubernetes-sigs/kubespray
 - https://kubernetes.io/docs/setup/production-environment/tools/kubespray/
 
-## Virtual machine
+Table of Contents:
 
-### Create Hyper-V VMs
+- [Pre-install](#pre-install)
+- [Virtual machine configuration](#virtual-machine-configuration)
+- [Host configuration](#host-configuration)
+- [Deploy cluster](#deploy-cluster)
+- [Post-install](#post-install)
+
+## Pre-install
+
+```powershell
+helper.ps1
+
+sudo yum update -y
+sudo dnf update -y
+```
+
+## Virtual machine configuration
+
+### 1. Create Hyper-V VMs
 
 ```powershell
 create-kube-vm.ps1
 ```
 
-### Install OS
+### 2. Install OS
 
 manually install linux (CentOS)
 
-### Requirements
+### 3. Kubernetes requirements
 
 ```bash
 bash ./require-all-node.sh
 ```
 
-### Add scripts
+### 4. Add scripts
 
 - `set-hostname.sh`
-- `set-network.sh`
+- `set-network.sh` or `set-network-dual.sh`
 
-### Copy vhd
+### 5. Copy vhd
 
 ```powershell
 convert-kube-vhd.ps1
 ```
 
-## Pre-install
+## Host configuration
 
-### Hostname and network
-
-set hostname:
+### 1. Set hostname
 
 ```bash
 # controlplane1
@@ -54,14 +69,17 @@ bash ./set-hostname.sh n2
 bash ./set-hostname.sh n3
 ```
 
-set network:
+### 2. Set network
 
 ```bash
-# all hosts
+# 1 network
 bash ./set-network.sh
+
+# 2 network
+bash ./set-network-dual.sh
 ```
 
-### Copy ssh keys
+### 3. Copy ssh keys
 
 ```bash
 bash ./pre-copy-ssh-key.sh
@@ -71,14 +89,15 @@ bash ./copy-ssh-key.sh
 
 ## Deploy cluster
 
-### Configure
+### 1. Configure cluster settings
 
 - `all.yaml`
 - `docker.yaml`
 - `addons.yaml`
 - `k8s-cluster.yaml`
+- `k8s-net-calico.yml`
 
-### Run playbook
+### 2. Run playbook
 
 ```bash
 export PASSWORD="${PASSWORD}"
@@ -87,20 +106,22 @@ bash ./install-k8s-kubespray.sh
 
 ## Post-install
 
-### Copy config and cert files
+### 1. Copy config and cert files
 
 ```bash
 bash ./post-install.sh
 ```
 
-### Dashboard
+### 2. Create dashboard ingress
 
 ```bash
 bash ./dashboard-clusterrolebinding.sh
 kubectl apply -filename dashboard-ingress.yaml
 ```
 
-### Netchecker
+### 3. Create Netchecker ingress (optional)
+
+before install, set to `deploy_netchecker: true` in `k8s-cluster.yaml`
 
 ```bash
 kubectl apply -filename netchecker-ingress.yaml

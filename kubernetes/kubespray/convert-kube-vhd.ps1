@@ -1,16 +1,18 @@
 function Convert-KubeVHD {
     param (
         [Parameter(Mandatory = $true, Position = 0)]
-        [string]$VMPath,
-        [Parameter(Mandatory = $true, Position = 1)]
         [string]$SrcVMName,
+        [Parameter(Mandatory = $true, Position = 1)]
+        [string]$SrcVMPath,
         [Parameter(Mandatory = $true, Position = 2)]
-        [string]$DstVMName
+        [string]$DstVMName,
+        [Parameter(Mandatory = $true, Position = 3)]
+        [string]$DstVMPath
     )
-    
-    $SrcVHDPath = "$VMPath\$SrcVMName\Virtual Hard Disks\$SrcVMName.vhdx"
-    $DstVHDPath = "$VMPath\$DstVMName\Virtual Hard Disks\$DstVMName.vhdx"
-    
+
+    $SrcVHDPath = "$SrcVMPath\$SrcVMName\Virtual Hard Disks\$SrcVMName.vhdx"
+    $DstVHDPath = "$DstVMPath\$DstVMName\Virtual Hard Disks\$DstVMName.vhdx"
+
     Remove-Item -Path "$DstVHDPath"
     Convert-VHD -Path "$SrcVHDPath" -DestinationPath "$DstVHDPath"
     Remove-VMHardDiskDrive -VMName "$DstVMName" `
@@ -30,9 +32,16 @@ function Convert-KubeVHD {
         -FirstBootDevice $HardDrive
 }
 
-Convert-KubeVHD "$env:USERPROFILE\hyper" "KubeAccessMachine" "KubeControlPlaneMachine1"
-Convert-KubeVHD "$env:USERPROFILE\hyper" "KubeAccessMachine" "KubeControlPlaneMachine2"
-Convert-KubeVHD "$env:USERPROFILE\hyper" "KubeAccessMachine" "KubeControlPlaneMachine3"
-Convert-KubeVHD "$env:USERPROFILE\hyper" "KubeAccessMachine" "KubeNodeMachine1"
-Convert-KubeVHD "$env:USERPROFILE\hyper" "KubeAccessMachine" "KubeNodeMachine2"
-Convert-KubeVHD "$env:USERPROFILE\hyper" "KubeAccessMachine" "KubeNodeMachine3"
+# Convert-KubeVHD "KubeAccessMachine" "C:\hyper" "KubeControlPlaneMachine1" "C:\hyper"
+# Convert-KubeVHD "KubeAccessMachine" "C:\hyper" "KubeControlPlaneMachine2" "C:\hyper"
+# Convert-KubeVHD "KubeAccessMachine" "C:\hyper" "KubeControlPlaneMachine3" "C:\hyper"
+# Convert-KubeVHD "KubeAccessMachine" "C:\hyper" "KubeNodeMachine1" "C:\hyper"
+# Convert-KubeVHD "KubeAccessMachine" "C:\hyper" "KubeNodeMachine2" "C:\hyper"
+# Convert-KubeVHD "KubeAccessMachine" "C:\hyper" "KubeNodeMachine3" "C:\hyper"
+
+Convert-KubeVHD "KubeAccessMachine" "$env:USERPROFILE\hyper" "KubeControlPlaneMachine1" "$env:USERPROFILE\hyper"
+Convert-KubeVHD "KubeAccessMachine" "$env:USERPROFILE\hyper" "KubeControlPlaneMachine2" "$env:USERPROFILE\hyper"
+Convert-KubeVHD "KubeAccessMachine" "$env:USERPROFILE\hyper" "KubeControlPlaneMachine3" "$env:USERPROFILE\hyper"
+Convert-KubeVHD "KubeAccessMachine" "$env:USERPROFILE\hyper" "KubeNodeMachine1" "$env:USERPROFILE\hyper"
+Convert-KubeVHD "KubeAccessMachine" "$env:USERPROFILE\hyper" "KubeNodeMachine2" "$env:USERPROFILE\hyper"
+Convert-KubeVHD "KubeAccessMachine" "$env:USERPROFILE\hyper" "KubeNodeMachine3" "$env:USERPROFILE\hyper"
