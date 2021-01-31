@@ -11,6 +11,10 @@ metadata:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
 spec:
+  tls:
+    - hosts:
+        - argocd.example.com
+      secretName: argocd-secret
   rules:
     - host: argocd.example.com
       http:
@@ -18,7 +22,3 @@ spec:
           - backend:
               serviceName: argocd-server
               servicePort: https
-  tls:
-    - hosts:
-        - argocd.example.com
-      secretName: argocd-secret
