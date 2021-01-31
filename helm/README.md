@@ -51,7 +51,7 @@ env:
 create bucket:
 
 ```bash
-mc mb myminio/mychart-storage
+mc mb my-minio/mychart-storage
 ```
 
 install:

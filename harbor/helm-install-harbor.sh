@@ -2,7 +2,7 @@
 
 ### requirements:
 ### sudo yum install -y httpd-tools
-### mc mb myminio/harbor-storage
+### mc mb my-minio/harbor-storage
 
 helm repo add harbor https://helm.goharbor.io
 helm repo update

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MINIO_ALIAS="myminio"
+MINIO_ALIAS="my-minio"
 MINIO_URL="http://minio.example.com"
 AWS_ACCESS_KEY="${AWS_ACCESS_KEY}"
 AWS_SECRET_KEY="${AWS_SECRET_KEY}"

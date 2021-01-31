@@ -17,7 +17,7 @@ function docker_run_chartmuseum_with_local_storage {
 }
 
 function docker_run_chartmuseum_with_s3_storage {
-    # mc mb myminio/chart-storage
+    # mc mb my-minio/chart-storage
 
     docker container run \
         --detach \
