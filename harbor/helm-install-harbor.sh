@@ -27,5 +27,5 @@ helm upgrade --install my-harbor \
     --create-namespace \
     --namespace ${NAMESPACE} \
     --values helm-chart-values-temp.yaml \
-    --version 1.5.2 \
+    --version 1.5.3 \
     harbor/harbor
