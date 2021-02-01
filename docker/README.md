@@ -6,41 +6,15 @@
 bash ./install-docker.sh
 ```
 
-### Docker Registry
-
-#### Container
-
-- https://docs.docker.com/registry/deploying/
-
-```bash
-bash ./docker-run-docker-registry.sh
-```
-
-#### Helm chart
-
-Deprecated chart
-
-https://github.com/helm/charts#%EF%B8%8F-deprecation-and-archive-notice
-
-```bash
-bash ./helm-install-docker-registry.sh
-```
-
-### Docker compose
-
-- https://github.com/docker/compose
-
-```bash
-bash ./install-docker-compose.sh
-```
-
 ## Docker build
 
 - https://docs.docker.com/engine/reference/commandline/build/
 
-## Configuration file
+### Dockerfile Examples
 
-`${HOME}/.docker/config.json`: [config.json](/docker/config.json)
+- [FTP Server README](/linux/ftp-server/README.md)
+- [RPM Package Repository Server README](/linux/rpm-package-repo-server/README.md)
+- [Kustomize README](/Kustomize/README.md)
 
 ## Daemon
 
@@ -72,17 +46,43 @@ systemctl daemon-reload
 systemctl restart docker.service
 ```
 
+## Configuration file
+
+`${HOME}/.docker/config.json`: [config.json](/docker/config.json)
+
+## Docker compose
+
+- https://github.com/docker/compose
+
+```bash
+bash ./install-docker-compose.sh
+```
+
+## Docker Registry
+
+### Container
+
+- https://docs.docker.com/registry/deploying/
+
+```bash
+bash ./docker-run-docker-registry.sh
+```
+
+### Helm chart
+
+Deprecated chart
+
+https://github.com/helm/charts#%EF%B8%8F-deprecation-and-archive-notice
+
+```bash
+bash ./helm-install-docker-registry.sh
+```
+
 ## Other commands
 
 - `base64-encoded.sh`
 - `docker-commands.sh`
 - `docker-mount-option.sh`
-
-## Dockerfile Examples
-
-- [Kustomize README](/Kustomize/README.md)
-- [FTP Server README](/linux/ftp-server/README.md)
-- [RPM Package Repository Server README](/linux/rpm-package-repo-server/README.md)
 
 ## Portainer
 

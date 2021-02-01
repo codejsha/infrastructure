@@ -1,6 +1,6 @@
 # Kafka
 
-## Install
+## Kubernetes
 
 ```bash
 bash ./helm-install-kafka.sh
@@ -21,8 +21,6 @@ bash ./helm-install-kafka.sh
 ## NiFi
 
 - https://github.com/cetic/helm-nifi
-
-### Install
 
 ```bash
 bash ./helm-install-nifi.sh

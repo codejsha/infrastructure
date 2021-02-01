@@ -116,7 +116,7 @@ bash ./post-install.sh
 
 ```bash
 bash ./dashboard-clusterrolebinding.sh
-kubectl apply -filename dashboard-ingress.yaml
+kubectl apply --filename dashboard-ingress.yaml
 ```
 
 ### 3. Create Netchecker ingress (optional)
@@ -124,5 +124,5 @@ kubectl apply -filename dashboard-ingress.yaml
 before install, set to `deploy_netchecker: true` in `k8s-cluster.yaml`
 
 ```bash
-kubectl apply -filename netchecker-ingress.yaml
+kubectl apply --filename netchecker-ingress.yaml
 ```

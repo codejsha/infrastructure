@@ -13,8 +13,6 @@ bash ./docker-run-redis.sh
 
 ## Kubernetes
 
-### Install
-
 ```bash
 bash ./helm-install-redis.sh
 ```
