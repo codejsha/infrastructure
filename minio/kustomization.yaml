@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Configure repo and tag of MinIO Operator Image
+images:
+  - name: minio/operator
+    newName: minio/operator
+    newTag: v4.0.0
+
+namespace: minio-operator
+
+resources:
+  - operator/operator-kustomize/namespace.yaml
+  - operator/operator-kustomize/service-account.yaml
+  - operator/operator-kustomize/cluster-role.yaml
+  - operator/operator-kustomize/cluster-role-binding.yaml
+  - operator/operator-kustomize/base/crds/minio.min.io_tenants.yaml
+  - operator/operator-kustomize/service.yaml
+  - operator/operator-kustomize/deployment.yaml
+  - operator/operator-kustomize/console-ui.yaml
