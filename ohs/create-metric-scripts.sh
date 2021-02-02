@@ -20,9 +20,9 @@ mkdir -p ${DOMAIN_HOME}/scripts
 
 ### replace pattern with string
 TEMP="\${ORACLE_HOME}"
-VAR_DOMAIN_HOME="${INSTANCE_HOME/${ORACLE_HOME}/${TEMP}}"
+VAR_DOMAIN_HOME="${DOMAIN_HOME/${ORACLE_HOME}/${TEMP}}"
 TEMP="\${DOMAIN_NAME}"
-VAR_DOMAIN_HOME="${INSTANCE_HOME/${DOMAIN_NAME}/${TEMP}}"
+VAR_DOMAIN_HOME="${VAR_DOMAIN_HOME/${DOMAIN_NAME}/${TEMP}}"
 
 ######################################################################
 
