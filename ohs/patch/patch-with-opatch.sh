@@ -29,6 +29,13 @@ function check_oracle_home {
     mkdir -p ${ORACLE_HOME}/OPatch/patch_files
 }
 
+function check_inventory_file {
+    if [ ! -f "${ORACLE_HOME}/${INVENTORY_FILE}" ]; then
+        echo "[ERROR] The inventory file (${ORACLE_HOME}/${INVENTORY_FILE}) does not exist!"
+        exit
+    fi
+}
+
 function check_inventory_group {
     ORACLE_HOME_GROUP="$(stat -c '%G' ${ORACLE_HOME})"
     INST_GROUP="$(grep inst_group ${ORACLE_HOME}/${INVENTORY_FILE} | cut -d'=' -f 2)"
@@ -63,6 +70,7 @@ function opatch_update {
 
     check_patch_file ${PATCH_FILE_DIR}/${PATCH_FILE}
     unzip -q -o ${PATCH_FILE_DIR}/${PATCH_FILE} -d ${ORACLE_HOME}/OPatch/patch_files
+
     ${JAVA_HOME}/bin/java \
         -jar ${ORACLE_HOME}/OPatch/patch_files/${PATCH_ID}/opatch_generic.jar \
         -silent oracle_home=${ORACLE_HOME} \
@@ -73,8 +81,8 @@ function opatch_update {
     #     -invPtrLoc ${ORACLE_HOME}/${INVENTORY_FILE} \
     #     -ignoreSysPrereqs
     # ${JAVA_HOME}/bin/java \
-    #     -jar ${ORACLE_HOME}/OPatch/patch_files/${PATCH_ID}/opatch_generic.jar \
     #     -Djava.io.tmpdir=/tmp \
+    #     -jar ${ORACLE_HOME}/OPatch/patch_files/${PATCH_ID}/opatch_generic.jar \
     #     -silent oracle_home=${ORACLE_HOME} \
     #     -invPtrLoc ${ORACLE_HOME}/${INVENTORY_FILE}
 
@@ -107,6 +115,7 @@ function opatch_apply {
 
     check_patch_file ${PATCH_FILE_DIR}/${PATCH_FILE}
     unzip -q -o ${PATCH_FILE_DIR}/${PATCH_FILE} -d ${ORACLE_HOME}/OPatch/patch_files
+
     # ${ORACLE_HOME}/OPatch/opatch apply \
     #     -silent \
     #     ${ORACLE_HOME}/OPatch/patch_files/${PATCH_ID}
@@ -126,6 +135,7 @@ function opatch_apply {
 
 function opatch_lsinventory {
     # ${ORACLE_HOME}/OPatch/opatch lsinventory
+    # ${ORACLE_HOME}/OPatch/opatch lsinventory -all
     ${ORACLE_HOME}/OPatch/opatch lsinventory \
         -all \
         -oh ${ORACLE_HOME} \
@@ -140,6 +150,7 @@ function opatch_lsinventory {
 
 check_java_home
 check_oracle_home
+check_inventory_file
 check_inventory_group
 check_inventory_location
 
