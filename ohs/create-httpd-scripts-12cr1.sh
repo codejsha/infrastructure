@@ -175,8 +175,8 @@ COMPONENT_LOG_PATH="\${ORACLE_INSTANCE}/diagnostics/logs/OHS/ohs1"
 CONFIG=\${DOMAIN_HOME}/config/fmwconfig/components/\${COMPONENT_TYPE}/instances/\${COMPONENT_NAME}/httpd.conf
 export ORACLE_HOME PRODUCT_HOME LD_LIBRARY_PATH ORACLE_INSTANCE COMPONENT_TYPE COMPONENT_CONFIG_PATH COMPONENT_LOG_PATH COMPONENT_NAME CONFIG
 
-\${ORACLE_HOME}/ohs/bin/httpd.worker -f \${CONFIG} -M
-# \${ORACLE_HOME}/ohs/bin/httpd.worker -f \${CONFIG} -t -D DUMP_MODULES
+# \${ORACLE_HOME}/ohs/bin/httpd.worker -f \${CONFIG} -M
+\${ORACLE_HOME}/ohs/bin/httpd.worker -f \${CONFIG} -t -D DUMP_MODULES
 EOF
 
 ######################################################################
