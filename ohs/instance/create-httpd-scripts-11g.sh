@@ -3,7 +3,6 @@
 source ./env-base-11g.sh
 source ./env-component-11g.sh
 
-MW_HOME="${MW_HOME}"
 ORACLE_HOME="${ORACLE_HOME}"
 INSTANCE_HOME="${INSTANCE_HOME}"
 
@@ -13,11 +12,11 @@ INSTANCE_HOME="${INSTANCE_HOME}"
 TEMP="\${ORACLE_HOME}"
 VAR_INSTANCE_HOME="${INSTANCE_HOME/${ORACLE_HOME}/${TEMP}}"
 TEMP="\${INSTANCE_NAME}"
-VAR_INSTANCE_HOME="${INSTANCE_HOME/${INSTANCE_NAME}/${TEMP}}"
+VAR_INSTANCE_HOME="${VAR_INSTANCE_HOME/${INSTANCE_NAME}/${TEMP}}"
 
 ######################################################################
 
-cat <<EOF > ${ORACLE_HOME}/check-config.sh
+cat <<EOF > ${INSTANCE_HOME}/check-config.sh
 #!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
@@ -37,7 +36,7 @@ EOF
 
 ######################################################################
 
-cat <<EOF > ${ORACLE_HOME}/get-version.sh
+cat <<EOF > ${INSTANCE_HOME}/get-version.sh
 #!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
@@ -57,7 +56,7 @@ EOF
 
 ######################################################################
 
-cat <<EOF > ${ORACLE_HOME}/get-compile-settings.sh
+cat <<EOF > ${INSTANCE_HOME}/get-compile-settings.sh
 #!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
@@ -77,7 +76,7 @@ EOF
 
 ######################################################################
 
-cat <<EOF > ${ORACLE_HOME}/get-vhosts-settings.sh
+cat <<EOF > ${INSTANCE_HOME}/get-vhosts-settings.sh
 #!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
@@ -97,7 +96,7 @@ EOF
 
 ######################################################################
 
-cat <<EOF > ${ORACLE_HOME}/get-run-settings.sh
+cat <<EOF > ${INSTANCE_HOME}/get-run-settings.sh
 #!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
@@ -117,7 +116,7 @@ EOF
 
 ######################################################################
 
-cat <<EOF > ${ORACLE_HOME}/get-settings.sh
+cat <<EOF > ${INSTANCE_HOME}/get-settings.sh
 #!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
@@ -138,7 +137,7 @@ EOF
 
 ######################################################################
 
-cat <<EOF > ${ORACLE_HOME}/get-load-modules.sh
+cat <<EOF > ${INSTANCE_HOME}/get-load-modules.sh
 #!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
@@ -153,13 +152,13 @@ COMPONENT_TYPE="OHS"
 CONFIG=\${INSTANCE_HOME}/config/\${COMPONENT_TYPE}/\${COMPONENT_NAME}/httpd.conf
 export ORACLE_HOME LD_LIBRARY_PATH ORACLE_INSTANCE COMPONENT_TYPE COMPONENT_NAME CONFIG
 
-\${ORACLE_HOME}/ohs/bin/httpd -DOHS_MPM_EVENT -f \${CONFIG} -M
-# \${ORACLE_HOME}/ohs/bin/httpd -DOHS_MPM_EVENT -f \${CONFIG} -t -D DUMP_MODULES
+# \${ORACLE_HOME}/ohs/bin/httpd -DOHS_MPM_EVENT -f \${CONFIG} -M
+\${ORACLE_HOME}/ohs/bin/httpd -DOHS_MPM_EVENT -f \${CONFIG} -t -D DUMP_MODULES
 EOF
 
 ######################################################################
 
-cat <<EOF > ${ORACLE_HOME}/get-include-files.sh
+cat <<EOF > ${INSTANCE_HOME}/get-include-files.sh
 #!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
@@ -179,11 +178,11 @@ EOF
 
 ######################################################################
 
-chmod 750 ${ORACLE_HOME}/check-config.sh
-chmod 750 ${ORACLE_HOME}/get-version.sh
-chmod 750 ${ORACLE_HOME}/get-compile-settings.sh
-chmod 750 ${ORACLE_HOME}/get-vhosts-settings.sh
-chmod 750 ${ORACLE_HOME}/get-run-settings.sh
-chmod 750 ${ORACLE_HOME}/get-settings.sh
-chmod 750 ${ORACLE_HOME}/get-load-modules.sh
-chmod 750 ${ORACLE_HOME}/get-include-files.sh
+chmod 750 ${INSTANCE_HOME}/check-config.sh
+chmod 750 ${INSTANCE_HOME}/get-version.sh
+chmod 750 ${INSTANCE_HOME}/get-compile-settings.sh
+chmod 750 ${INSTANCE_HOME}/get-vhosts-settings.sh
+chmod 750 ${INSTANCE_HOME}/get-run-settings.sh
+chmod 750 ${INSTANCE_HOME}/get-settings.sh
+chmod 750 ${INSTANCE_HOME}/get-load-modules.sh
+chmod 750 ${INSTANCE_HOME}/get-include-files.sh
