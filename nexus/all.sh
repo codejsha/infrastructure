@@ -14,10 +14,11 @@ bash ./create-user.sh "developer" "developer"
 ### create-blobstore.sh ${BLOBSTORE_NAME}
 bash ./create-blobstore.sh "nexus-maven-central"
 bash ./create-blobstore.sh "nexus-docker-hub"
-bash ./create-blobstore.sh "nexus-docker-registry"
+# bash ./create-blobstore.sh "nexus-docker-registry"
 # bash ./create-blobstore.sh "nexus-docker-kube-registry"
-# bash ./create-blobstore.sh "nexus-docker-harbor"
-bash ./create-blobstore.sh "nexus-helm-chartmuseum"
+bash ./create-blobstore.sh "nexus-docker-harbor"
+# bash ./create-blobstore.sh "nexus-helm-chartmuseum"
+bash ./create-blobstore.sh "nexus-helm-harbor"
 
 ######################################################################
 
@@ -38,16 +39,16 @@ bash ./update-maven-group-repo.sh "maven-public" "default" "maven-central\", \"m
 
 ### create-docker-proxy-repo.sh ${REPOSITORY_NAME} ${BLOBSTORE_NAME} ${REMOTE_URL} ${DOCKER_INDEX_TYPE}
 bash ./create-docker-proxy-repo.sh "docker-hub" "nexus-docker-hub" "https://registry-1.docker.io" "HUB"
-bash ./create-docker-proxy-repo.sh "docker-registry" "nexus-docker-registry" "http://my-docker-registry.registry-system:5000" "REGISTRY"
+# bash ./create-docker-proxy-repo.sh "docker-registry" "nexus-docker-registry" "http://my-docker-registry.registry-system:5000" "REGISTRY"
 # bash ./create-docker-proxy-repo.sh "docker-registry" "nexus-docker-registry" "http://registry.example.com" "REGISTRY"
 # bash ./create-docker-proxy-repo.sh "docker-kube-registry" "nexus-docker-kube-registry" "http://registry.kube-system:5000" "REGISTRY"
-# bash ./create-docker-proxy-repo.sh "docker-harbor" "nexus-docker-harbor" "https://core.harbor.example.com" "REGISTRY"
+bash ./create-docker-proxy-repo.sh "docker-harbor" "nexus-docker-harbor" "https://core.harbor.example.com" "REGISTRY"
 # bash ./create-docker-proxy-repo.sh "docker-harbor" "nexus-docker-harbor" "https://my-harbor-harbor-registry.harbor-system:5000" "REGISTRY"
 
 ### create-docker-group-repo.sh ${REPOSITORY_NAME} ${BLOBSTORE_NAME} ${REPOSITORY_MEMBER_NAMES}
-bash ./create-docker-group-repo.sh "docker-group" "default" "docker-hub\", \"docker-registry"
+# bash ./create-docker-group-repo.sh "docker-group" "default" "docker-hub\", \"docker-registry"
 # bash ./create-docker-group-repo.sh "docker-group" "default" "docker-hub\", \"docker-kube-registry"
-# bash ./create-docker-group-repo.sh "docker-group" "default" "docker-hub\", \"docker-harbor"
+bash ./create-docker-group-repo.sh "docker-group" "default" "docker-hub\", \"docker-harbor"
 
 ### update-docker-group-repo.sh ${REPOSITORY_NAME} ${BLOBSTORE_NAME} ${REPOSITORY_MEMBER_NAMES}
 # bash ./update-docker-group-repo.sh "docker-group" "default" "docker-hub\", \"docker-registry\", \"docker-kube-registry"
@@ -61,7 +62,8 @@ bash ./set-active-realms-list.sh "\"NexusAuthenticatingRealm\", \"NexusAuthorizi
 ### HELM
 
 ### create-helm-proxy-repo.sh ${REPOSITORY_NAME} ${BLOBSTORE_NAME} ${REMOTE_URL}
-bash ./create-helm-proxy-repo.sh "helm-chartmuseum" "nexus-helm-chartmuseum" "http://chartmuseum-service.chart-system:8080"
+# bash ./create-helm-proxy-repo.sh "helm-chartmuseum" "nexus-helm-chartmuseum" "http://chartmuseum-service.chart-system:8080"
+bash ./create-helm-proxy-repo.sh "helm-harbor" "nexus-helm-harbor" "https://core.harbor.example.com"
 
 ######################################################################
 
