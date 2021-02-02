@@ -2,7 +2,8 @@
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 ORACLE_HOME="/usr/local/weblogic"
-export DOMAIN_HOME="${ORACLE_HOME}/user_projects/domains/base_domain"
+DOMAIN_NAME="base_domain"
+export DOMAIN_HOME="${ORACLE_HOME}/user_projects/domains/${DOMAIN_NAME}"
 export ADMIN_SERVER_URL="t3://test.example.com:7001"
 export ADMIN_USERNAME="${1:-"weblogic"}"
 export ADMIN_PASSWORD="${2:-"welcome1"}"

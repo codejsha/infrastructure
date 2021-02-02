@@ -13,8 +13,12 @@ mkdir -p ${DOMAIN_HOME}/scripts
 ### replace pattern with string
 TEMP="\${MW_HOME}"
 VAR_DOMAIN_HOME_11="${DOMAIN_HOME/${MW_HOME}/${TEMP}}"
+TEMP="\${DOMAIN_NAME}"
+VAR_DOMAIN_HOME_11="${VAR_DOMAIN_HOME_11/${DOMAIN_NAME}/${TEMP}}"
 TEMP="\${ORACLE_HOME}"
 VAR_DOMAIN_HOME="${DOMAIN_HOME/${ORACLE_HOME}/${TEMP}}"
+TEMP="\${DOMAIN_NAME}"
+VAR_DOMAIN_HOME="${VAR_DOMAIN_HOME/${DOMAIN_NAME}/${TEMP}}"
 
 ######################################################################
 
@@ -44,6 +48,7 @@ cat << EOF > ${DOMAIN_HOME}/scripts/shutdown-${ADMIN_SERVER_NAME}.sh
 export PS4="\e[33;1m+ \e[0m"; set -x
 
 MW_HOME="${MW_HOME}"
+DOMAIN_NAME="${DOMAIN_NAME}"
 export DOMAIN_HOME="${VAR_DOMAIN_HOME_11}"
 EOF
 elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
@@ -51,6 +56,7 @@ cat << EOF > ${DOMAIN_HOME}/scripts/shutdown-${ADMIN_SERVER_NAME}.sh
 #!/bin/bash
 
 ORACLE_HOME="${ORACLE_HOME}"
+DOMAIN_NAME="${DOMAIN_NAME}"
 export DOMAIN_HOME="${VAR_DOMAIN_HOME}"
 EOF
 fi
