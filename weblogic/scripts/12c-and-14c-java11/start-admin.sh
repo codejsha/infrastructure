@@ -1,7 +1,6 @@
 #!/bin/bash
 
 SERVER_NAME="AdminServer"
-ADMIN_URL="t3://test.example.com:7001"
 DOMAIN_HOME="/usr/local/weblogic/user_projects/domains/base_domain"
 LOG_DIR="${DOMAIN_HOME}/logs"
 GET_DATE="$(date +'%Y%m%d_%H%M%S')"
