@@ -14,5 +14,5 @@ helm upgrade --install my-minio \
     --create-namespace \
     --namespace ${NAMESPACE} \
     --values helm-chart-values-temp.yaml \
-    --version 8.0.8 \
+    --version 8.0.9 \
     minio/minio
