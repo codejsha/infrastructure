@@ -3,6 +3,8 @@
 git clone https://github.com/minio/operator.git
 # gh repo clone minio/operator
 
+cd operator
+
 ### install
 kustomize build . | kubectl apply -f -
 
