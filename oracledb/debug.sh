@@ -1,6 +1,7 @@
 ### jdbc debug
 
-EXT_PRE_CLASSPATH="${EXT_PRE_CLASSPATH}:jdbc_g.jar"
+# EXT_PRE_CLASSPATH="${EXT_PRE_CLASSPATH}:ojdbc6_g.jar"
+EXT_PRE_CLASSPATH="${EXT_PRE_CLASSPATH}:ojdbc7_g.jar"
 export EXT_PRE_CLASSPATH
 
 JAVA_OPTIONS="${JAVA_OPTIONS} -Doracle.jdbc.Trace=true"
