@@ -6,6 +6,13 @@
 bash ./helm-install-kafka.sh
 ```
 
+## Docker Compose
+
+```bash
+docker-compose up
+docker-compose up -f docker-compose.yaml
+```
+
 ## Confluent Kafka
 
 [Confluent Kafka README](/kafka/confluent/README.md)

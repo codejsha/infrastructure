@@ -3,8 +3,9 @@
 ## Install
 
 ```bash
-### strimzi
+### strimzi helm chart
 bash ./helm-install-strimzi-kafka.sh
+
 ### strimzi operator
 bash ./operator-install-strimzi-kafka.sh
 ```
