@@ -32,8 +32,9 @@ helm upgrade --install my-docker-registry \
     --version 1.9.6 \
     stable/docker-registry
 
-    ### for ip address
-    # --set s3.regionEndpoint="http://10.10.10.52:9000" \
-
     ### rook ceph
     # --set persistence.storageClass="rook-ceph-block" \
+
+    ### minio
+    # --set s3.regionEndpoint="http://10.10.10.52:9000" \
+    # --set s3.regionEndpoint="https://minio-tenant-1.example.com" \

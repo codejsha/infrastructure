@@ -11,6 +11,7 @@ env:
     # STORAGE_AMAZON_PREFIX:
     # STORAGE_AMAZON_REGION:
     STORAGE_AMAZON_ENDPOINT: "http://minio.example.com"
+    # STORAGE_AMAZON_ENDPOINT: "https://minio-tenant-1.example.com"
     DISABLE_API: false
   secret:
     AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY}"
