@@ -100,6 +100,21 @@
     --property print.key=true \
     --topic my-topic
 
+### avro
+./kafka-avro-console-consumer \
+    --bootstrap-server localhost:9092 \
+    --property print.key=true \
+    --key-deserializer=org.apache.kafka.common.serialization.StringDeserializer \
+    --topic my-topic
+
+### avro (from beginning)
+./kafka-avro-console-consumer \
+    --bootstrap-server localhost:9092 \
+    --property print.key=true \
+    --key-deserializer=org.apache.kafka.common.serialization.StringDeserializer \
+    --topic my-topic \
+    --from-beginning
+
 ### consumer group list
 ./kafka-consumer-groups \
     --bootstrap-server localhost:9092 \
