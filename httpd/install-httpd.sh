@@ -33,7 +33,7 @@ function install_httpd {
         INSTALL_FILE="${1}"
 
         if [ ! -f "${INSTALL_FILE_DIR}/${INSTALL_FILE}" ]; then
-            echo "[ERROR] The INSTALL_FILE (${INSTALL_FILE_DIR}/${INSTALL_FILE}) does not exist!"
+            echo "[ERROR] The install file (${INSTALL_FILE_DIR}/${INSTALL_FILE}) does not exist!"
             exit
         fi
     }
@@ -109,7 +109,7 @@ function install_httpd_from_online {
         INSTALL_FILE="${1}"
 
         if [ ! -f "${INSTALL_FILE_DIR}/${INSTALL_FILE}" ]; then
-            echo "[ERROR] The INSTALL_FILE (${INSTALL_FILE_DIR}/${INSTALL_FILE}) does not exist!"
+            echo "[ERROR] The install file (${INSTALL_FILE_DIR}/${INSTALL_FILE}) does not exist!"
             exit
         fi
     }

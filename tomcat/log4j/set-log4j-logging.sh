@@ -23,7 +23,7 @@ function check_log4j_dir {
 
 function check_install_file {
     if [ ! -f "${INSTALL_FILE_DIR}/${INSTALL_FILE}" ]; then
-        echo "[ERROR] The INSTALL_FILE (${INSTALL_FILE_DIR}/${INSTALL_FILE}) does not exist!"
+        echo "[ERROR] The install file (${INSTALL_FILE_DIR}/${INSTALL_FILE}) does not exist!"
         exit
     fi
 }
