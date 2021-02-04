@@ -25,37 +25,20 @@ function check_catalina_home {
     fi
 }
 
-function check_install_file {
+function download_install_file {
     if [ ! -f "${INSTALL_FILE_DIR}/${INSTALL_FILE}" ]; then
-        echo "[ERROR] The install file (${INSTALL_FILE_DIR}/${INSTALL_FILE}) does not exist!"
-        exit
+        sudo curl -o ${INSTALL_FILE_DIR}/${INSTALL_FILE} \
+            -LJO https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_VERSION}/bin/${INSTALL_FILE}
     fi
 }
 
-function install_from_online {
-    if [ ! -f "${INSTALL_FILE}" ]; then
-        curl -LJO https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_VERSION}/bin/${INSTALL_FILE}
-    fi
-
+function extract_install_file {
     tar -xzf ${INSTALL_FILE} -C ${PARENT_CATALINA_HOME}
     mv ${PARENT_CATALINA_HOME}/apache-tomcat-${TOMCAT_VERSION} ${CATALINA_HOME}
-}
-
-function install_from_storage {
-    check_install_file
-
-    /usr/bin/cp -f ${INSTALL_FILE_DIR}/${INSTALL_FILE} .
-    tar -xzf ${INSTALL_FILE} -C ${PARENT_CATALINA_HOME}
-    mv ${PARENT_CATALINA_HOME}/apache-tomcat-${TOMCAT_VERSION} ${CATALINA_HOME}
-}
-
-function delete_install_file {
-    rm -f ${INSTALL_FILE}
 }
 
 ######################################################################
 
 check_catalina_home
-# install_from_online
-install_from_storage
-# delete_install_file
+download_install_file
+install_tomcat
