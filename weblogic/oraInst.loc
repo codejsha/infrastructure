@@ -1,2 +1,2 @@
 inst_group=progroup
-inventory_loc=/svc/oraInventory
+inventory_loc=/usr/local/oraInventory
