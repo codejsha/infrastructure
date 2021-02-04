@@ -33,7 +33,7 @@ function download_install_file {
 }
 
 function extract_install_file {
-    tar -xzf ${INSTALL_FILE} -C ${PARENT_CATALINA_HOME}
+    tar -xzf ${INSTALL_FILE_DIR}/${INSTALL_FILE} -C ${PARENT_CATALINA_HOME}
     mv ${PARENT_CATALINA_HOME}/apache-tomcat-${TOMCAT_VERSION} ${CATALINA_HOME}
 }
 
