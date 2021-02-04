@@ -14,7 +14,7 @@ function create_docker_group_repository {
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
         -X POST \
         -H "Accept:application/json" \
-        -H "Content-Type: application/json" \
+        -H "Content-Type:application/json" \
         -d @data-docker-group-repo-temp.json \
         ${NEXUS_URL}/service/rest/beta/repositories/docker/group
 }

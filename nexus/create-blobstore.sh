@@ -19,7 +19,7 @@ function create_s3_blob_store {
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
         -X POST \
         -H "Accept:application/json" \
-        -H "Content-Type: application/json" \
+        -H "Content-Type:application/json" \
         -d @data-blobstore-temp.json \
         ${NEXUS_URL}/service/rest/beta/blobstores/s3
 }

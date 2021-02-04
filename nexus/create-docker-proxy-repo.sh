@@ -15,7 +15,7 @@ function create_docker_proxy_repository {
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
         -X POST \
         -H "Accept:application/json" \
-        -H "Content-Type: application/json" \
+        -H "Content-Type:application/json" \
         -d @data-docker-proxy-repo-temp.json \
         ${NEXUS_URL}/service/rest/beta/repositories/docker/proxy
 }

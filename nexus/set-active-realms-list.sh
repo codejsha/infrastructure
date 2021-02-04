@@ -10,7 +10,7 @@ function set_active_realms_list {
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
         -X PUT \
         -H "Accept:application/json" \
-        -H "Content-Type: application/json" \
+        -H "Content-Type:application/json" \
         -d "[${REALM_IDS}]" \
         ${NEXUS_URL}/service/rest/beta/security/realms/active
 }

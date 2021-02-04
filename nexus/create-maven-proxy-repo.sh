@@ -14,7 +14,7 @@ function create_maven_proxy_repository {
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
         -X POST \
         -H "Accept:application/json" \
-        -H "Content-Type: application/json" \
+        -H "Content-Type:application/json" \
         -d @data-maven-proxy-repo-temp.json \
         ${NEXUS_URL}/service/rest/beta/repositories/maven/proxy
 }
