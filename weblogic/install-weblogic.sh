@@ -19,10 +19,10 @@
 # RESPONSE_FILE="response.rsp"
 
 ### 12214
-# JAVA_HOME="/usr/java/java-1.8.0"
+JAVA_HOME="/usr/java/java-1.8.0"
 INSTALL_FILE_DIR="/mnt/share/oracle-weblogic-server/wls12.2.1.4/fmw_12.2.1.4.0_wls_Disk1_1of1"
 INSTALL_FILE="fmw_12.2.1.4.0_wls.jar"
-# RESPONSE_FILE="response.rsp"
+RESPONSE_FILE="response.rsp"
 
 ### 1411
 # JAVA_HOME="/usr/java/java-1.8.0"
