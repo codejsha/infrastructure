@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function install_centos_with_yum {
+function install_httpd_with_yum {
     sudo yum install -y httpd
     sudo systemctl enable httpd
     sudo systemctl start httpd
@@ -8,7 +8,7 @@ function install_centos_with_yum {
 
 ######################################################################
 
-function install_centos_with_dnf {
+function install_httpd_with_dnf {
     sudo dnf install -y httpd
     sudo systemctl enable httpd
     sudo systemctl start httpd
@@ -16,95 +16,167 @@ function install_centos_with_dnf {
 
 ######################################################################
 
-function install_from_online_source {
+function install_httpd {
     HTTPD_HOME="/usr/local/httpd"
     INSTALL_FILE_DIR="/mnt/share/apache-http-server"
     PARENT_BUILD_DIR="/svc/install"
 
-    HTTPD_VERSION="2.4.46"
-    APR_VERSION="1.7.0"
-    APRUTIL_VERSION="1.6.1"
+    HTTPD_FILE="httpd-2.4.46.tar.gz"
+    APR_FILE="apr-1.7.0.tar.gz"
+    APRUTIL_FILE="apr-util-1.6.1.tar.gz"
 
-    sudo yum install -y gcc
-    sudo yum install -y pcre pcre-devel
-    sudo yum install -y expat expat-devel
-    sudo yum install -y openssl openssl-devel
+    HTTPD_DIR_NAME="${HTTPD_FILE/\.tar\.gz/}"
+    APR_DIR_NAME="${APR_FILE/\.tar\.gz/}"
+    APRUTIL_DIR_NAME="${APRUTIL_FILE/\.tar\.gz/}"
 
-    ### http2 requirements
-    # sudo yum install -y nghttp2 libnghttp2 libnghttp2-devel
+    function check_install_file {
+        INSTALL_FILE="${1}"
 
-    /usr/bin/cp -f ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}.tar.gz ${PARENT_BUILD_DIR}
-    /usr/bin/cp -f ${INSTALL_FILE_DIR}/apr-${APR_VERSION}.tar.gz ${PARENT_BUILD_DIR}
-    /usr/bin/cp -f ${INSTALL_FILE_DIR}/apr-util-${APRUTIL_VERSION}.tar.gz ${PARENT_BUILD_DIR}
+        if [ ! -f "${INSTALL_FILE_DIR}/${INSTALL_FILE}" ]; then
+            echo "[ERROR] The INSTALL_FILE (${INSTALL_FILE_DIR}/${INSTALL_FILE}) does not exist!"
+            exit
+        fi
+    }
 
-    cd ${PARENT_BUILD_DIR}
-    tar -xzf httpd-${HTTPD_VERSION}.tar.gz -C ${PARENT_BUILD_DIR}
-    tar -xzf apr-${APR_VERSION}.tar.gz -C ${PARENT_BUILD_DIR}
-    tar -xzf apr-util-${APRUTIL_VERSION}.tar.gz -C ${PARENT_BUILD_DIR}
+    function install_required_packages {
+        sudo yum install -y \
+            gcc \
+            pcre pcre-devel \
+            expat expat-devel \
+            openssl openssl-devel
 
-    cd ${PARENT_BUILD_DIR}
-    mv apr-${APR_VERSION} httpd-${HTTPD_VERSION}/srclib/apr
-    mv apr-util-${APRUTIL_VERSION} httpd-${HTTPD_VERSION}/srclib/apr-util
+        ### http2 requirements
+        # sudo yum install -y nghttp2 libnghttp2 libnghttp2-devel
+    }
 
-    cd ${PARENT_BUILD_DIR}/httpd-${HTTPD_VERSION}
-    ./configure --prefix=${HTTPD_HOME} \
-        --with-included-apr \
-        --enable-mpms-shared=all \
-        --enable-modules=all
-        # --enable-modules=most
+    function extract_install_files {
+        tar -xzf ${INSTALL_FILE_DIR}/${HTTPD_FILE} -C ${PARENT_BUILD_DIR}
+        tar -xzf ${INSTALL_FILE_DIR}/${APR_FILE} -C ${PARENT_BUILD_DIR}
+        tar -xzf ${INSTALL_FILE_DIR}/${APRUTIL_FILE} -C ${PARENT_BUILD_DIR}
+    }
 
-    make
-    make install
+    function include_apr_files {
+        cd ${PARENT_BUILD_DIR}
+        mv ${APR_DIR_NAME} ${HTTPD_DIR_NAME}/srclib/apr
+        mv ${APRUTIL_DIR_NAME} ${HTTPD_DIR_NAME}/srclib/apr-util
+    }
+
+    function configure_and_install {
+        ### configure
+        cd ${PARENT_BUILD_DIR}/${HTTPD_DIR_NAME}
+        ./configure --prefix=${HTTPD_HOME} \
+            --with-included-apr \
+            --enable-mpms-shared=all \
+            --enable-modules=all
+        # ./configure --prefix=${HTTPD_HOME} \
+        #     --with-included-apr \
+        #     --enable-mpms-shared=all \
+        #     --enable-modules=most
+
+        ### compile
+        make
+        ### install
+        make install
+    }
+
+    check_install_file ${HTTPD_FILE}
+    check_install_file ${APR_FILE}
+    check_install_file ${APRUTIL_FILE}
+
+    install_required_packages
+    extract_install_files
+    include_apr_files
+    configure_and_install
 }
 
 ######################################################################
 
-function install_from_online_source {
+function install_httpd_from_online {
     HTTPD_HOME="/usr/local/httpd"
-    INSTALL_FILE_DIR="/svc/install"
+    INSTALL_FILE_DIR="/mnt/share/apache-http-server"
+    # INSTALL_FILE_DIR="/svc/install"
     PARENT_BUILD_DIR="/svc/install"
 
-    HTTPD_VERSION="2.4.46"
-    APR_VERSION="1.7.0"
-    APRUTIL_VERSION="1.6.1"
+    HTTPD_FILE="httpd-2.4.46.tar.gz"
+    APR_FILE="apr-1.7.0.tar.gz"
+    APRUTIL_FILE="apr-util-1.6.1.tar.gz"
 
-    sudo yum install -y gcc
-    sudo yum install -y pcre pcre-devel
-    sudo yum install -y expat expat-devel
-    sudo yum install -y openssl openssl-devel
+    HTTPD_DIR_NAME="${HTTPD_FILE/\.tar\.gz/}"
+    APR_DIR_NAME="${APR_FILE/\.tar\.gz/}"
+    APRUTIL_DIR_NAME="${APRUTIL_FILE/\.tar\.gz/}"
 
-    ### http2 requirements
-    # sudo yum install -y nghttp2 libnghttp2 libnghttp2-devel
+    function check_install_file {
+        INSTALL_FILE="${1}"
 
-    curl -o ${INSTALL_FILE_DIR}/httpd-${HTTPD_VERSION}.tar.gz -LJO http://archive.apache.org/dist/httpd/httpd-${HTTPD_VERSION}.tar.gz
-    curl -o ${INSTALL_FILE_DIR}/apr-${APR_VERSION}.tar.gz -LJO http://archive.apache.org/dist/apr/apr-${APR_VERSION}.tar.gz
-    curl -o ${INSTALL_FILE_DIR}/apr-util-${APRUTIL_VERSION}.tar.gz -LJO http://archive.apache.org/dist/apr/apr-util-${APRUTIL_VERSION}.tar.gz
+        if [ ! -f "${INSTALL_FILE_DIR}/${INSTALL_FILE}" ]; then
+            echo "[ERROR] The INSTALL_FILE (${INSTALL_FILE_DIR}/${INSTALL_FILE}) does not exist!"
+            exit
+        fi
+    }
 
-    cd ${INSTALL_FILE_DIR}
-    tar -xzf httpd-${HTTPD_VERSION}.tar.gz -C ${PARENT_BUILD_DIR}
-    tar -xzf apr-${APR_VERSION}.tar.gz -C ${PARENT_BUILD_DIR}
-    tar -xzf apr-util-${APRUTIL_VERSION}.tar.gz -C ${PARENT_BUILD_DIR}
+    function install_required_packages {
+        sudo yum install -y \
+            gcc \
+            pcre pcre-devel \
+            expat expat-devel \
+            openssl openssl-devel
 
-    cd ${PARENT_BUILD_DIR}
-    mv apr-${APR_VERSION} httpd-${HTTPD_VERSION}/srclib/apr
-    mv apr-util-${APRUTIL_VERSION} httpd-${HTTPD_VERSION}/srclib/apr-util
+        ### http2 requirements
+        # sudo yum install -y nghttp2 libnghttp2 libnghttp2-devel
+    }
 
-    cd ${PARENT_BUILD_DIR}/httpd-${HTTPD_VERSION}
-    ./configure --prefix=${HTTPD_HOME} \
-        --with-included-apr \
-        --enable-mpms-shared=all
-    # ./configure --prefix=${HTTPD_HOME} \
-    #     --with-included-apr \
-    #     --enable-mpms-shared=all \
-    #     --enable-modules=all
+    function download_install_files {
+        if [ ! -f "${INSTALL_FILE_DIR}/${HTTPD_FILE}" ]; then
+            sudo curl -o ${INSTALL_FILE_DIR}/${HTTPD_FILE} -LJO http://archive.apache.org/dist/httpd/${HTTPD_FILE}
+        fi
+        if [ ! -f "${INSTALL_FILE_DIR}/${APR_FILE}" ]; then
+            sudo curl -o ${INSTALL_FILE_DIR}/${APR_FILE} -LJO http://archive.apache.org/dist/apr/${APR_FILE}
+        fi
+        if [ ! -f "${INSTALL_FILE_DIR}/${APRUTIL_FILE}" ]; then
+            sudo curl -o ${INSTALL_FILE_DIR}/${APRUTIL_FILE} -LJO http://archive.apache.org/dist/apr/${APRUTIL_FILE}
+        fi
+    }
 
-    make
-    make install
+    function extract_install_files {
+        tar -xzf ${INSTALL_FILE_DIR}/${HTTPD_FILE} -C ${PARENT_BUILD_DIR}
+        tar -xzf ${INSTALL_FILE_DIR}/${APR_FILE} -C ${PARENT_BUILD_DIR}
+        tar -xzf ${INSTALL_FILE_DIR}/${APRUTIL_FILE} -C ${PARENT_BUILD_DIR}
+    }
+
+    function include_apr_files {
+        cd ${PARENT_BUILD_DIR}
+        mv ${APR_DIR_NAME} ${HTTPD_DIR_NAME}/srclib/apr
+        mv ${APRUTIL_DIR_NAME} ${HTTPD_DIR_NAME}/srclib/apr-util
+    }
+
+    function configure_and_install {
+        ### configure
+        cd ${PARENT_BUILD_DIR}/${HTTPD_DIR_NAME}
+        ./configure --prefix=${HTTPD_HOME} \
+            --with-included-apr \
+            --enable-mpms-shared=all \
+            --enable-modules=all
+        # ./configure --prefix=${HTTPD_HOME} \
+        #     --with-included-apr \
+        #     --enable-mpms-shared=all \
+        #     --enable-modules=most
+
+        ### compile
+        make
+        ### install
+        make install
+    }
+
+    install_required_packages
+    download_install_files
+    extract_install_files
+    include_apr_files
+    configure_and_install
 }
 
 ######################################################################
 
-# install_centos_with_yum
-# install_centos_with_dnf
-install_from_source
-# install_from_online_source
+# install_httpd_with_yum
+# install_httpd_with_dnf
+install_httpd
+# install_httpd_from_online
