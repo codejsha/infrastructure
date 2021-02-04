@@ -19,81 +19,6 @@ function install_httpd_with_dnf {
 function install_httpd {
     HTTPD_HOME="/usr/local/httpd"
     INSTALL_FILE_DIR="/mnt/share/apache-http-server"
-    PARENT_BUILD_DIR="/svc/install"
-
-    HTTPD_FILE="httpd-2.4.46.tar.gz"
-    APR_FILE="apr-1.7.0.tar.gz"
-    APRUTIL_FILE="apr-util-1.6.1.tar.gz"
-
-    HTTPD_DIR_NAME="${HTTPD_FILE/\.tar\.gz/}"
-    APR_DIR_NAME="${APR_FILE/\.tar\.gz/}"
-    APRUTIL_DIR_NAME="${APRUTIL_FILE/\.tar\.gz/}"
-
-    function check_install_file {
-        INSTALL_FILE="${1}"
-
-        if [ ! -f "${INSTALL_FILE_DIR}/${INSTALL_FILE}" ]; then
-            echo "[ERROR] The install file (${INSTALL_FILE_DIR}/${INSTALL_FILE}) does not exist!"
-            exit
-        fi
-    }
-
-    function install_required_packages {
-        sudo yum install -y \
-            gcc \
-            pcre pcre-devel \
-            expat expat-devel \
-            openssl openssl-devel
-
-        ### http2 requirements
-        # sudo yum install -y nghttp2 libnghttp2 libnghttp2-devel
-    }
-
-    function extract_install_files {
-        tar -xzf ${INSTALL_FILE_DIR}/${HTTPD_FILE} -C ${PARENT_BUILD_DIR}
-        tar -xzf ${INSTALL_FILE_DIR}/${APR_FILE} -C ${PARENT_BUILD_DIR}
-        tar -xzf ${INSTALL_FILE_DIR}/${APRUTIL_FILE} -C ${PARENT_BUILD_DIR}
-    }
-
-    function include_apr_files {
-        cd ${PARENT_BUILD_DIR}
-        mv ${APR_DIR_NAME} ${HTTPD_DIR_NAME}/srclib/apr
-        mv ${APRUTIL_DIR_NAME} ${HTTPD_DIR_NAME}/srclib/apr-util
-    }
-
-    function configure_and_install {
-        ### configure
-        cd ${PARENT_BUILD_DIR}/${HTTPD_DIR_NAME}
-        ./configure --prefix=${HTTPD_HOME} \
-            --with-included-apr \
-            --enable-mpms-shared=all \
-            --enable-modules=all
-        # ./configure --prefix=${HTTPD_HOME} \
-        #     --with-included-apr \
-        #     --enable-mpms-shared=all \
-        #     --enable-modules=most
-
-        ### compile
-        make
-        ### install
-        make install
-    }
-
-    check_install_file ${HTTPD_FILE}
-    check_install_file ${APR_FILE}
-    check_install_file ${APRUTIL_FILE}
-
-    install_required_packages
-    extract_install_files
-    include_apr_files
-    configure_and_install
-}
-
-######################################################################
-
-function install_httpd_from_online {
-    HTTPD_HOME="/usr/local/httpd"
-    INSTALL_FILE_DIR="/mnt/share/apache-http-server"
     # INSTALL_FILE_DIR="/svc/install"
     PARENT_BUILD_DIR="/svc/install"
 
@@ -105,11 +30,9 @@ function install_httpd_from_online {
     APR_DIR_NAME="${APR_FILE/\.tar\.gz/}"
     APRUTIL_DIR_NAME="${APRUTIL_FILE/\.tar\.gz/}"
 
-    function check_install_file {
-        INSTALL_FILE="${1}"
-
-        if [ ! -f "${INSTALL_FILE_DIR}/${INSTALL_FILE}" ]; then
-            echo "[ERROR] The install file (${INSTALL_FILE_DIR}/${INSTALL_FILE}) does not exist!"
+    function check_httpd_home {
+        if [ -d "${HTTPD_HOME}" ]; then
+            echo "[ERROR] The HTTPD_HOME (${HTTPD_HOME}) already exists!"
             exit
         fi
     }
@@ -167,6 +90,7 @@ function install_httpd_from_online {
         make install
     }
 
+    check_httpd_home
     install_required_packages
     download_install_files
     extract_install_files
@@ -179,4 +103,3 @@ function install_httpd_from_online {
 # install_httpd_with_yum
 # install_httpd_with_dnf
 install_httpd
-# install_httpd_from_online
