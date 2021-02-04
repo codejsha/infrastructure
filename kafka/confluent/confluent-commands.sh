@@ -123,7 +123,7 @@
 ### zookeeper
 
 ### broker list
-./zookeeper-shell zookeeper1:2181 ls /brokers/ids
+./zookeeper-shell localhost:2181 ls /brokers/ids
 ./zookeeper-shell zookeeper1:2181,zookeeper2:2181,zookeeper3:2181 ls /brokers/ids
 
 ######################################################################
@@ -137,6 +137,22 @@
 ./kafka-broker-api-versions \
     --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
     --version
+
+######################################################################
+
+### configs
+
+### topics
+./kafka-configs \
+    --bootstrap-server localhost:9092 \
+    --entity-type topics \
+    --entity-name my-topic \
+    --describe
+./kafka-configs \
+    --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
+    --entity-type topics \
+    --entity-name my-topic \
+    --describe
 
 ######################################################################
 
@@ -167,3 +183,11 @@
     --num-records 1000 \
     --throughput -1 \
     --record-size 500000
+
+######################################################################
+
+### dump log
+
+./kafka-dump-log \
+    --print-data-log \
+    --files /tmp/confluent/kafka/data/my-topic-0/00000000000000000000.log
