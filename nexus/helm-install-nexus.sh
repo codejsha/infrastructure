@@ -10,5 +10,5 @@ helm upgrade --install my-nexus \
     --create-namespace \
     --namespace ${NAMESPACE} \
     --values helm-chart-values.yaml \
-    --version 4.1.1 \
+    --version 4.2.0 \
     oteemocharts/sonatype-nexus
