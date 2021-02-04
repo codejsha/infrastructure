@@ -23,7 +23,7 @@ function get_connector_task {
         --include \
         --header "Accept:application/json" \
         --request GET \
-        kafka-connect.example.com:8083/connectors/${CONNECTOR_NAME}
+        localhost:8083/connectors/${CONNECTOR_NAME}
 }
 
 ######################################################################
