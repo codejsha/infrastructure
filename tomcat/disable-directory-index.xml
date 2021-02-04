@@ -1,6 +1,8 @@
 <!-- ###################################################################### -->
 
-<!-- ### ${CATALINA_BASE}/conf/web.xml -->
+<!--
+    ${CATALINA_BASE}/conf/web.xml
+-->
     <servlet>
         <servlet-name>default</servlet-name>
         <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
@@ -21,7 +23,9 @@
 
 <!-- ###################################################################### -->
 
-<!-- ### ${APPLICATION_HOME}/WEB-INF/web.xml -->
+<!--
+    ${APPLICATION_HOME}/WEB-INF/web.xml
+-->
     <servlet>
         <servlet-name>default</servlet-name>
         <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>

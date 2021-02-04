@@ -37,7 +37,7 @@ function install_httpd {
         fi
     }
 
-    function install_required_packages {
+    function install_required_package {
         sudo yum install -y \
             gcc \
             pcre pcre-devel \
@@ -48,7 +48,7 @@ function install_httpd {
         # sudo yum install -y nghttp2 libnghttp2 libnghttp2-devel
     }
 
-    function download_install_files {
+    function download_install_file {
         if [ ! -f "${INSTALL_FILE_DIR}/${HTTPD_FILE}" ]; then
             sudo curl -o ${INSTALL_FILE_DIR}/${HTTPD_FILE} -LJO http://archive.apache.org/dist/httpd/${HTTPD_FILE}
         fi
@@ -60,7 +60,7 @@ function install_httpd {
         fi
     }
 
-    function extract_install_files {
+    function extract_install_file {
         tar -xzf ${INSTALL_FILE_DIR}/${HTTPD_FILE} -C ${PARENT_BUILD_DIR}
         tar -xzf ${INSTALL_FILE_DIR}/${APR_FILE} -C ${PARENT_BUILD_DIR}
         tar -xzf ${INSTALL_FILE_DIR}/${APRUTIL_FILE} -C ${PARENT_BUILD_DIR}
@@ -91,9 +91,9 @@ function install_httpd {
     }
 
     check_httpd_home
-    install_required_packages
-    download_install_files
-    extract_install_files
+    install_required_package
+    download_install_file
+    extract_install_file
     include_apr_files
     configure_and_install
 }

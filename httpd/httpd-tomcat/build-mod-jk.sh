@@ -12,7 +12,7 @@ TOMCAT_CONNECTORS_DIR="$(echo ${INSTALL_FILE} | grep -o -E "(.*[^\.tar\.gz])")"
 
 ######################################################################
 
-function install_required_packages {
+function install_required_package {
     sudo yum install -y libtool automake autoconf
 }
 
@@ -40,7 +40,7 @@ function delete_install_file {
 
 ######################################################################
 
-install_required_packages
+install_required_package
 extract_install_file
 build_mod_jk
 install_mod_jk

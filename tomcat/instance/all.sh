@@ -22,7 +22,7 @@ function create_instance_cluster_redis {
     bash ./create-instance-cluster-redis.sh inst2 8081 8444 8006 8010 8051
 }
 
-function create_scripts {
+function create_script {
     # bash ./create-scripts.sh inst1 8080 8443 8005
     # bash ./create-scripts.sh inst2 8081 8444 8006
     bash ./create-scripts.sh inst1 8080 8443 8005 8009 8050
@@ -36,4 +36,4 @@ create_instance_cluster
 # create_instance_cluster_full
 # create_instance_cluster_redis
 
-create_scripts
+create_script
