@@ -1,5 +1,17 @@
 ######################################################################
 
+### zookeeper
+
+### broker list
+./zookeeper-shell localhost:2181 ls /brokers/ids
+./zookeeper-shell zookeeper1:2181,zookeeper2:2181,zookeeper3:2181 ls /brokers/ids
+
+### broker list (testcluster znode)
+./zookeeper-shell localhost:2181 ls /testcluster/brokers/ids
+./zookeeper-shell zookeeper1:2181,zookeeper2:2181,zookeeper3:2181 ls /testcluster/brokers/ids
+
+######################################################################
+
 ### topic
 
 ### create topic
@@ -132,14 +144,6 @@
     --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
     --describe \
     --group my-group
-
-######################################################################
-
-### zookeeper
-
-### broker list
-./zookeeper-shell localhost:2181 ls /brokers/ids
-./zookeeper-shell zookeeper1:2181,zookeeper2:2181,zookeeper3:2181 ls /brokers/ids
 
 ######################################################################
 
