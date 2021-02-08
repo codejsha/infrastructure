@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CONFLUENT_HOME="/usr/local/confluent"
-SERVER_NAME="control-center"
+SERVER_NAME="control-center1"
 # PROPERTIES_FILE="${CONFLUENT_HOME}/etc/confluent-control-center/control-center.properties"
 PROPERTIES_FILE="${CONFLUENT_HOME}/properties/control-center.properties"
 
