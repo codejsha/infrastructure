@@ -1,9 +1,10 @@
 #!/bin/bash
 
 CONFLUENT_HOME="/usr/local/confluent"
-SERVER_NAME="control-center"
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/confluent-control-center/control-center.properties"
-PROPERTIES_FILE="${CONFLUENT_HOME}/properties/control-center.properties"
+SERVER_NAME="ksqldb1"
+# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/ksqldb/ksql-server.properties"
+# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/ksqldb/ksql-production-server.properties"
+PROPERTIES_FILE="${CONFLUENT_HOME}/properties/ksql-server.properties"
 
 LOG_DIR="/confluent/${SERVER_NAME}/logs"
 export LOG_DIR
@@ -21,5 +22,5 @@ if [ -f "${LOG_DIR}/nohup.${SERVER_NAME}.out" ]; then
 fi
 
 touch ${LOG_DIR}/nohup.${SERVER_NAME}.out
-nohup ${CONFLUENT_HOME}/bin/control-center-start ${PROPERTIES_FILE} > ${LOG_DIR}/nohup.${SERVER_NAME}.out 2>&1 &
+nohup ${CONFLUENT_HOME}/bin/ksql-server-start ${PROPERTIES_FILE} > ${LOG_DIR}/nohup.${SERVER_NAME}.out 2>&1 &
 tail -f ${LOG_DIR}/nohup.${SERVER_NAME}.out
