@@ -62,7 +62,7 @@ function install_weblogic_11g {
         -silent_xml=${INSTALL_SCRIPT_DIR}/${SILENT_FILE}
 }
 
-function install_weblogic {
+function install_weblogic_12c {
     ${JAVA_HOME}/bin/java \
         -Djava.security.egd=file:///dev/urandom \
         -jar ${INSTALL_FILE_DIR}/${INSTALL_FILE} \
@@ -82,13 +82,60 @@ function install_weblogic {
     #     -novalidation
 }
 
+function install_weblogic_14c {
+    ${JAVA_HOME}/bin/java \
+        -Djava.security.egd=file:///dev/urandom \
+        -jar ${INSTALL_FILE_DIR}/${INSTALL_FILE} \
+        -silent \
+        -responseFile ${INSTALL_SCRIPT_DIR}/${RESPONSE_FILE} \
+        -invPtrLoc ${INSTALL_SCRIPT_DIR}/${INVENTORY_FILE}
+
+    # ${JAVA_HOME}/bin/java \
+    #     -Djava.security.egd=file:///dev/urandom \
+    #     -jar ${INSTALL_FILE_DIR}/${INSTALL_FILE} \
+    #     -silent \
+    #     -responseFile ${INSTALL_SCRIPT_DIR}/${RESPONSE_FILE} \
+    #     -invPtrLoc ${INSTALL_SCRIPT_DIR}/${INVENTORY_FILE} \
+    #     -jreLoc ${JAVA_HOME} \
+    #     -ignoreSysPrereqs \
+    #     -force \
+    #     -novalidation
+}
+
+function install_weblogic {
+    OS_VERSION="$(grep "^VERSION=" /etc/os-release | grep -o -E "[0-9]{1,2}\.{0,1}[0-9]{0,2}")"
+
+    ### 11g
+    if [[ "${INSTALL_FILE}" =~ ^wls103 ]]; then
+        install_required_package_11g
+        install_weblogic_11g
+    ### 12cr1
+    elif [[ "${INSTALL_FILE}" =~ ^fmw_12.1|^wls_121 ]]; then
+        if [[ ${OS_VERSION} =~ ^7|^7. ]]; then
+            install_required_package_12c_rhel7
+        elif [[ ${OS_VERSION} =~ ^8|^8. ]]; then
+            install_required_package_12c_rhel8
+        fi
+        install_weblogic_12c
+    ### 12cr2
+    elif [[ "${INSTALL_FILE}" =~ ^fmw_12.2 ]]; then
+        if [[ ${OS_VERSION} =~ ^7|^7. ]]; then
+            install_required_package_12c_rhel7
+        elif [[ ${OS_VERSION} =~ ^8|^8. ]]; then
+            install_required_package_12c_rhel8
+        fi
+        install_weblogic_12c
+    ### 14c
+    elif [[ "${INSTALL_FILE}" =~ ^fmw_14. ]]; then
+        if [[ ${OS_VERSION} =~ ^7|^7. ]]; then
+            install_required_package_14c_rhel7
+        elif [[ ${OS_VERSION} =~ ^8|^8. ]]; then
+            install_required_package_14c_rhel8
+        fi
+        install_weblogic_14c
+    fi
+}
+
 ######################################################################
 
-# install_required_package_11g
-install_required_package_12c_rhel7
-# install_required_package_12c_rhel8
-# install_required_package_14c_rhel7
-# install_required_package_14c_rhel8
-
-# install_weblogic_11g
 install_weblogic
