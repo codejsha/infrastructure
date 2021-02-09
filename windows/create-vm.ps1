@@ -9,16 +9,17 @@
 $VMName = "LinuxMachine"
 $VMPath = "D:\hyper"
 $Switch = "HyperInternal"
-$InstallMedia = "E:\os-iso\CentOS-7-x86_64-DVD-1908.iso"
-# $InstallMedia = "E:\os-iso\Windows_Server_2019_Datacenter_EVAL_en-us_17763_refresh.iso"
+$InstallMedia = "F:\os-iso\CentOS-7-x86_64-DVD-2009.iso"
+# $InstallMedia = "F:\os-iso\Windows_Server_2019_Datacenter_EVAL_en-us_17763_refresh.iso"
 # $VHDName = ""
 
-New-VM -Name $VMName -Path $VMPath -Generation 2 -MemoryStartupBytes 2GB -Switch $Switch -BootDevice VHD -NewVHDPath "$VMPath\$VMName\Virtual Hard Disks\$VMName.vhdx" -NewVHDSizeBytes 256GB
+New-VM -Name $VMName -Path $VMPath -Generation 2 -MemoryStartupBytes 8GB -Switch $Switch -BootDevice VHD -NewVHDPath "$VMPath\$VMName\Virtual Hard Disks\$VMName.vhdx" -NewVHDSizeBytes 256GB
 # New-VM -Name $VMName -Path $VMPath -Generation 2 -MemoryStartupBytes 2GB -Switch $Switch -BootDevice VHD -VHDPath "$VMPath\$VMName\Virtual Hard Disks\$VHDName"
 
 Set-VMFirmware -VMName $VMName -EnableSecureBoot Off
 Set-VMProcessor -VMName $VMName -Count 2
-Set-VMMemory $VMName -DynamicMemoryEnabled $True -MinimumBytes 512MB -StartupBytes 2GB -MaximumBytes 4GB
+Set-VMMemory $VMName -DynamicMemoryEnabled $False -MinimumBytes 512MB -StartupBytes 2GB -MaximumBytes 4GB
+# Set-VMMemory $VMName -DynamicMemoryEnabled $True -MinimumBytes 512MB -StartupBytes 2GB -MaximumBytes 4GB
 
 # Add-VMNetworkAdapter -VMName $VMName -SwitchName $Switch
 
