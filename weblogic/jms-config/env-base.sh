@@ -19,6 +19,8 @@ INSTALL_SCRIPT_DIR="/svc/infrastructure/weblogic"
 
 ######################################################################
 
+### java home
+
 if [ ! -d "${JAVA_HOME}" ]; then
     echo "[ERROR] The JAVA_HOME (${JAVA_HOME}) does not exist!"
     exit
@@ -27,8 +29,28 @@ fi
 JAVA_VERSION="$(${JAVA_HOME}/bin/java -version 2>&1 /dev/null \
         | grep version | awk '{print $3}' | tr -d '"')"
 
+######################################################################
+
+### middleware home
+
 if [ ! -d "${MW_HOME}" ]; then
     echo "[ERROR] The ORACLE_HOME or MW_HOME (${MW_HOME}) does not exist!"
+    exit
+fi
+
+######################################################################
+
+### weblogic home
+
+WL_HOME=""
+if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
+    export WL_HOME="${MW_HOME}/wlserver_10.3"
+elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
+    export WL_HOME="${ORACLE_HOME}/wlserver"
+fi
+
+if [ ! -d "${WL_HOME}" ]; then
+    echo "[ERROR] The WL_HOME (${WL_HOME}) does not exist!"
     exit
 fi
 
@@ -68,19 +90,5 @@ fi
 
 if [ "$(readlink -f ${JAVA_HOME})" != "${JAVA_HOME_FROM_PROPERTIES}" ]; then
     echo "[ERROR] The JAVA_HOME(real path) and the JAVA_HOME(from properties) are not the same!"
-    exit
-fi
-
-######################################################################
-
-WL_HOME=""
-if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
-    export WL_HOME="${MW_HOME}/wlserver_10.3"
-elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
-    export WL_HOME="${ORACLE_HOME}/wlserver"
-fi
-
-if [ ! -d "${WL_HOME}" ]; then
-    echo "[ERROR] The WL_HOME (${WL_HOME}) does not exist!"
     exit
 fi
