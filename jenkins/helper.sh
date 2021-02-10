@@ -6,6 +6,8 @@ JENKINS_URL="http://jenkins.example.com"
 # JENKINS_FILE_DIR="${HOME}/.jenkins"
 JAVA_HOME="/usr/lib/jvm/java-11"
 
+######################################################################
+
 JENKINS_URL="${JENKINS_URL//\//\/}"
 # JENKINS_FILE_DIR="${JENKINS_FILE_DIR//\//\/}"
 JAVA_HOME="${JAVA_HOME//\//\/}"

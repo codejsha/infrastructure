@@ -5,6 +5,8 @@ ORACLE_HOME="${MW_HOME}/oracle_wt1"
 INSTANCE_NAME="instance1"
 INSTALL_SCRIPT_DIR="/svc/infrastructure/ohs"
 
+######################################################################
+
 MW_HOME="${MW_HOME//\//\/}"
 ORACLE_HOME="${ORACLE_HOME//\//\/}"
 INSTANCE_NAME="${INSTANCE_NAME//\//\/}"

@@ -4,6 +4,8 @@ ORACLE_HOME="/usr/local/ohs"
 DOMAIN_NAME="base_domain"
 INSTALL_SCRIPT_DIR="/svc/infrastructure/ohs"
 
+######################################################################
+
 ORACLE_HOME="${ORACLE_HOME//\//\/}"
 DOMAIN_NAME="${DOMAIN_NAME//\//\/}"
 INSTALL_SCRIPT_DIR="${INSTALL_SCRIPT_DIR//\//\/}"

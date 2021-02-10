@@ -6,6 +6,8 @@ JRE_HOME="/usr/lib/jvm/jre-11"
 # JRE_HOME="/usr/lib/jvm/jre-1.8.0"
 CATALINA_HOME="/usr/local/tomcat"
 
+######################################################################
+
 JAVA_HOME="${JAVA_HOME//\//\/}"
 JRE_HOME="${JRE_HOME//\//\/}"
 CATALINA_HOME="${CATALINA_HOME//\//\/}"

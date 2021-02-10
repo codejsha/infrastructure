@@ -3,8 +3,12 @@
 JAVA_HOME="/usr/lib/jvm/java-11"
 # JAVA_HOME="/usr/java/current"
 JBOSS_HOME="/usr/local/wildfly"
-BIND_ADDRESS="0.0.0.0"
-BIND_ADDRESS_MGMT="127.0.0.1"
+# BIND_ADDRESS="0.0.0.0"
+# BIND_ADDRESS_MGMT="127.0.0.1"
+BIND_ADDRESS="test.example.com"
+BIND_ADDRESS_MGMT="test.example.com"
+
+######################################################################
 
 JAVA_HOME="${JAVA_HOME//\//\/}"
 JBOSS_HOME="${JBOSS_HOME//\//\/}"
