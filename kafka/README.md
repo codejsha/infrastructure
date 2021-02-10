@@ -17,7 +17,7 @@ docker-compose up -f docker-compose.yaml
 
 [Confluent Kafka README](/kafka/confluent/README.md)
 
-## Strimzi kafka
+## Strimzi Kafka
 
 [Strimzi Kafka README](/kafka/strimzi/README.md)
 
