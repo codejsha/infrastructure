@@ -3,7 +3,11 @@
 <!--
     ${CATALINA_BASE}/conf/[enginename]/[hostname]/<context>.xml
 
-    Requirement: deployOnStartup="true" in the Host element (default: true)
+    Requirement:
+    - deployOnStartup="true" (default: true)
+
+      <Host name="localhost"  appBase="webapps"
+            unpackWARs="true" autoDeploy="false" deployOnStartup="true">
 -->
 
 <!-- ROOT.xml -->
