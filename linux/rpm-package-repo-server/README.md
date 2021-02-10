@@ -2,6 +2,10 @@
 
 Requirements: yum-utils, createrepo
 
+```bash
+sudo yum install -y yum-utils createrepo
+```
+
 ## Create repository
 
 ```bash
