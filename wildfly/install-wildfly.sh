@@ -34,10 +34,13 @@ function check_install_file {
     fi
 }
 
+function install_wildfly {
+    tar -C ${PARENT_JBOSS_HOME} -xzf ${INSTALL_FILE_DIR}/${INSTALL_FILE}
+    sudo mv ${PARENT_JBOSS_HOME}/${JBOSS_DIR_NAME} ${JBOSS_HOME}
+}
+
 ######################################################################
 
 check_jboss_home
 check_install_file
-
-tar -C ${PARENT_JBOSS_HOME} -xzf ${INSTALL_FILE_DIR}/${INSTALL_FILE}
-mv ${PARENT_JBOSS_HOME}/${JBOSS_DIR_NAME} ${JBOSS_HOME}
+install_wildfly
