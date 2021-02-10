@@ -32,13 +32,21 @@ function download_install_file {
     fi
 }
 
-function extract_install_file {
+function check_install_file {
+    if [ ! -f "${INSTALL_FILE_DIR}/${INSTALL_FILE}" ]; then
+        echo "[ERROR] The install file (${INSTALL_FILE_DIR}/${INSTALL_FILE}) does not exist!"
+        exit
+    fi
+}
+
+function install_tomcat {
     tar -xzf ${INSTALL_FILE_DIR}/${INSTALL_FILE} -C ${PARENT_CATALINA_HOME}
-    mv ${PARENT_CATALINA_HOME}/apache-tomcat-${TOMCAT_VERSION} ${CATALINA_HOME}
+    sudo mv ${PARENT_CATALINA_HOME}/apache-tomcat-${TOMCAT_VERSION} ${CATALINA_HOME}
 }
 
 ######################################################################
 
 check_catalina_home
 download_install_file
+check_install_file
 install_tomcat
