@@ -60,6 +60,21 @@ function install_httpd {
         fi
     }
 
+    function check_install_file {
+        if [ ! -f "${INSTALL_FILE_DIR}/${HTTPD_FILE}" ]; then
+            echo "[ERROR] The install file (${INSTALL_FILE_DIR}/${HTTPD_FILE}) does not exist!"
+            exit
+        fi
+        if [ ! -f "${INSTALL_FILE_DIR}/${APR_FILE}" ]; then
+            echo "[ERROR] The install file (${INSTALL_FILE_DIR}/${APR_FILE}) does not exist!"
+            exit
+        fi
+        if [ ! -f "${INSTALL_FILE_DIR}/${APRUTIL_FILE}" ]; then
+            echo "[ERROR] The install file (${INSTALL_FILE_DIR}/${APRUTIL_FILE}) does not exist!"
+            exit
+        fi
+    }
+
     function extract_install_file {
         tar -xzf ${INSTALL_FILE_DIR}/${HTTPD_FILE} -C ${PARENT_BUILD_DIR}
         tar -xzf ${INSTALL_FILE_DIR}/${APR_FILE} -C ${PARENT_BUILD_DIR}
@@ -93,6 +108,7 @@ function install_httpd {
     check_httpd_home
     install_required_package
     download_install_file
+    check_install_file
     extract_install_file
     include_apr_files
     configure_and_install
