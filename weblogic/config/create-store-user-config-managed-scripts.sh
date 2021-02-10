@@ -22,7 +22,7 @@ VAR_DOMAIN_HOME="${VAR_DOMAIN_HOME/${DOMAIN_NAME}/${TEMP}}"
 
 ######################################################################
 
-cat << EOF > ${DOMAIN_HOME}/scripts/shutdown_${MANAGED_SERVER_NAME}.py
+cat <<EOF > ${DOMAIN_HOME}/scripts/shutdown_${MANAGED_SERVER_NAME}.py
 #!/usr/bin/env python
 
 domain_home = os.environ['DOMAIN_HOME']
@@ -43,7 +43,7 @@ EOF
 ######################################################################
 
 if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
-cat << EOF > ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
+cat <<EOF > ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
 #!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
@@ -52,7 +52,7 @@ DOMAIN_NAME="${DOMAIN_NAME}"
 export DOMAIN_HOME="${VAR_DOMAIN_HOME_11}"
 EOF
 elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
-cat << EOF > ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
+cat <<EOF > ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
 #!/bin/bash
 
 ORACLE_HOME="${ORACLE_HOME}"
@@ -67,12 +67,12 @@ export MANAGED_SERVER_NAME="${MANAGED_SERVER_NAME}"
 EOF
 
 if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
-cat << EOF >> ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
+cat <<EOF >> ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
 
 \${MW_HOME}/wlserver_10.3/common/bin/wlst.sh \${DOMAIN_HOME}/scripts/shutdown_\${MANAGED_SERVER_NAME}.py
 EOF
 elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
-cat << EOF >> ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
+cat <<EOF >> ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
 
 \${ORACLE_HOME}/oracle_common/common/bin/wlst.sh \${DOMAIN_HOME}/scripts/shutdown_\${MANAGED_SERVER_NAME}.py
 EOF

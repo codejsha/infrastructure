@@ -4,7 +4,7 @@ source ./env-base.sh
 
 ######################################################################
 
-cat << EOF > ${DOMAIN_HOME}/scripts/encrypt-password.sh
+cat <<EOF > ${DOMAIN_HOME}/scripts/encrypt-password.sh
 #!/bin/bash
 export PS4="\e[33;1m+ \e[0m"; set -x
 
