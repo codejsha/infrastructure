@@ -10,6 +10,6 @@ KUBE_CONTEXT="$(kubectl config current-context)"
 helm upgrade ${RELEASE_NAME} \
     --kube-context ${KUBE_CONTEXT} \
     --namespace ${NAMESPACE} \
-    --values helm-chart-values.yaml \
+    --values helm-chart-values-private.yaml \
     --set kafka.enabled=true \
     ./confluent-operator/helm/confluent-operator
