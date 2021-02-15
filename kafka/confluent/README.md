@@ -1,17 +1,60 @@
 # Confluent Kafka
 
-## Install
-
-### Local
+## Local
 
 ```bash
 bash ./install-confluent-kafka.sh
 ```
 
-### Kubernetes
+## Kubernetes (Open source Helm charts)
 
 ```bash
+bash ./helm-install-open-source-confluent-kafka.sh
+```
+
+## Kubernetes Operator (with Helm)
+
+### Install
+
+using util:
+
+```bash
+bash ./operator-install-confluent-kafka.sh
+kubectl apply --filename control-center-ingress.yaml
+
+### install / upgrade / upgrade --install
+bash ./helm-install-confluent-util-kafka.sh
+bash ./helm-install-confluent-util-operator.sh
+bash ./helm-install-confluent-util-others.sh
+bash ./helm-install-confluent-util-zookeeper.sh
+```
+
+using cli:
+
+```bash
+bash ./helm-install-confluent-operator.sh
+bash ./helm-install-confluent-zookeeper.sh
 bash ./helm-install-confluent-kafka.sh
+bash ./helm-install-confluent-ksql.sh
+bash ./helm-install-confluent-schema-registry.sh
+bash ./helm-install-confluent-replicator.sh
+bash ./helm-install-confluent-control-center.sh
+bash ./helm-install-confluent-kafka-connect.sh
+kubectl apply --filename control-center-ingress.yaml
+```
+
+### Namespaced deployment (namespace-level)
+
+```bash
+bash ./apply-namespaced-deployment.sh
+```
+
+### Add license
+
+edit `confluent-license.yaml`, and apply:
+
+```bash
+bash ./add-license.sh
 ```
 
 ## Configuration parameters
