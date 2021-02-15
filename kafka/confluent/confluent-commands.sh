@@ -209,4 +209,4 @@
 
 ./kafka-dump-log \
     --print-data-log \
-    --files /tmp/confluent/kafka/data/my-topic-0/00000000000000000000.log
+    --files /mnt/kafka/data/my-topic-0/00000000000000000000.log
