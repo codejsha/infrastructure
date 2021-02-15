@@ -38,11 +38,13 @@ zookeeper:
   replicas: 3
   resources:
     requests:
-      cpu: 200m
+      # cpu: 500m
+      # memory: 4Gi
+      cpu: 100m
       memory: 512Mi
   jvmConfig:
     # heapSize: 4G
-    heapSize: 1G
+    heapSize: 512M
   configOverrides:
     server:
       - quorumListenOnAllIPs=true
@@ -64,6 +66,8 @@ kafka:
   replicas: 3
   resources:
     requests:
+      # cpu: "1"
+      # memory: 4Gi
       cpu: 200m
       memory: 1Gi
   jvmConfig:
@@ -166,6 +170,16 @@ connect:
 replicator:
   name: replicator
   replicas: 2
+  resources:
+    requests:
+      # cpu: 200m
+      # memory: 4Gi
+      cpu: 100m
+      memory: 512Mi
+    limits: {}
+  jvmConfig:
+    # heapSize: 4G
+    heapSize: 512M
   tls:
     enabled: false
     authentication:
@@ -259,6 +273,16 @@ ksql:
 controlcenter:
   name: control-center
   license: ""
+  resources:
+    requests:
+      # cpu: 500m
+      # memory: 4Gi
+      cpu: 100m
+      memory: 512Mi
+    limits: {}
+  jvmConfig:
+    # heapSize: 4G
+    heapSize: 512M
   ### C3 dependencies
   dependencies:
     c3KafkaCluster:
