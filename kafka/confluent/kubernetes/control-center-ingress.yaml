@@ -1,0 +1,17 @@
+# apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
+# apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: control-center-ingress
+  namespace: confluent-operator
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - host: control-center.example.com
+      http:
+        paths:
+          - backend:
+              serviceName: control-center-0-internal
+              servicePort: 9021

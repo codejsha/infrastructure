@@ -1,0 +1,297 @@
+######################################################################
+
+### Global
+
+global:
+  provider:
+    name: private
+    ### if any name which indicates regions
+    region: anyregion
+    ### Docker registry endpoint where Confluent Images are available.
+    registry:
+      fqdn: docker.io
+      credential:
+        required: false
+  storageClassName: local-path
+  # storageClassName: rook-ceph-block
+  sasl:
+    plain:
+      username: test
+      password: test123
+  authorization:
+    rbac:
+      enabled: false
+    simple:
+      enabled: false
+    superUsers: []
+  dependencies:
+    mds:
+      endpoint: ""
+      publicKey: ""
+
+######################################################################
+
+### Zookeeper Cluster
+
+zookeeper:
+  name: zookeeper
+  replicas: 3
+  resources:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+  jvmConfig:
+    # heapSize: 4G
+    heapSize: 1G
+  configOverrides:
+    server:
+      - quorumListenOnAllIPs=true
+      - tickTime=2000
+      - syncLimit=5
+      - initLimit=10
+      - dataDir=/mnt/data/data
+      - dataLogDir=/mnt/data/txnlog
+      - autopurge.purgeInterval=1
+    jvm: []
+    log4j: []
+
+######################################################################
+
+### Kafka Cluster
+
+kafka:
+  name: kafka
+  replicas: 3
+  resources:
+    requests:
+      cpu: 200m
+      memory: 1Gi
+  jvmConfig:
+    # heapSize: 4G
+    heapSize: 1G
+  loadBalancer:
+    enabled: false
+    domain: ""
+  tls:
+    enabled: false
+    fullchain: |-
+    privkey: |-
+    cacerts: |-
+  metricReporter:
+    enabled: true
+  configOverrides:
+    server:
+      ### Socket Server Settings
+      - listeners=INTERNAL://:9071,REPLICATION://:9072,EXTERNAL://:9092
+      - num.network.threads=4
+      - num.io.threads=8
+      - socket.send.buffer.bytes=102400
+      - socket.receive.buffer.bytes=102400
+      - socket.request.max.bytes=104857600
+
+      ### Replica Settings
+      - default.replication.factor=3
+      - min.insync.replicas=2
+      - replica.lag.time.max.ms=15000
+      - unclean.leader.election.enable=false
+
+      ### Log Basics
+      - log.dirs=/mnt/data/data0/logs
+      - num.partitions=3
+      - num.recovery.threads.per.data.dir=1
+      - auto.create.topics.enable=false
+      - delete.topic.enable=true
+      - message.max.bytes=2097164
+      - log.cleanup.policy=delete
+
+      ### Internal Topic Settings
+      - offsets.topic.replication.factor=3
+      - offsets.topic.compression.codec=3
+      - offsets.commit.timeout.ms=15000
+      - offsets.retention.minutes=10080
+      - transaction.state.log.replication.factor=3
+      - transaction.state.log.min.isr=2
+
+      ### Log Retention Policy
+      # - log.retention.hours=168
+      # - log.segment.bytes=1073741824
+      # - log.retention.check.interval.ms=300000
+
+      ### Zookeeper
+      - zookeeper.connection.timeout.ms=18000
+      - zookeeper.session.timeout.ms=22500
+    jvm: []
+    log4j: []
+
+######################################################################
+
+### Connect Cluster
+
+connect:
+  name: kafka-connect
+  replicas: 2
+  resources:
+    requests:
+      # cpu: 200m
+      # memory: 4Gi
+      cpu: 100m
+      memory: 512Mi
+    limits: {}
+  jvmConfig:
+    # heapSize: 4G
+    heapSize: 512M
+  tls:
+    enabled: false
+    ### "" for none, "tls" for mutual auth
+    authentication:
+      type: ""
+    fullchain: |-
+    privkey: |-
+    cacerts: |-
+  loadBalancer:
+    enabled: false
+    domain: ""
+  dependencies:
+    kafka:
+      bootstrapEndpoint: kafka:9071
+      brokerCount: 3
+    schemaRegistry:
+      enabled: true
+      url: http://schema-registry:8081
+
+######################################################################
+
+### Replicator Connect Cluster
+
+replicator:
+  name: replicator
+  replicas: 2
+  tls:
+    enabled: false
+    authentication:
+      type: ""
+    fullchain: |-
+    privkey: |-
+    cacerts: |-
+  loadBalancer:
+    enabled: false
+    domain: ""
+  dependencies:
+    kafka:
+      brokerCount: 3
+      bootstrapEndpoint: kafka:9071
+
+######################################################################
+
+### Schema Registry
+
+schemaregistry:
+  name: schema-registry
+  resources:
+    requests:
+      # cpu: 250m
+      # memory: 4Gi
+      cpu: 100m
+      memory: 512Mi
+    limits: {}
+  jvmConfig:
+    # heapSize: 4G
+    heapSize: 512M
+  tls:
+    enabled: false
+    authentication:
+      type: ""
+    fullchain: |-
+    privkey: |-
+    cacerts: |-
+  loadBalancer:
+    enabled: false
+    domain: ""
+  dependencies:
+    kafka:
+      brokerCount: 3
+      bootstrapEndpoint: kafka:9071
+
+######################################################################
+
+### ksqlDB
+
+ksql:
+  name: ksqldb
+  replicas: 2
+  resources:
+    requests:
+      # cpu: 200m
+      # memory: 4Gi
+      cpu: 100m
+      memory: 512Mi
+    limits: {}
+  jvmConfig:
+    # heapSize: 4G
+    heapSize: 512M
+  tls:
+    enabled: false
+    authentication:
+      type: ""
+    fullchain: |-
+    privkey: |-
+    cacerts: |-
+  loadBalancer:
+    enabled: false
+    domain: ""
+  dependencies:
+    kafka:
+      brokerCount: 3
+      bootstrapEndpoint: kafka:9071
+      brokerEndpoints: kafka-0.kafka:9071,kafka-1.kafka:9071,kafka-2.kafka:9071
+    schemaRegistry:
+      enabled: false
+      tls:
+        enabled: false
+        authentication:
+          type: ""
+      url: http://schema-registry:8081
+
+######################################################################
+
+### Control Center (C3) Resource configuration
+
+controlcenter:
+  name: control-center
+  license: ""
+  ### C3 dependencies
+  dependencies:
+    c3KafkaCluster:
+      brokerCount: 3
+      bootstrapEndpoint: kafka:9071
+      zookeeper:
+        endpoint: zookeeper:2181
+    connectCluster:
+      enabled: true
+      url: http://kafka-connect:8083
+    ksql:
+      enabled: true
+      url: http://ksqldb:9088
+    schemaRegistry:
+      enabled: true
+      url: http://schema-registry:8081
+  ### C3 External Access
+  loadBalancer:
+    enabled: false
+    domain: ""
+  ### TLS configuration
+  tls:
+    enabled: false
+    authentication:
+      type: ""
+    fullchain: |-
+    privkey: |-
+    cacerts: |-
+  ### C3 authentication
+  auth:
+    basic:
+      enabled: true
+      ### map with key as user and value as password and role
+      property:
+        admin: Developer1,Administrators
+        disallowed: no_access
