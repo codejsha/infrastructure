@@ -16,8 +16,6 @@ istioctl profile list
 ###     demo
 ###     empty
 
-istioctl install --set profile=default \
-   --set meshConfig.accessLogFile=/dev/stdout
-
-# kubectl get services -n istio-system
-# kubectl get pods -n istio-system
+istioctl install --set profile=default
+# istioctl install --set profile=default \
+#    --set meshConfig.accessLogFile=/dev/stdout
