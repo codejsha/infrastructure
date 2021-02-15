@@ -3,10 +3,9 @@
 CONFLUENT_HOME="/usr/local/confluent"
 SERVER_NAME="kafka-rest1"
 # PROPERTIES_FILE="${CONFLUENT_HOME}/etc/kafka-rest/kafka-rest.properties"
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/kafka-rest/kafka-rest1.properties"
 PROPERTIES_FILE="${CONFLUENT_HOME}/properties/kafka-rest1.properties"
 
-LOG_DIR="/confluent/${SERVER_NAME}/logs"
+LOG_DIR="/mnt/${SERVER_NAME}/logs"
 export LOG_DIR
 
 GET_DATE="$(date +'%Y%m%d_%H%M%S')"

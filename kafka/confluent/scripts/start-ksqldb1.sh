@@ -2,11 +2,11 @@
 
 CONFLUENT_HOME="/usr/local/confluent"
 SERVER_NAME="ksqldb1"
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/ksqldb/ksql-server.properties"
 # PROPERTIES_FILE="${CONFLUENT_HOME}/etc/ksqldb/ksql-production-server.properties"
+# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/ksqldb/ksql-server.properties"
 PROPERTIES_FILE="${CONFLUENT_HOME}/properties/ksql-server1.properties"
 
-LOG_DIR="/confluent/${SERVER_NAME}/logs"
+LOG_DIR="/mnt/${SERVER_NAME}/logs"
 export LOG_DIR
 
 GET_DATE="$(date +'%Y%m%d_%H%M%S')"

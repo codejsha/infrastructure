@@ -2,13 +2,15 @@
 
 CONFLUENT_HOME="/usr/local/confluent"
 SERVER_NAME="kafka-connect1"
+# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/kafka/connect-distributed.properties"
 # PROPERTIES_FILE="${CONFLUENT_HOME}/etc/schema-registry/connect-avro-distributed.properties"
+# PROPERTIES_FILE="${CONFLUENT_HOME}/properties/connect-distributed.properties"
 PROPERTIES_FILE="${CONFLUENT_HOME}/properties/connect-avro-distributed.properties"
 
-LOG_DIR="/confluent/${SERVER_NAME}/logs"
+LOG_DIR="/mnt/${SERVER_NAME}/logs"
 export LOG_DIR
 
-CLASSPATH="${CLASSPATH}:${CONFLUENT_HOME}/share/java/kafka-connect-replicator/*"
+CLASSPATH="${CONFLUENT_HOME}/share/java/kafka-connect-replicator/*"
 export CLASSPATH
 
 GET_DATE="$(date +'%Y%m%d_%H%M%S')"
