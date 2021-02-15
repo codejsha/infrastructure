@@ -27,8 +27,4 @@ docker-compose up -f docker-compose.yaml
 
 ## NiFi
 
-- https://github.com/cetic/helm-nifi
-
-```bash
-bash ./helm-install-nifi.sh
-```
+[NiFi README](/kafka/nifi/README.md)
