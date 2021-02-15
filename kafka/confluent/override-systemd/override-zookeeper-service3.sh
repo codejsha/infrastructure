@@ -1,19 +1,20 @@
 #!/bin/bash
 
 sudo mkdir -p /usr/lib/systemd/system/confluent-zookeeper.service.d
-# mkdir -p /confluent/zookeeper3/logs
+# mkdir -p /mnt/zookeeper3/logs
 
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-zookeeper.service.d/override.conf
 [Service]
 # User=
 # Group=
-Environment=
-ExecStart=
-
 # User=cp-kafka
 # Group=confluent
+
+# Environment=
 Environment="LOG_DIR=/var/log/kafka"
-# Environment="LOG_DIR=/confluent/zookeeper3/logs"
+# Environment="LOG_DIR=/mnt/zookeeper3/logs"
+
+ExecStart=
 # ExecStart=/usr/bin/zookeeper-server-start /etc/kafka/zookeeper.properties
 ExecStart=/usr/bin/zookeeper-server-start /etc/confluent/properties/zookeeper3.properties
 EOF

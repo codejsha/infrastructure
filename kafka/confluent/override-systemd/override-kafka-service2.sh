@@ -1,21 +1,22 @@
 #!/bin/bash
 
 sudo mkdir -p /usr/lib/systemd/system/confluent-server.service.d
-# mkdir -p /confluent/kafka2/logs
+# mkdir -p /mnt/kafka2/logs
 
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-server.service.d/override.conf
 [Service]
 # User=
 # Group=
-Environment=
-ExecStart=
-
 # User=cp-kafka
 # Group=confluent
+
+# Environment=
 Environment="LOG_DIR=/var/log/kafka"
-# Environment="LOG_DIR=/confluent/kafka2/logs"
+# Environment="LOG_DIR=/mnt/kafka2/logs"
+
+ExecStart=
 # ExecStart=/usr/bin/kafka-server-start /etc/kafka/server.properties
-ExecStart=/usr/bin/kafka-server-start /etc/confluent/properties/server2.properties
+ExecStart=/usr/bin/kafka-server-start /etc/confluent/properties/kafka2.properties
 EOF
 
 sudo systemctl daemon-reload

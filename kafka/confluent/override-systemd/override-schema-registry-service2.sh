@@ -1,19 +1,20 @@
 #!/bin/bash
 
 sudo mkdir -p /usr/lib/systemd/system/confluent-schema-registry.service.d
-# mkdir -p /confluent/schema-registry2/logs
+# mkdir -p /mnt/schema-registry2/logs
 
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-schema-registry.service.d/override.conf
 [Service]
 # User=
 # Group=
-Environment=
-ExecStart=
-
 # User=cp-schema-registry
 # Group=confluent
-Environment="LOG_DIR=/var/log/confluent/schema-registry"
-# Environment="LOG_DIR=/confluent/schema-registry2/logs"
+
+# Environment=
+# Environment="LOG_DIR=/var/log/confluent/schema-registry"
+# Environment="LOG_DIR=/mnt/schema-registry2/logs"
+
+ExecStart=
 # ExecStart=/usr/bin/schema-registry-start /etc/schema-registry/schema-registry.properties
 ExecStart=/usr/bin/schema-registry-start /etc/confluent/properties/schema-registry2.properties
 EOF
