@@ -1,10 +1,10 @@
 #!/bin/bash
 
-function operator_install_cassandra_with_artifacthub {
+function install_cassandra_with_artifacthub {
     kubectl create --filename https://operatorhub.io/install/alpha/cassandra-operator.yaml
 }
 
-function operator_install_cassandra_with_git {
+function install_cassandra_with_git {
     git clone https://github.com/instaclustr/cassandra-operator.git
     # gh repo clone instaclustr/cassandra-operator
 
@@ -15,5 +15,5 @@ function operator_install_cassandra_with_git {
 
 ######################################################################
 
-# operator_install_cassandra_with_artifacthub
-operator_install_cassandra_with_git
+# install_cassandra_with_artifacthub
+install_cassandra_with_git

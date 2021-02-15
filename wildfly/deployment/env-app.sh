@@ -18,20 +18,13 @@ function set_arguments {
         ARGS="${1}"
         shift
         case "${ARGS}" in
-            "--help")
-                print_help; exit;;
-            "--path")
-                APP_PATH="${1}"; shift;;
-            "--path="*)
-                APP_PATH="${ARGS#*=}";;
-            "--name")
-                APP_NAME="${1}"; shift;;
-            "--name="*)
-                APP_NAME="${ARGS#*=}";;
-            "--runtime-name")
-                APP_RUNTIME_NAME="${1}"; shift;;
-            "--runtime-name="*)
-                APP_RUNTIME_NAME="${ARGS#*=}";;
+            "--help")               print_help;                     exit;;
+            "--path")               APP_PATH="${1}";                shift;;
+            "--path="*)             APP_PATH="${ARGS#*=}";          ;;
+            "--name")               APP_NAME="${1}";                shift;;
+            "--name="*)             APP_NAME="${ARGS#*=}";          ;;
+            "--runtime-name")       APP_RUNTIME_NAME="${1}";        shift;;
+            "--runtime-name="*)     APP_RUNTIME_NAME="${ARGS#*=}";  ;;
         esac
     done
 }

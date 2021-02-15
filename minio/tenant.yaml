@@ -21,10 +21,10 @@ data:
   CONSOLE_PBKDF_PASSPHRASE: U0VDUkVU
   ## Salt to encrypt jwt payload, base64 encoded (echo -n 'SECRET' | base64)
   CONSOLE_PBKDF_SALT: U0VDUkVU
-  ## MinIO User Access Key (used for Console Login), base64 encoded (echo -n 'YOURCONSOLEACCESS' | base64)
-  CONSOLE_ACCESS_KEY: WU9VUkNPTlNPTEVBQ0NFU1M=
-  ## MinIO User Secret Key (used for Console Login), base64 encoded (echo -n 'YOURCONSOLESECRET' | base64)
-  CONSOLE_SECRET_KEY: WU9VUkNPTlNPTEVTRUNSRVQ=
+  ## MinIO User Access Key (used for Console Login), base64 encoded (echo -n 'minio' | base64)
+  CONSOLE_ACCESS_KEY: bWluaW8=
+  ## MinIO User Secret Key (used for Console Login), base64 encoded (echo -n 'minio123' | base64)
+  CONSOLE_SECRET_KEY: bWluaW8xMjM=
 ---
 ## MinIO Tenant Definition
 apiVersion: minio.min.io/v2
@@ -134,7 +134,7 @@ spec:
   ## accessible as DNS entries of form `<bucketname>.minio.default.svc.cluster.local`
   s3:
     ## This feature is turned off by default
-    bucketDNS: false
+    bucketDNS: true
 
   ## This field is used only when "requestAutoCert" is set to true. Use this field to set CommonName
   ## for the auto-generated certificate. Internal DNS name for the pod will be used if CommonName is

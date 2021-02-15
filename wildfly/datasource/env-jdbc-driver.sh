@@ -35,20 +35,13 @@ function set_arguments {
         ARGS="${1}"
         shift
         case "${ARGS}" in
-            "--help")
-                print_help; exit;;
-            "--driver-name")
-                DRIVER_NAME="${1}"; shift;;
-            "--driver-name="*)
-                DRIVER_NAME="${ARGS#*=}";;
-            "--module-name")
-                MODULE_NAME="${1}"; shift;;
-            "--module-name="*)
-                MODULE_NAME="${ARGS#*=}";;
-            "--driver-runtime-name")
-                DRIVER_RUNTIME_NAME="${1}"; shift;;
-            "--driver-runtime-name="*)
-                DRIVER_RUNTIME_NAME="${ARGS#*=}";;
+            "--help")                   print_help;                         exit;;
+            "--driver-name")            DRIVER_NAME="${1}";                 shift;;
+            "--driver-name="*)          DRIVER_NAME="${ARGS#*=}";           ;;
+            "--module-name")            MODULE_NAME="${1}";                 shift;;
+            "--module-name="*)          MODULE_NAME="${ARGS#*=}";           ;;
+            "--driver-runtime-name")    DRIVER_RUNTIME_NAME="${1}";         shift;;
+            "--driver-runtime-name="*)  DRIVER_RUNTIME_NAME="${ARGS#*=}";   ;;
         esac
     done
 }

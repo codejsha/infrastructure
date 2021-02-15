@@ -13,16 +13,11 @@ function set_arguments {
         ARGS="${1}"
         shift
         case "${ARGS}" in
-            "--help")
-                print_help;;
-            "--instance")
-                INSTANCE_NAME="${1}"; shift;;
-            "--instance="*)
-                INSTANCE_NAME="${ARGS#*=}";;
-            "--port-offset")
-                PORT_OFFSET="${1}"; shift;;
-            "--port-offset="*)
-                PORT_OFFSET="${ARGS#*=}";;
+            "--help")           print_help;                     ;;
+            "--instance")       INSTANCE_NAME="${1}";           shift;;
+            "--instance="*)     INSTANCE_NAME="${ARGS#*=}";     ;;
+            "--port-offset")    PORT_OFFSET="${1}";             shift;;
+            "--port-offset="*)  PORT_OFFSET="${ARGS#*=}";       ;;
         esac
     done
 }

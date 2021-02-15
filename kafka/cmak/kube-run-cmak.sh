@@ -1,11 +1,16 @@
 #!/bin/bash
 
+# ZK_HOSTS="my-kafka-zookeeper-headless:2181"
+ZK_HOSTS="my-cluster-zookeeper-nodes:2181"
+
+######################################################################
+
 function kube_run_cmak {
     kubectl run \
         cmak \
         --restart=Never \
         --labels=app=cmak \
-        --env="ZK_HOSTS=my-kafka-zookeeper-headless:2181" \
+        --env="ZK_HOSTS=${ZK_HOSTS}" \
         --image=core.harbor.example.com/library/cmak:latest
 }
 
@@ -17,7 +22,7 @@ function kube_run_cmak_attach {
         cmak \
         --restart=Never \
         --labels=app=cmak \
-        --env="ZK_HOSTS=my-kafka-zookeeper-headless:2181" \
+        --env="ZK_HOSTS=${ZK_HOSTS}" \
         --image=core.harbor.example.com/library/cmak:latest
 }
 
