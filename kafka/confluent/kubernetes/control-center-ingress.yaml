@@ -13,5 +13,5 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: control-center-0-internal
+              serviceName: controlcenter-0-internal
               servicePort: 9021

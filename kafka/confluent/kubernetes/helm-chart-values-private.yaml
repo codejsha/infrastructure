@@ -31,7 +31,7 @@ global:
 
 ######################################################################
 
-### Zookeeper Cluster
+### Zookeeper
 
 zookeeper:
   name: zookeeper
@@ -59,7 +59,7 @@ zookeeper:
 
 ######################################################################
 
-### Kafka Cluster
+### Kafka
 
 kafka:
   name: kafka
@@ -129,10 +129,10 @@ kafka:
 
 ######################################################################
 
-### Connect Cluster
+### Kafka Connect
 
 connect:
-  name: kafka-connect
+  name: connectors
   replicas: 2
   resources:
     requests:
@@ -161,11 +161,11 @@ connect:
       brokerCount: 3
     schemaRegistry:
       enabled: true
-      url: http://schema-registry:8081
+      url: http://schemaregistry:8081
 
 ######################################################################
 
-### Replicator Connect Cluster
+### Replicator
 
 replicator:
   name: replicator
@@ -200,7 +200,7 @@ replicator:
 ### Schema Registry
 
 schemaregistry:
-  name: schema-registry
+  name: schemaregistry
   resources:
     requests:
       # cpu: 250m
@@ -231,7 +231,7 @@ schemaregistry:
 ### ksqlDB
 
 ksql:
-  name: ksqldb
+  name: ksql
   replicas: 2
   resources:
     requests:
@@ -264,14 +264,14 @@ ksql:
         enabled: false
         authentication:
           type: ""
-      url: http://schema-registry:8081
+      url: http://schemaregistry:8081
 
 ######################################################################
 
-### Control Center (C3) Resource configuration
+### Control Center (C3)
 
 controlcenter:
-  name: control-center
+  name: controlcenter
   license: ""
   resources:
     requests:
@@ -292,13 +292,13 @@ controlcenter:
         endpoint: zookeeper:2181
     connectCluster:
       enabled: true
-      url: http://kafka-connect:8083
+      url: http://connectors:8083
     ksql:
       enabled: true
-      url: http://ksqldb:9088
+      url: http://ksql:9088
     schemaRegistry:
       enabled: true
-      url: http://schema-registry:8081
+      url: http://schemaregistry:8081
   ### C3 External Access
   loadBalancer:
     enabled: false
