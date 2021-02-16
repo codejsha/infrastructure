@@ -25,25 +25,10 @@ bash ./install-docker.sh
 
 ### Expose Docker daemon socket
 
-Configure Service:
+override docker service:
 
 ```bash
-bash ./docker-service.sh
-```
-
-The `docker-service.sh` script create `/etc/systemd/system/docker.service.d/override.conf` file:
-
-```conf
-[Service]
-ExecStart=
-ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --host tcp://0.0.0.0:2375
-```
-
-Restart Docker daemon:
-
-```bash
-systemctl daemon-reload
-systemctl restart docker.service
+bash ./override-docker-service.sh
 ```
 
 ## Configuration file
