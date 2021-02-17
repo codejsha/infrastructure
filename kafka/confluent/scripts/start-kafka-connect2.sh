@@ -65,10 +65,7 @@ if [ -n "${PID}" ]; then
   exit
 fi
 
-### create data and log dirs
-if [ ! -d "${DATA_DIR}" ]; then
-    mkdir -p ${DATA_DIR}
-fi
+### create log dir
 if [ ! -d "${LOG_DIR}/backup" ]; then
     mkdir -p ${LOG_DIR}/backup
 fi

@@ -69,7 +69,7 @@ if [ ! -d "${LOG_DIR}/backup" ]; then
     mkdir -p ${LOG_DIR}/backup
 fi
 
-### create the myid file
+### create myid file
 if [ ! -f "${DATA_DIR}/myid" ]; then
     echo ${MYID} > ${DATA_DIR}/myid
 fi
