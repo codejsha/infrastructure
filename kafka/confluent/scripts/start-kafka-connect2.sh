@@ -48,7 +48,7 @@ export KAFKA_JMX_OPTS
 # export KAFKA_LOG4J_OPTS
 
 ### classpath
-CLASSPATH="${CLASSPATH}:${CONFLUENT_HOME}/share/java/kafka-connect-replicator/*.jar"
+CLASSPATH="${CLASSPATH}:${CONFLUENT_HOME}/share/java/kafka-connect-replicator/*"
 export CLASSPATH
 
 ### check current user
