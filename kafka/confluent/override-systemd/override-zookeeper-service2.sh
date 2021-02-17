@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sudo mkdir -p /usr/lib/systemd/system/confluent-zookeeper.service.d
-# mkdir -p /mnt/zookeeper2/logs
+# mkdir -p /mnt/zookeeper/logs
 
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-zookeeper.service.d/override.conf
 [Service]
@@ -12,7 +12,7 @@ cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-zookeeper.service.d/overr
 
 # Environment=
 Environment="LOG_DIR=/var/log/kafka"
-# Environment="LOG_DIR=/mnt/zookeeper2/logs"
+# Environment="LOG_DIR=/mnt/zookeeper/logs"
 
 ExecStart=
 # ExecStart=/usr/bin/zookeeper-server-start /etc/kafka/zookeeper.properties

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sudo mkdir -p /usr/lib/systemd/system/confluent-kafka-connect.service.d
-# mkdir -p /mnt/kafka-connect1/logs
+# mkdir -p /mnt/kafka-connect/logs
 
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-kafka-connect.service.d/override.conf
 [Service]
@@ -12,7 +12,7 @@ cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-kafka-connect.service.d/o
 
 # Environment=
 Environment="LOG_DIR=/var/log/kafka"
-# Environment="LOG_DIR=/mnt/kafka-connect1/logs"
+# Environment="LOG_DIR=/mnt/kafka-connect/logs"
 Environment="CLASSPATH=/usr/share/java/kafka-connect-replicator/*"
 # Environment="CLASSPATH="/usr/local/confluent/share/java/kafka-connect-replicator/*"
 
