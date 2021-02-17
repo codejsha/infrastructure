@@ -12,6 +12,8 @@
 *.zip
 
 /kafka/cmak/cmak-*/
+/kafka/confluent/kubernetes/confluent-operator/
+/kafka/strimzi/strimzi-*/
 /kubernetes/kubespray/kubespray/
 /kraken/kraken/
 /oracledb/docker-images/
