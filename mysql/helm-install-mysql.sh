@@ -3,11 +3,14 @@
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 
-export ROOT_PASSWORD="${ROOT_PASSWORD}"
-export USERNAME="${USERNAME}"
-export PASSWORD="${PASSWORD}"
-export REPLICATION_USERNAME="${REPLICATION_USERNAME}"
-export REPLICATION_PASSWORD="${REPLICATION_PASSWORD}"
+USERNAME="${USERNAME}"
+PASSWORD="${PASSWORD}"
+
+export ROOT_PASSWORD="${PASSWORD}"
+export DATABASE_USERNAME="${USERNAME}"
+export DATABASE_PASSWORD="${PASSWORD}"
+export REPLICATION_USERNAME="${USERNAME}"
+export REPLICATION_PASSWORD="${PASSWORD}"
 
 envsubst < ./helm-chart-values.yaml > ./helm-chart-values-temp.yaml
 

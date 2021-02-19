@@ -7,8 +7,8 @@ architecture: standalone
 auth:
   rootPassword: "${ROOT_PASSWORD}"
   database: my_database
-  username: "${USERNAME}"
-  password: "${PASSWORD}"
+  username: "${DATABASE_USERNAME}"
+  password: "${DATABASE_PASSWORD}"
   replicationUser: "${REPLICATION_USERNAME}"
   replicationPassword: "${REPLICATION_PASSWORD}"
 
