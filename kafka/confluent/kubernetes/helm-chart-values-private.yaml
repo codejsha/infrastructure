@@ -5,14 +5,16 @@
 global:
   provider:
     name: private
-    ### if any name which indicates regions
     region: anyregion
-    ### Docker registry endpoint where Confluent Images are available.
     registry:
       fqdn: docker.io
+      # fqdn: core.harbor.example.com
       credential:
         required: false
-  storageClassName: local-path
+        # required: true
+        # username:
+        # password:
+  storageClassName: standard
   # storageClassName: rook-ceph-block
   sasl:
     plain:
@@ -28,6 +30,13 @@ global:
     mds:
       endpoint: ""
       publicKey: ""
+
+######################################################################
+
+### Operator
+
+operator:
+  name: cc-operator
 
 ######################################################################
 
@@ -133,6 +142,9 @@ kafka:
 
 connect:
   name: connectors
+  # image:
+  #   repository: confluentinc/cp-server-connect-operator
+  #   repository: confluentinc/cp-custom-kafka-connect-operator
   replicas: 2
   resources:
     requests:
@@ -146,7 +158,6 @@ connect:
     heapSize: 512M
   tls:
     enabled: false
-    ### "" for none, "tls" for mutual auth
     authentication:
       type: ""
     fullchain: |-
@@ -283,7 +294,6 @@ controlcenter:
   jvmConfig:
     # heapSize: 4G
     heapSize: 512M
-  ### C3 dependencies
   dependencies:
     c3KafkaCluster:
       brokerCount: 3
@@ -299,11 +309,9 @@ controlcenter:
     schemaRegistry:
       enabled: true
       url: http://schemaregistry:8081
-  ### C3 External Access
   loadBalancer:
     enabled: false
     domain: ""
-  ### TLS configuration
   tls:
     enabled: false
     authentication:
@@ -311,11 +319,9 @@ controlcenter:
     fullchain: |-
     privkey: |-
     cacerts: |-
-  ### C3 authentication
   auth:
     basic:
       enabled: true
-      ### map with key as user and value as password and role
       property:
         admin: Developer1,Administrators
         disallowed: no_access
