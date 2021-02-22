@@ -19,6 +19,10 @@ bash ./docker-run-postgresql.sh
 bash ./helm-install-postgresql.sh
 ```
 
+#### Grafana dashboard
+
+- https://grafana.com/grafana/dashboards/9628
+
 ### Local
 
 - https://www.postgresql.org/download/linux/redhat/

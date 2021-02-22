@@ -5,7 +5,7 @@
 postgresqlUsername: postgres
 postgresqlPassword: "${PASSWORD}"
 
-# postgresqlDatabase:
+postgresqlDatabase: postgres
 # postgresqlInitdbArgs:
 # initdbScriptsConfigMap:
 # initdbScriptsSecret:
@@ -31,3 +31,19 @@ resources:
   requests:
     memory: 256Mi
     cpu: 250m
+
+metrics:
+  enabled: true
+  # resources: {}
+  service:
+    type: ClusterIP
+    annotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "9187"
+    # loadBalancerIP:
+  serviceMonitor:
+    enabled: false
+    additionalLabels: {}
+  prometheusRule:
+    enabled: false
+    additionalLabels: {}
