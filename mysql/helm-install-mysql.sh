@@ -9,8 +9,8 @@ PASSWORD="${PASSWORD}"
 export ROOT_PASSWORD="${PASSWORD}"
 export DATABASE_USERNAME="${USERNAME}"
 export DATABASE_PASSWORD="${PASSWORD}"
-export REPLICATION_USERNAME="${USERNAME}"
-export REPLICATION_PASSWORD="${PASSWORD}"
+# export REPLICATION_USERNAME="${USERNAME}"
+# export REPLICATION_PASSWORD="${PASSWORD}"
 
 envsubst < ./helm-chart-values.yaml > ./helm-chart-values-temp.yaml
 

@@ -31,7 +31,7 @@ ${IPLANET_HOME}/bin/wadm delete-instance \
     --ssl="true" \
     --rcfile="null" \
     --no-prompt \
-    --config=${IPLANET_SERVER} \
+    --config="${IPLANET_SERVER}" \
     "${IPLANET_HOST}"
 
 ${IPLANET_HOME}/bin/wadm delete-config \

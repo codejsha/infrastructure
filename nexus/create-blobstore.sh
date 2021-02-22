@@ -4,13 +4,13 @@ export NEXUS_URL="https://nexus.example.com"
 export NEXUS_USER="admin"
 export NEXUS_PASSWORD="admin123"
 export BLOBSTORE_NAME="${1}"
+export BUCKET_NAME="${BLOBSTORE_NAME}"
 
 export AWS_ACCESS_KEY="${AWS_ACCESS_KEY}"
 export AWS_SECRET_KEY="${AWS_SECRET_KEY}"
 # export AWS_ENDPOINT_URL="http://10.10.10.52:9000"
 export AWS_ENDPOINT_URL="http://minio.example.com"
 # export AWS_ENDPOINT_URL="https://minio-tenant-1.example.com"
-export BUCKET_NAME="${BLOBSTORE_NAME}"
 
 envsubst < ./data-blobstore.json > ./data-blobstore-temp.json
 

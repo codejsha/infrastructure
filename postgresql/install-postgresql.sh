@@ -19,13 +19,13 @@ function install_postgresql_with_yum {
 
 function install_postgresql_with_dnf {
     ### Install the repository RPM:
-    dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+    sudo dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 
     ### Disable the built-in PostgreSQL module:
-    dnf -qy module disable postgresql
+    sudo dnf -qy module disable postgresql
 
     ### Install PostgreSQL:
-    dnf install -y postgresql${POSTGRESQL_VERSION}-server
+    sudo dnf install -y postgresql${POSTGRESQL_VERSION}-server
 
     ### Optionally initialize the database and enable automatic start:
     sudo /usr/pgsql-${POSTGRESQL_VERSION}/bin/postgresql-${POSTGRESQL_VERSION}-setup initdb

@@ -9,8 +9,8 @@ auth:
   database: my_database
   username: "${DATABASE_USERNAME}"
   password: "${DATABASE_PASSWORD}"
-  replicationUser: "${REPLICATION_USERNAME}"
-  replicationPassword: "${REPLICATION_PASSWORD}"
+  # replicationUser: "${REPLICATION_USERNAME}"
+  # replicationPassword: "${REPLICATION_PASSWORD}"
 
 # initdbScriptsConfigMap:
 
