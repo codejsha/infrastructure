@@ -1,10 +1,10 @@
 #!/bin/bash
 
-git clone --single-branch --branch v1.5.3 https://github.com/rook/rook.git
+git clone --single-branch --branch release-1.5 https://github.com/rook/rook.git
 
-kubectl create -f rook/cluster/examples/kubernetes/ceph/crds.yaml
-kubectl create -f rook/cluster/examples/kubernetes/ceph/common.yaml
-kubectl create -f rook/cluster/examples/kubernetes/ceph/operator.yaml
+kubectl apply -f rook/cluster/examples/kubernetes/ceph/crds.yaml
+kubectl apply -f rook/cluster/examples/kubernetes/ceph/common.yaml
+kubectl apply -f rook/cluster/examples/kubernetes/ceph/operator.yaml
 
 ### verify the rook-ceph-operator is in the `Running` state before proceeding
 kubectl -n rook-ceph get pod --watch

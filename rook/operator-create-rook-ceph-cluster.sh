@@ -2,12 +2,12 @@
 
 /usr/bin/cp -f cluster.yaml rook/cluster/examples/kubernetes/ceph/cluster.yaml
 
-kubectl create -f rook/cluster/examples/kubernetes/ceph/cluster.yaml
-kubectl create -f rook/cluster/examples/kubernetes/ceph/toolbox.yaml
-# kubectl create -f rook/cluster/examples/kubernetes/ceph/dashboard-ingress-https.yaml
-# kubectl create -f rook/cluster/examples/kubernetes/ceph/dashboard-loadbalancer.yaml
-kubectl create -f dashboard-ingress.yaml
-kubectl create -f rook/cluster/examples/kubernetes/ceph/csi/rbd/storageclass.yaml
+kubectl apply -f rook/cluster/examples/kubernetes/ceph/cluster.yaml
+kubectl apply -f rook/cluster/examples/kubernetes/ceph/toolbox.yaml
+# kubectl apply -f rook/cluster/examples/kubernetes/ceph/dashboard-ingress-https.yaml
+# kubectl apply -f rook/cluster/examples/kubernetes/ceph/dashboard-loadbalancer.yaml
+kubectl apply -f dashboard-ingress.yaml
+kubectl apply -f rook/cluster/examples/kubernetes/ceph/csi/rbd/storageclass.yaml
 
 ### get dashboard password
 # kubectl -n rook-ceph get secret rook-ceph-dashboard-password -o jsonpath="{['data']['password']}" | base64 --decode && echo
