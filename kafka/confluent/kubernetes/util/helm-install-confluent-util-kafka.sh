@@ -2,7 +2,7 @@
 
 NAMESPACE="confluent-operator"
 RELEASE_PREFIX="confluent"
-RELEASE_NAME="${RELEASE_PREFIX}-sr-replicator-connect-c3"
+RELEASE_NAME="${RELEASE_PREFIX}-kafka"
 KUBE_CONTEXT="$(kubectl config current-context)"
 
 # helm install ${RELEASE_NAME} \
@@ -10,10 +10,6 @@ KUBE_CONTEXT="$(kubectl config current-context)"
 helm upgrade ${RELEASE_NAME} \
     --kube-context ${KUBE_CONTEXT} \
     --namespace ${NAMESPACE} \
-    --values helm-chart-values-private.yaml \
-    --set connect.enabled=true \
-    --set schemaregistry.enabled=true \
-    --set replicator.enabled=true \
-    --set ksql.enabled=true \
-    --set controlcenter.enabled=true \
+    --values ../helm-chart-values-private.yaml \
+    --set kafka.enabled=true \
     ./confluent-operator/helm/confluent-operator
