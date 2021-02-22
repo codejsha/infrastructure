@@ -1,0 +1,14 @@
+FROM confluentinc/cp-server-connect-operator:6.1.0.0
+
+USER root
+RUN \
+    confluent-hub install --no-prompt confluentinc/kafka-connect-replicator:6.1.0 && \
+    confluent-hub install --no-prompt debezium/debezium-connector-postgresql:1.3.1 && \
+    confluent-hub install --no-prompt confluentinc/kafka-connect-elasticsearch:11.0.2 && \
+    confluent-hub install --no-prompt confluentinc/kafka-connect-oracle-cdc:1.0.3 && \
+    confluent-hub install --no-prompt wepay/kafka-connect-bigquery:2.1.0 && \
+    echo
+
+    # confluent-hub install --no-prompt confluentinc/kafka-connect-s3-source:1.4.3 && \
+    # confluent-hub install --no-prompt confluentinc/kafka-connect-s3:5.5.3 && \
+USER 1001
