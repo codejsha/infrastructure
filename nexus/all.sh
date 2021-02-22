@@ -11,6 +11,9 @@ bash ./create-user.sh "developer" "developer"
 
 ### BLOBSTORE
 
+export AWS_ACCESS_KEY="${AWS_ACCESS_KEY}"
+export AWS_SECRET_KEY="${AWS_SECRET_KEY}"
+
 ### create-blobstore.sh ${BLOBSTORE_NAME}
 bash ./create-blobstore.sh "nexus-maven-central"
 bash ./create-blobstore.sh "nexus-docker-hub"
@@ -72,10 +75,15 @@ bash ./create-helm-proxy-repo.sh "helm-harbor" "nexus-helm-harbor" "https://core
 # bash ./delete-repository.sh "maven-central"
 # bash ./delete-repository.sh "docker-hub"
 # bash ./delete-repository.sh "docker-registry"
+# bash ./delete-repository.sh "docker-harbor"
 # bash ./delete-repository.sh "docker-group"
 # bash ./delete-repository.sh "helm-chartmuseum"
+# bash ./delete-repository.sh "helm-harbor"
 
 # bash ./delete-blobstore.sh "nexus-maven-central"
 # bash ./delete-blobstore.sh "nexus-docker-hub"
 # bash ./delete-blobstore.sh "nexus-docker-registry"
+# bash ./delete-blobstore.sh "nexus-docker-kube-registry"
+# bash ./delete-blobstore.sh "nexus-docker-harbor"
 # bash ./delete-blobstore.sh "nexus-helm-chartmuseum"
+# bash ./delete-blobstore.sh "nexus-helm-harbor"
