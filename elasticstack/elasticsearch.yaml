@@ -1,0 +1,48 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elasticstack
+spec:
+  version: 7.11.1
+  http:
+    ### disable tls
+    tls:
+      selfSignedCertificate:
+        disabled: true
+    ### customize self-signed certificate
+    # tls:
+    #   selfSignedCertificate:
+    #     subjectAltNames:
+    #       - ip: 1.2.3.4
+    #       - dns: elasticsearch.example.com
+  nodeSets:
+    - name: master
+      count: 1
+      config:
+        node.roles: ["master"]
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-master
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 10Gi
+            storageClassName: rook-ceph-block
+            # storageClassName: local-path
+    - name: data
+      count: 1
+      config:
+        node.roles: ["data", "ingest"]
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 100Gi
+            storageClassName: rook-ceph-block
+            # storageClassName: local-path
