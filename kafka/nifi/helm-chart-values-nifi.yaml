@@ -20,8 +20,8 @@ jvmMemory: 512Mi
 
 persistence:
   enabled: true
-  storageClass: "local-path"
-  # storageClass: "rook-ceph-block"
+  storageClass: "rook-ceph-block"
+  # storageClass: "local-path"
   accessModes: [ReadWriteOnce]
   configStorage:
     size: 100Mi
@@ -72,8 +72,8 @@ registry:
   persistence:
     enabled: true
     database:
-      storageClass: "local-path"
-      # storageClass: "rook-ceph-block"
+      storageClass: "rook-ceph-block"
+      # storageClass: "local-path"
     flowStorage:
-      storageClass: "local-path"
-      # storageClass: "rook-ceph-block"
+      storageClass: "rook-ceph-block"
+      # storageClass: "local-path"

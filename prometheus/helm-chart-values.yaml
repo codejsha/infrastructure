@@ -10,8 +10,8 @@ alertmanager:
   persistentVolume:
     enabled: true
     size: 2Gi
-    storageClass: "local-path"
-    # storageClass: "rook-ceph-block"
+    storageClass: "rook-ceph-block"
+    # storageClass: "local-path"
   replicaCount: 1
   service:
     type: ClusterIP
@@ -50,8 +50,8 @@ server:
   persistentVolume:
     enabled: true
     size: 8Gi
-    storageClass: "local-path"
-    # storageClass: "rook-ceph-block"
+    storageClass: "rook-ceph-block"
+    # storageClass: "local-path"
   replicaCount: 1
   service:
     type: ClusterIP
@@ -73,5 +73,5 @@ pushgateway:
   persistentVolume:
     enabled: true
     size: 2Gi
-    storageClass: "local-path"
-    # storageClass: "rook-ceph-block"
+    storageClass: "rook-ceph-block"
+    # storageClass: "local-path"

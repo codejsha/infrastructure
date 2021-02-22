@@ -33,33 +33,33 @@ persistence:
   resourcePolicy: "keep"
   persistentVolumeClaim:
     registry:
-      storageClass: local-path
-      # storageClass: rook-ceph-block
+      storageClass: rook-ceph-block
+      # storageClass: local-path
       accessMode: ReadWriteOnce
       size: 5Gi
     chartmuseum:
-      storageClass: local-path
-      # storageClass: rook-ceph-block
+      storageClass: rook-ceph-block
+      # storageClass: local-path
       accessMode: ReadWriteOnce
       size: 5Gi
     jobservice:
-      storageClass: local-path
-      # storageClass: rook-ceph-block
+      storageClass: rook-ceph-block
+      # storageClass: local-path
       accessMode: ReadWriteOnce
       size: 1Gi
     database:
-      storageClass: local-path
-      # storageClass: rook-ceph-block
+      storageClass: rook-ceph-block
+      # storageClass: local-path
       accessMode: ReadWriteOnce
       size: 1Gi
     redis:
-      storageClass: local-path
-      # storageClass: rook-ceph-block
+      storageClass: rook-ceph-block
+      # storageClass: local-path
       accessMode: ReadWriteOnce
       size: 1Gi
     trivy:
-      storageClass: local-path
-      # storageClass: rook-ceph-block
+      storageClass: rook-ceph-block
+      # storageClass: local-path
       accessMode: ReadWriteOnce
       size: 5Gi
   imageChartStorage:

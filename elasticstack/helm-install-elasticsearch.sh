@@ -9,9 +9,9 @@ helm upgrade --install my-elasticsearch \
     --create-namespace \
     --namespace ${NAMESPACE} \
     --set esJavaOpts="-Xms512m -Xmx512m" \
-    --set volumeClaimTemplate.storageClassName="local-path" \
+    --set volumeClaimTemplate.storageClassName="rook-ceph-block" \
     --version 7.8.0 \
     elastic/elasticsearch
 
-    ### rook ceph
-    # --set volumeClaimTemplate.storageClassName="rook-ceph-block" \
+    ### local path provisioner
+    # --set volumeClaimTemplate.storageClassName="local-path" \
