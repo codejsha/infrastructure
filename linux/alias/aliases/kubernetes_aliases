@@ -26,6 +26,7 @@ alias kgpv="kubectl get persistentvolumes"
 alias kgpvc="kubectl get persistentvolumeclaims"
 alias kgpvcall="kubectl get persistentvolumeclaims --all-namespaces"
 
+alias krmfeof="cat <<EOF | kubectl delete --recursive --filename"
 alias krmjob-force="kubectl delete jobs --grace-period=0 --force"
 alias krmjoball="kubectl delete jobs --all"
 alias krmjoball-force="kubectl delete jobs --all --grace-period=0 --force"
