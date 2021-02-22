@@ -64,7 +64,7 @@ persistence:
       size: 5Gi
   imageChartStorage:
     disableredirect: true
-    caBundleSecretName: minio-tls
+    # caBundleSecretName: minio-tls
     type: s3
     s3:
       region: us-west-1
@@ -72,17 +72,17 @@ persistence:
       accesskey: ${AWS_ACCESS_KEY}
       secretkey: ${AWS_SECRET_KEY}
       regionendpoint: ${AWS_REGION_ENDPOINT}
-      #encrypt: false
-      #keyid: mykeyid
-      secure: true
-      skipverify: true
-      v4auth: true
-      #chunksize: "5242880"
-      #rootdirectory: /s3/object/name/prefix
-      #storageclass: STANDARD
-      #multipartcopychunksize: "33554432"
-      #multipartcopymaxconcurrency: 100
-      #multipartcopythresholdsize: "33554432"
+      # encrypt: false
+      # keyid: mykeyid
+      # secure: true
+      # skipverify: true
+      # v4auth: true
+      # chunksize: "5242880"
+      # rootdirectory: /s3/object/name/prefix
+      # storageclass: STANDARD
+      # multipartcopychunksize: "33554432"
+      # multipartcopymaxconcurrency: 100
+      # multipartcopythresholdsize: "33554432"
 
 updateStrategy:
   type: RollingUpdate
