@@ -26,10 +26,10 @@ function Add-KubeCephVHD {
         -Path $CephVHDPath
 }
 
-# Add-KubeCephVHD "C:\hyper" "KubeNodeMachine1" "KubeNodeCephDisk1" 512GB
-# Add-KubeCephVHD "C:\hyper" "KubeNodeMachine2" "KubeNodeCephDisk2" 512GB
-# Add-KubeCephVHD "C:\hyper" "KubeNodeMachine3" "KubeNodeCephDisk3" 512GB
+# Add-KubeCephVHD "C:\hyper" "KubeNodeMachine1" "KubeNodeCephDisk1" 1024GB
+# Add-KubeCephVHD "C:\hyper" "KubeNodeMachine2" "KubeNodeCephDisk2" 1024GB
+# Add-KubeCephVHD "C:\hyper" "KubeNodeMachine3" "KubeNodeCephDisk3" 1024GB
 
-Add-KubeCephVHD "$env:USERPROFILE\hyper" "KubeNodeMachine1" "KubeNodeCephDisk1" 512GB
-Add-KubeCephVHD "$env:USERPROFILE\hyper" "KubeNodeMachine2" "KubeNodeCephDisk2" 512GB
-Add-KubeCephVHD "$env:USERPROFILE\hyper" "KubeNodeMachine3" "KubeNodeCephDisk3" 512GB
+Add-KubeCephVHD "$env:USERPROFILE\hyper" "KubeNodeMachine1" "KubeNodeCephDisk1" 1024GB
+Add-KubeCephVHD "$env:USERPROFILE\hyper" "KubeNodeMachine2" "KubeNodeCephDisk2" 1024GB
+Add-KubeCephVHD "$env:USERPROFILE\hyper" "KubeNodeMachine3" "KubeNodeCephDisk3" 1024GB
