@@ -57,11 +57,23 @@ edit `confluent-license.yaml`, and apply:
 bash ./add-license.sh
 ```
 
+## kafka-connect
+
+connector plugin list:
+
+```bash
+curl --header "Accept:application/json" http://kafka-connect1.example.com/connector-plugins/ | jq .[].class
+```
+
+connector list:
+
+```bash
+curl --header "Accept:application/json" http://kafka-connect1.example.com/connectors/ | jq
+```
+
 ## Configuration parameters
 
 ### Topic
-
-partition, replication factor
 
 - ⭐ `segment.ms`
 - ⭐ `segment.bytes`
@@ -74,6 +86,8 @@ partition, replication factor
 - `compression.type`
 - `confluent.key.schema.validation`
 - `confluent.value.schema.validation`
+
+cf. partition, replication factor
 
 ### Producer
 
