@@ -25,6 +25,8 @@ function docker_run_oracledb11 {
         --publish 5500:8080 \
         --env ORACLE_PWD="${PASSWORD}" \
         --mount type=bind,src=/mnt/volume/oracledb11,dst=/u01/app/oracle/oradata \
+        --mount type=bind,src=/mnt/share,dst=/mnt/share \
+        --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
         oracle/database:11.2.0.2-xe
 }
 
@@ -47,6 +49,8 @@ function docker_run_oracledb12_r1 {
         --env ORACLE_PWD="${PASSWORD}" \
         --env ORACLE_CHARACTERSET=AL32UTF8 \
         --mount type=bind,src=/mnt/volume/oracledb12,dst=/opt/oracle/oradata \
+        --mount type=bind,src=/mnt/share,dst=/mnt/share \
+        --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
         oracle/database:12.1.0.2-ee
 }
 
@@ -68,6 +72,8 @@ function docker_run_oracledb12_r2 {
         --env ORACLE_PWD="${PASSWORD}" \
         --env ORACLE_CHARACTERSET=AL32UTF8 \
         --mount type=bind,src=/mnt/volume/oracledb12,dst=/opt/oracle/oradata \
+        --mount type=bind,src=/mnt/share,dst=/mnt/share \
+        --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
         oracle/database:12.2.0.1-ee
 }
 
@@ -81,6 +87,8 @@ function docker_run_oracledb12_r2_official_volume {
         --name oracledb12 \
         --publish 1521:1521 \
         --mount type=bind,src=oracledb12vol,dst=/ORCL \
+        --mount type=bind,src=/mnt/share,dst=/mnt/share \
+        --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
         store/oracle/database-enterprise:12.2.0.1
 }
 
@@ -95,6 +103,8 @@ function docker_run_oracledb12_r2_official {
         --name oracledb12 \
         --publish 1521:1521 \
         --mount type=bind,src=/mnt/volume/oracledb12,dst=/ORCL \
+        --mount type=bind,src=/mnt/share,dst=/mnt/share \
+        --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
         store/oracle/database-enterprise:12.2.0.1
 }
 
@@ -116,6 +126,8 @@ function docker_run_oracledb18 {
         --env ORACLE_PWD="${PASSWORD}" \
         --env ORACLE_CHARACTERSET=AL32UTF8 \
         --mount type=bind,src=/mnt/volume/oracledb18,dst=/opt/oracle/oradata \
+        --mount type=bind,src=/mnt/share,dst=/mnt/share \
+        --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
         oracle/database:18.3.0-ee
 }
 
@@ -137,6 +149,8 @@ function docker_run_oracledb19 {
         --env ORACLE_PWD="${PASSWORD}" \
         --env ORACLE_CHARACTERSET=AL32UTF8 \
         --mount type=bind,src=/mnt/volume/oracledb19,dst=/opt/oracle/oradata \
+        --mount type=bind,src=/mnt/share,dst=/mnt/share \
+        --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
         oracle/database:19.3.0-ee
 }
 
