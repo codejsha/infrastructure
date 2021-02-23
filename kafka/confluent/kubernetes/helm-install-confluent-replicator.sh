@@ -1,7 +1,7 @@
 #!/bin/bash
 
 NAMESPACE="confluent-operator"
-RELEASE_NAME="confluent-operator"
+RELEASE_NAME="confluent-replicator"
 KUBE_CONTEXT="$(kubectl config current-context)"
 
 # helm install ${RELEASE_NAME} \
