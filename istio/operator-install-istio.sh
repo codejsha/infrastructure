@@ -16,6 +16,7 @@ istioctl profile list
 ###     demo
 ###     empty
 
-istioctl install --set profile=default
-# istioctl install --set profile=default \
+# istioctl install --set profile=default
+istioctl install --skip-confirmation --set profile=default
+# istioctl install --skip-confirmation --set profile=default \
 #    --set meshConfig.accessLogFile=/dev/stdout
