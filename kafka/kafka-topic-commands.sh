@@ -1,8 +1,10 @@
 ######################################################################
+### apache kafka
+######################################################################
 
 ### topic
 
-### create topic
+### create
 ./kafka-topics.sh \
     --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
     --create \
@@ -10,7 +12,7 @@
     --partitions 3 \
     --replication-factor 1
 
-### delete topic
+### delete
 ./kafka-topics.sh \
     --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
     --topic my-topic \
@@ -21,44 +23,42 @@
     --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
     --list
 
-### describe topic
+### describe
 ./kafka-topics.sh \
     --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
     --topic my-topic \
     --describe
 
-######################################################################
 
-### producer
 
-### console producer
-./kafka-console-producer.sh \
-    --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
-    --topic my-topic
 
 ######################################################################
+### confluent kafka
+######################################################################
 
-### consumer
+### topic
 
-### console consumer
-./kafka-console-consumer.sh \
+### create
+./kafka-topics \
     --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
-    --topic my-topic
+    --create \
+    --topic my-topic \
+    --partitions 3 \
+    --replication-factor 1
 
-### console consumer (from beginning)
-./kafka-console-consumer.sh \
+### delete
+./kafka-topics \
     --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
     --topic my-topic \
-    --from-beginning
+    --delete
 
-######################################################################
-
-### broker
-
-### broker version
-./kafka-broker-api-versions.sh \
+### topic list
+./kafka-topics \
     --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
-    --version
+    --list
 
-### broker list
-kubectl exec -it my-cluster-zookeeper-0 -- bin/zookeeper-shell.sh localhost:12181 ls /brokers/ids
+### describe
+./kafka-topics \
+    --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
+    --topic my-topic \
+    --describe
