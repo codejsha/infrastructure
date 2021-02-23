@@ -3,6 +3,7 @@ FROM confluentinc/cp-server-connect-operator:6.1.0.0
 USER root
 RUN \
     confluent-hub install --no-prompt confluentinc/kafka-connect-replicator:6.1.0 && \
+    confluent-hub install --no-prompt confluentinc/kafka-connect-datagen:0.4.0 && \
     confluent-hub install --no-prompt debezium/debezium-connector-postgresql:1.3.1 && \
     confluent-hub install --no-prompt confluentinc/kafka-connect-elasticsearch:11.0.2 && \
     confluent-hub install --no-prompt confluentinc/kafka-connect-oracle-cdc:1.0.3 && \
