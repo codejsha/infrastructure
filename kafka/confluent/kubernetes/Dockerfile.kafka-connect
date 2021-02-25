@@ -1,15 +1,34 @@
 FROM confluentinc/cp-server-connect-operator:6.1.0.0
 
 USER root
+
+### source
 RUN \
-    confluent-hub install --no-prompt confluentinc/kafka-connect-replicator:6.1.0 && \
-    confluent-hub install --no-prompt confluentinc/kafka-connect-datagen:0.4.0 && \
-    confluent-hub install --no-prompt debezium/debezium-connector-postgresql:1.3.1 && \
-    confluent-hub install --no-prompt confluentinc/kafka-connect-elasticsearch:11.0.2 && \
-    confluent-hub install --no-prompt confluentinc/kafka-connect-oracle-cdc:1.0.3 && \
-    confluent-hub install --no-prompt wepay/kafka-connect-bigquery:2.1.0 && \
+    confluent-hub install --no-prompt confluentinc/kafka-connect-datagen:latest && \
+    confluent-hub install --no-prompt confluentinc/kafka-connect-oracle-cdc:latest && \
+    confluent-hub install --no-prompt confluentinc/kafka-connect-s3-source:latest && \
+    confluent-hub install --no-prompt confluentinc/kafka-connect-hdfs3-source:latest && \
+    confluent-hub install --no-prompt debezium/debezium-connector-postgresql:latest && \
+    confluent-hub install --no-prompt debezium/debezium-connector-mysql:latest && \
+    confluent-hub install --no-prompt debezium/debezium-connector-sqlserver:latest && \
+    confluent-hub install --no-prompt debezium/debezium-connector-mongodb:latest && \
     echo
 
-    # confluent-hub install --no-prompt confluentinc/kafka-connect-s3-source:1.4.3 && \
-    # confluent-hub install --no-prompt confluentinc/kafka-connect-s3:5.5.3 && \
+### sink
+RUN \
+    confluent-hub install --no-prompt confluentinc/kafka-connect-elasticsearch:latest && \
+    confluent-hub install --no-prompt confluentinc/kafka-connect-s3:latest && \
+    confluent-hub install --no-prompt confluentinc/kafka-connect-http:latest && \
+    confluent-hub install --no-prompt confluentinc/kafka-connect-hdfs3:latest && \
+    confluent-hub install --no-prompt confluentinc/kafka-connect-cassandra:latest && \
+    confluent-hub install --no-prompt wepay/kafka-connect-bigquery:latest && \
+    echo
+
+### source and sink
+RUN \
+    confluent-hub install --no-prompt confluentinc/kafka-connect-replicator:latest && \
+    confluent-hub install --no-prompt confluentinc/kafka-connect-jdbc:latest && \
+    confluent-hub install --no-prompt mongodb/kafka-connect-mongodb:latest && \
+    echo
+
 USER 1001
