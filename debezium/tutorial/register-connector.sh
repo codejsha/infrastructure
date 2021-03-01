@@ -6,7 +6,7 @@ function register_mysql_connector {
         --request POST \
         --header "Accept:application/json" \
         --header "Content-Type:application/json" \
-        --data @data-mysql.json \
+        --data @mysql-connector.json \
         localhost:8083/connectors
 }
 
