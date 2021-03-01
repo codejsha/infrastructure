@@ -1,0 +1,10 @@
+server:
+  dev:
+    enabled: true
+    devRootToken: "root"
+
+  standalone:
+    enabled: false
+
+  ha:
+    enabled: false

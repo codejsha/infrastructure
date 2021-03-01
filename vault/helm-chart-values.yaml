@@ -1,0 +1,49 @@
+injector:
+  enabled: true
+  metrics:
+    enabled: true
+
+server:
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 250m
+    limits:
+      memory: 256Mi
+      cpu: 250m
+
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: vault.example.com
+        paths:
+          - "/"
+
+  service:
+    enabled: true
+    # clusterIP: None
+    type: ClusterIP
+    port: 8200
+    targetPort: 8200
+
+  dataStorage:
+    enabled: true
+    size: 10Gi
+    mountPath: "/vault/data"
+    storageClass: rook-ceph-block
+    # storageClass: local-path
+    accessMode: ReadWriteOnce
+
+  auditStorage:
+    enabled: true
+    size: 10Gi
+    mountPath: "/vault/audit"
+    storageClass: rook-ceph-block
+    # storageClass: local-path
+    accessMode: ReadWriteOnce
+
+ui:
+  enabled: true
