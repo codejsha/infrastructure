@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GIT_VERSION="2.28.0"
+GIT_VERSION="2.30.1"
 
 sudo yum install -y epel-release
 sudo yum install -y gcc autoconf
