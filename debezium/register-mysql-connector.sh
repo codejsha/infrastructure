@@ -1,40 +1,99 @@
 #!/bin/bash
 
+# KAFKA_CONNECT_URL="kafka-connect1:8083"
 KAFKA_CONNECT_URL="kafka-connect.example.com:8083"
-# KAFKA_CONNECT_URL="kafka-connect1.example.com:8083"
-# KAFKA_CONNECT_URL="kafka-connect2.example.com:8083"
 
 ######################################################################
 
-function register_mysql_connector {
+function register_connector {
     curl \
         --include \
         --request POST \
         --header "Accept:application/json" \
         --header "Content-Type:application/json" \
-        --data @data-mysql.json \
+        --data @mysql-connector.json \
         ${KAFKA_CONNECT_URL}/connectors
+    # curl \
+    #     --silent \
+    #     --request POST \
+    #     --header "Accept:application/json" \
+    #     --header "Content-Type:application/json" \
+    #     --data @mysql-connector.json \
+    #     ${KAFKA_CONNECT_URL}/connectors
 }
 
 function get_connector_list {
     curl \
+        --silent \
+        --request GET \
         --header "Accept:application/json" \
-        ${KAFKA_CONNECT_URL}/connectors
+        ${KAFKA_CONNECT_URL}/connectors | jq .[]
+}
+
+function describe_connector {
+    curl \
+        --silent \
+        --request GET \
+        --header "Accept:application/json" \
+        ${KAFKA_CONNECT_URL}/connectors/mysql-connector | jq
+}
+
+function get_connector_status {
+    curl \
+        --silent \
+        --request GET \
+        --header "Accept:application/json" \
+        ${KAFKA_CONNECT_URL}/connectors/mysql-connector/status | jq
+}
+
+function get_connector_topic {
+    curl \
+        --silent \
+        --request GET \
+        --header "Accept:application/json" \
+        ${KAFKA_CONNECT_URL}/connectors/mysql-connector/topics | jq
 }
 
 function get_connector_task {
-    CONNECTOR_NAME="${1}"
+    curl \
+        --silent \
+        --request GET \
+        --header "Accept:application/json" \
+        ${KAFKA_CONNECT_URL}/connectors/mysql-connector/tasks | jq
+}
+
+function validate_connector_config {
+    jq .config mysql-connector.json > mysql-connector-config.json
 
     curl \
-        --include \
+        --silent \
+        --request PUT \
         --header "Accept:application/json" \
-        --request GET \
-        ${KAFKA_CONNECT_URL}/connectors/${CONNECTOR_NAME}
+        --header "Content-Type:application/json" \
+        --data @mysql-connector-config.json \
+        ${KAFKA_CONNECT_URL}/connector-plugins/MySqlConnector/config/validate | jq
+}
+
+function delete_connector {
+    curl \
+        --include \
+        --request DELETE \
+        --header "Accept:application/json" \
+        ${KAFKA_CONNECT_URL}/connectors/mysql-connector
+    # curl \
+    #     --silent \
+    #     --request DELETE \
+    #     --header "Accept:application/json" \
+    #     ${KAFKA_CONNECT_URL}/connectors/mysql-connector
 }
 
 ######################################################################
 
-register_postgresql_connector
-
+register_connector
 get_connector_list
-# get_connector_task "mysql-connector"
+# describe_connector
+# get_connector_status
+# get_connector_topic
+# get_connector_task
+# validate_connector_config
+# delete_connector
