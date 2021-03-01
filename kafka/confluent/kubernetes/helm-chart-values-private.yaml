@@ -6,6 +6,8 @@ global:
   provider:
     name: private
     region: anyregion
+    kubernetes:
+      clusterDomain: "svc.cluster.local"
     registry:
       fqdn: docker.io
       # fqdn: core.harbor.example.com
@@ -37,6 +39,23 @@ global:
 
 operator:
   name: cc-operator
+  icenseKey: ""
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  affinity: {}
+  tolerations: []
+  metrics:
+    dataDog:
+      enabled: false
+      port: 8125
+    prometheus:
+      enabled: false
+      port: 7777
 
 ######################################################################
 
@@ -51,6 +70,11 @@ zookeeper:
       # memory: 4Gi
       cpu: 100m
       memory: 512Mi
+    limits: {}
+  # storageClassName: ""
+  volume:
+    data: 10Gi
+    txnlog: 10Gi
   jvmConfig:
     # heapSize: 4G
     heapSize: 512M
@@ -65,6 +89,11 @@ zookeeper:
       - autopurge.purgeInterval=1
     jvm: []
     log4j: []
+  podAnnotations: {}
+  affinity:
+    nodeAffinity: {}
+    podAffinity: {}
+    podAntiAffinity: {}
 
 ######################################################################
 
@@ -73,12 +102,17 @@ zookeeper:
 kafka:
   name: kafka
   replicas: 3
+  license: ""
   resources:
     requests:
       # cpu: "1"
       # memory: 4Gi
       cpu: 200m
       memory: 1Gi
+    limits: {}
+  # storageClassName: ""
+  volume:
+    data0: 100Gi
   jvmConfig:
     # heapSize: 4G
     heapSize: 1G
@@ -112,7 +146,8 @@ kafka:
       - log.dirs=/mnt/data/data0/logs
       - num.partitions=3
       - num.recovery.threads.per.data.dir=1
-      - auto.create.topics.enable=false
+      # - auto.create.topics.enable=false
+      - auto.create.topics.enable=true
       - delete.topic.enable=true
       - message.max.bytes=2097164
       - log.cleanup.policy=delete
@@ -135,6 +170,11 @@ kafka:
       - zookeeper.session.timeout.ms=22500
     jvm: []
     log4j: []
+  podAnnotations: {}
+  affinity:
+    nodeAffinity: {}
+    podAffinity: {}
+    podAntiAffinity: {}
 
 ######################################################################
 
@@ -173,6 +213,13 @@ connect:
     schemaRegistry:
       enabled: true
       url: http://schemaregistry:8081
+  schemas:
+    enabled: true
+  podAnnotations: {}
+  affinity:
+    nodeAffinity: {}
+    podAffinity: {}
+    podAntiAffinity: {}
 
 ######################################################################
 
@@ -205,6 +252,13 @@ replicator:
     kafka:
       brokerCount: 3
       bootstrapEndpoint: kafka:9071
+  schemas:
+    enabled: true
+  podAnnotations: {}
+  affinity:
+    nodeAffinity: {}
+    podAffinity: {}
+    podAntiAffinity: {}
 
 ######################################################################
 
@@ -236,6 +290,11 @@ schemaregistry:
     kafka:
       brokerCount: 3
       bootstrapEndpoint: kafka:9071
+  podAnnotations: {}
+  affinity:
+    nodeAffinity: {}
+    podAffinity: {}
+    podAntiAffinity: {}
 
 ######################################################################
 
@@ -254,6 +313,9 @@ ksql:
   jvmConfig:
     # heapSize: 4G
     heapSize: 512M
+  # storageClassName: ""
+  volume:
+    data: 10Gi
   tls:
     enabled: false
     authentication:
@@ -270,12 +332,17 @@ ksql:
       bootstrapEndpoint: kafka:9071
       brokerEndpoints: kafka-0.kafka:9071,kafka-1.kafka:9071,kafka-2.kafka:9071
     schemaRegistry:
-      enabled: false
+      enabled: true
       tls:
         enabled: false
         authentication:
           type: ""
       url: http://schemaregistry:8081
+  podAnnotations: {}
+  affinity:
+    nodeAffinity: {}
+    podAffinity: {}
+    podAntiAffinity: {}
 
 ######################################################################
 
@@ -294,6 +361,9 @@ controlcenter:
   jvmConfig:
     # heapSize: 4G
     heapSize: 512M
+  # storageClassName: ""
+  volume:
+    data0: 10Gi
   dependencies:
     c3KafkaCluster:
       brokerCount: 3
@@ -325,3 +395,8 @@ controlcenter:
       property:
         admin: Developer1,Administrators
         disallowed: no_access
+  podAnnotations: {}
+  affinity:
+    nodeAffinity: {}
+    podAffinity: {}
+    podAntiAffinity: {}
