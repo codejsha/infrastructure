@@ -23,7 +23,7 @@ minikube addons enable olm
 # minikube addons enable pod-security-policy
 minikube addons enable registry
 minikube addons enable registry-aliases
-minikube addons enable registry-creds
+# minikube addons enable registry-creds
 minikube addons enable storage-provisioner
 # minikube addons enable storage-provisioner-gluster
 # minikube addons enable volumesnapshots
