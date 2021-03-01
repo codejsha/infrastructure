@@ -16,8 +16,11 @@ Table of Contents:
 
 ```powershell
 helper.ps1
+```
 
+```bash
 sudo yum update -y
+### or
 sudo dnf update -y
 ```
 

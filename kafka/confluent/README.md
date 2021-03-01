@@ -71,6 +71,16 @@ connector list:
 curl --header "Accept:application/json" http://kafka-connect1.example.com/connectors/ | jq
 ```
 
+some connectors:
+
+- https://www.confluent.io/hub/confluentinc/kafka-connect-replicator
+- https://www.confluent.io/hub/confluentinc/kafka-connect-datagen
+- https://www.confluent.io/hub/debezium/debezium-connector-postgresql
+- https://www.confluent.io/hub/confluentinc/kafka-connect-elasticsearch
+- https://www.confluent.io/hub/confluentinc/kafka-connect-s3-source
+- https://www.confluent.io/hub/confluentinc/kafka-connect-oracle-cdc
+- https://www.confluent.io/hub/wepay/kafka-connect-bigquery
+
 ## Configuration parameters
 
 ### Topic
