@@ -15,7 +15,8 @@ function install_neovim_with_download {
 
 function install_neovim_with_yum {
     # sudo yum install -y epel-release
-    sudo yum install -y neovim python36-neovim
+    sudo yum install -y neovim
+    sudo yum install -y python36-neovim
 }
 
 function install_neovim_with_apt {
@@ -35,13 +36,13 @@ mkdir -p ${HOME}/.config/nvim
 # syntax on
 # set termguicolors
 # set background=dark
-# 
+#
 # set shiftwidth=4
-# 
+#
 # set tabstop=4
 # set softtabstop=4
 # set expandtab
-# 
+#
 # set pastetoggle=<F12>
 # EOF
 
@@ -56,13 +57,8 @@ set expandtab
 set pastetoggle=<F12>
 EOF
 
-GREP_VAR="$(grep -q nvim ${HOME}/.bashrc)"
-if [ -n "${GREP_VAR}" ]; then
-cat <<EOF > ${HOME}/.bashrc
-
+### add path
 # neovim
-alias vi=\"nvim\"
-alias vim=\"nvim\"
-alias vimdiff=\"nvim -d\"
-EOF
-fi
+# alias vi=\"nvim\"
+# alias vim=\"nvim\"
+# alias vimdiff=\"nvim -d\"
