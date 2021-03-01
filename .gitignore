@@ -2,6 +2,12 @@
 .vscode/
 .idea/
 
+temp.json
+temp.ps1
+temp.sh
+temp.xml
+temp.yaml
+
 *.jar
 *.tar
 *.tar.gz
