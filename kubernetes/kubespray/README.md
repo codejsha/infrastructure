@@ -36,7 +36,7 @@ manually install linux (CentOS)
 ### 3. Kubernetes requirements
 
 ```bash
-bash ./require-all-node.sh
+bash ./pre-install.sh
 ```
 
 ### 4. Add scripts
