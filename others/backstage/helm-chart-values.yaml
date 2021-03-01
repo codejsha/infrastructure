@@ -1,8 +1,8 @@
 postgresql:
   enabled: true
   persistence:
-    storageClass: local-path
-    # storageClass: rook-ceph-block
+    storageClass: rook-ceph-block
+    # storageClass: local-path
     accessModes:
       - ReadWriteOnce
     size: 8Gi
