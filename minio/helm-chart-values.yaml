@@ -11,6 +11,10 @@ persistence:
 service:
   type: ClusterIP
   # type: LoadBalancer
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: "/minio/prometheus/metrics"
+    prometheus.io/port: "9000"
 
 ingress:
   enabled: true

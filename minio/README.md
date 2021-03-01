@@ -62,6 +62,10 @@ kubectl delete -n minio-tenant -f ./tenant.yaml
 
 ![minio-operator-architecture](/contents/images/minio-operator-architecture.png)
 
+### Grafana dashboard
+
+https://grafana.com/grafana/dashboards/13502
+
 ## Command examples
 
 - `aws-cli-minio-commands.sh`
