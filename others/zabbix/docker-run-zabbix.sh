@@ -9,8 +9,8 @@ docker network create zabbix-network
 docker container run \
     --detach \
     --name zabbix-postgres-server \
-    --publish 5432:5432 \
     --net zabbix-network \
+    --publish 5432:5432 \
     --env POSTGRES_DB="zabbix" \
     --env POSTGRES_USER="zabbix" \
     --env POSTGRES_PASSWORD="${PASSWORD}" \
@@ -32,8 +32,8 @@ docker container run \
 docker container run \
     --detach \
     --name zabbix-web-apache-pgsql \
-    --publish 8081:8080 \
     --net zabbix-network \
+    --publish 8081:8080 \
     --env DB_SERVER_HOST="zabbix-postgres-server" \
     --env POSTGRES_USER="zabbix" \
     --env POSTGRES_PASSWORD="${PASSWORD}" \

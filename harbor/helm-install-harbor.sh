@@ -14,6 +14,8 @@ helm repo update
 
 PASSWORD="${PASSWORD}"
 HARBOR_SECRET_KEY="${HARBOR_SECRET_KEY}"
+AWS_ACCESS_KEY="${AWS_ACCESS_KEY}"
+AWS_SECRET_KEY="${AWS_SECRET_KEY}"
 
 export AWS_REGION_ENDPOINT="http://minio.example.com"
 # export AWS_REGION_ENDPOINT="https://minio-tenant-1.example.com"
