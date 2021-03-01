@@ -22,7 +22,6 @@ function install_docker_with_yum {
     sudo systemctl enable docker
     sudo systemctl start docker
 
-    # sudo sed -i -E '/^root\tALL=\(ALL\) \tALL$/ a ${USER}\tALL=(ALL) \tALL' /etc/sudoers
     exit
 }
 
@@ -52,7 +51,6 @@ function install_docker_specific_version_with_yum {
     sudo systemctl enable docker
     sudo systemctl start docker
 
-    # sudo sed -i -E '/^root\tALL=\(ALL\) \tALL$/ a ${USER}\tALL=(ALL) \tALL' /etc/sudoers
     exit
 }
 
@@ -65,7 +63,6 @@ function install_docker_with_dnf {
     sudo systemctl enable --now docker
     sudo systemctl status docker
 
-    # sudo sed -i -E '/^root\tALL=\(ALL\) \tALL$/ a ${USER}\tALL=(ALL) \tALL' /etc/sudoers
     exit
 }
 
@@ -73,6 +70,8 @@ function install_docker_with_apt {
     curl -fsSL https://get.docker.com | sudo sh
 
     sudo usermod -a -G docker ${USER}
+
+    exit
 }
 
 ######################################################################

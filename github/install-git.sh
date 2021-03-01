@@ -16,4 +16,5 @@ make configure
 make all doc info
 sudo make install install-doc install-html install-info
 
+cd ..
 rm -f git-${GIT_VERSION}.tar.gz

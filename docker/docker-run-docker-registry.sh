@@ -11,7 +11,7 @@ sudo htpasswd -cB -b ${REGISTRY_VOLUME_DIR}/htpasswd ${USERNAME} ${PASSWORD}
 docker container run \
     --detach \
     --restart unless-stopped \
-    --name registry-server \
+    --name docker-registry \
     --publish 5000:5000 \
     --mount type=bind,src=${REGISTRY_VOLUME_DIR},dst=/var/lib/registry \
     --mount type=bind,src=${REGISTRY_VOLUME_DIR}/htpasswd,dst=/auth/htpasswd \
