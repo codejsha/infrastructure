@@ -17,12 +17,14 @@
     "database.history.kafka.topic": "database2.history.sakila",
     "database.history.kafka.bootstrap.servers": "kafka1:9092,kafka2:9092,kafka3:9092",
     "database.include.list": "sakila",
+    "time.precision.mode": "adaptive_time_microseconds",
     "decimal.handling.mode": "precise",
     "include.schema.changes": "true",
+    "connect.keep.alive": "true",
+    "tombstones.on.delete": "true",
     "max.queue.size": "8192",
     "max.batch.size": "2048",
-    "connect.timeout.ms": "30000",
-    "tombstones.on.delete": "true",
-    "connect.keep.alive": "true"
+    "poll.interval.ms": "1000",
+    "connect.timeout.ms": "30000"
   }
 }
