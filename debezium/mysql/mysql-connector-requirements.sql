@@ -4,7 +4,8 @@ GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *
 FLUSH PRIVILEGES;
 
 
--- enable binary log (mysql 8 is enabled by default)
+-- enable binary log
+-- (mysql 8 is enabled by default)
 
 
 -- gtid mode
