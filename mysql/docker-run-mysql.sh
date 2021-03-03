@@ -3,7 +3,7 @@
 PASSWORD="${PASSWORD}"
 
 MYSQL_VOLUME_DIR="/mnt/volume/mysql"
-sudo mkdir -p ${MYSQL_VOLUME_DIR}
+sudo mkdir -p ${MYSQL_VOLUME_DIR}/data
 
 ######################################################################
 
@@ -14,10 +14,8 @@ function docker_run_mysql8 {
         --publish 3306:3306 \
         --publish 33060:33060 \
         --env MYSQL_ROOT_PASSWORD="${PASSWORD}" \
-        --env PGDATA=/var/lib/postgresql/data/pgdata \
-        --mount type=bind,src=${MYSQL_VOLUME_DIR},dst=/var/lib/mysql \
-        --mount type=bind,src=/mnt/share,dst=/mnt/share \
-        --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
+        --mount type="bind",src="${MYSQL_VOLUME_DIR}/data",dst="/var/lib/mysql" \
+        --mount type="bind",src="${MYSQL_VOLUME_DIR}/config-file.cnf",dst="/etc/mysql/conf.d/config-file.cnf" \
         mysql:8.0.23
 }
 
@@ -28,10 +26,8 @@ function docker_run_mysql5 {
         --publish 3306:3306 \
         --publish 33060:33060 \
         --env MYSQL_ROOT_PASSWORD="${PASSWORD}" \
-        --env PGDATA=/var/lib/postgresql/data/pgdata \
-        --mount type=bind,src=${MYSQL_VOLUME_DIR},dst=/var/lib/mysql \
-        --mount type=bind,src=/mnt/share,dst=/mnt/share \
-        --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
+        --mount type="bind",src="${MYSQL_VOLUME_DIR}/data",dst="/var/lib/mysql" \
+        --mount type="bind",src="${MYSQL_VOLUME_DIR}/config-file.cnf",dst="/etc/mysql/conf.d/config-file.cnf" \
         mysql:5.7.33
 }
 

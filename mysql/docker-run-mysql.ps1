@@ -2,7 +2,7 @@ $password = "$password"
 
 # $MySQLVolumeDir="C:\volume\mysql"
 $MySQLVolumeDir="$env:USERPROFILE\volume\mysql"
-New-Item -Path $MySQLVolumeDir -ItemType Directory -Force
+New-Item -Path $MySQLVolumeDir\data -ItemType Directory -Force
 
 ######################################################################
 
@@ -13,20 +13,21 @@ function New-DockerRunMySQL8 {
         --publish 3306:3306 `
         --publish 33060:33060 `
         --env MYSQL_ROOT_PASSWORD="$password" `
-        --env PGDATA=/var/lib/postgresql/data/pgdata `
-        --mount type=bind,src=$MySQLVolumeDir,dst=/var/lib/mysql `
+        --mount type="bind",src="$MySQLVolumeDir\data",dst="/var/lib/mysql" `
+        --mount type="bind",src="$MySQLVolumeDir\config-file.cnf",dst="/etc/mysql/conf.d/config-file.cnf" `
         mysql:8.0.23
-}
+    }
 
-function New-DockerRunMySQL5 {
-    docker container run `
+    function New-DockerRunMySQL5 {
+        docker container run `
         --detach `
         --name mysql5 `
         --publish 3306:3306 `
         --publish 33060:33060 `
         --env MYSQL_ROOT_PASSWORD="$password" `
         --env PGDATA=/var/lib/postgresql/data/pgdata `
-        --mount type=bind,src=$MySQLVolumeDir,dst=/var/lib/mysql `
+        --mount type="bind",src="$MySQLVolumeDir\data",dst="/var/lib/mysql" `
+        --mount type="bind",src="$MySQLVolumeDir\config-file.cnf",dst="/etc/mysql/conf.d/config-file.cnf" `
         mysql:5.7.33
 }
 
