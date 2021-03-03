@@ -18,14 +18,13 @@ function New-DockerRunMySQL8 {
         mysql:8.0.23
     }
 
-    function New-DockerRunMySQL5 {
+function New-DockerRunMySQL5 {
         docker container run `
         --detach `
         --name mysql5 `
         --publish 3306:3306 `
         --publish 33060:33060 `
         --env MYSQL_ROOT_PASSWORD="$password" `
-        --env PGDATA=/var/lib/postgresql/data/pgdata `
         --mount type="bind",src="$MySQLVolumeDir\data",dst="/var/lib/mysql" `
         --mount type="bind",src="$MySQLVolumeDir\config-file.cnf",dst="/etc/mysql/conf.d/config-file.cnf" `
         mysql:5.7.33
