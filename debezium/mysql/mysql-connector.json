@@ -11,7 +11,7 @@
     "database.port": "3306",
     "database.user": "debezium",
     "database.password": "dbz",
-    "database.server.id": "5401",
+    "database.server.id": "5400",
     "database.server.name": "database2",
     "database.serverTimezone": "Asia/Seoul",
     "database.history.kafka.topic": "database2.history.sakila",
@@ -22,9 +22,11 @@
     "include.schema.changes": "true",
     "connect.keep.alive": "true",
     "tombstones.on.delete": "true",
+    "snapshot.mode": "initial",
     "max.queue.size": "8192",
     "max.batch.size": "2048",
     "poll.interval.ms": "1000",
-    "connect.timeout.ms": "30000"
+    "connect.timeout.ms": "30000",
+    "sanitize.field.names": "true"
   }
 }

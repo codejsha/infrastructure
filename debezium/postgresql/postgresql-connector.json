@@ -21,8 +21,10 @@
     "time.precision.mode": "adaptive",
     "decimal.handling.mode": "precise",
     "tombstones.on.delete": "true",
+    "snapshot.mode": "initial",
     "max.queue.size": "20240",
     "max.batch.size": "10240",
-    "poll.interval.ms": "1000"
+    "poll.interval.ms": "1000",
+    "sanitize.field.names": "false"
   }
 }
