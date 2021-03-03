@@ -74,6 +74,7 @@ function readlinkpwd() { echo "+ readlink --canonicalize .">&2; command readlink
 [ -f ~/.aliases/network_aliases ] && source ~/.aliases/network_aliases
 [ -f ~/.aliases/other_aliases ] && source ~/.aliases/other_aliases
 [ -f ~/.aliases/package_aliases ] && source ~/.aliases/package_aliases
+[ -f ~/.aliases/podman_aliases ] && source ~/.aliases/podman_aliases
 [ -f ~/.aliases/process_aliases ] && source ~/.aliases/process_aliases
 [ -f ~/.aliases/strimzi_aliases ] && source ~/.aliases/strimzi_aliases
 [ -f ~/.aliases/systemctl_aliases ] && source ~/.aliases/systemctl_aliases

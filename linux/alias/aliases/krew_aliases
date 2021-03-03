@@ -8,7 +8,7 @@ function kubectl-ns() { echo "+ kubectl-ns ${@}">&2; command kubectl-ns ${@}; } 
 function kubectl-tail() { echo "+ kubectl-tail ${@}">&2; command kubectl-tail ${@}; }   # ktail
 function kubectl-tree() { echo "+ kubectl-tree ${@}">&2; command kubectl-tree ${@}; }   # ktree
 
-alias kctx="kubectl-ctx"
+alias kctx="kubectl ctx"
 
 alias kns="kubectl ns"
 alias kns-argo="kubectl ns argo"

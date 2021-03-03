@@ -1,0 +1,3 @@
+# podman
+
+function podman() { echo "+ podman ${@}">&2; command podman ${@}; }
