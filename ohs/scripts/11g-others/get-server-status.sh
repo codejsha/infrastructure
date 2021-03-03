@@ -1,5 +1,5 @@
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -x
+export PS4="\e[33;1m+ \e[0m"; set -o xtrace
 
 # HOSTNAME_IP_ADDRESS="192.168.137.150"
 LISTEN_ADDRESS="127.0.0.1"

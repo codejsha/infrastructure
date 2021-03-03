@@ -11,7 +11,7 @@ DOMAIN_HOME="${DOMAIN_HOME}"
 
 cat <<EOF > ${DOMAIN_HOME}/get-server-status.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -x
+export PS4="\e[33;1m+ \e[0m"; set -o xtrace
 
 # HOSTNAME_IP_ADDRESS="$(hostname -i)"
 LISTEN_ADDRESS="127.0.0.1"

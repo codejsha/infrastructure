@@ -13,7 +13,7 @@ COMPONENT_NAME="${COMPONENT_NAME}"
 
 cat <<EOF > ${INSTANCE_HOME}/start-opmn.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -x
+export PS4="\e[33;1m+ \e[0m"; set -o xtrace
 
 INSTANCE_HOME="${INSTANCE_HOME}"
 
@@ -22,7 +22,7 @@ EOF
 
 cat <<EOF > ${INSTANCE_HOME}/stop-opmn.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -x
+export PS4="\e[33;1m+ \e[0m"; set -o xtrace
 
 INSTANCE_HOME="${INSTANCE_HOME}"
 
@@ -33,7 +33,7 @@ EOF
 
 cat <<EOF > ${INSTANCE_HOME}/get-status.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -x
+export PS4="\e[33;1m+ \e[0m"; set -o xtrace
 
 INSTANCE_HOME="${INSTANCE_HOME}"
 
@@ -44,7 +44,7 @@ EOF
 
 cat <<EOF > ${INSTANCE_HOME}/start-all.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -x
+export PS4="\e[33;1m+ \e[0m"; set -o xtrace
 
 INSTANCE_HOME="${INSTANCE_HOME}"
 
@@ -53,7 +53,7 @@ EOF
 
 cat <<EOF > ${INSTANCE_HOME}/stop-all.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -x
+export PS4="\e[33;1m+ \e[0m"; set -o xtrace
 
 INSTANCE_HOME="${INSTANCE_HOME}"
 
@@ -64,7 +64,7 @@ EOF
 
 cat <<EOF > ${INSTANCE_HOME}/start-${COMPONENT_NAME}.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -x
+export PS4="\e[33;1m+ \e[0m"; set -o xtrace
 
 INSTANCE_HOME="${INSTANCE_HOME}"
 COMPONENT_NAME="${COMPONENT_NAME}"
@@ -74,7 +74,7 @@ EOF
 
 cat <<EOF > ${INSTANCE_HOME}/stop-${COMPONENT_NAME}.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -x
+export PS4="\e[33;1m+ \e[0m"; set -o xtrace
 
 INSTANCE_HOME="${INSTANCE_HOME}"
 COMPONENT_NAME="${COMPONENT_NAME}"

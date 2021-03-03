@@ -10,7 +10,7 @@ mkdir -p ${DOMAIN_HOME}/scripts
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/regen-demo-identity.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -x
+export PS4="\e[33;1m+ \e[0m"; set -o xtrace
 
 JAVA_HOME="${JAVA_HOME}"
 WL_HOME="${WL_HOME}"

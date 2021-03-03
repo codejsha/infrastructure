@@ -44,7 +44,7 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -x
+export PS4="\e[33;1m+ \e[0m"; set -o xtrace
 
 EOF
 
