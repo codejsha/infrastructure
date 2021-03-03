@@ -1,15 +1,16 @@
 #!/bin/bash
 
-SAMPLE_DB_FILE_DIR="/mnt/share/postgresql"
-POSTGRES_PASSWORD="${POSTGRES_PASSWORD}"
+PASSWORD="${PASSWORD}"
 
-PGPASSWORD="${POSTGRES_PASSWORD}" \
+SAMPLE_DB_FILE_DIR="/mnt/share/postgresql"
+
+PGPASSWORD="${PASSWORD}" \
     psql \
     --host=postgres-lb.example.com \
     --port=5432 \
     --username=postgres \
     --command="CREATE DATABASE dvdrental"
-PGPASSWORD="${POSTGRES_PASSWORD}" \
+PGPASSWORD="${PASSWORD}" \
     psql \
     --host=postgres-lb.example.com \
     --port=5432 \
@@ -29,14 +30,14 @@ PGPASSWORD="${POSTGRES_PASSWORD}" \
 
 /usr/bin/cp -pf ${SAMPLE_DB_FILE_DIR}/dvdrental.zip .
 unzip dvdrental.zip
-PGPASSWORD="${POSTGRES_PASSWORD}" \
+PGPASSWORD="${PASSWORD}" \
     pg_restore \
     --host=postgres-lb.example.com \
     --port=5432 \
     --username=postgres \
     --dbname=dvdrental \
     ./dvdrental.tar
-PGPASSWORD="${POSTGRES_PASSWORD}" \
+PGPASSWORD="${PASSWORD}" \
     psql \
     --host=postgres-lb.example.com \
     --port=5432 \

@@ -1,16 +1,17 @@
 ######################################################################
 
 sudo su - postgres -c "psql"
-# ALTER USER postgres PASSWORD ${POSTGRES_PASSWORD};
+# ALTER USER postgres PASSWORD ${PASSWORD};
 
 ######################################################################
 
 ### connect
 
-PGPASSWORD="${POSTGRES_PASSWORD}" psql -U postgres
-PGPASSWORD="${POSTGRES_PASSWORD}" psql -h postgres.example.com -p 5432 -U postgres -d postgres
-PGPASSWORD="${POSTGRES_PASSWORD}" psql --port=5432 --username=postgres --dbname=postgres
-PGPASSWORD="${POSTGRES_PASSWORD}" \
+PGPASSWORD="${PASSWORD}" psql -U postgres
+PGPASSWORD="${PASSWORD}" psql -h test.example.com -p 5432 -U postgres -d postgres
+PGPASSWORD="${PASSWORD}" psql -h postgres.example.com -p 5432 -U postgres -d postgres
+PGPASSWORD="${PASSWORD}" psql --port=5432 --username=postgres --dbname=postgres
+PGPASSWORD="${PASSWORD}" \
     psql \
     --host=postgres-lb.example.com \
     --port=5432 \
@@ -21,7 +22,7 @@ PGPASSWORD="${POSTGRES_PASSWORD}" \
 
 ### database list
 
-PGPASSWORD="${POSTGRES_PASSWORD}" \
+PGPASSWORD="${PASSWORD}" \
     psql \
     --host=postgres-lb.example.com \
     --port=5432 \
@@ -42,7 +43,7 @@ PGPASSWORD="${POSTGRES_PASSWORD}" \
 
 ### create database
 
-PGPASSWORD="${POSTGRES_PASSWORD}" \
+PGPASSWORD="${PASSWORD}" \
     psql \
     --host=postgres-lb.example.com \
     --port=5432 \
@@ -53,7 +54,7 @@ PGPASSWORD="${POSTGRES_PASSWORD}" \
 
 ### switch database
 
-PGPASSWORD="${POSTGRES_PASSWORD}" \
+PGPASSWORD="${PASSWORD}" \
     psql \
     --host=postgres-lb.example.com \
     --port=5432 \
@@ -65,7 +66,7 @@ PGPASSWORD="${POSTGRES_PASSWORD}" \
 
 ### table list
 
-PGPASSWORD="${POSTGRES_PASSWORD}" \
+PGPASSWORD="${PASSWORD}" \
     psql \
     --host=postgres-lb.example.com \
     --port=5432 \
@@ -77,7 +78,7 @@ PGPASSWORD="${POSTGRES_PASSWORD}" \
 
 ### role
 
-PGPASSWORD="${POSTGRES_PASSWORD}" \
+PGPASSWORD="${PASSWORD}" \
     psql \
     --host=postgres-lb.example.com \
     --port=5432 \

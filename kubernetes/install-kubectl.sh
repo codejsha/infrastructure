@@ -22,6 +22,7 @@ gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cl
 EOF
 
     # sudo yum --showduplicate list kubectl
+    # sudo yum install -y kubectl
     sudo yum install -y kubectl-${KUBECTL_VERSION}
     sudo yum install -y bash-completion
 }
