@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # KAFKA_CONNECT_URL="kafka-connect1:8083"
-KAFKA_CONNECT_URL="kafka-connect.example.com:8083"
+KAFKA_CONNECT_URL="kafka-connect.example.com"
 
 ######################################################################
 
