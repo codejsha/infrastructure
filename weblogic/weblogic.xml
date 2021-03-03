@@ -11,6 +11,7 @@
         <cookie-max-age-secs>-1</cookie-max-age-secs>
         <cookie-http-only>true</cookie-http-only>
         <cookie-secure>false</cookie-secure>
+        <url-rewriting-enabled>true</url-rewriting-enabled>
     </session-descriptor>
 
     <jsp-descriptor>
