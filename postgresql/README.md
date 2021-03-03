@@ -1,8 +1,6 @@
 # PostgreSQL
 
-## Install
-
-### Docker
+## Docker
 
 ```bash
 bash ./docker-run-postgresql.sh
@@ -13,17 +11,23 @@ bash ./docker-run-postgresql.sh
 .\docker-run-postgresql.ps1
 ```
 
-### Kubernetes
+### debezium PostgreSQL
+
+```bash
+bash ./docker-run-debezium-postgresql.sh
+```
+
+## Kubernetes
 
 ```bash
 bash ./helm-install-postgresql.sh
 ```
 
-#### Grafana dashboard
+### Grafana dashboard
 
 - https://grafana.com/grafana/dashboards/9628
 
-### Local
+## Local
 
 - https://www.postgresql.org/download/linux/redhat/
 
