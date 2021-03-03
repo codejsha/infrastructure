@@ -23,8 +23,16 @@ docker-compose up -f docker-compose.yaml
 
 ## CMAK (Cluster Manager for Apache Kafka)
 
-[CMAK README](/kafka/cmak/README.md)
+- https://github.com/yahoo/CMAK
+
+```bash
+bash ./kube-run-cmak.sh
+```
 
 ## NiFi
 
-[NiFi README](/kafka/nifi/README.md)
+- https://github.com/cetic/helm-nifi
+
+```bash
+bash ./helm-install-nifi.sh
+```

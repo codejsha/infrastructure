@@ -2,11 +2,20 @@
 
 - https://docs.microsoft.com/en-us/sql/relational-databases/security/password-policy
 
-## Install
+## Docker
 
-### Helm chart
+```bash
+bash ./docker-run-sqlserver.sh
+```
 
-Deprecated chart
+```powershell
+### powershell
+.\docker-run-sqlserver.ps1
+```
+
+## Kubernetes
+
+⚠️ Deprecated chart
 
 https://github.com/helm/charts#%EF%B8%8F-deprecation-and-archive-notice
 

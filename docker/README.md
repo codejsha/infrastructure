@@ -14,6 +14,9 @@ bash ./install-docker.sh
 
 - [FTP Server README](/linux/ftp-server/README.md)
 - [RPM Package Repository Server README](/linux/rpm-package-repo-server/README.md)
+- [Tomcat README](/tomcat/README.md)
+- [Confluent Kafka README](/kafka/confluent/README.md)
+- [CMAK README](/kafka/cmak/README.md)
 - [Kustomize README](/Kustomize/README.md)
 
 ## Daemon
@@ -55,7 +58,7 @@ bash ./docker-run-docker-registry.sh
 
 ### Helm chart
 
-Deprecated chart
+⚠️ Deprecated chart
 
 https://github.com/helm/charts#%EF%B8%8F-deprecation-and-archive-notice
 
