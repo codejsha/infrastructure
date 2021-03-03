@@ -20,6 +20,8 @@ function register_connector {
     #     --header "Content-Type:application/json" \
     #     --data @mysql-connector.json \
     #     ${KAFKA_CONNECT_URL}/connectors
+
+    echo
 }
 
 function get_connector_list {
