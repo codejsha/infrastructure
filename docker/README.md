@@ -16,7 +16,6 @@ bash ./install-docker.sh
 - [RPM Package Repository Server README](/linux/rpm-package-repo-server/README.md)
 - [Tomcat README](/tomcat/README.md)
 - [Confluent Kafka README](/kafka/confluent/README.md)
-- [CMAK README](/kafka/cmak/README.md)
 - [Kustomize README](/Kustomize/README.md)
 
 ## Daemon

@@ -11,7 +11,7 @@ bash ./install-helm.sh
 
 ### Using docker container
 
-- [docker-run-helm-cli.sh](/helm/docker-run-helm-cli.sh)
+- `docker-run-helm-cli.sh`
 
 ### Push plugin
 

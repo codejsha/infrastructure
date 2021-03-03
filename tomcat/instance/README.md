@@ -27,7 +27,7 @@ bash ./create-instance-cluster-full.sh inst2 8081 8444 8006 8010 8051
 
 ### With Redis
 
-Set redisson mode in [env-redisson.sh](/tomcat/instance/env-redisson.sh):
+Set redisson mode in `env-redisson.sh`:
 
 ```bash
 # REDISSON_MODE="CLUSTER_MODE"

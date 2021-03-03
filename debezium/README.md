@@ -10,11 +10,11 @@
 
 [Tutorial README](/debezium/tutorial/README.md)
 
-## Example database
+## Sample database
 
-- PostgreSQL: dvdrental cf. [PostgreSQL README](/postgresql/README.md)
-- MySQL: Sakila (https://dev.mysql.com/doc/index-other.html)
-- SQL Server: Northwind (https://github.com/microsoft/sql-server-samples)
+- PostgreSQL: dvdrental (cf. [PostgreSQL README](/postgresql/README.md))
+- MySQL: Sakila (cf. [MySQL README](/mysql/README.md))
+- SQL Server: Northwind (cf. [SQL Server README](/sqlserver/README.md))
 
 ## Configuration
 

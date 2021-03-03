@@ -22,3 +22,7 @@ https://github.com/helm/charts#%EF%B8%8F-deprecation-and-archive-notice
 ```bash
 bash ./helm-install-sqlserver.sh
 ```
+
+## Sample database
+
+- https://github.com/microsoft/sql-server-samples
