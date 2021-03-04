@@ -11,7 +11,7 @@ cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-schema-registry.service.d
 # Group=confluent
 
 # Environment=
-# Environment="LOG_DIR=/var/log/confluent/schema-registry"
+Environment="LOG_DIR=/var/log/confluent/schema-registry"
 # Environment="LOG_DIR=/mnt/schema-registry/logs"
 
 ExecStart=

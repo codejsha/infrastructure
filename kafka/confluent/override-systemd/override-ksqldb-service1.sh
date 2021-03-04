@@ -11,7 +11,7 @@ cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-ksqldb.service.d/override
 # Group=confluent
 
 # Environment=
-# Environment="LOG_DIR=/var/log/confluent/ksql"
+Environment="LOG_DIR=/var/log/confluent/ksql"
 # Environment="LOG_DIR=/mnt/ksqldb/logs"
 
 ExecStart=

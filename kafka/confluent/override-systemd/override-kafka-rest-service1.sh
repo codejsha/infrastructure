@@ -11,7 +11,7 @@ cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-kafka-rest.service.d/over
 # Group=confluent
 
 # Environment=
-# Environment="LOG_DIR=/var/log/confluent/kafka-rest"
+Environment="LOG_DIR=/var/log/confluent/kafka-rest"
 # Environment="LOG_DIR=/mnt/kafka-rest/logs"
 
 ExecStart=

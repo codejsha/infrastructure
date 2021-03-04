@@ -12,8 +12,8 @@ cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-kafka-connect.service.d/o
 
 # Environment=
 Environment="LOG_DIR=/var/log/kafka"
-# Environment="LOG_DIR=/mnt/kafka-connect/logs"
 Environment="CLASSPATH=/usr/share/java/kafka-connect-replicator/*"
+# Environment="LOG_DIR=/mnt/kafka-connect/logs"
 # Environment="CLASSPATH="/usr/local/confluent/share/java/kafka-connect-replicator/*"
 
 ExecStart=
