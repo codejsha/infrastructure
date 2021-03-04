@@ -1,0 +1,109 @@
+# nameOverride:
+# fullnameOverride:
+
+forwarder:
+  enabled: true
+  serviceAccount:
+      create: true
+      annotations: {}
+  rbac:
+    create: true
+    pspEnabled: false
+  persistence:
+    enabled: false
+
+aggregator:
+  enabled: true
+  configMapFiles:
+    fluentd.conf: |
+      # Ignore fluentd own events
+      <match fluent.**>
+        @type null
+      </match>
+
+      @include fluentd-inputs.conf
+      @include fluentd-output.conf
+      {{- if .Values.metrics.enabled }}
+      @include metrics.conf
+      {{- end }}
+    fluentd-inputs.conf: |
+      # TCP input to receive logs from
+      {{- if and .Values.aggregator.port }}
+      <source>
+        @type forward
+        bind 0.0.0.0
+        port {{ .Values.aggregator.port }}
+      </source>
+      {{- end }}
+
+      # HTTP input for the liveness and readiness probes
+      <source>
+        @type http
+        bind 0.0.0.0
+        port 9880
+      </source>
+    fluentd-output.conf: |
+      # Throw the healthcheck to the standard output
+      <match fluentd.healthcheck>
+        @type stdout
+      </match>
+
+      # Send the logs to the standard output
+      <match **>
+        @type stdout
+      </match>
+    metrics.conf: |
+      # Prometheus Exporter Plugin
+      # input plugin that exports metrics
+      <source>
+        @type prometheus
+        port {{ .Values.metrics.service.port }}
+      </source>
+
+      # input plugin that collects metrics from MonitorAgent
+      <source>
+        @type prometheus_monitor
+        <labels>
+          host #{hostname}
+        </labels>
+      </source>
+
+      # input plugin that collects metrics for output plugin
+      <source>
+        @type prometheus_output_monitor
+        <labels>
+          host #{hostname}
+        </labels>
+      </source>
+  ingress:
+    enabled: true
+    certManager: false
+    hostname: fluentd.example.com
+    path: /
+    tls: false
+  persistence:
+    enabled: true
+    storageClass: "rook-ceph-block"
+    # storageClass: "local-path"
+    accessMode: ReadWriteOnce
+    size: 10Gi
+
+metrics:
+  enabled: true
+  service:
+    type: ClusterIP
+    port: 24231
+    # loadBalancerIP:
+    annotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "24231"
+      prometheus.io/path: "/metrics"
+  serviceMonitor:
+    enabled: false
+    # namespace: monitoring
+    # interval: 10s
+    # scrapeTimeout: 10s
+    # selector:
+    #   prometheus: my-prometheus
+    # labels: {}
+    # annotations: {}

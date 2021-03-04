@@ -6,11 +6,6 @@ NAMESPACE="elastic-system"
 helm upgrade --install my-fluentd \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --set output.host="elasticsearch-master" \
-    --set persistence.enabled="true" \
-    --set persistence.storageClass="local-path" \
-    --version 2.4.2 \
-    stable/fluentd
-
-    ### rook ceph
-    # --set persistence.storageClass="rook-ceph-block" \
+    --values helm-chart-values-fluentd.yaml \
+    --version 3.6.1 \
+    bitnami/fluentd
