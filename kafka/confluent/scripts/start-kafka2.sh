@@ -46,7 +46,7 @@ export KAFKA_JMX_OPTS
 # KAFKA_LOG4J_OPTS="${KAFKA_LOG4J_OPTS}"
 # export KAFKA_LOG4J_OPTS
 
-### aws s3 tiered storage
+### aws credentials
 # export AWS_ACCESS_KEY_ID=""
 # export AWS_SECRET_ACCESS_KEY=""
 

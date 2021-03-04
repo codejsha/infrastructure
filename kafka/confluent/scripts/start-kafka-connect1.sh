@@ -51,6 +51,10 @@ export KAFKA_JMX_OPTS
 CLASSPATH="${CLASSPATH}:${CONFLUENT_HOME}/share/java/kafka-connect-replicator/*"
 export CLASSPATH
 
+### aws credentials
+# export AWS_ACCESS_KEY_ID=""
+# export AWS_SECRET_ACCESS_KEY=""
+
 ### check current user
 CURRENT_USER="$(id -un)"
 if [ "${CURRENT_USER}" == "root" ]; then
