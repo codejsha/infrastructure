@@ -11,7 +11,7 @@ CREDENTIAL_STORE_NAME="${CREDENTIAL_STORE_NAME}"
 
 ######################################################################
 
-function get_credential_list {
+function get_credentials {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
@@ -21,4 +21,4 @@ function get_credential_list {
 
 ######################################################################
 
-get_credential_list
+get_credentials

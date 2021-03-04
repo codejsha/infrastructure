@@ -10,17 +10,17 @@
 
 ```bash
 bash ./create-credential-store.sh
-bash ./add-credential.sh ${PASSWORD}
+bash ./add-credentials.sh ${PASSWORD}
 ```
 
-use credential:
+use credentials:
 
 ```txt
---credential-reference={store=${CREDENTIAL_STORE_NAME}, alias=${CREDENTIAL_ALIAS}}
+--credential-reference={store=${CREDENTIAL_STORE_NAME}, alias=${CREDENTIALS_ALIAS}}
 
 <security>
     <user-name>admin</user-name>
-    <credential-reference store="${CREDENTIAL_STORE_NAME}" alias="${CREDENTIAL_ALIAS}"/>
+    <credential-reference store="${CREDENTIAL_STORE_NAME}" alias="${CREDENTIALS_ALIAS}"/>
 </security>
 ```
 
