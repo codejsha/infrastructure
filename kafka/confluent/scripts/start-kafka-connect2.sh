@@ -61,8 +61,8 @@ fi
 ### check running process
 PID="$(pgrep -xa java | grep ${PROPERTIES_FILE} | grep ${SERVER_NAME} | awk '{print $1}')"
 if [ -n "${PID}" ]; then
-  echo "[ERROR] The ${SERVER_NAME} (pid ${PID}) is already running!"
-  exit
+    echo "[ERROR] The ${SERVER_NAME} (pid ${PID}) is already running!"
+    exit
 fi
 
 ### create log dir

@@ -28,7 +28,7 @@ function docker_run_chartmuseum_with_s3_storage {
         --env STORAGE="amazon" \
         --env STORAGE_AMAZON_BUCKET="chart-storage" \
         --env STORAGE_AMAZON_PREFIX="" \
-        --env STORAGE_AMAZON_REGION="us-east-1" \
+        --env STORAGE_AMAZON_REGION="us-west-1" \
         --mount type=bind,src=~/.aws,dst=/home/chartmuseum/.aws,readonly \
         chartmuseum/chartmuseum:latest
 }

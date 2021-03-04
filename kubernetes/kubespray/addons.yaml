@@ -115,7 +115,7 @@ ingress_ambassador_enabled: false
 
 # ALB ingress controller deployment
 ingress_alb_enabled: false
-# alb_ingress_aws_region: "us-east-1"
+# alb_ingress_aws_region: "us-west-1"
 # alb_ingress_restrict_scheme: "false"
 # Enables logging on all outbound requests sent to the AWS API.
 # If logging is desired, set to true.

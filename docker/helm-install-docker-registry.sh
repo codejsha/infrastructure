@@ -17,7 +17,7 @@ helm upgrade --install my-docker-registry \
     --set secrets.htpasswd="$(cat ./htpasswd)" \
     --set secrets.s3.accessKey="${AWS_ACCESS_KEY}" \
     --set secrets.s3.secretKey="${AWS_SECRET_KEY}" \
-    --set s3.region="us-east-1" \
+    --set s3.region="us-west-1" \
     --set s3.regionEndpoint="http://minio.example.com" \
     --set s3.bucket="myimage" \
     --set s3.encrypt="false" \
