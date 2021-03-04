@@ -4,12 +4,19 @@
 - https://github.com/minio/mc
 - https://docs.minio.io/docs/aws-cli-with-minio.html
 - https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-docker.html
+- https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html
 
 ## Local
+
+default root id/pw: `minioadmin:minioadmin`
 
 ```bash
 bash ./install-minio.sh
 ```
+
+### Service
+
+- https://github.com/minio/minio-service
 
 ## Docker
 
@@ -64,7 +71,7 @@ kubectl delete -n minio-tenant -f ./tenant.yaml
 
 ### Grafana dashboard
 
-https://grafana.com/grafana/dashboards/13502
+- https://grafana.com/grafana/dashboards/13502
 
 ## Command examples
 

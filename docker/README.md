@@ -25,9 +25,7 @@ bash ./install-docker.sh
 
 `/etc/docker/daemon.json`: [daemon.json](/docker/daemon.json)
 
-### Expose Docker daemon socket
-
-override docker service:
+### Override docker service
 
 ```bash
 bash ./override-docker-service.sh

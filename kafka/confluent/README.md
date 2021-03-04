@@ -59,17 +59,25 @@ bash ./add-license.sh
 
 ## kafka-connect
 
+### REST API
+
 connector plugin list:
 
 ```bash
-curl --header "Accept:application/json" http://kafka-connect1.example.com/connector-plugins/ | jq .[].class
+curl --header "Accept:application/json" http://kafka-connect1.example.com/connector-plugins | jq .[].class
 ```
 
 connector list:
 
 ```bash
-curl --header "Accept:application/json" http://kafka-connect1.example.com/connectors/ | jq
+curl --header "Accept:application/json" http://kafka-connect1.example.com/connectors | jq
 ```
+
+### Connectors
+
+debezium connector examples:
+
+[debezium README](/debezium/README.md)
 
 some connectors:
 

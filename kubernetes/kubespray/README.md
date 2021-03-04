@@ -15,6 +15,7 @@ Table of Contents:
 ## Pre-install
 
 ```powershell
+### powershell
 helper.ps1
 ```
 
@@ -29,6 +30,7 @@ sudo dnf update -y
 ### 1. Create Hyper-V VMs
 
 ```powershell
+### powershell
 create-kube-vm.ps1
 ```
 
@@ -50,6 +52,7 @@ bash ./pre-install.sh
 ### 5. Copy vhd
 
 ```powershell
+### powershell
 convert-kube-vhd.ps1
 ```
 
