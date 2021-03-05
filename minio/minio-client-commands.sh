@@ -2,6 +2,9 @@
 
 ### host config
 
+MINIO_ALIAS="test-minio"
+MINIO_URL="http://test.example.com:9000"
+
 MINIO_ALIAS="my-minio"
 MINIO_URL="http://minio.example.com"
 
