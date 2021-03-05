@@ -1,4 +1,5 @@
 #!/bin/bash
+set -o errexit -o errtrace
 
 USERNAME="admin"
 PASSWORD="${PASSWORD}"
@@ -6,6 +7,7 @@ PASSWORD="${PASSWORD}"
 REGISTRY_VOLUME_DIR="/mnt/volume/registry"
 sudo mkdir -p ${REGISTRY_VOLUME_DIR}
 
+sudo yum install -y httpd-tools
 sudo htpasswd -cB -b ${REGISTRY_VOLUME_DIR}/htpasswd ${USERNAME} ${PASSWORD}
 
 docker container run \
