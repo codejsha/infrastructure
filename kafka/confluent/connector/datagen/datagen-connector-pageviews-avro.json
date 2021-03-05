@@ -1,15 +1,16 @@
 {
   "name": "datagen-pageviews-avro",
   "config": {
+    "name": "datagen-pageviews-avro",
     "connector.class": "io.confluent.kafka.connect.datagen.DatagenConnector",
+    "tasks.max": "1",
     "kafka.topic": "pageviews-avro",
     "quickstart": "pageviews",
-    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "key.converter": "io.confluent.connect.avro.AvroConverter",
     "key.converter.schema.registry.url": "http://schema-registry1:8081,http://schema-registry2:8081",
-    "value.converter": "org.apache.kafka.connect.avro.AvroConverter",
+    "value.converter": "io.confluent.connect.avro.AvroConverter",
     "value.converter.schema.registry.url": "http://schema-registry1:8081,http://schema-registry2:8081",
     "max.interval": 100,
-    "iterations": 10000000,
-    "tasks.max": "1"
+    "iterations": 10000000
   }
 }

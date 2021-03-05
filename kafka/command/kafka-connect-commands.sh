@@ -44,9 +44,3 @@ curl -s -H "Accept:application/json" -X GET http://kafka-connect1:8083/connector
 curl -s -H "Accept:application/json" -X GET http://kafka-connect1:8083/connectors/postgresql-connector/tasks | jq
 curl -s -H "Accept:application/json" -X GET http://kafka-connect1:8083/connectors/postgresql-connector/tasks/0 | jq
 curl -s -H "Accept:application/json" -X GET http://kafka-connect1:8083/connectors/postgresql-connector/tasks/0/status | jq
-
-######################################################################
-
-### datagen
-
-curl -s -X POST -H "Accept:application/json" -H "Content-Type:application/json" -d @datagen-connector-avro.json http://kafka-connect1:8083/connectors | jq
