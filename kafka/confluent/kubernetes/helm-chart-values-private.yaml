@@ -39,7 +39,6 @@ global:
 
 operator:
   name: cc-operator
-  icenseKey: ""
   resources:
     limits:
       cpu: 500m
@@ -102,7 +101,6 @@ zookeeper:
 kafka:
   name: kafka
   replicas: 3
-  license: ""
   resources:
     requests:
       # cpu: "1"
@@ -350,7 +348,6 @@ ksql:
 
 controlcenter:
   name: controlcenter
-  license: ""
   resources:
     requests:
       # cpu: 500m
