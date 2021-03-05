@@ -164,7 +164,7 @@ WaitSecondsHighCount             |                         0                    
 
 ### 11g
 
-Add 'WebLogic Server/Server Examples' component to COMPONENT_PATHS in [silent.xml](/weblogic/silent.xml).
+Add `WebLogic Server/Server Examples` component to COMPONENT_PATHS in `silent.xml`.
 
 ```xml
         <data-value name="COMPONENT_PATHS" value="WebLogic Server/Core Application Server|WebLogic Server/Administration Console|WebLogic Server/Configuration Wizard and Upgrade Framework|WebLogic Server/Web 2.0 HTTP Pub-Sub Server|WebLogic Server/WebLogic JDBC Drivers|WebLogic Server/Third Party JDBC Drivers|WebLogic Server/WebLogic Server Clients|WebLogic Server/WebLogic Web Server Plugins|WebLogic Server/UDDI and Xquery Support|WebLogic Server/Server Examples" />

@@ -35,11 +35,11 @@ using cli:
 bash ./helm-install-confluent-operator.sh
 bash ./helm-install-confluent-zookeeper.sh
 bash ./helm-install-confluent-kafka.sh
-bash ./helm-install-confluent-ksql.sh
 bash ./helm-install-confluent-schema-registry.sh
-bash ./helm-install-confluent-replicator.sh
-bash ./helm-install-confluent-control-center.sh
 bash ./helm-install-confluent-kafka-connect.sh
+bash ./helm-install-confluent-replicator.sh
+bash ./helm-install-confluent-ksql.sh
+bash ./helm-install-confluent-control-center.sh
 kubectl apply --filename control-center-ingress.yaml
 ```
 
@@ -64,30 +64,25 @@ bash ./add-license.sh
 connector plugin list:
 
 ```bash
-curl --header "Accept:application/json" http://kafka-connect1.example.com/connector-plugins | jq .[].class
+curl --header "Accept:application/json" http://kafka-connect.example.com/connector-plugins | jq .[].class
 ```
 
 connector list:
 
 ```bash
-curl --header "Accept:application/json" http://kafka-connect1.example.com/connectors | jq
+curl --header "Accept:application/json" http://kafka-connect.example.com/connectors | jq
 ```
 
 ### Connectors
 
-debezium connector examples:
+- https://www.confluent.io/hub/
+- https://github.com/confluentinc/kafka-connect-datagen
 
-[debezium README](/debezium/README.md)
+connector examples:
 
-some connectors:
-
-- https://www.confluent.io/hub/confluentinc/kafka-connect-replicator
-- https://www.confluent.io/hub/confluentinc/kafka-connect-datagen
-- https://www.confluent.io/hub/debezium/debezium-connector-postgresql
-- https://www.confluent.io/hub/confluentinc/kafka-connect-elasticsearch
-- https://www.confluent.io/hub/confluentinc/kafka-connect-s3-source
-- https://www.confluent.io/hub/confluentinc/kafka-connect-oracle-cdc
-- https://www.confluent.io/hub/wepay/kafka-connect-bigquery
+- [debezium README](/debezium/README.md)
+- AWS S3 Sink Connector
+- Datagen Connector
 
 ## Configuration parameters
 
