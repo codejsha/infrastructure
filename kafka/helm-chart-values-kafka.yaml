@@ -44,7 +44,8 @@ externalAccess:
 
 persistence:
   enabled: true
-  storageClass: "rook-ceph-block"
+  storageClass: "standard"
+  # storageClass: "rook-ceph-block"
   # storageClass: "local-path"
   accessModes:
     - ReadWriteOnce
@@ -55,5 +56,6 @@ zookeeper:
   replicaCount: 3
   persistence:
     enabled: true
-    storageClass: "rook-ceph-block"
+    storageClass: "standard"
+    # storageClass: "rook-ceph-block"
     # storageClass: "local-path"

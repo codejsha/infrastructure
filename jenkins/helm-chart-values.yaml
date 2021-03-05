@@ -69,7 +69,8 @@ agent:
 
 persistence:
   enabled: true
-  storageClass: "rook-ceph-block"
+  storageClass: "standard"
+  # storageClass: "rook-ceph-block"
   # storageClass: "local-path"
   accessMode: "ReadWriteOnce"
   size: "8Gi"

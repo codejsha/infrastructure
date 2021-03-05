@@ -26,8 +26,9 @@ spec:
         - id: 0
           type: persistent-claim
           size: 100Gi
-          class: local-path
+          class: standard
           # class: rook-ceph-block
+          # class: local-path
           deleteClaim: false
     config:
       offsets.topic.replication.factor: 1
@@ -38,8 +39,9 @@ spec:
     storage:
       type: persistent-claim
       size: 100Gi
-      class: local-path
+      class: standard
       # class: rook-ceph-block
+      # class: local-path
       deleteClaim: false
   entityOperator:
     topicOperator: {}

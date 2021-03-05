@@ -13,7 +13,7 @@ helm upgrade --install my-mssql \
     --set collation="SQL_Latin1_General_100_CI_AS_SC" \
     --set sapassword="${PASSWORD}" \
     --set persistence.enabled="true" \
-    --set persistence.storageClass="rook-ceph-block" \
+    --set persistence.storageClass="standard" \
     --set service.type="LoadBalancer" \
     --set service.loadBalancerIP="10.10.10.91" \
     --version 0.11.2 \
@@ -21,3 +21,5 @@ helm upgrade --install my-mssql \
 
     ### local path provisioner
     # --set persistence.storageClass="local-path" \
+    ### rook ceph
+    # --set persistence.storageClass="rook-ceph-block" \

@@ -72,8 +72,10 @@ registry:
   persistence:
     enabled: true
     database:
-      storageClass: "rook-ceph-block"
+      storageClass: "standard"
+      # storageClass: "rook-ceph-block"
       # storageClass: "local-path"
     flowStorage:
-      storageClass: "rook-ceph-block"
+      storageClass: "standard"
+      # storageClass: "rook-ceph-block"
       # storageClass: "local-path"

@@ -9,11 +9,16 @@ NAMESPACE="kafka-system"
 helm upgrade --install my-cp-kafka \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --set cp-zookeeper.persistence.dataDirStorageClass="rook-ceph-block" \
-    --set cp-zookeeper.persistence.dataLogDirStorageClass="rook-ceph-block" \
-    --set cp-kafka.persistence.storageClass="rook-ceph-block" \
+    --set cp-zookeeper.persistence.dataDirStorageClass="standard" \
+    --set cp-zookeeper.persistence.dataLogDirStorageClass="standard" \
+    --set cp-kafka.persistence.storageClass="standard" \
     --version 0.5.0 \
     confluentinc/cp-helm-charts
+
+    ### rook ceph
+    # --set cp-zookeeper.persistence.dataDirStorageClass="rook-ceph-block" \
+    # --set cp-zookeeper.persistence.dataLogDirStorageClass="rook-ceph-block" \
+    # --set cp-kafka.persistence.storageClass="rook-ceph-block" \
 
     ### local path provisioner
     # --set cp-zookeeper.persistence.dataDirStorageClass="local-path" \

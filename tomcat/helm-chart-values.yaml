@@ -34,7 +34,8 @@ extraVolumeMounts: []
 
 persistence:
   enabled: true
-  storageClass: "rook-ceph-block"
+  storageClass: "standard"
+  # storageClass: "rook-ceph-block"
   # storageClass: "local-path"
   accessModes:
     - ReadWriteOnce

@@ -9,6 +9,7 @@ helm_enabled: true
 # Registry deployment
 registry_enabled: false
 # registry_namespace: kube-system
+# registry_storage_class: "standard"
 # registry_storage_class: "rook-ceph-block"
 # registry_storage_class: "local-path"
 # registry_disk_size: "100Gi"

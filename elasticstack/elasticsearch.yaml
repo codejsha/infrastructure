@@ -29,7 +29,8 @@ spec:
             resources:
               requests:
                 storage: 10Gi
-            storageClassName: rook-ceph-block
+            storageClassName: standard
+            # storageClassName: rook-ceph-block
             # storageClassName: local-path
     - name: data
       count: 1
@@ -44,5 +45,6 @@ spec:
             resources:
               requests:
                 storage: 100Gi
-            storageClassName: rook-ceph-block
+            storageClassName: standard
+            # storageClassName: rook-ceph-block
             # storageClassName: local-path

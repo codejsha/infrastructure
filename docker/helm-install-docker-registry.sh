@@ -28,10 +28,12 @@ helm upgrade --install my-docker-registry \
     --set ingress.hosts={"registry.example.com"} \
     --set ingress.path="/" \
     --set persistence.enabled="true" \
-    --set persistence.storageClass="rook-ceph-block" \
+    --set persistence.storageClass="standard" \
     --version 1.9.6 \
     stable/docker-registry
 
+    ### rook ceph
+    # --set persistence.storageClass="rook-ceph-block" \
     ### local path provisioner
     # --set persistence.storageClass="local-path" \
 
