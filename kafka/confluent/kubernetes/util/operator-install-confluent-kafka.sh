@@ -12,7 +12,7 @@ cd confluent-operator/scripts
 ./operator-util.sh --release-prefix confluent --namespace confluent-operator --helm-file ../../../helm-chart-values-private.yaml
 
 ### upgrade
-# ./operator-util.sh --upgrade --release-prefix confluent --namespace confluent-operator --helm-file ../../helm-chart-values-private.yaml
+# ./operator-util.sh --upgrade --release-prefix confluent --namespace confluent-operator --helm-file ../../../helm-chart-values-private.yaml
 
 ### delete
-# ./operator-util.sh --delete --release-prefix confluent --namespace confluent-operator --helm-file ../../helm-chart-values-private.yaml
+# ./operator-util.sh --delete --release-prefix confluent --namespace confluent-operator --helm-file ../../../helm-chart-values-private.yaml
