@@ -1,4 +1,5 @@
 {
+  "name": "postgresql-connector",
   "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
   "tasks.max": "1",
   "plugin.name": "decoderbufs",

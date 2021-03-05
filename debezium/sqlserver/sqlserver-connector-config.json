@@ -1,4 +1,5 @@
 {
+  "name": "sqlserver-connector",
   "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
   "tasks.max": "1",
   "key.converter": "io.confluent.connect.avro.AvroConverter",

@@ -1,4 +1,5 @@
 {
+  "name": "mysql-connector",
   "connector.class": "io.debezium.connector.mysql.MySqlConnector",
   "tasks.max": "1",
   "key.converter": "io.confluent.connect.avro.AvroConverter",
