@@ -11,7 +11,7 @@ cat <<EOF > ${HTTPD_HOME}/start-httpd.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -28,7 +28,7 @@ cat <<EOF > ${HTTPD_HOME}/restart-httpd.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -45,7 +45,7 @@ cat <<EOF > ${HTTPD_HOME}/stop-httpd.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -62,7 +62,7 @@ cat <<EOF > ${HTTPD_HOME}/check-config.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -79,7 +79,7 @@ cat <<EOF > ${HTTPD_HOME}/get-compile-settings.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -96,7 +96,7 @@ cat <<EOF > ${HTTPD_HOME}/get-include-files.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -113,7 +113,7 @@ cat <<EOF > ${HTTPD_HOME}/get-load-modules.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -131,7 +131,7 @@ cat <<EOF > ${HTTPD_HOME}/get-run-settings.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -148,7 +148,7 @@ cat <<EOF > ${HTTPD_HOME}/get-settings.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -166,7 +166,7 @@ cat <<EOF > ${HTTPD_HOME}/get-version.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -181,7 +181,7 @@ cat <<EOF > ${HTTPD_HOME}/get-vhosts-settings.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
