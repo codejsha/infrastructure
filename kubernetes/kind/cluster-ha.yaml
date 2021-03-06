@@ -12,6 +12,7 @@ nodes:
         nodeRegistration:
           kubeletExtraArgs:
             node-labels: "ingress-ready=true"
+            # system-reserved: memory=2Gi
     extraPortMappings:
       - containerPort: 80
         hostPort: 80
@@ -20,7 +21,37 @@ nodes:
         hostPort: 443
         protocol: TCP
   - role: control-plane
+    # kubeadmConfigPatches:
+    #   - |
+    #     kind: JoinConfiguration
+    #     nodeRegistration:
+    #       kubeletExtraArgs:
+    #         system-reserved: memory=2Gi
   - role: control-plane
+    # kubeadmConfigPatches:
+    #   - |
+    #     kind: JoinConfiguration
+    #     nodeRegistration:
+    #       kubeletExtraArgs:
+    #         system-reserved: memory=2Gi
   - role: worker
+    # kubeadmConfigPatches:
+    #   - |
+    #     kind: JoinConfiguration
+    #     nodeRegistration:
+    #       kubeletExtraArgs:
+    #         system-reserved: memory=8Gi
   - role: worker
+    # kubeadmConfigPatches:
+    #   - |
+    #     kind: JoinConfiguration
+    #     nodeRegistration:
+    #       kubeletExtraArgs:
+    #         system-reserved: memory=8Gi
   - role: worker
+    # kubeadmConfigPatches:
+    #   - |
+    #     kind: JoinConfiguration
+    #     nodeRegistration:
+    #       kubeletExtraArgs:
+    #         system-reserved: memory=8Gi
