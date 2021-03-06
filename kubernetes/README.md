@@ -2,13 +2,33 @@
 
 ## Install
 
+### Kubespray
+
 [Installing Kubernetes with Kubespray README](/kubernetes/kubespray/README.md)
+
+### kind
+
+- https://kind.sigs.k8s.io/
+
+```bash
+bash ./install-kind.sh
+bash ./create-cluster.sh
+```
+
+### minikube
+
+- https://minikube.sigs.k8s.io/docs/
+
+```bash
+bash ./install-minikube.sh
+bash ./start-minikube.sh
+```
 
 ## CLI Tools
 
 ### kubectl
 
-https://kubernetes.io/docs/tasks/tools/install-kubectl
+- https://kubernetes.io/docs/tasks/tools/install-kubectl
 
 ```bash
 bash ./install-kubectl.sh
@@ -16,7 +36,7 @@ bash ./install-kubectl.sh
 
 ### kubectl-aliases
 
-https://github.com/ahmetb/kubectl-aliases
+- https://github.com/ahmetb/kubectl-aliases
 
 ```bash
 bash ./install-kubectl-aliases.sh
@@ -24,7 +44,7 @@ bash ./install-kubectl-aliases.sh
 
 ### Krew
 
-https://krew.sigs.k8s.io/
+- https://krew.sigs.k8s.io/
 
 ```bash
 bash ./install-krew.sh
