@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 HTTPD_HOME="/usr/local/httpd"
 
@@ -17,7 +20,7 @@ function install_required_package {
 }
 
 function extract_install_file {
-    /usr/bin/cp -f ${INSTALL_FILE_DIR}/${INSTALL_FILE} ${INSTALL_SCRIPT_DIR}/httpd-tomcat
+    /bin/cp -f ${INSTALL_FILE_DIR}/${INSTALL_FILE} ${INSTALL_SCRIPT_DIR}/httpd-tomcat
     cd ${INSTALL_SCRIPT_DIR}/httpd-tomcat
     tar -xzf ${INSTALL_FILE}
 }

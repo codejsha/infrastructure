@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 function install_httpd_with_yum {
     sudo yum install -y httpd
@@ -17,18 +20,18 @@ function install_httpd_with_dnf {
 ######################################################################
 
 function install_httpd {
-    HTTPD_HOME="/usr/local/httpd"
-    INSTALL_FILE_DIR="/mnt/share/apache-http-server"
-    # INSTALL_FILE_DIR="/svc/install"
-    PARENT_BUILD_DIR="/svc/install"
+    local HTTPD_HOME="/usr/local/httpd"
+    local INSTALL_FILE_DIR="/mnt/share/apache-http-server"
+    # local INSTALL_FILE_DIR="/svc/install"
+    local PARENT_BUILD_DIR="/svc/install"
 
-    HTTPD_FILE="httpd-2.4.46.tar.gz"
-    APR_FILE="apr-1.7.0.tar.gz"
-    APRUTIL_FILE="apr-util-1.6.1.tar.gz"
+    local HTTPD_FILE="httpd-2.4.46.tar.gz"
+    local APR_FILE="apr-1.7.0.tar.gz"
+    local APRUTIL_FILE="apr-util-1.6.1.tar.gz"
 
-    HTTPD_DIR_NAME="${HTTPD_FILE/\.tar\.gz/}"
-    APR_DIR_NAME="${APR_FILE/\.tar\.gz/}"
-    APRUTIL_DIR_NAME="${APRUTIL_FILE/\.tar\.gz/}"
+    local HTTPD_DIR_NAME="${HTTPD_FILE/\.tar\.gz/}"
+    local APR_DIR_NAME="${APR_FILE/\.tar\.gz/}"
+    local APRUTIL_DIR_NAME="${APRUTIL_FILE/\.tar\.gz/}"
 
     function check_httpd_home {
         if [ -d "${HTTPD_HOME}" ]; then
@@ -102,7 +105,9 @@ function install_httpd {
         ### compile
         make
         ### install
-        make install
+        sudo make install
+
+        sudo chown -R $(id -un):$(id -gn) ${HTTPD_HOME}
     }
 
     check_httpd_home
