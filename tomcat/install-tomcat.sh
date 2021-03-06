@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 source ./env-base.sh
 
@@ -40,8 +43,9 @@ function check_install_file {
 }
 
 function install_tomcat {
-    tar -xzf ${INSTALL_FILE_DIR}/${INSTALL_FILE} -C ${PARENT_CATALINA_HOME}
+    sudo tar -xzf ${INSTALL_FILE_DIR}/${INSTALL_FILE} -C ${PARENT_CATALINA_HOME}
     sudo mv ${PARENT_CATALINA_HOME}/apache-tomcat-${TOMCAT_VERSION} ${CATALINA_HOME}
+    sudo chown -R $(id -un):$(id -gn) ${CATALINA_HOME}
 }
 
 ######################################################################

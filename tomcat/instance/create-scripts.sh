@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 source ./env-base.sh
 source ./env-instance.sh
@@ -18,6 +21,9 @@ VAR_LOG_DIR="${LOG_DIR/${CATALINA_BASE}/${TEMP}}"
 ### create start script
 cat <<EOF > ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export JAVA_HOME="${JAVA_HOME}"
@@ -31,8 +37,8 @@ export CATALINA_PID="\${CATALINA_BASE}/tomcat.pid"
 
 CURRENT_USER="\$(id -un)"
 if [ "\${CURRENT_USER}" == "root" ]; then
-  echo "[ERROR] The current user is root!"
-  exit
+    echo "[ERROR] The current user is root!"
+    exit
 fi
 
 CATALINA_OPTS="\${CATALINA_OPTS} -D\${INSTANCE_NAME}"
@@ -117,6 +123,9 @@ EOF
 ### create stop script
 cat <<EOF > ${CATALINA_BASE}/stop-${INSTANCE_NAME}.sh
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export JAVA_HOME="${JAVA_HOME}"
@@ -132,6 +141,9 @@ EOF
 ### create configtest script
 cat <<EOF > ${CATALINA_BASE}/check-config.sh
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export CATALINA_HOME="${CATALINA_HOME}"
@@ -145,6 +157,9 @@ EOF
 ### create version script
 cat <<EOF > ${CATALINA_BASE}/get-version.sh
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export CATALINA_HOME="${CATALINA_HOME}"

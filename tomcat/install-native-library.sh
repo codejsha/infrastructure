@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 source ./env-base.sh
 
@@ -30,7 +33,7 @@ function check_install_file {
 }
 
 function extract_install_file {
-    /usr/bin/cp -f ${INSTALL_FILE_DIR}/${INSTALL_FILE} ${INSTALL_SCRIPT_DIR}/tomcat
+    /bin/cp -f ${INSTALL_FILE_DIR}/${INSTALL_FILE} ${INSTALL_SCRIPT_DIR}/tomcat
     cd ${INSTALL_SCRIPT_DIR}/tomcat
     tar -xzf ${INSTALL_FILE}
 }

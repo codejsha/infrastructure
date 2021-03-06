@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 source ./env-base.sh
 
@@ -38,23 +41,23 @@ function create_log4j_dir {
 }
 
 function copy_library {
-    /usr/bin/cp -f \
+    /bin/cp -f \
         ${INSTALL_FILE_DIR}/${LOG4J_INSTALL_FILE_DIR_NAME}/log4j-api-${LOG4J_VERSION}.jar \
         ${CATALINA_HOME}/log4j2/lib
-    /usr/bin/cp -f \
+    /bin/cp -f \
         ${INSTALL_FILE_DIR}/${LOG4J_INSTALL_FILE_DIR_NAME}/log4j-appserver-${LOG4J_VERSION}.jar \
         ${CATALINA_HOME}/log4j2/lib
-    /usr/bin/cp -f \
+    /bin/cp -f \
         ${INSTALL_FILE_DIR}/${LOG4J_INSTALL_FILE_DIR_NAME}/log4j-core-${LOG4J_VERSION}.jar \
         ${CATALINA_HOME}/log4j2/lib
 }
 
 function copy_config_file {
-    /usr/bin/cp -f ${INSTALL_SCRIPT_DIR}log4j2-tomcat.xml ${CATALINA_HOME}/log4j2/conf
+    /bin/cp -f ${INSTALL_SCRIPT_DIR}log4j2-tomcat.xml ${CATALINA_HOME}/log4j2/conf
 }
 
 function copy_setenv_script {
-    /usr/bin/cp -f ${INSTALL_SCRIPT_DIR}/setenv.sh ${CATALINA_HOME}/bin
+    /bin/cp -f ${INSTALL_SCRIPT_DIR}/setenv.sh ${CATALINA_HOME}/bin
     chmod 750 ${CATALINA_HOME}/bin/setenv.sh
 }
 

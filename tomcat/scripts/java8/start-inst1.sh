@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 INSTANCE_NAME="inst1"
 export JAVA_HOME="/usr/lib/jvm/java-1.8.0"
@@ -12,8 +15,8 @@ export CATALINA_PID="${CATALINA_BASE}/tomcat.pid"
 
 CURRENT_USER="$(id -un)"
 if [ "${CURRENT_USER}" == "root" ]; then
-  echo "[ERROR] The current user is root!"
-  exit
+    echo "[ERROR] The current user is root!"
+    exit
 fi
 
 CATALINA_OPTS="${CATALINA_OPTS} -D${INSTANCE_NAME}"
