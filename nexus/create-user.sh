@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 export NEXUS_URL="https://nexus.example.com"
 export NEXUS_USER="admin"
@@ -13,6 +16,8 @@ export USER_ROLES="nx-admin"
 
 envsubst < ./data-user.json > ./data-user-temp.json
 
+######################################################################
+
 function create_user {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
@@ -22,5 +27,7 @@ function create_user {
         -d @data-user-temp.json \
         ${NEXUS_URL}/service/rest/beta/security/users
 }
+
+######################################################################
 
 create_user

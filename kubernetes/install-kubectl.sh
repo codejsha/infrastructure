@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 KUBECTL_VERSION="1.18.8"
 
@@ -8,6 +11,7 @@ function install_kubectl_with_download {
     curl -LO https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
     chmod +x ./kubectl
     sudo mv ./kubectl /usr/local/bin/kubectl
+    sudo chwon root:root /usr/local/bin/kubectl
 }
 
 function install_kubectl_with_yum {

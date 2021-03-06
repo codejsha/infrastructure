@@ -1,14 +1,17 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 PASSWORD="${PASSWORD}"
 
 ######################################################################
 
 function docker_run_debezium_postgresql11 {
-    POSTGRES_VOLUME_DIR="/mnt/volume/postgresql"
+    local POSTGRES_VOLUME_DIR="/mnt/volume/postgresql"
     sudo mkdir -p ${POSTGRES_VOLUME_DIR}/data
     # docker run -i --rm debezium/postgres:11 cat /usr/share/postgresql/postgresql.conf.sample > debezium-postgresql.conf
-    sudo /usr/bin/cp -f debezium-postgresql.conf ${POSTGRES_VOLUME_DIR}/postgresql.conf
+    sudo /bin/cp -f debezium-postgresql.conf ${POSTGRES_VOLUME_DIR}/postgresql.conf
 
     docker container run \
         --detach \
@@ -27,10 +30,10 @@ function docker_run_debezium_postgresql11 {
 }
 
 function docker_run_debezium_postgresql12 {
-    POSTGRES_VOLUME_DIR="/mnt/volume/postgresql"
+    local POSTGRES_VOLUME_DIR="/mnt/volume/postgresql"
     sudo mkdir -p ${POSTGRES_VOLUME_DIR}/data
     # docker run -i --rm debezium/postgres:12 cat /usr/share/postgresql/postgresql.conf.sample > debezium-postgresql.conf
-    sudo /usr/bin/cp -f debezium-postgresql.conf ${POSTGRES_VOLUME_DIR}/postgresql.conf
+    sudo /bin/cp -f debezium-postgresql.conf ${POSTGRES_VOLUME_DIR}/postgresql.conf
 
     docker container run \
         --detach \
@@ -49,10 +52,10 @@ function docker_run_debezium_postgresql12 {
 }
 
 function docker_run_debezium_postgresql13 {
-    POSTGRES_VOLUME_DIR="/mnt/volume/postgresql"
+    local POSTGRES_VOLUME_DIR="/mnt/volume/postgresql"
     sudo mkdir -p ${POSTGRES_VOLUME_DIR}/data
     # docker run -i --rm debezium/postgres:13 cat /usr/share/postgresql/postgresql.conf.sample > debezium-postgresql.conf
-    sudo /usr/bin/cp -f debezium-postgresql.conf ${POSTGRES_VOLUME_DIR}/postgresql.conf
+    sudo /bin/cp -f debezium-postgresql.conf ${POSTGRES_VOLUME_DIR}/postgresql.conf
 
     docker container run \
         --detach \

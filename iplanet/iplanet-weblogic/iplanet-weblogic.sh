@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 IPLANET_HOME="/usr/local/iplanet"
 PLUGIN_HOME="${IPLANET_HOME}/plugins/weblogic-plugin"

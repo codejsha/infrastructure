@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 export NEXUS_URL="https://nexus.example.com"
 export NEXUS_USER="admin"
@@ -9,6 +12,8 @@ export REPOSITORY_MEMBER_NAMES="${3}"
 
 envsubst < ./data-maven-group-repo.json > ./data-maven-group-repo-temp.json
 
+######################################################################
+
 function create_maven_group_repository {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
@@ -18,5 +23,7 @@ function create_maven_group_repository {
         -d @data-maven-group-repo-temp.json \
         ${NEXUS_URL}/service/rest/beta/repositories/maven/group
 }
+
+######################################################################
 
 create_maven_group_repository

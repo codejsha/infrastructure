@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 if [ ! -f "SHARED_SECRET.txt" ]; then
     echo "$(openssl rand -hex 16)" > SHARED_SECRET.txt

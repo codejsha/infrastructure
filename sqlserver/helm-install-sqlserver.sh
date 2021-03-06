@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 PASSWORD="${PASSWORD}"
 
@@ -19,7 +22,8 @@ helm upgrade --install my-mssql \
     --version 0.11.2 \
     stable/mssql-linux
 
-    ### local path provisioner
-    # --set persistence.storageClass="local-path" \
     ### rook ceph
     # --set persistence.storageClass="rook-ceph-block" \
+
+    ### local path provisioner
+    # --set persistence.storageClass="local-path" \

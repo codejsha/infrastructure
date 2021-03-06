@@ -1,10 +1,13 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 NAMESPACE="metallb-system"
 kubectl create namespace ${NAMESPACE}
 
 ### Enable strict ARP mode
-# kubectl edit configmap kube-proxy -n kube-system 
+# kubectl edit configmap kube-proxy -n kube-system
 ### ---
 ### apiVersion: kubeproxy.config.k8s.io/v1alpha1
 ### kind: KubeProxyConfiguration

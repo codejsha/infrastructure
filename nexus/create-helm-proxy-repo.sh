@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 export NEXUS_URL="https://nexus.example.com"
 export NEXUS_USER="admin"
@@ -9,6 +12,8 @@ export REMOTE_URL="${3}"
 
 envsubst < ./data-helm-proxy-repo.json > ./data-helm-proxy-repo-temp.json
 
+######################################################################
+
 function create_helm_proxy_repository {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
@@ -18,5 +23,7 @@ function create_helm_proxy_repository {
         -d @data-helm-proxy-repo-temp.json \
         ${NEXUS_URL}/service/rest/beta/repositories/helm/proxy
 }
+
+######################################################################
 
 create_helm_proxy_repository

@@ -1,8 +1,11 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 rm -rf ~/.aliases
 
-/usr/bin/cp -f .bashrc_ubuntu ~/.bashrc
-/usr/bin/cp -rf aliases ~/.aliases
+/bin/cp -f .bashrc_ubuntu ~/.bashrc
+/bin/cp -rf aliases ~/.aliases
 
 curl -o ~/.aliases/kubectl_aliases -LJO https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases

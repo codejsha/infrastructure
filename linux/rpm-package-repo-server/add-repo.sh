@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 cat <<EOF | sudo tee /etc/yum.repos.d/example-repo.repo
 [example-repo]
@@ -9,4 +12,4 @@ gpgcheck=0
 priority=1
 EOF
 
-# sudo /usr/bin/cp -f client/example-repo.repo /etc/yum.repos.d/example-repo.repo
+# sudo /bin/cp -f client/example-repo.repo /etc/yum.repos.d/example-repo.repo

@@ -1,7 +1,7 @@
 # process
 
-alias killhttpd="sudo pgrep httpd | xargs sudo kill -9"
-alias killjava="sudo pgrep java | xargs sudo kill -9"
+alias killhttpd="sudo pkill -9 httpd"
+alias killjava="sudo pkill -9 java"
 
 alias psef="sudo ps -ef | grep "
 alias psefhttpd="sudo ps -ef | grep httpd"

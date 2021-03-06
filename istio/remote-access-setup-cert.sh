@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 INGRESS_DOMAIN="example.com"
 # INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
@@ -32,4 +35,4 @@ openssl x509 -req \
     -out ${CERT_DIR}/tls.crt
 kubectl create secret tls telemetry-gw-cert \
     --key=${CERT_DIR}/tls.key \
-    --cert=${CERT_DIR}/tls.crt -n istio-system 
+    --cert=${CERT_DIR}/tls.crt -n istio-system

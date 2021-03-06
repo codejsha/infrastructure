@@ -26,16 +26,16 @@ some options:
 ```bash
 nl .bash_profile
 #  1  # .bash_profile
-#  
+#
 #  2  # Get the aliases and functions
 #  3  if [ -f ~/.bashrc ]; then
 #  4          . ~/.bashrc
 #  5  fi
-#  
+#
 #  6  # User specific environment and startup programs
-#  
+#
 #  7  PATH=$PATH:$HOME/.local/bin:$HOME/bin
-#  
+#
 #  8  export PATH
 ```
 

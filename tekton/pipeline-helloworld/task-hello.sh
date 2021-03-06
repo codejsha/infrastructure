@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 cat <<EOF > ./task-hello.yaml
 apiVersion: tekton.dev/v1beta1
@@ -22,4 +25,4 @@ tkn task start hello
 # tkn task start hello --dry-run > taskRun-hello.yaml
 # kubectl create -f taskRun-hello.yaml
 
-tkn taskrun logs --last -f 
+tkn taskrun logs --last -f

@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 export NEXUS_URL="https://nexus.example.com"
 export NEXUS_USER="admin"
@@ -14,6 +17,8 @@ export AWS_ENDPOINT_URL="http://minio.example.com"
 
 envsubst < ./data-blobstore.json > ./data-blobstore-temp.json
 
+######################################################################
+
 function create_s3_blob_store {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
@@ -23,5 +28,7 @@ function create_s3_blob_store {
         -d @data-blobstore-temp.json \
         ${NEXUS_URL}/service/rest/beta/blobstores/s3
 }
+
+######################################################################
 
 create_s3_blob_store

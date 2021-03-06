@@ -1,8 +1,11 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 PROMETHEUS_VOLUME_DIR="/mnt/volume/prometheus"
 sudo mkdir -p ${PROMETHEUS_VOLUME_DIR}
-sudo /usr/bin/cp -f prometheus.yaml ${PROMETHEUS_VOLUME_DIR}/prometheus.yml
+sudo /bin/cp -f prometheus.yaml ${PROMETHEUS_VOLUME_DIR}/prometheus.yml
 
 docker container run \
     --detach \

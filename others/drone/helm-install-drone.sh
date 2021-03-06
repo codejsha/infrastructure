@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 helm repo add drone https://charts.drone.io
 helm repo update
@@ -39,5 +42,6 @@ helm upgrade --install my-drone \
 
     ### local path provisioner
     # --set persistentVolume.storageClass="local-path" \
+
     ### rook ceph
     # --set persistentVolume.storageClass="rook-ceph-block" \

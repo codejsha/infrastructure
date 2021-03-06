@@ -1,8 +1,11 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 function install_oracle_jdk6 {
-    INSTALL_FILE_DIR="/mnt/share/oracle-jdk/6"
-    INSTALL_FILE="jdk-6u211-linux-x64.bin"
+    local INSTALL_FILE_DIR="/mnt/share/oracle-jdk/6"
+    local INSTALL_FILE="jdk-6u211-linux-x64.bin"
 
     cp ${INSTALL_FILE_DIR}/${INSTALL_FILE} /usr/java
     cd /usr/java
@@ -13,8 +16,8 @@ function install_oracle_jdk6 {
 }
 
 function install_oracle_jdk7 {
-    INSTALL_FILE_DIR="/mnt/share/oracle-jdk/7"
-    INSTALL_FILE="jdk-7u281-linux-x64.tar.gz"
+    local INSTALL_FILE_DIR="/mnt/share/oracle-jdk/7"
+    local INSTALL_FILE="jdk-7u281-linux-x64.tar.gz"
 
     tar -C /usr/java -xzf ${INSTALL_FILE_DIR}/${INSTALL_FILE}
 
@@ -22,8 +25,8 @@ function install_oracle_jdk7 {
 }
 
 function install_oracle_jdk8 {
-    INSTALL_FILE_DIR="/mnt/share/oracle-jdk/8"
-    INSTALL_FILE="jdk-8u271-linux-x64.tar.gz"
+    local INSTALL_FILE_DIR="/mnt/share/oracle-jdk/8"
+    local INSTALL_FILE="jdk-8u271-linux-x64.tar.gz"
 
     tar -C /usr/java -xzf ${INSTALL_FILE_DIR}/${INSTALL_FILE}
 
@@ -31,8 +34,8 @@ function install_oracle_jdk8 {
 }
 
 function install_oracle_jdk11 {
-    INSTALL_FILE_DIR="/mnt/share/oracle-jdk/11"
-    INSTALL_FILE="jdk-11.0.7_linux-x64_bin.tar.gz"
+    local INSTALL_FILE_DIR="/mnt/share/oracle-jdk/11"
+    local INSTALL_FILE="jdk-11.0.7_linux-x64_bin.tar.gz"
 
     tar -C /usr/java -xzf ${INSTALL_FILE_DIR}/${INSTALL_FILE}
 

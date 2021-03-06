@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 export NEXUS_URL="https://nexus.example.com"
 export NEXUS_USER="admin"
@@ -7,6 +10,8 @@ export REPOSITORY_NAME="${1}"
 export BLOBSTORE_NAME="${2}"
 
 envsubst < ./data-docker-hosted-repo.json > ./data-docker-hosted-repo-temp.json
+
+######################################################################
 
 function create_docker_hosted_repository {
     curl --insecure \
@@ -17,5 +22,7 @@ function create_docker_hosted_repository {
         -d @data-docker-hosted-repo-temp.json \
         ${NEXUS_URL}/service/rest/beta/repositories/docker/hosted
 }
+
+######################################################################
 
 create_docker_hosted_repository

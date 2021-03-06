@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 # DVD Rental database (https://www.postgresqltutorial.com/postgresql-sample-database/)
 
 PASSWORD="${PASSWORD}"
@@ -6,7 +9,7 @@ PASSWORD="${PASSWORD}"
 SAMPLE_DB_FILE_DIR="/mnt/share/postgresql"
 
 ### unzip archive file
-/usr/bin/cp -pf ${SAMPLE_DB_FILE_DIR}/dvdrental.zip .
+/bin/cp -pf ${SAMPLE_DB_FILE_DIR}/dvdrental.zip .
 unzip dvdrental.zip
 
 ### create database

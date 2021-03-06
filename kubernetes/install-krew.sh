@@ -1,10 +1,13 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 ### requirement:
 ### git
 
 (
-    set -o xtrace; cd "$(mktemp -d)" &&
+    cd "$(mktemp -d)" &&
     curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/krew.tar.gz" &&
     tar zxvf krew.tar.gz &&
     KREW=./krew-"$(uname | tr '[:upper:]' '[:lower:]')_amd64" &&

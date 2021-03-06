@@ -1,10 +1,13 @@
 #!/bin/bash
-
-NEOVIM_VERSION="0.4.4"
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 ######################################################################
 
 function install_neovim_with_download {
+    local NEOVIM_VERSION="0.4.4"
+
     sudo yum install -y fuse fuse-sshfs
 
     if [ ! -e "/usr/local/bin/nvim" ]; then

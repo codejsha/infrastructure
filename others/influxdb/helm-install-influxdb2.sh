@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 helm repo add influxdata https://helm.influxdata.com
 helm repo update
@@ -17,7 +20,8 @@ helm upgrade --install my-influxdb \
     --set persistence.storageClass="standard" \
     influxdata/influxdb2
 
-    ### local path provisioner
-    # --set persistence.storageClass="local-path" \
     ### rook ceph
     # --set persistence.storageClass="rook-ceph-block" \
+
+    ### local path provisioner
+    # --set persistence.storageClass="local-path" \

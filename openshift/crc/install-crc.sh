@@ -1,11 +1,14 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 INSTALL_FILE_DIR="/mnt/share/redhat-codeready-containers"
 INSTALL_FILE="crc-linux-amd64.tar.xz"
 SECRET_FILE="pull-secret.txt"
 
-/usr/bin/cp -f ${INSTALL_FILE_DIR}/${INSTALL_FILE} ~
-/usr/bin/cp -f ${INSTALL_FILE_DIR}/${SECRET_FILE} ~
+/bin/cp -f ${INSTALL_FILE_DIR}/${INSTALL_FILE} ~
+/bin/cp -f ${INSTALL_FILE_DIR}/${SECRET_FILE} ~
 tar -xf ~/${INSTALL_FILE}
 
 mv crc-linux-*-amd64 crc-linux

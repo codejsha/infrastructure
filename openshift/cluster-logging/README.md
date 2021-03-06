@@ -31,4 +31,3 @@ clusterserviceversion.operators.coreos.com/elasticsearch-operator.4.5.0-20210204
 NAME                                                PACKAGE           SOURCE             CHANNEL
 subscription.operators.coreos.com/cluster-logging   cluster-logging   redhat-operators   4.5
 ```
-

@@ -1,6 +1,9 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
-/usr/bin/cp -f cluster.yaml rook/cluster/examples/kubernetes/ceph/cluster.yaml
+/bin/cp -f cluster.yaml rook/cluster/examples/kubernetes/ceph/cluster.yaml
 
 kubectl apply -f rook/cluster/examples/kubernetes/ceph/cluster.yaml
 kubectl apply -f rook/cluster/examples/kubernetes/ceph/toolbox.yaml

@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 NEXUS_VOLUME_DIR="/mnt/volume/nexus"
 sudo mkdir -p ${NEXUS_VOLUME_DIR}

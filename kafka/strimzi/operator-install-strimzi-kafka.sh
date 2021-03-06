@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 STRIMZI_VERSION="0.20.1"
 STRIMZI_OPERATOR_NAMESPACE="kafka-operator"
