@@ -1,3 +1,3 @@
 #!/bin/bash
 
-find . -type f | xargs sed -i "s/\s*$//g"
+find . -type f -not -path "./contents/*" | xargs sed -i "s/\s*$//g"
