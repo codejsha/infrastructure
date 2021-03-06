@@ -1,7 +1,10 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
-# usage:
-# bash ./harbor-push-helm.sh <CHART_PATH> [TAG]
+### usage:
+### bash ./harbor-push-helm.sh <CHART_PATH> [TAG]
 
 CHART_PATH="${1}"
 TAG="${2:-latest}"

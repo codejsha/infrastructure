@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 # KAFKA_CONNECT_URL="kafka-connect1:8083"
 KAFKA_CONNECT_URL="kafka-connect.example.com"

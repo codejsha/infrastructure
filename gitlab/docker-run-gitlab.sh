@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 GITLAB_VOLUME_DIR="/mnt/volume/gitlab"
 sudo rm -rf ${GITLAB_VOLUME_DIR}

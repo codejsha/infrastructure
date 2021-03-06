@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 helm repo add elastic https://helm.elastic.co
 helm repo update
@@ -15,5 +18,6 @@ helm upgrade --install my-elasticsearch \
 
     ### rook ceph
     # --set volumeClaimTemplate.storageClassName="rook-ceph-block" \
+
     ### local path provisioner
     # --set volumeClaimTemplate.storageClassName="local-path" \

@@ -1,7 +1,10 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
-# usage:
-# bash ./harbor-push-image.sh <SOURCE_IMAGE> [TAG]
+### usage:
+### bash ./harbor-push-image.sh <SOURCE_IMAGE> [TAG]
 
 SOURCE_IMAGE="${1}"
 TAG="${2:-latest}"

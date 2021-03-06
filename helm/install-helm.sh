@@ -1,14 +1,17 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 # HELM_VERSION="3.5.1"
 # curl -LJO https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz
-# tar -xvzf helm-v${HELM_VERSION}-linux-amd64.tar.gz
+# tar -xzf helm-v${HELM_VERSION}-linux-amd64.tar.gz
 # sudo mv linux-amd64/helm /usr/local/bin/helm
 # sudo chown root:root /usr/local/bin/helm
 
 # HELM_VERSION="2.17.0"
 # curl -LJO https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz
-# tar -xvzf helm-v${HELM_VERSION}-linux-amd64.tar.gz
+# tar -xzf helm-v${HELM_VERSION}-linux-amd64.tar.gz
 # sudo mv linux-amd64/helm /usr/local/bin/helm
 # sudo chown root:root /usr/local/bin/helm
 

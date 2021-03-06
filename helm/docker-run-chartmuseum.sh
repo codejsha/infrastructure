@@ -1,8 +1,11 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 function docker_run_chartmuseum_with_local_storage {
-    CHARTMUSEUM_VOLUME_DIR="/mnt/volume/chartmuseum"
-    sudo mkdir -p ${CHARTMUSEUM_VOLUME_DIR}
+    local CHARTMUSEUM_VOLUME_DIR="/mnt/volume/chartmuseum"
+    local sudo mkdir -p ${CHARTMUSEUM_VOLUME_DIR}
 
     docker container run \
         --detach \

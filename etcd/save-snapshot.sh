@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 GET_DATE="$(date +'%Y%m%d-%H%M%S')"
 FILENAME="etcd-snapshot-${GET_DATE}"

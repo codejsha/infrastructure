@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 ######################################################################
 
@@ -26,8 +29,8 @@ function install_docker_with_yum {
 }
 
 function install_docker_specific_version_with_yum {
-    DOCKER_VERSION="19.03.13"
-    CONTAINERD_VERSION="1.3.7"
+    local DOCKER_VERSION="19.03.13"
+    local CONTAINERD_VERSION="1.3.7"
 
     sudo yum remove docker \
         docker-client \

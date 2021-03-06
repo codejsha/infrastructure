@@ -1,5 +1,7 @@
 #!/bin/bash
-set -o errexit -o errtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 USERNAME="admin"
 PASSWORD="${PASSWORD}"

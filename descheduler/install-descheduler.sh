@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 git clone https://github.com/kubernetes-sigs/descheduler.git
 # gh repo clone kubernetes-sigs/descheduler
