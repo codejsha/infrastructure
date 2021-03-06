@@ -41,6 +41,8 @@ bash ./logout-server.sh
 - [create-proj.sh](/argoproj/argocd/create-proj.sh)
 - [create-role.sh](/argoproj/argocd/create-role.sh)
 
+cf. https://argoproj.github.io/argo-cd/user-guide/projects/
+
 ## App
 
 ### yaml
