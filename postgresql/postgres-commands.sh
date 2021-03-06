@@ -88,14 +88,3 @@ PGPASSWORD="${PASSWORD}" \
 ###  Role name |                         Attributes                         | Member of
 ### -----------+------------------------------------------------------------+-----------
 ###  postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
-
-######################################################################
-
-### check connection
-
-SHOW max_connections;
-SELECT COUNT(*) FROM pg_stat_activity;
-SELECT pid, query, state FROM pg_stat_activity;
-SELECT pid, query, state FROM pg_stat_activity WHERE state LIKE 'idle';
-
-######################################################################
