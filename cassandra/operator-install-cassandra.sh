@@ -1,4 +1,8 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+# set -o xtrace
 
 function install_cassandra_with_artifacthub {
     kubectl create --filename https://operatorhub.io/install/alpha/cassandra-operator.yaml
