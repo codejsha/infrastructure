@@ -1,4 +1,8 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+# set -o xtrace
 
 ARGOCD_VERSION="v1.7.7"
 

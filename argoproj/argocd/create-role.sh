@@ -1,5 +1,8 @@
 #!/bin/bash
-# https://argoproj.github.io/argo-cd/user-guide/projects/
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+# set -o xtrace
 
 PROJECT="myproject"
 APP="myproject"
