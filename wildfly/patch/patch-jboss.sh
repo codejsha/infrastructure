@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 source ./env-base.sh
 
@@ -22,7 +25,7 @@ function apply_patch {
 }
 
 function rollback_patch {
-    PATCH_ID="${1}"
+    local PATCH_ID="${1}"
 
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \

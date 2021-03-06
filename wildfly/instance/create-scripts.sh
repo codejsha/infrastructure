@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 source ./env-base.sh
 
@@ -33,6 +36,9 @@ VAR_JBOSS_LOG_DIR="${JBOSS_LOG_DIR/${JBOSS_BASE_DIR}/${TEMP}}"
 
 cat <<EOF > ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export JAVA_HOME="${JAVA_HOME}"
@@ -51,14 +57,14 @@ PORT_OFFSET="${PORT_OFFSET}"
 
 CURRENT_USER="\$(id -un)"
 if [ "\${CURRENT_USER}" == "root" ]; then
-  echo "[ERROR] The current user is root!"
-  exit
+    echo "[ERROR] The current user is root!"
+    exit
 fi
 
 PID="\$(pgrep -xa java | grep \${INSTANCE_NAME} | awk '{print \$1}')"
 if [ -n "\${PID}" ]; then
-  echo "[ERROR] The \${INSTANCE_NAME} (pid \${PID}) is already running!"
-  exit
+    echo "[ERROR] The \${INSTANCE_NAME} (pid \${PID}) is already running!"
+    exit
 fi
 
 JAVA_OPTS="\${JAVA_OPTS} -D\${INSTANCE_NAME}"
@@ -166,6 +172,9 @@ EOF
 
 cat <<EOF > ${JBOSS_BASE_DIR}/stop-${INSTANCE_NAME}.sh
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export JAVA_HOME="${JAVA_HOME}"

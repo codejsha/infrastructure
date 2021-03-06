@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 INSTANCE_NAME="inst1"
 export JAVA_HOME="/usr/lib/jvm/java-1.8.0"
@@ -17,14 +20,14 @@ PORT_OFFSET="0"
 
 CURRENT_USER="$(id -un)"
 if [ "${CURRENT_USER}" == "root" ]; then
-  echo "[ERROR] The current user is root!"
-  exit
+    echo "[ERROR] The current user is root!"
+    exit
 fi
 
 PID="$(pgrep -xa java | grep ${INSTANCE_NAME} | awk '{print $1}')"
 if [ -n "${PID}" ]; then
-  echo "[ERROR] The ${INSTANCE_NAME} (pid ${PID}) is already running!"
-  exit
+    echo "[ERROR] The ${INSTANCE_NAME} (pid ${PID}) is already running!"
+    exit
 fi
 
 JAVA_OPTS="${JAVA_OPTS} -D${INSTANCE_NAME}"
