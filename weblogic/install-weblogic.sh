@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 ### 1036 (11119)
 # JAVA_HOME="/usr/java/java-1.7.0"
@@ -103,7 +106,7 @@ function install_weblogic_14c {
 }
 
 function install_weblogic {
-    OS_VERSION="$(grep "^VERSION=" /etc/os-release | grep -o -E "[0-9]{1,2}\.{0,1}[0-9]{0,2}")"
+    local OS_VERSION="$(grep "^VERSION=" /etc/os-release | grep -o -E "[0-9]{1,2}\.{0,1}[0-9]{0,2}")"
 
     ### 11g
     if [[ "${INSTALL_FILE}" =~ ^wls103 ]]; then

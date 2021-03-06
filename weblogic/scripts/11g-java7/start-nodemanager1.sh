@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 WL_HOME="/usr/local/weblogic/wlserver_10.3"
 DOMAIN_HOME="/usr/local/weblogic/user_projects/domains/base_domain"
@@ -6,14 +9,14 @@ LOG_DIR="${DOMAIN_HOME}/logs"
 
 CURRENT_USER="$(id -un)"
 if [ "${CURRENT_USER}" == "root" ]; then
-  echo "[ERROR] The current user is root!"
-  exit
+    echo "[ERROR] The current user is root!"
+    exit
 fi
 
 PID="$(pgrep -xa java | grep ${WL_HOME} | grep NodeManager | awk '{print $1}')"
 if [ -n "${PID}" ]; then
-  echo "[ERROR] The NodeManager (pid ${PID}) is already running!"
-  exit
+    echo "[ERROR] The NodeManager (pid ${PID}) is already running!"
+    exit
 fi
 
 JAVA_OPTIONS="${JAVA_OPTIONS} -DListenAddress=test.example.com"
@@ -27,10 +30,10 @@ JAVA_OPTIONS="${JAVA_OPTIONS} -DLogCount=1"
 export JAVA_OPTIONS
 
 if [ -f "${LOG_DIR}/nohup.NodeManager.out" ]; then
-  mv ${LOG_DIR}/nohup.NodeManager.out ${LOG_DIR}/nodemanager/nohup.NodeManager.${GET_DATE}.out
+    mv ${LOG_DIR}/nohup.NodeManager.out ${LOG_DIR}/nodemanager/nohup.NodeManager.${GET_DATE}.out
 fi
 # if [ -f "${LOG_DIR}/gc.NodeManager.log" ]; then
-#   mv ${LOG_DIR}/gc.NodeManager.log ${LOG_DIR}/nodemanager/gc.NodeManager.${GET_DATE}.log
+#     mv ${LOG_DIR}/gc.NodeManager.log ${LOG_DIR}/nodemanager/gc.NodeManager.${GET_DATE}.log
 # fi
 
 touch ${LOG_DIR}/nohup.NodeManager.out

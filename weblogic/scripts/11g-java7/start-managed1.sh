@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 SERVER_NAME="ManagedServer1"
 DOMAIN_HOME="/usr/local/weblogic/user_projects/domains/base_domain"
@@ -7,14 +10,14 @@ GET_DATE="$(date +'%Y%m%d_%H%M%S')"
 
 CURRENT_USER="$(id -un)"
 if [ "${CURRENT_USER}" == "root" ]; then
-  echo "[ERROR] The current user is root!"
-  exit
+    echo "[ERROR] The current user is root!"
+    exit
 fi
 
 PID="$(pgrep -xa java | grep ${DOMAIN_HOME} | grep ${SERVER_NAME} | awk '{print $1}')"
 if [ -n "${PID}" ]; then
-  echo "[ERROR] The ${SERVER_NAME} (pid ${PID}) is already running!"
-  exit
+    echo "[ERROR] The ${SERVER_NAME} (pid ${PID}) is already running!"
+    exit
 fi
 
 USER_MEM_ARGS="-D${SERVER_NAME}"
@@ -56,10 +59,10 @@ export JAVA_OPTIONS
 # export EXT_POST_CLASSPATH
 
 if [ -f "${LOG_DIR}/nohup.${SERVER_NAME}.out" ]; then
-  mv ${LOG_DIR}/nohup.${SERVER_NAME}.out ${LOG_DIR}/${SERVER_NAME}/nohup.${SERVER_NAME}.${GET_DATE}.out
+    mv ${LOG_DIR}/nohup.${SERVER_NAME}.out ${LOG_DIR}/${SERVER_NAME}/nohup.${SERVER_NAME}.${GET_DATE}.out
 fi
 if [ -f "${LOG_DIR}/gc.${SERVER_NAME}.log" ]; then
-  mv ${LOG_DIR}/gc.${SERVER_NAME}.log ${LOG_DIR}/${SERVER_NAME}/gc.${SERVER_NAME}.${GET_DATE}.log
+    mv ${LOG_DIR}/gc.${SERVER_NAME}.log ${LOG_DIR}/${SERVER_NAME}/gc.${SERVER_NAME}.${GET_DATE}.log
 fi
 
 touch ${LOG_DIR}/nohup.${SERVER_NAME}.out

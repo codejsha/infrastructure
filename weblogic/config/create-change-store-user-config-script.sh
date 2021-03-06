@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 source ./env-base.sh
 
@@ -44,7 +47,11 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 EOF
 

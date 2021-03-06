@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 MW_HOME="/usr/local/weblogic"
 PATCH_FILE_DIR="/mnt/share/oracle-weblogic-server/wls10.3.6"
@@ -15,7 +18,7 @@ function check_middleware_home {
 }
 
 function check_patch_file {
-    PATCH_FILE_PATH="${1}"
+    local PATCH_FILE_PATH="${1}"
 
     if [ ! -f "${PATCH_FILE_PATH}" ]; then
         echo "[ERROR] The PATCH_FILE (${PATCH_FILE_PATH}) does not exist!"
@@ -24,17 +27,17 @@ function check_patch_file {
 }
 
 function change_bsu_mem_args {
-    MEM_ARGS="${1:-"-Xms4096m -Xmx4096m"}"
+    local MEM_ARGS="${1:-"-Xms4096m -Xmx4096m"}"
     sed -i "s/MEM_ARGS=.*/MEM_ARGS=\"${MEM_ARGS}\"/g" ${MW_HOME}/utils/bsu/bsu.sh
 }
 
 function backup_cache_dir {
-    GET_DATE="$(date +'%Y%m%d_%H%M%S')"
+    local GET_DATE="$(date +'%Y%m%d_%H%M%S')"
     mv ${MW_HOME}/utils/bsu/cache_dir ${MW_HOME}/utils/bsu/cache_dir_${GET_DATE}
 }
 
 function bsu_update {
-    PATCH_FILE="${1}"
+    local PATCH_FILE="${1}"
 
     cd ${MW_HOME}/utils/bsu
     check_patch_file ${PATCH_FILE_DIR}/${PATCH_FILE}
@@ -42,17 +45,11 @@ function bsu_update {
     chmod 750 ${MW_HOME}/utils/bsu/bsu_update.sh
 
     ${MW_HOME}/utils/bsu/bsu_update.sh install
-
-    STATUS="${?}"
-    if [ "${STATUS}" -ne "0" ]; then
-        echo "[ERROR] The update (${PATCH_ID}) is not completed!"
-        exit
-    fi
 }
 
 function bsu_remove {
-    PATCH_FILE="${1}"
-    PATCH_LIST="${2}"
+    local PATCH_FILE="${1}"
+    local PATCH_LIST="${2}"
 
     cd ${MW_HOME}/utils/bsu
 
@@ -66,17 +63,11 @@ function bsu_remove {
     #     -verbose \
     #     -log=${MW_HOME}/utils/bsu/bsu-remove-${PATCH_LIST}.log \
     #     -log_priority=debug
-
-    STATUS="${?}"
-    if [ "${STATUS}" -ne "0" ]; then
-        echo "[ERROR] The rollback (${PATCH_LIST}) is not completed!"
-        exit
-    fi
 }
 
 function bsu_install {
-    PATCH_FILE="${1}"
-    PATCH_LIST="${2}"
+    local PATCH_FILE="${1}"
+    local PATCH_LIST="${2}"
 
     cd ${MW_HOME}/utils/bsu
     check_patch_file ${PATCH_FILE_DIR}/${PATCH_FILE}
@@ -92,12 +83,6 @@ function bsu_install {
     #     -verbose \
     #     -log=${MW_HOME}/utils/bsu/bsu-install-${PATCH_LIST}.log \
     #     -log_priority=debug
-
-    STATUS="${?}"
-    if [ "${STATUS}" -ne "0" ]; then
-        echo "[ERROR] The patch (${PATCH_LIST}) is not completed!"
-        exit
-    fi
 }
 
 function bsu_view_applied {

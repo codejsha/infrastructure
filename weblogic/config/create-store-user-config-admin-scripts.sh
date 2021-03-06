@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 source ./env-base.sh
 
@@ -45,7 +48,11 @@ EOF
 if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
 cat <<EOF > ${DOMAIN_HOME}/scripts/shutdown-${ADMIN_SERVER_NAME}.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 MW_HOME="${MW_HOME}"
 DOMAIN_NAME="${DOMAIN_NAME}"
@@ -54,6 +61,11 @@ EOF
 elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
 cat <<EOF > ${DOMAIN_HOME}/scripts/shutdown-${ADMIN_SERVER_NAME}.sh
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 ORACLE_HOME="${ORACLE_HOME}"
 DOMAIN_NAME="${DOMAIN_NAME}"

@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 source ./env-base.sh
 
@@ -27,6 +30,9 @@ FILE_NAME_SUFFIX="${FILE_NAME_SUFFIX/machine/nodemanager}"
 if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
 cat <<EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 WL_HOME="${WL_HOME}"
 DOMAIN_HOME="${DOMAIN_HOME}"
@@ -34,27 +40,30 @@ LOG_DIR="${VAR_LOG_DIR}"
 
 CURRENT_USER="\$(id -un)"
 if [ "\${CURRENT_USER}" == "root" ]; then
-  echo "[ERROR] The current user is root!"
-  exit
+    echo "[ERROR] The current user is root!"
+    exit
 fi
 
 PID="\$(pgrep -xa java | grep \${WL_HOME} | grep NodeManager | awk '{print \$1}')"
 if [ -n "\${PID}" ]; then
-  echo "[ERROR] The NodeManager (pid \${PID}) is already running!"
-  exit
+    echo "[ERROR] The NodeManager (pid \${PID}) is already running!"
+    exit
 fi
 EOF
 elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
 cat <<EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 DOMAIN_HOME="${DOMAIN_HOME}"
 LOG_DIR="${VAR_LOG_DIR}"
 
 PID="\$(pgrep -xa java | grep \${DOMAIN_HOME} | grep NodeManager | awk '{print \$1}')"
 if [ -n "\${PID}" ]; then
-  echo "[ERROR] The NodeManager (pid \${PID}) is already running!"
-  exit
+    echo "[ERROR] The NodeManager (pid \${PID}) is already running!"
+    exit
 fi
 EOF
 fi
@@ -72,10 +81,10 @@ JAVA_OPTIONS="\${JAVA_OPTIONS} -DLogCount=1"
 export JAVA_OPTIONS
 
 if [ -f "\${LOG_DIR}/nohup.NodeManager.out" ]; then
-  mv \${LOG_DIR}/nohup.NodeManager.out \${LOG_DIR}/nodemanager/nohup.NodeManager.\${GET_DATE}.out
+    mv \${LOG_DIR}/nohup.NodeManager.out \${LOG_DIR}/nodemanager/nohup.NodeManager.\${GET_DATE}.out
 fi
 # if [ -f "\${LOG_DIR}/gc.NodeManager.log" ]; then
-#   mv \${LOG_DIR}/gc.NodeManager.log \${LOG_DIR}/nodemanager/gc.NodeManager.\${GET_DATE}.log
+#     mv \${LOG_DIR}/gc.NodeManager.log \${LOG_DIR}/nodemanager/gc.NodeManager.\${GET_DATE}.log
 # fi
 
 touch \${LOG_DIR}/nohup.NodeManager.out
@@ -102,17 +111,23 @@ EOF
 if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
 cat <<EOF > ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 WL_HOME="${WL_HOME}"
 
 PID="\$(pgrep -xa java | grep \${WL_HOME} | grep NodeManager | awk '{print \$1}')"
 if [ -n "\${PID}" ]; then
-  kill -9 \${PID}
+    kill -9 \${PID}
 fi
 EOF
 elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
 cat <<EOF > ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 DOMAIN_HOME="${DOMAIN_HOME}"
 
