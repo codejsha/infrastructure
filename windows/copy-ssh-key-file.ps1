@@ -11,8 +11,8 @@ function Copy-SSHKeyFile {
     scp.exe $env:USERPROFILE\.ssh\id_rsa.pub ${DstUser}@${HostName}:${DstPath}
 }
 
-Copy-SSHKeyFile "testmacine" "root" "/root"
-Copy-SSHKeyFile "testmacine" "prouser" "/home/prouser"
+Copy-SSHKeyFile "testmachine" "root" "/root"
+Copy-SSHKeyFile "testmachine" "prouser" "/home/prouser"
 
 # Copy-SSHKeyFile "cpnode0" "confluent" "/usr/local/confluent"
 # Copy-SSHKeyFile "cpnode1" "confluent" "/usr/local/confluent"
