@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 source ./env-base-11g.sh
 source ./env-component-11g.sh
@@ -18,7 +21,11 @@ VAR_INSTANCE_HOME="${VAR_INSTANCE_HOME/${INSTANCE_NAME}/${TEMP}}"
 
 cat <<EOF > ${INSTANCE_HOME}/check-config.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 ORACLE_HOME="${ORACLE_HOME}"
 INSTANCE_NAME="${INSTANCE_NAME}"
@@ -38,7 +45,11 @@ EOF
 
 cat <<EOF > ${INSTANCE_HOME}/get-version.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 ORACLE_HOME="${ORACLE_HOME}"
 INSTANCE_NAME="${INSTANCE_NAME}"
@@ -58,7 +69,11 @@ EOF
 
 cat <<EOF > ${INSTANCE_HOME}/get-compile-settings.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 ORACLE_HOME="${ORACLE_HOME}"
 INSTANCE_NAME="${INSTANCE_NAME}"
@@ -78,7 +93,11 @@ EOF
 
 cat <<EOF > ${INSTANCE_HOME}/get-vhosts-settings.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 ORACLE_HOME="${ORACLE_HOME}"
 INSTANCE_NAME="${INSTANCE_NAME}"
@@ -98,7 +117,11 @@ EOF
 
 cat <<EOF > ${INSTANCE_HOME}/get-run-settings.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 ORACLE_HOME="${ORACLE_HOME}"
 INSTANCE_NAME="${INSTANCE_NAME}"
@@ -118,7 +141,11 @@ EOF
 
 cat <<EOF > ${INSTANCE_HOME}/get-settings.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 ORACLE_HOME="${ORACLE_HOME}"
 INSTANCE_NAME="${INSTANCE_NAME}"
@@ -139,7 +166,11 @@ EOF
 
 cat <<EOF > ${INSTANCE_HOME}/get-load-modules.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 ORACLE_HOME="${ORACLE_HOME}"
 INSTANCE_NAME="${INSTANCE_NAME}"
@@ -160,7 +191,11 @@ EOF
 
 cat <<EOF > ${INSTANCE_HOME}/get-include-files.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 ORACLE_HOME="${ORACLE_HOME}"
 INSTANCE_NAME="${INSTANCE_NAME}"

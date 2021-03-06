@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 JAVA_HOME="/usr/java/java-1.8.0"
 # JAVA_HOME="/usr/java/java-11"
@@ -37,8 +40,8 @@ function check_inventory_file {
 }
 
 function check_inventory_group {
-    ORACLE_HOME_GROUP="$(stat -c '%G' ${ORACLE_HOME})"
-    INST_GROUP="$(grep inst_group ${ORACLE_HOME}/${INVENTORY_FILE} | cut -d'=' -f 2)"
+    local ORACLE_HOME_GROUP="$(stat -c '%G' ${ORACLE_HOME})"
+    local INST_GROUP="$(grep inst_group ${ORACLE_HOME}/${INVENTORY_FILE} | cut -d'=' -f 2)"
 
     if [[ "${ORACLE_HOME_GROUP}" != "${INST_GROUP}" ]]; then
         echo "[ERROR] The group of ORACLE_HOME directory (${ORACLE_HOME_GROUP}) and the inst_group value (${INST_GROUP}) are not the same!"
@@ -47,7 +50,7 @@ function check_inventory_group {
 }
 
 function check_inventory_location {
-    INVENTORY_LOC="$(grep inventory_loc ${ORACLE_HOME}/${INVENTORY_FILE} | cut -d'=' -f 2)"
+    local INVENTORY_LOC="$(grep inventory_loc ${ORACLE_HOME}/${INVENTORY_FILE} | cut -d'=' -f 2)"
 
     if [ ! -d "${INVENTORY_LOC}" ]; then
         echo "[ERROR] The Oracle Inventory directory (${INVENTORY_LOC}) does not exist!"
@@ -56,7 +59,7 @@ function check_inventory_location {
 }
 
 function check_patch_file {
-    PATCH_FILE_PATH="${1}"
+    local PATCH_FILE_PATH="${1}"
 
     if [ ! -f "${PATCH_FILE_PATH}" ]; then
         echo "[ERROR] The PATCH_FILE (${PATCH_FILE_PATH}) does not exist!"
@@ -65,8 +68,8 @@ function check_patch_file {
 }
 
 function opatch_update {
-    PATCH_FILE="${1}"
-    PATCH_ID="${2}"
+    local PATCH_FILE="${1}"
+    local PATCH_ID="${2}"
 
     check_patch_file ${PATCH_FILE_DIR}/${PATCH_FILE}
     unzip -q -o ${PATCH_FILE_DIR}/${PATCH_FILE} -d ${ORACLE_HOME}/OPatch/patch_files
@@ -85,29 +88,17 @@ function opatch_update {
     #     -jar ${ORACLE_HOME}/OPatch/patch_files/${PATCH_ID}/opatch_generic.jar \
     #     -silent oracle_home=${ORACLE_HOME} \
     #     -invPtrLoc ${ORACLE_HOME}/${INVENTORY_FILE}
-
-    STATUS="${?}"
-    if [ "${STATUS}" -ne "0" ]; then
-        echo "[ERROR] The update (${PATCH_ID}) is not completed!"
-        exit
-    fi
 }
 
 function opatch_rollback {
-    PATCH_ID="${1}"
+    local PATCH_ID="${1}"
 
     ${ORACLE_HOME}/OPatch/opatch rollback -silent -id ${PATCH_ID}
-
-    STATUS="${?}"
-    if [ "${STATUS}" -ne "0" ]; then
-        echo "[ERROR] The rollback (${PATCH_ID}) is not completed!"
-        exit
-    fi
 }
 
 function opatch_apply {
-    PATCH_FILE="${1}"
-    PATCH_ID="${2}"
+    local PATCH_FILE="${1}"
+    local PATCH_ID="${2}"
     if [ -z "${PATCH_ID}" ]; then
         PATCH_ID_TEMP="${1/_*/}"
         PATCH_ID="${PATCH_ID_TEMP/p/}"
@@ -125,12 +116,6 @@ function opatch_apply {
         -invPtrLoc ${ORACLE_HOME}/${INVENTORY_FILE} \
         -jre ${JAVA_HOME}/jre \
         ${ORACLE_HOME}/OPatch/patch_files/${PATCH_ID}
-
-    STATUS="${?}"
-    if [ "${STATUS}" -ne "0" ]; then
-        echo "[ERROR] The patch (${PATCH_ID}) is not completed!"
-        exit
-    fi
 }
 
 function opatch_lsinventory {

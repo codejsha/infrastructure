@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 source ./env-base.sh
 source ./env-component.sh
@@ -17,15 +20,19 @@ VAR_LOG_DIR="${LOG_DIR/${DOMAIN_HOME}/${TEMP}}"
 
 cat <<EOF > ${DOMAIN_HOME}/start-${COMPONENT_NAME}.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 DOMAIN_HOME="${DOMAIN_HOME}"
 COMPONENT_NAME="${COMPONENT_NAME}"
 
 CURRENT_USER="\$(id -un)"
 if [ "\${CURRENT_USER}" == "root" ]; then
-  echo "[ERROR] The current user is root!"
-  exit
+    echo "[ERROR] The current user is root!"
+    exit
 fi
 
 export CONFIG_JVM_ARGS="\${CONFIG_JVM_ARGS} -Djava.security.egd=file:///dev/urandom"
@@ -34,7 +41,11 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/stop-${COMPONENT_NAME}.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 DOMAIN_HOME="${DOMAIN_HOME}"
 COMPONENT_NAME="${COMPONENT_NAME}"

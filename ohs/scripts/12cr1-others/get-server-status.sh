@@ -1,7 +1,11 @@
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
-# HOSTNAME_IP_ADDRESS="192.168.137.150"
+# LISTEN_ADDRESS="test.example.com"
 LISTEN_ADDRESS="127.0.0.1"
 LISTEN_PORT="80"
 

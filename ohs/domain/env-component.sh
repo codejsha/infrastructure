@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 export COMPONENT_NAME="ohs1"
 export COMPONENT_ADMIN_LISTEN_ADDRESS="127.0.0.1"

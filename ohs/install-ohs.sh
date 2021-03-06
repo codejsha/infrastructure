@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 ### 11119
 # INSTALL_FILE_DIR="/mnt/share/oracle-http-server/ohs11.1.1.9/ofm_webtier_linux_11.1.1.9.0_64_disk1_1of1"

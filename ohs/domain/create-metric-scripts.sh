@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
 source ./env-base.sh
 source ./env-component.sh
@@ -49,7 +52,11 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/get-dump-metrics-${COMPONENT_NAME}.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 ORACLE_HOME="${ORACLE_HOME}"
 DOMAIN_NAME="${DOMAIN_NAME}"
@@ -120,7 +127,11 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-plugin-${COMPONENT_NAME}.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 METRIC_TABLE_NAME="OHSWebLogic"
 
@@ -141,7 +152,11 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-process-info-${COMPONENT_NAME}.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 METRIC_TABLE_NAME="dms_cProcessInfo"
 
@@ -162,7 +177,11 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-module-${COMPONENT_NAME}.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 METRIC_TABLE_NAME="ohs_module"
 
@@ -183,7 +202,11 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-moduleset-${COMPONENT_NAME}.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 METRIC_TABLE_NAME="ohs_moduleSet"
 
@@ -204,7 +227,11 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-response-${COMPONENT_NAME}.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 METRIC_TABLE_NAME="ohs_responses"
 
@@ -225,7 +252,11 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-server-${COMPONENT_NAME}.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 METRIC_TABLE_NAME="ohs_server"
 
@@ -246,7 +277,11 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-vhostset-${COMPONENT_NAME}.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 METRIC_TABLE_NAME="ohs_vhostSet"
 
@@ -267,7 +302,11 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-vhost-${COMPONENT_NAME}.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 METRIC_TABLE_NAME="ohs_virtualHost"
 
@@ -288,7 +327,11 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-vhostaddr-${COMPONENT_NAME}.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 METRIC_TABLE_NAME="ohs_virtualHostAddr"
 
@@ -309,7 +352,11 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-vhostaddrs-${COMPONENT_NAME}.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 METRIC_TABLE_NAME="ohs_virtualHostAddrs"
 
@@ -330,7 +377,11 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-system-${COMPONENT_NAME}.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 METRIC_TABLE_NAME="system"
 
@@ -351,7 +402,11 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-system-host-${COMPONENT_NAME}.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 METRIC_TABLE_NAME="system_host"
 
@@ -372,7 +427,11 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-system-process-${COMPONENT_NAME}.sh
 #!/bin/bash
-export PS4="\e[33;1m+ \e[0m"; set -o xtrace
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
 
 METRIC_TABLE_NAME="system_process"
 
