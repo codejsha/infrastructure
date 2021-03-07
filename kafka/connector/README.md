@@ -21,6 +21,8 @@ curl --header "Accept:application/json" http://kafka-connect.example.com/connect
 - https://debezium.io/documentation/reference/1.4/architecture.html
 - https://debezium.io/documentation/reference/1.4/tutorial.html
 
+### Connector examples
+
 ### PostgreSQL Source Connector
 
 sample database: dvdrental (cf. [PostgreSQL README](/postgresql/README.md))
@@ -79,7 +81,7 @@ export AWS_SECRET_ACCESS_KEY=""
 s3 bucket configurations:
 
 ```json
-    "store.url": "http://test.example.com:9000",
+    "store.url": "http://minio.example.com",
     "s3.region": "us-west-1",
     "s3.bucket.name": "kafka-s3-sink-storage",
     "s3.part.size": "5242880",
