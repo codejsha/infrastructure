@@ -21,7 +21,7 @@ curl --header "Accept:application/json" http://kafka-connect.example.com/connect
 - https://debezium.io/documentation/reference/1.4/architecture.html
 - https://debezium.io/documentation/reference/1.4/tutorial.html
 
-### Connector examples
+## Connector examples
 
 ### PostgreSQL Source Connector
 
@@ -90,3 +90,18 @@ s3 bucket configurations:
 ### Datagen Connector
 
 - https://github.com/confluentinc/kafka-connect-datagen
+- https://docs.confluent.io/platform/current/ksqldb/tutorials/basics-local.html
+
+`DatagenTask.Quickstart` enum:
+
+- `clickstream_codes`
+- `clickstream`
+- `clickstream_users`
+- `orders`
+- `ratings`
+- `users`
+- `users_`
+- `pageviews`
+- `stock_trades`
+- `inventory`
+- `product`
