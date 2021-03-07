@@ -57,33 +57,6 @@ edit `confluent-license.yaml`, and apply:
 bash ./add-license.sh
 ```
 
-## kafka-connect
-
-### REST API
-
-connector plugin list:
-
-```bash
-curl --header "Accept:application/json" http://kafka-connect.example.com/connector-plugins | jq .[].class
-```
-
-connector list:
-
-```bash
-curl --header "Accept:application/json" http://kafka-connect.example.com/connectors | jq
-```
-
-### Connectors
-
-- https://www.confluent.io/hub/
-- https://github.com/confluentinc/kafka-connect-datagen
-
-connector examples:
-
-- [debezium README](/debezium/README.md)
-- AWS S3 Sink Connector
-- Datagen Connector
-
 ## Configuration parameters
 
 ### Topic
