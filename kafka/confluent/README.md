@@ -38,7 +38,7 @@ bash ./helm-install-confluent-kafka.sh
 bash ./helm-install-confluent-schema-registry.sh
 bash ./helm-install-confluent-kafka-connect.sh
 bash ./helm-install-confluent-replicator.sh
-bash ./helm-install-confluent-ksql.sh
+bash ./helm-install-confluent-ksqldb.sh
 bash ./helm-install-confluent-control-center.sh
 kubectl apply --filename control-center-ingress.yaml
 ```
@@ -47,14 +47,6 @@ kubectl apply --filename control-center-ingress.yaml
 
 ```bash
 bash ./apply-namespaced-deployment.sh
-```
-
-### Add license
-
-edit `confluent-license.yaml`, and apply:
-
-```bash
-bash ./add-license.sh
 ```
 
 ## Configuration parameters
