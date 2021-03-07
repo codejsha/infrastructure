@@ -19,9 +19,9 @@ temp.yaml
 *-temp.yaml
 *.zip
 
-/debezium/debezium/
 /kafka/cmak/cmak-*/
 /kafka/confluent/kubernetes/confluent-operator/
+/kafka/debezium/
 /kafka/strimzi/strimzi-*/
 /kubernetes/kubespray/kubespray/
 /kraken/kraken/
