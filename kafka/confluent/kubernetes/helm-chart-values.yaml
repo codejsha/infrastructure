@@ -4,8 +4,19 @@
 
 global:
   provider:
+    ### private
     name: private
     region: anyregion
+    ### aws
+    # name: aws
+    # region: us-west-2
+    ### azure
+    # name: azure
+    # region: westus
+    ### gcp
+    # name: gcp
+    # region: us-central1
+
     kubernetes:
       clusterDomain: "svc.cluster.local"
     registry:
