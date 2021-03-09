@@ -9,7 +9,7 @@
 bash ./all.sh
 ```
 
-## Traffic managemet
+## Traffic management
 
 ### Virtual services
 
