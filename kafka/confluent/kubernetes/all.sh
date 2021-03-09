@@ -3,11 +3,7 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
-if [ ! -d "confluent-operator" ]; then
-    curl -LJO https://platform-ops-bin.s3-us-west-1.amazonaws.com/operator/confluent-operator-1.7.0.tar.gz
-    mkdir confluent-operator
-    tar -xzf confluent-operator-1.7.0.tar.gz -C confluent-operator
-fi
+bash ./pre-install.sh
 
 bash ./helm-install-confluent-operator.sh
 bash ./wait-pod-ready-status.sh "app=cc-operator"
@@ -34,11 +30,11 @@ bash ./helm-install-confluent-control-center.sh
 bash ./wait-pod-ready-status.sh "type=controlcenter"
 
 ### uninstall
-# helm uninstall confluent-control-center
-# helm uninstall confluent-ksqldb
-# helm uninstall confluent-replicator
-# helm uninstall confluent-kafka-connect
-# helm uninstall confluent-schema-registry
-# helm uninstall confluent-kafka
-# helm uninstall confluent-zookeeper
-# helm uninstall confluent-operator
+# helm uninstall -n confluent-operator confluent-control-center
+# helm uninstall -n confluent-operator confluent-ksqldb
+# helm uninstall -n confluent-operator confluent-replicator
+# helm uninstall -n confluent-operator confluent-kafka-connect
+# helm uninstall -n confluent-operator confluent-schema-registry
+# helm uninstall -n confluent-operator confluent-kafka
+# helm uninstall -n confluent-operator confluent-zookeeper
+# helm uninstall -n confluent-operator confluent-operator

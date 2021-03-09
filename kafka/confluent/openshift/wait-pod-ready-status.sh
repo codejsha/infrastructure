@@ -9,8 +9,8 @@ ELAPSED_TIME="0"
 ELAPSED_MAX_TIME="600"
 
 while [ "${ELAPSED_TIME}" -lt "${ELAPSED_MAX_TIME}" ]; do
-    IS_POD_READY_ARR="$(kubectl get po -n ${NAMESPACE} -l ${LABEL} -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}')"
-    # IS_POD_READY_ARR="$(oc get po -n ${NAMESPACE} -l ${LABEL} -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}')"
+    # IS_POD_READY_ARR="$(kubectl get po -n ${NAMESPACE} -l ${LABEL} -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}')"
+    IS_POD_READY_ARR="$(oc get po -n ${NAMESPACE} -l ${LABEL} -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}')"
     ALL_POD_READY="True"
 
     if [ -z "${IS_POD_READY_ARR}" ]; then
