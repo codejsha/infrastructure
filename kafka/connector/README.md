@@ -1,4 +1,4 @@
-# Connector (Kafka Connect)
+# Kafka Connect Connectors
 
 - https://www.confluent.io/hub/
 
