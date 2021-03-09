@@ -21,6 +21,7 @@ global:
       clusterDomain: "svc.cluster.local"
     registry:
       fqdn: docker.io
+      # fqdn: registry.ocp.cluster.local:5000
       # fqdn: core.harbor.example.com
       credential:
         required: false
