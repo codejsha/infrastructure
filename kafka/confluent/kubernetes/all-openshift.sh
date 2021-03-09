@@ -3,22 +3,16 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
 
-kubectl create namespace confluent-operator
-
 if [ ! -d "confluent-operator" ]; then
     curl -LJO https://platform-ops-bin.s3-us-west-1.amazonaws.com/operator/confluent-operator-1.7.0.tar.gz
     mkdir confluent-operator
     tar -xzf confluent-operator-1.7.0.tar.gz -C confluent-operator
 fi
 
-cd ../kubernetes
-
 bash ./helm-install-confluent-operator.sh
 bash ./wait-pod-ready-status.sh "app=cc-operator"
 
-cd ../openshift
-bash ./set-security-context.sh
-cd ../kubernetes
+bash ./set-security-context-openshift.sh
 
 bash ./helm-install-confluent-zookeeper.sh
 bash ./wait-pod-ready-status.sh "type=zookeeper"
