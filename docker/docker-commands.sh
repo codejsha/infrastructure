@@ -53,6 +53,15 @@ docker load --input ${IMAGE_FILE}
 
 ### network
 
+### create network
+docker network create stream-network
+
+### connect container to network
+docker network connect stream-network kafka
+
+### disconnect container from network
+docker network disconnect stream-network kafka
+
 ### remove unused networks
 docker network prune --force
 
