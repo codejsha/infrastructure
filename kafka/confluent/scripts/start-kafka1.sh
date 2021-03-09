@@ -14,6 +14,8 @@ export LOG_DIR
 export JAVA_HOME="/usr/lib/jvm/java-1.8.0"
 # export JAVA_HOME="/usr/lib/jvm/java-11"
 
+######################################################################
+
 ### memory options
 KAFKA_HEAP_OPTS="${KAFKA_HEAP_OPTS} -Xms1G -Xmx1G"
 export KAFKA_HEAP_OPTS
@@ -46,9 +48,13 @@ export KAFKA_JMX_OPTS
 # KAFKA_LOG4J_OPTS="${KAFKA_LOG4J_OPTS}"
 # export KAFKA_LOG4J_OPTS
 
+######################################################################
+
 ### aws credentials
 # export AWS_ACCESS_KEY_ID=""
 # export AWS_SECRET_ACCESS_KEY=""
+
+######################################################################
 
 ### check current user
 CURRENT_USER="$(id -un)"

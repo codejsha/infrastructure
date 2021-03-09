@@ -1,3 +1,5 @@
+######################################################################
+
 Get-NetAdapter
 Get-NetAdapter -IncludeHidden
 Get-NetAdapter -Physical

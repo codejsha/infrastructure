@@ -17,6 +17,8 @@ export LOG_DIR
 export JAVA_HOME="/usr/lib/jvm/java-1.8.0"
 # export JAVA_HOME="/usr/lib/jvm/java-11"
 
+######################################################################
+
 ### memory options
 KAFKA_HEAP_OPTS="${KAFKA_HEAP_OPTS} -Xms512M -Xmx512M"
 export KAFKA_HEAP_OPTS
@@ -48,6 +50,8 @@ export KAFKA_JMX_OPTS
 ### log4j
 # KAFKA_LOG4J_OPTS="${KAFKA_LOG4J_OPTS}"
 # export KAFKA_LOG4J_OPTS
+
+######################################################################
 
 ### check current user
 CURRENT_USER="$(id -un)"
