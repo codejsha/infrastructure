@@ -1,3 +1,3 @@
 #!/bin/bash
 
-oc apply -n confluent-operator -f customuid-scc.yaml
+oc apply --namespace confluent-operator --filename customuid-scc.yaml

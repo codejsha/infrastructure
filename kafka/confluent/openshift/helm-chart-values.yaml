@@ -1,0 +1,411 @@
+######################################################################
+
+### Global
+
+global:
+  provider:
+    ### private
+    name: private
+    region: anyregion
+    ### aws
+    # name: aws
+    # region: us-west-2
+    ### azure
+    # name: azure
+    # region: westus
+    ### gcp
+    # name: gcp
+    # region: us-central1
+
+    kubernetes:
+      clusterDomain: "svc.cluster.local"
+    registry:
+      fqdn: docker.io
+      # fqdn: registry.ocp.cluster.local:5000
+      # fqdn: core.harbor.example.com
+      credential:
+        required: false
+        # required: true
+        # username:
+        # password:
+  storageClassName: standard
+  # storageClassName: rook-ceph-block
+  sasl:
+    plain:
+      username: test
+      password: test123
+  authorization:
+    rbac:
+      enabled: false
+    simple:
+      enabled: false
+    superUsers: []
+  dependencies:
+    mds:
+      endpoint: ""
+      publicKey: ""
+
+######################################################################
+
+### Operator
+
+operator:
+  name: cc-operator
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  affinity: {}
+  tolerations: []
+  metrics:
+    dataDog:
+      enabled: true
+      port: 8125
+    prometheus:
+      enabled: true
+      port: 7777
+
+######################################################################
+
+### Zookeeper
+
+zookeeper:
+  name: zookeeper
+  replicas: 3
+  resources:
+    requests:
+      # cpu: 500m
+      # memory: 4Gi
+      cpu: 100m
+      memory: 512Mi
+    limits: {}
+  # storageClassName: ""
+  volume:
+    data: 10Gi
+    txnlog: 10Gi
+  jvmConfig:
+    # heapSize: 4G
+    heapSize: 512M
+  configOverrides:
+    server:
+      - quorumListenOnAllIPs=true
+      - tickTime=2000
+      - syncLimit=5
+      - initLimit=10
+      - dataDir=/mnt/data/data
+      - dataLogDir=/mnt/data/txnlog
+      - autopurge.purgeInterval=1
+    jvm: []
+    log4j: []
+  podAnnotations: {}
+  affinity:
+    nodeAffinity: {}
+    podAffinity: {}
+    podAntiAffinity: {}
+
+######################################################################
+
+### Kafka
+
+kafka:
+  name: kafka
+  replicas: 3
+  resources:
+    requests:
+      # cpu: "1"
+      # memory: 4Gi
+      cpu: 200m
+      memory: 1Gi
+    limits: {}
+  # storageClassName: ""
+  volume:
+    data0: 100Gi
+  jvmConfig:
+    # heapSize: 4G
+    heapSize: 1G
+  loadBalancer:
+    enabled: false
+    domain: ""
+  tls:
+    enabled: false
+    fullchain: |-
+    privkey: |-
+    cacerts: |-
+  metricReporter:
+    enabled: true
+  configOverrides:
+    server:
+      ### Socket Server Settings
+      - listeners=INTERNAL://:9071,REPLICATION://:9072,EXTERNAL://:9092
+      - num.network.threads=4
+      - num.io.threads=8
+      - socket.send.buffer.bytes=102400
+      - socket.receive.buffer.bytes=102400
+      - socket.request.max.bytes=104857600
+
+      ### Replica Settings
+      - default.replication.factor=3
+      - min.insync.replicas=2
+      - replica.lag.time.max.ms=15000
+      - unclean.leader.election.enable=false
+
+      ### Log Basics
+      - log.dirs=/mnt/data/data0/logs
+      - num.partitions=3
+      - num.recovery.threads.per.data.dir=1
+      # - auto.create.topics.enable=false
+      - auto.create.topics.enable=true
+      - delete.topic.enable=true
+      - message.max.bytes=2097164
+      - log.cleanup.policy=delete
+
+      ### Internal Topic Settings
+      - offsets.topic.replication.factor=3
+      - offsets.topic.compression.codec=3
+      - offsets.commit.timeout.ms=15000
+      - offsets.retention.minutes=10080
+      - transaction.state.log.replication.factor=3
+      - transaction.state.log.min.isr=2
+
+      ### Log Retention Policy
+      # - log.retention.hours=168
+      # - log.segment.bytes=1073741824
+      # - log.retention.check.interval.ms=300000
+
+      ### Zookeeper
+      - zookeeper.connection.timeout.ms=18000
+      - zookeeper.session.timeout.ms=22500
+    jvm: []
+    log4j: []
+  podAnnotations: {}
+  affinity:
+    nodeAffinity: {}
+    podAffinity: {}
+    podAntiAffinity: {}
+
+######################################################################
+
+### Kafka Connect
+
+connect:
+  name: connectors
+  # image:
+  #   repository: confluentinc/cp-server-connect-operator
+  #   repository: confluentinc/cp-custom-kafka-connect-operator
+  replicas: 2
+  resources:
+    requests:
+      # cpu: 200m
+      # memory: 4Gi
+      cpu: 100m
+      memory: 512Mi
+    limits: {}
+  jvmConfig:
+    # heapSize: 4G
+    heapSize: 512M
+  tls:
+    enabled: false
+    authentication:
+      type: ""
+    fullchain: |-
+    privkey: |-
+    cacerts: |-
+  loadBalancer:
+    enabled: false
+    domain: ""
+  dependencies:
+    kafka:
+      bootstrapEndpoint: kafka:9071
+      brokerCount: 3
+    schemaRegistry:
+      enabled: true
+      url: http://schemaregistry:8081
+  schemas:
+    enabled: true
+  podAnnotations: {}
+  affinity:
+    nodeAffinity: {}
+    podAffinity: {}
+    podAntiAffinity: {}
+
+######################################################################
+
+### Replicator
+
+replicator:
+  name: replicator
+  replicas: 2
+  resources:
+    requests:
+      # cpu: 200m
+      # memory: 4Gi
+      cpu: 100m
+      memory: 512Mi
+    limits: {}
+  jvmConfig:
+    # heapSize: 4G
+    heapSize: 512M
+  tls:
+    enabled: false
+    authentication:
+      type: ""
+    fullchain: |-
+    privkey: |-
+    cacerts: |-
+  loadBalancer:
+    enabled: false
+    domain: ""
+  dependencies:
+    kafka:
+      brokerCount: 3
+      bootstrapEndpoint: kafka:9071
+  schemas:
+    enabled: true
+  podAnnotations: {}
+  affinity:
+    nodeAffinity: {}
+    podAffinity: {}
+    podAntiAffinity: {}
+
+######################################################################
+
+### Schema Registry
+
+schemaregistry:
+  name: schemaregistry
+  resources:
+    requests:
+      # cpu: 250m
+      # memory: 4Gi
+      cpu: 100m
+      memory: 512Mi
+    limits: {}
+  jvmConfig:
+    # heapSize: 4G
+    heapSize: 512M
+  tls:
+    enabled: false
+    authentication:
+      type: ""
+    fullchain: |-
+    privkey: |-
+    cacerts: |-
+  loadBalancer:
+    enabled: false
+    domain: ""
+  dependencies:
+    kafka:
+      brokerCount: 3
+      bootstrapEndpoint: kafka:9071
+  podAnnotations: {}
+  affinity:
+    nodeAffinity: {}
+    podAffinity: {}
+    podAntiAffinity: {}
+
+######################################################################
+
+### ksqlDB
+
+ksql:
+  name: ksql
+  replicas: 2
+  resources:
+    requests:
+      # cpu: 200m
+      # memory: 4Gi
+      cpu: 100m
+      memory: 512Mi
+    limits: {}
+  jvmConfig:
+    # heapSize: 4G
+    heapSize: 512M
+  # storageClassName: ""
+  volume:
+    data: 10Gi
+  tls:
+    enabled: false
+    authentication:
+      type: ""
+    fullchain: |-
+    privkey: |-
+    cacerts: |-
+  loadBalancer:
+    enabled: false
+    domain: ""
+  dependencies:
+    kafka:
+      brokerCount: 3
+      bootstrapEndpoint: kafka:9071
+      brokerEndpoints: kafka-0.kafka:9071,kafka-1.kafka:9071,kafka-2.kafka:9071
+    schemaRegistry:
+      enabled: true
+      tls:
+        enabled: false
+        authentication:
+          type: ""
+      url: http://schemaregistry:8081
+  podAnnotations: {}
+  affinity:
+    nodeAffinity: {}
+    podAffinity: {}
+    podAntiAffinity: {}
+
+######################################################################
+
+### Control Center (C3)
+
+controlcenter:
+  name: controlcenter
+  resources:
+    requests:
+      # cpu: 500m
+      # memory: 4Gi
+      cpu: 100m
+      memory: 512Mi
+    limits: {}
+  jvmConfig:
+    # heapSize: 4G
+    heapSize: 512M
+  # storageClassName: ""
+  volume:
+    data0: 10Gi
+  dependencies:
+    c3KafkaCluster:
+      brokerCount: 3
+      bootstrapEndpoint: kafka:9071
+      zookeeper:
+        endpoint: zookeeper:2181
+    connectCluster:
+      enabled: true
+      url: http://connectors:8083
+    ksql:
+      enabled: true
+      url: http://ksql:9088
+    schemaRegistry:
+      enabled: true
+      url: http://schemaregistry:8081
+  loadBalancer:
+    enabled: false
+    domain: ""
+  tls:
+    enabled: false
+    authentication:
+      type: ""
+    fullchain: |-
+    privkey: |-
+    cacerts: |-
+  auth:
+    basic:
+      enabled: true
+      property:
+        admin: Developer1,Administrators
+        disallowed: no_access
+  podAnnotations: {}
+  affinity:
+    nodeAffinity: {}
+    podAffinity: {}
+    podAntiAffinity: {}
