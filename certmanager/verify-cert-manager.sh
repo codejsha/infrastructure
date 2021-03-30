@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 cat <<EOF > ./test-resources.yaml
 apiVersion: v1
@@ -30,10 +30,10 @@ spec:
     name: test-selfsigned
 EOF
 
-kubectl apply -f test-resources.yaml
+kubectl apply --filename test-resources.yaml
 
-kubectl describe certificate -n cert-manager-test
+kubectl describe certificate --namespace cert-manager-test
 ### Result:
 ### Normal  CertIssued  4s    cert-manager  Certificate issued successfully
 
-kubectl delete -f test-resources.yaml
+kubectl delete --filename test-resources.yaml
