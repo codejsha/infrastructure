@@ -55,6 +55,7 @@ alias kns-rook-ceph="kubectl ns rook-ceph"
 alias kns-tomcat="kubectl ns tomcat-system"
 alias kns-tekton="kubectl ns tekton-pipelines"
 alias kns-vault="kubectl ns vault-system"
+alias kns-velero="kubectl ns velero"
 
 alias krew="kubectl krew"
 alias krew-index-list="kubectl krew index list"

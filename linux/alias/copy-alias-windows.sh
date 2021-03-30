@@ -5,7 +5,7 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 
 rm -rf ~/.aliases
 
-/bin/cp -f .bashrc_ubuntu ~/.bashrc
+/bin/cp -f .bashrc_windows ~/.bashrc
 /bin/cp -rf aliases ~/.aliases
 
 curl -o ~/.aliases/kubectl_aliases -LJO https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases

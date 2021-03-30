@@ -2,8 +2,8 @@
 
 eval "$(gh completion --shell bash)"
 
-function gh() { echo "+ gh ${@}">&2; command gh ${@}; }
-function git() { echo "+ git ${@}">&2; command git ${@}; }
+# function gh() { echo "+ gh ${@}">&2; command gh ${@}; }
+# function git() { echo "+ git ${@}">&2; command git ${@}; }
 
 alias gh-auth-login="gh auth login"
 alias gh-auth-logout="gh auth logout"

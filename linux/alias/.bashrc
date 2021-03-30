@@ -80,6 +80,7 @@ function readlinkpwd() { echo "+ readlink --canonicalize .">&2; command readlink
 [ -f ~/.aliases/systemctl_aliases ] && source ~/.aliases/systemctl_aliases
 [ -f ~/.aliases/tekton_aliases ] && source ~/.aliases/tekton_aliases
 [ -f ~/.aliases/vault_aliases ] && source ~/.aliases/vault_aliases
+[ -f ~/.aliases/velero_aliases ] && source ~/.aliases/velero_aliases
 
 # neovim
 alias vi="nvim"

@@ -1,4 +1,4 @@
-# confluent platform
+# confluent
 
 export CONFLUENT_HOME=/usr/local/confluent
 export PATH="${PATH}:${CONFLUENT_HOME}/bin"
