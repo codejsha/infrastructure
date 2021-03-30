@@ -1,1 +1,1 @@
-choco install argocd
+choco install --confirm argocd
