@@ -1,1 +1,1 @@
-choco install jenkins
+choco install --confirm jenkins
