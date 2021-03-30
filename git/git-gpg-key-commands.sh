@@ -1,3 +1,5 @@
+######################################################################
+
 gpg --full-generate-key
 ### Kind of key:    RSA and RSA (default)
 ### Keysize:        4096
@@ -7,20 +9,22 @@ gpg --full-generate-key
 ### Okay
 
 gpg --list-secret-keys --keyid-format LONG
-gpg --armor --export "ABCDEFGHIJKLMNOP"
+gpg --armor --export "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 ######################################################################
 
 git config --global user.name "USER_NAME"
 git config --global user.email "USER_EMAIL"
-git config --global user.signingkey "ABCDEFGHIJKLMNOP"
+git config --global user.signingkey "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 git config --global commit.gpgsign true
-git config --global gpg.program $(which gpg)
+git config --global gpg.program gpg
+# git config --global gpg.program $(which gpg)
 
 ######################################################################
 
 git config user.name "USER_NAME"
 git config user.email "USER_EMAIL"
-git config user.signingkey "ABCDEFGHIJKLMNOP"
+git config user.signingkey "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 git config commit.gpgsign true
-git config gpg.program $(which gpg)
+git config gpg.program gpg
+# git config gpg.program $(which gpg)

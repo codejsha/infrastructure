@@ -1,0 +1,7 @@
+[user]
+	name =
+	email =
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
