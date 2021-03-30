@@ -1,1 +1,1 @@
-choco install kind
+choco install --confirm kind

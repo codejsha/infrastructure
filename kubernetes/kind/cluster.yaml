@@ -20,4 +20,24 @@ nodes:
         hostPort: 443
         protocol: TCP
   - role: worker
+    # kubeadmConfigPatches:
+    #   - |
+    #     kind: JoinConfiguration
+    #     nodeRegistration:
+    #       kubeletExtraArgs:
+    #         system-reserved: memory=8Gi
   - role: worker
+    # kubeadmConfigPatches:
+    #   - |
+    #     kind: JoinConfiguration
+    #     nodeRegistration:
+    #       kubeletExtraArgs:
+    #         system-reserved: memory=8Gi
+  - role: worker
+    # kubeadmConfigPatches:
+    #   - |
+    #     kind: JoinConfiguration
+    #     nodeRegistration:
+    #       kubeletExtraArgs:
+    #         system-reserved: memory=8Gi
+
