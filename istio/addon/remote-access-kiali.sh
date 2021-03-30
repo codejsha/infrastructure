@@ -1,11 +1,11 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 INGRESS_DOMAIN="${INGRESS_DOMAIN:-"example.com"}"
 
-cat <<EOF | kubectl apply -f -
+cat <<EOF | kubectl apply --filename -
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:

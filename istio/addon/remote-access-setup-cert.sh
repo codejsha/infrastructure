@@ -1,14 +1,14 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 INGRESS_DOMAIN="example.com"
-# INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+# INGRESS_HOST=$(kubectl get service istio-ingressgateway --namespace istio-system --output jsonpath='{.status.loadBalancer.ingress[0].ip}')
 # INGRESS_DOMAIN=${INGRESS_HOST}.nip.io
 export INGRESS_DOMAIN
 
-CERT_DIR=/tmp/certs
+CERT_DIR="./certs"
 mkdir -p ${CERT_DIR}
 
 openssl req \
@@ -34,5 +34,6 @@ openssl x509 -req \
     -in ${CERT_DIR}/cert.csr \
     -out ${CERT_DIR}/tls.crt
 kubectl create secret tls telemetry-gw-cert \
+    --namespace istio-system \
     --key=${CERT_DIR}/tls.key \
-    --cert=${CERT_DIR}/tls.crt -n istio-system
+    --cert=${CERT_DIR}/tls.crt

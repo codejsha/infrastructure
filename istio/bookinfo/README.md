@@ -3,10 +3,13 @@
 - https://github.com/istio/istio/tree/master/samples/bookinfo
 - https://istio.io/latest/docs/examples/bookinfo/
 
-## Configuration
+## Deploy
 
 ```bash
 bash ./all.sh
+
+### kustomize
+bash ./kustomize-install-bookinfo.sh
 ```
 
 ## Traffic management

@@ -1,15 +1,15 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 INGRESS_DOMAIN="${INGRESS_DOMAIN:-"example.com"}"
 
-cat <<EOF | kubectl apply -f -
+cat <<EOF | kubectl apply --filename -
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: tracing-gateway
+  name: grafana-gateway
   namespace: istio-system
 spec:
   selector:
@@ -17,38 +17,38 @@ spec:
   servers:
   - port:
       number: 443
-      name: https-tracing
+      name: https-grafana
       protocol: HTTPS
     tls:
       mode: SIMPLE
       credentialName: telemetry-gw-cert
     hosts:
-    - "tracing.${INGRESS_DOMAIN}"
+    - "grafana.${INGRESS_DOMAIN}"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: tracing-vs
+  name: grafana-vs
   namespace: istio-system
 spec:
   hosts:
-  - "tracing.${INGRESS_DOMAIN}"
+  - "grafana.${INGRESS_DOMAIN}"
   gateways:
-  - tracing-gateway
+  - grafana-gateway
   http:
   - route:
     - destination:
-        host: tracing
+        host: grafana
         port:
-          number: 80
+          number: 3000
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: tracing
+  name: grafana
   namespace: istio-system
 spec:
-  host: tracing
+  host: grafana
   trafficPolicy:
     tls:
       mode: DISABLE

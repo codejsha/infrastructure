@@ -1,16 +1,9 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
-
-curl -sL https://istio.io/downloadIstioctl | sh -
-# curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.1 TARGET_ARCH=x86_64 sh -
-
-export PATH=$PATH:$HOME/.istioctl/bin
-istioctl version
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 istioctl operator init
-kubectl create namespace istio-system
 
 ### profile list
 istioctl profile list

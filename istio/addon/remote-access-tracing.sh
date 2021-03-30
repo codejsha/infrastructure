@@ -1,15 +1,15 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 INGRESS_DOMAIN="${INGRESS_DOMAIN:-"example.com"}"
 
-cat <<EOF | kubectl apply -f -
+cat <<EOF | kubectl apply --filename -
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: prometheus-gateway
+  name: tracing-gateway
   namespace: istio-system
 spec:
   selector:
@@ -17,38 +17,38 @@ spec:
   servers:
   - port:
       number: 443
-      name: https-prom
+      name: https-tracing
       protocol: HTTPS
     tls:
       mode: SIMPLE
       credentialName: telemetry-gw-cert
     hosts:
-    - "prometheus.${INGRESS_DOMAIN}"
+    - "tracing.${INGRESS_DOMAIN}"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: prometheus-vs
+  name: tracing-vs
   namespace: istio-system
 spec:
   hosts:
-  - "prometheus.${INGRESS_DOMAIN}"
+  - "tracing.${INGRESS_DOMAIN}"
   gateways:
-  - prometheus-gateway
+  - tracing-gateway
   http:
   - route:
     - destination:
-        host: prometheus
+        host: tracing
         port:
-          number: 9090
+          number: 80
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: prometheus
+  name: tracing
   namespace: istio-system
 spec:
-  host: prometheus
+  host: tracing
   trafficPolicy:
     tls:
       mode: DISABLE

@@ -1,15 +1,15 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 INGRESS_DOMAIN="${INGRESS_DOMAIN:-"example.com"}"
 
-cat <<EOF | kubectl apply -f -
+cat <<EOF | kubectl apply --filename -
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: grafana-gateway
+  name: prometheus-gateway
   namespace: istio-system
 spec:
   selector:
@@ -17,38 +17,38 @@ spec:
   servers:
   - port:
       number: 443
-      name: https-grafana
+      name: https-prom
       protocol: HTTPS
     tls:
       mode: SIMPLE
       credentialName: telemetry-gw-cert
     hosts:
-    - "grafana.${INGRESS_DOMAIN}"
+    - "prometheus.${INGRESS_DOMAIN}"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: grafana-vs
+  name: prometheus-vs
   namespace: istio-system
 spec:
   hosts:
-  - "grafana.${INGRESS_DOMAIN}"
+  - "prometheus.${INGRESS_DOMAIN}"
   gateways:
-  - grafana-gateway
+  - prometheus-gateway
   http:
   - route:
     - destination:
-        host: grafana
+        host: prometheus
         port:
-          number: 3000
+          number: 9090
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: grafana
+  name: prometheus
   namespace: istio-system
 spec:
-  host: grafana
+  host: prometheus
   trafficPolicy:
     tls:
       mode: DISABLE
