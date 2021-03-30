@@ -1,1 +1,1 @@
-choco install gh
+choco install --confirm gh

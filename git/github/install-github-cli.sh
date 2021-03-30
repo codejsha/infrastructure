@@ -1,7 +1,9 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
+
+######################################################################
 
 function install_github_cli_with_dnf {
     sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo

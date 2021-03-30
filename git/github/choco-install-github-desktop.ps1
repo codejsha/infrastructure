@@ -1,1 +1,1 @@
-choco install github-desktop
+choco install --confirm github-desktop
