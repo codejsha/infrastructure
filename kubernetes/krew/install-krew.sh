@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 ### requirement:
 ### git
@@ -15,5 +15,5 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"
 )
 
 ### add path
-# PATH="${KREW_ROOT:-"$HOME/.krew"}/bin:$PATH"
+# PATH="${KREW_ROOT:-"${HOME}/.krew"}/bin:${PATH}"
 # export PATH
