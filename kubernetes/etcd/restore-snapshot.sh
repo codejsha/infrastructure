@@ -1,9 +1,9 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-KEYWORD="${1}"
+FILENAME="${1}"
 
 export ETCDCTL_API=3
 /usr/local/bin/etcdctl \
@@ -11,5 +11,4 @@ export ETCDCTL_API=3
     --cacert=/etc/ssl/etcd/ssl/ca.pem \
     --cert=/etc/ssl/etcd/ssl/member-controlplane1.pem \
     --key=/etc/ssl/etcd/ssl/member-controlplane1-key.pem \
-    get / --prefix --keys-only \
-    | grep ${KEYWORD}
+    snapshot restore ${FILENAME}
