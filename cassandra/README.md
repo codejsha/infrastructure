@@ -1,14 +1,12 @@
 # Cassandra
 
-## Install
-
-### Helm chart
+## Kubernetes (Helm chart)
 
 ```bash
 bash ./helm-install-cassandra.sh
 ```
 
-### Operator
+## Kubernetes (Operator)
 
 - https://operatorhub.io/operator/cassandra-operator
 - https://github.com/instaclustr/cassandra-operator
