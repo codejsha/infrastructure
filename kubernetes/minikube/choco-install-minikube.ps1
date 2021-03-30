@@ -1,1 +1,1 @@
-choco install minikube
+choco install --confirm minikube

@@ -1,9 +1,9 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-minikube addons enable ambassador
+# minikube addons enable ambassador
 # minikube addons enable csi-hostpath-driver
 minikube addons enable metrics-server
 minikube addons enable dashboard
@@ -22,7 +22,7 @@ minikube addons enable logviewer
 minikube addons enable metallb
 # minikube addons enable nvidia-driver-installer
 # minikube addons enable nvidia-gpu-device-plugin
-minikube addons enable olm
+# minikube addons enable olm
 # minikube addons enable pod-security-policy
 minikube addons enable registry
 minikube addons enable registry-aliases

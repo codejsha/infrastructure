@@ -4,6 +4,9 @@ set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 minikube start \
+    --driver podman \
+    --container-runtime cri-o \
+    --cri-socket /var/run/crio/crio.sock \
     --nodes 4 \
     --addons metallb \
     --addons ingress \
