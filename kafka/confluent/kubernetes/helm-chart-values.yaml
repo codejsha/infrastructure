@@ -62,10 +62,10 @@ operator:
   tolerations: []
   metrics:
     dataDog:
-      enabled: false
+      enabled: true
       port: 8125
     prometheus:
-      enabled: false
+      enabled: true
       port: 7777
 
 ######################################################################

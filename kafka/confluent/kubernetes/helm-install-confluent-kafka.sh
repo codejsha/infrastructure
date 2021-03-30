@@ -12,5 +12,5 @@ helm upgrade --install ${RELEASE_NAME} \
     --namespace ${NAMESPACE} \
     --values helm-chart-values.yaml \
     --values helm-chart-values-license.yaml \
-    --set kafka.enabled=true \
+    --set kafka.enabled="true" \
     ./confluent-operator/helm/confluent-operator

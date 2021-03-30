@@ -11,5 +11,5 @@ helm upgrade ${RELEASE_NAME} \
     --kube-context ${KUBE_CONTEXT} \
     --namespace ${NAMESPACE} \
     --values ../helm-chart-values.yaml \
-    --set operator.enabled=true \
+    --set operator.enabled="true" \
     ./confluent-operator/helm/confluent-operator

@@ -11,6 +11,5 @@ helm upgrade --install ${RELEASE_NAME} \
     --create-namespace \
     --namespace ${NAMESPACE} \
     --values helm-chart-values.yaml \
-    --values helm-chart-values-license.yaml \
-    --set zookeeper.enabled=true \
+    --set zookeeper.enabled="true" \
     ./confluent-operator/helm/confluent-operator

@@ -11,6 +11,5 @@ helm upgrade --install ${RELEASE_NAME} \
     --create-namespace \
     --namespace ${NAMESPACE} \
     --values helm-chart-values.yaml \
-    --values helm-chart-values-license.yaml \
-    --set replicator.enabled=true \
+    --set replicator.enabled="true" \
     ./confluent-operator/helm/confluent-operator

@@ -12,6 +12,6 @@ helm upgrade --install ${RELEASE_NAME} \
     --namespace ${NAMESPACE} \
     --values helm-chart-values.yaml \
     --values helm-chart-values-license.yaml \
-    --set controlcenter.enabled=true \
+    --set controlcenter.enabled="true" \
     ./confluent-operator/helm/confluent-operator
 

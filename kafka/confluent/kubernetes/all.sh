@@ -1,9 +1,9 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-bash ./pre-install.sh
+bash ./download-install-file.sh
 
 bash ./helm-install-confluent-operator.sh
 bash ./wait-pod-ready-status.sh "app=cc-operator"
@@ -30,11 +30,11 @@ bash ./helm-install-confluent-control-center.sh
 bash ./wait-pod-ready-status.sh "type=controlcenter"
 
 ### uninstall
-# helm uninstall -n confluent-operator confluent-control-center
-# helm uninstall -n confluent-operator confluent-ksqldb
-# helm uninstall -n confluent-operator confluent-replicator
-# helm uninstall -n confluent-operator confluent-kafka-connect
-# helm uninstall -n confluent-operator confluent-schema-registry
-# helm uninstall -n confluent-operator confluent-kafka
-# helm uninstall -n confluent-operator confluent-zookeeper
-# helm uninstall -n confluent-operator confluent-operator
+# helm uninstall --namespace confluent-operator confluent-control-center
+# helm uninstall --namespace confluent-operator confluent-ksqldb
+# helm uninstall --namespace confluent-operator confluent-replicator
+# helm uninstall --namespace confluent-operator confluent-kafka-connect
+# helm uninstall --namespace confluent-operator confluent-schema-registry
+# helm uninstall --namespace confluent-operator confluent-kafka
+# helm uninstall --namespace confluent-operator confluent-zookeeper
+# helm uninstall --namespace confluent-operator confluent-operator
