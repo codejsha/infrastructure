@@ -1,14 +1,22 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 REPO_VOLUME_DIR="/mnt/volume/example-repo"
 # sudo mkdir -p ${REPO_VOLUME_DIR}
 
-docker container run \
-    --detach \
-    --name example-repo-server \
-    --publish 8888:8888 \
-    --mount type=bind,src=${REPO_VOLUME_DIR},dst=/var/www/html/example-repo \
-    example-repo-server
+######################################################################
+
+function docker_run_example_repo {
+    docker container run \
+        --detach \
+        --name example-repo \
+        --publish 8888:8888 \
+        --mount type="bind",src="${REPO_VOLUME_DIR}",dst="/var/www/html/example-repo" \
+        example-repo
+}
+
+######################################################################
+
+docker_run_example_repo

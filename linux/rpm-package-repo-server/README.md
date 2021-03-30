@@ -32,7 +32,7 @@ sudo createrepo --update ${PACKAGE_REPO_VOLUME_DIR}
 ## Build image
 
 ```bash
-docker image build --tag example-repo-server .
+docker image build --tag example-repo .
 ```
 
 ## Run
@@ -40,10 +40,10 @@ docker image build --tag example-repo-server .
 ```bash
 docker container run \
     --detach \
-    --name example-repo-server \
+    --name example-repo \
     --publish 8888:8888 \
-    --mount type=bind,src=/mnt/volume/example-repo,dst=/var/www/html/example-repo \
-    example-repo-server
+    --mount type="bind",src="/mnt/volume/example-repo",dst="/var/www/html/example-repo" \
+    example-repo
 ```
 
 ## Test
