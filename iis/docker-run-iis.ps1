@@ -1,14 +1,19 @@
-$MountSrc = "F:\share"
-$MountDst = "$env:SystemDrive\mnt\share"
-$IISPublishPort = "8080"
-$SiteListenPort = "80"
+$IISVolumeDir = "$env:USERPROFILE\volume\iis"
+New-Item -Path $IISVolumeDir -ItemType Directory -Force
 
-### run iis container
-docker container run `
+######################################################################
+
+function New-DockerRunIIS {
+    docker container run `
     --detach `
     --name winiis `
-    --publish $IISPublishPort\:$SiteListenPort `
-    --mount type=bind,src=$MountSrc,dst=$MountDst `
+    --publish 8080:80 `
+    --mount type="bind",src="$IISVolumeDir/config",dst="/etc/gitlab" `
+    --mount type="bind",src="F:\share",dst="$env:SystemDrive\share" `
+    --mount type="bind",src="F:\storage",dst="$env:SystemDrive\storage" `
     mcr.microsoft.com/windows/servercore/iis:windowsservercore-ltsc2016
+}
 
-docker exec -it winiis powershell
+######################################################################
+
+New-DockerRunIIS
