@@ -12,7 +12,7 @@
 bash ./operator-install-elastic-operator.sh
 bash ./operator-install-elasticsearch.sh
 bash ./operator-install-kibana.sh
-kubectl apply -n elastic-system -f kibana-ingress.yaml
+kubectl apply --namespace elastic-system --filename kibana-ingress.yaml
 ```
 
 ## Fluentd

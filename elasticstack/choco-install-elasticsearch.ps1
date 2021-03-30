@@ -1,1 +1,1 @@
-choco install elasticsearch
+choco install --confirm elasticsearch
