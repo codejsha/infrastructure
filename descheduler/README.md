@@ -2,9 +2,7 @@
 
 - https://github.com/kubernetes-sigs/descheduler
 
-## Install
-
-### Repository
+## Kubernetes (from repository)
 
 ```bash
 bash ./install-descheduler.sh
@@ -12,7 +10,7 @@ bash ./install-descheduler.sh
 
 ConfigMap: `descheduler-policy-configmap.yaml`
 
-### Helm
+## Kubernetes (Helm chart)
 
 ```bash
 bash ./helm-install-descheduler.sh
@@ -22,7 +20,7 @@ ConfigMap: `${RELEASE_NAME}-descheduler-helm-chart.yaml`
 
 cf. nameOverride, fullnameOverride
 
-### Kustomize
+## Kubernetes (Operator)
 
 ```bash
 bash ./kustomize-install-descheduler.sh
