@@ -1,9 +1,20 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 ######################################################################
+
+function install_docker_with_dnf {
+    sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+    sudo dnf install -y docker-ce docker-ce-cli containerd.io
+
+    sudo usermod -a -G docker ${USER}
+    sudo systemctl enable docker
+    sudo systemctl start docker
+
+    exit
+}
 
 function install_docker_with_yum {
     sudo yum remove -y \
@@ -59,18 +70,6 @@ function install_docker_specific_version_with_yum {
     exit
 }
 
-function install_docker_with_dnf {
-    sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
-    sudo dnf install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.10-3.2.el7.x86_64.rpm
-    sudo dnf install -y docker-ce
-
-    sudo usermod -a -G docker ${USER}
-    sudo systemctl enable --now docker
-    sudo systemctl status docker
-
-    exit
-}
-
 function install_docker_with_apt {
     curl -fsSL https://get.docker.com | sudo sh
 
@@ -81,6 +80,7 @@ function install_docker_with_apt {
 
 ######################################################################
 
-install_docker_with_yum
 # install_docker_with_dnf
+install_docker_with_yum
+# install_docker_specific_version_with_yum
 # install_docker_with_apt

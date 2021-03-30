@@ -15,8 +15,8 @@ bash ./install-docker.sh
 - [FTP Server README](/linux/ftp-server/README.md)
 - [RPM Package Repository Server README](/linux/rpm-package-repo-server/README.md)
 - [Tomcat README](/tomcat/README.md)
-- [Confluent Kafka README](/kafka/confluent/README.md)
-- [Kustomize README](/Kustomize/README.md)
+- [CMAK - Kafka README](/kafka/README.md)
+- [Kafka Connect - Confluent Platform README](/kafka/confluent/README.md)
 
 ## Daemon
 
@@ -35,7 +35,7 @@ bash ./override-docker-service.sh
 
 `${HOME}/.docker/config.json`: [config.json](/docker/config.json)
 
-## Docker compose
+## Docker Compose
 
 - https://github.com/docker/compose
 
@@ -45,7 +45,7 @@ bash ./install-docker-compose.sh
 
 ## Docker Registry
 
-### Container
+### Docker (container)
 
 - https://docs.docker.com/registry/deploying/
 
@@ -53,7 +53,7 @@ bash ./install-docker-compose.sh
 bash ./docker-run-docker-registry.sh
 ```
 
-### Helm chart
+### Kubernetes (Helm chart)
 
 ⚠️ Deprecated chart
 

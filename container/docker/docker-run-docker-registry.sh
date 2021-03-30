@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 USERNAME="admin"
 PASSWORD="${PASSWORD}"
@@ -17,8 +17,8 @@ docker container run \
     --restart unless-stopped \
     --name docker-registry \
     --publish 5000:5000 \
-    --mount type=bind,src=${REGISTRY_VOLUME_DIR},dst=/var/lib/registry \
-    --mount type=bind,src=${REGISTRY_VOLUME_DIR}/htpasswd,dst=/auth/htpasswd \
+    --mount type="bind",src="${REGISTRY_VOLUME_DIR}",dst="/var/lib/registry" \
+    --mount type="bind",src="${REGISTRY_VOLUME_DIR}/htpasswd",dst="/auth/htpasswd" \
     --env REGISTRY_AUTH="htpasswd" \
     --env REGISTRY_AUTH_HTPASSWD_REALM="localhost" \
     --env REGISTRY_AUTH_HTPASSWD_PATH="/auth/htpasswd" \
