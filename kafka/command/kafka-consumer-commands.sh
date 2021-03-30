@@ -18,7 +18,7 @@
 
 
 ######################################################################
-### confluent kafka
+### confluent platform
 ######################################################################
 
 ### console
@@ -45,31 +45,31 @@
 
 ### console
 ./kafka-avro-console-consumer \
-    --bootstrap-server localhost:9092 \
+    --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
     --property print.key=true \
     --key-deserializer=org.apache.kafka.common.serialization.StringDeserializer \
     --topic my-topic
 
 ### from beginning
 ./kafka-avro-console-consumer \
-    --bootstrap-server localhost:9092 \
+    --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
     --property print.key=true \
     --key-deserializer=org.apache.kafka.common.serialization.StringDeserializer \
     --topic my-topic \
     --from-beginning
 
 ### schema
-/app/confluent/bin/kafka-avro-console-consumer \
+./kafka-avro-console-consumer \
     --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
     --property print.key=true \
-    --property schema.registry.url=http://schema-registry1:8081 \
+    --property schema.registry.url=http://schema-registry1:8081,http://schema-registry2:8081 \
     --topic my-topic
 
 ### max message
-/app/confluent/bin/kafka-avro-console-consumer \
+./kafka-avro-console-consumer \
     --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
     --property print.key=true \
-    --property schema.registry.url=http://schema-registry1:8081 \
+    --property schema.registry.url=http://schema-registry1:8081,http://schema-registry2:8081 \
     --topic my-topic \
     --max-messages 1
 

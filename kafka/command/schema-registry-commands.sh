@@ -1,6 +1,6 @@
 ######################################################################
 
-### schemas
+### schema
 
 curl -s -H "Accept:application/json" -X GET http://schema-registry1:8081/schemas/types | jq
 ### [
@@ -11,7 +11,7 @@ curl -s -H "Accept:application/json" -X GET http://schema-registry1:8081/schemas
 
 ######################################################################
 
-### subjects
+### subject
 
 curl -s -H "Accept:application/json" -X GET http://schema-registry1:8081/subjects | jq
 
