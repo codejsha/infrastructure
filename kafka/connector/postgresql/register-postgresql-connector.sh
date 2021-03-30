@@ -1,10 +1,11 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-# KAFKA_CONNECT_URL="kafka-connect1:8083"
-KAFKA_CONNECT_URL="kafka-connect.example.com"
+# KAFKA_CONNECT_URL="http://localhost:8083"
+# KAFKA_CONNECT_URL="http://kafka-connect1:8083"
+KAFKA_CONNECT_URL="http://kafka-connect.example.com"
 
 ######################################################################
 
@@ -68,8 +69,15 @@ function get_connector_task {
 }
 
 function validate_connector_config {
-    jq .config postgresql-connector.json > postgresql-connector-config.json
+    # curl \
+    #     --silent \
+    #     --request PUT \
+    #     --header "Accept:application/json" \
+    #     --header "Content-Type:application/json" \
+    #     --data '{}' \
+    #     ${KAFKA_CONNECT_URL}/connector-plugins/PostgresConnector/config/validate | jq
 
+    jq .config postgresql-connector.json > postgresql-connector-config.json
     curl \
         --silent \
         --request PUT \
