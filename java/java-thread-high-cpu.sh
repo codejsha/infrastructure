@@ -1,18 +1,18 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-# usage:
-# bash ./java-thread-high-cpu.sh <PID>
+### Usage:
+### bash ./java-thread-high-cpu.sh <PID>
 
 PID="${1}"
 # JAVA_HOME="/usr/lib/jvm/java-1.8.0"
 JAVA_HOME="/usr/lib/jvm/java-11"
 
-LOOP_COUNT=1
-TOP_THREAD_COUNT=5
-INTERVAL_SECONDS=5
+LOOP_COUNT="1"
+TOP_THREAD_COUNT="5"
+INTERVAL_SECONDS="5"
 
 if [ -z "${PID}" ]; then
     echo "Usage: bash ./java-thread-high-cpu.sh <PID>"
