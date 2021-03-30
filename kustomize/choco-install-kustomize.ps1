@@ -1,1 +1,1 @@
-choco install kustomize
+choco install --confirm kustomize

@@ -19,5 +19,5 @@ docker container run k8s.gcr.io/kustomize/kustomize:v3.8.7 version
 Chocolatey:
 
 ```bash
-choco install kustomize
+choco install --confirm kustomize
 ```
