@@ -1,9 +1,18 @@
-# Confluent Kafka
+# Confluent
 
 ## Local
 
 ```bash
 bash ./install-confluent-kafka.sh
+```
+
+## Docker Compose
+
+```bash
+docker create network stream-network
+
+docker-compose up -d
+# docker-compose up -d -f docker-compose.yaml
 ```
 
 ## Kubernetes (Open source Helm charts)
@@ -12,22 +21,9 @@ bash ./install-confluent-kafka.sh
 bash ./helm-install-open-source-confluent-kafka.sh
 ```
 
-## Kubernetes Operator (with Helm)
+## Kubernetes (Operator with Helm)
 
 ### Install
-
-using util:
-
-```bash
-bash ./operator-install-confluent-kafka.sh
-kubectl apply --filename control-center-ingress.yaml
-
-### install / upgrade / upgrade --install
-bash ./helm-install-confluent-util-kafka.sh
-bash ./helm-install-confluent-util-operator.sh
-bash ./helm-install-confluent-util-others.sh
-bash ./helm-install-confluent-util-zookeeper.sh
-```
 
 using cli:
 
@@ -40,6 +36,20 @@ bash ./helm-install-confluent-kafka-connect.sh
 bash ./helm-install-confluent-replicator.sh
 bash ./helm-install-confluent-ksqldb.sh
 bash ./helm-install-confluent-control-center.sh
+kubectl apply --filename control-center-ingress.yaml
+```
+
+using util:
+
+```bash
+bash ./operator-install-confluent-kafka.sh
+
+### install / upgrade / upgrade --install
+bash ./helm-install-confluent-util-operator.sh
+bash ./helm-install-confluent-util-zookeeper.sh
+bash ./helm-install-confluent-util-kafka.sh
+bash ./helm-install-confluent-util-others.sh
+
 kubectl apply --filename control-center-ingress.yaml
 ```
 

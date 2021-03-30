@@ -1,14 +1,14 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 function install_confluent_kafka_with_download {
     local CONFLUENT_HOME="/usr/local/confluent"
     local INSTALL_FILE_DIR="/mnt/share/confluent-platform"
     local INSTALL_FILE="confluent-6.1.0.tar.gz"
 
-    local PARENT_CONFLUENT_HOME="$(readlink --canonicalize-missing ${PARENT_CONFLUENT_HOME}/../)"
+    local PARENT_CONFLUENT_HOME="$(readlink --canonicalize-missing ${CONFLUENT_HOME}/../)"
     local CONFLUENT_VERSION="$(echo ${INSTALL_FILE} | grep -o -E "([^confluent-].*[^\.tar\.gz])")"
     local CONFLUENT_MAJOR_VERSION="$(echo ${CONFLUENT_VERSION} | grep -o -E "^[0-9]{1,3}")"
 
