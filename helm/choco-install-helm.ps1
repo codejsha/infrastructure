@@ -1,1 +1,1 @@
-choco install kubernetes-helm
+choco install --confirm kubernetes-helm

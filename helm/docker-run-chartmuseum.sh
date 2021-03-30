@@ -1,7 +1,9 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
+
+######################################################################
 
 function docker_run_chartmuseum_with_local_storage {
     local CHARTMUSEUM_VOLUME_DIR="/mnt/volume/chartmuseum"
@@ -12,10 +14,10 @@ function docker_run_chartmuseum_with_local_storage {
         --rm \
         --name chartmuseum \
         --publish 8080:8080 \
-        --env DEBUG=true \
-        --env STORAGE=local \
-        --env STORAGE_LOCAL_ROOTDIR=/charts \
-        --mount type=bind,src=${CHARTMUSEUM_VOLUME_DIR},dst=/charts \
+        --env DEBUG="true" \
+        --env STORAGE="local" \
+        --env STORAGE_LOCAL_ROOTDIR="/charts" \
+        --mount type="bind",src="${CHARTMUSEUM_VOLUME_DIR}",dst="/charts" \
         chartmuseum/chartmuseum:latest
 }
 
@@ -32,7 +34,7 @@ function docker_run_chartmuseum_with_s3_storage {
         --env STORAGE_AMAZON_BUCKET="chart-storage" \
         --env STORAGE_AMAZON_PREFIX="" \
         --env STORAGE_AMAZON_REGION="us-west-1" \
-        --mount type=bind,src=~/.aws,dst=/home/chartmuseum/.aws,readonly \
+        --mount type="bind",src="~/.aws",dst="/home/chartmuseum/.aws",readonly \
         chartmuseum/chartmuseum:latest
 }
 

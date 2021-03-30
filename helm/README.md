@@ -21,13 +21,13 @@ bash ./install-helm-push-plugin.sh
 
 ## ChartMuseum
 
-### Container
+### Docker (container)
 
 ```bash
 bash ./docker-run-chartmuseum.sh
 ```
 
-### Helm chart
+### Kubernetes (Helm chart)
 
 ⚠️ Deprecated chart
 
