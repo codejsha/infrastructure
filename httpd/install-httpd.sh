@@ -1,18 +1,20 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-function install_httpd_with_yum {
-    sudo yum install -y httpd
+######################################################################
+
+function install_httpd_with_dnf {
+    sudo dnf install -y httpd
     sudo systemctl enable httpd
     sudo systemctl start httpd
 }
 
 ######################################################################
 
-function install_httpd_with_dnf {
-    sudo dnf install -y httpd
+function install_httpd_with_yum {
+    sudo yum install -y httpd
     sudo systemctl enable httpd
     sudo systemctl start httpd
 }
@@ -121,6 +123,6 @@ function install_httpd {
 
 ######################################################################
 
-# install_httpd_with_yum
 # install_httpd_with_dnf
+# install_httpd_with_yum
 install_httpd

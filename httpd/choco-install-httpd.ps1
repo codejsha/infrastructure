@@ -1,1 +1,1 @@
-choco install apache-httpd
+choco install --confirm apache-httpd

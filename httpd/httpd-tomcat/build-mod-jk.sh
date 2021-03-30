@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 HTTPD_HOME="/usr/local/httpd"
 
@@ -11,7 +11,7 @@ INSTALL_SCRIPT_DIR="/svc/infrastructure/tomcat"
 
 ######################################################################
 
-TOMCAT_CONNECTORS_DIR="$(echo ${INSTALL_FILE} | grep -o -E "(.*[^\.tar\.gz])")"
+TOMCAT_CONNECTOR_DIR="$(echo ${INSTALL_FILE} | grep -o -E "(.*[^\.tar\.gz])")"
 
 ######################################################################
 
@@ -26,7 +26,7 @@ function extract_install_file {
 }
 
 function build_mod_jk {
-    cd ${INSTALL_SCRIPT_DIR}/httpd-tomcat/${TOMCAT_CONNECTORS_DIR}/native
+    cd ${INSTALL_SCRIPT_DIR}/httpd-tomcat/${TOMCAT_CONNECTOR_DIR}/native
     ./configure --with-apxs=${HTTPD_HOME}/bin/apxs
 }
 
@@ -38,7 +38,7 @@ function install_mod_jk {
 
 function delete_install_file {
     rm -f ${INSTALL_SCRIPT_DIR}/httpd-tomcat/${INSTALL_FILE}
-    rm -rf ${INSTALL_SCRIPT_DIR}/httpd-tomcat/${TOMCAT_CONNECTORS_DIR}
+    rm -rf ${INSTALL_SCRIPT_DIR}/httpd-tomcat/${TOMCAT_CONNECTOR_DIR}
 }
 
 ######################################################################
