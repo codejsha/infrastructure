@@ -1,7 +1,10 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-sudo yum install -y epel-release
-# sudo dnf config-manager --set-enabled PowerTools
+### dnf
+sudo dnf install -y epel-release
+
+### yum
+# sudo yum install -y epel-release

@@ -1,9 +1,20 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 ######################################################################
+
+function install_neovim_with_yum {
+    sudo yum install -y epel-release
+    sudo yum install -y neovim
+    # sudo yum install -y python36-neovim
+}
+
+function install_neovim_with_apt {
+    sudo apt-get install neovim
+    # sudo apt-get install python3-neovim
+}
 
 function install_neovim_with_download {
     local NEOVIM_VERSION="0.4.4"
@@ -16,22 +27,11 @@ function install_neovim_with_download {
     fi
 }
 
-function install_neovim_with_yum {
-    sudo yum install -y epel-release
-    sudo yum install -y neovim
-    sudo yum install -y python36-neovim
-}
-
-function install_neovim_with_apt {
-    sudo apt-get install neovim
-    sudo apt-get install python3-neovim
-}
-
 ######################################################################
 
-# install_neovim_with_download
 install_neovim_with_yum
 # install_neovim_with_apt
+# install_neovim_with_download
 
 mkdir -p ${HOME}/.config/nvim
 
