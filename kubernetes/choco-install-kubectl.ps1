@@ -1,1 +1,1 @@
-choco install kubernetes-cli
+choco install --confirm kubernetes-cli

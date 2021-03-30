@@ -9,6 +9,7 @@
 ### kind
 
 - https://kind.sigs.k8s.io/
+- https://github.com/kubernetes-sigs/kind/
 
 ```bash
 bash ./install-kind.sh
@@ -18,6 +19,7 @@ bash ./create-cluster.sh
 ### minikube
 
 - https://minikube.sigs.k8s.io/docs/
+- https://github.com/kubernetes/minikube
 
 ```bash
 bash ./install-minikube.sh
