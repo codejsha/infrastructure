@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 STRIMZI_NAMESPACE="kafka-system"
 
@@ -9,14 +9,14 @@ STRIMZI_NAMESPACE="kafka-system"
 
 function create_kafka_cluster {
     kubectl apply \
-        --filename strimzi-kafka-cluster.yaml \
-        -n ${STRIMZI_NAMESPACE}
+        --namespace ${STRIMZI_NAMESPACE} \
+        --filename strimzi-kafka-cluster.yaml
 }
 
 function delete_kafka_cluster {
     kubectl delete \
-        --filename strimzi-kafka-cluster.yaml \
-        -n ${STRIMZI_NAMESPACE}
+        --namespace ${STRIMZI_NAMESPACE} \
+        --filename strimzi-kafka-cluster.yaml
 }
 
 ######################################################################

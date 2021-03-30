@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 STRIMZI_VERSION="0.20.1"
 STRIMZI_OPERATOR_NAMESPACE="kafka-operator"
@@ -40,58 +40,58 @@ function deploy_resource {
     sed -i "s/namespace: .*/namespace: ${STRIMZI_OPERATOR_NAMESPACE}/" \
         strimzi-${STRIMZI_VERSION}/install/cluster-operator/*RoleBinding*.yaml
     kubectl apply \
-        --filename strimzi-${STRIMZI_VERSION}/install/cluster-operator/ \
-        -n ${STRIMZI_OPERATOR_NAMESPACE}
+        --namespace ${STRIMZI_OPERATOR_NAMESPACE} \
+        --filename strimzi-${STRIMZI_VERSION}/install/cluster-operator/
     # kubectl apply \
-    #     --filename strimzi-${STRIMZI_VERSION}/install/strimzi-admin/ \
-    #     -n ${STRIMZI_OPERATOR_NAMESPACE}
+    #     --namespace ${STRIMZI_OPERATOR_NAMESPACE} \
+    #     --filename strimzi-${STRIMZI_VERSION}/install/strimzi-admin/
 }
 
 function give_permission_to_strimzi_operator {
     kubectl apply \
-        --filename strimzi-${STRIMZI_VERSION}/install/cluster-operator/020-RoleBinding-strimzi-cluster-operator.yaml \
-        -n ${STRIMZI_NAMESPACE}
+        --namespace ${STRIMZI_NAMESPACE} \
+        --filename strimzi-${STRIMZI_VERSION}/install/cluster-operator/020-RoleBinding-strimzi-cluster-operator.yaml
     kubectl apply \
-        --filename strimzi-${STRIMZI_VERSION}/install/cluster-operator/032-RoleBinding-strimzi-cluster-operator-topic-operator-delegation.yaml \
-        -n ${STRIMZI_NAMESPACE}
+        --namespace ${STRIMZI_NAMESPACE} \
+        --filename strimzi-${STRIMZI_VERSION}/install/cluster-operator/032-RoleBinding-strimzi-cluster-operator-topic-operator-delegation.yaml
     kubectl apply \
-        --filename strimzi-${STRIMZI_VERSION}/install/cluster-operator/031-RoleBinding-strimzi-cluster-operator-entity-operator-delegation.yaml \
-        -n ${STRIMZI_NAMESPACE}
+        --namespace ${STRIMZI_NAMESPACE} \
+        --filename strimzi-${STRIMZI_VERSION}/install/cluster-operator/031-RoleBinding-strimzi-cluster-operator-entity-operator-delegation.yaml
 }
 
 function create_entity_operator {
     kubectl apply \
-        --filename strimzi-${STRIMZI_VERSION}/install/topic-operator/ \
-        -n ${STRIMZI_NAMESPACE}
+        --namespace ${STRIMZI_NAMESPACE} \
+        --filename strimzi-${STRIMZI_VERSION}/install/topic-operator/
     kubectl apply \
-        --filename strimzi-${STRIMZI_VERSION}/install/user-operator/ \
-        -n ${STRIMZI_NAMESPACE}
+        --namespace ${STRIMZI_NAMESPACE} \
+        --filename strimzi-${STRIMZI_VERSION}/install/user-operator/
 }
 
 function delete_strimzi_operator {
     kubectl delete \
-        --filename strimzi-${STRIMZI_VERSION}/install/topic-operator/ \
-        -n ${STRIMZI_NAMESPACE}
+        --namespace ${STRIMZI_NAMESPACE} \
+        --filename strimzi-${STRIMZI_VERSION}/install/topic-operator/
     kubectl delete \
-        --filename strimzi-${STRIMZI_VERSION}/install/user-operator/ \
-        -n ${STRIMZI_NAMESPACE}
+        --namespace ${STRIMZI_NAMESPACE} \
+        --filename strimzi-${STRIMZI_VERSION}/install/user-operator/
 
     kubectl delete \
-        --filename strimzi-${STRIMZI_VERSION}/install/cluster-operator/020-RoleBinding-strimzi-cluster-operator.yaml \
-        -n ${STRIMZI_NAMESPACE}
+        --namespace ${STRIMZI_NAMESPACE} \
+        --filename strimzi-${STRIMZI_VERSION}/install/cluster-operator/020-RoleBinding-strimzi-cluster-operator.yaml
     kubectl delete \
-        --filename strimzi-${STRIMZI_VERSION}/install/cluster-operator/032-RoleBinding-strimzi-cluster-operator-topic-operator-delegation.yaml \
-        -n ${STRIMZI_NAMESPACE}
+        --namespace ${STRIMZI_NAMESPACE} \
+        --filename strimzi-${STRIMZI_VERSION}/install/cluster-operator/032-RoleBinding-strimzi-cluster-operator-topic-operator-delegation.yaml
     kubectl delete \
-        --filename strimzi-${STRIMZI_VERSION}/install/cluster-operator/031-RoleBinding-strimzi-cluster-operator-entity-operator-delegation.yaml \
-        -n ${STRIMZI_NAMESPACE}
+        --namespace ${STRIMZI_NAMESPACE} \
+        --filename strimzi-${STRIMZI_VERSION}/install/cluster-operator/031-RoleBinding-strimzi-cluster-operator-entity-operator-delegation.yaml
 
     kubectl delete \
-        --filename strimzi-${STRIMZI_VERSION}/install/cluster-operator/ \
-        -n ${STRIMZI_OPERATOR_NAMESPACE}
+        --namespace ${STRIMZI_OPERATOR_NAMESPACE} \
+        --filename strimzi-${STRIMZI_VERSION}/install/cluster-operator/
     # kubectl delete \
-    #     --filename strimzi-${STRIMZI_VERSION}/install/strimzi-admin/ \
-    #     -n ${STRIMZI_OPERATOR_NAMESPACE}
+    #     --namespace ${STRIMZI_OPERATOR_NAMESPACE} \
+    #     --filename strimzi-${STRIMZI_VERSION}/install/strimzi-admin/
 }
 
 ######################################################################
