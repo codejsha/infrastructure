@@ -19,16 +19,19 @@ bash ./install-ohs.sh
 bash ./all.sh
 ```
 
-### 11g
+### 12cR2
 
 ```bash
-bash ./create-instance-11g.sh
-bash ./create-component-11g.sh
+bash ./create-domain.sh
+bash ./delete-component.sh
+bash ./create-component.sh
 
-bash ./create-scripts-11g.sh
+bash ./create-nodemgr-scripts.sh
+bash ./create-scripts.sh
 
-bash ./create-httpd-scripts-11g.sh
-bash ./create-links-script-11g.sh
+bash ./create-httpd-scripts.sh
+bash ./create-links-script.sh
+bash ./create-metric-scripts.sh
 ```
 
 ### 12cR1
@@ -45,19 +48,16 @@ bash ./create-links-script.sh
 bash ./create-metric-scripts.sh
 ```
 
-### 12cR2
+### 11g
 
 ```bash
-bash ./create-domain.sh
-bash ./delete-component.sh
-bash ./create-component.sh
+bash ./create-instance-11g.sh
+bash ./create-component-11g.sh
 
-bash ./create-nodemgr-scripts.sh
-bash ./create-scripts.sh
+bash ./create-scripts-11g.sh
 
-bash ./create-httpd-scripts.sh
-bash ./create-links-script.sh
-bash ./create-metric-scripts.sh
+bash ./create-httpd-scripts-11g.sh
+bash ./create-links-script-11g.sh
 ```
 
 ## Metrics (12c)
