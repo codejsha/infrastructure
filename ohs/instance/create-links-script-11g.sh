@@ -16,7 +16,7 @@ cat <<EOF > ${INSTANCE_HOME}/get-server-status.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 

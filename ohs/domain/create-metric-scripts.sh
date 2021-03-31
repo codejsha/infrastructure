@@ -54,7 +54,7 @@ cat <<EOF > ${DOMAIN_HOME}/scripts/get-dump-metrics-${COMPONENT_NAME}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -129,7 +129,7 @@ cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-plugin-${COMPONENT_NAME}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -154,7 +154,7 @@ cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-process-info-${COMPONENT_NAME}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -179,7 +179,7 @@ cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-module-${COMPONENT_NAME}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -204,7 +204,7 @@ cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-moduleset-${COMPONENT_NAME}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -229,7 +229,7 @@ cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-response-${COMPONENT_NAME}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -254,7 +254,7 @@ cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-server-${COMPONENT_NAME}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -279,7 +279,7 @@ cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-vhostset-${COMPONENT_NAME}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -304,7 +304,7 @@ cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-vhost-${COMPONENT_NAME}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -329,7 +329,7 @@ cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-vhostaddr-${COMPONENT_NAME}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -354,7 +354,7 @@ cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-vhostaddrs-${COMPONENT_NAME}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -379,7 +379,7 @@ cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-system-${COMPONENT_NAME}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -404,7 +404,7 @@ cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-system-host-${COMPONENT_NAME}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -429,7 +429,7 @@ cat <<EOF > ${DOMAIN_HOME}/scripts/get-metrics-system-process-${COMPONENT_NAME}.
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 

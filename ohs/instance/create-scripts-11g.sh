@@ -18,7 +18,7 @@ cat <<EOF > ${INSTANCE_HOME}/start-opmn.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -31,7 +31,7 @@ cat <<EOF > ${INSTANCE_HOME}/stop-opmn.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -46,7 +46,7 @@ cat <<EOF > ${INSTANCE_HOME}/get-status.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -61,7 +61,7 @@ cat <<EOF > ${INSTANCE_HOME}/start-all.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -74,7 +74,7 @@ cat <<EOF > ${INSTANCE_HOME}/stop-all.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -89,7 +89,7 @@ cat <<EOF > ${INSTANCE_HOME}/start-${COMPONENT_NAME}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -103,7 +103,7 @@ cat <<EOF > ${INSTANCE_HOME}/stop-${COMPONENT_NAME}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
