@@ -21,6 +21,3 @@ function install_github_cli_with_apt {
 
 install_github_cli_with_dnf
 # install_github_cli_with_apt
-
-# gh auth login
-# gh config set git_protocol ssh
