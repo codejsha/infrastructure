@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 helm repo add drone https://charts.drone.io
 helm repo update
@@ -40,8 +40,8 @@ helm upgrade --install my-drone \
     # --set env.DRONE_GITLAB_CLIENT_SECRET="" \
     # --set env.DRONE_GITLAB_SERVER="" \
 
-    ### local path provisioner
-    # --set persistentVolume.storageClass="local-path" \
-
     ### rook ceph
     # --set persistentVolume.storageClass="rook-ceph-block" \
+
+    ### local path provisioner
+    # --set persistentVolume.storageClass="local-path" \
