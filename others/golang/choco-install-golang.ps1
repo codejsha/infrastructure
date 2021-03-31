@@ -1,1 +1,1 @@
-choco install golang
+choco install --confirm golang
