@@ -5,7 +5,7 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 
 HTTPD_VOLUME_HOME="/mnt/volume/httpd"
 sudo mkdir -p ${HTTPD_VOLUME_HOME}/{conf,htdocs}
-sudo /bin/cp -f docker-httpd.conf ${HTTPD_VOLUME_HOME}/conf/httpd.conf
+# sudo /bin/cp -f docker-httpd.conf ${HTTPD_VOLUME_HOME}/conf/httpd.conf
 
 ######################################################################
 
