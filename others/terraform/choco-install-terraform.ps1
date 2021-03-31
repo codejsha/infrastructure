@@ -1,1 +1,1 @@
-choco install terraform
+choco install --confirm terraform
