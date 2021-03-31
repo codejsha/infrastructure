@@ -1,1 +1,1 @@
-choco install azure-cli
+choco install --confirm azure-cli
