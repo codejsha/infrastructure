@@ -1,1 +1,1 @@
-choco install python3
+choco install --confirm python3
