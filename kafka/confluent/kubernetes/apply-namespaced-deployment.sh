@@ -1,13 +1,14 @@
 #!/bin/bash
 
-INSTALL_SCRIPT_DIR="/svc/infrastructure/kafka/confluent"
+INSTALL_SCRIPT_DIR="/svc/infrastructure/kafka/confluent/kubernetes"
 OPERATOR_HOME="${INSTALL_SCRIPT_DIR}/confluent-operator"
 
-cd ${OPERATOR_HOME}
+bash ./download-install-file.sh
 
-kubectl apply --filename resources/crds --namespace confluent-operator
-kubectl apply --filename namespaced-deployment-role.yaml --namespace confluent-operator
-kubectl apply --filename namespaced-deployment-rolebinding.yaml --namespace confluent-operator
+kubectl apply --namespace confluent-operator --filename ${OPERATOR_HOME}/resources/crds
 
-rm ${OPERATOR_HOME}/helm/confluent-operator/charts/operator/templates/clusterrole.yaml
-rm ${OPERATOR_HOME}/helm/confluent-operator/charts/operator/templates/clusterrolebinding.yaml
+kubectl apply --namespace confluent-operator --filename ${INSTALL_SCRIPT_DIR}/namespaced-deployment-role.yaml
+kubectl apply --namespace confluent-operator --filename ${INSTALL_SCRIPT_DIR}/namespaced-deployment-rolebinding.yaml
+
+rm -f ${OPERATOR_HOME}/helm/confluent-operator/charts/operator/templates/clusterrole.yaml
+rm -f ${OPERATOR_HOME}/helm/confluent-operator/charts/operator/templates/clusterrolebinding.yaml
