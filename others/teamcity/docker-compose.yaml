@@ -1,0 +1,27 @@
+version: "3.1"
+
+services:
+  teamcity-server:
+    image: jetbrains/teamcity-server:2018.2.2-linux
+    ports:
+      - 8111:8111
+    volumes:
+      - /team/teamcity-server/data:/data/teamcity_server/datadir
+      - /team/teamcity-server/logs:/opt/teamcity/logs
+
+  teamcity-agent:
+    image: jetbrains/teamcity-agent:2018.2.2-linux
+    volumes:
+      - /team/teamcity-agent/config:/data/teamcity_agent/conf
+    environment:
+      - SERVER_URL="http://team-city-server:8111"
+
+  postgresql:
+    image: postgres:11.1
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - /team/postgres/data:/var/lib/postgresql/data
