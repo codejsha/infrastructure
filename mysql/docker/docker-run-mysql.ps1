@@ -1,7 +1,7 @@
 $password = "$password"
 
-# $MySQLVolumeDir="C:\volume\mysql"
-$MySQLVolumeDir="$env:USERPROFILE\volume\mysql"
+# $MySQLVolumeDir = "C:\volume\mysql"
+$MySQLVolumeDir = "$env:USERPROFILE\volume\mysql"
 New-Item -Path $MySQLVolumeDir\data -ItemType Directory -Force
 
 ######################################################################

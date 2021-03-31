@@ -13,13 +13,13 @@ bash ./docker-run-mysql.sh
 .\docker-run-mysql.ps1
 ```
 
-## Docker compose
+## Docker Compose
 
 ```bash
 docker-compose up
 ```
 
-## Kubernetes
+## Kubernetes (Helm chart)
 
 ```bash
 bash ./helm-install-mysql.sh

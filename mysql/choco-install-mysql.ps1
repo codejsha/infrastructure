@@ -1,2 +1,2 @@
-choco install mysql
-choco install mysql.workbench
+choco install --confirm mysql
+choco install --confirm mysql.workbench
