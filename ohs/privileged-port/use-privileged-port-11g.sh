@@ -1,9 +1,9 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-source ./env-base.sh
+source ./env-base-11g.sh
 
 USERNAME="$(id --user --name)"
 if [ "${USERNAME}" != "root" ]; then
@@ -11,8 +11,9 @@ if [ "${USERNAME}" != "root" ]; then
     exit 1
 fi
 
-chown root ${ORACLE_HOME}/ohs/bin/launch
-chmod 4750 ${ORACLE_HOME}/ohs/bin/launch
+cd ${ORACLE_HOME}/ohs/bin
+chown root .apachectl
+chmod 6750 .apachectl
 
 ### Configure the User and Group directive in httpd.conf.
 # User prouser

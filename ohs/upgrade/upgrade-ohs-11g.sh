@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 INSTALL_FILE_DIR="/mnt/share/oracle-http-server/ohs11.1.1.9/p20995453_111190_Linux-x86-64"
 INSTALL_FILE="Disk1/runInstaller"
