@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 source ./env-base.sh
 
@@ -45,25 +45,12 @@ EOF
 
 ######################################################################
 
-if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
+if [[ ${WEBLOGIC_VERSION} =~ ^14.1|^12. ]]; then
 cat <<EOF > ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
-export PS4="\e[33;1m+ \e[0m"
-set -o xtrace
-
-MW_HOME="${MW_HOME}"
-DOMAIN_NAME="${DOMAIN_NAME}"
-export DOMAIN_HOME="${VAR_DOMAIN_HOME_11}"
-EOF
-elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
-cat <<EOF > ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
-#!/bin/bash
-set -o errtrace
-set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
@@ -71,22 +58,35 @@ ORACLE_HOME="${ORACLE_HOME}"
 DOMAIN_NAME="${DOMAIN_NAME}"
 export DOMAIN_HOME="${VAR_DOMAIN_HOME}"
 EOF
+elif [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
+cat <<EOF > ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
+#!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
+export PS4="\e[33;1m+ \e[0m"
+set -o xtrace
+
+MW_HOME="${MW_HOME}"
+DOMAIN_NAME="${DOMAIN_NAME}"
+export DOMAIN_HOME="${VAR_DOMAIN_HOME_11}"
+EOF
 fi
 
 cat <<EOF >> ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
 export ADMIN_SERVER_URL="t3://${ADMIN_SERVER_LISTEN_ADDRESS}:${ADMIN_SERVER_LISTEN_PORT}"
 export MANAGED_SERVER_NAME="${MANAGED_SERVER_NAME}"
+
+export CONFIG_JVM_ARGS="\${CONFIG_JVM_ARGS} -Djava.security.egd=file:///dev/urandom"
 EOF
 
-if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
+if [[ ${WEBLOGIC_VERSION} =~ ^14.1|^12. ]]; then
 cat <<EOF >> ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
-
-\${MW_HOME}/wlserver_10.3/common/bin/wlst.sh \${DOMAIN_HOME}/scripts/shutdown_\${MANAGED_SERVER_NAME}.py
-EOF
-elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
-cat <<EOF >> ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
-
 \${ORACLE_HOME}/oracle_common/common/bin/wlst.sh \${DOMAIN_HOME}/scripts/shutdown_\${MANAGED_SERVER_NAME}.py
+EOF
+elif [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
+cat <<EOF >> ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
+\${MW_HOME}/wlserver_10.3/common/bin/wlst.sh \${DOMAIN_HOME}/scripts/shutdown_\${MANAGED_SERVER_NAME}.py
 EOF
 fi
 

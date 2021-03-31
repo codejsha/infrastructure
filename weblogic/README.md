@@ -75,10 +75,10 @@ connect(admin_username, admin_password, admin_server_url)
 #### Server
 
 ```bash
+### 14c, 12c
+${ORACLE_HOME}/oracle_common/common/bin/wlst.sh get_server_status.py
 ### 11g
 ${MW_HOME}/wlserver_10.3/common/bin/wlst.sh get_server_status.py
-### 12c, 14c
-${ORACLE_HOME}/oracle_common/common/bin/wlst.sh get_server_status.py
 ```
 
 ```txt
@@ -118,10 +118,10 @@ StuckThreadCount              |               0               0               0
 #### Datasource
 
 ```bash
+### 14c, 12c
+${ORACLE_HOME}/oracle_common/common/bin/wlst.sh get_datasource_status.py
 ### 11g
 ${MW_HOME}/wlserver_10.3/common/bin/wlst.sh get_datasource_status.py
-### 12c, 14c
-${ORACLE_HOME}/oracle_common/common/bin/wlst.sh get_datasource_status.py
 ```
 
 ```txt

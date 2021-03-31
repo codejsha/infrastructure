@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 export JAVA_HOME="/usr/java/current"
 
@@ -34,7 +34,7 @@ JAVA_VERSION="$(${JAVA_HOME}/bin/java -version 2>&1 /dev/null \
 
 ######################################################################
 
-### middleware home
+### oracle home / middleware home
 
 if [ ! -d "${MW_HOME}" ]; then
     echo "[ERROR] The ORACLE_HOME or MW_HOME (${MW_HOME}) does not exist!"
@@ -46,10 +46,10 @@ fi
 ### weblogic home
 
 WL_HOME=""
-if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
-    export WL_HOME="${MW_HOME}/wlserver_10.3"
-elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
+if [[ ${WEBLOGIC_VERSION} =~ ^14.1|^12. ]]; then
     export WL_HOME="${ORACLE_HOME}/wlserver"
+elif [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
+    export WL_HOME="${MW_HOME}/wlserver_10.3"
 fi
 
 if [ ! -d "${WL_HOME}" ]; then
@@ -60,16 +60,16 @@ fi
 ######################################################################
 
 ### registry file
+### 14c, 12c: ${ORACLE_HOME}/inventory/registry.xml
 ### 11g: ${MW_HOME}/registry.xml
-### 12c, 14c: ${ORACLE_HOME}/inventory/registry.xml
 
 WEBLOGIC_VERSION=""
-if [ -f "${MW_HOME}/registry.xml" ]; then
-    WEBLOGIC_VERSION="$(grep "name=\"WebLogic Server\"" ${MW_HOME}/registry.xml \
-        | grep -o -E "[0-9]{2}\.[0-9]\.[0-9]\.[0-9]")"
-elif [ -f "${ORACLE_HOME}/inventory/registry.xml" ]; then
+if [ -f "${ORACLE_HOME}/inventory/registry.xml" ]; then
     WEBLOGIC_VERSION="$(grep "name=\"WebLogic Server\"" ${ORACLE_HOME}/inventory/registry.xml \
         | grep -o -E "[0-9]{2}\.[0-9]\.[0-9]\.[0-9]\.[0-9]")"
+elif [ -f "${MW_HOME}/registry.xml" ]; then
+    WEBLOGIC_VERSION="$(grep "name=\"WebLogic Server\"" ${MW_HOME}/registry.xml \
+        | grep -o -E "[0-9]{2}\.[0-9]\.[0-9]\.[0-9]")"
 else
     echo "[ERROR] The ORACLE_HOME or MW_HOME (${MW_HOME}) is invalid!"
     exit
@@ -78,17 +78,17 @@ fi
 ######################################################################
 
 ### properties file
+### 14c, 12c: ${ORACLE_HOME}/oui/.globalEnv.properties
 ### 11g: ${MW_HOME}/wlserver_10.3/.product.properties
-### 12c, 14c: ${ORACLE_HOME}/oui/.globalEnv.properties
 
 JAVA_HOME_FROM_PROPERTIES=""
-if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
-    JAVA_HOME_FROM_PROPERTIES="$(grep -e "^JAVA_HOME" -m 1 ${MW_HOME}/wlserver_10.3/.product.properties \
-        | grep -o -E "/.*$")"
-elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
+if [[ ${WEBLOGIC_VERSION} =~ ^14.1|^12. ]]; then
     JAVA_HOME_FROM_PROPERTIES="$(grep -e "^JAVA_HOME" -m 1 ${ORACLE_HOME}/oui/.globalEnv.properties \
         | grep -o -E "/.*$")"
     # JAVA_HOME_FROM_PROPERTIES="$(${ORACLE_HOME}/oui/bin/getProperty.sh JAVA_HOME")"
+elif [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
+    JAVA_HOME_FROM_PROPERTIES="$(grep -e "^JAVA_HOME" -m 1 ${MW_HOME}/wlserver_10.3/.product.properties \
+        | grep -o -E "/.*$")"
 fi
 
 if [ "$(readlink -f ${JAVA_HOME})" != "${JAVA_HOME_FROM_PROPERTIES}" ]; then

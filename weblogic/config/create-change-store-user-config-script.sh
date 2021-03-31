@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 source ./env-base.sh
 
@@ -49,23 +49,23 @@ cat <<EOF > ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
 set -o xtrace
 
 EOF
 
-if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
-cat <<EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
-MW_HOME="${MW_HOME}"
-DOMAIN_NAME="${DOMAIN_NAME}"
-export DOMAIN_HOME="${VAR_DOMAIN_HOME_11}"
-EOF
-elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
+if [[ ${WEBLOGIC_VERSION} =~ ^14.1|^12. ]]; then
 cat <<EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 ORACLE_HOME="${ORACLE_HOME}"
 DOMAIN_NAME="${DOMAIN_NAME}"
 export DOMAIN_HOME="${VAR_DOMAIN_HOME}"
+EOF
+elif [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
+cat <<EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
+MW_HOME="${MW_HOME}"
+DOMAIN_NAME="${DOMAIN_NAME}"
+export DOMAIN_HOME="${VAR_DOMAIN_HOME_11}"
 EOF
 fi
 
@@ -76,13 +76,13 @@ export ADMIN_PASSWORD="\${2:-"welcome1"}"
 
 EOF
 
-if [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
-cat <<EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
-\${MW_HOME}/wlserver_10.3/common/bin/wlst.sh \${DOMAIN_HOME}/scripts/change_store_user_config.py
-EOF
-elif [[ ${WEBLOGIC_VERSION} =~ ^12.|^14.1 ]]; then
+if [[ ${WEBLOGIC_VERSION} =~ ^14.1|^12. ]]; then
 cat <<EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 \${ORACLE_HOME}/oracle_common/common/bin/wlst.sh \${DOMAIN_HOME}/scripts/change_store_user_config.py
+EOF
+elif [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
+cat <<EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
+\${MW_HOME}/wlserver_10.3/common/bin/wlst.sh \${DOMAIN_HOME}/scripts/change_store_user_config.py
 EOF
 fi
 

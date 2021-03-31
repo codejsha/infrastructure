@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 source ./env-base.sh
 
@@ -24,7 +24,7 @@ cat <<EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 
 SERVER_NAME="${SERVER_NAME}"
 DOMAIN_HOME="${DOMAIN_HOME}"
@@ -62,7 +62,7 @@ USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+PrintTenuringDistribution"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -Xloggc:\${LOG_DIR}/gc.\${SERVER_NAME}.log"
 # USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+UseGCLogFileRotation"
 # USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+NumberOfGCLogFiles=30"
-# USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+GCLogFileSize=8K"
+# USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+GCLogFileSize=1M"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+HeapDumpOnOutOfMemoryError"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:HeapDumpPath=\${LOG_DIR}/dump"
 export USER_MEM_ARGS
@@ -81,7 +81,7 @@ USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+PrintTenuringDistribution"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -Xloggc:\${LOG_DIR}/gc.\${SERVER_NAME}.log"
 # USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+UseGCLogFileRotation"
 # USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+NumberOfGCLogFiles=30"
-# USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+GCLogFileSize=8K"
+# USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+GCLogFileSize=1M"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:+HeapDumpOnOutOfMemoryError"
 USER_MEM_ARGS="\${USER_MEM_ARGS} -XX:HeapDumpPath=\${LOG_DIR}/dump"
 export USER_MEM_ARGS
@@ -156,13 +156,14 @@ cat <<EOF > ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 
 ADMIN_URL="t3://${ADMIN_SERVER_LISTEN_ADDRESS}:${ADMIN_SERVER_LISTEN_PORT}"
 DOMAIN_HOME="${DOMAIN_HOME}"
 USERNAME="${ADMIN_USERNAME}"
 PASSWORD="${ADMIN_PASSWORD}"
 
+export CONFIG_JVM_ARGS="${CONFIG_JVM_ARGS} -Djava.security.egd=file:///dev/urandom"
 \${DOMAIN_HOME}/bin/stopWebLogic.sh \${USERNAME} \${PASSWORD} \${ADMIN_URL}
 EOF
 

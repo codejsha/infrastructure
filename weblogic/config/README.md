@@ -8,7 +8,7 @@ bash ./all.sh
 
 ## Domain
 
-| Script                               | Jython                               |
+| Script                               | WLST Script                          |
 | ------------------------------------ | ------------------------------------ |
 | `conf-domain.sh`                     |                                      |
 | `set-domain-config-archive.sh`       | `set_domain_config_archive.py`       |
@@ -33,7 +33,7 @@ bash ./all.sh
 
 ## Server
 
-| Script                      | Jython                 |
+| Script                      | WLST Script            |
 | --------------------------- | ---------------------- |
 | `create-server.sh`          | `create_server.py`     |
 | `set-server-config.sh`      | `set_server_config.py` |
@@ -42,21 +42,21 @@ bash ./all.sh
 
 ## Cluster
 
-| Script                  | Jython                  |
+| Script                  | WLST Script             |
 | ----------------------- | ----------------------- |
 | `create-cluster.sh`     | `create_cluster.py`     |
 | `set-cluster-config.sh` | `set_cluster_config.py` |
 
 ## Data source
 
-| Script                     | Jython                     |
+| Script                     | WLST Script                |
 | -------------------------- | -------------------------- |
 | `create-datasource.sh`     | `create_datasource.py`     |
 | `set-datasource-config.sh` | `set_datasource_config.py` |
 
 ## Node manager
 
-| Script                                 | Jython                  |
+| Script                                 | WLST Script             |
 | -------------------------------------- | ----------------------- |
 | `create-nodemgr.sh`                    | `create_nodemgr.py`     |
 | `set-nodemgr-config.sh`                | `set_nodemgr_config.py` |
@@ -65,6 +65,6 @@ bash ./all.sh
 
 ## Application
 
-| Script          | Jython          |
+| Script          | WLST Script     |
 | --------------- | --------------- |
 | `deploy-app.sh` | `deploy_app.py` |
