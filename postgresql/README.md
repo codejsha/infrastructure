@@ -32,7 +32,7 @@ bash ./helm-install-postgresql.sh
 - https://www.postgresql.org/download/linux/redhat/
 
 ```bash
-bash ./install-postgresql.sh
+bash ./install-postgresql-server.sh
 ```
 
 ## Example Commands

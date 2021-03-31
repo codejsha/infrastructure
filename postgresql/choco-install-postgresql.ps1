@@ -1,3 +1,3 @@
-# choco install postgresql11
-# choco install postgresql12
-choco install postgresql13
+choco install --confirm postgresql13
+# choco install --confirm postgresql12
+# choco install --confirm postgresql11
