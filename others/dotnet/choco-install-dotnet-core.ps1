@@ -1,2 +1,2 @@
-choco install dotnetcore-sdk
-# choco install dotnetcore3-desktop-runtime
+choco install --confirm dotnetcore-sdk
+# choco install --confirm dotnetcore3-desktop-runtime
