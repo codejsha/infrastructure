@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 INSTALL_FILE_DIR="/mnt/share/redhat-codeready-containers"
 INSTALL_FILE="crc-linux-amd64.tar.xz"
