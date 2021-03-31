@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 PASSWORD="${PASSWORD}"
 
@@ -12,49 +12,50 @@ cd docker-images/OracleDatabase/SingleInstance/dockerfiles
 
 ######################################################################
 
-function docker_run_oracledb11 {
-    /bin/cp -f /mnt/share/oracle-database/11gr2/oracle-xe-11.2.0-1.0.x86_64.rpm.zip 11.2.0.2
-    bash ./buildDockerImage.sh -v 11.2.0.2 -x -i
-    rm -f 11.2.0.2/*.zip
+function docker_run_oracledb19 {
+    /bin/cp -f /mnt/share/oracle-database/19c/LINUX.X64_193000_db_home.zip 19.3.0
+    bash ./buildDockerImage.sh -v 19.3.0 -e -i
+    rm -f 19.3.0/*.zip
 
-    sudo mkdir -p /mnt/volume/oracledb11
-    sudo chmod 777 /mnt/volume/oracledb11
+    local ORACLE_DB_VOLUME_DIR="/mnt/volume/oracledb19"
+    sudo mkdir -p ${ORACLE_DB_VOLUME_DIR}
 
-    docker container run \
-        --detach \
-        --name oracledb11 \
-        --shm-size=1g \
-        --publish 1521:1521 \
-        --publish 5500:8080 \
-        --env ORACLE_PWD="${PASSWORD}" \
-        --mount type=bind,src=/mnt/volume/oracledb11,dst=/u01/app/oracle/oradata \
-        --mount type=bind,src=/mnt/share,dst=/mnt/share \
-        --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
-        oracle/database:11.2.0.2-xe
-}
-
-function docker_run_oracledb12_r1 {
-    /bin/cp -f /mnt/share/oracle-database/12cr1/linuxamd64_12102_database_1of2.zip 12.1.0.2
-    /bin/cp -f /mnt/share/oracle-database/12cr1/linuxamd64_12102_database_2of2.zip 12.1.0.2
-    bash ./buildDockerImage.sh -v 12.1.0.2 -e -i
-    rm -f 12.1.0.2/*.zip
-
-    sudo mkdir -p /mnt/volume/oracledb12
-    sudo chmod 777 /mnt/volume/oracledb12
+    sudo chmod 777 ${ORACLE_DB_VOLUME_DIR}
 
     docker container run \
         --detach \
-        --name oracledb12 \
+        --name oracledb19 \
         --publish 1521:1521 \
         --publish 5500:5500 \
-        --env ORACLE_SID=ORCLCDB \
-        --env ORACLE_PDB=ORCLPDB1 \
+        --env ORACLE_SID="ORCLCDB" \
+        --env ORACLE_PDB="ORCLPDB1" \
         --env ORACLE_PWD="${PASSWORD}" \
-        --env ORACLE_CHARACTERSET=AL32UTF8 \
-        --mount type=bind,src=/mnt/volume/oracledb12,dst=/opt/oracle/oradata \
-        --mount type=bind,src=/mnt/share,dst=/mnt/share \
-        --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
-        oracle/database:12.1.0.2-ee
+        --env ORACLE_CHARACTERSET="AL32UTF8" \
+        --mount type="bind",src="${ORACLE_DB_VOLUME_DIR}",dst="/opt/oracle/oradata" \
+        oracle/database:19.3.0-ee
+}
+
+function docker_run_oracledb18 {
+    /bin/cp -f /mnt/share/oracle-database/18c/LINUX.X64_180000_db_home.zip 18.3.0
+    bash ./buildDockerImage.sh -v 18.3.0 -e -i
+    rm -f 18.3.0/*.zip
+
+    local ORACLE_DB_VOLUME_DIR="/mnt/volume/oracledb18"
+    sudo mkdir -p ${ORACLE_DB_VOLUME_DIR}
+
+    sudo chmod 777 ${ORACLE_DB_VOLUME_DIR}
+
+    docker container run \
+        --detach \
+        --name oracledb18 \
+        --publish 1521:1521 \
+        --publish 5500:5500 \
+        --env ORACLE_SID="ORCLCDB" \
+        --env ORACLE_PDB="ORCLPDB1" \
+        --env ORACLE_PWD="${PASSWORD}" \
+        --env ORACLE_CHARACTERSET="AL32UTF8" \
+        --mount type="bind",src="${ORACLE_DB_VOLUME_DIR}",dst="/opt/oracle/oradata" \
+        oracle/database:18.3.0-ee
 }
 
 function docker_run_oracledb12_r2 {
@@ -62,21 +63,21 @@ function docker_run_oracledb12_r2 {
     bash ./buildDockerImage.sh -v 12.2.0.1 -e -i
     rm -f 12.2.0.1/*.zip
 
-    sudo mkdir -p /mnt/volume/oracledb12
-    sudo chmod 777 /mnt/volume/oracledb12
+    local ORACLE_DB_VOLUME_DIR="/mnt/volume/oracledb12"
+    sudo mkdir -p ${ORACLE_DB_VOLUME_DIR}
+
+    sudo chmod 777 ${ORACLE_DB_VOLUME_DIR}
 
     docker container run \
         --detach \
         --name oracledb12 \
         --publish 1521:1521 \
         --publish 5500:5500 \
-        --env ORACLE_SID=ORCLCDB \
-        --env ORACLE_PDB=ORCLPDB1 \
+        --env ORACLE_SID="ORCLCDB" \
+        --env ORACLE_PDB="ORCLPDB1" \
         --env ORACLE_PWD="${PASSWORD}" \
-        --env ORACLE_CHARACTERSET=AL32UTF8 \
-        --mount type=bind,src=/mnt/volume/oracledb12,dst=/opt/oracle/oradata \
-        --mount type=bind,src=/mnt/share,dst=/mnt/share \
-        --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
+        --env ORACLE_CHARACTERSET="AL32UTF8" \
+        --mount type="bind",src="${ORACLE_DB_VOLUME_DIR}",dst="/opt/oracle/oradata" \
         oracle/database:12.2.0.1-ee
 }
 
@@ -89,9 +90,7 @@ function docker_run_oracledb12_r2_official_volume {
         --detach \
         --name oracledb12 \
         --publish 1521:1521 \
-        --mount type=bind,src=oracledb12vol,dst=/ORCL \
-        --mount type=bind,src=/mnt/share,dst=/mnt/share \
-        --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
+        --mount type="bind",src="oracledb12vol",dst="/ORCL" \
         store/oracle/database-enterprise:12.2.0.1
 }
 
@@ -105,64 +104,61 @@ function docker_run_oracledb12_r2_official {
         --detach \
         --name oracledb12 \
         --publish 1521:1521 \
-        --mount type=bind,src=/mnt/volume/oracledb12,dst=/ORCL \
-        --mount type=bind,src=/mnt/share,dst=/mnt/share \
-        --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
+        --mount type="bind",src="${ORACLE_DB_VOLUME_DIR}",dst="/opt/oracle/oradata" \
         store/oracle/database-enterprise:12.2.0.1
 }
 
-function docker_run_oracledb18 {
-    /bin/cp -f /mnt/share/oracle-database/18c/LINUX.X64_180000_db_home.zip 18.3.0
-    bash ./buildDockerImage.sh -v 18.3.0 -e -i
-    rm -f 18.3.0/*.zip
+function docker_run_oracledb12_r1 {
+    /bin/cp -f /mnt/share/oracle-database/12cr1/linuxamd64_12102_database_1of2.zip 12.1.0.2
+    /bin/cp -f /mnt/share/oracle-database/12cr1/linuxamd64_12102_database_2of2.zip 12.1.0.2
+    bash ./buildDockerImage.sh -v 12.1.0.2 -e -i
+    rm -f 12.1.0.2/*.zip
 
-    sudo mkdir -p /mnt/volume/oracledb18
-    sudo chmod 777 /mnt/volume/oracledb18
+    local ORACLE_DB_VOLUME_DIR="/mnt/volume/oracledb12"
+    sudo mkdir -p ${ORACLE_DB_VOLUME_DIR}
+
+    sudo chmod 777 ${ORACLE_DB_VOLUME_DIR}
 
     docker container run \
         --detach \
-        --name oracledb18 \
+        --name oracledb12 \
         --publish 1521:1521 \
         --publish 5500:5500 \
-        --env ORACLE_SID=ORCLCDB \
-        --env ORACLE_PDB=ORCLPDB1 \
+        --env ORACLE_SID="ORCLCDB" \
+        --env ORACLE_PDB="ORCLPDB1" \
         --env ORACLE_PWD="${PASSWORD}" \
-        --env ORACLE_CHARACTERSET=AL32UTF8 \
-        --mount type=bind,src=/mnt/volume/oracledb18,dst=/opt/oracle/oradata \
-        --mount type=bind,src=/mnt/share,dst=/mnt/share \
-        --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
-        oracle/database:18.3.0-ee
+        --env ORACLE_CHARACTERSET="AL32UTF8" \
+        --mount type="bind",src="${ORACLE_DB_VOLUME_DIR}",dst="/opt/oracle/oradata" \
+        oracle/database:12.1.0.2-ee
 }
 
-function docker_run_oracledb19 {
-    /bin/cp -f /mnt/share/oracle-database/19c/LINUX.X64_193000_db_home.zip 19.3.0
-    bash ./buildDockerImage.sh -v 19.3.0 -e -i
-    rm -f 19.3.0/*.zip
+function docker_run_oracledb11 {
+    /bin/cp -f /mnt/share/oracle-database/11gr2/oracle-xe-11.2.0-1.0.x86_64.rpm.zip 11.2.0.2
+    bash ./buildDockerImage.sh -v 11.2.0.2 -x -i
+    rm -f 11.2.0.2/*.zip
 
-    sudo mkdir -p /mnt/volume/oracledb19
-    sudo chmod 777 /mnt/volume/oracledb19
+    local ORACLE_DB_VOLUME_DIR="/mnt/volume/oracledb11"
+    sudo mkdir -p ${ORACLE_DB_VOLUME_DIR}
+
+    sudo chmod 777 ${ORACLE_DB_VOLUME_DIR}
 
     docker container run \
         --detach \
-        --name oracledb19 \
+        --name oracledb11 \
         --publish 1521:1521 \
-        --publish 5500:5500 \
-        --env ORACLE_SID=ORCLCDB \
-        --env ORACLE_PDB=ORCLPDB1 \
+        --publish 5500:8080 \
+        --shm-size="1g" \
         --env ORACLE_PWD="${PASSWORD}" \
-        --env ORACLE_CHARACTERSET=AL32UTF8 \
-        --mount type=bind,src=/mnt/volume/oracledb19,dst=/opt/oracle/oradata \
-        --mount type=bind,src=/mnt/share,dst=/mnt/share \
-        --mount type=bind,src=/mnt/storage,dst=/mnt/storage \
-        oracle/database:19.3.0-ee
+        --mount type="bind",src="${ORACLE_DB_VOLUME_DIR}",dst="/opt/oracle/oradata" \
+        oracle/database:11.2.0.2-xe
 }
 
 ######################################################################
 
-# docker_run_oracledb11
-# docker_run_oracledb12_r1
+docker_run_oracledb19
+# docker_run_oracledb18
 # docker_run_oracledb12_r2
 # docker_run_oracledb12_r2_official_volume
 # docker_run_oracledb12_r2_official
-# docker_run_oracledb18
-docker_run_oracledb19
+# docker_run_oracledb12_r1
+# docker_run_oracledb11
