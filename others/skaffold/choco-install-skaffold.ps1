@@ -1,1 +1,1 @@
-choco install skaffold
+choco install --confirm skaffold
