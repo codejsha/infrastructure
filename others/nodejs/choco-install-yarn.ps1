@@ -1,1 +1,1 @@
-choco install yarn
+choco install --confirm yarn

@@ -1,1 +1,1 @@
-choco install nodejs.install
+choco install --confirm nodejs.install
