@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 SERVER_NAME="ManagedServer1"
 DOMAIN_HOME="/usr/local/weblogic/user_projects/domains/base_domain"
@@ -35,7 +35,7 @@ USER_MEM_ARGS="${USER_MEM_ARGS} -XX:+PrintTenuringDistribution"
 USER_MEM_ARGS="${USER_MEM_ARGS} -Xloggc:${LOG_DIR}/gc.${SERVER_NAME}.log"
 # USER_MEM_ARGS="${USER_MEM_ARGS} -XX:+UseGCLogFileRotation"
 # USER_MEM_ARGS="${USER_MEM_ARGS} -XX:+NumberOfGCLogFiles=30"
-# USER_MEM_ARGS="${USER_MEM_ARGS} -XX:+GCLogFileSize=8K"
+# USER_MEM_ARGS="${USER_MEM_ARGS} -XX:+GCLogFileSize=1M"
 USER_MEM_ARGS="${USER_MEM_ARGS} -XX:+HeapDumpOnOutOfMemoryError"
 USER_MEM_ARGS="${USER_MEM_ARGS} -XX:HeapDumpPath=${LOG_DIR}/dump"
 export USER_MEM_ARGS
