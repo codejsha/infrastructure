@@ -1,1 +1,1 @@
-choco install awscli
+choco install --confirm awscli
