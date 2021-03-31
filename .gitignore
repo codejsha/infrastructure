@@ -19,13 +19,14 @@ temp.yaml
 *-temp.yaml
 *.zip
 
+/istio/addon/certs/
 /kafka/cmak/cmak-*/
 /kafka/confluent/kubernetes/confluent-operator/
 /kafka/debezium/
 /kafka/strimzi/strimzi-*/
 /kubernetes/kubespray/kubespray/
-/kraken/kraken/
 /oracledb/docker-images/
+/others/kraken/kraken/
 /rook/rook/
 /temp/
 /tomcat/log4j/apache-log4j-*-bin/
