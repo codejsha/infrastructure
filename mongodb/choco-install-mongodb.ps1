@@ -1,1 +1,1 @@
-choco install mongodb
+choco install --confirm mongodb
