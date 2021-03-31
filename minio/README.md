@@ -24,20 +24,22 @@ bash ./install-minio.sh
 bash ./docker-run-minio.sh
 ```
 
-## Kubernetes
+## Kubernetes (Helm chart)
 
-### Helm chart
+⚠️ Deprecated chart
+
+- https://github.com/minio/charts
 
 ```bash
 bash ./helm-install-minio.sh
 ```
 
-### Operator
+## Kubernetes (Operator)
 
 - https://github.com/minio/operator
 - https://github.com/minio/console
 
-#### krew
+### krew
 
 ```bash
 ### install and configure
@@ -45,31 +47,31 @@ bash ./operator-install-minio.sh
 bash ./operator-create-minio-tenant.sh
 
 ### ingress
-kubectl apply -f ./tenant-console-ingress.yaml
+kubectl apply --filename ./tenant-console-ingress.yaml
 
 ### delete
 bash ./operator-delete-minio-tenant.sh
 ```
 
-#### kustomize
+### kustomize
 
 ```bash
 ### install and configure
 bash ./kustomize-install-minio-operator.sh
-kubectl apply -n minio-tenant -f ./tenant.yaml
+kubectl apply --namespace minio-tenant --filename ./tenant.yaml
 
 ### ingress
-kubectl apply -f ./tenant-console-ingress.yaml
+kubectl apply --filename ./tenant-console-ingress.yaml
 
 ### delete
-kubectl delete -n minio-tenant -f ./tenant.yaml
+kubectl delete --namespace minio-tenant --filename ./tenant.yaml
 ```
 
-#### Architecture
+### Architecture
 
 ![minio-operator-architecture](/contents/images/minio-operator-architecture.png)
 
-### Grafana dashboard
+## Grafana dashboard
 
 - https://grafana.com/grafana/dashboards/13502
 
