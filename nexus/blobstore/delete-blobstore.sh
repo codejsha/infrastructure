@@ -1,22 +1,23 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 NEXUS_URL="https://nexus.example.com"
 NEXUS_USER="admin"
 NEXUS_PASSWORD="admin123"
+BLOBSTORE_NAME="${1}"
 
 ######################################################################
 
-function get_blob_store_list {
+function delete_blob_store {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
-        -X GET \
-        -H "Accept:application/json" \
-        ${NEXUS_URL}/service/rest/beta/blobstores
+        --request DELETE \
+        --header "Accept:application/json" \
+        ${NEXUS_URL}/service/rest/beta/blobstores/${BLOBSTORE_NAME}
 }
 
 ######################################################################
 
-get_blob_store_list
+delete_blob_store

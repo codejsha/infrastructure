@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 NEXUS_URL="https://nexus.example.com"
 NEXUS_USER="admin"
@@ -13,8 +13,8 @@ REPOSITORY_NAME="${1}"
 function delete_repository {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
-        -X DELETE \
-        -H "Accept:application/json" \
+        --request DELETE \
+        --header "Accept:application/json" \
         ${NEXUS_URL}/service/rest/beta/repositories/${REPOSITORY_NAME}
 }
 

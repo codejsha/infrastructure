@@ -1,18 +1,22 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 ######################################################################
 
 ### USER
+cd security
 
 ### create-user.sh ${USER_ID} ${USER_PASSWORD}
 bash ./create-user.sh "developer" "developer"
 
+cd ..
+
 ######################################################################
 
 ### BLOBSTORE
+cd blobstore
 
 export AWS_ACCESS_KEY="${AWS_ACCESS_KEY}"
 export AWS_SECRET_KEY="${AWS_SECRET_KEY}"
@@ -26,9 +30,12 @@ bash ./create-blobstore.sh "nexus-docker-harbor"
 # bash ./create-blobstore.sh "nexus-helm-chartmuseum"
 bash ./create-blobstore.sh "nexus-helm-harbor"
 
+cd ..
+
 ######################################################################
 
 ### MAVEN
+cd maven
 
 ### delete-repository.sh ${REPOSITORY_NAME}
 bash ./delete-repository.sh "maven-central"
@@ -39,9 +46,12 @@ bash ./create-maven-proxy-repo.sh "maven-central" "nexus-maven-central" "https:/
 ### update-maven-group-repo.sh ${REPOSITORY_NAME} ${BLOBSTORE_NAME} ${REPOSITORY_MEMBER_NAMES}
 bash ./update-maven-group-repo.sh "maven-public" "default" "maven-central\", \"maven-releases\", \"maven-snapshots"
 
+cd ..
+
 ######################################################################
 
 ### DOCKER
+cd docker
 
 ### create-docker-proxy-repo.sh ${REPOSITORY_NAME} ${BLOBSTORE_NAME} ${REMOTE_URL} ${DOCKER_INDEX_TYPE}
 bash ./create-docker-proxy-repo.sh "docker-hub" "nexus-docker-hub" "https://registry-1.docker.io" "HUB"
@@ -63,13 +73,18 @@ bash ./create-docker-group-repo.sh "docker-group" "default" "docker-hub\", \"doc
 ### set-active-realms-list.sh ${REALM_IDS}
 bash ./set-active-realms-list.sh "\"NexusAuthenticatingRealm\", \"NexusAuthorizingRealm\", \"DockerToken\""
 
+cd ..
+
 ######################################################################
 
 ### HELM
+cd helm
 
 ### create-helm-proxy-repo.sh ${REPOSITORY_NAME} ${BLOBSTORE_NAME} ${REMOTE_URL}
 # bash ./create-helm-proxy-repo.sh "helm-chartmuseum" "nexus-helm-chartmuseum" "http://chartmuseum-service.chart-system:8080"
 bash ./create-helm-proxy-repo.sh "helm-harbor" "nexus-helm-harbor" "https://core.harbor.example.com"
+
+cd ..
 
 ######################################################################
 

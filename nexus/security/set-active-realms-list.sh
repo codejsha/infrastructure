@@ -6,27 +6,20 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 NEXUS_URL="https://nexus.example.com"
 NEXUS_USER="admin"
 NEXUS_PASSWORD="admin123"
+REALM_IDS="${1}"
 
 ######################################################################
 
-function status {
+function set_active_realms_list {
     curl --insecure \
-        --head \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
-        --request GET \
+        --request PUT \
         --header "Accept:application/json" \
-        ${NEXUS_URL}/service/rest/v1/status
-}
-
-function status_check {
-    # curl --insecure \
-    #     --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
-    #     --request GET \
-    #     --header "Accept:application/json" \
-    #     ${NEXUS_URL}/service/rest/v1/status/check
+        --header "Content-Type:application/json" \
+        --data "[${REALM_IDS}]" \
+        ${NEXUS_URL}/service/rest/beta/security/realms/active
 }
 
 ######################################################################
 
-status
-# status_check
+set_active_realms_list

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 NEXUS_URL="https://nexus.example.com"
 NEXUS_USER="admin"
@@ -9,14 +9,14 @@ NEXUS_PASSWORD="admin123"
 
 ######################################################################
 
-function get_user_list {
+function get_available_realms_list {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
-        -X GET \
-        -H "Accept:application/json" \
-        ${NEXUS_URL}/service/rest/beta/security/users
+        --request GET \
+        --header "Accept:application/json" \
+        ${NEXUS_URL}/service/rest/beta/security/realms/available
 }
 
 ######################################################################
 
-get_user_list
+get_available_realms_list

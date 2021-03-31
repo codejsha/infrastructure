@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 export NEXUS_URL="https://nexus.example.com"
 export NEXUS_USER="admin"
@@ -14,16 +14,16 @@ envsubst < ./data-docker-group-repo.json > ./data-docker-group-repo-temp.json
 
 ######################################################################
 
-function update_docker_group_repository {
+function create_docker_group_repository {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
-        -X PUT \
-        -H "Accept:application/json" \
-        -H "Content-Type:application/json" \
-        -d @data-docker-group-repo-temp.json \
-        ${NEXUS_URL}/service/rest/beta/repositories/docker/group/${REPOSITORY_NAME}
+        --request POST \
+        --header "Accept:application/json" \
+        --header "Content-Type:application/json" \
+        --data @data-docker-group-repo-temp.json \
+        ${NEXUS_URL}/service/rest/beta/repositories/docker/group
 }
 
 ######################################################################
 
-update_docker_group_repository
+create_docker_group_repository

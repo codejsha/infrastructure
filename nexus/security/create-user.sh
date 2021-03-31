@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 export NEXUS_URL="https://nexus.example.com"
 export NEXUS_USER="admin"
@@ -21,10 +21,10 @@ envsubst < ./data-user.json > ./data-user-temp.json
 function create_user {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
-        -X POST \
-        -H "Accept:application/json" \
-        -H "Content-Type:application/json" \
-        -d @data-user-temp.json \
+        --request POST \
+        --header "Accept:application/json" \
+        --header "Content-Type:application/json" \
+        --data @data-user-temp.json \
         ${NEXUS_URL}/service/rest/beta/security/users
 }
 

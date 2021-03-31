@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 export NEXUS_URL="https://nexus.example.com"
 export NEXUS_USER="admin"
@@ -22,10 +22,10 @@ envsubst < ./data-blobstore.json > ./data-blobstore-temp.json
 function create_s3_blob_store {
     curl --insecure \
         --user ${NEXUS_USER}:${NEXUS_PASSWORD} \
-        -X POST \
-        -H "Accept:application/json" \
-        -H "Content-Type:application/json" \
-        -d @data-blobstore-temp.json \
+        --request POST \
+        --header "Accept:application/json" \
+        --header "Content-Type:application/json" \
+        --data @data-blobstore-temp.json \
         ${NEXUS_URL}/service/rest/beta/blobstores/s3
 }
 
