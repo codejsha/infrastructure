@@ -1,1 +1,1 @@
-choco install typescript
+choco install --confirm typescript
