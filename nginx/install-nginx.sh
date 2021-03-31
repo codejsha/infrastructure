@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 cat <<EOF | sudo tee /etc/yum.repos.d/nginx.repo
 [nginx]
@@ -12,3 +12,9 @@ enabled=1
 EOF
 
 sudo yum install -y nginx
+
+sudo systemctl enable nginx
+sudo systemctl start nginx
+
+# sudo firewall-cmd --permanent --zone=public --add-port=80/tcp
+# sudo firewall-cmd --reload

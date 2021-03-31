@@ -1,1 +1,1 @@
-choco install nginx
+choco install --confirm nginx
