@@ -14,7 +14,7 @@ function docker_run_zabbix_postgresql {
     docker container run \
         --detach \
         --name zabbix-postgres-server \
-        --net zabbix-network \
+        --network zabbix-network \
         --publish 5432:5432 \
         --env POSTGRES_DB="zabbix" \
         --env POSTGRES_USER="zabbix" \
@@ -31,7 +31,7 @@ docker_run_zabbix_postgresql
 docker container run \
     --detach \
     --name zabbix-server-pgsql \
-    --net zabbix-network \
+    --network zabbix-network \
     --env DB_SERVER_HOST="zabbix-postgres-server" \
     --env DB_SERVER_PORT="5432" \
     --env POSTGRES_DB="zabbix" \
@@ -42,7 +42,7 @@ docker container run \
 docker container run \
     --detach \
     --name zabbix-web-apache-pgsql \
-    --net zabbix-network \
+    --network zabbix-network \
     --publish 8081:8080 \
     --env DB_SERVER_HOST="zabbix-postgres-server" \
     --env POSTGRES_USER="zabbix" \

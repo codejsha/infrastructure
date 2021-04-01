@@ -11,7 +11,7 @@ function docker_run_zabbix_web {
     docker container run \
         --detach \
         --name zabbix-web-apache-pgsql \
-        --net zabbix-network \
+        --network zabbix-network \
         --publish 8081:8080 \
         --env DB_SERVER_HOST="zabbix-postgres-server" \
         --env POSTGRES_USER="zabbix" \
