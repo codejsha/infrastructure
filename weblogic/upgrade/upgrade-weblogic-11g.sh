@@ -26,10 +26,10 @@ function upgrade_weblogic_11g {
     #     -jar ${INSTALL_FILE_DIR}/${INSTALL_FILE} \
     #     -mode=silent \
     #     -silent_xml=${INSTALL_SCRIPT_DIR}/${SILENT_FILE} \
-    #     -silent_priority="debug" \
-    #     -silent_log="upgrade-silent-install.log" \
-    #     -log_priority="debug" \
-    #     -log="upgrade-install.log"
+    #     -silent_priority=debug \
+    #     -silent_log=upgrade-silent-install.log \
+    #     -log_priority=debug \
+    #     -log=upgrade-install.log
 }
 
 ######################################################################
