@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 INSTANCE_NAME="inst1"
 export JAVA_HOME="/usr/lib/jvm/java-11"
@@ -38,7 +38,7 @@ JAVA_OPTS="${JAVA_OPTS} -XX:+UseG1GC"
 JAVA_OPTS="${JAVA_OPTS} -XX:MaxGCPauseMillis=200"
 JAVA_OPTS="${JAVA_OPTS} -XX:InitiatingHeapOccupancyPercent=45"
 JAVA_OPTS="${JAVA_OPTS} -Xlog:gc*=info:file=${JBOSS_LOG_DIR}/gc.${INSTANCE_NAME}.log:time,pid,tid,level,tags"
-# JAVA_OPTS="${JAVA_OPTS} -Xlog:gc*=info:file=${JBOSS_LOG_DIR}/gc.${INSTANCE_NAME}.log:time,pid,tid,level,tags:filecount=30,filesize=8K"
+# JAVA_OPTS="${JAVA_OPTS} -Xlog:gc*=info:file=${JBOSS_LOG_DIR}/gc.${INSTANCE_NAME}.log:time,pid,tid,level,tags:filecount=30,filesize=1M"
 JAVA_OPTS="${JAVA_OPTS} -XX:+HeapDumpOnOutOfMemoryError"
 JAVA_OPTS="${JAVA_OPTS} -XX:HeapDumpPath=${JBOSS_LOG_DIR}/dump"
 export JAVA_OPTS

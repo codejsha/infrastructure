@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 INSTANCE_NAME="inst1"
 export JAVA_HOME="/usr/lib/jvm/java-1.8.0"
@@ -43,7 +43,7 @@ JAVA_OPTS="${JAVA_OPTS} -XX:+PrintHeapAtGC"
 JAVA_OPTS="${JAVA_OPTS} -Xloggc:${JBOSS_LOG_DIR}/gc.${INSTANCE_NAME}.log"
 # JAVA_OPTS="${JAVA_OPTS} -XX:+UseGCLogFileRotation"
 # JAVA_OPTS="${JAVA_OPTS} -XX:+NumberOfGCLogFiles=30"
-# JAVA_OPTS="${JAVA_OPTS} -XX:+GCLogFileSize=8K"
+# JAVA_OPTS="${JAVA_OPTS} -XX:+GCLogFileSize=1M"
 JAVA_OPTS="${JAVA_OPTS} -XX:+HeapDumpOnOutOfMemoryError"
 JAVA_OPTS="${JAVA_OPTS} -XX:HeapDumpPath=${JBOSS_LOG_DIR}/dump"
 export JAVA_OPTS
