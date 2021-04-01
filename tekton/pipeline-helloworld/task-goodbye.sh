@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 # https://tekton.dev/docs/getting-started/
 
 cat <<EOF > ./task-goodbye.yaml
@@ -18,11 +18,11 @@ spec:
         echo "Goodbye World!"
 EOF
 
-kubectl apply -f task-goodbye.yaml
+kubectl apply --filename task-goodbye.yaml
 
 tkn task start goodbye --dry-run
 tkn task start goodbye
 # tkn task start goodbye --dry-run > taskRun-goodbye.yaml
-# kubectl create -f taskRun-goodbye.yaml
+# kubectl create --filename taskRun-goodbye.yaml
 
-tkn taskrun logs --last -f
+tkn taskrun logs --follow --last

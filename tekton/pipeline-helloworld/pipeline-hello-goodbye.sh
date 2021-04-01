@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 cat <<EOF > ./pipeline-hello-goodbye.yaml
 apiVersion: tekton.dev/v1beta1
@@ -20,11 +20,11 @@ spec:
         name: goodbye
 EOF
 
-kubectl apply -f pipeline-hello-goodbye.yaml
+kubectl apply --filename pipeline-hello-goodbye.yaml
 
 tkn pipeline start hello-goodbye --dry-run
 tkn pipeline start hello-goodbye
 # tkn pipeline start hello-goodbye --dry-run > pipelineRun-hello-goodbye.yaml
-# kubectl create -f pipelineRun-hello-goodbye.yaml
+# kubectl create --filename pipelineRun-hello-goodbye.yaml
 
-tkn pipelinerun logs --last -f
+tkn pipelinerun logs --follow --last

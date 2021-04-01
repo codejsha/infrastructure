@@ -1,11 +1,11 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 NAMESPACE="tekton-pipelines"
 kubectl create namespace ${NAMESPACE}
-kubectl config set-context --current --namespace="${NAMESPACE}"
+kubectl config set-context --current --namespace "${NAMESPACE}"
 
 kubectl create clusterrolebinding tekton-operator-cluster-admin --clusterrole cluster-admin --serviceaccount tekton-operator:tekton-operator
 
@@ -18,7 +18,7 @@ spec:
   version: v0.8.2
 EOF
 
-kubectl apply -f operator-tekton-dashboard.yaml
+kubectl apply --filename operator-tekton-dashboard.yaml
 
 ### check
-# kubectl get tektonaddon dashboard -o jsonpath='{.status.conditions[0]}'
+# kubectl get tektonaddon dashboard --output jsonpath='{.status.conditions[0]}'

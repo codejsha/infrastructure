@@ -1,1 +1,1 @@
-choco install tektoncd-cli
+choco install --confirm tektoncd-cli

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 export ARGOCD_USERNAME="${ARGOCD_USERNAME}"
 export ARGOCD_PASSWORD="${ARGOCD_PASSWORD}"
@@ -15,7 +15,7 @@ envsubst < ./argocd-secret.yaml > ./argocd-secret-temp.yaml
 envsubst < ./gitlab-cd-secret.yaml > ./gitlab-cd-secret-temp.yaml
 envsubst < ./gitlab-ci-secret.yaml > ./gitlab-ci-secret-temp.yaml
 
-kubectl config set-context --current --namespace=myproject
+kubectl config set-context --current --namespace myproject
 
 kubectl apply --filename https://raw.githubusercontent.com/tektoncd/catalog/master/task/git-clone/0.2/git-clone.yaml
 kubectl apply --filename https://raw.githubusercontent.com/tektoncd/catalog/master/task/maven/0.2/maven.yaml
