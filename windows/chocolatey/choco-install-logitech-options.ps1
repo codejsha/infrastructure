@@ -1,1 +1,1 @@
-choco install logitech-options
+choco install --confirm logitech-options

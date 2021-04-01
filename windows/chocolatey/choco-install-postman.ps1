@@ -1,1 +1,1 @@
-choco install postman
+choco install --confirm postman

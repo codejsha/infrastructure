@@ -34,9 +34,9 @@ foreach ($item in $collection) {
     $AnonymousUid = "1000"
     $AnonymousGid = "1000"
     $LanguageEncoding = "Ansi" # default
-    $EnableAnonymousAccess = $False
-    $EnableUnmappedAccess = $True
-    $AllowRootAccess = $False
+    $EnableAnonymousAccess = $false
+    $EnableUnmappedAccess = $true
+    $AllowRootAccess = $false
     $Permission = "readwrite"
 
     New-NfsShare `

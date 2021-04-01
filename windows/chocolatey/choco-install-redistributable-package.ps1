@@ -1,6 +1,6 @@
-choco install vcredist2010
-choco install vcredist2012
-choco install vcredist2013
-choco install vcredist2015
-choco install vcredist2017
-choco install vcredist140   # 2015-2019
+choco install --confirm vcredist2010
+choco install --confirm vcredist2012
+choco install --confirm vcredist2013
+choco install --confirm vcredist2015
+choco install --confirm vcredist2017
+choco install --confirm vcredist140   # 2015-2019

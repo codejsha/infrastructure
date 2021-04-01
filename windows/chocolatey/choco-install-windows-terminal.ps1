@@ -1,1 +1,1 @@
-choco install microsoft-windows-terminal
+choco install --confirm microsoft-windows-terminal

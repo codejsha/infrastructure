@@ -1,1 +1,1 @@
-choco install neovim
+choco install --confirm neovim

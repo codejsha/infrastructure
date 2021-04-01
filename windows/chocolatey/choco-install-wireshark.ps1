@@ -1,1 +1,1 @@
-choco install wireshark
+choco install --confirm wireshark

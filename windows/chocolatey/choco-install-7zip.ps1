@@ -1,1 +1,1 @@
-choco install 7zip.install
+choco install --confirm 7zip.install

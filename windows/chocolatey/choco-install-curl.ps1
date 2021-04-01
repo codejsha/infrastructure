@@ -1,1 +1,1 @@
-choco install curl
+choco install --confirm curl

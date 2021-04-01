@@ -1,1 +1,1 @@
-choco install adobereader
+choco install --confirm adobereader

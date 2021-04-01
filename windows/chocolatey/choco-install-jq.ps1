@@ -1,1 +1,1 @@
-choco install jq
+choco install --confirm jq

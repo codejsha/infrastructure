@@ -1,1 +1,1 @@
-choco install jetbrainstoolbox
+choco install --confirm jetbrainstoolbox

@@ -1,1 +1,1 @@
-choco install firefox
+choco install --confirm firefox

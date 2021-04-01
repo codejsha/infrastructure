@@ -1,1 +1,1 @@
-choco install googlechrome
+choco install --confirm googlechrome

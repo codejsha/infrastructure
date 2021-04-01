@@ -1,1 +1,1 @@
-choco install teamviewer
+choco install --confirm teamviewer

@@ -6,10 +6,11 @@
 ### https://docs.microsoft.com/en-us/powershell/module/hyper-v/set-vmmemory
 ### https://docs.microsoft.com/en-us/powershell/module/hyper-v/new-vhd
 
-$VMName = "LinuxMachine"
+$VMName = "TestServerMachine"
 $VMPath = "D:\hyper"
 $Switch = "HyperInternal"
-$InstallMedia = "F:\os-iso\CentOS-7-x86_64-DVD-2009.iso"
+# $InstallMedia = "F:\os-iso\CentOS-7-x86_64-DVD-2009.iso"
+$InstallMedia = "F:\os-iso\CentOS-8.3.2011-x86_64-dvd1.iso"
 # $InstallMedia = "F:\os-iso\Windows_Server_2019_Datacenter_EVAL_en-us_17763_refresh.iso"
 # $VHDName = ""
 
@@ -18,8 +19,8 @@ New-VM -Name $VMName -Path $VMPath -Generation 2 -MemoryStartupBytes 8GB -Switch
 
 Set-VMFirmware -VMName $VMName -EnableSecureBoot Off
 Set-VMProcessor -VMName $VMName -Count 2
-Set-VMMemory $VMName -DynamicMemoryEnabled $False -MinimumBytes 512MB -StartupBytes 2GB -MaximumBytes 4GB
-# Set-VMMemory $VMName -DynamicMemoryEnabled $True -MinimumBytes 512MB -StartupBytes 2GB -MaximumBytes 4GB
+Set-VMMemory $VMName -DynamicMemoryEnabled $false -StartupBytes 8GB
+# Set-VMMemory $VMName -DynamicMemoryEnabled $true -StartupBytes 2GB -MinimumBytes 512MB -MaximumBytes 4GB
 
 # Add-VMNetworkAdapter -VMName $VMName -SwitchName $Switch
 

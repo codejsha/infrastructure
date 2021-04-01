@@ -1,1 +1,1 @@
-choco install filezilla
+choco install --confirm filezilla

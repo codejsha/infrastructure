@@ -1,1 +1,1 @@
-choco install virtualbox
+choco install --confirm virtualbox

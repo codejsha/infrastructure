@@ -1,1 +1,1 @@
-choco install mobaxterm
+choco install --confirm mobaxterm

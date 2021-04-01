@@ -1,1 +1,1 @@
-choco install evernote
+choco install --confirm evernote

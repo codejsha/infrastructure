@@ -1,1 +1,1 @@
-choco install sysinternals
+choco install --confirm sysinternals

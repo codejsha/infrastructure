@@ -1,1 +1,1 @@
-choco install eclipse
+choco install --confirm eclipse

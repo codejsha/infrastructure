@@ -1,1 +1,1 @@
-choco install winscp
+choco install --confirm winscp
