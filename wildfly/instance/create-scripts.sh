@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 source ./env-base.sh
 
@@ -38,7 +38,7 @@ cat <<EOF > ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export JAVA_HOME="${JAVA_HOME}"
@@ -71,7 +71,20 @@ JAVA_OPTS="\${JAVA_OPTS} -D\${INSTANCE_NAME}"
 JAVA_OPTS="\${JAVA_OPTS} -Xms1024m -Xmx1024m"
 EOF
 
-if [[ ${JAVA_VERSION} =~ ^1.8 ]]; then
+if [[ ${JAVA_VERSION} =~ ^11 ]]; then
+cat <<EOF >> ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
+JAVA_OPTS="\${JAVA_OPTS} -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
+# JAVA_OPTS="\${JAVA_OPTS} -XX:+UseParallelGC"
+JAVA_OPTS="\${JAVA_OPTS} -XX:+UseG1GC"
+JAVA_OPTS="\${JAVA_OPTS} -XX:MaxGCPauseMillis=200"
+JAVA_OPTS="\${JAVA_OPTS} -XX:InitiatingHeapOccupancyPercent=45"
+JAVA_OPTS="\${JAVA_OPTS} -Xlog:gc*=info:file=\${JBOSS_LOG_DIR}/gc.\${INSTANCE_NAME}.log:time,pid,tid,level,tags"
+# JAVA_OPTS="\${JAVA_OPTS} -Xlog:gc*=info:file=\${JBOSS_LOG_DIR}/gc.\${INSTANCE_NAME}.log:time,pid,tid,level,tags:filecount=30,filesize=1M"
+JAVA_OPTS="\${JAVA_OPTS} -XX:+HeapDumpOnOutOfMemoryError"
+JAVA_OPTS="\${JAVA_OPTS} -XX:HeapDumpPath=\${JBOSS_LOG_DIR}/dump"
+export JAVA_OPTS
+EOF
+elif [[ ${JAVA_VERSION} =~ ^1.8 ]]; then
 cat <<EOF >> ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
 JAVA_OPTS="\${JAVA_OPTS} -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
 JAVA_OPTS="\${JAVA_OPTS} -XX:+UseParallelGC"
@@ -84,20 +97,7 @@ JAVA_OPTS="\${JAVA_OPTS} -XX:+PrintHeapAtGC"
 JAVA_OPTS="\${JAVA_OPTS} -Xloggc:\${JBOSS_LOG_DIR}/gc.\${INSTANCE_NAME}.log"
 # JAVA_OPTS="\${JAVA_OPTS} -XX:+UseGCLogFileRotation"
 # JAVA_OPTS="\${JAVA_OPTS} -XX:+NumberOfGCLogFiles=30"
-# JAVA_OPTS="\${JAVA_OPTS} -XX:+GCLogFileSize=8K"
-JAVA_OPTS="\${JAVA_OPTS} -XX:+HeapDumpOnOutOfMemoryError"
-JAVA_OPTS="\${JAVA_OPTS} -XX:HeapDumpPath=\${JBOSS_LOG_DIR}/dump"
-export JAVA_OPTS
-EOF
-elif [[ ${JAVA_VERSION} =~ ^11 ]]; then
-cat <<EOF >> ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
-JAVA_OPTS="\${JAVA_OPTS} -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
-# JAVA_OPTS="\${JAVA_OPTS} -XX:+UseParallelGC"
-JAVA_OPTS="\${JAVA_OPTS} -XX:+UseG1GC"
-JAVA_OPTS="\${JAVA_OPTS} -XX:MaxGCPauseMillis=200"
-JAVA_OPTS="\${JAVA_OPTS} -XX:InitiatingHeapOccupancyPercent=45"
-JAVA_OPTS="\${JAVA_OPTS} -Xlog:gc*=info:file=\${JBOSS_LOG_DIR}/gc.\${INSTANCE_NAME}.log:time,pid,tid,level,tags"
-# JAVA_OPTS="\${JAVA_OPTS} -Xlog:gc*=info:file=\${JBOSS_LOG_DIR}/gc.\${INSTANCE_NAME}.log:time,pid,tid,level,tags:filecount=30,filesize=8K"
+# JAVA_OPTS="\${JAVA_OPTS} -XX:+GCLogFileSize=1M"
 JAVA_OPTS="\${JAVA_OPTS} -XX:+HeapDumpOnOutOfMemoryError"
 JAVA_OPTS="\${JAVA_OPTS} -XX:HeapDumpPath=\${JBOSS_LOG_DIR}/dump"
 export JAVA_OPTS
@@ -132,17 +132,17 @@ export JAVA_OPTS
 
 EOF
 
-if [[ ${JAVA_VERSION} =~ ^1.8 ]]; then
-cat <<EOF >> ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
-# JAVA_OPTS="\${JAVA_OPTS} -verbose:class"
-# JAVA_OPTS="\${JAVA_OPTS} -verbose:module"
-# JAVA_OPTS="\${JAVA_OPTS} -verbose:jni"
-# export JAVA_OPTS
-EOF
-elif [[ ${JAVA_VERSION} =~ ^11 ]]; then
+if [[ ${JAVA_VERSION} =~ ^11 ]]; then
 cat <<EOF >> ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
 # JAVA_OPTS="\${JAVA_OPTS} -Xlog:class+load=info,class+unload=info:stdout:time,level,tags"
 # JAVA_OPTS="\${JAVA_OPTS} -Xlog:module*=info:stdout:time,level,tags"
+# JAVA_OPTS="\${JAVA_OPTS} -verbose:jni"
+# export JAVA_OPTS
+EOF
+elif [[ ${JAVA_VERSION} =~ ^1.8 ]]; then
+cat <<EOF >> ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
+# JAVA_OPTS="\${JAVA_OPTS} -verbose:class"
+# JAVA_OPTS="\${JAVA_OPTS} -verbose:module"
 # JAVA_OPTS="\${JAVA_OPTS} -verbose:jni"
 # export JAVA_OPTS
 EOF
@@ -174,7 +174,7 @@ cat <<EOF > ${JBOSS_BASE_DIR}/stop-${INSTANCE_NAME}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export JAVA_HOME="${JAVA_HOME}"

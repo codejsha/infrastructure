@@ -1,19 +1,19 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-# DRIVER_FILE_DIR="/mnt/share/oracle-database/11gr2/OJDBC-Full"
-# DRIVER_FILE_DIR="/mnt/share/oracle-database/12cr1/OJDBC-Full"
-# DRIVER_FILE_DIR="/mnt/share/oracle-database/12cr2/OJDBC-Full"
-# DRIVER_FILE_DIR="/mnt/share/oracle-database/18c/ojdbc8-full"
-# DRIVER_FILE_DIR="/mnt/share/oracle-database/19c/ojdbc8-full"
 DRIVER_FILE_DIR="/mnt/share/oracle-database/19c/ojdbc10-full"
+# DRIVER_FILE_DIR="/mnt/share/oracle-database/19c/ojdbc8-full"
+# DRIVER_FILE_DIR="/mnt/share/oracle-database/18c/ojdbc8-full"
+# DRIVER_FILE_DIR="/mnt/share/oracle-database/12cr2/OJDBC-Full"
+# DRIVER_FILE_DIR="/mnt/share/oracle-database/12cr1/OJDBC-Full"
+# DRIVER_FILE_DIR="/mnt/share/oracle-database/11gr2/OJDBC-Full"
 
-# DRIVER_FILE="ojdbc6.jar"
-# DRIVER_FILE="ojdbc7.jar"
-# DRIVER_FILE="ojdbc8.jar"
 DRIVER_FILE="ojdbc10.jar"
+# DRIVER_FILE="ojdbc8.jar"
+# DRIVER_FILE="ojdbc7.jar"
+# DRIVER_FILE="ojdbc6.jar"
 
 ### module
 DRIVER_NAME="oracle"

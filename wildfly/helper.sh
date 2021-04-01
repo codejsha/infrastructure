@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 JAVA_HOME="/usr/lib/jvm/java-11"
 # JAVA_HOME="/usr/java/current"
@@ -13,8 +13,11 @@ BIND_ADDRESS_MGMT="test.example.com"
 
 ######################################################################
 
+### escape forward slash
 JAVA_HOME="${JAVA_HOME//\//\/}"
 JBOSS_HOME="${JBOSS_HOME//\//\/}"
+
+######################################################################
 
 find . -type f -name "env-base.sh" | xargs perl -pi -e "s/^JAVA_HOME=.*/JAVA_HOME=\"${JAVA_HOME}\"/"
 find . -type f -name "env-base.sh" | xargs perl -pi -e "s/^JBOSS_HOME=.*/JBOSS_HOME=\"${JBOSS_HOME}\"/"
