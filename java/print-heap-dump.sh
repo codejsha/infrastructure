@@ -7,8 +7,8 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 ### bash ./print-heap-dump.sh <PID>
 
 PID="${1}"
-# JAVA_HOME="/usr/lib/jvm/java-1.8.0"
 JAVA_HOME="/usr/lib/jvm/java-11"
+# JAVA_HOME="/usr/lib/jvm/java-1.8.0"
 
 if [ -z "${PID}" ]; then
     echo "Usage: bash ./print-heap-dump.sh <PID>"

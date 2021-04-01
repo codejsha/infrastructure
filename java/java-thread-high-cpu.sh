@@ -7,8 +7,8 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 ### bash ./java-thread-high-cpu.sh <PID>
 
 PID="${1}"
-# JAVA_HOME="/usr/lib/jvm/java-1.8.0"
 JAVA_HOME="/usr/lib/jvm/java-11"
+# JAVA_HOME="/usr/lib/jvm/java-1.8.0"
 
 LOOP_COUNT="1"
 TOP_THREAD_COUNT="5"

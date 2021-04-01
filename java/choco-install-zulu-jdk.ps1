@@ -1,3 +1,4 @@
-# choco install --confirm correttojdk
-choco install --confirm corretto11jdk
-choco install --confirm corretto8jdk
+# choco install --confirm zulu
+choco install --confirm zulu11
+choco install --confirm zulu8
+choco install --confirm zulu7
