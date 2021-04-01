@@ -36,6 +36,6 @@ function install_git_build {
 
 ######################################################################
 
-# install_git_with_dnf
-install_git_with_yum
+install_git_with_dnf
+# install_git_with_yum
 # install_git_build
