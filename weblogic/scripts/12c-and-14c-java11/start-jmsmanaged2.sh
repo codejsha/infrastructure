@@ -29,7 +29,7 @@ USER_MEM_ARGS="${USER_MEM_ARGS} -XX:+UseG1GC"
 USER_MEM_ARGS="${USER_MEM_ARGS} -XX:MaxGCPauseMillis=200"
 USER_MEM_ARGS="${USER_MEM_ARGS} -XX:InitiatingHeapOccupancyPercent=45"
 USER_MEM_ARGS="${USER_MEM_ARGS} -Xlog:gc*=info:file=${LOG_DIR}/gc.${SERVER_NAME}.log:time,pid,tid,level,tags"
-# USER_MEM_ARGS="${USER_MEM_ARGS} -Xlog:gc*=info:file=${LOG_DIR}/gc.${SERVER_NAME}.log:time,pid,tid,level,tags:filecount=30,filesize=8K"
+# USER_MEM_ARGS="${USER_MEM_ARGS} -Xlog:gc*=info:file=${LOG_DIR}/gc.${SERVER_NAME}.log:time,pid,tid,level,tags:filecount=30,filesize=1M"
 USER_MEM_ARGS="${USER_MEM_ARGS} -XX:+HeapDumpOnOutOfMemoryError"
 USER_MEM_ARGS="${USER_MEM_ARGS} -XX:HeapDumpPath=${LOG_DIR}/dump"
 export USER_MEM_ARGS
