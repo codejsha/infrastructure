@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 INSTANCE_NAME="inst1"
 export JAVA_HOME="/usr/lib/jvm/java-1.8.0"
@@ -34,7 +34,7 @@ CATALINA_OPTS="${CATALINA_OPTS} -XX:+PrintTenuringDistribution"
 CATALINA_OPTS="${CATALINA_OPTS} -Xloggc:${LOG_DIR}/gc.${INSTANCE_NAME}.log"
 # CATALINA_OPTS="${CATALINA_OPTS} -XX:+UseGCLogFileRotation"
 # CATALINA_OPTS="${CATALINA_OPTS} -XX:+NumberOfGCLogFiles=30"
-# CATALINA_OPTS="${CATALINA_OPTS} -XX:+GCLogFileSize=8K"
+# CATALINA_OPTS="${CATALINA_OPTS} -XX:+GCLogFileSize=1M"
 CATALINA_OPTS="${CATALINA_OPTS} -XX:+HeapDumpOnOutOfMemoryError"
 CATALINA_OPTS="${CATALINA_OPTS} -XX:HeapDumpPath=${LOG_DIR}/dump"
 export CATALINA_OPTS

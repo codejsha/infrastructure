@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 INSTANCE_NAME="inst1"
 export JAVA_HOME="/usr/lib/jvm/java-11"
@@ -28,7 +28,7 @@ CATALINA_OPTS="${CATALINA_OPTS} -XX:+UseG1GC"
 CATALINA_OPTS="${CATALINA_OPTS} -XX:MaxGCPauseMillis=200"
 CATALINA_OPTS="${CATALINA_OPTS} -XX:InitiatingHeapOccupancyPercent=45"
 CATALINA_OPTS="${CATALINA_OPTS} -Xlog:gc*=info:file=${LOG_DIR}/gc.${INSTANCE_NAME}.log:time,pid,tid,level,tags"
-# CATALINA_OPTS="${CATALINA_OPTS} -Xlog:gc*=info:file=${LOG_DIR}/gc.${INSTANCE_NAME}.log:time,pid,tid,level,tags:filecount=30,filesize=8K"
+# CATALINA_OPTS="${CATALINA_OPTS} -Xlog:gc*=info:file=${LOG_DIR}/gc.${INSTANCE_NAME}.log:time,pid,tid,level,tags:filecount=30,filesize=1M"
 CATALINA_OPTS="${CATALINA_OPTS} -XX:+HeapDumpOnOutOfMemoryError"
 CATALINA_OPTS="${CATALINA_OPTS} -XX:HeapDumpPath=${LOG_DIR}/dump"
 export CATALINA_OPTS
