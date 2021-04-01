@@ -58,7 +58,24 @@ confluent local services kafka \
 
 ######################################################################
 
-### connect
+### schema-registry
+
+confluent local services schema-registry start
+confluent local services schema-registry status
+confluent local services schema-registry stop
+confluent local services schema-registry top
+
+### log
+confluent local services schema-registry log
+confluent local services schema-registry log -f
+confluent local services schema-registry log --follow
+
+### acl
+confluent local services schema-registry acl --list
+
+######################################################################
+
+### kafka-connect
 
 confluent local services connect start
 confluent local services connect status
@@ -96,24 +113,7 @@ confluent local services kafka-rest log --follow
 
 ######################################################################
 
-### schema-registry
-
-confluent local services schema-registry start
-confluent local services schema-registry status
-confluent local services schema-registry stop
-confluent local services schema-registry top
-
-### log
-confluent local services schema-registry log
-confluent local services schema-registry log -f
-confluent local services schema-registry log --follow
-
-### acl
-confluent local services schema-registry acl --list
-
-######################################################################
-
-### ksql-server
+### ksqldb
 
 confluent local services ksql-server start
 confluent local services ksql-server status

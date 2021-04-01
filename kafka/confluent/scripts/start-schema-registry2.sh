@@ -10,8 +10,8 @@ LOG_DIR="/mnt/schema-registry/logs"
 export LOG_DIR
 
 ### java home
-export JAVA_HOME="/usr/lib/jvm/java-1.8.0"
 # export JAVA_HOME="/usr/lib/jvm/java-11"
+export JAVA_HOME="/usr/lib/jvm/java-1.8.0"
 
 ######################################################################
 

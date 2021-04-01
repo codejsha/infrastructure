@@ -10,8 +10,8 @@ LOG_DIR="/mnt/kafka-rest/logs"
 export LOG_DIR
 
 ### java home
-export JAVA_HOME="/usr/lib/jvm/java-1.8.0"
 # export JAVA_HOME="/usr/lib/jvm/java-11"
+export JAVA_HOME="/usr/lib/jvm/java-1.8.0"
 
 ######################################################################
 
