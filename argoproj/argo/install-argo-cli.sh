@@ -10,5 +10,3 @@ gunzip argo-linux-amd64.gz
 chmod +x argo-linux-amd64
 sudo mv argo-linux-amd64 /usr/local/bin/argo
 sudo chown root:root /usr/local/bin/argo
-
-argo version

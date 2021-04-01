@@ -11,8 +11,6 @@ cd velero-v${VELERO_VERSION}-linux-amd64
 sudo mv velero /usr/local/bin
 sudo chown root:root /usr/local/bin/velero
 
-velero version
-
 ### autocompletion
 sudo yum install -y bash-completion
 source <(velero completion bash)

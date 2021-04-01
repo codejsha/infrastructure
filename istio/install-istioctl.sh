@@ -6,6 +6,5 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 curl -sL https://istio.io/downloadIstioctl | sh -
 # curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.1 TARGET_ARCH=x86_64 sh -
 
-istioctl version
-
+### add path
 # export PATH=${PATH}:${HOME}/.istioctl/bin
