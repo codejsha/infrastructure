@@ -14,8 +14,8 @@ BIND_ADDRESS_MGMT="test.example.com"
 ######################################################################
 
 ### escape forward slash
-JAVA_HOME="${JAVA_HOME//\//\/}"
-JBOSS_HOME="${JBOSS_HOME//\//\/}"
+JAVA_HOME="${JAVA_HOME//\//\\/}"
+JBOSS_HOME="${JBOSS_HOME//\//\\/}"
 
 ######################################################################
 

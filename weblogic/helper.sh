@@ -14,15 +14,15 @@ INSTALL_SCRIPT_DIR="/svc/infrastructure/weblogic"
 ######################################################################
 
 ### escape forward slash
-JAVA_HOME="${JAVA_HOME//\//\/}"
-ORACLE_HOME="${ORACLE_HOME//\//\/}"
-ORA_INVENTORY_LOCATION="${ORA_INVENTORY_LOCATION//\//\/}"
+JAVA_HOME="${JAVA_HOME//\//\\/}"
+ORACLE_HOME="${ORACLE_HOME//\//\\/}"
+ORA_INVENTORY_LOCATION="${ORA_INVENTORY_LOCATION//\//\\/}"
 
 perl -pi -e "s/ORACLE_HOME=.*/ORACLE_HOME=${ORACLE_HOME}/" ${INSTALL_SCRIPT_DIR}/response.rsp
 perl -pi -e "s/inventory_loc=.*/inventory_loc=${ORA_INVENTORY_LOCATION}/" ${INSTALL_SCRIPT_DIR}/oraInst.loc
 
 ### escape forward slash
-INSTALL_SCRIPT_DIR="${INSTALL_SCRIPT_DIR//\//\/}"
+INSTALL_SCRIPT_DIR="${INSTALL_SCRIPT_DIR//\//\\/}"
 
 find . -type f -name "env-base.sh" | xargs perl -pi -e "s/JAVA_HOME=.*/JAVA_HOME=\"${JAVA_HOME}\"/"
 find . -type f -name "env-base.sh" | xargs perl -pi -e "s/ORACLE_HOME=.*/ORACLE_HOME=\"${ORACLE_HOME}\"/"

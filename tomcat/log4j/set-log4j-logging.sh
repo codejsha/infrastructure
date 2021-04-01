@@ -53,7 +53,7 @@ function copy_library {
 }
 
 function copy_config_file {
-    /bin/cp -f ${INSTALL_SCRIPT_DIR}log4j2-tomcat.xml ${CATALINA_HOME}/log4j2/conf
+    /bin/cp -f ${INSTALL_SCRIPT_DIR}/log4j2-tomcat.xml ${CATALINA_HOME}/log4j2/conf
 }
 
 function copy_setenv_script {

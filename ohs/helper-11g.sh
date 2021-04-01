@@ -11,10 +11,10 @@ INSTALL_SCRIPT_DIR="/svc/infrastructure/ohs"
 ######################################################################
 
 ### escape forward slash
-MW_HOME="${MW_HOME//\//\/}"
-ORACLE_HOME="${ORACLE_HOME//\//\/}"
-INSTANCE_NAME="${INSTANCE_NAME//\//\/}"
-INSTALL_SCRIPT_DIR="${INSTALL_SCRIPT_DIR//\//\/}"
+MW_HOME="${MW_HOME//\//\\/}"
+ORACLE_HOME="${ORACLE_HOME//\//\\/}"
+INSTANCE_NAME="${INSTANCE_NAME//\//\\/}"
+INSTALL_SCRIPT_DIR="${INSTALL_SCRIPT_DIR//\//\\/}"
 
 ######################################################################
 

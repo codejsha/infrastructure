@@ -12,9 +12,9 @@ CATALINA_HOME="/usr/local/tomcat"
 ######################################################################
 
 ### escape forward slash
-JAVA_HOME="${JAVA_HOME//\//\/}"
-JRE_HOME="${JRE_HOME//\//\/}"
-CATALINA_HOME="${CATALINA_HOME//\//\/}"
+JAVA_HOME="${JAVA_HOME//\//\\/}"
+JRE_HOME="${JRE_HOME//\//\\/}"
+CATALINA_HOME="${CATALINA_HOME//\//\\/}"
 
 ######################################################################
 

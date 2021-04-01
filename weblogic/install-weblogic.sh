@@ -120,7 +120,6 @@ function install_weblogic {
             install_required_package_14c_rhel7
         fi
         install_weblogic_14c
-    fi
     ### 12cr2
     elif [[ "${INSTALL_FILE}" =~ ^fmw_12.2 ]]; then
         if [[ ${OS_VERSION} =~ ^8|^8. ]]; then
@@ -141,6 +140,7 @@ function install_weblogic {
     elif [[ "${INSTALL_FILE}" =~ ^wls103 ]]; then
         install_required_package_11g
         install_weblogic_11g
+    fi
 }
 
 ######################################################################

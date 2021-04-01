@@ -10,8 +10,8 @@ BASE_LOG_DIR="/mnt"
 ######################################################################
 
 ### escape forward slash
-BASE_DATA_DIR="${BASE_DATA_DIR//\//\/}"
-BASE_LOG_DIR="${BASE_LOG_DIR//\//\/}"
+BASE_DATA_DIR="${BASE_DATA_DIR//\//\\/}"
+BASE_LOG_DIR="${BASE_LOG_DIR//\//\\/}"
 
 ######################################################################
 
