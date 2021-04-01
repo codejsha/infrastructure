@@ -80,7 +80,7 @@ function install_docker_with_apt {
 
 ######################################################################
 
-# install_docker_with_dnf
-install_docker_with_yum
+install_docker_with_dnf
+# install_docker_with_yum
 # install_docker_specific_version_with_yum
 # install_docker_with_apt

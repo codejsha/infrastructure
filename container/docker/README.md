@@ -23,7 +23,7 @@ bash ./install-docker.sh
 - https://docs.docker.com/engine/reference/commandline/dockerd/
 - https://docs.docker.com/registry/insecure/
 
-`/etc/docker/daemon.json`: [daemon.json](/docker/daemon.json)
+`/etc/docker/daemon.json`: `daemon.json`
 
 ### Override docker service
 
@@ -33,7 +33,7 @@ bash ./override-docker-service.sh
 
 ## Configuration file
 
-`${HOME}/.docker/config.json`: [config.json](/docker/config.json)
+`${HOME}/.docker/config.json`: `config.json`
 
 ## Docker Compose
 
