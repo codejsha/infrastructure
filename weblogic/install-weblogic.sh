@@ -4,8 +4,8 @@ set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 ### 1411
-# JAVA_HOME="/usr/java/java-1.8.0"
 # JAVA_HOME="/usr/java/java-11"
+# JAVA_HOME="/usr/java/java-1.8.0"
 # INSTALL_FILE_DIR="/mnt/share/oracle-weblogic-server/wls14.1.1/fmw_14.1.1.0.0_wls_Disk1_1of1"
 # INSTALL_FILE="fmw_14.1.1.0.0_wls.jar"
 

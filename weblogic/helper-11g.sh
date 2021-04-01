@@ -14,12 +14,14 @@ INSTALL_SCRIPT_DIR="/svc/infrastructure/weblogic"
 
 ORACLE_HOME="${MW_HOME}"
 
+### escape forward slash
 JAVA_HOME="${JAVA_HOME//\//\/}"
 ORACLE_HOME="${ORACLE_HOME//\//\/}"
 
 perl -pi -e "s/name=\"BEAHOME\" value=\".*\"/name=\"BEAHOME\" value=\"${ORACLE_HOME}\"/" ${INSTALL_SCRIPT_DIR}/silent.xml
 perl -pi -e "s/name=\"WLS_INSTALL_DIR\" value=\".*\"/name=\"WLS_INSTALL_DIR\" value=\"${ORACLE_HOME}\/wlserver_10.3\"/" ${INSTALL_SCRIPT_DIR}/silent.xml
 
+### escape forward slash
 INSTALL_SCRIPT_DIR="${INSTALL_SCRIPT_DIR//\//\/}"
 
 find . -type f -name "env-base.sh" | xargs perl -pi -e "s/JAVA_HOME=.*/JAVA_HOME=\"${JAVA_HOME}\"/"

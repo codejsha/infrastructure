@@ -3,16 +3,16 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-JAVA_HOME="/usr/java/java-1.8.0"
 # JAVA_HOME="/usr/java/java-11"
+JAVA_HOME="/usr/java/java-1.8.0"
 
 ORACLE_HOME="/usr/local/weblogic"
 INVENTORY_FILE="oraInst.loc"
 
-# PATCH_FILE_DIR="/mnt/share/oracle-weblogic-server/wls12.1.3"
-PATCH_FILE_DIR="/mnt/share/oracle-weblogic-server/wls12.2.1.3"
-# PATCH_FILE_DIR="/mnt/share/oracle-weblogic-server/wls12.2.1.4"
 # PATCH_FILE_DIR="/mnt/share/oracle-weblogic-server/wls14.1.1"
+# PATCH_FILE_DIR="/mnt/share/oracle-weblogic-server/wls12.2.1.4"
+PATCH_FILE_DIR="/mnt/share/oracle-weblogic-server/wls12.2.1.3"
+# PATCH_FILE_DIR="/mnt/share/oracle-weblogic-server/wls12.1.3"
 
 ######################################################################
 
@@ -84,6 +84,7 @@ function opatch_update {
     #     -invPtrLoc ${ORACLE_HOME}/${INVENTORY_FILE} \
     #     -ignoreSysPrereqs
     # ${JAVA_HOME}/bin/java \
+    #     -Djava.security.egd=file:///dev/urandom \
     #     -Djava.io.tmpdir=/tmp \
     #     -jar ${ORACLE_HOME}/OPatch/patch_files/${PATCH_ID}/opatch_generic.jar \
     #     -silent oracle_home=${ORACLE_HOME} \

@@ -3,8 +3,8 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-JAVA_HOME="/usr/java/java-1.8.0"
 # JAVA_HOME="/usr/java/java-11"
+JAVA_HOME="/usr/java/java-1.8.0"
 
 ORACLE_HOME="/usr/local/weblogic"
 INVENTORY_FILE="oraInst.loc"
