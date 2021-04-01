@@ -26,7 +26,7 @@ function New-MinikubeVM {
     Set-VMProcessor -VMName $VMName `
         -Count 2
     Set-VMMemory -VMName $VMName `
-        -DynamicMemoryEnabled $False
+        -DynamicMemoryEnabled $false
     # Add-VMDvdDrive -VMName $VMName  `
     #     -ControllerNumber 0 `
     #     -ControllerLocation 1 `

@@ -29,6 +29,6 @@ function install_mysql_shell_with_apt {
 
 ######################################################################
 
-# install_mysql_shell_with_dnf
-install_mysql_shell_with_yum
+install_mysql_shell_with_dnf
+# install_mysql_shell_with_yum
 # install_mysql_shell_with_apt

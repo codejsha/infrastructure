@@ -9,7 +9,7 @@ function docker_run_burrow {
     docker container run \
         --detach \
         --name burrow \
-        --net stream-network \
+        --network stream-network \
         --publish 8000:8000 \
         docker.pkg.github.com/linkedin/burrow/burrow:latest
 }

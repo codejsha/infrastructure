@@ -6,7 +6,7 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 NAMESPACE="bookinfo"
 kubectl create namespace ${NAMESPACE}
 kubectl label namespace bookinfo istio-injection=enabled
-kubectl config set-context --current --namespace="${NAMESPACE}"
+kubectl config set-context --current --namespace "${NAMESPACE}"
 
 ### deploy bookinfo
 kubectl apply --filename https://raw.githubusercontent.com/istio/istio/master/samples/bookinfo/platform/kube/bookinfo.yaml
@@ -20,7 +20,7 @@ kubectl apply --filename https://raw.githubusercontent.com/istio/istio/master/sa
 ### check bookinfo
 # kubectl get services
 # kubectl get pods
-# kubectl exec -it $(kubectl get pod --selector app=ratings --output jsonpath='{.items[0].metadata.name}') \
+# kubectl exec -it $(kubectl get pods --selector app=ratings --output jsonpath='{.items[0].metadata.name}') \
 #     -c ratings -- curl productpage:9080/productpage | grep -o "<title>.*</title>"
 
 ### deploy networking
