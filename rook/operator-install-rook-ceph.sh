@@ -1,16 +1,16 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 git clone --single-branch --branch release-1.5 https://github.com/rook/rook.git
 
-kubectl apply -f rook/cluster/examples/kubernetes/ceph/crds.yaml
-kubectl apply -f rook/cluster/examples/kubernetes/ceph/common.yaml
-kubectl apply -f rook/cluster/examples/kubernetes/ceph/operator.yaml
+kubectl apply --filename rook/cluster/examples/kubernetes/ceph/crds.yaml
+kubectl apply --filename rook/cluster/examples/kubernetes/ceph/common.yaml
+kubectl apply --filename rook/cluster/examples/kubernetes/ceph/operator.yaml
 
 ### verify the rook-ceph-operator is in the `Running` state before proceeding
-kubectl -n rook-ceph get pod --watch
+kubectl get pods --namespace rook-ceph --watch
 ### NAME                                  READY   STATUS    RESTARTS   AGE
 ### rook-ceph-operator-667756ddb6-spzpt   1/1     Running   0          2m9s
 ### rook-discover-54vcm                   1/1     Running   0          83s
