@@ -1,11 +1,10 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 source ./env-base.sh
 source ./env-instance.sh
-# source ./env-function.sh
 
 ######################################################################
 
@@ -32,14 +31,6 @@ envsubst < ./tomcat-users.xml > ${CATALINA_BASE}/conf/tomcat-users.xml
 # /bin/cp -pf ./tomcat-users.xml ${CATALINA_BASE}/conf/tomcat-users.xml
 
 ######################################################################
-
-### format xml
-# tidy_indent ${CATALINA_BASE}/conf/server.xml
-# tidy_indent ${CATALINA_BASE}/conf/context.xml
-# tidy_indent ${CATALINA_BASE}/conf/tomcat-users.xml
-# tidy_nowrap ${CATALINA_BASE}/conf/server.xml
-# tidy_nowrap ${CATALINA_BASE}/conf/context.xml
-# tidy_nowrap ${CATALINA_BASE}/conf/tomcat-users.xml
 
 ### change permission
 find ${CATALINA_BASE}/conf -type f | xargs chmod 600

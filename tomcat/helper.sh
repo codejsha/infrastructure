@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 JAVA_HOME="/usr/lib/jvm/java-11"
 JRE_HOME="/usr/lib/jvm/jre-11"
@@ -11,9 +11,12 @@ CATALINA_HOME="/usr/local/tomcat"
 
 ######################################################################
 
+### escape forward slash
 JAVA_HOME="${JAVA_HOME//\//\/}"
 JRE_HOME="${JRE_HOME//\//\/}"
 CATALINA_HOME="${CATALINA_HOME//\//\/}"
+
+######################################################################
 
 find . -type f -name "env-base.sh" | xargs perl -pi -e "s/JAVA_HOME=.*/JAVA_HOME=\"${JAVA_HOME}\"/"
 find . -type f -name "env-base.sh" | xargs perl -pi -e "s/JRE_HOME=.*/JRE_HOME=\"${JRE_HOME}\"/"

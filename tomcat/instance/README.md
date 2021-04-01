@@ -1,7 +1,5 @@
 # Create instances
 
-Optional: tidy package (if you use it)
-
 ## Instance
 
 ```bash

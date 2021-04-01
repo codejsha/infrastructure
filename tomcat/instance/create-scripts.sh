@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: func ${FUNCNAME[0]}: status ${?}"' ERR
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 source ./env-base.sh
 source ./env-instance.sh
@@ -23,7 +23,7 @@ cat <<EOF > ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export JAVA_HOME="${JAVA_HOME}"
@@ -47,7 +47,19 @@ CATALINA_OPTS="\${CATALINA_OPTS} -XX:NewSize=384m -XX:MaxNewSize=384m"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
 EOF
 
-if [[ ${JAVA_VERSION} =~ ^1.8 ]]; then
+if [[ ${JAVA_VERSION} =~ ^11 ]]; then
+cat <<EOF >> ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
+# CATALINA_OPTS="\${CATALINA_OPTS} -XX:+UseParallelGC"
+CATALINA_OPTS="\${CATALINA_OPTS} -XX:+UseG1GC"
+CATALINA_OPTS="\${CATALINA_OPTS} -XX:MaxGCPauseMillis=200"
+CATALINA_OPTS="\${CATALINA_OPTS} -XX:InitiatingHeapOccupancyPercent=45"
+CATALINA_OPTS="\${CATALINA_OPTS} -Xlog:gc*=info:file=\${LOG_DIR}/gc.\${INSTANCE_NAME}.log:time,pid,tid,level,tags"
+# CATALINA_OPTS="\${CATALINA_OPTS} -Xlog:gc*=info:file=\${LOG_DIR}/gc.\${INSTANCE_NAME}.log:time,pid,tid,level,tags:filecount=30,filesize=1M"
+CATALINA_OPTS="\${CATALINA_OPTS} -XX:+HeapDumpOnOutOfMemoryError"
+CATALINA_OPTS="\${CATALINA_OPTS} -XX:HeapDumpPath=\${LOG_DIR}/dump"
+export CATALINA_OPTS
+EOF
+elif [[ ${JAVA_VERSION} =~ ^1.8 ]]; then
 cat <<EOF >> ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:+UseParallelGC"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:-UseAdaptiveSizePolicy"
@@ -60,19 +72,7 @@ CATALINA_OPTS="\${CATALINA_OPTS} -XX:+PrintTenuringDistribution"
 CATALINA_OPTS="\${CATALINA_OPTS} -Xloggc:\${LOG_DIR}/gc.\${INSTANCE_NAME}.log"
 # CATALINA_OPTS="\${CATALINA_OPTS} -XX:+UseGCLogFileRotation"
 # CATALINA_OPTS="\${CATALINA_OPTS} -XX:+NumberOfGCLogFiles=30"
-# CATALINA_OPTS="\${CATALINA_OPTS} -XX:+GCLogFileSize=8K"
-CATALINA_OPTS="\${CATALINA_OPTS} -XX:+HeapDumpOnOutOfMemoryError"
-CATALINA_OPTS="\${CATALINA_OPTS} -XX:HeapDumpPath=\${LOG_DIR}/dump"
-export CATALINA_OPTS
-EOF
-elif [[ ${JAVA_VERSION} =~ ^11 ]]; then
-cat <<EOF >> ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
-# CATALINA_OPTS="\${CATALINA_OPTS} -XX:+UseParallelGC"
-CATALINA_OPTS="\${CATALINA_OPTS} -XX:+UseG1GC"
-CATALINA_OPTS="\${CATALINA_OPTS} -XX:MaxGCPauseMillis=200"
-CATALINA_OPTS="\${CATALINA_OPTS} -XX:InitiatingHeapOccupancyPercent=45"
-CATALINA_OPTS="\${CATALINA_OPTS} -Xlog:gc*=info:file=\${LOG_DIR}/gc.\${INSTANCE_NAME}.log:time,pid,tid,level,tags"
-# CATALINA_OPTS="\${CATALINA_OPTS} -Xlog:gc*=info:file=\${LOG_DIR}/gc.\${INSTANCE_NAME}.log:time,pid,tid,level,tags:filecount=30,filesize=8K"
+# CATALINA_OPTS="\${CATALINA_OPTS} -XX:+GCLogFileSize=1M"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:+HeapDumpOnOutOfMemoryError"
 CATALINA_OPTS="\${CATALINA_OPTS} -XX:HeapDumpPath=\${LOG_DIR}/dump"
 export CATALINA_OPTS
@@ -88,17 +88,17 @@ export CATALINA_OPTS
 
 EOF
 
-if [[ ${JAVA_VERSION} =~ ^1.8 ]]; then
-cat <<EOF >> ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
-# CATALINA_OPTS="\${CATALINA_OPTS} -verbose:class"
-# CATALINA_OPTS="\${CATALINA_OPTS} -verbose:module"
-# CATALINA_OPTS="\${CATALINA_OPTS} -verbose:jni"
-# export CATALINA_OPTS
-EOF
-elif [[ ${JAVA_VERSION} =~ ^11 ]]; then
+if [[ ${JAVA_VERSION} =~ ^11 ]]; then
 cat <<EOF >> ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
 # CATALINA_OPTS="\${CATALINA_OPTS} -Xlog:class+load=info,class+unload=info:stdout:time,level,tags"
 # CATALINA_OPTS="\${CATALINA_OPTS} -Xlog:module*=info:stdout:time,level,tags"
+# CATALINA_OPTS="\${CATALINA_OPTS} -verbose:jni"
+# export CATALINA_OPTS
+EOF
+elif [[ ${JAVA_VERSION} =~ ^1.8 ]]; then
+cat <<EOF >> ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
+# CATALINA_OPTS="\${CATALINA_OPTS} -verbose:class"
+# CATALINA_OPTS="\${CATALINA_OPTS} -verbose:module"
 # CATALINA_OPTS="\${CATALINA_OPTS} -verbose:jni"
 # export CATALINA_OPTS
 EOF
@@ -125,7 +125,7 @@ cat <<EOF > ${CATALINA_BASE}/stop-${INSTANCE_NAME}.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export JAVA_HOME="${JAVA_HOME}"
@@ -143,7 +143,7 @@ cat <<EOF > ${CATALINA_BASE}/check-config.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export CATALINA_HOME="${CATALINA_HOME}"
@@ -159,7 +159,7 @@ cat <<EOF > ${CATALINA_BASE}/get-version.sh
 #!/bin/bash
 set -o errtrace
 set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: func \${FUNCNAME[0]}: status \${?}"' ERR
+trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export CATALINA_HOME="${CATALINA_HOME}"

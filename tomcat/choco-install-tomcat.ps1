@@ -1,1 +1,1 @@
-choco install tomcat
+choco install --confirm tomcat

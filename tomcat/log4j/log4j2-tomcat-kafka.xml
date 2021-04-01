@@ -3,7 +3,7 @@
     <Appenders>
         <Kafka name="Kafka" topic="my-topic">
             <PatternLayout pattern="[%date] [%level] [%thread] [%class.%method] %message%n"/>
-            <Property name="bootstrap.servers">node1.example.com:9094,node2.example.com:9094,node3.example.com:9094</Property>
+            <Property name="bootstrap.servers">kafka1.example.com:9094,kafka2.example.com:9094,kafka3.example.com:9094</Property>
         </Kafka>
     </Appenders>
     <Loggers>

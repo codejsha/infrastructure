@@ -36,4 +36,4 @@ bash ./install-tomcat.sh
 - https://cloud.google.com/appengine/docs/standard/java/config/webxml
 - https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html
 
-cf. [weblogic/web.xml](/weblogic/web.xml)
+cf. [weblogic/web.xml](/weblogic/deployment/web.xml)
