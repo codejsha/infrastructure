@@ -3,6 +3,8 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
+######################################################################
+
 function all_12cr2 {
     bash ./create-domain.sh
     bash ./delete-component.sh

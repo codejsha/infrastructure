@@ -10,10 +10,13 @@ INSTALL_SCRIPT_DIR="/svc/infrastructure/ohs"
 
 ######################################################################
 
+### escape forward slash
 MW_HOME="${MW_HOME//\//\/}"
 ORACLE_HOME="${ORACLE_HOME//\//\/}"
 INSTANCE_NAME="${INSTANCE_NAME//\//\/}"
 INSTALL_SCRIPT_DIR="${INSTALL_SCRIPT_DIR//\//\/}"
+
+######################################################################
 
 find . -type f -name "env-base.sh" | xargs perl -pi -e "s/MW_HOME=.*/MW_HOME=\"${MW_HOME}\"/"
 find . -type f -name "env-base.sh" | xargs perl -pi -e "s/ORACLE_HOME=.*/ORACLE_HOME=\"${ORACLE_HOME}\"/"
