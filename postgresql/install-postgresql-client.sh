@@ -28,5 +28,5 @@ function install_postgresql_client_with_yum {
 
 ######################################################################
 
-# install_postgresql_client_with_dnf
-install_postgresql_client_with_yum
+install_postgresql_client_with_dnf
+# install_postgresql_client_with_yum

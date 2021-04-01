@@ -1,7 +1,7 @@
 ######################################################################
 
 # get the default config
-docker run -i postgres cat /usr/share/postgresql/postgresql.conf.sample > postgres-default.conf
+docker container run -i postgres cat /usr/share/postgresql/postgresql.conf.sample > postgres-default.conf
 
 ######################################################################
 

@@ -38,5 +38,5 @@ function install_postgresql_server_with_yum {
 
 ######################################################################
 
-# install_postgresql_server_with_dnf
-install_postgresql_server_with_yum
+install_postgresql_server_with_dnf
+# install_postgresql_server_with_yum
