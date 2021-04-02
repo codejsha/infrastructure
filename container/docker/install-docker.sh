@@ -41,8 +41,8 @@ function install_docker_with_yum {
 }
 
 function install_docker_specific_version_with_yum {
-    local DOCKER_VERSION="19.03.13"
-    local CONTAINERD_VERSION="1.3.7"
+    local DOCKER_VERSION="19.03.15"
+    local CONTAINERD_VERSION="1.3.9"
 
     sudo yum remove -y \
         docker \
