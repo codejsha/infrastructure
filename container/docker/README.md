@@ -23,7 +23,13 @@ bash ./install-docker.sh
 - https://docs.docker.com/engine/reference/commandline/dockerd/
 - https://docs.docker.com/registry/insecure/
 
-`/etc/docker/daemon.json`: `daemon.json`
+`/etc/docker/daemon.json` example: `daemon.json`
+
+systemd cgroup driver:
+
+```bash
+  "exec-opts": ["native.cgroupdriver=systemd"],
+```
 
 ### Override docker service
 
@@ -33,7 +39,7 @@ bash ./override-docker-service.sh
 
 ## Configuration file
 
-`${HOME}/.docker/config.json`: `config.json`
+`${HOME}/.docker/config.json` example: `config.json`
 
 ## Docker Compose
 
