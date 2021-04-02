@@ -22,6 +22,7 @@ alias sshnode1="ssh root@node1"
 alias sshnode2="ssh root@node2"
 alias sshnode3="ssh root@node3"
 alias sudo-shell="sudo --shell"
+alias watch="watch "
 
 # location
 function cdp() { DIRECTORY="${1}"; echo "+ cd -P ${@}">&2; command cd -P ${DIRECTORY}; STATUS="${?}"; if [ "${STATUS}" -eq "0" ]; then printf "\e[38;2;216;160;223mLOCATION: $(pwd)\e[0m\n"; ls --almost-all -l; fi; }
