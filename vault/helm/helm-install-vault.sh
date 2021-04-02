@@ -14,7 +14,7 @@ helm upgrade --install my-vault \
     --namespace ${NAMESPACE} \
     --values helm-chart-values.yaml \
     --values helm-chart-values-standalone.yaml \
-    --version 0.9.1 \
+    --version 0.10.0 \
     hashicorp/vault
 
     ### dev mode
@@ -24,8 +24,8 @@ helm upgrade --install my-vault \
     ### ha mode
     # --values helm-chart-values-ha.yaml \
 
-# mkdir -p .vault
-# kubectl exec -it my-vault-0 -- vault operator init > .vault/unseal_keys_and_root_token.txt
+# mkdir -p ~/.vault
+# kubectl exec -it my-vault-0 -- vault operator init > ~/.vault/unseal_keys_and_root_token.txt
 # kubectl exec -ti my-vault-0 -- vault operator unseal UNSEAL_KEY_1
 # kubectl exec -ti my-vault-0 -- vault operator unseal UNSEAL_KEY_2
 # kubectl exec -ti my-vault-0 -- vault operator unseal UNSEAL_KEY_3
