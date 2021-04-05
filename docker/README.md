@@ -77,4 +77,4 @@ bash ./helm-install-docker-registry.sh
 
 ## Portainer
 
-- [Portainer README](/docker/portainer.md)
+- [Portainer README](/docker/portainer/portainer.md)
