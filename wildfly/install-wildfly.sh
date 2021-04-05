@@ -38,8 +38,9 @@ function check_install_file {
 }
 
 function install_wildfly {
-    tar -C ${PARENT_JBOSS_HOME} -xzf ${INSTALL_FILE_DIR}/${INSTALL_FILE}
+    sudo tar -C ${PARENT_JBOSS_HOME} -xzf ${INSTALL_FILE_DIR}/${INSTALL_FILE}
     sudo mv ${PARENT_JBOSS_HOME}/${JBOSS_DIR_NAME} ${JBOSS_HOME}
+    sudo chown -R $(id -un):$(id -gn) ${JBOSS_HOME}
 }
 
 ######################################################################

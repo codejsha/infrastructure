@@ -38,8 +38,9 @@ function check_install_file {
 }
 
 function install_jboss {
-    unzip -q -o ${INSTALL_FILE_DIR}/${INSTALL_FILE} -d ${PARENT_JBOSS_HOME}
+    sudo unzip -q -o ${INSTALL_FILE_DIR}/${INSTALL_FILE} -d ${PARENT_JBOSS_HOME}
     sudo mv ${PARENT_JBOSS_HOME}/${JBOSS_DIR_NAME} ${JBOSS_HOME}
+    sudo chown -R $(id -un):$(id -gn) ${JBOSS_HOME}
 }
 
 ######################################################################
