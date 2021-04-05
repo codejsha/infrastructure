@@ -6,6 +6,10 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 TENANT_NAME="minio-tenant-1"
 NAMESPACE="minio-tenant"
 
+STORAGE_CLASS="standard"
+# STORAGE_CLASS="rook-ceph-block"
+# STORAGE_CLASS="local-path"
+
 kubectl create namespace ${NAMESPACE}
 
 kubectl minio tenant create \
@@ -14,7 +18,7 @@ kubectl minio tenant create \
     --servers 3 \
     --volumes 12 \
     --capacity 12Ti \
-    --storage-class local-path
+    --storage-class ${STORAGE_CLASS}
 
 # kubectl minio tenant create \
 #     --name ${TENANT_NAME} \
@@ -22,6 +26,6 @@ kubectl minio tenant create \
 #     --servers 3 \
 #     --volumes 12 \
 #     --capacity 12Ti \
-#     --storage-class local-path \
+#     --storage-class ${STORAGE_CLASS} \
 #     -o > tenant.yaml
 # kubectl apply --filename tenant.yaml
