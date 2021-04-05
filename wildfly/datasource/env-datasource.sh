@@ -3,18 +3,30 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-# DRIVER_NAME=""
+DRIVER_NAME="${DRIVER_NAME}"
 
 DATASOURCE_NAME="baseds1"
-JNDI_NAME="java:/base/ds1"
+JNDI_NAME="java:jboss/datasources/baseds1"
+
+### postgresql
+CONNECTION_URL="jdbc:postgresql://test.example.com:5432/postgres"
+USERNAME="postgres"
+PASSWORD="${PASSWORD}"
+# PASSWORD="postgres"
+# PASSWORD="\${VAULT::datasource::password::1}"
+CHECK_VALID_CONNECTION_SQL="SELECT 1"
+
+### oracle database
+# CONNECTION_URL="jdbc:oracle:thin:@192.168.137.1:1521:orclcdb"
+# USERNAME="system"
+# PASSWORD="${PASSWORD}"
+# PASSWORD="\${VAULT::datasource::password::1}"
+# CHECK_VALID_CONNECTION_SQL="SQL ISVALID"
+
 ENABLED="true"
-CONNECTION_URL="jdbc:oracle:thin:@192.168.137.1:1521:orclcdb"
-INITIAL_POOL_SIZE="20"
-MIN_POOL_SIZE="20"
-MAX_POOL_SIZE="20"
-USERNAME="system"
-PASSWORD="\${VAULT::datasource::password::1}"
-CHECK_VALID_CONNECTION_SQL="SQL ISVALID"
+INITIAL_POOL_SIZE="30"
+MIN_POOL_SIZE="30"
+MAX_POOL_SIZE="30"
 BACKGROUND_VALIDATION="true"
 BACKGROUND_VALIDATION_MILLIS="120000"
 BLOCKING_TIMEOUT_WAIT_MILLIS="2000"

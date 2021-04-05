@@ -10,29 +10,21 @@ JBOSS_HOME="${JBOSS_HOME}"
 BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
 JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
 
-DRIVER_CLASS_NAME="${DRIVER_CLASS_NAME}"
+DRIVER_FILE_DIR="${DRIVER_FILE_DIR}"
+DRIVER_FILE="${DRIVER_FILE}"
 
-DRIVER_NAME="${DRIVER_NAME}"
 MODULE_NAME="${MODULE_NAME}"
 
 ######################################################################
 
-function add_jdbc_driver_with_module {
+function add_jdbc_module {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-<<EOF
-batch
-/subsystem=datasources/jdbc-driver=${DRIVER_NAME}\
-    :add(\
-    driver-name=${DRIVER_NAME},\
-    driver-module-name=${MODULE_NAME},\
-    driver-xa-datasource-class-name=${DRIVER_CLASS_NAME})
-run-batch
-quit
-EOF
+        --echo-command \
+        --command="module add --name=${MODULE_NAME} --resources=${DRIVER_FILE_DIR}/${DRIVER_FILE} --dependencies=javax.api,javax.transaction.api"
 }
 
 ######################################################################
 
-add_jdbc_driver_with_module
+add_jdbc_module

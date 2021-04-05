@@ -3,7 +3,10 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-######################################################################
+### JDBC MODULE
+bash ./add-jdbc-module.sh
+# bash ./add-jdbc-module.sh --port-offset=0
+# bash ./add-jdbc-module.sh --port-offset=1
 
 ### JDBC DRIVER (WITH MODULE)
 
@@ -28,8 +31,8 @@ bash ./add-datasource.sh --port-offset=1
 ######################################################################
 
 # bash ./set-datasource.sh
-bash ./set-datasource.sh --port-offset=0
-bash ./set-datasource.sh --port-offset=1
+# bash ./set-datasource.sh --port-offset=0
+# bash ./set-datasource.sh --port-offset=1
 
 ######################################################################
 

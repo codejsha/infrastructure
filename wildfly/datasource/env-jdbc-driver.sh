@@ -3,26 +3,36 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-DRIVER_FILE_DIR="/mnt/share/oracle-database/19c/ojdbc10-full"
+### postgresql
+DRIVER_FILE_DIR="/mnt/share/postgresql"
+DRIVER_FILE="postgresql-42.2.19.jar"
+DRIVER_CLASS_NAME="org.postgresql.xa.PGXADataSource"
+
+DRIVER_NAME="postgres"
+MODULE_NAME="org.postgres"
+DRIVER_RUNTIME_NAME="${DRIVER_FILE}"
+
+######################################################################
+
+### oracle database
+
+# DRIVER_FILE_DIR="/mnt/share/oracle-database/19c/ojdbc10-full"
 # DRIVER_FILE_DIR="/mnt/share/oracle-database/19c/ojdbc8-full"
 # DRIVER_FILE_DIR="/mnt/share/oracle-database/18c/ojdbc8-full"
 # DRIVER_FILE_DIR="/mnt/share/oracle-database/12cr2/OJDBC-Full"
 # DRIVER_FILE_DIR="/mnt/share/oracle-database/12cr1/OJDBC-Full"
 # DRIVER_FILE_DIR="/mnt/share/oracle-database/11gr2/OJDBC-Full"
 
-DRIVER_FILE="ojdbc10.jar"
+# DRIVER_FILE="ojdbc10.jar"
 # DRIVER_FILE="ojdbc8.jar"
 # DRIVER_FILE="ojdbc7.jar"
 # DRIVER_FILE="ojdbc6.jar"
 
-### module
-DRIVER_NAME="oracle"
-MODULE_NAME="com.oracle"
+# DRIVER_CLASS_NAME="oracle.jdbc.xa.client.OracleXADataSource"
 
-### deployment
-DRIVER_NAME="${DRIVER_FILE}"
-DRIVER_RUNTIME_NAME="${DRIVER_FILE}"
-
+# DRIVER_NAME="oracle"
+# MODULE_NAME="com.oracle"
+# DRIVER_RUNTIME_NAME="${DRIVER_FILE}"
 
 ######################################################################
 
