@@ -4,23 +4,20 @@ set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 source ./env-base.sh
-source ./env-ajp-thread-pool.sh
 
 JBOSS_HOME="${JBOSS_HOME}"
 BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
 JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
 
-WORKER_NAME="${WORKER_NAME}"
-
 ######################################################################
 
-function set_listener_thread_pool {
+function disable_http_method {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
 <<EOF
 batch
-/subsystem=undertow/server=default-server/ajp-listener=ajp:write-attribute(name=worker,value=${WORKER_NAME})
+/subsystem=undertow/server=default-server/https-listener=default:write-attribute(name=disallowed-methods,value=[PUT,DELETE,TRACE,OPTIONS])
 run-batch
 quit
 EOF
@@ -36,5 +33,5 @@ function reload_server {
 
 ######################################################################
 
-set_listener_thread_pool
+disable_http_method
 reload_server

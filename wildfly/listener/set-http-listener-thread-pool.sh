@@ -4,7 +4,7 @@ set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 source ./env-base.sh
-source ./env-thread-pool.sh
+source ./env-http-thread-pool.sh
 
 JBOSS_HOME="${JBOSS_HOME}"
 BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
@@ -21,8 +21,6 @@ function set_listener_thread_pool {
 <<EOF
 batch
 /subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=worker,value=${WORKER_NAME})
-
-# /subsystem=undertow/server=default-server/https-listener=https:write-attribute(name=worker,value=${WORKER_NAME})
 run-batch
 quit
 EOF
