@@ -3,17 +3,17 @@
 ## Install
 
 ```bash
-### pre-install (11g)
-bash ./helper-11g.sh
-
-### pre-install (12c)
+### pre-install
+### 14c, 12c:
 bash ./helper.sh
+### 11g:
+bash ./helper-11g.sh
 
 ### install
 bash ./install-weblogic.sh
 ```
 
-## Create a domain
+## Create domain
 
 ```bash
 bash ./create-domain.sh

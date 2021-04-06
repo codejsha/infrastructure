@@ -66,5 +66,3 @@ bash ./encrypt-password-with-picketbox.sh ${PASSWORD}
 ```
 
 - https://access.redhat.com/solutions/184963
-
-[Security README](/wildfly/security/README.md)
