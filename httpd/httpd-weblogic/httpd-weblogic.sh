@@ -3,7 +3,9 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-HTTPD_HOME="/usr/local/httpd"
+source ./env-base.sh
+
+HTTPD_HOME="${HTTPD_HOME}"
 PLUGIN_HOME="${HTTPD_HOME}/modules/weblogic-plugin"
 
 # PLUGIN_FILE_DIR="/mnt/share/oracle-http-server/ohs11.1.1.9/ofm_wlsplugins_generic_11.1.1.9.0_disk1_1of1"

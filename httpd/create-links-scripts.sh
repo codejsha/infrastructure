@@ -6,7 +6,9 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 ### requirement:
 ### sudo yum install -y links
 
-HTTPD_HOME="/usr/local/httpd"
+source ./env-base.sh
+
+HTTPD_HOME="${HTTPD_HOME}"
 
 ######################################################################
 
