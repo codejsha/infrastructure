@@ -12,8 +12,12 @@ SERVER_CONFIG_FILE="standalone-ha.xml"
 
 BIND_ADDRESS_MGMT="test.example.com"
 JBOSS_MGMT_HTTP_PORT="9990"
+USERNAME="admin"
+PASSWORD="welcome1"
 
 ${JBOSS_HOME}/bin/jboss-cli.sh \
     --connect \
     --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+    --user="${USERNAME}" \
+    --password="${PASSWORD}" \
     --command=":shutdown"

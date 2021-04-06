@@ -9,6 +9,8 @@ source ./env-tcpping.sh
 JBOSS_HOME="${JBOSS_HOME}"
 BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
 JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
+USERNAME="${USERNAME}"
+PASSWORD="${PASSWORD}"
 
 INSTANCE_NAME1="${INSTANCE_NAME1}"
 INSTANCE_NAME2="${INSTANCE_NAME2}"
@@ -25,6 +27,8 @@ function add_outbound_socket_binding {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --user="${USERNAME}" \
+        --password="${PASSWORD}" \
 <<EOF
 batch
 /socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=${INSTANCE_NAME1}:add(host=${BIND_ADDRESS1},port=${JGROUPS_TCP_PORT1})
@@ -38,6 +42,8 @@ function set_standard_sockets {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --user="${USERNAME}" \
+        --password="${PASSWORD}" \
 <<EOF
 batch
 /socket-binding-group=standard-sockets/socket-binding=jgroups-tcp:write-attribute(name=port,value=${JGROUPS_TCP_PORT})
@@ -54,6 +60,8 @@ function reset_tcp_stack {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --user="${USERNAME}" \
+        --password="${PASSWORD}" \
 <<EOF
 batch
 /subsystem=jgroups/stack=tcp:remove()
@@ -78,6 +86,8 @@ function set_tcp_clustering {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --user="${USERNAME}" \
+        --password="${PASSWORD}" \
 <<EOF
 batch
 /subsystem=jgroups/channel=ee:write-attribute(name=stack,value=tcp)
@@ -90,6 +100,8 @@ function reload_server {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --user="${USERNAME}" \
+        --password="${PASSWORD}" \
         --echo-command \
         --command=":reload()"
 }

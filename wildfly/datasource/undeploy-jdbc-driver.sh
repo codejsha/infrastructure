@@ -8,6 +8,8 @@ source ./env-base.sh
 JBOSS_HOME="${JBOSS_HOME}"
 BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
 JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
+USERNAME="${USERNAME}"
+PASSWORD="${PASSWORD}"
 
 DRIVER_NAME="${DRIVER_FILE}"
 
@@ -19,6 +21,8 @@ function undeploy_application {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --user="${USERNAME}" \
+        --password="${PASSWORD}" \
 <<EOF
 batch
 undeploy ${APP_NAME}
@@ -31,6 +35,8 @@ function get_deployment_status_all {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --user="${USERNAME}" \
+        --password="${PASSWORD}" \
 <<EOF
 batch
 deploy -l

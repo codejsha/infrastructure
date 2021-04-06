@@ -8,13 +8,14 @@ source ./env-base.sh
 JBOSS_HOME="${JBOSS_HOME}"
 JBOSS_BASE_DIR="${JBOSS_BASE_DIR}"
 
+USERNAME="${USERNAME}"
 PASSWORD="${PASSWORD}"
 
 ${JBOSS_HOME}/bin/add-user.sh \
-    --user "admin" \
+    --user "${USERNAME}" \
     --password "${PASSWORD}" \
     -sc ${JBOSS_BASE_DIR}/configuration
 # ${JBOSS_HOME}/bin/add-user.sh \
 #     --user "developer" \
-#     --password "${PASSWORD}" \
+#     --password "developer" \
 #     -sc ${JBOSS_BASE_DIR}/configuration

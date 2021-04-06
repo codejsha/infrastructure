@@ -4,6 +4,7 @@ set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 ### postgresql
+
 DRIVER_FILE_DIR="/mnt/share/postgresql"
 DRIVER_FILE="postgresql-42.2.19.jar"
 DRIVER_CLASS_NAME="org.postgresql.xa.PGXADataSource"

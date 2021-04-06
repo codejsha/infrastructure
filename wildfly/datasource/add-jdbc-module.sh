@@ -9,6 +9,8 @@ source ./env-jdbc-driver.sh
 JBOSS_HOME="${JBOSS_HOME}"
 BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
 JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
+USERNAME="${USERNAME}"
+PASSWORD="${PASSWORD}"
 
 DRIVER_FILE_DIR="${DRIVER_FILE_DIR}"
 DRIVER_FILE="${DRIVER_FILE}"
@@ -21,6 +23,8 @@ function add_jdbc_module {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --user="${USERNAME}" \
+        --password="${PASSWORD}" \
         --echo-command \
         --command="module add --name=${MODULE_NAME} --resources=${DRIVER_FILE_DIR}/${DRIVER_FILE} --dependencies=javax.api,javax.transaction.api"
 }

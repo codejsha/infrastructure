@@ -9,6 +9,8 @@ source ./env-jdbc-driver.sh
 JBOSS_HOME="${JBOSS_HOME}"
 BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
 JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
+USERNAME="${USERNAME}"
+PASSWORD="${PASSWORD}"
 
 DRIVER_FILE_DIR="${DRIVER_FILE_DIR}"
 DRIVER_FILE="${DRIVER_FILE}"
@@ -25,6 +27,8 @@ function deploy_application {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --user="${USERNAME}" \
+        --password="${PASSWORD}" \
 <<EOF
 batch
 deploy ${APP_PATH}\
@@ -40,6 +44,8 @@ function get_deployment_status {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --user="${USERNAME}" \
+        --password="${PASSWORD}" \
         --echo-command \
         --command="deployment-info --name=${APP_NAME}"
 }
@@ -48,6 +54,8 @@ function get_deployment_status_all {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --user="${USERNAME}" \
+        --password="${PASSWORD}" \
         --echo-command \
         --command="deploy -l"
 }

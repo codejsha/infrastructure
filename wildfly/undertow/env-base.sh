@@ -11,6 +11,7 @@ JAVA_HOME="/usr/lib/jvm/java-11"
 JBOSS_HOME="/usr/local/wildfly"
 JBOSS_BASE_DIR="${JBOSS_HOME}/instances/${INSTANCE_NAME}"
 JBOSS_CONFIG_DIR="${JBOSS_BASE_DIR}/configuration"
+JBOSS_LOG_DIR="${JBOSS_BASE_DIR}/logs"
 
 # SERVER_CONFIG_FILE="standalone-full-ha.xml"
 # SERVER_CONFIG_FILE="standalone-full.xml"
@@ -28,7 +29,8 @@ JBOSS_AJP_PORT="8009"
 JBOSS_MGMT_HTTP_PORT="9990"
 JBOSS_MGMT_HTTPS_PORT="9993"
 
-JBOSS_LOG_DIR="${JBOSS_BASE_DIR}/logs"
+USERNAME="admin"
+PASSWORD="welcome1"
 
 ######################################################################
 

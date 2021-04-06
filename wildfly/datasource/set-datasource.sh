@@ -10,6 +10,8 @@ source ./env-datasource.sh
 JBOSS_HOME="${JBOSS_HOME}"
 BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
 JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
+USERNAME="${USERNAME}"
+PASSWORD="${PASSWORD}"
 
 DRIVER_NAME="${DRIVER_NAME}"
 
@@ -42,6 +44,8 @@ function set_datasource {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --user="${USERNAME}" \
+        --password="${PASSWORD}" \
 <<EOF
 batch
 /subsystem=datasources/data-source=${DATASOURCE_NAME}:write-attribute(name=jndi-name,value="${JNDI_NAME}")
@@ -73,6 +77,8 @@ function reload_server {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --user="${USERNAME}" \
+        --password="${PASSWORD}" \
         --echo-command \
         --command=":reload()"
 }
@@ -81,6 +87,8 @@ function test_connection_pool {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --user="${USERNAME}" \
+        --password="${PASSWORD}" \
         --echo-command \
         --command="/subsystem=datasources/data-source=${DATASOURCE_NAME}:test-connection-in-pool()"
 }

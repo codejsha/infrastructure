@@ -13,16 +13,31 @@ PASSWORD="${PASSWORD}"
 
 ######################################################################
 
-function get_server_args {
+function add_mgmt_realm_auth_local {
+    ${JBOSS_HOME}/bin/jboss-cli.sh \
+        --connect \
+        --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
+        --user="${USERNAME}" \
+        --password="${PASSWORD}" \
+<<EOF
+batch
+/core-service=management/security-realm=ManagementRealm/authentication=local:add(default-user,skip-group-loading=true)
+run-batch
+quit
+EOF
+}
+
+function reload_server {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
         --user="${USERNAME}" \
         --password="${PASSWORD}" \
         --echo-command \
-        --command="/core-service=platform-mbean/type=runtime:read-attribute(name=input-arguments)"
+        --command=":reload()"
 }
 
 ######################################################################
 
-get_server_args
+add_mgmt_realm_auth_local
+reload_server
