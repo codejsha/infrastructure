@@ -6,7 +6,7 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 ### Requiremets:
 ### Servers and Clusters (for JMS configurations)
 
-source ./env-base.sh
+source ../env-base.sh
 
 ######################################################################
 

@@ -3,7 +3,7 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-source ./env-base.sh
+source ../env-base.sh
 
 COMPRESS_CONTENT_TYPE="${COMPRESS_CONTENT_TYPE}, text/html"
 COMPRESS_CONTENT_TYPE="${COMPRESS_CONTENT_TYPE}, text/xml"

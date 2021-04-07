@@ -6,7 +6,7 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 ### requirement:
 ### sudo yum install -y links
 
-source ./env-base.sh
+source ../env-base.sh
 
 DOMAIN_HOME="${DOMAIN_HOME}"
 

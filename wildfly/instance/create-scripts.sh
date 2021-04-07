@@ -3,7 +3,7 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-source ./env-base.sh
+source ../env-base.sh
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 PORT_OFFSET="${PORT_OFFSET}"

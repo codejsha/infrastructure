@@ -6,7 +6,7 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 ### Log levels:
 ### ALL, CONFIG, DEBUG, ERROR, FATAL, FINE, FINER, FINEST, INFO, OFF, SEVERE, TRACE, WARN, WARNING
 
-source ./env-base.sh
+source ../env-base.sh
 
 JBOSS_HOME="${JBOSS_HOME}"
 BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"

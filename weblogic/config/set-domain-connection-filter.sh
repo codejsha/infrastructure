@@ -3,7 +3,7 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-source ./env-base.sh
+source ../env-base.sh
 
 CONNECTION_FILTER="${CONNECTION_FILTER}, 192.168.137.0/24 test.example.com 7001 allow"
 CONNECTION_FILTER="${CONNECTION_FILTER}, 0.0.0.0/0 * * deny"

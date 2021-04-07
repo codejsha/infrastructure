@@ -3,7 +3,7 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-source ./env-base-11g.sh
+source ../env-base-11g.sh
 source ./env-component-11g.sh
 
 MW_HOME="${MW_HOME}"

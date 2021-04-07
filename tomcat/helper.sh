@@ -18,6 +18,6 @@ CATALINA_HOME="${CATALINA_HOME//\//\\/}"
 
 ######################################################################
 
-find . -type f -name "env-base.sh" | xargs perl -pi -e "s/JAVA_HOME=.*/JAVA_HOME=\"${JAVA_HOME}\"/"
-find . -type f -name "env-base.sh" | xargs perl -pi -e "s/JRE_HOME=.*/JRE_HOME=\"${JRE_HOME}\"/"
-find . -type f -name "env-base.sh" | xargs perl -pi -e "s/CATALINA_HOME=.*/CATALINA_HOME=\"${CATALINA_HOME}\"/"
+perl -pi -e "s/JAVA_HOME=.*/JAVA_HOME=\"${JAVA_HOME}\"/" env-base.sh
+perl -pi -e "s/JRE_HOME=.*/JRE_HOME=\"${JRE_HOME}\"/" env-base.sh
+perl -pi -e "s/CATALINA_HOME=.*/CATALINA_HOME=\"${CATALINA_HOME}\"/" env-base.sh

@@ -3,7 +3,7 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-source ./env-base.sh
+source ../env-base.sh
 
 export JMSMODULE_NAME="${1}"
 export DISTQUEUE_NAME="${2}"
