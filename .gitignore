@@ -3,8 +3,10 @@
 .idea/
 
 temp.json
-temp.ps1
 temp.log
+temp.md
+temp.properties
+temp.ps1
 temp.sh
 temp.txt
 temp.xml
