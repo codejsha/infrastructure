@@ -21,19 +21,6 @@ ds_target = os.environ['DS_TARGET']
 ######################################################################
 
 
-def create_generic_datasource(_domain_version, _ds_name):
-    cd('/')
-    if _ds_name not in [jdbc_resource.getName() for jdbc_resource in cmo.getJDBCSystemResources()]:
-        cmo.createJDBCSystemResource(_ds_name)
-        cd('/JDBCSystemResources/' + _ds_name + '/JDBCResource/' + _ds_name)
-        cmo.setName(_ds_name)
-        if ('12.2' in _domain_version) or ('14.' in _domain_version):
-            cmo.setDatasourceType('GENERIC')
-        cd('/JDBCSystemResources/' + _ds_name + '/JDBCResource/' + _ds_name +
-           '/JDBCDriverParams/' + _ds_name + '/Properties/' + _ds_name)
-        cmo.createProperty('user')
-
-
 def set_generic_datasource_param_config(_domain_version, _ds_name, _ds_jndi, _ds_url,
                                         _ds_driver, _ds_user, _ds_password,
                                         _ds_init, _ds_min, _ds_max, _ds_target_type, _ds_target):
@@ -74,9 +61,9 @@ def set_generic_datasource_param_config(_domain_version, _ds_name, _ds_jndi, _ds
     # cmo.setStatementCacheSize(10)
     # cmo.setTestConnectionsOnReserve(False)
     # cmo.setTestFrequencySeconds(120)
-    if ('12.1.3' in _domain_version) or ('12.2' in _domain_version) or ('14.' in _domain_version):
+    if ('14.' in _domain_version) or ('12.2' in _domain_version) or ('12.1.3' in _domain_version):
         cmo.setTestTableName('SQL ISVALID\r\n')
-    elif ('10.3' in _domain_version) or ('12.1' in _domain_version):
+    elif ('12.1' in _domain_version) or ('10.3' in _domain_version):
         cmo.setTestTableName('SQL SELECT 1 FROM DUAL\r\n')
     else:
         pass
@@ -122,7 +109,6 @@ edit()
 startEdit()
 domain_version = cmo.getDomainVersion()
 
-create_generic_datasource(domain_version, ds_name)
 set_generic_datasource_param_config(domain_version, ds_name, ds_jndi, ds_url,
                                     ds_driver, ds_user, ds_password,
                                     ds_init, ds_min, ds_max, ds_target_type, ds_target)

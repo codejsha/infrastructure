@@ -17,7 +17,7 @@ def create_generic_datasource(_domain_version, _ds_name):
         cmo.createJDBCSystemResource(_ds_name)
         cd('/JDBCSystemResources/' + _ds_name + '/JDBCResource/' + _ds_name)
         cmo.setName(_ds_name)
-        if ('12.2' in _domain_version) or ('14.' in _domain_version):
+        if ('14.' in _domain_version) or ('12.2' in _domain_version):
             cmo.setDatasourceType('GENERIC')
         cd('/JDBCSystemResources/' + _ds_name + '/JDBCResource/' + _ds_name +
            '/JDBCDriverParams/' + _ds_name + '/Properties/' + _ds_name)

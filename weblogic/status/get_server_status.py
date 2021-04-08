@@ -96,7 +96,7 @@ def get_server_heap_status(_servers):
 def get_server_threadpool_status(_domain_version, _servers):
     _server_names = [server.getName() for server in _servers]
     _is_ver_1212_or_later = False
-    if ('12.' in _domain_version) or ('14.' in _domain_version):
+    if ('14.' in _domain_version) or ('12.' in _domain_version):
         _is_ver_1212_or_later = True
         if '12.1.1' in _domain_version:
             _is_ver_1212_or_later = False

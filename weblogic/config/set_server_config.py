@@ -117,7 +117,7 @@ def set_server_log_config(_domain_version, _log_dir, _server_name):
     cmo.setLoggerSeverity('Info')
     cmo.setRedirectStdoutToServerLogEnabled(True)
     cmo.setRedirectStderrToServerLogEnabled(True)
-    if ('12.2' in _domain_version) or ('14.' in _domain_version):
+    if ('14.' in _domain_version) or ('12.2' in _domain_version):
         cmo.setLogMonitoringEnabled(True)
         cmo.setLogMonitoringIntervalSecs(30)
         cmo.setLogMonitoringThrottleThreshold(1500)

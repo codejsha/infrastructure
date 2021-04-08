@@ -69,16 +69,16 @@ export JAVA_OPTIONS
 JAVA_OPTIONS="${JAVA_OPTIONS} -verbose:class"
 export JAVA_OPTIONS
 
+### 12.1.3 and later
+JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.debug.DebugClassLoadingVerbose=true"
+JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.debug.DebugClassLoadingContextualTrace=true"
+JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.StdoutDebugEnabled=true"
+export JAVA_OPTIONS
+
 ### 12.1.2 and earlier
 JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.utils.classloaders.GenericClassLoader.Verbose=true"
 JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.utils.classloaders.FilteringClassLoader.Verbose=true"
 JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.utils.classloaders.ChangeAwareClassLoader.Verbose=true"
-JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.StdoutDebugEnabled=true"
-export JAVA_OPTIONS
-
-### 12.1.3 and later
-JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.debug.DebugClassLoadingVerbose=true"
-JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.debug.DebugClassLoadingContextualTrace=true"
 JAVA_OPTIONS="${JAVA_OPTIONS} -Dweblogic.StdoutDebugEnabled=true"
 export JAVA_OPTIONS
 
