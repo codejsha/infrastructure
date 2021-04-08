@@ -8,24 +8,29 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 # JAVA_HOME="/usr/java/java-1.8.0"
 # INSTALL_FILE_DIR="/mnt/share/oracle-weblogic-server/wls14.1.1/fmw_14.1.1.0.0_wls_Disk1_1of1"
 # INSTALL_FILE="fmw_14.1.1.0.0_wls.jar"
+# RESPONSE_FILE="response.rsp"
+# INVENTORY_FILE="oraInst.loc"
 
 ### 12214
 JAVA_HOME="/usr/java/java-1.8.0"
 INSTALL_FILE_DIR="/mnt/share/oracle-weblogic-server/wls12.2.1.4/fmw_12.2.1.4.0_wls_Disk1_1of1"
 INSTALL_FILE="fmw_12.2.1.4.0_wls.jar"
 RESPONSE_FILE="response.rsp"
+INVENTORY_FILE="oraInst.loc"
 
 ### 12213
 # JAVA_HOME="/usr/java/java-1.8.0"
 # INSTALL_FILE_DIR="/mnt/share/oracle-weblogic-server/wls12.2.1.3/fmw_12.2.1.3.0_wls_Disk1_1of1"
 # INSTALL_FILE="fmw_12.2.1.3.0_wls.jar"
 # RESPONSE_FILE="response.rsp"
+# INVENTORY_FILE="oraInst.loc"
 
 ### 1213
 # JAVA_HOME="/usr/java/java-1.8.0"
 # INSTALL_FILE_DIR="/mnt/share/oracle-weblogic-server/wls12.1.3"
 # INSTALL_FILE="fmw_12.1.3.0.0_wls.jar"
 # RESPONSE_FILE="response.rsp"
+# INVENTORY_FILE="oraInst.loc"
 
 ### 1036 (11119)
 # JAVA_HOME="/usr/java/java-1.7.0"
@@ -33,7 +38,6 @@ RESPONSE_FILE="response.rsp"
 # INSTALL_FILE="wls1036_generic.jar"
 # SILENT_FILE="silent.xml"
 
-INVENTORY_FILE="oraInst.loc"
 INSTALL_SCRIPT_DIR="/svc/infrastructure/weblogic"
 
 ######################################################################
