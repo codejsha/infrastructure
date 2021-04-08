@@ -22,7 +22,7 @@ INSTALL_SCRIPT_DIR="/svc/infrastructure/weblogic"
 
 ######################################################################
 
-### java home
+### check java home
 
 if [ ! -d "${JAVA_HOME}" ]; then
     echo "[ERROR] The JAVA_HOME (${JAVA_HOME}) does not exist!"
@@ -34,7 +34,7 @@ JAVA_VERSION="$(${JAVA_HOME}/bin/java -version 2>&1 /dev/null \
 
 ######################################################################
 
-### oracle home / middleware home
+### check oracle home / middleware home
 
 if [ ! -d "${MW_HOME}" ]; then
     echo "[ERROR] The ORACLE_HOME or MW_HOME (${MW_HOME}) does not exist!"
@@ -43,21 +43,7 @@ fi
 
 ######################################################################
 
-### weblogic home
-
-WL_HOME=""
-if [[ ${WEBLOGIC_VERSION} =~ ^14.1|^12. ]]; then
-    export WL_HOME="${ORACLE_HOME}/wlserver"
-elif [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
-    export WL_HOME="${MW_HOME}/wlserver_10.3"
-fi
-
-if [ ! -d "${WL_HOME}" ]; then
-    echo "[ERROR] The WL_HOME (${WL_HOME}) does not exist!"
-    exit
-fi
-
-######################################################################
+### get weblogic version
 
 ### registry file
 ### 14c, 12c: ${ORACLE_HOME}/inventory/registry.xml
@@ -77,6 +63,8 @@ fi
 
 ######################################################################
 
+### verify java home
+
 ### properties file
 ### 14c, 12c: ${ORACLE_HOME}/oui/.globalEnv.properties
 ### 11g: ${MW_HOME}/wlserver_10.3/.product.properties
@@ -93,5 +81,21 @@ fi
 
 if [ "$(readlink -f ${JAVA_HOME})" != "${JAVA_HOME_FROM_PROPERTIES}" ]; then
     echo "[ERROR] The JAVA_HOME(real path) and the JAVA_HOME(from properties) are not the same!"
+    exit
+fi
+
+######################################################################
+
+### setup weblogic home
+
+WL_HOME=""
+if [[ ${WEBLOGIC_VERSION} =~ ^14.1|^12. ]]; then
+    export WL_HOME="${ORACLE_HOME}/wlserver"
+elif [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
+    export WL_HOME="${MW_HOME}/wlserver_10.3"
+fi
+
+if [ ! -d "${WL_HOME}" ]; then
+    echo "[ERROR] The WL_HOME (${WL_HOME}) does not exist!"
     exit
 fi
