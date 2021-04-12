@@ -3,4 +3,4 @@
 export CONFLUENT_HOME=/usr/local/confluent
 export PATH="${PATH}:${CONFLUENT_HOME}/bin"
 
-source /etc/bash_completion.d/confluent
+source <(confluent completion bash)

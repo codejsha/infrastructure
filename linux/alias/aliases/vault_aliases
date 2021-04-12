@@ -2,8 +2,8 @@
 
 function vault() { echo "+ vault ${@}">&2; command vault ${@}; }
 
-export VAULT_TOKEN="$(cat ~/.vault/root_token.txt)"
 export VAULT_ADDR="http://vault.example.com"
+[ -f ~/.vault/root_token.txt ] && export VAULT_TOKEN="$(cat ~/.vault/root_token.txt)"
 
 alias vault-kv-get="vault kv get"
 alias vault-kv-list-kv="vault kv list kv"
