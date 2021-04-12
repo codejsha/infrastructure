@@ -5,6 +5,10 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 
 git clone --single-branch --branch release-1.5 https://github.com/rook/rook.git
 
+# curl -LJO https://github.com/rook/rook/archive/refs/tags/v1.5.9.tar.gz
+# tar -xzf rook-1.5.9.tar.gz
+# mv rook-1.5.9 rook
+
 kubectl apply --filename rook/cluster/examples/kubernetes/ceph/crds.yaml
 kubectl apply --filename rook/cluster/examples/kubernetes/ceph/common.yaml
 kubectl apply --filename rook/cluster/examples/kubernetes/ceph/operator.yaml
