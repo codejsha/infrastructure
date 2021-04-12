@@ -3,9 +3,11 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
+INSTALL_SCRIPT_DIR="/svc/infrastructure/wildfly"
+
 INSTANCE_NAME="inst1"   # default
 PORT_OFFSET="0"         # default
-source ./env-function.sh
+source ${INSTALL_SCRIPT_DIR}/env-function.sh
 
 JAVA_HOME="/usr/lib/jvm/java-11"
 JBOSS_HOME="/usr/local/wildfly"

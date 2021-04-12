@@ -154,11 +154,11 @@ cat <<EOF >> ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
 
 if [ -f "\${JBOSS_LOG_DIR}/nohup.\${INSTANCE_NAME}.out" ]; then
     mv \${JBOSS_LOG_DIR}/nohup.\${INSTANCE_NAME}.out \\
-        \${JBOSS_LOG_DIR}/\${INSTANCE_NAME}/nohup.\${INSTANCE_NAME}.\${GET_DATE}.out
+        \${JBOSS_LOG_DIR}/backup/nohup.\${INSTANCE_NAME}.\${GET_DATE}.out
 fi
 if [ -f "\${JBOSS_LOG_DIR}/gc.\${INSTANCE_NAME}.log" ]; then
     mv \${JBOSS_LOG_DIR}/gc.\${INSTANCE_NAME}.log \\
-        \${JBOSS_LOG_DIR}/\${INSTANCE_NAME}/gc.\${INSTANCE_NAME}.\${GET_DATE}.log
+        \${JBOSS_LOG_DIR}/backup/gc.\${INSTANCE_NAME}.\${GET_DATE}.log
 fi
 
 touch \${JBOSS_LOG_DIR}/nohup.\${INSTANCE_NAME}.out

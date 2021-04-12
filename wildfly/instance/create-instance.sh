@@ -17,5 +17,5 @@ mkdir -p ${JBOSS_BASE_DIR}
 /bin/cp -rpf ${JBOSS_HOME}/standalone/deployments ${JBOSS_BASE_DIR}
 /bin/cp -rpf ${JBOSS_HOME}/standalone/lib ${JBOSS_BASE_DIR}
 /bin/cp -rpf ${JBOSS_HOME}/standalone/tmp ${JBOSS_BASE_DIR}
-mkdir -p ${JBOSS_LOG_DIR}/${INSTANCE_NAME}
+mkdir -p ${JBOSS_LOG_DIR}/backup
 mkdir -p ${JBOSS_LOG_DIR}/dump

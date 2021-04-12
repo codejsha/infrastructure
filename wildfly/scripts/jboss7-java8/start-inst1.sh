@@ -14,7 +14,7 @@ GET_DATE="$(date +'%Y%m%d_%H%M%S')"
 
 BIND_ADDRESS="test.example.com"
 BIND_ADDRESS_MGMT="test.example.com"
-BIND_ADDRESS_PRIVATE="127.0.0.1"
+BIND_ADDRESS_PRIVATE="test.example.com"
 DEFAULT_MULTICAST_ADDRESS="230.0.0.4"
 PORT_OFFSET="0"
 
@@ -79,11 +79,11 @@ export JAVA_OPTS
 
 if [ -f "${JBOSS_LOG_DIR}/nohup.${INSTANCE_NAME}.out" ]; then
     mv ${JBOSS_LOG_DIR}/nohup.${INSTANCE_NAME}.out \
-        ${JBOSS_LOG_DIR}/${INSTANCE_NAME}/nohup.${INSTANCE_NAME}.${GET_DATE}.out
+        ${JBOSS_LOG_DIR}/backup/nohup.${INSTANCE_NAME}.${GET_DATE}.out
 fi
 if [ -f "${JBOSS_LOG_DIR}/gc.${INSTANCE_NAME}.log" ]; then
     mv ${JBOSS_LOG_DIR}/gc.${INSTANCE_NAME}.log \
-        ${JBOSS_LOG_DIR}/${INSTANCE_NAME}/gc.${INSTANCE_NAME}.${GET_DATE}.log
+        ${JBOSS_LOG_DIR}/backup/gc.${INSTANCE_NAME}.${GET_DATE}.log
 fi
 
 touch ${JBOSS_LOG_DIR}/nohup.${INSTANCE_NAME}.out
