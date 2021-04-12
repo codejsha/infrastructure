@@ -16,13 +16,7 @@ Table of Contents:
 
 ```powershell
 ### powershell
-helper.ps1
-```
-
-```bash
-sudo yum update -y
-### or
-sudo dnf update -y
+.\helper.ps1
 ```
 
 ## Virtual machine configuration
@@ -31,12 +25,19 @@ sudo dnf update -y
 
 ```powershell
 ### powershell
-create-kube-vm.ps1
+.\create-kube-vm.ps1
 ```
 
 ### 2. Install OS
 
 manually install linux (CentOS)
+
+update packages:
+
+```bash
+sudo dnf update -y
+sudo yum update -y
+```
 
 ### 3. Kubernetes requirements
 
@@ -53,7 +54,7 @@ bash ./pre-install.sh
 
 ```powershell
 ### powershell
-convert-kube-vhd.ps1
+.\convert-kube-vhd.ps1
 ```
 
 ## Host configuration
@@ -78,10 +79,10 @@ bash ./set-hostname.sh n3
 ### 2. Set network
 
 ```bash
-# 1 network
+# one network
 bash ./set-network.sh
 
-# 2 network
+# two networks
 bash ./set-network-dual.sh
 ```
 
@@ -123,12 +124,4 @@ bash ./post-install.sh
 ```bash
 bash ./dashboard-clusterrolebinding.sh
 kubectl apply --filename dashboard-ingress.yaml
-```
-
-### 3. Create Netchecker ingress (optional)
-
-before install, set to `deploy_netchecker: true` in `k8s-cluster.yaml`
-
-```bash
-kubectl apply --filename netchecker-ingress.yaml
 ```

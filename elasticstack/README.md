@@ -15,6 +15,10 @@ kubectl apply --namespace elastic-system --filename kibana-ingress.yaml
 
 ## Fluentd
 
+```bash
+bash ./helm-install-fluentd.sh
+```
+
 ### Grafana dashboard
 
 - https://grafana.com/grafana/dashboards/13042

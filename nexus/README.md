@@ -51,8 +51,7 @@ bash ./all.sh
 - `create-maven-proxy-repo.sh`
 - `update-maven-group-repo.sh`
 
-
-### Management
+### Security
 
 user:
 
@@ -64,7 +63,3 @@ realms:
 - `get-active-realms-list.sh`
 - `get-available-realms-list.sh`
 - `set-active-realms-list.sh`
-
-health check:
-
-- `health-check.sh`
