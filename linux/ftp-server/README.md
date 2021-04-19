@@ -21,5 +21,5 @@ docker container run \
 ## Test
 
 ```bash
-curl ftp://localhost/pub
+curl ftp://localhost/pub/
 ```
