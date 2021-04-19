@@ -1,0 +1,76 @@
+apiVersion: minio.min.io/v2
+kind: Tenant
+metadata:
+  name: minio-tenant-1
+  namespace: minio-tenant
+  annotations:
+    prometheus.io/path: /minio/prometheus/metrics
+    prometheus.io/port: "9000"
+    prometheus.io/scrape: "true"
+
+# scheduler:
+#   name: ""
+
+spec:
+  image: minio/minio:RELEASE.2021-04-06T23-11-00Z
+  imagePullPolicy: IfNotPresent
+  imagePullSecret: {}
+
+  pools:
+    - servers: 1
+      volumesPerServer: 4
+      resources: {}
+      volumeClaimTemplate:
+        apiVersion: v1
+        kind: persistentvolumeclaims
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Ti
+          storageClassName: standard
+          # storageClassName: rook-ceph-block
+          # storageClassName: local-path
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: v1.min.io/tenant
+                    operator: In
+                    values:
+                      - minio-tenant-1
+              topologyKey: kubernetes.io/hostname
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+
+  mountPath: /export
+  podManagementPolicy: Parallel
+
+  credsSecret:
+    name: minio-tenant-1-creds-secret
+  externalCertSecret:
+    - name: minio-tenant-1-cert
+      type: kubernetes.io/tls
+  certConfig: {}
+  requestAutoCert: false
+
+  s3:
+    bucketDNS: false
+
+  console:
+    image: minio/console:v0.6.7
+    replicas: 1
+    resources: {}
+    consoleSecret:
+      name: minio-tenant-1-console-secret
+    externalCertSecret:
+      name: minio-tenant-1-cert
+      type: kubernetes.io/tls
+    securityContext:
+      runAsUser: 1000
+      runAsGroup: 2000
+      runAsNonRoot: true

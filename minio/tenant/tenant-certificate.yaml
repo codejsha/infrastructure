@@ -1,0 +1,28 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: minio-tenant-1-cert
+  # namespace: minio-tenant
+spec:
+  commonName: minio-tenant-1-console.example.com
+  secretName: minio-tenant-1-cert
+  dnsNames:
+    # Ingress domain
+    - "minio-tenant-1-console.example.com"
+    - "minio-tenant-1.example.com"
+    # Internal domain
+    - "minio"
+    - "minio.minio-tenant"
+    - "minio.minio-tenant.svc.cluster.local"
+    - "*.minio.minio-tenant.svc.cluster.local"
+    - "minio-tenant-1-console"
+    - "minio-tenant-1-console.minio-tenant"
+    - "minio-tenant-1-console.minio-tenant.svc.cluster.local"
+    - "minio-tenant-1-hl"
+    - "minio-tenant-1-hl.minio-tenant"
+    - "minio-tenant-1-hl.minio-tenant.svc.cluster.local"
+    - "*.minio-tenant-1-hl.minio-tenant.svc.cluster.local"
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io

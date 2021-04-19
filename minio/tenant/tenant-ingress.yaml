@@ -1,6 +1,4 @@
-# apiVersion: extensions/v1beta1
-apiVersion: networking.k8s.io/v1beta1
-# apiVersion: networking.k8s.io/v1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: minio-tenant-1
@@ -10,15 +8,21 @@ metadata:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    cert-manager.io/cluster-issuer: "selfsigned-issuer"
+    acme.cert-manager.io/http01-ingress-class: "nginx"
 spec:
   tls:
     - hosts:
         - minio-tenant-1.example.com
-      secretName: minio-tls
+      secretName: minio-tenant-1-cert
   rules:
     - host: minio-tenant-1.example.com
       http:
         paths:
-          - backend:
-              serviceName: minio-hl
-              servicePort: 9000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio
+                port:
+                  number: 443
