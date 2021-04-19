@@ -48,6 +48,22 @@ bash ./kube-run-cmak.sh
 
 - https://github.com/linkedin/Burrow
 
+## Xinfra Monitor
+
+- https://github.com/linkedin/kafka-monitor
+
+## Cruise Control
+
+- https://github.com/linkedin/cruise-control
+
+## Kafdrop
+
+- https://github.com/obsidiandynamics/kafdrop
+
+## Secor
+
+- https://github.com/pinterest/secor
+
 ## Apache NiFi
 
 - https://nifi.apache.org/docs.html
