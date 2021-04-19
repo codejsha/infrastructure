@@ -13,23 +13,71 @@ bash ./helper-11g.sh
 bash ./install-weblogic.sh
 ```
 
-## Create domain
+## Domain
 
 ```bash
+### create domain
 bash ./create-domain.sh
 ```
 
-## Configuration
+## Logging
 
-- Domain: [config README](/weblogic/config/README.md)
-- JMS: [jms-config README](/weblogic/jms-config/README.md)
+### logrotate
 
-### Logging
+- https://www.redhat.com/sysadmin/setting-logrotate
+- https://access.redhat.com/solutions/1294
 
-- [Logging](/weblogic/logging/logging.md)
-- [debug.sh](/weblogic/debug.sh)
+`/etc/logrotate.d/weblogic_base_domain.conf`:
 
-## Deployment descriptor
+```conf
+daily
+rotate 4
+create
+dateext
+notifempty
+missingok
+
+/usr/local/weblogic/user_projects/domains/base_domain/logs/*.out {
+}
+
+/usr/local/weblogic/user_projects/domains/base_domain/logs/*.log {
+}
+```
+
+### Rotating log file in Windows service
+
+- https://docs.oracle.com/middleware/12213/wls/START/winservice.htm
+- https://docs.oracle.com/en/middleware/standalone/weblogic-server/14.1.1.0/start/winservice.html
+
+#### Edit argument
+
+At the end of the wlsvc command, append the following command option:
+
+```cmd
+-log:%LOG_PATH%
+```
+
+#### Edit stdout log file
+
+by time:
+
+```log
+# ROTATION_TYPE = TIME
+# TIME_START_DATE = MONTH DAY YEAR HOUR:MINUTES:SECONDS
+# TIME_INTERVAL_MINS = NUMBER_OF_MINUTES
+```
+
+by size:
+
+```log
+# ROTATION_TYPE = SIZE
+# SIZE_KB = FILE_SIZE_IN_KILOBYTES
+# SIZE_TRIGGER_INTERVAL_MINS = NUMBER_OF_MINUTES
+```
+
+## Deployment
+
+### Deployment descriptor
 
 web.xml:
 
@@ -42,13 +90,63 @@ weblogic.xml:
 
 - https://docs.oracle.com/middleware/12213/wls/WBAPP/weblogic_xml.htm
 
+## WebLogic Plugin
+
+### Check plugin version
+
+#### DebugConfigInfo
+
+Enable the query parameter:
+
+```conf
+DebugConfigInfo ON
+```
+
+Invoke:
+
+```txt
+http://www.example.com/helloworld?__WebLogicBridgeConfig
+```
+
+#### Linux
+
+```bash
+strings mod_wl.so | grep WLSPLUGINS
+# WLSPLUGINS_12.2.1.3.0_LINUX.X64_170817.1846
+# WebLogic Server Plugin version 12.2.1.3.0 <WLSPLUGINS_12.2.1.3.0_LINUX.X64_170817.1846>
+
+# WLSPLUGINS_12.1.3.0.0_LINUX.X64_140429.1732
+# WebLogic Server Plugin version 12.1.3 <WLSPLUGINS_12.1.3.0.0_LINUX.X64_140429.1732>
+
+# WLSPLUGINS_11.1.1.9.0_LINUX.X64_150206.1116
+# WebLogic Server Plugin version 1.1 <WLSPLUGINS_11.1.1.9.0_LINUX.X64_150206.1116>
+```
+
+#### Windows
+
+Use Sysinternals strings:
+
+```powershell
+strings64.exe iisproxy.dll | Select-String "WLSPLUGINS" -SimpleMatch
+# WLSPLUGINS_12.2.1.3.0_WINDOWS.X64_170817.2030
+# WebLogic Server Plugin version 12.2.1.3.0 <WLSPLUGINS_12.2.1.3.0_WINDOWS.X64_170817.2030>
+
+# WLSPLUGINS_12.1.3.0.0_WINDOWS.X64_140429.1806
+# WebLogic Server Plugin version 12.1.3 <WLSPLUGINS_12.1.3.0.0_WINDOWS.X64_140429.1806>
+
+# WLSPLUGINS_11.1.1.9.0_WINDOWS.X64_150209.1021
+# WebLogic Server Plugin version 1.1 <WLSPLUGINS_11.1.1.9.0_WINDOWS.X64_150209.1021>
+```
+
 ## RESTful Management Services
 
-- https://docs.oracle.com/middleware/11119/wls/RESTS/restfulmanagementservices.htm
-- https://docs.oracle.com/middleware/12213/wls/WLRUR/overview.htm
-- https://docs.oracle.com/en/middleware/fusion-middleware/weblogic-server/12.2.1.4/wlrur/examples.html
 - https://docs.oracle.com/en/middleware/standalone/weblogic-server/14.1.1.0/wlrur/overview.html
 - https://docs.oracle.com/en/middleware/standalone/weblogic-server/14.1.1.0/wlrur/examples.html
+- https://docs.oracle.com/en/middleware/fusion-middleware/weblogic-server/12.2.1.4/wlrur/overview.html
+- https://docs.oracle.com/en/middleware/fusion-middleware/weblogic-server/12.2.1.4/wlrur/examples.html
+- https://docs.oracle.com/middleware/12213/wls/WLRUR/overview.htm
+- https://docs.oracle.com/middleware/12213/wls/WLRUR/examples.htm
+- https://docs.oracle.com/middleware/11119/wls/RESTS/restfulmanagementservices.htm
 
 ## WLST (WebLogic Scripting Tool)
 

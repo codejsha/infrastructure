@@ -23,12 +23,12 @@ JAVA_OPTIONS="${JAVA_OPTIONS} -DLogCount=1"
 export JAVA_OPTIONS
 
 if [ -f "${LOG_DIR}/nohup.NodeManager.out" ]; then
-    mv ${LOG_DIR}/nohup.NodeManager.out ${LOG_DIR}/nodemanager/nohup.NodeManager.${GET_DATE}.out
+    mv ${LOG_DIR}/nohup.NodeManager.out ${LOG_DIR}/nodemanager/nohup.NodeManager.${DATETIME}.out
 fi
 # if [ -f "${LOG_DIR}/gc.NodeManager.log" ]; then
-#     mv ${LOG_DIR}/gc.NodeManager.log ${LOG_DIR}/nodemanager/gc.NodeManager.${GET_DATE}.log
+#     mv ${LOG_DIR}/gc.NodeManager.log ${LOG_DIR}/nodemanager/gc.NodeManager.${DATETIME}.log
 # fi
 
 touch ${LOG_DIR}/nohup.NodeManager.out
-${DOMAIN_HOME}/bin/startNodeManager.sh >> ${LOG_DIR}/nohup.NodeManager.out 2>&1 &
+${DOMAIN_HOME}/bin/startNodeManager.sh > ${LOG_DIR}/nohup.NodeManager.out 2>&1 &
 tail -f ${LOG_DIR}/nohup.NodeManager.out

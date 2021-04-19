@@ -3,10 +3,6 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-bash ./print-env-base-info.sh
-
-######################################################################
-
 ### DEPLOY APPLICATION
 ### bash ./deploy-app.sh ${APP_NAME} ${APP_PATH} ${APP_TARGET}
 

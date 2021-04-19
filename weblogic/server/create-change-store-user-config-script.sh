@@ -5,8 +5,6 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 
 source ../env-base.sh
 
-MANAGED_SERVER_NAME="${1}"
-
 ######################################################################
 
 mkdir -p ${DOMAIN_HOME}/scripts
@@ -22,74 +20,72 @@ TEMP="\${ORACLE_HOME}"
 VAR_DOMAIN_HOME="${DOMAIN_HOME/${ORACLE_HOME}/${TEMP}}"
 TEMP="\${DOMAIN_NAME}"
 VAR_DOMAIN_HOME="${VAR_DOMAIN_HOME/${DOMAIN_NAME}/${TEMP}}"
+TEMP="\${DOMAIN_HOME}"
+VAR_LOG_DIR="${LOG_DIR/${DOMAIN_HOME}/${TEMP}}"
 
 ######################################################################
 
-cat <<EOF > ${DOMAIN_HOME}/scripts/shutdown_${MANAGED_SERVER_NAME}.py
+cat <<EOF > ${DOMAIN_HOME}/scripts/change_store_user_config.py
 #!/usr/bin/env python
 
 domain_home = os.environ['DOMAIN_HOME']
 admin_server_url = os.environ['ADMIN_SERVER_URL']
-managed_server_name = os.environ['MANAGED_SERVER_NAME']
+admin_username = os.environ['ADMIN_USERNAME']
+admin_password = os.environ['ADMIN_PASSWORD']
 
 ######################################################################
 
-connect(userConfigFile=domain_home + '/security/WebLogicConfig.properties',
-        userKeyFile=domain_home + '/security/WebLogicKey.properties',
-        url=admin_server_url)
+connect(admin_username, admin_password, admin_server_url)
 
-shutdown(managed_server_name, 'Server', ignoreSessions='true', force='true')
+storeUserConfig(domain_home + '/security/WebLogicConfig.properties',
+                domain_home + '/security/WebLogicKey.properties')
 
 exit()
 EOF
 
 ######################################################################
 
-if [[ ${WEBLOGIC_VERSION} =~ ^14.1|^12. ]]; then
-cat <<EOF > ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
+cat <<EOF > ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 #!/bin/bash
+set -o xtrace
 set -o errtrace
 set -o errexit
 trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
-set -o xtrace
 
+EOF
+
+if [[ ${WEBLOGIC_VERSION} =~ ^14.1|^12. ]]; then
+cat <<EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 ORACLE_HOME="${ORACLE_HOME}"
 DOMAIN_NAME="${DOMAIN_NAME}"
 export DOMAIN_HOME="${VAR_DOMAIN_HOME}"
 EOF
 elif [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
-cat <<EOF > ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
-#!/bin/bash
-set -o errtrace
-set -o errexit
-trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
-export PS4="\e[33;1m+ \e[0m"
-set -o xtrace
-
+cat <<EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 MW_HOME="${MW_HOME}"
 DOMAIN_NAME="${DOMAIN_NAME}"
 export DOMAIN_HOME="${VAR_DOMAIN_HOME_11}"
 EOF
 fi
 
-cat <<EOF >> ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
+cat <<EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
 export ADMIN_SERVER_URL="t3://${ADMIN_SERVER_LISTEN_ADDRESS}:${ADMIN_SERVER_LISTEN_PORT}"
-export MANAGED_SERVER_NAME="${MANAGED_SERVER_NAME}"
+export ADMIN_USERNAME="\${1:-"weblogic"}"
+export ADMIN_PASSWORD="\${2:-"welcome1"}"
 
-export CONFIG_JVM_ARGS="\${CONFIG_JVM_ARGS} -Djava.security.egd=file:///dev/urandom"
 EOF
 
 if [[ ${WEBLOGIC_VERSION} =~ ^14.1|^12. ]]; then
-cat <<EOF >> ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
-\${ORACLE_HOME}/oracle_common/common/bin/wlst.sh \${DOMAIN_HOME}/scripts/shutdown_\${MANAGED_SERVER_NAME}.py
+cat <<EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
+\${ORACLE_HOME}/oracle_common/common/bin/wlst.sh \${DOMAIN_HOME}/scripts/change_store_user_config.py
 EOF
 elif [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
-cat <<EOF >> ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
-\${MW_HOME}/wlserver_10.3/common/bin/wlst.sh \${DOMAIN_HOME}/scripts/shutdown_\${MANAGED_SERVER_NAME}.py
+cat <<EOF >> ${DOMAIN_HOME}/scripts/change-store-user-config.sh
+\${MW_HOME}/wlserver_10.3/common/bin/wlst.sh \${DOMAIN_HOME}/scripts/change_store_user_config.py
 EOF
 fi
 
 ######################################################################
 
-chmod 750 ${DOMAIN_HOME}/scripts/shutdown-${MANAGED_SERVER_NAME}.sh
+chmod 750 ${DOMAIN_HOME}/scripts/change-store-user-config.sh

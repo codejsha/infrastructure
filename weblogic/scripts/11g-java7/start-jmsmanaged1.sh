@@ -6,7 +6,7 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 SERVER_NAME="JmsManagedServer1"
 DOMAIN_HOME="/usr/local/weblogic/user_projects/domains/base_domain"
 LOG_DIR="${DOMAIN_HOME}/logs"
-GET_DATE="$(date +'%Y%m%d_%H%M%S')"
+DATETIME="$(date +'%Y%m%d_%H%M%S')"
 
 CURRENT_USER="$(id -un)"
 if [ "${CURRENT_USER}" == "root" ]; then
@@ -59,10 +59,10 @@ export JAVA_OPTIONS
 # export EXT_POST_CLASSPATH
 
 if [ -f "${LOG_DIR}/nohup.${SERVER_NAME}.out" ]; then
-    mv ${LOG_DIR}/nohup.${SERVER_NAME}.out ${LOG_DIR}/${SERVER_NAME}/nohup.${SERVER_NAME}.${GET_DATE}.out
+    mv ${LOG_DIR}/nohup.${SERVER_NAME}.out ${LOG_DIR}/${SERVER_NAME}/nohup.${SERVER_NAME}.${DATETIME}.out
 fi
 if [ -f "${LOG_DIR}/gc.${SERVER_NAME}.log" ]; then
-    mv ${LOG_DIR}/gc.${SERVER_NAME}.log ${LOG_DIR}/${SERVER_NAME}/gc.${SERVER_NAME}.${GET_DATE}.log
+    mv ${LOG_DIR}/gc.${SERVER_NAME}.log ${LOG_DIR}/${SERVER_NAME}/gc.${SERVER_NAME}.${DATETIME}.log
 fi
 
 touch ${LOG_DIR}/nohup.${SERVER_NAME}.out
