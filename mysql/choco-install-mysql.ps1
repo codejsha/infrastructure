@@ -1,2 +1,3 @@
 choco install --confirm mysql
-choco install --confirm mysql.workbench
+
+# choco uninstall --confirm mysql

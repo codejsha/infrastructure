@@ -1,4 +1,4 @@
-# choco uninstall --confirm git.install
+### install
 choco install --confirm git.install --package-parameters="/NoShellIntegration"
 
 ### package parameters
@@ -13,3 +13,6 @@ choco install --confirm git.install --package-parameters="/NoShellIntegration"
 ### /NoCredentialManager
 ### /NoGitLfs
 ### /SChannel
+
+### uninstall
+# choco uninstall --confirm git.install
