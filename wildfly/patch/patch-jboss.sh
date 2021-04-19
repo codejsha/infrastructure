@@ -5,12 +5,6 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 
 source ../env-base.sh
 
-JBOSS_HOME="${JBOSS_HOME}"
-BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
-JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
-USERNAME="${USERNAME}"
-PASSWORD="${PASSWORD}"
-
 PATCH_FILE_DIR="/mnt/share/redhat-jboss-eap"
 
 # PATCH_FILE="jboss-eap-7.2.8-patch.zip"

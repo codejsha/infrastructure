@@ -5,6 +5,4 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 
 source ./env-base.sh
 
-JBOSS_HOME="${JBOSS_HOME}"
-
 ${JBOSS_HOME}/bin/standalone.sh -v

@@ -6,19 +6,8 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 source ../env-base.sh
 source ./env-jdbc-driver.sh
 
-JBOSS_HOME="${JBOSS_HOME}"
-BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
-JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
-USERNAME="${USERNAME}"
-PASSWORD="${PASSWORD}"
-
-DRIVER_FILE_DIR="${DRIVER_FILE_DIR}"
-DRIVER_FILE="${DRIVER_FILE}"
-DRIVER_NAME="${DRIVER_NAME}"
-DRIVER_RUNTIME_NAME="${DRIVER_RUNTIME_NAME}"
-
-APP_PATH="${DRIVER_FILE_DIR}/${DRIVER_FILE}"
 APP_NAME="${DRIVER_NAME}"
+APP_PATH="${DRIVER_FILE_DIR}/${DRIVER_FILE}"
 APP_RUNTIME_NAME="${DRIVER_RUNTIME_NAME}"
 
 ######################################################################

@@ -6,9 +6,6 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 source ../../env-base.sh
 source ./env-password-vault.sh
 
-JBOSS_HOME="${JBOSS_HOME}"
-KEYSTORE_PASSWORD="${KEYSTORE_PASSWORD}"
-
 if [ ! -f "${JBOSS_HOME}/vault/vault.keystore" ]; then
     echo "[INFO] The keystore is created."
     keytool \

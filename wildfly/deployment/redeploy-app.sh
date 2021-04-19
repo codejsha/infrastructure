@@ -5,10 +5,6 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 
 source ./env-app.sh
 
-APP_PATH="${APP_PATH}"
-APP_NAME="${APP_NAME}"
-APP_RUNTIME_NAME="${APP_RUNTIME_NAME}"
-
 ######################################################################
 
 bash ./undeploy-app.sh --name=${APP_NAME}

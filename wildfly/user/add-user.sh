@@ -5,12 +5,6 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 
 source ../env-base.sh
 
-JBOSS_HOME="${JBOSS_HOME}"
-JBOSS_BASE_DIR="${JBOSS_BASE_DIR}"
-
-USERNAME="${USERNAME}"
-PASSWORD="${PASSWORD}"
-
 ${JBOSS_HOME}/bin/add-user.sh \
     --user "${USERNAME}" \
     --password "${PASSWORD}" \

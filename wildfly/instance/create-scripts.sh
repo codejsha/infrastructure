@@ -5,23 +5,6 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 
 source ../env-base.sh
 
-INSTANCE_NAME="${INSTANCE_NAME}"
-PORT_OFFSET="${PORT_OFFSET}"
-JAVA_HOME="${JAVA_HOME}"
-JBOSS_HOME="${JBOSS_HOME}"
-JBOSS_BASE_DIR="${JBOSS_BASE_DIR}"
-JBOSS_CONFIG_DIR="${JBOSS_CONFIG_DIR}"
-JBOSS_LOG_DIR="${JBOSS_LOG_DIR}"
-SERVER_CONFIG_FILE="${SERVER_CONFIG_FILE}"
-BIND_ADDRESS="${BIND_ADDRESS}"
-BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
-BIND_ADDRESS_PRIVATE="${BIND_ADDRESS_PRIVATE}"
-DEFAULT_MULTICAST_ADDRESS="${DEFAULT_MULTICAST_ADDRESS}"
-JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
-USERNAME="${USERNAME}"
-PASSWORD="${PASSWORD}"
-JAVA_VERSION="${JAVA_VERSION}"
-
 ######################################################################
 
 ### replace pattern with string
@@ -49,7 +32,7 @@ export JBOSS_BASE_DIR="${VAR_JBOSS_BASE_DIR}"
 export JBOSS_CONFIG_DIR="${VAR_JBOSS_CONFIG_DIR}"
 export JBOSS_LOG_DIR="${VAR_JBOSS_LOG_DIR}"
 SERVER_CONFIG_FILE="${SERVER_CONFIG_FILE}"
-GET_DATE="\$(date +'%Y%m%d_%H%M%S')"
+DATETIME="\$(date +'%Y%m%d_%H%M%S')"
 
 BIND_ADDRESS="${BIND_ADDRESS}"
 BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
@@ -154,11 +137,11 @@ cat <<EOF >> ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
 
 if [ -f "\${JBOSS_LOG_DIR}/nohup.\${INSTANCE_NAME}.out" ]; then
     mv \${JBOSS_LOG_DIR}/nohup.\${INSTANCE_NAME}.out \\
-        \${JBOSS_LOG_DIR}/backup/nohup.\${INSTANCE_NAME}.\${GET_DATE}.out
+        \${JBOSS_LOG_DIR}/backup/nohup.\${INSTANCE_NAME}.\${DATETIME}.out
 fi
 if [ -f "\${JBOSS_LOG_DIR}/gc.\${INSTANCE_NAME}.log" ]; then
     mv \${JBOSS_LOG_DIR}/gc.\${INSTANCE_NAME}.log \\
-        \${JBOSS_LOG_DIR}/backup/gc.\${INSTANCE_NAME}.\${GET_DATE}.log
+        \${JBOSS_LOG_DIR}/backup/gc.\${INSTANCE_NAME}.\${DATETIME}.log
 fi
 
 touch \${JBOSS_LOG_DIR}/nohup.\${INSTANCE_NAME}.out

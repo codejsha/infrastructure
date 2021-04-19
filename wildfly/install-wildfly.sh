@@ -5,8 +5,6 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 
 source ./env-base.sh
 
-JBOSS_HOME="${JBOSS_HOME}"
-
 INSTALL_FILE_DIR="/mnt/share/wildfly"
 
 # INSTALL_FILE="wildfly-17.0.1.Final.zip"

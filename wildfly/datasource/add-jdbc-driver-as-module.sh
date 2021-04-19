@@ -6,17 +6,6 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 source ../env-base.sh
 source ./env-jdbc-driver.sh
 
-JBOSS_HOME="${JBOSS_HOME}"
-BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
-JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
-USERNAME="${USERNAME}"
-PASSWORD="${PASSWORD}"
-
-DRIVER_CLASS_NAME="${DRIVER_CLASS_NAME}"
-
-DRIVER_NAME="${DRIVER_NAME}"
-MODULE_NAME="${MODULE_NAME}"
-
 ######################################################################
 
 function add_jdbc_driver_with_module {

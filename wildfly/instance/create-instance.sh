@@ -5,11 +5,6 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 
 source ../env-base.sh
 
-INSTANCE_NAME="${INSTANCE_NAME}"
-JBOSS_HOME="${JBOSS_HOME}"
-JBOSS_BASE_DIR="${JBOSS_BASE_DIR}"
-JBOSS_LOG_DIR="${JBOSS_LOG_DIR}"
-
 ######################################################################
 
 mkdir -p ${JBOSS_BASE_DIR}

@@ -7,14 +7,6 @@ source ../env-base.sh
 source ./env-http-thread-pool.sh
 # source ./env-https-thread-pool.sh
 
-JBOSS_HOME="${JBOSS_HOME}"
-BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
-JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
-USERNAME="${USERNAME}"
-PASSWORD="${PASSWORD}"
-
-WORKER_NAME="${WORKER_NAME}"
-
 ######################################################################
 
 function set_listener_thread_pool {

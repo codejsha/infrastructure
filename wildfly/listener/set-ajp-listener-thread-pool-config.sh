@@ -6,19 +6,6 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 source ../env-base.sh
 source ./env-ajp-thread-pool.sh
 
-JBOSS_HOME="${JBOSS_HOME}"
-BIND_ADDRESS_MGMT="${BIND_ADDRESS_MGMT}"
-JBOSS_MGMT_HTTP_PORT="${JBOSS_MGMT_HTTP_PORT}"
-USERNAME="${USERNAME}"
-PASSWORD="${PASSWORD}"
-
-WORKER_NAME="${WORKER_NAME}"
-IO_THREADS="${IO_THREADS}"
-STACK_SIZE="${STACK_SIZE}"
-TASK_CORE_THREADS="${TASK_CORE_THREADS}"
-TASK_KEEPALIVE="${TASK_KEEPALIVE}"
-TASK_MAX_THREADS="${TASK_MAX_THREADS}"
-
 ######################################################################
 
 function set_listener_thread_pool_config {

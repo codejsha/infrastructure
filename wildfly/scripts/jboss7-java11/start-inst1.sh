@@ -10,7 +10,7 @@ export JBOSS_BASE_DIR="${JBOSS_HOME}/instances/inst1"
 export JBOSS_CONFIG_DIR="${JBOSS_BASE_DIR}/configuration"
 export JBOSS_LOG_DIR="${JBOSS_BASE_DIR}/logs"
 SERVER_CONFIG_FILE="standalone-ha.xml"
-GET_DATE="$(date +'%Y%m%d_%H%M%S')"
+DATETIME="$(date +'%Y%m%d_%H%M%S')"
 
 BIND_ADDRESS="test.example.com"
 BIND_ADDRESS_MGMT="test.example.com"
@@ -74,11 +74,11 @@ export JAVA_OPTS
 
 if [ -f "${JBOSS_LOG_DIR}/nohup.${INSTANCE_NAME}.out" ]; then
     mv ${JBOSS_LOG_DIR}/nohup.${INSTANCE_NAME}.out \
-        ${JBOSS_LOG_DIR}/backup/nohup.${INSTANCE_NAME}.${GET_DATE}.out
+        ${JBOSS_LOG_DIR}/backup/nohup.${INSTANCE_NAME}.${DATETIME}.out
 fi
 if [ -f "${JBOSS_LOG_DIR}/gc.${INSTANCE_NAME}.log" ]; then
     mv ${JBOSS_LOG_DIR}/gc.${INSTANCE_NAME}.log \
-        ${JBOSS_LOG_DIR}/backup/gc.${INSTANCE_NAME}.${GET_DATE}.log
+        ${JBOSS_LOG_DIR}/backup/gc.${INSTANCE_NAME}.${DATETIME}.log
 fi
 
 touch ${JBOSS_LOG_DIR}/nohup.${INSTANCE_NAME}.out
