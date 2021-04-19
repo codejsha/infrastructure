@@ -37,6 +37,8 @@ RUN \
     confluent-hub install --no-prompt confluentinc/kafka-connect-mqtt:latest && \
     confluent-hub install --no-prompt confluentinc/kafka-connect-influxdb:latest && \
     confluent-hub install --no-prompt mongodb/kafka-connect-mongodb:latest && \
+    confluent-hub install --no-prompt confluentinc/kafka-connect-sftp:latest && \
+    confluent-hub install --no-prompt confluentinc/kafka-connect-ftps:latest && \
     echo
 
 USER 1001

@@ -35,3 +35,5 @@ ${CONFLUENT_HOME}/bin/confluent-hub install --no-prompt confluentinc/kafka-conne
 ${CONFLUENT_HOME}/bin/confluent-hub install --no-prompt confluentinc/kafka-connect-mqtt:latest
 ${CONFLUENT_HOME}/bin/confluent-hub install --no-prompt confluentinc/kafka-connect-influxdb:latest
 ${CONFLUENT_HOME}/bin/confluent-hub install --no-prompt mongodb/kafka-connect-mongodb:latest
+${CONFLUENT_HOME}/bin/confluent-hub install --no-prompt confluentinc/kafka-connect-sftp:latest
+${CONFLUENT_HOME}/bin/confluent-hub install --no-prompt confluentinc/kafka-connect-ftps:latest
