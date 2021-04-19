@@ -102,6 +102,9 @@ LS_COLORS="${LS_COLORS}:*.war=\e[38;2;214;157;133"
 LS_COLORS="${LS_COLORS}:*.zip=\e[38;2;214;157;133"
 export LS_COLORS
 
+# timezone
+TZ="Asia/Seoul"
+
 # path
 PATH="${PATH}:/usr/local/go/bin"
 PATH="${PATH}:/usr/local/maven/bin"
