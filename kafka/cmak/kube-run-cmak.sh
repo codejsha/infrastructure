@@ -19,9 +19,9 @@ function kube_run_cmak {
 
 function kube_run_cmak_attach {
     kubectl run \
+        --rm \
         --stdin \
         --tty \
-        --rm \
         cmak \
         --restart=Never \
         --labels=app=cmak \

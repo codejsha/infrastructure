@@ -6,7 +6,7 @@
 
 <!-- server.xml -->
 <GlobalNamingResources>
-    <!-- SQL Server DataSource -->
+    <!-- SQL Server Datasource -->
     <Resource name="jdbc/mssql" auth="Container" type="javax.sql.DataSource"
               username="sa" password="PASSWORD" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
               url="jdbc:sqlserver://test.example.com:1433;database=sqlserverdb"
@@ -19,7 +19,7 @@
 
 <!-- context.xml -->
 <Context>
-    <!-- SQL Server DataSource -->
+    <!-- SQL Server Datasource -->
     <ResourceLink name="jdbc/mssql" global="jdbc/mssql" type="javax.sql.DataSource" />
 </Context>
 
@@ -43,7 +43,7 @@
 
 <!-- context.xml -->
 <Context>
-    <!-- SQL Server DataSource -->
+    <!-- SQL Server Datasource -->
     <Resource name="jdbc/mssql" auth="Container" type="javax.sql.DataSource"
               username="sa" password="PASSWORD" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
               url="jdbc:sqlserver://test.example.com:1433;database=sqlserverdb"
@@ -73,7 +73,7 @@
 
 <!-- server.xml -->
 <GlobalNamingResources>
-    <!-- SQL Server DataSource -->
+    <!-- SQL Server Datasource -->
     <Resource name="jdbc/mssql" auth="Container" type="javax.sql.DataSource" factory="com.zaxxer.hikari.HikariJNDIFactory"
               dataSource.user="sa" dataSource.password="PASSWORD" dataSourceClassName="oracle.jdbc.pool.OracleDataSource"
               dataSource.url="jdbc:sqlserver://test.example.com:1433;database=sqlserverdb"
@@ -84,7 +84,7 @@
 
 <!-- context.xml -->
 <Context>
-    <!-- SQL Server DataSource -->
+    <!-- SQL Server Datasource -->
     <ResourceLink name="jdbc/mssql" global="jdbc/mssql" type="javax.sql.DataSource" />
 </Context>
 
@@ -108,7 +108,7 @@
 
 <!-- context.xml -->
 <Context>
-    <!-- SQL Server DataSource -->
+    <!-- SQL Server Datasource -->
     <Resource name="jdbc/mssql" auth="Container" type="javax.sql.DataSource" factory="com.zaxxer.hikari.HikariJNDIFactory"
               dataSource.user="sa" dataSource.password="PASSWORD" dataSourceClassName="oracle.jdbc.pool.OracleDataSource"
               dataSource.url="jdbc:sqlserver://test.example.com:1433;database=sqlserverdb"

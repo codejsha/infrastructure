@@ -26,6 +26,8 @@ helm upgrade --install my-vault \
 
 # mkdir -p ~/.vault
 # kubectl exec -it my-vault-0 -- vault operator init > ~/.vault/unseal_keys_and_root_token.txt
-# kubectl exec -ti my-vault-0 -- vault operator unseal UNSEAL_KEY_1
-# kubectl exec -ti my-vault-0 -- vault operator unseal UNSEAL_KEY_2
-# kubectl exec -ti my-vault-0 -- vault operator unseal UNSEAL_KEY_3
+# cat ~/.vault/unseal_keys_and_root_token.txt
+#
+# kubectl exec -it my-vault-0 -- vault operator unseal <UNSEAL_KEY_1>
+# kubectl exec -it my-vault-0 -- vault operator unseal <UNSEAL_KEY_2>
+# kubectl exec -it my-vault-0 -- vault operator unseal <UNSEAL_KEY_3>

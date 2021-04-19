@@ -8,8 +8,8 @@ MYSQL_PORT_3306_TCP_PORT="3306"
 MYSQL_ENV_MYSQL_ROOT_PASSWORD="debezium"
 
 docker container run \
-    --detach \
     --rm \
+    --detach \
     --name mysqlterm \
     --link mysql:mysql \
     --env TZ="Asia/Seoul" \

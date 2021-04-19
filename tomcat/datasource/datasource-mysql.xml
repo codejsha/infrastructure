@@ -6,7 +6,7 @@
 
 <!-- server.xml -->
 <GlobalNamingResources>
-    <!-- MySQL DataSource -->
+    <!-- MySQL Datasource -->
     <Resource name="jdbc/mysql" auth="Container" type="javax.sql.DataSource"
               username="mysql" password="PASSWORD" driverClassName="com.mysql.cj.jdbc.Driver"
               url="jdbc:mysql://test.example.com:3306/mysqldb"
@@ -19,7 +19,7 @@
 
 <!-- context.xml -->
 <Context>
-    <!-- MySQL DataSource -->
+    <!-- MySQL Datasource -->
     <ResourceLink name="jdbc/mysql" global="jdbc/mysql" type="javax.sql.DataSource" />
 </Context>
 
@@ -43,7 +43,7 @@
 
 <!-- context.xml -->
 <Context>
-    <!-- MySQL DataSource -->
+    <!-- MySQL Datasource -->
     <Resource name="jdbc/mysql" auth="Container" type="javax.sql.DataSource"
               username="mysql" password="PASSWORD" driverClassName="com.mysql.cj.jdbc.Driver"
               url="jdbc:mysql://test.example.com:3306/mysqldb"
@@ -73,7 +73,7 @@
 
 <!-- server.xml -->
 <GlobalNamingResources>
-    <!-- MySQL DataSource -->
+    <!-- MySQL Datasource -->
     <Resource name="jdbc/mysql" auth="Container" type="javax.sql.DataSource" factory="com.zaxxer.hikari.HikariJNDIFactory"
               dataSource.user="postgres" dataSource.password="PASSWORD"
               jdbcUrl="jdbc:mysql://test.example.com:3306/mysqldb"
@@ -84,7 +84,7 @@
 
 <!-- context.xml -->
 <Context>
-    <!-- MySQL DataSource -->
+    <!-- MySQL Datasource -->
     <ResourceLink name="jdbc/mysql" global="jdbc/mysql" type="javax.sql.DataSource" />
 </Context>
 
@@ -108,7 +108,7 @@
 
 <!-- context.xml -->
 <Context>
-    <!-- MySQL DataSource -->
+    <!-- MySQL Datasource -->
     <Resource name="jdbc/mysql" auth="Container" type="javax.sql.DataSource" factory="com.zaxxer.hikari.HikariJNDIFactory"
               dataSource.user="postgres" dataSource.password="PASSWORD"
               jdbcUrl="jdbc:mysql://test.example.com:3306/mysqldb"

@@ -8,5 +8,5 @@
 <!-- cluster -->
 <Logger name="org.apache.catalina.tribes" level="debug" />
 
-<!-- PostgreSQL DataSource -->
+<!-- PostgreSQL Datasource -->
 <Logger name="org.postgresql.Driver" level="debug" />

@@ -10,8 +10,8 @@ function docker_run_chartmuseum_with_local_storage {
     local sudo mkdir -p ${CHARTMUSEUM_VOLUME_DIR}
 
     docker container run \
-        --detach \
         --rm \
+        --detach \
         --name chartmuseum \
         --publish 8080:8080 \
         --env DEBUG="true" \
@@ -25,8 +25,8 @@ function docker_run_chartmuseum_with_s3_storage {
     # mc mb my-minio/chart-storage
 
     docker container run \
-        --detach \
         --rm \
+        --detach \
         --name chartmuseum \
         --publish 8080:8080 \
         --env DEBUG=1 \

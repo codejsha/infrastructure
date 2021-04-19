@@ -3,10 +3,12 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-PASSWORD="${PASSWORD}"
+USERNAME="minio"
+PASSWORD="minio123"
+# PASSWORD="${PASSWORD}"
 
 SERVER_NAME="minio"
-export MINIO_ROOT_USER="admin"
+export MINIO_ROOT_USER="${USERNAME}"
 export MINIO_ROOT_PASSWORD="${PASSWORD}"
 MINIO_DIR="/mnt/minio"
 DATA_DIR="${MINIO_DIR}/data"
@@ -16,9 +18,9 @@ sudo mkdir -p ${DATA_DIR}
 sudo mkdir -p ${LOG_DIR}/backup
 sudo chown -R $(id -un):$(id -gn) ${MINIO_DIR}
 
-GET_DATE="$(date +'%Y%m%d_%H%M%S')"
+DATETIME="$(date +'%Y%m%d_%H%M%S')"
 if [ -f "${LOG_DIR}/nohup.${SERVER_NAME}.out" ]; then
-    mv ${LOG_DIR}/nohup.${SERVER_NAME}.out ${LOG_DIR}/backup/nohup.${SERVER_NAME}.${GET_DATE}.out
+    mv ${LOG_DIR}/nohup.${SERVER_NAME}.out ${LOG_DIR}/backup/nohup.${SERVER_NAME}.${DATETIME}.out
 fi
 
 nohup minio server ${DATA_DIR} > ${LOG_DIR}/nohup.${SERVER_NAME}.out 2>&1 &

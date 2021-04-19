@@ -6,7 +6,9 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 helm repo add minio https://helm.min.io
 helm repo update
 
-export PASSWORD="${PASSWORD}"
+export USERNAME="minio"
+export PASSWORD="minio123"
+# export PASSWORD="${PASSWORD}"
 
 envsubst < ./helm-chart-values.yaml > ./helm-chart-values-temp.yaml
 

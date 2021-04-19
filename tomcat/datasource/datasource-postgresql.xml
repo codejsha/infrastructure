@@ -6,7 +6,7 @@
 
 <!-- server.xml -->
 <GlobalNamingResources>
-    <!-- PostgreSQL DataSource -->
+    <!-- PostgreSQL Datasource -->
     <Resource name="jdbc/postgres" auth="Container" type="javax.sql.DataSource"
               username="postgres" password="postgres" driverClassName="org.postgresql.Driver"
               url="jdbc:postgresql://test.example.com:5432/postgres"
@@ -19,7 +19,7 @@
 
 <!-- context.xml -->
 <Context>
-    <!-- PostgreSQL DataSource -->
+    <!-- PostgreSQL Datasource -->
     <ResourceLink name="jdbc/postgres" global="jdbc/postgres" type="javax.sql.DataSource" />
 </Context>
 
@@ -43,7 +43,7 @@
 
 <!-- context.xml -->
 <Context>
-    <!-- PostgreSQL DataSource -->
+    <!-- PostgreSQL Datasource -->
     <Resource name="jdbc/postgres" auth="Container" type="javax.sql.DataSource"
               username="postgres" password="postgres" driverClassName="org.postgresql.Driver"
               url="jdbc:postgresql://test.example.com:5432/postgres"
@@ -73,7 +73,7 @@
 
 <!-- server.xml -->
 <GlobalNamingResources>
-    <!-- PostgreSQL DataSource -->
+    <!-- PostgreSQL Datasource -->
     <Resource name="jdbc/postgres" auth="Container" type="javax.sql.DataSource" factory="com.zaxxer.hikari.HikariJNDIFactory"
               dataSource.user="postgres" dataSource.password="postgres" dataSourceClassName="org.postgresql.ds.PGSimpleDataSource"
               dataSource.url="jdbc:postgresql://test.example.com:5432/postgres"
@@ -84,7 +84,7 @@
 
 <!-- context.xml -->
 <Context>
-    <!-- PostgreSQL DataSource -->
+    <!-- PostgreSQL Datasource -->
     <ResourceLink name="jdbc/postgres" global="jdbc/postgres" type="javax.sql.DataSource" />
 </Context>
 
@@ -108,7 +108,7 @@
 
 <!-- context.xml -->
 <Context>
-    <!-- PostgreSQL DataSource -->
+    <!-- PostgreSQL Datasource -->
     <Resource name="jdbc/postgres" auth="Container" type="javax.sql.DataSource" factory="com.zaxxer.hikari.HikariJNDIFactory"
               dataSource.user="postgres" dataSource.password="postgres" dataSourceClassName="org.postgresql.ds.PGSimpleDataSource"
               dataSource.url="jdbc:postgresql://test.example.com:5432/postgres"

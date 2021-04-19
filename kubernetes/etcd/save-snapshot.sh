@@ -3,8 +3,8 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-GET_DATE="$(date +'%Y%m%d-%H%M%S')"
-FILENAME="etcd-snapshot-${GET_DATE}"
+DATETIME="$(date +'%Y%m%d-%H%M%S')"
+FILENAME="etcd-snapshot-${DATETIME}"
 
 export ETCDCTL_API=3
 /usr/local/bin/etcdctl \

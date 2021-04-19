@@ -4,8 +4,8 @@ set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 docker container run \
-    --detach \
     --rm \
+    --detach \
     --name zookeeper \
     --publish 2181:2181 \
     --publish 2888:2888 \

@@ -84,9 +84,9 @@ if [ ! -d "${LOG_DIR}/backup" ]; then
 fi
 
 ### backup stdout log
-GET_DATE="$(date +'%Y%m%d_%H%M%S')"
+DATETIME="$(date +'%Y%m%d_%H%M%S')"
 if [ -f "${LOG_DIR}/nohup.${SERVER_NAME}.out" ]; then
-    mv ${LOG_DIR}/nohup.${SERVER_NAME}.out ${LOG_DIR}/backup/nohup.${SERVER_NAME}.${GET_DATE}.out
+    mv ${LOG_DIR}/nohup.${SERVER_NAME}.out ${LOG_DIR}/backup/nohup.${SERVER_NAME}.${DATETIME}.out
 fi
 
 touch ${LOG_DIR}/nohup.${SERVER_NAME}.out

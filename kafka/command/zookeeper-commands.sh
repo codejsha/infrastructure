@@ -25,4 +25,4 @@ kubectl exec -it my-cluster-zookeeper-0 -- bin/zookeeper-shell.sh localhost:2181
 ### kubernetes
 
 ### kafka-confluent-operator znode
-kubectl exec zookeeper-0 -c zookeeper -- zookeeper-shell localhost:2181 ls /kafka-confluent-operator/brokers/ids
+kubectl exec zookeeper-0 --container zookeeper -- zookeeper-shell localhost:2181 ls /kafka-confluent-operator/brokers/ids

@@ -6,7 +6,7 @@
 
 <!-- server.xml -->
 <GlobalNamingResources>
-    <!-- Oracle Database DataSource -->
+    <!-- Oracle Database Datasource -->
     <Resource name="jdbc/oracle" auth="Container" type="javax.sql.DataSource"
               username="system" password="PASSWORD" driverClassName="oracle.jdbc.OracleDriver"
               url="jdbc:oracle:thin:@test.example.com:1521:orclcdb"
@@ -19,7 +19,7 @@
 
 <!-- context.xml -->
 <Context>
-    <!-- Oracle Database DataSource -->
+    <!-- Oracle Database Datasource -->
     <ResourceLink name="jdbc/oracle" global="jdbc/oracle" type="javax.sql.DataSource" />
 </Context>
 
@@ -43,7 +43,7 @@
 
 <!-- context.xml -->
 <Context>
-    <!-- Oracle Database DataSource -->
+    <!-- Oracle Database Datasource -->
     <Resource name="jdbc/oracle" auth="Container" type="javax.sql.DataSource"
               username="system" password="PASSWORD" driverClassName="oracle.jdbc.OracleDriver"
               url="jdbc:oracle:thin:@test.example.com:1521:orclcdb"
@@ -73,7 +73,7 @@
 
 <!-- server.xml -->
 <GlobalNamingResources>
-    <!-- Oracle Database DataSource -->
+    <!-- Oracle Database Datasource -->
     <Resource name="jdbc/oracle" auth="Container" type="javax.sql.DataSource" factory="com.zaxxer.hikari.HikariJNDIFactory"
               dataSource.user="postgres" dataSource.password="PASSWORD" dataSourceClassName="oracle.jdbc.pool.OracleDataSource"
               dataSource.url="jdbc:oracle:thin:@test.example.com:1521:orclcdb"
@@ -85,7 +85,7 @@
 
 <!-- context.xml -->
 <Context>
-    <!-- Oracle Database DataSource -->
+    <!-- Oracle Database Datasource -->
     <ResourceLink name="jdbc/oracle" global="jdbc/oracle" type="javax.sql.DataSource" />
 </Context>
 
@@ -109,7 +109,7 @@
 
 <!-- context.xml -->
 <Context>
-    <!-- Oracle Database DataSource -->
+    <!-- Oracle Database Datasource -->
     <Resource name="jdbc/oracle" auth="Container" type="javax.sql.DataSource" factory="com.zaxxer.hikari.HikariJNDIFactory"
               dataSource.user="postgres" dataSource.password="PASSWORD" dataSourceClassName="oracle.jdbc.pool.OracleDataSource"
               dataSource.url="jdbc:oracle:thin:@test.example.com:1521:orclcdb"

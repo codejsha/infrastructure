@@ -4,8 +4,8 @@ set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 docker container run \
-    --detach \
     --rm \
+    --detach \
     --name mysql \
     --publish 3306:3306 \
     --env MYSQL_ROOT_PASSWORD="debezium" \
