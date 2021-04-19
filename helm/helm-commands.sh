@@ -21,17 +21,17 @@ helm search repo --versions ingress-nginx/ingress-nginx
 ### chart
 
 ### show
-helm show chart
-helm show readme
-helm show values
+helm show chart ingress-nginx/ingress-nginx
+helm show readme ingress-nginx/ingress-nginx
+helm show values ingress-nginx/ingress-nginx
 
 ### install / upgrade
-helm install my-ingress
-helm upgrade my-ingress
-helm upgrade --install my-ingress
+helm install my-release
+helm upgrade my-release
+helm upgrade --install my-release
 
 ### uninstall
-helm uninstall my-ingress
+helm uninstall my-release
 
 ### pull
 helm pull --untar --untardir charts ingress-nginx/ingress-nginx
@@ -55,4 +55,4 @@ helm push --insecure my-chart https://core.harbor.example.com/library
 ######################################################################
 
 ### status
-helm status
+helm status my-release
