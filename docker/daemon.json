@@ -9,6 +9,6 @@
     "https://nexus.example.com",
     "http://nexus.example.com"
   ],
-  "debug": true,
+  "debug": false,
   "experimental": false
 }
