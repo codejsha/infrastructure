@@ -2,23 +2,14 @@
 .vscode/
 .idea/
 
-temp.json
-temp.log
-temp.md
-temp.properties
-temp.ps1
-temp.sh
-temp.txt
-temp.xml
-temp.yaml
+temp/
+temp.*
 
 *.jar
 *.tar
 *.tar.gz
 *.tgz
-*-temp.json
-*-temp.xml
-*-temp.yaml
+*-temp.*
 *.zip
 
 /istio/addon/certs/
@@ -27,6 +18,7 @@ temp.yaml
 /kafka/debezium/
 /kafka/strimzi/strimzi-*/
 /kubernetes/kubespray/kubespray/
+/minio/operator/operator/
 /oracledb/docker-images/
 /others/kraken/kraken/
 /rook/rook/
