@@ -68,7 +68,7 @@ docker login registry.example.com
 docker image tag centos:latest registry.example.com/centos:latest
 docker image push registry.example.com/centos:latest
 
-docker login core.harbor.example.com
+docker login core.harbor.example.com/library
 docker image tag centos:latest core.harbor.example.com/library/centos:latest
 docker image push core.harbor.example.com/library/centos:latest
 
