@@ -6,6 +6,11 @@
 ## Install
 
 ```bash
+### pre-install
+kubectl create namespace harbor-system
+kubectl apply --namespace harbor-system --filename tenant-certificate.yaml
+
+### install
 bash ./helm-install-harbor.sh
 ```
 

@@ -22,7 +22,6 @@ AWS_SECRET_KEY="${AWS_SECRET_KEY}"
 
 export AWS_REGION_ENDPOINT="http://minio.example.com"
 # export AWS_REGION_ENDPOINT="https://minio-tenant-1.example.com"
-# export AWS_REGION_ENDPOINT="https://minio-hl.minio-tenant.svc.cluster.local:9000"
 export AWS_ACCESS_KEY="${AWS_ACCESS_KEY}"
 export AWS_SECRET_KEY="${AWS_SECRET_KEY}"
 
@@ -31,9 +30,7 @@ export HARBOR_SECRET_KEY="${HARBOR_SECRET_KEY}" # Must be a string of 16 chars
 export REGISTRY_USERNAME="admin"
 export REGISTRY_PASSWORD="${PASSWORD}"
 export REGISTRY_HTPASSWD="$(htpasswd -nbBC10 ${REGISTRY_USERNAME} ${REGISTRY_PASSWORD})"
-export INTERNAL_DATABASE_PASSWORD="${PASSWORD}"
-export EXTERNAL_DATABASE_USERNAME="admin"
-export EXTERNAL_DATABASE_PASSWORD="${PASSWORD}"
+export DATABASE_PASSWORD="${PASSWORD}"
 
 envsubst < ./helm-chart-values.yaml > ./helm-chart-values-temp.yaml
 

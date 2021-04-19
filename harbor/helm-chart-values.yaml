@@ -70,10 +70,11 @@ persistence:
       size: 5Gi
   imageChartStorage:
     disableredirect: true
-    # caBundleSecretName: minio-tls
+    caBundleSecretName: minio-tenant-1-cert
     type: s3
     s3:
-      region: us-west-1
+      region: anyregion
+      # region: us-west-1
       bucket: harbor-storage
       accesskey: ${AWS_ACCESS_KEY}
       secretkey: ${AWS_SECRET_KEY}
@@ -90,24 +91,104 @@ persistence:
       # multipartcopymaxconcurrency: 100
       # multipartcopythresholdsize: "33554432"
 
-updateStrategy:
-  type: RollingUpdate
-
 harborAdminPassword: "${HARBOR_ADMIN_PASSWORD}"
 
 secretKey: "${HARBOR_SECRET_KEY}"
 
+portal:
+  replicas: 1
+  # resources:
+  #  requests:
+  #    cpu: 100m
+  #    memory: 256Mi
+
+core:
+  replicas: 1
+  # resources:
+  #  requests:
+  #    cpu: 100m
+  #    memory: 256Mi
+
 registry:
+  # registry:
+  #   resources:
+  #     requests:
+  #       cpu: 100m
+  #       memory: 256Mi
+  # controller:
+  #   resources:
+  #     requests:
+  #       cpu: 100m
+  #       memory: 256Mi
   replicas: 1
   credentials:
     username: "${REGISTRY_USERNAME}"
     password: "${REGISTRY_PASSWORD}"
     htpasswd: "${REGISTRY_HTPASSWD}"
 
+chartmuseum:
+  replicas: 1
+  # resources:
+  #  requests:
+  #    cpu: 100m
+  #    memory: 256Mi
+
+trivy:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 1
+      memory: 1Gi
+
+notary:
+  server:
+    replicas: 1
+    # resources:
+    #  requests:
+    #    cpu: 100m
+    #    memory: 256Mi
+  signer:
+    replicas: 1
+    # resources:
+    #  requests:
+    #    cpu: 100m
+    #    memory: 256Mi
+
 database:
   type: internal
   internal:
-    password: "${INTERNAL_DATABASE_PASSWORD}"
-  external:
-    username: "${EXTERNAL_DATABASE_USERNAME}"
-    password: "${EXTERNAL_DATABASE_PASSWORD}"
+    password: "${DATABASE_PASSWORD}"
+    # resources:
+    #   requests:
+    #     cpu: 100m
+    #     memory: 256Mi
+
+redis:
+  type: internal
+  # internal:
+  #   resources:
+  #     requests:
+  #       cpu: 100m
+  #       memory: 256Mi
+
+exporter:
+  replicas: 1
+  # resources:
+  # requests:
+  #   cpu: 100m
+  #   memory: 256Mi
+
+metrics:
+  enabled: true
+  core:
+    path: /metrics
+    port: 8001
+  registry:
+    path: /metrics
+    port: 8001
+  exporter:
+    path: /metrics
+    port: 8001
