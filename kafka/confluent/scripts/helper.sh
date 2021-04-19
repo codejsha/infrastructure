@@ -1,66 +1,61 @@
 #!/bin/bash
+set -o xtrace
 set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
+######################################################################
+
+function replace_variable {
+    local START_SCRIPT_NAME="${1}"
+    local STOP_SCRIPT_NAME="${2}"
+    local CONFLUENT_HOME="${3}"
+    local LOG_DIR="${4}"
+    local DATA_DIR="${5}"
+
+    ### escape forward slash
+    local CONFLUENT_HOME="${CONFLUENT_HOME//\//\\/}"
+    local DATA_DIR="${DATA_DIR//\//\\/}"
+    local LOG_DIR="${LOG_DIR//\//\\/}"
+
+    perl -pi -e "s/CONFLUENT_HOME=.*/CONFLUENT_HOME=\"${CONFLUENT_HOME}\"/g" ${START_SCRIPT_NAME}
+    perl -pi -e "s/CONFLUENT_HOME=.*/CONFLUENT_HOME=\"${CONFLUENT_HOME}\"/g" ${STOP_SCRIPT_NAME}
+    perl -pi -e "s/DATA_DIR=.*/DATA_DIR=\"${DATA_DIR}\"/g" ${START_SCRIPT_NAME}
+    perl -pi -e "s/LOG_DIR=.*/LOG_DIR=\"${LOG_DIR}\"/g" ${START_SCRIPT_NAME}
+}
+
+######################################################################
+
 CONFLUENT_HOME="/usr/local/confluent"
-BASE_DATA_DIR="/mnt"
-BASE_LOG_DIR="/mnt"
-
-######################################################################
-
-### escape forward slash
-BASE_DATA_DIR="${BASE_DATA_DIR//\//\\/}"
-BASE_LOG_DIR="${BASE_LOG_DIR//\//\\/}"
-
-######################################################################
 
 ### zookeeper
-DATA_DIR="${BASE_DATA_DIR}/zookeeper/data"
-LOG_DIR="${BASE_LOG_DIR}/zookeeper/logs"
-perl -pi -e "s/CONFLUENT_HOME=.*/CONFLUENT_HOME=\"${CONFLUENT_HOME}\"/g" start-zookeeper*.sh
-perl -pi -e "s/CONFLUENT_HOME=.*/CONFLUENT_HOME=\"${CONFLUENT_HOME}\"/g" stop-zookeeper*.sh
-perl -pi -e "s/DATA_DIR=.*/DATA_DIR=\"${DATA_DIR}\"/g" start-zookeeper*.sh
-perl -pi -e "s/LOG_DIR=.*/LOG_DIR=\"${LOG_DIR}\"/g" start-zookeeper*.sh
+DATA_DIR="/mnt/zookeeper/data"
+LOG_DIR="/mnt/zookeeper/logs"
+replace_variable "start-zookeeper*.sh" "stop-zookeeper*.sh" ${CONFLUENT_HOME} ${LOG_DIR} ${DATA_DIR}
 
 ### kafka
-DATA_DIR="${BASE_DATA_DIR}/kafka/data"
-LOG_DIR="${BASE_LOG_DIR}/kafka/logs"
-perl -pi -e "s/CONFLUENT_HOME=.*/CONFLUENT_HOME=\"${CONFLUENT_HOME}\"/g" start-kafka*.sh
-perl -pi -e "s/CONFLUENT_HOME=.*/CONFLUENT_HOME=\"${CONFLUENT_HOME}\"/g" stop-kafka*.sh
-perl -pi -e "s/DATA_DIR=.*/DATA_DIR=\"${DATA_DIR}\"/g" start-kafka*.sh
-perl -pi -e "s/LOG_DIR=.*/LOG_DIR=\"${LOG_DIR}\"/g" start-kafka*.sh
+DATA_DIR="/mnt/kafka/data"
+LOG_DIR="/mnt/kafka/logs"
+replace_variable "start-kafka*.sh" "stop-kafka*.sh" ${CONFLUENT_HOME} ${LOG_DIR} ${DATA_DIR}
 
 ### schema-registry
-LOG_DIR="${BASE_LOG_DIR}/schema-registry/logs"
-perl -pi -e "s/CONFLUENT_HOME=.*/CONFLUENT_HOME=\"${CONFLUENT_HOME}\"/g" start-schema-registry*.sh
-perl -pi -e "s/CONFLUENT_HOME=.*/CONFLUENT_HOME=\"${CONFLUENT_HOME}\"/g" stop-schema-registry*.sh
-perl -pi -e "s/LOG_DIR=.*/LOG_DIR=\"${LOG_DIR}\"/g" start-schema-registry*.sh
+LOG_DIR="/mnt/schema-registry/logs"
+replace_variable "start-schema-registry*.sh" "stop-schema-registry*.sh" ${CONFLUENT_HOME} ${LOG_DIR}
 
 ### kafka-connect
-LOG_DIR="${BASE_LOG_DIR}/kafka-connect/logs"
-perl -pi -e "s/CONFLUENT_HOME=.*/CONFLUENT_HOME=\"${CONFLUENT_HOME}\"/g" start-kafka-connect*.sh
-perl -pi -e "s/CONFLUENT_HOME=.*/CONFLUENT_HOME=\"${CONFLUENT_HOME}\"/g" stop-kafka-connect*.sh
-perl -pi -e "s/LOG_DIR=.*/LOG_DIR=\"${LOG_DIR}\"/g" start-kafka-connect*.sh
+LOG_DIR="/mnt/kafka-connect/logs"
+replace_variable "start-kafka-connect*.sh" "stop-kafka-connect*.sh" ${CONFLUENT_HOME} ${LOG_DIR}
 
 ### kafka-rest
-LOG_DIR="${BASE_LOG_DIR}/kafka-rest/logs"
-perl -pi -e "s/CONFLUENT_HOME=.*/CONFLUENT_HOME=\"${CONFLUENT_HOME}\"/g" start-kafka-rest*.sh
-perl -pi -e "s/CONFLUENT_HOME=.*/CONFLUENT_HOME=\"${CONFLUENT_HOME}\"/g" stop-kafka-rest*.sh
-perl -pi -e "s/LOG_DIR=.*/LOG_DIR=\"${LOG_DIR}\"/g" start-kafka-rest*.sh
+LOG_DIR="/mnt/kafka-rest/logs"
+replace_variable "start-kafka-rest*.sh" "stop-kafka-rest*.sh" ${CONFLUENT_HOME} ${LOG_DIR}
 
 ### ksqldb
-DATA_DIR="${BASE_DATA_DIR}/ksqldb/data"
-LOG_DIR="${BASE_LOG_DIR}/ksqldb/logs"
-perl -pi -e "s/CONFLUENT_HOME=.*/CONFLUENT_HOME=\"${CONFLUENT_HOME}\"/g" start-ksqldb*.sh
-perl -pi -e "s/CONFLUENT_HOME=.*/CONFLUENT_HOME=\"${CONFLUENT_HOME}\"/g" stop-ksqldb*.sh
-perl -pi -e "s/DATA_DIR=.*/DATA_DIR=\"${DATA_DIR}\"/g" start-ksqldb*.sh
-perl -pi -e "s/LOG_DIR=.*/LOG_DIR=\"${LOG_DIR}\"/g" start-ksqldb*.sh
+DATA_DIR="/mnt/ksqldb/data"
+LOG_DIR="/mnt/ksqldb/logs"
+replace_variable "start-ksqldb*.sh" "stop-ksqldb*.sh" ${CONFLUENT_HOME} ${LOG_DIR} ${DATA_DIR}
 
 ### control-center
-DATA_DIR="${BASE_DATA_DIR}/control-center/data"
-LOG_DIR="${BASE_LOG_DIR}/control-center/logs"
-perl -pi -e "s/CONFLUENT_HOME=.*/CONFLUENT_HOME=\"${CONFLUENT_HOME}\"/g" start-control-center*.sh
-perl -pi -e "s/CONFLUENT_HOME=.*/CONFLUENT_HOME=\"${CONFLUENT_HOME}\"/g" stop-control-center*.sh
-perl -pi -e "s/DATA_DIR=.*/DATA_DIR=\"${DATA_DIR}\"/g" start-control-center*.sh
-perl -pi -e "s/LOG_DIR=.*/LOG_DIR=\"${LOG_DIR}\"/g" start-control-center*.sh
+DATA_DIR="/mnt/control-center/data"
+LOG_DIR="/mnt/control-center/logs"
+replace_variable "start-control-center*.sh" "stop-control-center*.sh" ${CONFLUENT_HOME} ${LOG_DIR} ${DATA_DIR}
