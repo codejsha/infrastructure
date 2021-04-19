@@ -1,14 +1,8 @@
-# FTP Server
+#!/bin/bash
+set -o errtrace
+set -o errexit
+trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-## Build image
-
-```bash
-docker image build --tag ftp-server .
-```
-
-## Run
-
-```bash
 docker container run \
     --detach \
     --name ftp-server \
@@ -16,10 +10,3 @@ docker container run \
     --publish 10400-10410:10400-10410 \
     --mount type="bind",src="/mnt/share",dst="/var/ftp/pub" \
     ftp-server /bin/bash -c '/usr/sbin/vsftpd && tail -f /dev/null'
-```
-
-## Test
-
-```bash
-curl ftp://localhost/pub
-```

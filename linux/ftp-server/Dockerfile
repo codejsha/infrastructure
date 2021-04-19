@@ -1,4 +1,4 @@
-FROM centos:7.5.1804
+FROM centos:7.9.2009
 
 RUN yum install -y vsftpd; yum clean all;
 
