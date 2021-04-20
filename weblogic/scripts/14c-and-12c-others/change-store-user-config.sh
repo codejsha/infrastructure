@@ -12,4 +12,5 @@ export ADMIN_SERVER_URL="t3://test.example.com:7001"
 export ADMIN_USERNAME="${1:-"weblogic"}"
 export ADMIN_PASSWORD="${2:-"welcome1"}"
 
+export CONFIG_JVM_ARGS="${CONFIG_JVM_ARGS} -Djava.security.egd=file:///dev/urandom"
 ${ORACLE_HOME}/oracle_common/common/bin/wlst.sh ${DOMAIN_HOME}/scripts/change_store_user_config.py

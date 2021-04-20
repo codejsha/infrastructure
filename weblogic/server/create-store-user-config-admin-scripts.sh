@@ -76,16 +76,16 @@ fi
 cat <<EOF >> ${DOMAIN_HOME}/scripts/shutdown-${ADMIN_SERVER_NAME}.sh
 export ADMIN_SERVER_URL="t3://${ADMIN_SERVER_LISTEN_ADDRESS}:${ADMIN_SERVER_LISTEN_PORT}"
 export ADMIN_SERVER_NAME="${ADMIN_SERVER_NAME}"
+
+export CONFIG_JVM_ARGS="\${CONFIG_JVM_ARGS} -Djava.security.egd=file:///dev/urandom"
 EOF
 
 if [[ ${WEBLOGIC_VERSION} =~ ^14.1|^12. ]]; then
 cat <<EOF >> ${DOMAIN_HOME}/scripts/shutdown-${ADMIN_SERVER_NAME}.sh
-
 \${ORACLE_HOME}/oracle_common/common/bin/wlst.sh \${DOMAIN_HOME}/scripts/shutdown_\${ADMIN_SERVER_NAME}.py
 EOF
 elif [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
 cat <<EOF >> ${DOMAIN_HOME}/scripts/shutdown-${ADMIN_SERVER_NAME}.sh
-
 \${MW_HOME}/wlserver_10.3/common/bin/wlst.sh \${DOMAIN_HOME}/scripts/shutdown_\${ADMIN_SERVER_NAME}.py
 EOF
 fi

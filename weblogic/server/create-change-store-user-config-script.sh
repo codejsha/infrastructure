@@ -74,6 +74,7 @@ export ADMIN_SERVER_URL="t3://${ADMIN_SERVER_LISTEN_ADDRESS}:${ADMIN_SERVER_LIST
 export ADMIN_USERNAME="\${1:-"weblogic"}"
 export ADMIN_PASSWORD="\${2:-"welcome1"}"
 
+export CONFIG_JVM_ARGS="\${CONFIG_JVM_ARGS} -Djava.security.egd=file:///dev/urandom"
 EOF
 
 if [[ ${WEBLOGIC_VERSION} =~ ^14.1|^12. ]]; then
