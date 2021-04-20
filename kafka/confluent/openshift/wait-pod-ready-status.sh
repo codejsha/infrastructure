@@ -29,7 +29,7 @@ while [ "${ELAPSED_TIME}" -lt "${MAX_ELAPSED_TIME}" ]; do
         break;
     fi
 
-    echo "[INFO] Waiting for all pods to be ready (${LABEL})..."
+    echo "[INFO] Waiting for all pods to be ready (${LABEL}) ..."
     ELAPSED_TIME="$(( ${ELAPSED_TIME} + 10 ))"
     sleep ${INTERVAL_SECONDS}
 done
