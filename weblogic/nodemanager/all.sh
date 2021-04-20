@@ -11,6 +11,15 @@ bash ./create-nodemgr.sh BaseMachine1
 
 ######################################################################
 
+### CHANGE NODE MANAGER PASSWORD
+### bash ./change-nodemgr-password.sh
+### bash ./change-nodemgr-password.sh ${NEW_USERNAME} ${NEW_PASSWORD}
+
+# bash ./change-nodemgr-password.sh 
+bash ./change-nodemgr-password.sh weblogic welcome1
+
+######################################################################
+
 ### CONFIGURE NODE MANAGER
 ### bash ./set-nodemgr-config.sh ${NODEMGR_NAME} ${NODEMGR_ADDRESS} ${NODEMGR_PORT}
 
