@@ -14,7 +14,7 @@ kubectl apply --namespace harbor-system --filename tenant-certificate.yaml
 bash ./helm-install-harbor.sh
 ```
 
-## Pods
+### Pods
 
 ```txt
 NAME                                              READY   STATUS    RESTARTS   AGE
@@ -30,3 +30,7 @@ my-harbor-harbor-redis-0                          1/1     Running   0          9
 my-harbor-harbor-registry-6499f7457-t5g24         2/2     Running   0          95s
 my-harbor-harbor-trivy-0                          1/1     Running   0          95s
 ```
+
+## Certificate
+
+download registry's certificate, and copy it to `/etc/docker/certs.d/core.harbor.example.com/ca.crt`
