@@ -12,7 +12,6 @@ bash ./install-docker.sh
 
 ### Dockerfile Examples
 
-- [FTP Server README](/linux/ftp-server/README.md)
 - [RPM Package Repository Server README](/linux/rpm-package-repo-server/README.md)
 - [Tomcat README](/tomcat/README.md)
 - [CMAK - Kafka README](/kafka/README.md)
