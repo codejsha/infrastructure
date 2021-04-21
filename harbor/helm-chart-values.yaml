@@ -158,13 +158,22 @@ notary:
     #    memory: 256Mi
 
 database:
-  type: internal
-  internal:
+  type: external
+  # internal:
+  #   password: "${DATABASE_PASSWORD}"
+  #   resources:
+  #     requests:
+  #       cpu: 100m
+  #       memory: 256Mi
+  external:
+    host: "my-harbor-postgres-postgresql"
+    port: "5432"
+    username: "postgres"
     password: "${DATABASE_PASSWORD}"
-    # resources:
-    #   requests:
-    #     cpu: 100m
-    #     memory: 256Mi
+    coreDatabase: "registry"
+    notaryServerDatabase: "notary_server"
+    notarySignerDatabase: "notary_signer"
+    sslmode: "disable"
 
 redis:
   type: internal
