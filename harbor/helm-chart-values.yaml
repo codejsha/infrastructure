@@ -78,7 +78,7 @@ persistence:
       bucket: harbor-storage
       accesskey: ${AWS_ACCESS_KEY}
       secretkey: ${AWS_SECRET_KEY}
-      regionendpoint: ${AWS_REGION_ENDPOINT}
+      regionendpoint: ${AWS_S3_REGION_ENDPOINT}
       # encrypt: false
       # keyid: mykeyid
       # secure: true

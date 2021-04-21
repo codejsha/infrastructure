@@ -25,8 +25,8 @@ curl -s -H "Accept:application/json" -X GET http://kafka-connect1:8083/connector
 curl -s -H "Accept:application/json" -X GET http://kafka-connect1:8083/connectors/postgresql-connector/status | jq
 
 ### validate
-# jq .config postgresql-connector.json > postgresql-connector-config.json
-curl -s -X PUT -H "Accept:application/json" -H "Content-Type:application/json" -d @postgresql-connector-config.json http://kafka-connect1:8083/connector-plugins/PostgresConnector/config/validate | jq
+# jq .config postgresql-connector.json > postgresql-connector-temp.json
+curl -s -X PUT -H "Accept:application/json" -H "Content-Type:application/json" -d @postgresql-connector-temp.json http://kafka-connect1:8083/connector-plugins/PostgresConnector/config/validate | jq
 
 ### delete
 curl -s -H "Accept:application/json" -X DELETE http://kafka-connect1:8083/connectors/postgresql-connector
