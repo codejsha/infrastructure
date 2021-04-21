@@ -39,4 +39,4 @@ function helm_install_postgresql_harbor {
 ######################################################################
 
 helm_install_postgresql
-helm_install_postgresql_harbor
+# helm_install_postgresql_harbor
