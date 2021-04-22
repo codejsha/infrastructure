@@ -17,6 +17,7 @@ ${CONFLUENT_HOME}/bin/confluent-hub install --no-prompt debezium/debezium-connec
 ${CONFLUENT_HOME}/bin/confluent-hub install --no-prompt debezium/debezium-connector-mysql:latest
 ${CONFLUENT_HOME}/bin/confluent-hub install --no-prompt debezium/debezium-connector-sqlserver:latest
 ${CONFLUENT_HOME}/bin/confluent-hub install --no-prompt debezium/debezium-connector-mongodb:latest
+${CONFLUENT_HOME}/bin/confluent-hub install --no-prompt jcustenborder/kafka-connect-spooldir:latest
 
 ### sink
 ${CONFLUENT_HOME}/bin/confluent-hub install --no-prompt confluentinc/kafka-connect-s3:latest

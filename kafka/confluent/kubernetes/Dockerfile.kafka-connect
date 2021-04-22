@@ -15,6 +15,7 @@ RUN \
     confluent-hub install --no-prompt debezium/debezium-connector-mysql:latest && \
     confluent-hub install --no-prompt debezium/debezium-connector-sqlserver:latest && \
     confluent-hub install --no-prompt debezium/debezium-connector-mongodb:latest && \
+    confluent-hub install --no-prompt jcustenborder/kafka-connect-spooldir:latest && \
     echo
 
 ### sink
