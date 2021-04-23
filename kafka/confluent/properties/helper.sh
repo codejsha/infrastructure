@@ -70,4 +70,4 @@ DATA_DIR="/mnt/control-center/data"
 # DATA_DIR="/var/lib/confluent/control-center"
 PLUGIN_PATH="/usr/local/confluent/share/java,/usr/local/confluent/share/confluent-hub-components"
 # PLUGIN_PATH="/usr/share/java,/usr/share/confluent-hub-components"
-replace_variable_control_center "control-center*.properties" ${DATA_DIR}
+replace_variable_control_center "control-center*.properties" ${DATA_DIR} ${PLUGIN_PATH}
