@@ -38,13 +38,20 @@ function replace_variable_ksqldb {
 function replace_variable_control_center {
     local START_SCRIPT_NAME="${1}"
     local DATA_DIR="${2}"
-    local PLUGIN_PATH="${3}"
 
     ### escape forward slash
     local DATA_DIR="${DATA_DIR//\//\\/}"
-    local PLUGIN_PATH="${PLUGIN_PATH//\//\\/}"
 
     perl -pi -e "s/^confluent.controlcenter.data.dir=.*/confluent.controlcenter.data.dir=${DATA_DIR}/g" ${START_SCRIPT_NAME}
+}
+
+function replace_variable_kafka_connect {
+    local START_SCRIPT_NAME="${1}"
+    local PLUGIN_PATH="${2}"
+
+    ### escape forward slash
+    local PLUGIN_PATH="${PLUGIN_PATH//\//\\/}"
+
     perl -pi -e "s/^plugin.path=.*/plugin.path=${PLUGIN_PATH}/g" ${START_SCRIPT_NAME}
 }
 
@@ -68,6 +75,11 @@ replace_variable_ksqldb "ksql-server*.properties" ${DATA_DIR}
 ### control-center
 DATA_DIR="/mnt/control-center/data"
 # DATA_DIR="/var/lib/confluent/control-center"
+replace_variable_control_center "control-center*.properties" ${DATA_DIR}
+
+######################################################################
+
+### kafka-connect
 PLUGIN_PATH="/usr/local/confluent/share/java,/usr/local/confluent/share/confluent-hub-components"
 # PLUGIN_PATH="/usr/share/java,/usr/share/confluent-hub-components"
-replace_variable_control_center "control-center*.properties" ${DATA_DIR} ${PLUGIN_PATH}
+replace_variable_kafka_connect "connect*.properties" ${PLUGIN_PATH}
