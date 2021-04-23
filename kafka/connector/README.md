@@ -76,7 +76,7 @@ s3 bucket configurations:
 - `inventory`
 - `product`
 
-### [FTP] SFTP CSV/JSON Source Connector
+### FTP: SFTP CSV/JSON Source Connector
 
 file path/pattern configurations:
 

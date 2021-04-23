@@ -75,9 +75,9 @@ gpgkey=https://packages.confluent.io/rpm/6.1/archive.key
 enabled=1
 EOF
 
-    yum install -y curl which
-    yum install -y confluent-platform
-    yum install -y confluent-security
+    sudo yum install -y curl which
+    sudo yum install -y confluent-platform
+    sudo yum install -y confluent-security
 }
 
 ######################################################################
