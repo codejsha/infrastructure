@@ -14,9 +14,9 @@ kubectl apply --filename rook/cluster/examples/kubernetes/ceph/csi/rbd/storagecl
 kubectl apply --filename dashboard-ingress.yaml
 
 ### delete
-# kubectl apply --filename dashboard-ingress.yaml
-# kubectl apply --filename rook/cluster/examples/kubernetes/ceph/dashboard-loadbalancer.yaml
-# kubectl apply --filename rook/cluster/examples/kubernetes/ceph/dashboard-ingress-https.yaml
-# kubectl apply --filename rook/cluster/examples/kubernetes/ceph/csi/rbd/storageclass.yaml
-# kubectl apply --filename rook/cluster/examples/kubernetes/ceph/toolbox.yaml
-# kubectl apply --filename rook/cluster/examples/kubernetes/ceph/cluster.yaml
+# kubectl delete --filename dashboard-ingress.yaml
+# kubectl delete --filename rook/cluster/examples/kubernetes/ceph/dashboard-loadbalancer.yaml
+# kubectl delete --filename rook/cluster/examples/kubernetes/ceph/dashboard-ingress-https.yaml
+# kubectl delete --filename rook/cluster/examples/kubernetes/ceph/csi/rbd/storageclass.yaml
+# kubectl delete --filename rook/cluster/examples/kubernetes/ceph/toolbox.yaml
+# kubectl delete --filename rook/cluster/examples/kubernetes/ceph/cluster.yaml
