@@ -7,7 +7,7 @@ DATETIME="$(date +'%Y%m%d-%H%M%S')"
 FILENAME="etcd-snapshot-${DATETIME}"
 
 export ETCDCTL_API=3
-/usr/local/bin/etcdctl \
+sudo /usr/local/bin/etcdctl \
     --endpoints=https://controlplane1:2379 \
     --cacert=/etc/ssl/etcd/ssl/ca.pem \
     --cert=/etc/ssl/etcd/ssl/member-controlplane1.pem \

@@ -10,6 +10,7 @@ PASSWORD="minio123"
 SERVER_NAME="minio"
 export MINIO_ROOT_USER="${USERNAME}"
 export MINIO_ROOT_PASSWORD="${PASSWORD}"
+
 MINIO_DIR="/mnt/minio"
 DATA_DIR="${MINIO_DIR}/data"
 LOG_DIR="${MINIO_DIR}/logs"
