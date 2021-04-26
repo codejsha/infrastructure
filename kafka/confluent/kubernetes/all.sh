@@ -29,7 +29,12 @@ bash ./wait-pod-ready-status.sh "type=ksql"
 bash ./helm-install-confluent-control-center.sh
 bash ./wait-pod-ready-status.sh "type=controlcenter"
 
+kubectl apply --namespace confluent-operator --filename kafka-connect0-ingress.yaml
+kubectl apply --namespace confluent-operator --filename control-center-ingress.yaml
+
 ### uninstall
+# kubectl delete --namespace confluent-operator --filename control-center-ingress.yaml
+# kubectl delete --namespace confluent-operator --filename kafka-connect0-ingress.yaml
 # helm uninstall --namespace confluent-operator confluent-control-center
 # helm uninstall --namespace confluent-operator confluent-ksqldb
 # helm uninstall --namespace confluent-operator confluent-replicator

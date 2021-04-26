@@ -39,6 +39,7 @@ bash ./helm-install-confluent-replicator.sh
 bash ./helm-install-confluent-ksqldb.sh
 bash ./helm-install-confluent-control-center.sh
 kubectl apply --filename control-center-ingress.yaml
+kubectl apply --filename kafka-connect0-ingress.yaml
 ```
 
 using util:
@@ -53,6 +54,7 @@ bash ./helm-install-confluent-util-kafka.sh
 bash ./helm-install-confluent-util-others.sh
 
 kubectl apply --filename control-center-ingress.yaml
+kubectl apply --filename kafka-connect0-ingress.yaml
 ```
 
 ### Namespaced deployment (namespace-level)
