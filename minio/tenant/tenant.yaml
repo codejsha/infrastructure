@@ -31,6 +31,7 @@ spec:
               storage: 1Ti
           storageClassName: standard
           # storageClassName: rook-ceph-block
+          # storageClassName: openebs-jiva-default
           # storageClassName: local-path
       affinity:
         podAntiAffinity:
@@ -42,10 +43,6 @@ spec:
                     values:
                       - minio-tenant-1
               topologyKey: kubernetes.io/hostname
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        runAsNonRoot: true
 
   mountPath: /export
   podManagementPolicy: Parallel
@@ -68,9 +65,5 @@ spec:
     consoleSecret:
       name: minio-tenant-1-console-secret
     externalCertSecret:
-      name: minio-tenant-1-cert
+      name: minio-tenant-1-console-cert
       type: kubernetes.io/tls
-    securityContext:
-      runAsUser: 1000
-      runAsGroup: 2000
-      runAsNonRoot: true

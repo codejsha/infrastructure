@@ -8,13 +8,13 @@ metadata:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
-    cert-manager.io/cluster-issuer: "selfsigned-issuer"
+    cert-manager.io/issuer: "vault-issuer"
     acme.cert-manager.io/http01-ingress-class: "nginx"
 spec:
   tls:
     - hosts:
         - minio-tenant-1-console.example.com
-      secretName: minio-tenant-1-cert
+      secretName: minio-tenant-1-console-cert
   rules:
     - host: minio-tenant-1-console.example.com
       http:

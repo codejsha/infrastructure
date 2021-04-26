@@ -10,8 +10,6 @@ STORAGE_CLASS="standard"
 # STORAGE_CLASS="rook-ceph-block"
 # STORAGE_CLASS="local-path"
 
-kubectl create namespace ${NAMESPACE}
-
 ######################################################################
 
 # kubectl minio tenant create \
