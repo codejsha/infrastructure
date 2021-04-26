@@ -35,36 +35,45 @@ persistence:
     registry:
       storageClass: standard
       # storageClass: rook-ceph-block
+      # storageClass: openebs-device
+      # storageClass: openebs-hostpath
       # storageClass: local-path
       accessMode: ReadWriteOnce
       size: 5Gi
     chartmuseum:
       storageClass: standard
       # storageClass: rook-ceph-block
+      # storageClass: openebs-device
+      # storageClass: openebs-hostpath
       # storageClass: local-path
       accessMode: ReadWriteOnce
       size: 5Gi
     jobservice:
       storageClass: standard
       # storageClass: rook-ceph-block
+      # storageClass: openebs-device
+      # storageClass: openebs-hostpath
       # storageClass: local-path
       accessMode: ReadWriteOnce
       size: 1Gi
     database:
       storageClass: standard
       # storageClass: rook-ceph-block
+      # storageClass: openebs-jiva-default
       # storageClass: local-path
       accessMode: ReadWriteOnce
       size: 1Gi
     redis:
       storageClass: standard
       # storageClass: rook-ceph-block
+      # storageClass: openebs-jiva-default
       # storageClass: local-path
       accessMode: ReadWriteOnce
       size: 1Gi
     trivy:
       storageClass: standard
       # storageClass: rook-ceph-block
+      # storageClass: openebs-jiva-default
       # storageClass: local-path
       accessMode: ReadWriteOnce
       size: 5Gi
@@ -72,6 +81,14 @@ persistence:
     disableredirect: true
     caBundleSecretName: minio-tenant-1-cert
     type: s3
+    # filesystem:
+    #   rootdirectory: /storage
+    #   maxthreads: 100
+    # azure:
+    #   accountname: accountname
+    #   accountkey: base64encodedaccountkey
+    #   container: containername
+    #   realm: core.windows.net
     s3:
       region: anyregion
       # region: us-west-1

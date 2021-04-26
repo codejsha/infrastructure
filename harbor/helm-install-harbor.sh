@@ -9,8 +9,8 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 ### sudo yum install -y httpd-tools
 ###
 ### bucket:
+### mc mb --insecure minio-tenant-1/harbor-storage
 ### mc mb my-minio/harbor-storage
-### mc mb minio-tenant-1/harbor-storage --insecure
 
 helm repo add harbor https://helm.goharbor.io
 helm repo update
@@ -20,8 +20,8 @@ HARBOR_SECRET_KEY="${HARBOR_SECRET_KEY}"
 AWS_ACCESS_KEY="${AWS_ACCESS_KEY}"
 AWS_SECRET_KEY="${AWS_SECRET_KEY}"
 
-# export AWS_S3_REGION_ENDPOINT="http://minio.example.com"
 export AWS_S3_REGION_ENDPOINT="https://minio-tenant-1.example.com"
+# export AWS_S3_REGION_ENDPOINT="http://minio.example.com"
 export AWS_ACCESS_KEY="${AWS_ACCESS_KEY}"
 export AWS_SECRET_KEY="${AWS_SECRET_KEY}"
 
@@ -41,5 +41,5 @@ helm upgrade --install my-harbor \
     --create-namespace \
     --namespace ${NAMESPACE} \
     --values helm-chart-values-temp.yaml \
-    --version 1.5.3 \
+    --version 1.6.1 \
     harbor/harbor
