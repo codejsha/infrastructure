@@ -8,11 +8,7 @@ postgresqlPassword: "${PASSWORD}"
 postgresqlDatabase: postgres
 # postgresqlInitdbArgs:
 # initdbScripts:
-#   harbor_initdb_script.sql: |
-#     CREATE DATABASE registry;
-#     CREATE DATABASE notary_server;
-#     CREATE DATABASE notary_signer;
-#     CREATE DATABASE clair;
+#   initdb_script.sql: |
 # initdbScriptsConfigMap:
 # initdbScriptsSecret:
 # initdbUser:

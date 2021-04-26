@@ -32,6 +32,7 @@ function helm_install_postgresql_harbor {
         --create-namespace \
         --namespace ${NAMESPACE} \
         --values helm-chart-values-temp.yaml \
+        --values helm-chart-values-harbor.yaml \
         --version 10.3.18 \
         bitnami/postgresql
 }
