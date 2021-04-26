@@ -29,6 +29,7 @@ persistence:
   enabled: true
   storageClass: "standard"
   # storageClass: "rook-ceph-block"
+  # storageClass: "openebs-jiva-default"
   # storageClass: "local-path"
   accessModes:
     - ReadWriteOnce

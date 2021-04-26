@@ -30,6 +30,7 @@ global:
         # password:
   storageClassName: standard
   # storageClassName: rook-ceph-block
+  # storageClassName: openebs-jiva-default
   sasl:
     plain:
       username: test

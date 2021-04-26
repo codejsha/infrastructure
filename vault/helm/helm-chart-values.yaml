@@ -35,6 +35,7 @@ server:
     mountPath: "/vault/data"
     storageClass: standard
     # storageClass: rook-ceph-block
+    # storageClass: openebs-jiva-default
     # storageClass: local-path
     accessMode: ReadWriteOnce
 
@@ -44,6 +45,7 @@ server:
     mountPath: "/vault/audit"
     storageClass: standard
     # storageClass: rook-ceph-block
+    # storageClass: openebs-jiva-default
     # storageClass: local-path
     accessMode: ReadWriteOnce
 
