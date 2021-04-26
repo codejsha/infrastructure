@@ -3,6 +3,10 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
+if [ -d "operator" ]; then
+    rm -rf operator
+fi
+
 git clone https://github.com/minio/operator.git
 # gh repo clone minio/operator
 

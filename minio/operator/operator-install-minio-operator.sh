@@ -3,11 +3,15 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-NAMESPACE="minio-operator"
-
-# kubectl minio init --namespace ${NAMESPACE}
+# kubectl minio init --namespace minio-operator
 
 kubectl minio init --output > minio-operator.yaml
-kubectl apply --namespace ${NAMESPACE} minio-operator.yaml
+kubectl apply --namespace minio-operator --filename minio-operator.yaml
 
-# kubectl minio delete --namespace ${NAMESPACE}
+######################################################################
+
+### delete
+
+# kubectl minio delete --namespace minio-operator
+
+# kubectl delete --namespace minio-operator --filename minio-operator.yaml
