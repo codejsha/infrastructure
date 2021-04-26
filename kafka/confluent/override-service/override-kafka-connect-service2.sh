@@ -1,7 +1,8 @@
 #!/bin/bash
 
 sudo mkdir -p /usr/lib/systemd/system/confluent-kafka-connect.service.d
-# mkdir -p /mnt/kafka-connect/logs
+# sudo mkdir -p /mnt/kafka-connect/logs
+# sudo chown -R cp-kafka-connect:confluent /mnt/kafka-connect
 
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-kafka-connect.service.d/override.conf
 [Service]

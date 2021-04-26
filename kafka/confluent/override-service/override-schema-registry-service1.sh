@@ -1,7 +1,8 @@
 #!/bin/bash
 
 sudo mkdir -p /usr/lib/systemd/system/confluent-schema-registry.service.d
-# mkdir -p /mnt/schema-registry/logs
+# sudo mkdir -p /mnt/schema-registry/logs
+# sudo chown -R cp-schema-registry:confluent /mnt/schema-registry
 
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-schema-registry.service.d/override.conf
 [Service]

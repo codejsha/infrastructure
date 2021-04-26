@@ -1,7 +1,8 @@
 #!/bin/bash
 
 sudo mkdir -p /usr/lib/systemd/system/confluent-control-center.service.d
-# mkdir -p /mnt/control-center/logs
+# sudo mkdir -p /mnt/control-center/logs
+# sudo chown -R cp-control-center:confluent /mnt/control-center
 
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-control-center.service.d/override.conf
 [Service]

@@ -1,7 +1,8 @@
 #!/bin/bash
 
 sudo mkdir -p /usr/lib/systemd/system/confluent-zookeeper.service.d
-# mkdir -p /mnt/zookeeper/logs
+# sudo mkdir -p /mnt/zookeeper/logs
+# sudo chown -R cp-kafka:confluent /mnt/zookeeper
 
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-zookeeper.service.d/override.conf
 [Service]

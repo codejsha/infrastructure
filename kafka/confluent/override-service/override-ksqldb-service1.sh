@@ -1,7 +1,8 @@
 #!/bin/bash
 
 sudo mkdir -p /usr/lib/systemd/system/confluent-ksqldb.service.d
-# mkdir -p /mnt/ksqldb/logs
+# sudo mkdir -p /mnt/ksqldb/logs
+# sudo chown -R cp-ksql:confluent /mnt/ksqldb
 
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-ksqldb.service.d/override.conf
 [Service]
