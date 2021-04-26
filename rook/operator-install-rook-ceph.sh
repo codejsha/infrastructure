@@ -3,11 +3,11 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-git clone --single-branch --branch release-1.5 https://github.com/rook/rook.git
+git clone --single-branch --branch release-1.6 https://github.com/rook/rook.git
 
-# curl -LJO https://github.com/rook/rook/archive/refs/tags/v1.5.9.tar.gz
-# tar -xzf rook-1.5.9.tar.gz
-# mv rook-1.5.9 rook
+# curl -LJO https://github.com/rook/rook/archive/refs/tags/v1.6.1.tar.gz
+# tar -xzf rook-1.6.1.tar.gz
+# mv rook-1.6.1 rook
 
 kubectl apply --filename rook/cluster/examples/kubernetes/ceph/crds.yaml
 kubectl apply --filename rook/cluster/examples/kubernetes/ceph/common.yaml
