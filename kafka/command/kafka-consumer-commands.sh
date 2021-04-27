@@ -62,14 +62,14 @@
 ./kafka-avro-console-consumer \
     --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
     --property print.key=true \
-    --property schema.registry.url=http://schema-registry1:8081,http://schema-registry2:8081 \
+    --property schema.registry.url=http://schema-registry1:8081 \
     --topic my-topic
 
 ### max message
 ./kafka-avro-console-consumer \
     --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
     --property print.key=true \
-    --property schema.registry.url=http://schema-registry1:8081,http://schema-registry2:8081 \
+    --property schema.registry.url=http://schema-registry1:8081 \
     --topic my-topic \
     --max-messages 1
 
