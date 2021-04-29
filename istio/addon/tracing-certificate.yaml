@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jaeger-cert
+  namespace: istio-system
+spec:
+  commonName: jaeger.example.com
+  secretName: jaeger-cert
+  dnsNames:
+    ### ingress domain
+    - "jaeger.example.com"
+  issuerRef:
+    name: selfsigned-cluster-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io

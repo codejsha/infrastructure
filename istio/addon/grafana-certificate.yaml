@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: grafana-cert
+  namespace: istio-system
+spec:
+  commonName: grafana.example.com
+  secretName: grafana-cert
+  dnsNames:
+    ### ingress domain
+    - "grafana.example.com"
+  issuerRef:
+    name: selfsigned-cluster-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
