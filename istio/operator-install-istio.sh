@@ -8,12 +8,13 @@ istioctl operator init
 ### profile list
 istioctl profile list
 ### Istio configuration profiles:
-###     minimal
-###     preview
-###     remote
 ###     default
 ###     demo
 ###     empty
+###     minimal
+###     openshift
+###     preview
+###     remote
 
 ### install
 # istioctl install --set profile=default
