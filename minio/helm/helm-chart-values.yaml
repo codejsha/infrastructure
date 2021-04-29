@@ -5,6 +5,9 @@ persistence:
   enabled: true
   storageClass: "standard"
   # storageClass: "rook-ceph-block"
+  # storageClass: "openebs-jiva-default"
+  # storageClass: "openebs-device"
+  # storageClass: "openebs-hostpath"
   # storageClass: "local-path"
   accessMode: ReadWriteOnce
   size: 500Gi
