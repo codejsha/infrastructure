@@ -47,6 +47,9 @@ def create_prop_file(server, prop, servers=None):
                                     f'{server.key_converter_schema_registry_url}', edited_prop)
         edited_prop = replace_param('value.converter.schema.registry.url',
                                     f'{server.value_converter_schema_registry_url}', edited_prop)
+        edited_prop = replace_param('config.storage.topic', f'{server.config_storage_topic}', edited_prop)
+        edited_prop = replace_param('offset.storage.topic', f'{server.offset_storage_topic}', edited_prop)
+        edited_prop = replace_param('status.storage.topic', f'{server.status_storage_topic}', edited_prop)
         edited_prop = replace_param('plugin.path', f'{server.plugin_path}', edited_prop)
 
     # replicator
@@ -57,6 +60,9 @@ def create_prop_file(server, prop, servers=None):
                                     f'{server.key_converter_schema_registry_url}', edited_prop)
         edited_prop = replace_param('value.converter.schema.registry.url',
                                     f'{server.value_converter_schema_registry_url}', edited_prop)
+        edited_prop = replace_param('config.storage.topic', f'{server.config_storage_topic}', edited_prop)
+        edited_prop = replace_param('offset.storage.topic', f'{server.offset_storage_topic}', edited_prop)
+        edited_prop = replace_param('status.storage.topic', f'{server.status_storage_topic}', edited_prop)
         edited_prop = replace_param('plugin.path', f'{server.plugin_path}', edited_prop)
 
     # kafka-rest
@@ -115,10 +121,13 @@ def create_start_script_file(base, server, start):
 def create_stop_script_file(base, server, stop):
     edited_stop = stop
     edited_stop = replace_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_stop)
-    if isinstance(server, Common):
-        write_file(f'scripts/{server.file.stop_file}', edited_stop)
-    else:
-        write_file(f'scripts/server-stop/{server.file.stop_file}', edited_stop)
+    write_file(f'scripts/server-stop/{server.file.stop_file}', edited_stop)
+
+
+def create_common_stop_script_file(base, server, stop):
+    edited_stop = stop
+    edited_stop = replace_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_stop)
+    write_file(f'scripts/{server.file.common_stop_file}', edited_stop)
 
 
 def create_log_script_file(server, log):
@@ -139,15 +148,8 @@ def create_server_file(base, server_dict, prop_dict, start_dict, stop_dict, log_
             create_stop_script_file(base, server, stop_dict.get(server_type))
             create_log_script_file(server, log_dict.get(ServerType.ANY))
 
-
-# endregion
-
-# region common
-
-
-def create_common_stop_script_file(base, common_list, stop_dict):
-    for common in common_list:
-        create_stop_script_file(base, common, stop_dict.get(common.server_type))
+    for server in [servers[0] for servers in server_dict.values()]:
+        create_common_stop_script_file(base, server, stop_dict.get(server.server_type))
 
 
 # endregion
@@ -200,7 +202,6 @@ def main():
     # read values
     values_data = read_yaml_file(f'{current_dir}/values.yaml')
     base_data = read_base_data(values_data)
-    common_data = read_common_data(values_data)
     server_data = read_server_data(values_data)
 
     # read template
@@ -211,10 +212,9 @@ def main():
 
     # create files
     create_server_file(base_data, server_data, prop_data, start_data, stop_data, log_data)
-    create_common_stop_script_file(base_data, common_data, stop_data)
 
     # create other files
-    create_start_and_stop_symlink_script_file(common_data, server_data)
+    create_start_and_stop_symlink_script_file(server_data)
     create_add_host_script_file(server_data)
     create_secure_copy_script_file(base_data, server_data)
     create_kafka_alias_file(base_data)

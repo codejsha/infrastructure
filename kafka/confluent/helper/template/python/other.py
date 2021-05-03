@@ -3,15 +3,16 @@
 from template.python.fileio import *
 
 
-def create_start_and_stop_symlink_script_file(common_list, server_dict):
+def create_start_and_stop_symlink_script_file(server_dict):
     data_list = [f'#!/bin/bash\n']
     total_server_count = sum(map(len, server_dict.values()))
 
-    index = 1
+    is_first = True
     for server_type, servers in server_dict.items():
         for server in servers:
-            if index == 1:
+            if is_first:
                 data_list.append(f'if [ "$(hostname)" == "{server.host_name}" ]; then')
+                is_first = False
             else:
                 data_list.append(f'elif [ "$(hostname)" == "{server.host_name}" ]; then')
 
@@ -24,23 +25,18 @@ def create_start_and_stop_symlink_script_file(common_list, server_dict):
             data_list.append(f'    if [ -f "{server.file.log_file}" ]; then')
             data_list.append(f'        ln -snf {server.file.log_file} log.sh')
             data_list.append(f'    fi')
+    data_list.append(f'fi\n')
 
-            if index == total_server_count:
-                data_list.append(f'fi\n')
-            index += 1
-
-    index = 1
-    for server in common_list:
-        if index == 1:
-            data_list.append(f'if [ -f "{server.file.stop_file}" ]; then')
+    is_first = True
+    for server in [servers[0] for servers in server_dict.values()]:
+        if is_first:
+            data_list.append(f'if [ -f "{server.file.common_stop_file}" ]; then')
+            is_first = False
         else:
-            data_list.append(f'elif [ -f "{server.file.stop_file}" ]; then')
+            data_list.append(f'elif [ -f "{server.file.common_stop_file}" ]; then')
 
-        data_list.append(f'    ln -snf {server.file.stop_file} stop.sh')
-
-        if index == len(common_list):
-            data_list.append(f'fi')
-        index += 1
+        data_list.append(f'    ln -snf {server.file.common_stop_file} stop.sh')
+    data_list.append(f'fi')
 
     edited_symlink = '\n'.join(data_list) + '\n'
     write_file('scripts/others/create-symlink.sh', edited_symlink)

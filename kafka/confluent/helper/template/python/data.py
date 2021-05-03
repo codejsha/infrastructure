@@ -27,13 +27,8 @@ class File:
     properties_file: any
     start_file: any
     stop_file: str
+    common_stop_file: str
     log_file: any
-
-
-@dataclass
-class Common:
-    server_type: ServerType
-    file: File
 
 
 @dataclass
@@ -80,6 +75,9 @@ class KafkaConnect(Server):
     bootstrap_servers: str
     key_converter_schema_registry_url: str
     value_converter_schema_registry_url: str
+    config_storage_topic: str
+    offset_storage_topic: str
+    status_storage_topic: str
     plugin_path: str
 
 
@@ -90,6 +88,9 @@ class Replicator(Server):
     bootstrap_servers: str
     key_converter_schema_registry_url: str
     value_converter_schema_registry_url: str
+    config_storage_topic: str
+    offset_storage_topic: str
+    status_storage_topic: str
     plugin_path: str
 
 

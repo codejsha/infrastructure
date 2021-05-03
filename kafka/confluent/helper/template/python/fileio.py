@@ -3,6 +3,7 @@
 import os
 import shutil
 
+import jinja2
 import yaml
 
 
@@ -39,8 +40,9 @@ def read_file(file_path):
 
 
 def read_yaml_file(file_path):
-    with open(file_path, 'r') as script_file:
-        return yaml.full_load(script_file)
+    env = jinja2.Environment(loader=jinja2.FileSystemLoader('.'), trim_blocks=False, lstrip_blocks=True)
+    template = env.get_template('values.yaml')
+    return yaml.safe_load(template.render())
 
 
 def write_file(file_path, file_data):
