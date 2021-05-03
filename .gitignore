@@ -2,6 +2,9 @@
 .vscode/
 .idea/
 
+venv/
+__pycache__/
+
 temp/
 temp.*
 
@@ -14,6 +17,9 @@ temp.*
 
 /istio/addon/certs/
 /kafka/cmak/cmak-*/
+/kafka/confluent/helper/packages/
+/kafka/confluent/helper/properties/
+/kafka/confluent/helper/scripts/
 /kafka/confluent/kubernetes/confluent-operator/
 /kafka/debezium/
 /kafka/strimzi/strimzi-*/
