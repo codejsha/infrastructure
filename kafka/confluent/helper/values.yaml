@@ -1,0 +1,348 @@
+### base
+base:
+  user: confluent
+  confluentHome: /usr/local/confluent
+  javaHome: /usr/lib/jvm/java-1.8.0
+  propertiesPath: ${CONFLUENT_HOME}/properties
+  scriptsPath: ${CONFLUENT_HOME}/scripts
+
+######################################################################
+
+### zookeeper
+zookeeper:
+  common:
+    commonStopScript:
+      file:
+        stop: stop-zookeeper.sh
+  servers:
+    - serverName: zookeeper1
+      hostName: zookeeper1
+      ipAddress: 10.10.10.11
+      serverId: 1
+      dataDir: /mnt/zookeeper/data
+      logDir: /mnt/zookeeper/logs
+      clientPort: 2181
+      peerToPeerPort: 2888:3888
+      file:
+        properties: zookeeper1.properties
+        start: start-zookeeper1.sh
+        stop: stop-zookeeper1.sh
+        log: log-zookeeper1.sh
+
+    - serverName: zookeeper2
+      hostName: zookeeper2
+      ipAddress: 10.10.10.12
+      serverId: 2
+      dataDir: /mnt/zookeeper/data
+      logDir: /mnt/zookeeper/logs
+      clientPort: 2181
+      peerToPeerPort: 2888:3888
+      file:
+        properties: zookeeper2.properties
+        start: start-zookeeper2.sh
+        stop: stop-zookeeper2.sh
+        log: log-zookeeper2.sh
+
+    - serverName: zookeeper3
+      hostName: zookeeper3
+      ipAddress: 10.10.10.13
+      serverId: 3
+      dataDir: /mnt/zookeeper/data
+      logDir: /mnt/zookeeper/logs
+      clientPort: 2181
+      peerToPeerPort: 2888:3888
+      file:
+        properties: zookeeper3.properties
+        start: start-zookeeper3.sh
+        stop: stop-zookeeper3.sh
+        log: log-zookeeper3.sh
+
+######################################################################
+
+### kafka
+kafka:
+  common:
+    commonStopScript:
+      file:
+        stop: stop-kafka.sh
+  servers:
+    - serverName: kafka1
+      hostName: kafka1
+      ipAddress: 10.10.10.21
+      serverId: 1
+      dataDir: /mnt/kafka/data
+      logDir: /mnt/kafka/logs
+      listeners: PLAINTEXT://0.0.0.0:9092
+      advertisedListeners: PLAINTEXT://kafka1:9092
+      zookeeperConnect: zookeeper1:2181/testcluster
+      metricsReporterBootstrapServers: kafka1:9092,kafka2:9092,kafka3:9092
+      file:
+        properties: kafka1.properties
+        start: start-kafka1.sh
+        stop: stop-kafka1.sh
+        log: log-kafka1.sh
+
+    - serverName: kafka2
+      hostName: kafka2
+      ipAddress: 10.10.10.22
+      serverId: 2
+      dataDir: /mnt/kafka/data
+      logDir: /mnt/kafka/logs
+      listeners: PLAINTEXT://0.0.0.0:9092
+      advertisedListeners: PLAINTEXT://kafka2:9092
+      zookeeperConnect: zookeeper2:2181/testcluster
+      metricsReporterBootstrapServers: kafka1:9092,kafka2:9092,kafka3:9092
+      file:
+        properties: kafka2.properties
+        start: start-kafka2.sh
+        stop: stop-kafka2.sh
+        log: log-kafka2.sh
+
+    - serverName: kafka3
+      hostName: kafka3
+      ipAddress: 10.10.10.23
+      serverId: 3
+      dataDir: /mnt/kafka/data
+      logDir: /mnt/kafka/logs
+      listeners: PLAINTEXT://0.0.0.0:9092
+      advertisedListeners: PLAINTEXT://kafka2:9092
+      zookeeperConnect: zookeeper3:2181/testcluster
+      metricsReporterBootstrapServers: kafka1:9092,kafka2:9092,kafka3:9092
+      file:
+        properties: kafka3.properties
+        start: start-kafka3.sh
+        stop: stop-kafka3.sh
+        log: log-kafka3.sh
+
+######################################################################
+
+### schema-registry
+schemaRegistry:
+  common:
+    commonStopScript:
+      file:
+        stop: stop-schema-registry.sh
+  servers:
+    - serverName: schema-registry1
+      hostName: schema-registry1
+      ipAddress: 10.10.10.31
+      logDir: /mnt/schema-registry/logs
+      listeners: http://0.0.0.0:8081
+      bootstrapServers: PLAINTEXT://kafka1:9092,PLAINTEXT://kafka2:9092,PLAINTEXT://kafka3:9092
+      topic: _schemas
+      file:
+        properties: schema-registry1.properties
+        start: start-schema-registry1.sh
+        stop: stop-schema-registry1.sh
+        log: log-schema-registry1.sh
+
+    - serverName: schema-registry2
+      hostName: schema-registry2
+      ipAddress: 10.10.10.32
+      logDir: /mnt/schema-registry/logs
+      listeners: http://0.0.0.0:8081
+      bootstrapServers: PLAINTEXT://kafka1:9092,PLAINTEXT://kafka2:9092,PLAINTEXT://kafka3:9092
+      topic: _schemas
+      file:
+        properties: schema-registry2.properties
+        start: start-schema-registry2.sh
+        stop: stop-schema-registry2.sh
+        log: log-schema-registry2.sh
+
+######################################################################
+
+### kafka-connect
+kafkaConnect:
+  common:
+    commonStopScript:
+      file:
+        stop: stop-kafka-connect.sh
+  servers:
+    - serverName: kafka-connect1
+      hostName: kafka-connect1
+      ipAddress: 10.10.10.41
+      groupId: connect-cluster
+      logDir: /mnt/kafka-connect/logs
+      bootstrapServers: PLAINTEXT://kafka1:9092,PLAINTEXT://kafka2:9092,PLAINTEXT://kafka3:9092
+      keyConverterSchemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
+      valueConverterSchemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
+      pluginPath: /usr/local/confluent/share/java,/usr/local/confluent/share/confluent-hub-components
+      file:
+        properties: kafka-connect1.properties
+        start: start-kafka-connect1.sh
+        stop: stop-kafka-connect1.sh
+        log: log-kafka-connect1.sh
+
+    - serverName: kafka-connect2
+      hostName: kafka-connect2
+      ipAddress: 10.10.10.42
+      groupId: connect-cluster
+      logDir: /mnt/kafka-connect/logs
+      bootstrapServers: PLAINTEXT://kafka1:9092,PLAINTEXT://kafka2:9092,PLAINTEXT://kafka3:9092
+      keyConverterSchemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
+      valueConverterSchemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
+      pluginPath: /usr/local/confluent/share/java,/usr/local/confluent/share/confluent-hub-components
+      file:
+        properties: kafka-connect2.properties
+        start: start-kafka-connect2.sh
+        stop: stop-kafka-connect2.sh
+        log: log-kafka-connect2.sh
+
+######################################################################
+
+### replicator
+replicator:
+  common:
+    commonStopScript:
+      file:
+        stop: stop-replicator.sh
+  servers:
+    - serverName: replicator1
+      hostName: replicator1
+      ipAddress: 10.10.10.61
+      groupId: connect-cluster
+      logDir: /mnt/replicator/logs
+      bootstrapServers: kafka1:9092,kafka2:9092,kafka3:9092
+      keyConverterSchemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
+      valueConverterSchemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
+      pluginPath: /usr/local/confluent/share/java,/usr/local/confluent/share/confluent-hub-components
+      file:
+        properties: replicator1.properties
+        start: start-replicator1.sh
+        stop: stop-replicator1.sh
+        log: log-replicator1.sh
+
+######################################################################
+
+### kafka-rest
+kafkaRest:
+  common:
+    commonStopScript:
+      file:
+        stop: stop-kafka-rest.sh
+  servers:
+    - serverName: kafka-rest1
+      hostName: kafka-rest1
+      ipAddress: 10.10.10.51
+      serverId: 1
+      logDir: /mnt/kafka-rest/logs
+      bootstrapServers: PLAINTEXT://kafka1:9092,PLAINTEXT://kafka2:9092,PLAINTEXT://kafka3:9092
+      schemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
+      file:
+        properties: kafka-rest1.properties
+        start: start-kafka-rest1.sh
+        stop: stop-kafka-rest1.sh
+        log: log-kafka-rest1.sh
+
+    - serverName: kafka-rest2
+      hostName: kafka-rest2
+      ipAddress: 10.10.10.52
+      serverId: 2
+      logDir: /mnt/kafka-rest/logs
+      bootstrapServers: PLAINTEXT://kafka1:9092,PLAINTEXT://kafka2:9092,PLAINTEXT://kafka3:9092
+      schemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
+      file:
+        properties: kafka-rest2.properties
+        start: start-kafka-rest2.sh
+        stop: stop-kafka-rest2.sh
+        log: log-kafka-rest2.sh
+
+######################################################################
+
+### ksqldb
+ksqlDB:
+  common:
+    commonStopScript:
+      file:
+        stop: stop-ksqldb.sh
+  servers:
+    - serverName: ksqldb1
+      hostName: ksqldb1
+      ipAddress: 10.10.10.71
+      groupId: ksql-cluster
+      dataDir: /mnt/ksqldb/data
+      logDir: /mnt/ksqldb/logs
+      listeners: http://0.0.0.0:8088
+      advertisedListener: http://ksqldb1:8088
+      bootstrapServers: kafka1:9092,kafka2:9092,kafka3:9092
+      schemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
+      file:
+        properties: ksqldb1.properties
+        start: start-ksqldb1.sh
+        stop: stop-ksqldb1.sh
+        log: log-ksqldb1.sh
+
+    - serverName: ksqldb2
+      hostName: ksqldb2
+      ipAddress: 10.10.10.72
+      groupId: ksql-cluster
+      dataDir: /mnt/ksqldb/data
+      logDir: /mnt/ksqldb/logs
+      listeners: http://0.0.0.0:8088
+      advertisedListener: http://ksqldb2:8088
+      bootstrapServers: kafka1:9092,kafka2:9092,kafka3:9092
+      schemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
+      file:
+        properties: ksqldb2.properties
+        start: start-ksqldb2.sh
+        stop: stop-ksqldb2.sh
+        log: log-ksqldb2.sh
+
+    - serverName: ksqldb3
+      hostName: ksqldb3
+      ipAddress: 10.10.10.73
+      groupId: ksql-cluster
+      dataDir: /mnt/ksqldb/data
+      logDir: /mnt/ksqldb/logs
+      listeners: http://0.0.0.0:8088
+      advertisedListener: http://ksqldb3:8088
+      bootstrapServers: kafka1:9092,kafka2:9092,kafka3:9092
+      schemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
+      file:
+        properties: ksqldb3.properties
+        start: start-ksqldb3.sh
+        stop: stop-ksqldb3.sh
+        log: log-ksqldb3.sh
+
+    - serverName: ksqldb4
+      hostName: ksqldb4
+      ipAddress: 10.10.10.74
+      groupId: ksql-cluster
+      dataDir: /mnt/ksqldb/data
+      logDir: /mnt/ksqldb/logs
+      listeners: http://0.0.0.0:8088
+      advertisedListener: http://ksqldb4:8088
+      bootstrapServers: kafka1:9092,kafka2:9092,kafka3:9092
+      schemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
+      file:
+        properties: ksqldb4.properties
+        start: start-ksqldb4.sh
+        stop: stop-ksqldb4.sh
+        log: log-ksqldb4.sh
+
+######################################################################
+
+### control-center
+controlCenter:
+  common:
+    commonStopScript:
+      file:
+        stop: stop-control-center.sh
+  servers:
+    - serverName: control-center1
+      hostName: control-center1
+      ipAddress: 10.10.10.81
+      serverId: 1
+      dataDir: /mnt/control-center/data
+      logDir: /mnt/control-center/logs
+      bootstrapServers: kafka1:9092,kafka2:9092,kafka3:9092
+      zookeeperConnect: zookeeper1:2181,zookeeper2:2181,zookeeper3:2181/testcluster
+      schemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
+      kafkaConnectUrl: http://kafka-connect1:8083,http://kafka-connect2:8083
+      kafkaRestUrl: http://kafka-rest1:8090,http://kafka-rest2:8090
+      ksqlDBUrl: http://ksqldb1:8088,http://ksqldb2:8088,http://ksqldb3:8088,http://ksqldb4:8088
+      file:
+        properties: control-center1.properties
+        start: start-control-center1.sh
+        stop: stop-control-center1.sh
+        log: log-control-center1.sh
