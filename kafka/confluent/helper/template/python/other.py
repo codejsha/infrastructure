@@ -64,8 +64,8 @@ def create_add_host_script_file(server_dict):
 def create_secure_copy_script_file(base, server_dict):
     data_list = [
         f'#!/bin/bash\n',
-        f'tar -czf ../../properties/* confluent-properties.tar.gz',
-        f'tar -czf ../../scripts/* confluent-scripts.tar.gz',
+        f'tar -czf confluent-properties.tar.gz ../../properties/*',
+        f'tar -czf confluent-scripts.tar.gz ../../scripts/*',
         f'# tar -czf properties/* confluent-properties.tar.gz',
         f'# tar -czf scripts/* confluent-scripts.tar.gz\n'
     ]
