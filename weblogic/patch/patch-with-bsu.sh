@@ -63,6 +63,14 @@ function bsu_remove {
     #     -verbose \
     #     -log_priority=debug \
     #     -log=${MW_HOME}/utils/bsu/bsu-remove-${PATCH_LIST}.log
+    # ${MW_HOME}/utils/bsu/bsu.sh \
+    #     -remove \
+    #     -patchlist=${PATCH_LIST} \
+    #     -prod_dir=${MW_HOME}/wlserver_10.3 \
+    #     -patch_download_dir=${MW_HOME}/utils/bsu/cache_dir \
+    #     -verbose \
+    #     -log_priority=debug \
+    #     -log=${MW_HOME}/utils/bsu/bsu-remove-${PATCH_LIST}.log
 }
 
 function bsu_install {
@@ -83,6 +91,14 @@ function bsu_install {
     #     -verbose \
     #     -log_priority=debug \
     #     -log=${MW_HOME}/utils/bsu/bsu-install-${PATCH_LIST}.log
+    # ${MW_HOME}/utils/bsu/bsu.sh \
+    #     -install \
+    #     -patchlist=${PATCH_LIST} \
+    #     -prod_dir=${MW_HOME}/wlserver_10.3 \
+    #     -patch_download_dir=${MW_HOME}/utils/bsu/cache_dir \
+    #     -verbose \
+    #     -log_priority=debug \
+    #     -log=${MW_HOME}/utils/bsu/bsu-install-${PATCH_LIST}.log
 }
 
 function bsu_view_applied {
@@ -95,6 +111,14 @@ function bsu_view_applied {
     #     -view \
     #     -status=applied \
     #     -prod_dir=${MW_HOME}/wlserver_10.3 \
+    #     -verbose \
+    #     -log_priority=debug \
+    #     -log=${MW_HOME}/utils/bsu/bsu-install-${PATCH_LIST}.log
+    # ${MW_HOME}/utils/bsu/bsu.sh \
+    #     -view \
+    #     -status=applied \
+    #     -prod_dir=${MW_HOME}/wlserver_10.3 \
+    #     -patch_download_dir=${MW_HOME}/utils/bsu/cache_dir \
     #     -verbose \
     #     -log_priority=debug \
     #     -log=${MW_HOME}/utils/bsu/bsu-install-${PATCH_LIST}.log
