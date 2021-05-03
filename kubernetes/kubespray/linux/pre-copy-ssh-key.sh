@@ -6,7 +6,7 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 sudo yum install -y epel-release
 sudo yum install -y sshpass
 
-cat <<EOF | sudo tee -a /etc/hosts
+cat << EOF | sudo tee -a /etc/hosts
 192.168.140.10 kubeaccess
 192.168.140.11 controlplane1
 192.168.140.12 controlplane2
