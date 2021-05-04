@@ -20,7 +20,7 @@ function docker_run_minio {
         --env MINIO_ROOT_USER="${USERNAME}" \
         --env MINIO_ROOT_PASSWORD="${PASSWORD}" \
         --mount type="bind",src="${MINIO_VOLUME_DIR}",dst="/data" \
-        minio/minio server ${MINIO_VOLUME_DIR}
+        minio/minio server /data
 }
 
 ######################################################################
