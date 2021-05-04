@@ -3,9 +3,9 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-# KAFKA_CONNECT_URL="http://localhost:8083"
+KAFKA_CONNECT_URL="http://localhost:8083"
 # KAFKA_CONNECT_URL="http://kafka-connect1:8083"
-KAFKA_CONNECT_URL="http://kafka-connect.example.com"
+# KAFKA_CONNECT_URL="http://kafka-connect.example.com"
 
 ######################################################################
 
@@ -15,14 +15,14 @@ function register_connector {
         --request POST \
         --header "Accept:application/json" \
         --header "Content-Type:application/json" \
-        --data @aws-s3-sink-connector-kubernetes.json \
+        --data @aws-s3-sink-connector.json \
         ${KAFKA_CONNECT_URL}/connectors
     # curl \
     #     --include \
     #     --request POST \
     #     --header "Accept:application/json" \
     #     --header "Content-Type:application/json" \
-    #     --data @aws-s3-sink-connector.json \
+    #     --data @aws-s3-sink-connector-kubernetes.json \
     #     ${KAFKA_CONNECT_URL}/connectors
 
     echo
@@ -38,5 +38,5 @@ function delete_connector {
 
 ######################################################################
 
-register_connector
 # delete_connector
+register_connector

@@ -8,7 +8,7 @@
     "key.converter.schema.registry.url": "http://schema-registry1:8081,http://schema-registry2:8081",
     "value.converter": "io.confluent.connect.avro.AvroConverter",
     "value.converter.schema.registry.url": "http://schema-registry1:8081,http://schema-registry2:8081",
-    "topics": "pageviews-avro",
+    "topics": "pageviews",
     "store.url": "http://test.example.com:9000",
     "s3.region": "us-west-1",
     "s3.bucket.name": "kafka-s3-sink-storage",
