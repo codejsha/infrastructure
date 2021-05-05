@@ -38,5 +38,5 @@ function delete_connector {
 
 ######################################################################
 
-# delete_connector
+delete_connector
 register_connector
