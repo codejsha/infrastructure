@@ -43,23 +43,17 @@ def read_zookeeper_list(values):
     if values.get('zookeeper') is None:
         return server_list
 
-    # default value
-    default_client_port = 2181
-    default_peer_to_peer_port = '2888:3888'
-
-    # required
     common_stop_file = \
-        values['zookeeper']['common']['stopScript']['file']['stop']
+        values['zookeeper']['common']['stopScript']
     data_dir = \
         values['zookeeper']['common']['param']['dataDir']
     log_dir = \
         values['zookeeper']['common']['param']['logDir']
 
-    # optional
     client_port = \
-        values['zookeeper']['common']['param'].get('clientPort', default_client_port)
+        values['zookeeper']['common']['param'].get('clientPort')
     peer_to_peer_port = \
-        values['zookeeper']['common']['param'].get('peerToPeerPort', default_peer_to_peer_port)
+        values['zookeeper']['common']['param'].get('peerToPeerPort')
 
     for server in values['zookeeper']['servers']:
         server_list.append(
@@ -75,7 +69,7 @@ def read_zookeeper_list(values):
                      common_stop_file),
                 server['serverId'],
                 override_parameter(server, 'dataDir', data_dir),
-                override_parameter(server, 'log_dir', log_dir),
+                override_parameter(server, 'logDir', log_dir),
                 override_parameter(server, 'clientPort', client_port),
                 override_parameter(server, 'peerToPeerPort', peer_to_peer_port)
             )
@@ -89,12 +83,8 @@ def read_kafka_list(values):
     if values.get('kafka') is None:
         return server_list
 
-    # default value
-    default_listeners = 'PLAINTEXT://0.0.0.0:9092'
-
-    # required
     common_stop_file = \
-        values['kafka']['common']['stopScript']['file']['stop']
+        values['kafka']['common']['stopScript']
     data_dir = \
         values['kafka']['common']['param']['dataDir']
     log_dir = \
@@ -102,15 +92,12 @@ def read_kafka_list(values):
     zookeeper_connect = \
         values['kafka']['common']['param']['zookeeperConnect']
 
-    # optional
     listeners = \
-        values['kafka']['common']['param'].get('listeners', default_listeners)
+        values['kafka']['common']['param'].get('listeners')
     metrics_reporter_bootstrap_servers = \
         values['kafka']['common']['param'].get('metricsReporterBootstrapServers')
 
     for server in values['kafka']['servers']:
-        default_advertised_listeners = f'PLAINTEXT://{server["hostName"]}:9092'
-
         server_list.append(
             Kafka(
                 ServerType.KAFKA,
@@ -124,9 +111,9 @@ def read_kafka_list(values):
                      common_stop_file),
                 server['serverId'],
                 override_parameter(server, 'dataDir', data_dir),
-                override_parameter(server, 'log_dir', log_dir),
+                override_parameter(server, 'logDir', log_dir),
                 override_parameter(server, 'listeners', listeners),
-                server.get('advertisedListeners', default_advertised_listeners),
+                server.get('advertisedListeners'),
                 override_parameter(server, 'zookeeperConnect', zookeeper_connect),
                 override_parameter(server, 'metricsReporterBootstrapServers',
                                    metrics_reporter_bootstrap_servers)
@@ -141,23 +128,17 @@ def read_schema_registry_list(values):
     if values.get('schemaRegistry') is None:
         return server_list
 
-    # default value
-    default_listeners = 'PLAINTEXT://0.0.0.0:8081'
-    default_topic = '_schemas'
-
-    # required
     common_stop_file = \
-        values['schemaRegistry']['common']['stopScript']['file']['stop']
+        values['schemaRegistry']['common']['stopScript']
     log_dir = \
         values['schemaRegistry']['common']['param']['logDir']
     bootstrap_servers = \
         values['schemaRegistry']['common']['param']['bootstrapServers']
 
-    # optional
     listeners = \
-        values['schemaRegistry']['common']['param'].get('listeners', default_listeners)
+        values['schemaRegistry']['common']['param'].get('listeners')
     topic = \
-        values['schemaRegistry']['common']['param'].get('topic', default_topic)
+        values['schemaRegistry']['common']['param'].get('topic')
 
     for server in values['schemaRegistry']['servers']:
         server_list.append(
@@ -171,7 +152,7 @@ def read_schema_registry_list(values):
                      server['file']['stop'],
                      server['file']['log'],
                      common_stop_file),
-                override_parameter(server, 'log_dir', log_dir),
+                override_parameter(server, 'logDir', log_dir),
                 override_parameter(server, 'listeners', listeners),
                 override_parameter(server, 'bootstrapServers', bootstrap_servers),
                 override_parameter(server, 'topic', topic)
@@ -186,14 +167,8 @@ def read_kafka_connect_list(values):
     if values.get('kafkaConnect') is None:
         return server_list
 
-    # default value
-    default_config_storage_topic = 'connect-configs'
-    default_offset_storage_topic = 'connect-offsets'
-    default_status_storage_topic = 'connect-statuses'
-
-    # required
     common_stop_file = \
-        values['kafkaConnect']['common']['stopScript']['file']['stop']
+        values['kafkaConnect']['common']['stopScript']
     log_dir = \
         values['kafkaConnect']['common']['param']['logDir']
     group_id = \
@@ -203,17 +178,16 @@ def read_kafka_connect_list(values):
     plugin_path = \
         values['kafkaConnect']['common']['param']['pluginPath']
 
-    # optional
     key_converter_schema_registry_url = \
         values['kafkaConnect']['common']['param'].get('keyConverterSchemaRegistryUrl')
     value_converter_schema_registry_url = \
         values['kafkaConnect']['common']['param'].get('valueConverterSchemaRegistryUrl')
     config_storage_topic = \
-        values['kafkaConnect']['common']['param'].get('configStorageTopic', default_config_storage_topic)
+        values['kafkaConnect']['common']['param'].get('configStorageTopic')
     offset_storage_topic = \
-        values['kafkaConnect']['common']['param'].get('offsetStorageTopic', default_offset_storage_topic)
+        values['kafkaConnect']['common']['param'].get('offsetStorageTopic')
     status_storage_topic = \
-        values['kafkaConnect']['common']['param'].get('statusStorageTopic', default_status_storage_topic)
+        values['kafkaConnect']['common']['param'].get('statusStorageTopic')
 
     for server in values['kafkaConnect']['servers']:
         server_list.append(
@@ -249,14 +223,8 @@ def read_replicator_list(values):
     if values.get('replicator') is None:
         return server_list
 
-    # default value
-    default_config_storage_topic = 'connect-configs'
-    default_offset_storage_topic = 'connect-offsets'
-    default_status_storage_topic = 'connect-statuses'
-
-    # required
     common_stop_file = \
-        values['replicator']['common']['stopScript']['file']['stop']
+        values['replicator']['common']['stopScript']
     log_dir = \
         values['replicator']['common']['param']['logDir']
     group_id = \
@@ -266,17 +234,16 @@ def read_replicator_list(values):
     plugin_path = \
         values['replicator']['common']['param']['pluginPath']
 
-    # optional
     key_converter_schema_registry_url = \
         values['replicator']['common']['param'].get('keyConverterSchemaRegistryUrl')
     value_converter_schema_registry_url = \
         values['replicator']['common']['param'].get('valueConverterSchemaRegistryUrl')
     config_storage_topic = \
-        values['replicator']['common']['param'].get('configStorageTopic', default_config_storage_topic)
+        values['replicator']['common']['param'].get('configStorageTopic')
     offset_storage_topic = \
-        values['replicator']['common']['param'].get('offsetStorageTopic', default_offset_storage_topic)
+        values['replicator']['common']['param'].get('offsetStorageTopic')
     status_storage_topic = \
-        values['replicator']['common']['param'].get('statusStorageTopic', default_status_storage_topic)
+        values['replicator']['common']['param'].get('statusStorageTopic')
 
     for server in values['replicator']['servers']:
         server_list.append(
@@ -310,15 +277,13 @@ def read_kafka_rest_list(values):
     if values.get('kafkaRest') is None:
         return server_list
 
-    # required
     common_stop_file = \
-        values['kafkaRest']['common']['stopScript']['file']['stop']
+        values['kafkaRest']['common']['stopScript']
     log_dir = \
         values['kafkaRest']['common']['param']['logDir']
     bootstrap_servers = \
         values['kafkaRest']['common']['param']['bootstrapServers']
 
-    # optional
     schema_registry_url = \
         values['kafkaRest']['common']['param'].get('schemaRegistryUrl')
 
@@ -349,12 +314,8 @@ def read_ksqldb_list(values):
     if values.get('ksqlDB') is None:
         return server_list
 
-    # default value
-    default_listeners = 'PLAINTEXT://0.0.0.0:8088'
-
-    # required
     common_stop_file = \
-        values['ksqlDB']['common']['stopScript']['file']['stop']
+        values['ksqlDB']['common']['stopScript']
     data_dir = \
         values['ksqlDB']['common']['param']['dataDir']
     log_dir = \
@@ -364,15 +325,12 @@ def read_ksqldb_list(values):
     bootstrap_servers = \
         values['ksqlDB']['common']['param']['bootstrapServers']
 
-    # optional
     listeners = \
-        values['ksqlDB']['common']['param'].get('listeners', default_listeners)
+        values['ksqlDB']['common']['param'].get('listeners')
     schema_registry_url = \
         values['ksqlDB']['common']['param'].get('schemaRegistryUrl')
 
     for server in values['ksqlDB']['servers']:
-        default_advertised_listener = f'PLAINTEXT://{server["hostName"]}:8088'
-
         server_list.append(
             KsqlDB(
                 ServerType.KSQLDB,
@@ -386,9 +344,9 @@ def read_ksqldb_list(values):
                      common_stop_file),
                 override_parameter(server, 'groupId', group_id),
                 override_parameter(server, 'dataDir', data_dir),
-                override_parameter(server, 'log_dir', log_dir),
+                override_parameter(server, 'logDir', log_dir),
                 override_parameter(server, 'listeners', listeners),
-                server.get('advertisedListener', default_advertised_listener),
+                server.get('advertisedListener'),
                 override_parameter(server, 'bootstrapServers', bootstrap_servers),
                 override_parameter(server, 'schemaRegistryUrl', schema_registry_url)
             )
@@ -402,9 +360,8 @@ def read_control_center_list(values):
     if values.get('controlCenter') is None:
         return server_list
 
-    # required
     common_stop_file = \
-        values['controlCenter']['common']['stopScript']['file']['stop']
+        values['controlCenter']['common']['stopScript']
     data_dir = \
         values['controlCenter']['common']['param']['dataDir']
     log_dir = \
@@ -414,7 +371,6 @@ def read_control_center_list(values):
     zookeeper_connect = \
         values['controlCenter']['common']['param']['zookeeperConnect']
 
-    # optional
     schema_registry_url = \
         values['controlCenter']['common']['param'].get('schemaRegistryUrl')
     kafka_connect_url = \
@@ -438,7 +394,7 @@ def read_control_center_list(values):
                      common_stop_file),
                 server['serverId'],
                 override_parameter(server, 'dataDir', data_dir),
-                override_parameter(server, 'log_dir', log_dir),
+                override_parameter(server, 'logDir', log_dir),
                 override_parameter(server, 'bootstrapServers', bootstrap_servers),
                 override_parameter(server, 'zookeeperConnect', zookeeper_connect),
                 override_parameter(server, 'schemaRegistryUrl', schema_registry_url),

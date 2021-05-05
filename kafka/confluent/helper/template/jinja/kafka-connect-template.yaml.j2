@@ -1,0 +1,120 @@
+kafkaConnect:
+  common:
+    {% if kafkaConnect.common.stopScript is defined %}
+    stopScript: {{ kafkaConnect.common.stopScript }}
+    {% else %}
+    stopScript: stop-kafka-connect.sh
+    {% endif %}
+    param:
+    {# logDir #}
+      logDir: {{ kafkaConnect.common.param.logDir }}
+    {# groupId #}
+      groupId: {{ kafkaConnect.common.param.groupId }}
+    {# bootstrapServers #}
+      bootstrapServers: {{ kafkaConnect.common.param.bootstrapServers }}
+    {# keyConverterSchemaRegistryUrl #}
+      {% if kafkaConnect.common.param.keyConverterSchemaRegistryUrl is defined %}
+      keyConverterSchemaRegistryUrl: {{ kafkaConnect.common.param.keyConverterSchemaRegistryUrl }}
+      {% else %}
+      keyConverterSchemaRegistryUrl:
+      {% endif %}
+    {# valueConverterSchemaRegistryUrl #}
+      {% if kafkaConnect.common.param.valueConverterSchemaRegistryUrl is defined %}
+      valueConverterSchemaRegistryUrl: {{ kafkaConnect.common.param.valueConverterSchemaRegistryUrl }}
+      {% else %}
+      valueConverterSchemaRegistryUrl:
+      {% endif %}
+    {# configStorageTopic #}
+      {% if kafkaConnect.common.param.configStorageTopic is defined %}
+      configStorageTopic: {{ kafkaConnect.common.param.configStorageTopic }}
+      {% else %}
+      configStorageTopic: connect-configs
+      {% endif %}
+    {# offsetStorageTopic #}
+      {% if kafkaConnect.common.param.offsetStorageTopic is defined %}
+      offsetStorageTopic: {{ kafkaConnect.common.param.offsetStorageTopic }}
+      {% else %}
+      offsetStorageTopic: connect-offsets
+      {% endif %}
+    {# statusStorageTopic #}
+      {% if kafkaConnect.common.param.statusStorageTopic is defined %}
+      statusStorageTopic: {{ kafkaConnect.common.param.statusStorageTopic }}
+      {% else %}
+      statusStorageTopic: connect-statuses
+      {% endif %}
+    {# pluginPath #}
+      {% if kafkaConnect.common.param.pluginPath is defined %}
+      pluginPath: {{ kafkaConnect.common.param.pluginPath }}
+      {% else %}
+      pluginPath: {{ base.confluentHome }}/share/java,{{ base.confluentHome }}/share/confluent-hub-components
+      {% endif %}
+
+  servers:
+    {% for server in kafkaConnect.servers %}
+    - serverName: {{ server.serverName }}
+    {# hostName #}
+      {% if server.hostName is defined %}
+      hostName: {{ server.hostName }}
+      {% else %}
+      hostName: {{ server.serverName }}
+      {% endif %}
+    {# ipAddress #}
+      ipAddress: {{ server.ipAddress }}
+      paramOverride:
+      {# groupId #}
+        {% if server.paramOverride is defined and server.paramOverride.groupId is defined %}
+        groupId: {{ server.paramOverride.groupId }}
+        {% else %}
+        # groupId:
+        {% endif %}
+      {# logDir #}
+        {% if server.paramOverride is defined and server.paramOverride.logDir is defined %}
+        logDir: {{ server.paramOverride.logDir }}
+        {% else %}
+        # logDir:
+        {% endif %}
+      {# bootstrapServers #}
+        {% if server.paramOverride is defined and server.paramOverride.bootstrapServers is defined %}
+        bootstrapServers: {{ server.paramOverride.bootstrapServers }}
+        {% else %}
+        # bootstrapServers:
+        {% endif %}
+      {# keyConverterSchemaRegistryUrl #}
+        {% if server.paramOverride is defined and server.paramOverride.keyConverterSchemaRegistryUrl is defined %}
+        keyConverterSchemaRegistryUrl: {{ server.paramOverride.keyConverterSchemaRegistryUrl }}
+        {% else %}
+        # keyConverterSchemaRegistryUrl:
+        {% endif %}
+      {# valueConverterSchemaRegistryUrl #}
+        {% if server.paramOverride is defined and server.paramOverride.valueConverterSchemaRegistryUrl is defined %}
+        valueConverterSchemaRegistryUrl: {{ server.paramOverride.valueConverterSchemaRegistryUrl }}
+        {% else %}
+        # valueConverterSchemaRegistryUrl:
+        {% endif %}
+      {# configStorageTopic #}
+        {% if server.paramOverride is defined and server.paramOverride.configStorageTopic is defined %}
+        configStorageTopic: {{ server.paramOverride.configStorageTopic }}
+        {% else %}
+        # configStorageTopic:
+        {% endif %}
+      {# offsetStorageTopic #}
+        {% if server.paramOverride is defined and server.paramOverride.offsetStorageTopic is defined %}
+        offsetStorageTopic: {{ server.paramOverride.offsetStorageTopic }}
+        {% else %}
+        # offsetStorageTopic:
+        {% endif %}
+      {# statusStorageTopic #}
+        {% if server.paramOverride is defined and server.paramOverride.statusStorageTopic is defined %}
+        statusStorageTopic: {{ server.paramOverride.statusStorageTopic }}
+        {% else %}
+        # statusStorageTopic:
+        {% endif %}
+      {# pluginPath #}
+        {% if server.paramOverride is defined and server.paramOverride.pluginPath is defined %}
+        pluginPath: {{ server.paramOverride.pluginPath }}
+        {% else %}
+        # pluginPath:
+        {% endif %}
+    {% include 'file-template.yaml.j2' %}
+
+    {% endfor %}

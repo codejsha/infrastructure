@@ -1,0 +1,54 @@
+kafkaRest:
+  common:
+    {% if kafkaRest.common.stopScript is defined %}
+    stopScript: {{ kafkaRest.common.stopScript }}
+    {% else %}
+    stopScript: stop-kafka-rest.sh
+    {% endif %}
+    param:
+    {# logDir #}
+      logDir: {{ kafkaRest.common.param.logDir }}
+    {# bootstrapServers #}
+      bootstrapServers: {{ kafkaRest.common.param.bootstrapServers }}
+    {# schemaRegistryUrl #}
+      {% if kafkaRest.common.param.schemaRegistryUrl is defined %}
+      schemaRegistryUrl: {{ kafkaRest.common.param.schemaRegistryUrl }}
+      {% else %}
+      schemaRegistryUrl:
+      {% endif %}
+
+  servers:
+    {% for server in kafkaRest.servers %}
+    - serverName: {{ server.serverName }}
+    {# hostName #}
+      {% if server.hostName is defined %}
+      hostName: {{ server.hostName }}
+      {% else %}
+      hostName: {{ server.serverName }}
+      {% endif %}
+    {# ipAddress #}
+      ipAddress: {{ server.ipAddress }}
+    {# serverId #}
+      serverId: {{ server.serverId }}
+      paramOverride:
+      {# logDir #}
+        {% if server.paramOverride is defined and server.paramOverride.logDir is defined %}
+        logDir: {{ server.paramOverride.logDir }}
+        {% else %}
+        # logDir:
+        {% endif %}
+      {# bootstrapServers #}
+        {% if server.paramOverride is defined and server.paramOverride.bootstrapServers is defined %}
+        bootstrapServers: {{ server.paramOverride.bootstrapServers }}
+        {% else %}
+        # bootstrapServers:
+        {% endif %}
+      {# schemaRegistryUrl #}
+        {% if server.paramOverride is defined and server.paramOverride.schemaRegistryUrl is defined %}
+        schemaRegistryUrl: {{ server.paramOverride.schemaRegistryUrl }}
+        {% else %}
+        # schemaRegistryUrl:
+        {% endif %}
+    {% include 'file-template.yaml.j2' %}
+
+    {% endfor %}

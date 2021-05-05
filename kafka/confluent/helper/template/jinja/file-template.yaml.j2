@@ -1,0 +1,25 @@
+      file:
+      {# properties #}
+        {% if server.file is defined and server.file.properties is defined %}
+        properties: {{ server.file.properties }}
+        {% else %}
+        properties: {{ server.serverName }}.properties
+        {% endif %}
+      {# start #}
+        {% if server.file is defined and server.file.start is defined %}
+        start: {{ server.file.start }}
+        {% else %}
+        start: start-{{ server.serverName }}.sh
+        {% endif %}
+      {# stop #}
+        {% if server.file is defined and server.file.stop is defined %}
+        stop: {{ server.file.stop }}
+        {% else %}
+        stop: stop-{{ server.serverName }}.sh
+        {% endif %}
+      {# log #}
+        {% if server.file is defined and server.file.log is defined %}
+        log: {{ server.file.log }}
+        {% else %}
+        log: log-{{ server.serverName }}.sh
+        {% endif %}

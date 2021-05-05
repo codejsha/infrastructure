@@ -39,7 +39,7 @@ def create_start_and_stop_symlink_script_file(server_dict):
     data_list.append(f'fi')
 
     edited_symlink = '\n'.join(data_list) + '\n'
-    write_file('scripts/others/create-symlink.sh', edited_symlink)
+    write_file('output/scripts/others/create-symlink.sh', edited_symlink)
 
 
 def create_add_host_script_file(server_dict):
@@ -54,7 +54,7 @@ def create_add_host_script_file(server_dict):
 
     data_list.append(f'EOF')
     edited_hosts = '\n'.join(data_list) + '\n'
-    write_file('scripts/others/add-hosts.sh', edited_hosts)
+    write_file('output/scripts/others/add-hosts.sh', edited_hosts)
 
 
 def create_secure_copy_script_file(base, server_dict):
@@ -82,7 +82,7 @@ def create_secure_copy_script_file(base, server_dict):
                              f'{base.user}@{server.host_name}:{base.confluent_home}')
 
     edited_hosts = '\n'.join(data_list) + '\n'
-    write_file('scripts/others/scp-files.sh', edited_hosts)
+    write_file('output/scripts/others/scp-files.sh', edited_hosts)
 
 
 def create_kafka_alias_file(base):
@@ -93,12 +93,14 @@ def create_kafka_alias_file(base):
         f'export PATH\n',
         f'alias killjava="pkill -9 java"',
         f'alias pxjava="pgrep -xa java"',
+        f'',
         f'alias goprops="cd ${{CONFLUENT_HOME}}/properties"',
         f'alias goscripts="cd ${{CONFLUENT_HOME}}/scripts"',
+        f'',
         f'alias startsh="${{CONFLUENT_HOME}}/scripts/start.sh"',
         f'alias stopsh="${{CONFLUENT_HOME}}/scripts/stop.sh"',
         f'alias logsh="${{CONFLUENT_HOME}}/scripts/log.sh"'
     ]
 
     edited_hosts = '\n'.join(data_list) + '\n'
-    write_file('scripts/others/.kafka_aliases', edited_hosts)
+    write_file('output/scripts/others/.kafka_aliases', edited_hosts)

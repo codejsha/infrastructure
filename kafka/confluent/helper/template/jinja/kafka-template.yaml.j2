@@ -1,0 +1,80 @@
+kafka:
+  common:
+    {% if kafka.common.stopScript is defined %}
+    stopScript: {{ kafka.common.stopScript }}
+    {% else %}
+    stopScript: stop-kafka.sh
+    {% endif %}
+    param:
+    {# dataDir #}
+      dataDir: {{ kafka.common.param.dataDir }}
+    {# logDir #}
+      logDir: {{ kafka.common.param.logDir }}
+    {# listeners #}
+      {% if kafka.common.param.listeners is defined %}
+      listeners: {{ kafka.common.param.listeners }}
+      {% else %}
+      listeners: PLAINTEXT://0.0.0.0:9092
+      {% endif %}
+    {# zookeeperConnect #}
+      zookeeperConnect: {{ kafka.common.param.zookeeperConnect }}
+    {# metricsReporterBootstrapServers #}
+      {% if kafka.common.param.metricsReporterBootstrapServers is defined %}
+      metricsReporterBootstrapServers: {{ kafka.common.param.metricsReporterBootstrapServers }}
+      {% else %}
+      metricsReporterBootstrapServers:
+      {% endif %}
+
+  servers:
+    {% for server in kafka.servers %}
+    - serverName: {{ server.serverName }}
+    {# hostName #}
+      {% if server.hostName is defined %}
+      hostName: {{ server.hostName }}
+      {% else %}
+      hostName: {{ server.serverName }}
+      {% endif %}
+    {# ipAddress #}
+      ipAddress: {{ server.ipAddress }}
+    {# serverId #}
+      serverId: {{ server.serverId }}
+    {# advertisedListeners #}
+      {% if server.advertisedListeners is defined %}
+      advertisedListeners: {{ server.advertisedListeners }}
+      {% else %}
+      advertisedListeners: PLAINTEXT://{{ server.serverName }}:9092
+      {% endif %}
+      paramOverride:
+      {# dataDir #}
+        {% if server.paramOverride is defined and server.paramOverride.dataDir is defined %}
+        dataDir: {{ server.paramOverride.dataDir }}
+        {% else %}
+        # dataDir:
+        {% endif %}
+      {# logDir #}
+        {% if server.paramOverride is defined and server.paramOverride.logDir is defined %}
+        logDir: {{ server.paramOverride.logDir }}
+        {% else %}
+        # logDir:
+        {% endif %}
+      {# listeners #}
+        {% if server.paramOverride is defined and server.paramOverride.listeners is defined %}
+        listeners: {{ server.paramOverride.listeners }}
+        {% else %}
+        # listeners:
+        {% endif %}
+      {# zookeeperConnect #}
+        {% if server.paramOverride is defined and server.paramOverride.zookeeperConnect is defined %}
+        zookeeperConnect: {{ server.paramOverride.zookeeperConnect }}
+        {% else %}
+        # zookeeperConnect:
+        {% endif %}
+      {# metricsReporterBootstrapServers #}
+        {% if server.paramOverride is defined and server.paramOverride.metricsReporterBootstrapServers is defined %}
+        metricsReporterBootstrapServers: {{ server.paramOverride.metricsReporterBootstrapServers }}
+        {% else %}
+        # metricsReporterBootstrapServers:
+        {% endif %}
+    {% include 'file-template.yaml.j2' %}
+
+    {% endfor %}

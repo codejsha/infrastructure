@@ -1,0 +1,55 @@
+base:
+  user: {{ base.user }}
+  confluentHome: {{ base.confluentHome }}
+  javaHome: {{ base.javaHome }}
+  propertiesPath: {{ base.propertiesPath }}
+  scriptsPath: {{ base.scriptsPath }}
+
+
+######################################################################
+
+
+### zookeeper
+{% include 'zookeeper-template.yaml.j2' %}
+
+######################################################################
+
+
+### kafka
+{% include 'kafka-template.yaml.j2' %}
+
+######################################################################
+
+
+### schema-registry
+{% include 'schema-registry-template.yaml.j2' %}
+
+######################################################################
+
+
+### kafka-connect
+{% include 'kafka-connect-template.yaml.j2' %}
+
+######################################################################
+
+
+### replicator
+{% include 'replicator-template.yaml.j2' %}
+
+######################################################################
+
+
+### kafka-rest
+{% include 'kafka-rest-template.yaml.j2' %}
+
+######################################################################
+
+
+### ksqldb
+{% include 'ksqldb-template.yaml.j2' %}
+
+######################################################################
+
+
+### control-center
+{% include 'control-center-template.yaml.j2' %}

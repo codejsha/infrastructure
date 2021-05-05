@@ -1,0 +1,106 @@
+controlCenter:
+  common:
+    {% if controlCenter.common.stopScript is defined %}
+    stopScript: {{ controlCenter.common.stopScript }}
+    {% else %}
+    stopScript: stop-control-center.sh
+    {% endif %}
+    param:
+    {# dataDir #}
+      dataDir: {{ controlCenter.common.param.dataDir }}
+    {# logDir #}
+      logDir: {{ controlCenter.common.param.logDir }}
+    {# bootstrapServers #}
+      bootstrapServers: {{ controlCenter.common.param.bootstrapServers }}
+    {# zookeeperConnect #}
+      zookeeperConnect: {{ controlCenter.common.param.zookeeperConnect }}
+    {# schemaRegistryUrl #}
+      {% if controlCenter.common.param.schemaRegistryUrl is defined %}
+      schemaRegistryUrl: {{ controlCenter.common.param.schemaRegistryUrl }}
+      {% else %}
+      schemaRegistryUrl:
+      {% endif %}
+    {# kafkaConnectUrl #}
+      {% if controlCenter.common.param.kafkaConnectUrl is defined %}
+      kafkaConnectUrl: {{ controlCenter.common.param.kafkaConnectUrl }}
+      {% else %}
+      kafkaConnectUrl:
+      {% endif %}
+    {# kafkaRestUrl #}
+      {% if controlCenter.common.param.kafkaRestUrl is defined %}
+      kafkaRestUrl: {{ controlCenter.common.param.kafkaRestUrl }}
+      {% else %}
+      kafkaRestUrl:
+      {% endif %}
+    {# ksqlDBUrl #}
+      {% if controlCenter.common.param.ksqlDBUrl is defined %}
+      ksqlDBUrl: {{ controlCenter.common.param.ksqlDBUrl }}
+      {% else %}
+      ksqlDBUrl:
+      {% endif %}
+
+  servers:
+    {% for server in controlCenter.servers %}
+    - serverName: {{ server.serverName }}
+    {# hostName #}
+      {% if server.hostName is defined %}
+      hostName: {{ server.hostName }}
+      {% else %}
+      hostName: {{ server.serverName }}
+      {% endif %}
+    {# ipAddress #}
+      ipAddress: {{ server.ipAddress }}
+    {# serverId #}
+      serverId: {{ server.serverId }}
+      paramOverride:
+      {# dataDir #}
+        {% if server.paramOverride is defined and server.paramOverride.dataDir is defined %}
+        dataDir: {{ server.paramOverride.dataDir }}
+        {% else %}
+        # dataDir:
+        {% endif %}
+      {# logDir #}
+        {% if server.paramOverride is defined and server.paramOverride.logDir is defined %}
+        logDir: {{ server.paramOverride.logDir }}
+        {% else %}
+        # logDir:
+        {% endif %}
+      {# bootstrapServers #}
+        {% if server.paramOverride is defined and server.paramOverride.bootstrapServers is defined %}
+        bootstrapServers: {{ server.paramOverride.bootstrapServers }}
+        {% else %}
+        # bootstrapServers:
+        {% endif %}
+      {# zookeeperConnect #}
+        {% if server.paramOverride is defined and server.paramOverride.zookeeperConnect is defined %}
+        zookeeperConnect: {{ server.paramOverride.zookeeperConnect }}
+        {% else %}
+        # zookeeperConnect:
+        {% endif %}
+      {# schemaRegistryUrl #}
+        {% if server.paramOverride is defined and server.paramOverride.schemaRegistryUrl is defined %}
+        schemaRegistryUrl: {{ server.paramOverride.schemaRegistryUrl }}
+        {% else %}
+        # schemaRegistryUrl:
+        {% endif %}
+      {# kafkaConnectUrl #}
+        {% if server.paramOverride is defined and server.paramOverride.kafkaConnectUrl is defined %}
+        kafkaConnectUrl: {{ server.paramOverride.kafkaConnectUrl }}
+        {% else %}
+        # kafkaConnectUrl:
+        {% endif %}
+      {# kafkaRestUrl #}
+        {% if server.paramOverride is defined and server.paramOverride.kafkaRestUrl is defined %}
+        kafkaRestUrl: {{ server.paramOverride.kafkaRestUrl }}
+        {% else %}
+        # kafkaRestUrl:
+        {% endif %}
+      {# ksqlDBUrl #}
+        {% if server.paramOverride is defined and server.paramOverride.ksqlDBUrl is defined %}
+        ksqlDBUrl: {{ server.paramOverride.ksqlDBUrl }}
+        {% else %}
+        # ksqlDBUrl:
+        {% endif %}
+    {% include 'file-template.yaml.j2' %}
+
+    {% endfor %}

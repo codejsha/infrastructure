@@ -1,0 +1,86 @@
+ksqlDB:
+  common:
+    {% if ksqlDB.common.stopScript is defined %}
+    stopScript: {{ ksqlDB.common.stopScript }}
+    {% else %}
+    stopScript: stop-ksqldb.sh
+    {% endif %}
+    param:
+    {# dataDir #}
+      dataDir: {{ ksqlDB.common.param.dataDir }}
+    {# logDir #}
+      logDir: {{ ksqlDB.common.param.logDir }}
+    {# groupId #}
+      groupId: {{ ksqlDB.common.param.groupId }}
+    {# listeners #}
+      {% if ksqlDB.common.param.listeners is defined %}
+      listeners: {{ ksqlDB.common.param.listeners }}
+      {% else %}
+      listeners: PLAINTEXT://0.0.0.0:8088
+      {% endif %}
+    {# bootstrapServers #}
+      bootstrapServers: {{ ksqlDB.common.param.bootstrapServers }}
+    {# schemaRegistryUrl #}
+      {% if ksqlDB.common.param.schemaRegistryUrl is defined %}
+      schemaRegistryUrl: {{ ksqlDB.common.param.schemaRegistryUrl }}
+      {% else %}
+      schemaRegistryUrl:
+      {% endif %}
+
+  servers:
+    {% for server in ksqlDB.servers %}
+    - serverName: {{ server.serverName }}
+    {# hostName #}
+      {% if server.hostName is defined %}
+      hostName: {{ server.hostName }}
+      {% else %}
+      hostName: {{ server.serverName }}
+      {% endif %}
+    {# ipAddress #}
+      ipAddress: {{ server.ipAddress }}
+    {# advertisedListener #}
+      {% if server.advertisedListener is defined %}
+      advertisedListener: {{ server.advertisedListener }}
+      {% else %}
+      advertisedListener: PLAINTEXT://{{ server.serverName }}:8088
+      {% endif %}
+      paramOverride:
+      {# groupId #}
+        {% if server.paramOverride is defined and server.paramOverride.groupId is defined %}
+        groupId: {{ server.paramOverride.groupId }}
+        {% else %}
+        # groupId:
+        {% endif %}
+      {# dataDir #}
+        {% if server.paramOverride is defined and server.paramOverride.dataDir is defined %}
+        dataDir: {{ server.paramOverride.dataDir }}
+        {% else %}
+        # dataDir:
+        {% endif %}
+      {# logDir #}
+        {% if server.paramOverride is defined and server.paramOverride.logDir is defined %}
+        logDir: {{ server.paramOverride.logDir }}
+        {% else %}
+        # logDir:
+        {% endif %}
+      {# listeners #}
+        {% if server.paramOverride is defined and server.paramOverride.listeners is defined %}
+        listeners: {{ server.paramOverride.listeners }}
+        {% else %}
+        # listeners:
+        {% endif %}
+      {# bootstrapServers #}
+        {% if server.paramOverride is defined and server.paramOverride.bootstrapServers is defined %}
+        bootstrapServers: {{ server.paramOverride.bootstrapServers }}
+        {% else %}
+        # bootstrapServers:
+        {% endif %}
+      {# schemaRegistryUrl #}
+        {% if server.paramOverride is defined and server.paramOverride.schemaRegistryUrl is defined %}
+        schemaRegistryUrl: {{ server.paramOverride.schemaRegistryUrl }}
+        {% else %}
+        # schemaRegistryUrl:
+        {% endif %}
+    {% include 'file-template.yaml.j2' %}
+
+    {% endfor %}

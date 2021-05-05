@@ -1,0 +1,66 @@
+zookeeper:
+  common:
+    {% if zookeeper.common.stopScript is defined %}
+    stopScript: {{ zookeeper.common.stopScript }}
+    {% else %}
+    stopScript: stop-zookeeper.sh
+    {% endif %}
+    param:
+      {# dataDir #}
+      dataDir: {{ zookeeper.common.param.dataDir }}
+      {# logDir #}
+      logDir: {{ zookeeper.common.param.logDir }}
+      {# clientPort #}
+      {% if zookeeper.common.param.clientPort is defined %}
+      clientPort: {{ zookeeper.common.param.clientPort }}
+      {% else %}
+      clientPort: 2181
+      {% endif %}
+      {# peerToPeerPort #}
+      {% if zookeeper.common.param.peerToPeerPort is defined %}
+      peerToPeerPort: {{ zookeeper.common.param.peerToPeerPort }}
+      {% else %}
+      peerToPeerPort: 2888:3888
+      {% endif %}
+
+  servers:
+    {% for server in zookeeper.servers %}
+    - serverName: {{ server.serverName }}
+      {# hostName #}
+      {% if server.hostName is defined %}
+      hostName: {{ server.hostName }}
+      {% else %}
+      hostName: {{ server.serverName }}
+      {% endif %}
+      {# ipAddress #}
+      ipAddress: {{ server.ipAddress }}
+      {# serverId #}
+      serverId: {{ server.serverId }}
+      paramOverride:
+        {# dataDir #}
+        {% if server.paramOverride is defined and server.paramOverride.dataDir is defined %}
+        dataDir: {{ server.paramOverride.dataDir }}
+        {% else %}
+        # dataDir:
+        {% endif %}
+        {# logDir #}
+        {% if server.paramOverride is defined and server.paramOverride.logDir is defined %}
+        logDir: {{ server.paramOverride.logDir }}
+        {% else %}
+        # logDir:
+        {% endif %}
+        {# clientPort #}
+        {% if server.paramOverride is defined and server.paramOverride.clientPort is defined %}
+        clientPort: {{ server.paramOverride.clientPort }}
+        {% else %}
+        # clientPort:
+        {% endif %}
+        {# peerToPeerPort #}
+        {% if server.paramOverride is defined and server.paramOverride.peerToPeerPort is defined %}
+        peerToPeerPort: {{ server.paramOverride.peerToPeerPort }}
+        {% else %}
+        # peerToPeerPort:
+        {% endif %}
+    {% include 'file-template.yaml.j2' %}
+
+    {% endfor %}

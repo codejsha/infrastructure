@@ -1,0 +1,64 @@
+schemaRegistry:
+  common:
+    {% if schemaRegistry.common.stopScript is defined %}
+    stopScript: {{ schemaRegistry.common.stopScript }}
+    {% else %}
+    stopScript: stop-schema-registry.sh
+    {% endif %}
+    param:
+    {# logDir #}
+      logDir: {{ schemaRegistry.common.param.logDir }}
+    {# listeners #}
+      {% if schemaRegistry.common.param.listeners is defined %}
+      listeners: {{ schemaRegistry.common.param.listeners }}
+      {% else %}
+      listeners: PLAINTEXT://0.0.0.0:8081
+      {% endif %}
+    {# bootstrapServers #}
+      bootstrapServers: {{ schemaRegistry.common.param.bootstrapServers }}
+    {# topic #}
+      {% if schemaRegistry.common.param.topic is defined %}
+      topic: {{ schemaRegistry.common.param.topic }}
+      {% else %}
+      topic: _schemas
+      {% endif %}
+
+  servers:
+    {% for server in schemaRegistry.servers %}
+    - serverName: {{ server.serverName }}
+    {# hostName #}
+      {% if server.hostName is defined %}
+      hostName: {{ server.hostName }}
+      {% else %}
+      hostName: {{ server.serverName }}
+      {% endif %}
+    {# ipAddress #}
+      ipAddress: {{ server.ipAddress }}
+      paramOverride:
+      {# logDir #}
+        {% if server.paramOverride is defined and server.paramOverride.logDir is defined %}
+        logDir: {{ server.paramOverride.logDir }}
+        {% else %}
+        # logDir:
+        {% endif %}
+      {# listeners #}
+        {% if server.paramOverride is defined and server.paramOverride.listeners is defined %}
+        listeners: {{ server.paramOverride.listeners }}
+        {% else %}
+        # listeners:
+        {% endif %}
+      {# bootstrapServers #}
+        {% if server.paramOverride is defined and server.paramOverride.bootstrapServers is defined %}
+        bootstrapServers: {{ server.paramOverride.bootstrapServers }}
+        {% else %}
+        # bootstrapServers:
+        {% endif %}
+      {# topic #}
+        {% if server.paramOverride is defined and server.paramOverride.topic is defined %}
+        topic: {{ server.paramOverride.topic }}
+        {% else %}
+        # topic:
+        {% endif %}
+    {% include 'file-template.yaml.j2' %}
+
+    {% endfor %}
