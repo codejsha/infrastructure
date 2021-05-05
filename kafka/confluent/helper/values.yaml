@@ -1,4 +1,3 @@
-### base
 base:
   user: confluent
   confluentHome: /usr/local/confluent
@@ -11,58 +10,34 @@ base:
 ### zookeeper
 zookeeper:
   common:
-    stopScript:
-      file:
-        stop: stop-zookeeper.sh
     param:
       dataDir: /mnt/zookeeper/data
       logDir: /mnt/zookeeper/logs
 
   servers:
-    - {% set name = "zookeeper1" %}
+    - serverName: zookeeper1
+      # hostName:
       ipAddress: 10.10.10.11
-      hostName: "{{ name }}"
-      serverName: "{{ name }}"
       serverId: 1
       # paramOverride:
-      file:
-        properties: "{{ name }}.properties"
-        start: "start-{{ name }}.sh"
-        stop: "stop-{{ name }}.sh"
-        log: "log-{{ name }}.sh"
 
-    - {% set name = "zookeeper2" %}
+    - serverName: zookeeper2
+      # hostName:
       ipAddress: 10.10.10.12
-      hostName: "{{ name }}"
-      serverName: "{{ name }}"
       serverId: 2
       # paramOverride:
-      file:
-        properties: "{{ name }}.properties"
-        start: "start-{{ name }}.sh"
-        stop: "stop-{{ name }}.sh"
-        log: "log-{{ name }}.sh"
 
-    - {% set name = "zookeeper3" %}
+    - serverName: zookeeper3
+      # hostName:
       ipAddress: 10.10.10.13
-      hostName: "{{ name }}"
-      serverName: "{{ name }}"
       serverId: 3
       # paramOverride:
-      file:
-        properties: "{{ name }}.properties"
-        start: "start-{{ name }}.sh"
-        stop: "stop-{{ name }}.sh"
-        log: "log-{{ name }}.sh"
 
 ######################################################################
 
 ### kafka
 kafka:
   common:
-    stopScript:
-      file:
-        stop: stop-kafka.sh
     param:
       dataDir: /mnt/kafka/data
       logDir: /mnt/kafka/logs
@@ -70,85 +45,49 @@ kafka:
       metricsReporterBootstrapServers: kafka1:9092,kafka2:9092,kafka3:9092
 
   servers:
-    - {% set name = "kafka1" %}
+    - serverName: kafka1
+      # hostName:
       ipAddress: 10.10.10.21
-      hostName: "{{ name }}"
-      serverName: "{{ name }}"
       serverId: 1
       # paramOverride:
-      file:
-        properties: "{{ name }}.properties"
-        start: "start-{{ name }}.sh"
-        stop: "stop-{{ name }}.sh"
-        log: "log-{{ name }}.sh"
 
-    - {% set name = "kafka2" %}
+    - serverName: kafka2
+      # hostName:
       ipAddress: 10.10.10.22
-      hostName: "{{ name }}"
-      serverName: "{{ name }}"
       serverId: 2
       # paramOverride:
-      file:
-        properties: "{{ name }}.properties"
-        start: "start-{{ name }}.sh"
-        stop: "stop-{{ name }}.sh"
-        log: "log-{{ name }}.sh"
 
-    - {% set name = "kafka3" %}
+    - serverName: kafka3
+      # hostName:
       ipAddress: 10.10.10.23
-      hostName: "{{ name }}"
-      serverName: "{{ name }}"
       serverId: 3
       # paramOverride:
-      file:
-        properties: "{{ name }}.properties"
-        start: "start-{{ name }}.sh"
-        stop: "stop-{{ name }}.sh"
-        log: "log-{{ name }}.sh"
 
 ######################################################################
 
 ### schema-registry
 schemaRegistry:
   common:
-    stopScript:
-      file:
-        stop: stop-schema-registry.sh
     param:
       logDir: /mnt/schema-registry/logs
       bootstrapServers: PLAINTEXT://kafka1:9092,PLAINTEXT://kafka2:9092,PLAINTEXT://kafka3:9092
 
   servers:
-    - {% set name = "schema-registry1" %}
+    - serverName: schema-registry1
+      # hostName:
       ipAddress: 10.10.10.31
-      hostName: "{{ name }}"
-      serverName: "{{ name }}"
       # paramOverride:
-      file:
-        properties: "{{ name }}.properties"
-        start: "start-{{ name }}.sh"
-        stop: "stop-{{ name }}.sh"
-        log: "log-{{ name }}.sh"
 
-    - {% set name = "schema-registry2" %}
+    - serverName: schema-registry2
+      # hostName:
       ipAddress: 10.10.10.32
-      hostName: "{{ name }}"
-      serverName: "{{ name }}"
       # paramOverride:
-      file:
-        properties: "{{ name }}.properties"
-        start: "start-{{ name }}.sh"
-        stop: "stop-{{ name }}.sh"
-        log: "log-{{ name }}.sh"
 
 ######################################################################
 
 ### kafka-connect
 kafkaConnect:
   common:
-    stopScript:
-      file:
-        stop: stop-kafka-connect.sh
     param:
       logDir: /mnt/kafka-connect/logs
       groupId: connect-cluster
@@ -158,108 +97,67 @@ kafkaConnect:
       configStorageTopic: connect-configs
       offsetStorageTopic: connect-offsets
       statusStorageTopic: connect-statuses
-      pluginPath: /usr/local/confluent/share/java,/usr/local/confluent/share/confluent-hub-components
 
   servers:
-    - {% set name = "kafka-connect1" %}
+    - serverName: kafka-connect1
+      # hostName:
       ipAddress: 10.10.10.41
-      hostName: "{{ name }}"
-      serverName: "{{ name }}"
       # paramOverride:
-      file:
-        properties: "{{ name }}.properties"
-        start: "start-{{ name }}.sh"
-        stop: "stop-{{ name }}.sh"
-        log: "log-{{ name }}.sh"
 
-    - {% set name = "kafka-connect2" %}
-      ipAddress: 10.10.10.42
-      hostName: "{{ name }}"
-      serverName: "{{ name }}"
+    - serverName: kafka-connect2
+      # hostName:
+      ipAddress: 10.10.10.41
       # paramOverride:
-      file:
-        properties: "{{ name }}.properties"
-        start: "start-{{ name }}.sh"
-        stop: "stop-{{ name }}.sh"
-        log: "log-{{ name }}.sh"
 
 ######################################################################
 
 ### replicator
 replicator:
   common:
-    stopScript:
-      file:
-        stop: stop-replicator.sh
     param:
       logDir: /mnt/replicator/logs
-      groupId: connect-cluster
+      groupId: replicator-cluster
       bootstrapServers: PLAINTEXT://kafka1:9092,PLAINTEXT://kafka2:9092,PLAINTEXT://kafka3:9092
       keyConverterSchemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
       valueConverterSchemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
-      configStorageTopic: connect-configs
-      offsetStorageTopic: connect-offsets
-      statusStorageTopic: connect-statuses
-      pluginPath: /usr/local/confluent/share/java,/usr/local/confluent/share/confluent-hub-components
+      configStorageTopic: replicator-configs
+      offsetStorageTopic: replicator-offsets
+      statusStorageTopic: replicator-statuses
 
   servers:
-    - {% set name = "replicator1" %}
+    - serverName: replicator1
+      # hostName:
       ipAddress: 10.10.10.61
-      hostName: "{{ name }}"
-      serverName: "{{ name }}"
       # paramOverride:
-      file:
-        properties: "{{ name }}.properties"
-        start: "start-{{ name }}.sh"
-        stop: "stop-{{ name }}.sh"
-        log: "log-{{ name }}.sh"
 
 ######################################################################
 
 ### kafka-rest
 kafkaRest:
   common:
-    stopScript:
-      file:
-        stop: stop-kafka-rest.sh
     param:
       logDir: /mnt/kafka-rest/logs
       bootstrapServers: PLAINTEXT://kafka1:9092,PLAINTEXT://kafka2:9092,PLAINTEXT://kafka3:9092
       schemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
 
   servers:
-    - {% set name = "kafka-rest1" %}
+    - serverName: kafka-rest1
+      # hostName:
       ipAddress: 10.10.10.51
-      hostName: "{{ name }}"
-      serverName: "{{ name }}"
       serverId: 1
       # paramOverride:
-      file:
-        properties: "{{ name }}.properties"
-        start: "start-{{ name }}.sh"
-        stop: "stop-{{ name }}.sh"
-        log: "log-{{ name }}.sh"
 
-    - {% set name = "kafka-rest2" %}
+    - serverName: kafka-rest2
+      # hostName:
       ipAddress: 10.10.10.52
-      hostName: "{{ name }}"
-      serverName: "{{ name }}"
       serverId: 2
       # paramOverride:
-      file:
-        properties: "{{ name }}.properties"
-        start: "start-{{ name }}.sh"
-        stop: "stop-{{ name }}.sh"
-        log: "log-{{ name }}.sh"
 
 ######################################################################
 
 ### ksqldb
 ksqlDB:
   common:
-    stopScript:
-      file:
-        stop: stop-ksqldb.sh
     param:
       dataDir: /mnt/ksqldb/data
       logDir: /mnt/ksqldb/logs
@@ -268,58 +166,32 @@ ksqlDB:
       schemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
 
   servers:
-    - {% set name = "kafka-ksqldb1" %}
+    - serverName: ksqldb1
+      # hostName:
       ipAddress: 10.10.10.71
-      hostName: "{{ name }}"
-      serverName: "{{ name }}"
       # paramOverride:
-      file:
-        properties: "{{ name }}.properties"
-        start: "start-{{ name }}.sh"
-        stop: "stop-{{ name }}.sh"
-        log: "log-{{ name }}.sh"
 
-    - {% set name = "kafka-ksqldb2" %}
+    - serverName: ksqldb2
+      # hostName:
       ipAddress: 10.10.10.72
-      hostName: "{{ name }}"
-      serverName: "{{ name }}"
       # paramOverride:
-      file:
-        properties: "{{ name }}.properties"
-        start: "start-{{ name }}.sh"
-        stop: "stop-{{ name }}.sh"
-        log: "log-{{ name }}.sh"
 
-    - {% set name = "kafka-ksqldb3" %}
+    - serverName: ksqldb3
+      # hostName:
       ipAddress: 10.10.10.73
-      hostName: "{{ name }}"
-      serverName: "{{ name }}"
       # paramOverride:
-      file:
-        properties: "{{ name }}.properties"
-        start: "start-{{ name }}.sh"
-        stop: "stop-{{ name }}.sh"
-        log: "log-{{ name }}.sh"
 
-    - {% set name = "kafka-ksqldb4" %}
+    - serverName: ksqldb4
+      # hostName:
       ipAddress: 10.10.10.74
-      hostName: "{{ name }}"
-      serverName: "{{ name }}"
       # paramOverride:
-      file:
-        properties: "{{ name }}.properties"
-        start: "start-{{ name }}.sh"
-        stop: "stop-{{ name }}.sh"
-        log: "log-{{ name }}.sh"
 
 ######################################################################
 
 ### control-center
 controlCenter:
   common:
-    stopScript:
-      file:
-        stop: stop-control-center.sh
+    stop: stop-control-center.sh
     param:
       dataDir: /mnt/control-center/data
       logDir: /mnt/control-center/logs
@@ -331,14 +203,8 @@ controlCenter:
       ksqlDBUrl: http://ksqldb1:8088,http://ksqldb2:8088,http://ksqldb3:8088,http://ksqldb4:8088
 
   servers:
-    - {% set name = "control-center1" %}
+    - serverName: control-center1
+      # hostName:
       ipAddress: 10.10.10.81
-      hostName: "{{ name }}"
-      serverName: "{{ name }}"
       serverId: 1
       # paramOverride:
-      file:
-        properties: "{{ name }}.properties"
-        start: "start-{{ name }}.sh"
-        stop: "stop-{{ name }}.sh"
-        log: "log-{{ name }}.sh"
