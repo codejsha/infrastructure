@@ -27,8 +27,8 @@ class File:
     properties_file: any
     start_file: any
     stop_file: str
-    common_stop_file: str
     log_file: any
+    common_stop_file: str
 
 
 @dataclass
