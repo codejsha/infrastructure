@@ -23,12 +23,11 @@ class Base:
 
 
 @dataclass
-class File:
-    properties_file: any
-    start_file: any
-    stop_file: str
-    log_file: any
-    common_stop_file: str
+class ServerFile:
+    properties: any
+    start: any
+    stop: str
+    log: any
 
 
 @dataclass
@@ -37,7 +36,8 @@ class Server:
     server_name: str
     host_name: str
     ip_address: str
-    file: File
+    stop_script: str
+    file: ServerFile
 
 
 @dataclass
@@ -108,7 +108,7 @@ class KsqlDB(Server):
     data_dir: str
     log_dir: str
     listeners: str
-    advertised_listeners: str
+    advertised_listener: str
     bootstrap_servers: str
     schema_registry_url: str
 
@@ -123,6 +123,6 @@ class ControlCenter(Server):
     schema_registry_url: str
     kafka_connect_url: str
     kafka_rest_url: str
-    ksqldb_url: str
+    ksql_db_url: str
 
 # endregion

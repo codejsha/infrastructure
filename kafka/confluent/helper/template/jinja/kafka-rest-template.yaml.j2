@@ -1,3 +1,4 @@
+{% if kafkaRest is defined %}
 kafkaRest:
   common:
     {% if kafkaRest.common.stopScript is defined %}
@@ -52,3 +53,4 @@ kafkaRest:
     {% include 'file-template.yaml.j2' %}
 
     {% endfor %}
+{% endif %}

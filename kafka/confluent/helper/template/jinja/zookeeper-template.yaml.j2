@@ -1,3 +1,4 @@
+{% if zookeeper is defined %}
 zookeeper:
   common:
     {% if zookeeper.common.stopScript is defined %}
@@ -64,3 +65,4 @@ zookeeper:
     {% include 'file-template.yaml.j2' %}
 
     {% endfor %}
+{% endif %}

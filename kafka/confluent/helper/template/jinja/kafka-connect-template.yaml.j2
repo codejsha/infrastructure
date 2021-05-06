@@ -1,3 +1,4 @@
+{% if kafkaConnect is defined %}
 kafkaConnect:
   common:
     {% if kafkaConnect.common.stopScript is defined %}
@@ -118,3 +119,4 @@ kafkaConnect:
     {% include 'file-template.yaml.j2' %}
 
     {% endfor %}
+{% endif %}

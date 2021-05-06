@@ -1,3 +1,4 @@
+{% if replicator is defined %}
 replicator:
   common:
     {% if replicator.common.stopScript is defined %}
@@ -118,3 +119,4 @@ replicator:
     {% include 'file-template.yaml.j2' %}
 
     {% endfor %}
+{% endif %}

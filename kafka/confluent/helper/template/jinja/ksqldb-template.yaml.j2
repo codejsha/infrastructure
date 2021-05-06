@@ -1,34 +1,35 @@
-ksqlDB:
+{% if ksqlDb is defined %}
+ksqlDb:
   common:
-    {% if ksqlDB.common.stopScript is defined %}
-    stopScript: {{ ksqlDB.common.stopScript }}
+    {% if ksqlDb.common.stopScript is defined %}
+    stopScript: {{ ksqlDb.common.stopScript }}
     {% else %}
     stopScript: stop-ksqldb.sh
     {% endif %}
     param:
     {# dataDir #}
-      dataDir: {{ ksqlDB.common.param.dataDir }}
+      dataDir: {{ ksqlDb.common.param.dataDir }}
     {# logDir #}
-      logDir: {{ ksqlDB.common.param.logDir }}
+      logDir: {{ ksqlDb.common.param.logDir }}
     {# groupId #}
-      groupId: {{ ksqlDB.common.param.groupId }}
+      groupId: {{ ksqlDb.common.param.groupId }}
     {# listeners #}
-      {% if ksqlDB.common.param.listeners is defined %}
-      listeners: {{ ksqlDB.common.param.listeners }}
+      {% if ksqlDb.common.param.listeners is defined %}
+      listeners: {{ ksqlDb.common.param.listeners }}
       {% else %}
-      listeners: PLAINTEXT://0.0.0.0:8088
+      listeners: http://0.0.0.0:8088
       {% endif %}
     {# bootstrapServers #}
-      bootstrapServers: {{ ksqlDB.common.param.bootstrapServers }}
+      bootstrapServers: {{ ksqlDb.common.param.bootstrapServers }}
     {# schemaRegistryUrl #}
-      {% if ksqlDB.common.param.schemaRegistryUrl is defined %}
-      schemaRegistryUrl: {{ ksqlDB.common.param.schemaRegistryUrl }}
+      {% if ksqlDb.common.param.schemaRegistryUrl is defined %}
+      schemaRegistryUrl: {{ ksqlDb.common.param.schemaRegistryUrl }}
       {% else %}
       schemaRegistryUrl:
       {% endif %}
 
   servers:
-    {% for server in ksqlDB.servers %}
+    {% for server in ksqlDb.servers %}
     - serverName: {{ server.serverName }}
     {# hostName #}
       {% if server.hostName is defined %}
@@ -42,7 +43,7 @@ ksqlDB:
       {% if server.advertisedListener is defined %}
       advertisedListener: {{ server.advertisedListener }}
       {% else %}
-      advertisedListener: PLAINTEXT://{{ server.serverName }}:8088
+      advertisedListener: http://{{ server.serverName }}:8088
       {% endif %}
       paramOverride:
       {# groupId #}
@@ -84,3 +85,4 @@ ksqlDB:
     {% include 'file-template.yaml.j2' %}
 
     {% endfor %}
+{% endif %}

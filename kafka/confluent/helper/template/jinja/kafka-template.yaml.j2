@@ -1,3 +1,4 @@
+{% if kafka is defined %}
 kafka:
   common:
     {% if kafka.common.stopScript is defined %}
@@ -78,3 +79,4 @@ kafka:
     {% include 'file-template.yaml.j2' %}
 
     {% endfor %}
+{% endif %}

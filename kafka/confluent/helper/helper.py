@@ -77,7 +77,7 @@ def create_prop_file(server, prop, servers=None):
         edited_prop = replace_param('state.dir', f'{server.data_dir}', edited_prop)
         edited_prop = replace_param('state.dir', f'{server.data_dir}', edited_prop)
         edited_prop = replace_param('listeners', f'{server.listeners}', edited_prop)
-        edited_prop = replace_param('advertised.listener', f'{server.advertised_listeners}', edited_prop)
+        edited_prop = replace_param('advertised.listener', f'{server.advertised_listener}', edited_prop)
         edited_prop = replace_param('bootstrap.servers', f'{server.bootstrap_servers}', edited_prop)
         edited_prop = replace_param('ksql.schema.registry.url', f'{server.schema_registry_url}', edited_prop)
 
@@ -94,9 +94,9 @@ def create_prop_file(server, prop, servers=None):
         edited_prop = replace_param('confluent.controlcenter.streams.cprest.url',
                                     f'{server.kafka_rest_url}', edited_prop)
         edited_prop = replace_param('confluent.controlcenter.ksql.ksqldb.url',
-                                    f'{server.ksqldb_url}', edited_prop)
+                                    f'{server.ksql_db_url}', edited_prop)
 
-    write_file(f'output/properties/{server.file.properties_file}', edited_prop)
+    write_file(f'output/properties/{server.file.properties}', edited_prop)
 
 
 def create_start_script_file(base, server, start):
@@ -104,7 +104,7 @@ def create_start_script_file(base, server, start):
     edited_start = replace_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_start)
     edited_start = replace_variable('SERVER_NAME', f'{server.server_name}', edited_start)
     edited_start = replace_variable('PROPERTIES_FILE',
-                                    f'{base.properties_path}/{server.file.properties_file}', edited_start)
+                                    f'{base.properties_path}/{server.file.properties}', edited_start)
     edited_start = replace_variable('LOG_DIR', f'{server.log_dir}', edited_start)
     edited_start = replace_variable('JAVA_HOME', f'{base.java_home}', edited_start)
 
@@ -115,26 +115,26 @@ def create_start_script_file(base, server, start):
     if server.server_type == ServerType.ZOOKEEPER:
         edited_start = replace_variable('MYID', f'{server.server_id}', edited_start)
 
-    write_file(f'output/scripts/{server.file.start_file}', edited_start)
+    write_file(f'output/scripts/{server.file.start}', edited_start)
 
 
 def create_stop_script_file(base, server, stop):
     edited_stop = stop
     edited_stop = replace_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_stop)
-    write_file(f'output/scripts/server-stop/{server.file.stop_file}', edited_stop)
+    write_file(f'output/scripts/server-stop/{server.file.stop}', edited_stop)
 
 
 def create_common_stop_script_file(base, server, stop):
     edited_stop = stop
     edited_stop = replace_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_stop)
-    write_file(f'output/scripts/{server.file.common_stop_file}', edited_stop)
+    write_file(f'output/scripts/{server.stop_script}', edited_stop)
 
 
 def create_log_script_file(server, log):
     edited_log = log
     edited_log = replace_variable('SERVER_NAME', f'{server.server_name}', edited_log)
     edited_log = replace_variable('LOG_DIR', f'{server.log_dir}', edited_log)
-    write_file(f'output/scripts/server-log/{server.file.log_file}', edited_log)
+    write_file(f'output/scripts/server-log/{server.file.log}', edited_log)
 
 
 def create_server_file(base, server_dict, prop_dict, start_dict, stop_dict, log_dict):
@@ -148,7 +148,7 @@ def create_server_file(base, server_dict, prop_dict, start_dict, stop_dict, log_
             create_stop_script_file(base, server, stop_dict.get(server_type))
             create_log_script_file(server, log_dict.get(ServerType.ANY))
 
-    for server in [servers[0] for servers in server_dict.values()]:
+    for server in [servers[0] for servers in server_dict.values() if servers]:
         create_common_stop_script_file(base, server, stop_dict.get(server.server_type))
 
 

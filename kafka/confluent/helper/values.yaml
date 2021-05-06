@@ -156,7 +156,7 @@ kafkaRest:
 ######################################################################
 
 ### ksqldb
-ksqlDB:
+ksqlDb:
   common:
     param:
       dataDir: /mnt/ksqldb/data
@@ -200,7 +200,7 @@ controlCenter:
       schemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
       kafkaConnectUrl: http://kafka-connect1:8083,http://kafka-connect2:8083
       kafkaRestUrl: http://kafka-rest1:8090,http://kafka-rest2:8090
-      ksqlDBUrl: http://ksqldb1:8088,http://ksqldb2:8088,http://ksqldb3:8088,http://ksqldb4:8088
+      ksqlDbUrl: http://ksqldb1:8088,http://ksqldb2:8088,http://ksqldb3:8088,http://ksqldb4:8088
 
   servers:
     - serverName: control-center1

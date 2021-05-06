@@ -1,3 +1,4 @@
+{% if schemaRegistry is defined %}
 schemaRegistry:
   common:
     {% if schemaRegistry.common.stopScript is defined %}
@@ -12,7 +13,7 @@ schemaRegistry:
       {% if schemaRegistry.common.param.listeners is defined %}
       listeners: {{ schemaRegistry.common.param.listeners }}
       {% else %}
-      listeners: PLAINTEXT://0.0.0.0:8081
+      listeners: http://0.0.0.0:8081
       {% endif %}
     {# bootstrapServers #}
       bootstrapServers: {{ schemaRegistry.common.param.bootstrapServers }}
@@ -62,3 +63,4 @@ schemaRegistry:
     {% include 'file-template.yaml.j2' %}
 
     {% endfor %}
+{% endif %}

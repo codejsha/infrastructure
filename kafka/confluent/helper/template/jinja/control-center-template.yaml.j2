@@ -1,3 +1,4 @@
+{% if controlCenter is defined %}
 controlCenter:
   common:
     {% if controlCenter.common.stopScript is defined %}
@@ -32,11 +33,11 @@ controlCenter:
       {% else %}
       kafkaRestUrl:
       {% endif %}
-    {# ksqlDBUrl #}
-      {% if controlCenter.common.param.ksqlDBUrl is defined %}
-      ksqlDBUrl: {{ controlCenter.common.param.ksqlDBUrl }}
+    {# ksqlDbUrl #}
+      {% if controlCenter.common.param.ksqlDbUrl is defined %}
+      ksqlDbUrl: {{ controlCenter.common.param.ksqlDbUrl }}
       {% else %}
-      ksqlDBUrl:
+      ksqlDbUrl:
       {% endif %}
 
   servers:
@@ -95,12 +96,13 @@ controlCenter:
         {% else %}
         # kafkaRestUrl:
         {% endif %}
-      {# ksqlDBUrl #}
-        {% if server.paramOverride is defined and server.paramOverride.ksqlDBUrl is defined %}
-        ksqlDBUrl: {{ server.paramOverride.ksqlDBUrl }}
+      {# ksqlDbUrl #}
+        {% if server.paramOverride is defined and server.paramOverride.ksqlDbUrl is defined %}
+        ksqlDbUrl: {{ server.paramOverride.ksqlDbUrl }}
         {% else %}
-        # ksqlDBUrl:
+        # ksqlDbUrl:
         {% endif %}
     {% include 'file-template.yaml.j2' %}
 
     {% endfor %}
+{% endif %}

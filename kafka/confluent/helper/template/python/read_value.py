@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import re
 
 from template.python.data import *
 from template.python.enumeration import ServerType
@@ -8,13 +9,8 @@ from template.python.enumeration import ServerType
 
 
 def read_base_data(values):
-    base = Base(
-        values['base']['user'],
-        values['base']['confluentHome'],
-        values['base']['javaHome'],
-        values['base']['propertiesPath'],
-        values['base']['scriptsPath']
-    )
+    edited_dict = change_dictionary_key_case(values['base'])
+    base = Base(**edited_dict)
     return base
 
 
@@ -43,37 +39,14 @@ def read_zookeeper_list(values):
     if values.get('zookeeper') is None:
         return server_list
 
-    common_stop_file = \
-        values['zookeeper']['common']['stopScript']
-    data_dir = \
-        values['zookeeper']['common']['param']['dataDir']
-    log_dir = \
-        values['zookeeper']['common']['param']['logDir']
-
-    client_port = \
-        values['zookeeper']['common']['param'].get('clientPort')
-    peer_to_peer_port = \
-        values['zookeeper']['common']['param'].get('peerToPeerPort')
+    component_type = {'serverType': ServerType.ZOOKEEPER}
+    common_stop = {'stopScript': values['zookeeper']['common']['stopScript']}
+    common_params = values['zookeeper']['common']['param']
 
     for server in values['zookeeper']['servers']:
-        server_list.append(
-            Zookeeper(
-                ServerType.ZOOKEEPER,
-                server['serverName'],
-                server['hostName'],
-                server['ipAddress'],
-                File(server['file']['properties'],
-                     server['file']['start'],
-                     server['file']['stop'],
-                     server['file']['log'],
-                     common_stop_file),
-                server['serverId'],
-                override_parameter(server, 'dataDir', data_dir),
-                override_parameter(server, 'logDir', log_dir),
-                override_parameter(server, 'clientPort', client_port),
-                override_parameter(server, 'peerToPeerPort', peer_to_peer_port)
-            )
-        )
+        edited_dict = transform_dictionary(component_type, common_stop, common_params, server)
+        server_list.append(Zookeeper(**edited_dict))
+
     return server_list
 
 
@@ -83,42 +56,14 @@ def read_kafka_list(values):
     if values.get('kafka') is None:
         return server_list
 
-    common_stop_file = \
-        values['kafka']['common']['stopScript']
-    data_dir = \
-        values['kafka']['common']['param']['dataDir']
-    log_dir = \
-        values['kafka']['common']['param']['logDir']
-    zookeeper_connect = \
-        values['kafka']['common']['param']['zookeeperConnect']
-
-    listeners = \
-        values['kafka']['common']['param'].get('listeners')
-    metrics_reporter_bootstrap_servers = \
-        values['kafka']['common']['param'].get('metricsReporterBootstrapServers')
+    component_type = {'serverType': ServerType.KAFKA}
+    common_stop = {'stopScript': values['kafka']['common']['stopScript']}
+    common_params = values['kafka']['common']['param']
 
     for server in values['kafka']['servers']:
-        server_list.append(
-            Kafka(
-                ServerType.KAFKA,
-                server['serverName'],
-                server['hostName'],
-                server['ipAddress'],
-                File(server['file']['properties'],
-                     server['file']['start'],
-                     server['file']['stop'],
-                     server['file']['log'],
-                     common_stop_file),
-                server['serverId'],
-                override_parameter(server, 'dataDir', data_dir),
-                override_parameter(server, 'logDir', log_dir),
-                override_parameter(server, 'listeners', listeners),
-                server.get('advertisedListeners'),
-                override_parameter(server, 'zookeeperConnect', zookeeper_connect),
-                override_parameter(server, 'metricsReporterBootstrapServers',
-                                   metrics_reporter_bootstrap_servers)
-            )
-        )
+        edited_dict = transform_dictionary(component_type, common_stop, common_params, server)
+        server_list.append(Kafka(**edited_dict))
+
     return server_list
 
 
@@ -128,36 +73,14 @@ def read_schema_registry_list(values):
     if values.get('schemaRegistry') is None:
         return server_list
 
-    common_stop_file = \
-        values['schemaRegistry']['common']['stopScript']
-    log_dir = \
-        values['schemaRegistry']['common']['param']['logDir']
-    bootstrap_servers = \
-        values['schemaRegistry']['common']['param']['bootstrapServers']
-
-    listeners = \
-        values['schemaRegistry']['common']['param'].get('listeners')
-    topic = \
-        values['schemaRegistry']['common']['param'].get('topic')
+    component_type = {'serverType': ServerType.SCHEMA_REGISTRY}
+    common_stop = {'stopScript': values['schemaRegistry']['common']['stopScript']}
+    common_params = values['schemaRegistry']['common']['param']
 
     for server in values['schemaRegistry']['servers']:
-        server_list.append(
-            SchemaRegistry(
-                ServerType.SCHEMA_REGISTRY,
-                server['serverName'],
-                server['hostName'],
-                server['ipAddress'],
-                File(server['file']['properties'],
-                     server['file']['start'],
-                     server['file']['stop'],
-                     server['file']['log'],
-                     common_stop_file),
-                override_parameter(server, 'logDir', log_dir),
-                override_parameter(server, 'listeners', listeners),
-                override_parameter(server, 'bootstrapServers', bootstrap_servers),
-                override_parameter(server, 'topic', topic)
-            )
-        )
+        edited_dict = transform_dictionary(component_type, common_stop, common_params, server)
+        server_list.append(SchemaRegistry(**edited_dict))
+
     return server_list
 
 
@@ -167,53 +90,14 @@ def read_kafka_connect_list(values):
     if values.get('kafkaConnect') is None:
         return server_list
 
-    common_stop_file = \
-        values['kafkaConnect']['common']['stopScript']
-    log_dir = \
-        values['kafkaConnect']['common']['param']['logDir']
-    group_id = \
-        values['kafkaConnect']['common']['param']['groupId']
-    bootstrap_servers = \
-        values['kafkaConnect']['common']['param']['bootstrapServers']
-    plugin_path = \
-        values['kafkaConnect']['common']['param']['pluginPath']
-
-    key_converter_schema_registry_url = \
-        values['kafkaConnect']['common']['param'].get('keyConverterSchemaRegistryUrl')
-    value_converter_schema_registry_url = \
-        values['kafkaConnect']['common']['param'].get('valueConverterSchemaRegistryUrl')
-    config_storage_topic = \
-        values['kafkaConnect']['common']['param'].get('configStorageTopic')
-    offset_storage_topic = \
-        values['kafkaConnect']['common']['param'].get('offsetStorageTopic')
-    status_storage_topic = \
-        values['kafkaConnect']['common']['param'].get('statusStorageTopic')
+    component_type = {'serverType': ServerType.KAFKA_CONNECT}
+    common_stop = {'stopScript': values['kafkaConnect']['common']['stopScript']}
+    common_params = values['kafkaConnect']['common']['param']
 
     for server in values['kafkaConnect']['servers']:
-        server_list.append(
-            KafkaConnect(
-                ServerType.KAFKA_CONNECT,
-                server['serverName'],
-                server['hostName'],
-                server['ipAddress'],
-                File(server['file']['properties'],
-                     server['file']['start'],
-                     server['file']['stop'],
-                     server['file']['log'],
-                     common_stop_file),
-                override_parameter(server, 'groupId', group_id),
-                override_parameter(server, 'logDir', log_dir),
-                override_parameter(server, 'bootstrapServers', bootstrap_servers),
-                override_parameter(server, 'keyConverterSchemaRegistryUrl',
-                                   key_converter_schema_registry_url),
-                override_parameter(server, 'valueConverterSchemaRegistryUrl',
-                                   value_converter_schema_registry_url),
-                override_parameter(server, 'configStorageTopic', config_storage_topic),
-                override_parameter(server, 'offsetStorageTopic', offset_storage_topic),
-                override_parameter(server, 'statusStorageTopic', status_storage_topic),
-                override_parameter(server, 'pluginPath', plugin_path)
-            )
-        )
+        edited_dict = transform_dictionary(component_type, common_stop, common_params, server)
+        server_list.append(KafkaConnect(**edited_dict))
+
     return server_list
 
 
@@ -223,51 +107,14 @@ def read_replicator_list(values):
     if values.get('replicator') is None:
         return server_list
 
-    common_stop_file = \
-        values['replicator']['common']['stopScript']
-    log_dir = \
-        values['replicator']['common']['param']['logDir']
-    group_id = \
-        values['replicator']['common']['param']['groupId']
-    bootstrap_servers = \
-        values['replicator']['common']['param']['bootstrapServers']
-    plugin_path = \
-        values['replicator']['common']['param']['pluginPath']
-
-    key_converter_schema_registry_url = \
-        values['replicator']['common']['param'].get('keyConverterSchemaRegistryUrl')
-    value_converter_schema_registry_url = \
-        values['replicator']['common']['param'].get('valueConverterSchemaRegistryUrl')
-    config_storage_topic = \
-        values['replicator']['common']['param'].get('configStorageTopic')
-    offset_storage_topic = \
-        values['replicator']['common']['param'].get('offsetStorageTopic')
-    status_storage_topic = \
-        values['replicator']['common']['param'].get('statusStorageTopic')
+    component_type = {'serverType': ServerType.REPLICATOR}
+    common_stop = {'stopScript': values['replicator']['common']['stopScript']}
+    common_params = values['replicator']['common']['param']
 
     for server in values['replicator']['servers']:
-        server_list.append(
-            Replicator(
-                ServerType.REPLICATOR,
-                server['serverName'],
-                server['hostName'],
-                server['ipAddress'],
-                File(server['file']['properties'],
-                     server['file']['start'],
-                     server['file']['stop'],
-                     server['file']['log'],
-                     common_stop_file),
-                override_parameter(server, 'groupId', group_id),
-                override_parameter(server, 'logDir', log_dir),
-                override_parameter(server, 'bootstrapServers', bootstrap_servers),
-                override_parameter(server, 'keyConverterSchemaRegistryUrl', key_converter_schema_registry_url),
-                override_parameter(server, 'valueConverterSchemaRegistryUrl', value_converter_schema_registry_url),
-                override_parameter(server, 'configStorageTopic', config_storage_topic),
-                override_parameter(server, 'offsetStorageTopic', offset_storage_topic),
-                override_parameter(server, 'statusStorageTopic', status_storage_topic),
-                override_parameter(server, 'pluginPath', plugin_path)
-            )
-        )
+        edited_dict = transform_dictionary(component_type, common_stop, common_params, server)
+        server_list.append(Replicator(**edited_dict))
+
     return server_list
 
 
@@ -277,80 +124,31 @@ def read_kafka_rest_list(values):
     if values.get('kafkaRest') is None:
         return server_list
 
-    common_stop_file = \
-        values['kafkaRest']['common']['stopScript']
-    log_dir = \
-        values['kafkaRest']['common']['param']['logDir']
-    bootstrap_servers = \
-        values['kafkaRest']['common']['param']['bootstrapServers']
-
-    schema_registry_url = \
-        values['kafkaRest']['common']['param'].get('schemaRegistryUrl')
+    component_type = {'serverType': ServerType.KAFKA_REST}
+    common_stop = {'stopScript': values['kafkaRest']['common']['stopScript']}
+    common_params = values['kafkaRest']['common']['param']
 
     for server in values['kafkaRest']['servers']:
-        server_list.append(
-            KafkaRest(
-                ServerType.KAFKA_REST,
-                server['serverName'],
-                server['hostName'],
-                server['ipAddress'],
-                File(server['file']['properties'],
-                     server['file']['start'],
-                     server['file']['stop'],
-                     server['file']['log'],
-                     common_stop_file),
-                server['serverId'],
-                override_parameter(server, 'logDir', log_dir),
-                override_parameter(server, 'bootstrapServers', bootstrap_servers),
-                override_parameter(server, 'schemaRegistryUrl', schema_registry_url)
-            )
-        )
+        edited_dict = transform_dictionary(component_type, common_stop, common_params, server)
+        server_list.append(KafkaRest(**edited_dict))
+
     return server_list
 
 
 def read_ksqldb_list(values):
     server_list = []
 
-    if values.get('ksqlDB') is None:
+    if values.get('ksqlDb') is None:
         return server_list
 
-    common_stop_file = \
-        values['ksqlDB']['common']['stopScript']
-    data_dir = \
-        values['ksqlDB']['common']['param']['dataDir']
-    log_dir = \
-        values['ksqlDB']['common']['param']['logDir']
-    group_id = \
-        values['ksqlDB']['common']['param']['groupId']
-    bootstrap_servers = \
-        values['ksqlDB']['common']['param']['bootstrapServers']
+    component_type = {'serverType': ServerType.KSQLDB}
+    common_stop = {'stopScript': values['ksqlDb']['common']['stopScript']}
+    common_params = values['ksqlDb']['common']['param']
 
-    listeners = \
-        values['ksqlDB']['common']['param'].get('listeners')
-    schema_registry_url = \
-        values['ksqlDB']['common']['param'].get('schemaRegistryUrl')
+    for server in values['ksqlDb']['servers']:
+        edited_dict = transform_dictionary(component_type, common_stop, common_params, server)
+        server_list.append(KsqlDB(**edited_dict))
 
-    for server in values['ksqlDB']['servers']:
-        server_list.append(
-            KsqlDB(
-                ServerType.KSQLDB,
-                server['serverName'],
-                server['hostName'],
-                server['ipAddress'],
-                File(server['file']['properties'],
-                     server['file']['start'],
-                     server['file']['stop'],
-                     server['file']['log'],
-                     common_stop_file),
-                override_parameter(server, 'groupId', group_id),
-                override_parameter(server, 'dataDir', data_dir),
-                override_parameter(server, 'logDir', log_dir),
-                override_parameter(server, 'listeners', listeners),
-                server.get('advertisedListener'),
-                override_parameter(server, 'bootstrapServers', bootstrap_servers),
-                override_parameter(server, 'schemaRegistryUrl', schema_registry_url)
-            )
-        )
     return server_list
 
 
@@ -360,49 +158,14 @@ def read_control_center_list(values):
     if values.get('controlCenter') is None:
         return server_list
 
-    common_stop_file = \
-        values['controlCenter']['common']['stopScript']
-    data_dir = \
-        values['controlCenter']['common']['param']['dataDir']
-    log_dir = \
-        values['controlCenter']['common']['param']['logDir']
-    bootstrap_servers = \
-        values['controlCenter']['common']['param']['bootstrapServers']
-    zookeeper_connect = \
-        values['controlCenter']['common']['param']['zookeeperConnect']
-
-    schema_registry_url = \
-        values['controlCenter']['common']['param'].get('schemaRegistryUrl')
-    kafka_connect_url = \
-        values['controlCenter']['common']['param'].get('kafkaConnectUrl')
-    kafka_rest_url = \
-        values['controlCenter']['common']['param'].get('kafkaRestUrl')
-    ksqldb_url = \
-        values['controlCenter']['common']['param'].get('ksqlDBUrl')
+    component_type = {'serverType': ServerType.CONTROL_CENTER}
+    common_stop = {'stopScript': values['controlCenter']['common']['stopScript']}
+    common_params = values['controlCenter']['common']['param']
 
     for server in values['controlCenter']['servers']:
-        server_list.append(
-            ControlCenter(
-                ServerType.CONTROL_CENTER,
-                server['serverName'],
-                server['hostName'],
-                server['ipAddress'],
-                File(server['file']['properties'],
-                     server['file']['start'],
-                     server['file']['stop'],
-                     server['file']['log'],
-                     common_stop_file),
-                server['serverId'],
-                override_parameter(server, 'dataDir', data_dir),
-                override_parameter(server, 'logDir', log_dir),
-                override_parameter(server, 'bootstrapServers', bootstrap_servers),
-                override_parameter(server, 'zookeeperConnect', zookeeper_connect),
-                override_parameter(server, 'schemaRegistryUrl', schema_registry_url),
-                override_parameter(server, 'kafkaConnectUrl', kafka_connect_url),
-                override_parameter(server, 'kafkaRestUrl', kafka_rest_url),
-                override_parameter(server, 'ksqlDBUrl', ksqldb_url)
-            )
-        )
+        edited_dict = transform_dictionary(component_type, common_stop, common_params, server)
+        server_list.append(ControlCenter(**edited_dict))
+
     return server_list
 
 
@@ -411,10 +174,30 @@ def read_control_center_list(values):
 # region function
 
 
-def override_parameter(server, param, value):
-    if server.get('paramOverride') is None:
-        return value
+def transform_dictionary(component_type, common_stop, common_params, server):
+    pop_file = server.pop('file')
+    server_file = {'file': ServerFile(**pop_file)}
+    server_override = server.pop('paramOverride')
+
+    if server_override is not None:
+        merge_dict = \
+            {**component_type, **common_stop, **common_params, **server, **server_override, **server_file}
     else:
-        return server.get('paramOverride').get(param)
+        merge_dict = \
+            {**component_type, **common_stop, **common_params, **server, **server_file}
+
+    edited_dict = change_dictionary_key_case(merge_dict)
+    return edited_dict
+
+
+def change_dictionary_key_case(anydict):
+    result = dict()
+    for key in anydict.keys():
+        result[camel_case_to_snake_case(key)] = anydict[key]
+    return result
+
+
+def camel_case_to_snake_case(anystr):
+    return re.sub(r"(?<!^)(?=[A-Z])", '_', anystr).lower()
 
 # endregion
