@@ -19,36 +19,36 @@ export JAVA_HOME
 ######################################################################
 
 ### memory options
-KAFKA_HEAP_OPTS="${KAFKA_HEAP_OPTS} -Xms512M -Xmx512M"
-export KAFKA_HEAP_OPTS
+KSQL_HEAP_OPTS="${KSQL_HEAP_OPTS} -Xms512M -Xmx512M"
+export KSQL_HEAP_OPTS
 
 ### performance
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -server"
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:+UseG1GC"
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:MaxGCPauseMillis=20"
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:InitiatingHeapOccupancyPercent=35"
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:+ExplicitGCInvokesConcurrent"
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:MaxInlineLevel=15"
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -Djava.awt.headless=true"
-export KAFKA_JVM_PERFORMANCE_OPTS
+KSQL_JVM_PERFORMANCE_OPTS="${KSQL_JVM_PERFORMANCE_OPTS} -server"
+KSQL_JVM_PERFORMANCE_OPTS="${KSQL_JVM_PERFORMANCE_OPTS} -XX:+UseG1GC"
+KSQL_JVM_PERFORMANCE_OPTS="${KSQL_JVM_PERFORMANCE_OPTS} -XX:MaxGCPauseMillis=20"
+KSQL_JVM_PERFORMANCE_OPTS="${KSQL_JVM_PERFORMANCE_OPTS} -XX:InitiatingHeapOccupancyPercent=35"
+KSQL_JVM_PERFORMANCE_OPTS="${KSQL_JVM_PERFORMANCE_OPTS} -XX:+ExplicitGCInvokesConcurrent"
+KSQL_JVM_PERFORMANCE_OPTS="${KSQL_JVM_PERFORMANCE_OPTS} -XX:MaxInlineLevel=15"
+KSQL_JVM_PERFORMANCE_OPTS="${KSQL_JVM_PERFORMANCE_OPTS} -Djava.awt.headless=true"
+export KSQL_JVM_PERFORMANCE_OPTS
 
 ### generic jvm settings
-KAFKA_OPTS="${KAFKA_OPTS} -D${SERVER_NAME}"
-export KAFKA_OPTS
+KSQL_OPTS="${KSQL_OPTS} -D${SERVER_NAME}"
+export KSQL_OPTS
 
 ### gc option
 export GC_LOG_ENABLED="true"
 
 ### jmx
 # export JMX_PORT=""
-KAFKA_JMX_OPTS="${KAFKA_JMX_OPTS} -Dcom.sun.management.jmxremote"
-KAFKA_JMX_OPTS="${KAFKA_JMX_OPTS} -Dcom.sun.management.jmxremote.authenticate=false"
-KAFKA_JMX_OPTS="${KAFKA_JMX_OPTS} -Dcom.sun.management.jmxremote.ssl=false "
-export KAFKA_JMX_OPTS
+KSQL_JMX_OPTS="${KSQL_JMX_OPTS} -Dcom.sun.management.jmxremote"
+KSQL_JMX_OPTS="${KSQL_JMX_OPTS} -Dcom.sun.management.jmxremote.authenticate=false"
+KSQL_JMX_OPTS="${KSQL_JMX_OPTS} -Dcom.sun.management.jmxremote.ssl=false "
+export KSQL_JMX_OPTS
 
 ### log4j
-# KAFKA_LOG4J_OPTS="${KAFKA_LOG4J_OPTS}"
-# export KAFKA_LOG4J_OPTS
+# KSQL_LOG4J_OPTS="${KSQL_LOG4J_OPTS}"
+# export KSQL_LOG4J_OPTS
 
 ######################################################################
 
