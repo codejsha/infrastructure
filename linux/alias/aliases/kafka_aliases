@@ -1,0 +1,12 @@
+# confluent
+
+source <(confluent completion bash)
+
+function kafkacat() { echo "+ kafkacat ${@}">&2; command kafkacat ${@}; }
+
+CONFLUENT_HOME="/usr/local/confluent"
+export CONFLUENT_HOME
+PATH="${PATH}:${CONFLUENT_HOME}/bin"
+export PATH
+
+alias kafkacat="docker container run -it --network host edenhill/kafkacat:1.6.0"
