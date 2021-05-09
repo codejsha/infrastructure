@@ -5,4 +5,4 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 
 PASSWORD="${PASSWORD}"
 
-mysqlsh root@test.example.com:3306 --password=${PASSWORD} --sql < mysql-connector-requirements.sql
+mysqlsh root@test.example.com:3306 --password=${PASSWORD} --sql < mysql-source-requirements.sql

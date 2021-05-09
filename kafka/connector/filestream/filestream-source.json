@@ -1,0 +1,10 @@
+{
+  "name": "filestream-source",
+  "config": {
+    "name": "filestream-source",
+    "connector.class": "FileStreamSource",
+    "tasks.max": "1",
+    "topic": "filestream_source",
+    "file": "/path/to/example.json"
+  }
+}

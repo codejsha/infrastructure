@@ -1,7 +1,7 @@
 {
-  "name": "sftp-json-source-connector",
+  "name": "sftp-json-source",
   "config": {
-    "name": "sftp-json-source-connector",
+    "name": "sftp-json-source",
     "connector.class": "io.confluent.connect.sftp.SftpJsonSourceConnector",
     "tasks.max": "1",
     "key.converter": "io.confluent.connect.avro.AvroConverter",
@@ -9,7 +9,7 @@
     "value.converter": "io.confluent.connect.avro.AvroConverter",
     "value.converter.schema.registry.url": "http://schemaregistry-0-internal:8081,http://schemaregistry-1-internal:8081",
     "schema.generation.enabled": "true",
-    "kafka.topic": "sftp-json-topic",
+    "kafka.topic": "sftp_json_topic",
     "input.file.pattern": ".*\\.json",
     "input.path": "/pub/data",
     "error.path": "/pub/error",

@@ -15,14 +15,14 @@ function register_connector {
         --request POST \
         --header "Accept:application/json" \
         --header "Content-Type:application/json" \
-        --data @aws-s3-sink-connector.json \
+        --data @sqlserver-source.json \
         ${KAFKA_CONNECT_URL}/connectors
     # curl \
     #     --include \
     #     --request POST \
     #     --header "Accept:application/json" \
     #     --header "Content-Type:application/json" \
-    #     --data @aws-s3-sink-connector-kubernetes.json \
+    #     --data @sqlserver-source-kubernetes.json \
     #     ${KAFKA_CONNECT_URL}/connectors
 
     echo
@@ -33,7 +33,7 @@ function delete_connector {
         --include \
         --request DELETE \
         --header "Accept:application/json" \
-        ${KAFKA_CONNECT_URL}/connectors/aws-s3-sink-connector
+        ${KAFKA_CONNECT_URL}/connectors/sqlserver-source
 }
 
 ######################################################################

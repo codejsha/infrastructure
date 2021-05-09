@@ -15,14 +15,14 @@ function register_connector {
         --request POST \
         --header "Accept:application/json" \
         --header "Content-Type:application/json" \
-        --data @datagen-connector-pageviews.json \
+        --data @datagen-pageviews.json \
         ${KAFKA_CONNECT_URL}/connectors
     # curl \
     #     --include \
     #     --request POST \
     #     --header "Accept:application/json" \
     #     --header "Content-Type:application/json" \
-    #     --data @datagen-connector-pageviews-kubernetes.json \
+    #     --data @datagen-pageviews-kubernetes.json \
     #     ${KAFKA_CONNECT_URL}/connectors
 
     echo

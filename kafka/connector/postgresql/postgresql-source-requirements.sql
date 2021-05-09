@@ -1,3 +1,5 @@
+-- postgresql source connector requirements
+
 -- create user
 CREATE USER debezium WITH ENCRYPTED PASSWORD 'dbz';
 ALTER ROLE debezium WITH REPLICATION LOGIN;

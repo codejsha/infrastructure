@@ -15,14 +15,14 @@ function register_connector {
         --request POST \
         --header "Accept:application/json" \
         --header "Content-Type:application/json" \
-        --data @sftp-json-source-connector.json \
+        --data @sftp-json-source.json \
         ${KAFKA_CONNECT_URL}/connectors
     # curl \
     #     --include \
     #     --request POST \
     #     --header "Accept:application/json" \
     #     --header "Content-Type:application/json" \
-    #     --data @sftp-json-source-connector-kubernetes.json \
+    #     --data @sftp-json-source-kubernetes.json \
     #     ${KAFKA_CONNECT_URL}/connectors
 
     echo
@@ -33,7 +33,7 @@ function delete_connector {
         --include \
         --request DELETE \
         --header "Accept:application/json" \
-        ${KAFKA_CONNECT_URL}/connectors/sftp-json-source-connector
+        ${KAFKA_CONNECT_URL}/connectors/sftp-json-source
 }
 
 ######################################################################

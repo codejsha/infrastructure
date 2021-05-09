@@ -1,7 +1,7 @@
 {
-  "name": "sftp-csv-source-connector",
+  "name": "sftp-csv-source",
   "config": {
-    "name": "sftp-csv-source-connector",
+    "name": "sftp-csv-source",
     "connector.class": "io.confluent.connect.sftp.SftpCsvSourceConnector",
     "tasks.max": "1",
     "key.converter": "io.confluent.connect.avro.AvroConverter",
@@ -9,7 +9,7 @@
     "value.converter": "io.confluent.connect.avro.AvroConverter",
     "value.converter.schema.registry.url": "http://schema-registry1:8081,http://schema-registry2:8081",
     "schema.generation.enabled": "true",
-    "kafka.topic": "sftp-csv-topic",
+    "kafka.topic": "sftp_csv_topic",
     "input.file.pattern": ".*\\.csv",
     "input.path": "/var/ftp/pub/data",
     "error.path": "/var/ftp/pub/error",
