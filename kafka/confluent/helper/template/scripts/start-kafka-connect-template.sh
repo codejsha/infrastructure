@@ -20,7 +20,7 @@ export JAVA_HOME
 ######################################################################
 
 ### memory options
-KAFKA_HEAP_OPTS="${KAFKA_HEAP_OPTS} -Xms256M -Xmx2G"
+KAFKA_HEAP_OPTS="${KAFKA_HEAP_OPTS} -Xms2G -Xmx2G"
 export KAFKA_HEAP_OPTS
 
 ### performance

@@ -4,7 +4,7 @@ kafka:
     {% if kafka.common.stopScript is defined %}
     stopScript: {{ kafka.common.stopScript }}
     {% else %}
-    stopScript: stop-kafka.sh
+    stopScript: {{ defaultKafkaStopScript }}
     {% endif %}
     param:
     {# dataDir #}
@@ -15,16 +15,36 @@ kafka:
       {% if kafka.common.param.listeners is defined %}
       listeners: {{ kafka.common.param.listeners }}
       {% else %}
-      listeners: PLAINTEXT://0.0.0.0:9092
+      listeners: {{ 'PLAINTEXT://0.0.0.0:' }}{{ defaultKafkaListenPort }}
       {% endif %}
     {# zookeeperConnect #}
+      {% if kafka.common.param.zookeeperConnect is defined %}
       zookeeperConnect: {{ kafka.common.param.zookeeperConnect }}
+      {% else %}
+      {% if zookeeper.servers is defined %}
+      zookeeperConnect: {% for server in zookeeper.servers -%}
+      {{ server.serverName }}:{{ defaultZookeeperClientPort }}
+      {%- if not loop.last -%},{% endif %}
+      {%- if loop.last -%}{{ defaultZookeeperZNode }}{% endif %}
+      {% endfor %}
+      {% else %}
+      zookeeperConnect:
+      {% endif %}
+      {% endif %}
+      {{ '' }}
     {# metricsReporterBootstrapServers #}
       {% if kafka.common.param.metricsReporterBootstrapServers is defined %}
       metricsReporterBootstrapServers: {{ kafka.common.param.metricsReporterBootstrapServers }}
       {% else %}
+      {% if kafka.servers is defined %}
+      metricsReporterBootstrapServers: {% for server in kafka.servers -%}
+      {{ server.serverName }}:{{ defaultKafkaListenPort }}{%- if not loop.last -%},{% endif %}
+      {% endfor %}
+      {% else %}
       metricsReporterBootstrapServers:
       {% endif %}
+      {% endif %}
+      {{ '' }}
 
   servers:
     {% for server in kafka.servers %}
@@ -43,7 +63,7 @@ kafka:
       {% if server.advertisedListeners is defined %}
       advertisedListeners: {{ server.advertisedListeners }}
       {% else %}
-      advertisedListeners: PLAINTEXT://{{ server.serverName }}:9092
+      advertisedListeners: PLAINTEXT://{{ server.serverName }}:{{ defaultKafkaListenPort }}
       {% endif %}
       paramOverride:
       {# dataDir #}

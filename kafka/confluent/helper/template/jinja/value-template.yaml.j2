@@ -1,3 +1,37 @@
+{# ###################################################################### #}
+{# zookeeper #}
+{% set defaultZookeeperStopScript = 'stop-zookeeper.sh' %}
+{% set defaultZookeeperClientPort = '2181' %}
+{% set defaultZookeeperPeerToPeerPort = '2888:3888' %}
+{% set defaultZookeeperZNode = '/testcluster' %}
+{# kafka #}
+{% set defaultKafkaStopScript = 'stop-kafka.sh' %}
+{% set defaultKafkaListenPort = '9092' %}
+{# schema-registry #}
+{% set defaultSchemaRegistryStopScript = 'stop-schema-registry.sh' %}
+{% set defaultSchemaRegistryListenPort = '8081' %}
+{# kafka-connect #}
+{% set defaultKafkaConnectStopScript = 'stop-kafka-connect.sh' %}
+{% set defaultKafkaConnectListenPort = '8083' %}
+{% set defaultKafkaConnectConfigStorageTopic = 'connect-configs' %}
+{% set defaultKafkaConnectOffsetStorageTopic = 'connect-offsets' %}
+{% set defaultKafkaConnectStatusStorageTopic = 'connect-statuses' %}
+{# replicator #}
+{% set defaultReplicatorStopScript = 'stop-replicator.sh' %}
+{% set defaultReplicatorListenPort = '8083' %}
+{% set defaultReplicatorConfigStorageTopic = 'replicator-configs' %}
+{% set defaultReplicatorOffsetStorageTopic = 'replicator-offsets' %}
+{% set defaultReplicatorStatusStorageTopic = 'replicator-statuses' %}
+{# kafka-rest #}
+{% set defaultKafkaRestStopScript = 'stop-kafka-rest.sh' %}
+{% set defaultKafkaRestListenPort = '8082' %}
+{# ksqldb #}
+{% set defaultKsqlDbStopScript = 'stop-ksqldb.sh' %}
+{% set defaultKsqlDbListenPort = '8088' %}
+{# control-center #}
+{% set defaultControlCenterStopScript = 'stop-control-center.sh' %}
+{# ###################################################################### #}
+---
 base:
   user: {{ base.user }}
   confluentHome: {{ base.confluentHome }}

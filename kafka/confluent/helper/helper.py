@@ -37,7 +37,6 @@ def create_prop_file(server, prop, servers=None):
         edited_prop = replace_param('host.name', f'{server.host_name}', edited_prop)
         edited_prop = replace_param('listeners', f'{server.listeners}', edited_prop)
         edited_prop = replace_param('kafkastore.bootstrap.servers', f'{server.bootstrap_servers}', edited_prop)
-        edited_prop = replace_param('kafkastore.topic', f'{server.topic}', edited_prop)
 
     # kafka-connect
     elif server.server_type == ServerType.KAFKA_CONNECT:
@@ -89,11 +88,11 @@ def create_prop_file(server, prop, servers=None):
         edited_prop = replace_param('zookeeper.connect', f'{server.zookeeper_connect}', edited_prop)
         edited_prop = replace_param('confluent.controlcenter.schema.registry.url',
                                     f'{server.schema_registry_url}', edited_prop)
-        edited_prop = replace_param('confluent.controlcenter.connect.cluster',
+        edited_prop = replace_param('confluent.controlcenter.connect.connectcluster.cluster',
                                     f'{server.kafka_connect_url}', edited_prop)
         edited_prop = replace_param('confluent.controlcenter.streams.cprest.url',
                                     f'{server.kafka_rest_url}', edited_prop)
-        edited_prop = replace_param('confluent.controlcenter.ksql.ksqldb.url',
+        edited_prop = replace_param('confluent.controlcenter.ksql.ksqlcluster.url',
                                     f'{server.ksql_db_url}', edited_prop)
 
     write_file(f'output/properties/{server.file.properties}', edited_prop)

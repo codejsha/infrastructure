@@ -4,7 +4,7 @@ controlCenter:
     {% if controlCenter.common.stopScript is defined %}
     stopScript: {{ controlCenter.common.stopScript }}
     {% else %}
-    stopScript: stop-control-center.sh
+    stopScript: {{ defaultControlCenterStopScript }}
     {% endif %}
     param:
     {# dataDir #}
@@ -12,33 +12,85 @@ controlCenter:
     {# logDir #}
       logDir: {{ controlCenter.common.param.logDir }}
     {# bootstrapServers #}
+      {% if controlCenter.common.param.bootstrapServers is defined %}
       bootstrapServers: {{ controlCenter.common.param.bootstrapServers }}
+      {% else %}
+      {% if kafka.servers is defined %}
+      bootstrapServers: {% for server in kafka.servers -%}
+      {{ server.serverName }}:{{ defaultKafkaListenPort }}{%- if not loop.last -%},{% endif %}
+      {% endfor %}
+      {% else %}
+      bootstrapServers:
+      {% endif %}
+      {% endif %}
+      {{ '' }}
     {# zookeeperConnect #}
+      {% if controlCenter.common.param.zookeeperConnect is defined %}
       zookeeperConnect: {{ controlCenter.common.param.zookeeperConnect }}
+      {% else %}
+      {% if zookeeper.servers is defined %}
+      zookeeperConnect: {% for server in zookeeper.servers -%}
+      {{ server.serverName }}:{{ defaultZookeeperClientPort }}
+      {%- if not loop.last -%},{% endif %}
+      {%- if loop.last -%}{{ defaultZookeeperZNode }}{% endif %}
+      {% endfor %}
+      {% else %}
+      zookeeperConnect:
+      {% endif %}
+      {% endif %}
+      {{ '' }}
     {# schemaRegistryUrl #}
       {% if controlCenter.common.param.schemaRegistryUrl is defined %}
       schemaRegistryUrl: {{ controlCenter.common.param.schemaRegistryUrl }}
       {% else %}
+      {% if schemaRegistry.servers is defined %}
+      schemaRegistryUrl: {% for server in schemaRegistry.servers -%}
+      http://{{ server.serverName }}:{{ defaultSchemaRegistryListenPort }}{%- if not loop.last -%},{% endif %}
+      {% endfor %}
+      {% else %}
       schemaRegistryUrl:
       {% endif %}
+      {% endif %}
+      {{ '' }}
     {# kafkaConnectUrl #}
       {% if controlCenter.common.param.kafkaConnectUrl is defined %}
       kafkaConnectUrl: {{ controlCenter.common.param.kafkaConnectUrl }}
       {% else %}
+      {% if kafkaConnect.servers is defined %}
+      kafkaConnectUrl: {% for server in kafkaConnect.servers -%}
+      http://{{ server.serverName }}:{{ defaultKafkaConnectListenPort }}{%- if not loop.last -%},{% endif %}
+      {% endfor %}
+      {% else %}
       kafkaConnectUrl:
       {% endif %}
+      {% endif %}
+      {{ '' }}
     {# kafkaRestUrl #}
       {% if controlCenter.common.param.kafkaRestUrl is defined %}
       kafkaRestUrl: {{ controlCenter.common.param.kafkaRestUrl }}
       {% else %}
+      {% if kafkaRest.servers is defined %}
+      kafkaRestUrl: {% for server in kafkaRest.servers -%}
+      http://{{ server.serverName }}:{{ defaultKafkaRestListenPort }}{%- if not loop.last -%},{% endif %}
+      {% endfor %}
+      {% else %}
       kafkaRestUrl:
       {% endif %}
+      {% endif %}
+      {{ '' }}
     {# ksqlDbUrl #}
       {% if controlCenter.common.param.ksqlDbUrl is defined %}
       ksqlDbUrl: {{ controlCenter.common.param.ksqlDbUrl }}
       {% else %}
+      {% if ksqlDb.servers is defined %}
+      ksqlDbUrl: {% for server in ksqlDb.servers -%}
+      http://{{ server.serverName }}:{{ defaultKsqlDbListenPort }}{%- if not loop.last -%},{% endif %}
+      {% endfor %}
+      {% else %}
       ksqlDbUrl:
       {% endif %}
+      {% endif %}
+      {{ '' }}
 
   servers:
     {% for server in controlCenter.servers %}

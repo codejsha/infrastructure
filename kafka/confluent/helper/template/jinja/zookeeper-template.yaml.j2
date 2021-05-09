@@ -4,7 +4,7 @@ zookeeper:
     {% if zookeeper.common.stopScript is defined %}
     stopScript: {{ zookeeper.common.stopScript }}
     {% else %}
-    stopScript: stop-zookeeper.sh
+    stopScript: {{ defaultZookeeperStopScript }}
     {% endif %}
     param:
       {# dataDir #}
@@ -15,13 +15,19 @@ zookeeper:
       {% if zookeeper.common.param.clientPort is defined %}
       clientPort: {{ zookeeper.common.param.clientPort }}
       {% else %}
-      clientPort: 2181
+      clientPort: {{ defaultZookeeperClientPort }}
       {% endif %}
       {# peerToPeerPort #}
       {% if zookeeper.common.param.peerToPeerPort is defined %}
       peerToPeerPort: {{ zookeeper.common.param.peerToPeerPort }}
       {% else %}
-      peerToPeerPort: 2888:3888
+      peerToPeerPort: {{ defaultZookeeperPeerToPeerPort }}
+      {% endif %}
+    {# zNode #}
+      {% if kafka.common.param.zNode is defined %}
+      zNode: {{ kafka.common.param.zNode }}
+      {% else %}
+      zNode: {{ defaultZookeeperZNode }}
       {% endif %}
 
   servers:

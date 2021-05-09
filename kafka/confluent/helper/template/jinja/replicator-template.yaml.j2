@@ -4,7 +4,7 @@ replicator:
     {% if replicator.common.stopScript is defined %}
     stopScript: {{ replicator.common.stopScript }}
     {% else %}
-    stopScript: stop-replicator.sh
+    stopScript: {{ defaultReplicatorStopScript }}
     {% endif %}
     param:
     {# logDir #}
@@ -12,36 +12,61 @@ replicator:
     {# groupId #}
       groupId: {{ replicator.common.param.groupId }}
     {# bootstrapServers #}
+      {% if replicator.common.param.bootstrapServers is defined %}
       bootstrapServers: {{ replicator.common.param.bootstrapServers }}
+      {% else %}
+      {% if kafka.servers is defined %}
+      bootstrapServers: {% for server in kafka.servers -%}
+      PLAINTEXT://{{ server.serverName }}:{{ defaultKafkaListenPort }}{%- if not loop.last -%},{% endif %}
+      {% endfor %}
+      {% else %}
+      bootstrapServers:
+      {% endif %}
+      {% endif %}
+      {{ '' }}
     {# keyConverterSchemaRegistryUrl #}
       {% if replicator.common.param.keyConverterSchemaRegistryUrl is defined %}
       keyConverterSchemaRegistryUrl: {{ replicator.common.param.keyConverterSchemaRegistryUrl }}
       {% else %}
+      {% if schemaRegistry.servers is defined %}
+      keyConverterSchemaRegistryUrl: {% for server in schemaRegistry.servers -%}
+      http://{{ server.serverName }}:{{ defaultSchemaRegistryListenPort }}{%- if not loop.last -%},{% endif %}
+      {% endfor %}
+      {% else %}
       keyConverterSchemaRegistryUrl:
       {% endif %}
+      {% endif %}
+      {{ '' }}
     {# valueConverterSchemaRegistryUrl #}
       {% if replicator.common.param.valueConverterSchemaRegistryUrl is defined %}
       valueConverterSchemaRegistryUrl: {{ replicator.common.param.valueConverterSchemaRegistryUrl }}
       {% else %}
+      {% if schemaRegistry.servers is defined %}
+      valueConverterSchemaRegistryUrl: {% for server in schemaRegistry.servers -%}
+      http://{{ server.serverName }}:{{ defaultSchemaRegistryListenPort }}{%- if not loop.last -%},{% endif %}
+      {% endfor %}
+      {% else %}
       valueConverterSchemaRegistryUrl:
       {% endif %}
+      {% endif %}
+      {{ '' }}
     {# configStorageTopic #}
       {% if replicator.common.param.configStorageTopic is defined %}
       configStorageTopic: {{ replicator.common.param.configStorageTopic }}
       {% else %}
-      configStorageTopic: replicator-configs
+      configStorageTopic: {{ defaultReplicatorConfigStorageTopic }}
       {% endif %}
     {# offsetStorageTopic #}
       {% if replicator.common.param.offsetStorageTopic is defined %}
       offsetStorageTopic: {{ replicator.common.param.offsetStorageTopic }}
       {% else %}
-      offsetStorageTopic: replicator-offsets
+      offsetStorageTopic: {{ defaultReplicatorOffsetStorageTopic }}
       {% endif %}
     {# statusStorageTopic #}
       {% if replicator.common.param.statusStorageTopic is defined %}
       statusStorageTopic: {{ replicator.common.param.statusStorageTopic }}
       {% else %}
-      statusStorageTopic: replicator-statuses
+      statusStorageTopic: {{ defaultReplicatorStatusStorageTopic }}
       {% endif %}
     {# pluginPath #}
       {% if replicator.common.param.pluginPath is defined %}

@@ -47,6 +47,7 @@ class Zookeeper(Server):
     log_dir: str
     client_port: str
     peer_to_peer_port: str
+    z_node: str
 
 
 @dataclass
@@ -65,7 +66,6 @@ class SchemaRegistry(Server):
     log_dir: str
     listeners: str
     bootstrap_servers: str
-    topic: str
 
 
 @dataclass

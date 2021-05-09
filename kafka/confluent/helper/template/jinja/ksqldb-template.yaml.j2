@@ -4,7 +4,7 @@ ksqlDb:
     {% if ksqlDb.common.stopScript is defined %}
     stopScript: {{ ksqlDb.common.stopScript }}
     {% else %}
-    stopScript: stop-ksqldb.sh
+    stopScript: {{ defaultKsqlDbStopScript }}
     {% endif %}
     param:
     {# dataDir #}
@@ -17,16 +17,34 @@ ksqlDb:
       {% if ksqlDb.common.param.listeners is defined %}
       listeners: {{ ksqlDb.common.param.listeners }}
       {% else %}
-      listeners: http://0.0.0.0:8088
+      listeners: http://0.0.0.0:{{ defaultKsqlDbListenPort }}
       {% endif %}
     {# bootstrapServers #}
+      {% if ksqlDb.common.param.bootstrapServers is defined %}
       bootstrapServers: {{ ksqlDb.common.param.bootstrapServers }}
+      {% else %}
+      {% if kafka.servers is defined %}
+      bootstrapServers: {% for server in kafka.servers -%}
+      {{ server.serverName }}:{{ defaultKafkaListenPort }}{%- if not loop.last -%},{% endif %}
+      {% endfor %}
+      {% else %}
+      bootstrapServers:
+      {% endif %}
+      {% endif %}
+      {{ '' }}
     {# schemaRegistryUrl #}
       {% if ksqlDb.common.param.schemaRegistryUrl is defined %}
       schemaRegistryUrl: {{ ksqlDb.common.param.schemaRegistryUrl }}
       {% else %}
+      {% if schemaRegistry.servers is defined %}
+      schemaRegistryUrl: {% for server in schemaRegistry.servers -%}
+      http://{{ server.serverName }}:{{ defaultSchemaRegistryListenPort }}{%- if not loop.last -%},{% endif %}
+      {% endfor %}
+      {% else %}
       schemaRegistryUrl:
       {% endif %}
+      {% endif %}
+      {{ '' }}
 
   servers:
     {% for server in ksqlDb.servers %}
@@ -43,7 +61,7 @@ ksqlDb:
       {% if server.advertisedListener is defined %}
       advertisedListener: {{ server.advertisedListener }}
       {% else %}
-      advertisedListener: http://{{ server.serverName }}:8088
+      advertisedListener: http://{{ server.serverName }}:{{ defaultKsqlDbListenPort }}
       {% endif %}
       paramOverride:
       {# groupId #}

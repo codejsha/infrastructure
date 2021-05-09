@@ -4,7 +4,7 @@ schemaRegistry:
     {% if schemaRegistry.common.stopScript is defined %}
     stopScript: {{ schemaRegistry.common.stopScript }}
     {% else %}
-    stopScript: stop-schema-registry.sh
+    stopScript: {{ defaultSchemaRegistryStopScript }}
     {% endif %}
     param:
     {# logDir #}
@@ -13,16 +13,21 @@ schemaRegistry:
       {% if schemaRegistry.common.param.listeners is defined %}
       listeners: {{ schemaRegistry.common.param.listeners }}
       {% else %}
-      listeners: http://0.0.0.0:8081
+      listeners: http://0.0.0.0:{{ defaultSchemaRegistryListenPort }}
       {% endif %}
     {# bootstrapServers #}
+      {% if schemaRegistry.common.param.bootstrapServers is defined %}
       bootstrapServers: {{ schemaRegistry.common.param.bootstrapServers }}
-    {# topic #}
-      {% if schemaRegistry.common.param.topic is defined %}
-      topic: {{ schemaRegistry.common.param.topic }}
       {% else %}
-      topic: _schemas
+      {% if kafka.servers is defined %}
+      bootstrapServers: {% for server in kafka.servers -%}
+      PLAINTEXT://{{ server.serverName }}:{{ defaultKafkaListenPort }}{%- if not loop.last -%},{% endif %}
+      {% endfor %}
+      {% else %}
+      bootstrapServers:
       {% endif %}
+      {% endif %}
+      {{ '' }}
 
   servers:
     {% for server in schemaRegistry.servers %}
@@ -53,12 +58,6 @@ schemaRegistry:
         bootstrapServers: {{ server.paramOverride.bootstrapServers }}
         {% else %}
         # bootstrapServers:
-        {% endif %}
-      {# topic #}
-        {% if server.paramOverride is defined and server.paramOverride.topic is defined %}
-        topic: {{ server.paramOverride.topic }}
-        {% else %}
-        # topic:
         {% endif %}
     {% include 'file-template.yaml.j2' %}
 

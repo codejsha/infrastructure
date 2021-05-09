@@ -37,7 +37,7 @@ def create_start_and_stop_symlink_script_file(server_dict):
 def create_add_host_script_file(server_dict):
     data_list = [
         f'#!/bin/bash\n',
-        f'cat << EOF | sudo tee -a /etc/hosts'
+        f'cat <<EOF | sudo tee -a /etc/hosts'
     ]
 
     for server_type, servers in server_dict.items():

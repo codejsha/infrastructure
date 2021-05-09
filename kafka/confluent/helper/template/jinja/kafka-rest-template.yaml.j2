@@ -4,19 +4,37 @@ kafkaRest:
     {% if kafkaRest.common.stopScript is defined %}
     stopScript: {{ kafkaRest.common.stopScript }}
     {% else %}
-    stopScript: stop-kafka-rest.sh
+    stopScript: {{ defaultKafkaRestStopScript }}
     {% endif %}
     param:
     {# logDir #}
       logDir: {{ kafkaRest.common.param.logDir }}
     {# bootstrapServers #}
+      {% if kafkaRest.common.param.bootstrapServers is defined %}
       bootstrapServers: {{ kafkaRest.common.param.bootstrapServers }}
+      {% else %}
+      {% if kafka.servers is defined %}
+      bootstrapServers: {% for server in kafka.servers -%}
+      PLAINTEXT://{{ server.serverName }}:{{ defaultKafkaListenPort }}{%- if not loop.last -%},{% endif %}
+      {% endfor %}
+      {% else %}
+      bootstrapServers:
+      {% endif %}
+      {% endif %}
+      {{ '' }}
     {# schemaRegistryUrl #}
       {% if kafkaRest.common.param.schemaRegistryUrl is defined %}
       schemaRegistryUrl: {{ kafkaRest.common.param.schemaRegistryUrl }}
       {% else %}
+      {% if schemaRegistry.servers is defined %}
+      schemaRegistryUrl: {% for server in schemaRegistry.servers -%}
+      http://{{ server.serverName }}:{{ defaultSchemaRegistryListenPort }}{%- if not loop.last -%},{% endif %}
+      {% endfor %}
+      {% else %}
       schemaRegistryUrl:
       {% endif %}
+      {% endif %}
+      {{ '' }}
 
   servers:
     {% for server in kafkaRest.servers %}

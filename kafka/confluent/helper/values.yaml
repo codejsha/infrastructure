@@ -41,8 +41,6 @@ kafka:
     param:
       dataDir: /mnt/kafka/data
       logDir: /mnt/kafka/logs
-      zookeeperConnect: zookeeper1:2181,zookeeper2:2181,zookeeper3:2181/testcluster
-      metricsReporterBootstrapServers: kafka1:9092,kafka2:9092,kafka3:9092
 
   servers:
     - serverName: kafka1
@@ -70,7 +68,6 @@ schemaRegistry:
   common:
     param:
       logDir: /mnt/schema-registry/logs
-      bootstrapServers: PLAINTEXT://kafka1:9092,PLAINTEXT://kafka2:9092,PLAINTEXT://kafka3:9092
 
   servers:
     - serverName: schema-registry1
@@ -91,12 +88,6 @@ kafkaConnect:
     param:
       logDir: /mnt/kafka-connect/logs
       groupId: connect-cluster
-      bootstrapServers: PLAINTEXT://kafka1:9092,PLAINTEXT://kafka2:9092,PLAINTEXT://kafka3:9092
-      keyConverterSchemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
-      valueConverterSchemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
-      configStorageTopic: connect-configs
-      offsetStorageTopic: connect-offsets
-      statusStorageTopic: connect-statuses
 
   servers:
     - serverName: kafka-connect1
@@ -117,12 +108,6 @@ replicator:
     param:
       logDir: /mnt/replicator/logs
       groupId: replicator-cluster
-      bootstrapServers: PLAINTEXT://kafka1:9092,PLAINTEXT://kafka2:9092,PLAINTEXT://kafka3:9092
-      keyConverterSchemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
-      valueConverterSchemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
-      configStorageTopic: replicator-configs
-      offsetStorageTopic: replicator-offsets
-      statusStorageTopic: replicator-statuses
 
   servers:
     - serverName: replicator1
@@ -137,8 +122,6 @@ kafkaRest:
   common:
     param:
       logDir: /mnt/kafka-rest/logs
-      bootstrapServers: PLAINTEXT://kafka1:9092,PLAINTEXT://kafka2:9092,PLAINTEXT://kafka3:9092
-      schemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
 
   servers:
     - serverName: kafka-rest1
@@ -162,8 +145,6 @@ ksqlDb:
       dataDir: /mnt/ksqldb/data
       logDir: /mnt/ksqldb/logs
       groupId: ksql-cluster
-      bootstrapServers: kafka1:9092,kafka2:9092,kafka3:9092
-      schemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
 
   servers:
     - serverName: ksqldb1
@@ -191,16 +172,9 @@ ksqlDb:
 ### control-center
 controlCenter:
   common:
-    stop: stop-control-center.sh
     param:
       dataDir: /mnt/control-center/data
       logDir: /mnt/control-center/logs
-      bootstrapServers: kafka1:9092,kafka2:9092,kafka3:9092
-      zookeeperConnect: zookeeper1:2181,zookeeper2:2181,zookeeper3:2181/testcluster
-      schemaRegistryUrl: http://schema-registry1:8081,http://schema-registry2:8081
-      kafkaConnectUrl: http://kafka-connect1:8083,http://kafka-connect2:8083
-      kafkaRestUrl: http://kafka-rest1:8090,http://kafka-rest2:8090
-      ksqlDbUrl: http://ksqldb1:8088,http://ksqldb2:8088,http://ksqldb3:8088,http://ksqldb4:8088
 
   servers:
     - serverName: control-center1
