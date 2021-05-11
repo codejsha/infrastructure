@@ -87,6 +87,18 @@ file path/pattern configurations:
     "finished.path": "",
 ```
 
+### HDFS Sink Connector
+
+hdfs configurations:
+
+```json
+    "hdfs.url": "",
+    "hadoop.home": "",
+    "hadoop.conf.dir": "",
+    "topics.dir": "",
+    "logs.dir": "",
+```
+
 ### MySQL Source Connector
 
 sample database: Sakila (cf. [MySQL README](/mysql/README.md))

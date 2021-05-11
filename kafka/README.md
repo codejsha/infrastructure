@@ -90,8 +90,6 @@ bash ./helm-install-nifi.sh
 - `confluent.key.schema.validation`
 - `confluent.value.schema.validation`
 
-cf. partition, replication factor
-
 ### Producer
 
 - ⭐ `bootstrap.servers`
