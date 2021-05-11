@@ -17,19 +17,19 @@ zookeeper:
   servers:
     - serverName: zookeeper1
       # hostName:
-      ipAddress: 10.10.10.11
+      hostAddress: 10.10.10.11
       serverId: 1
       # paramOverride:
 
     - serverName: zookeeper2
       # hostName:
-      ipAddress: 10.10.10.12
+      hostAddress: 10.10.10.12
       serverId: 2
       # paramOverride:
 
     - serverName: zookeeper3
       # hostName:
-      ipAddress: 10.10.10.13
+      hostAddress: 10.10.10.13
       serverId: 3
       # paramOverride:
 
@@ -45,19 +45,19 @@ kafka:
   servers:
     - serverName: kafka1
       # hostName:
-      ipAddress: 10.10.10.21
+      hostAddress: 10.10.10.21
       serverId: 1
       # paramOverride:
 
     - serverName: kafka2
       # hostName:
-      ipAddress: 10.10.10.22
+      hostAddress: 10.10.10.22
       serverId: 2
       # paramOverride:
 
     - serverName: kafka3
       # hostName:
-      ipAddress: 10.10.10.23
+      hostAddress: 10.10.10.23
       serverId: 3
       # paramOverride:
 
@@ -72,12 +72,12 @@ schemaRegistry:
   servers:
     - serverName: schema-registry1
       # hostName:
-      ipAddress: 10.10.10.31
+      hostAddress: 10.10.10.31
       # paramOverride:
 
     - serverName: schema-registry2
       # hostName:
-      ipAddress: 10.10.10.32
+      hostAddress: 10.10.10.32
       # paramOverride:
 
 ######################################################################
@@ -92,12 +92,12 @@ kafkaConnect:
   servers:
     - serverName: kafka-connect1
       # hostName:
-      ipAddress: 10.10.10.41
+      hostAddress: 10.10.10.41
       # paramOverride:
 
     - serverName: kafka-connect2
       # hostName:
-      ipAddress: 10.10.10.41
+      hostAddress: 10.10.10.41
       # paramOverride:
 
 ######################################################################
@@ -112,7 +112,7 @@ replicator:
   servers:
     - serverName: replicator1
       # hostName:
-      ipAddress: 10.10.10.61
+      hostAddress: 10.10.10.61
       # paramOverride:
 
 ######################################################################
@@ -126,13 +126,13 @@ kafkaRest:
   servers:
     - serverName: kafka-rest1
       # hostName:
-      ipAddress: 10.10.10.51
+      hostAddress: 10.10.10.51
       serverId: 1
       # paramOverride:
 
     - serverName: kafka-rest2
       # hostName:
-      ipAddress: 10.10.10.52
+      hostAddress: 10.10.10.52
       serverId: 2
       # paramOverride:
 
@@ -149,22 +149,12 @@ ksqlDb:
   servers:
     - serverName: ksqldb1
       # hostName:
-      ipAddress: 10.10.10.71
+      hostAddress: 10.10.10.71
       # paramOverride:
 
     - serverName: ksqldb2
       # hostName:
-      ipAddress: 10.10.10.72
-      # paramOverride:
-
-    - serverName: ksqldb3
-      # hostName:
-      ipAddress: 10.10.10.73
-      # paramOverride:
-
-    - serverName: ksqldb4
-      # hostName:
-      ipAddress: 10.10.10.74
+      hostAddress: 10.10.10.72
       # paramOverride:
 
 ######################################################################
@@ -179,6 +169,6 @@ controlCenter:
   servers:
     - serverName: control-center1
       # hostName:
-      ipAddress: 10.10.10.81
+      hostAddress: 10.10.10.81
       serverId: 1
       # paramOverride:

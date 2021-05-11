@@ -16,6 +16,7 @@ def reset_output_dir(current_dir):
     scripts_output_dir = current_dir.joinpath('output/scripts')
     server_stop_scripts_output_dir = current_dir.joinpath('output/scripts/server-stop')
     server_log_scripts_output_dir = current_dir.joinpath('output/scripts/server-log')
+    server_grep_scripts_output_dir = current_dir.joinpath('output/scripts/server-grep')
     other_output_dir = current_dir.joinpath('output/scripts/others')
 
     if os.path.exists(output_dir):
@@ -26,6 +27,7 @@ def reset_output_dir(current_dir):
     os.mkdir(scripts_output_dir)
     os.mkdir(server_stop_scripts_output_dir)
     os.mkdir(server_log_scripts_output_dir)
+    os.mkdir(server_grep_scripts_output_dir)
     os.mkdir(other_output_dir)
 
 

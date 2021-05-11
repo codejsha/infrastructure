@@ -1,27 +1,26 @@
-{% if kafka is defined %}
+{% if kafka %}
+{% set component = kafka %}
 kafka:
   common:
-    {% if kafka.common.stopScript is defined %}
-    stopScript: {{ kafka.common.stopScript }}
-    {% else %}
-    stopScript: {{ defaultKafkaStopScript }}
-    {% endif %}
+    {% set stopScript = component.common.stopScript if component.common.stopScript
+        else defaultKafkaStopScript %}
+    stopScript: {{ stopScript }}
     param:
     {# dataDir #}
-      dataDir: {{ kafka.common.param.dataDir }}
+      dataDir: {{ component.common.param.dataDir }}
     {# logDir #}
-      logDir: {{ kafka.common.param.logDir }}
+      logDir: {{ component.common.param.logDir }}
     {# listeners #}
-      {% if kafka.common.param.listeners is defined %}
-      listeners: {{ kafka.common.param.listeners }}
+      {% if component.common.param.listeners %}
+      listeners: {{ component.common.param.listeners }}
       {% else %}
-      listeners: {{ 'PLAINTEXT://0.0.0.0:' }}{{ defaultKafkaListenPort }}
+      listeners: PLAINTEXT://0.0.0.0:{{ defaultKafkaListenPort }}
       {% endif %}
     {# zookeeperConnect #}
-      {% if kafka.common.param.zookeeperConnect is defined %}
-      zookeeperConnect: {{ kafka.common.param.zookeeperConnect }}
+      {% if component.common.param.zookeeperConnect %}
+      zookeeperConnect: {{ component.common.param.zookeeperConnect }}
       {% else %}
-      {% if zookeeper.servers is defined %}
+      {% if zookeeper.servers %}
       zookeeperConnect: {% for server in zookeeper.servers -%}
       {{ server.serverName }}:{{ defaultZookeeperClientPort }}
       {%- if not loop.last -%},{% endif %}
@@ -33,11 +32,11 @@ kafka:
       {% endif %}
       {{ '' }}
     {# metricsReporterBootstrapServers #}
-      {% if kafka.common.param.metricsReporterBootstrapServers is defined %}
-      metricsReporterBootstrapServers: {{ kafka.common.param.metricsReporterBootstrapServers }}
+      {% if component.common.param.metricsReporterBootstrapServers %}
+      metricsReporterBootstrapServers: {{ component.common.param.metricsReporterBootstrapServers }}
       {% else %}
-      {% if kafka.servers is defined %}
-      metricsReporterBootstrapServers: {% for server in kafka.servers -%}
+      {% if component.servers %}
+      metricsReporterBootstrapServers: {% for server in component.servers -%}
       {{ server.serverName }}:{{ defaultKafkaListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
       {% else %}
@@ -47,51 +46,51 @@ kafka:
       {{ '' }}
 
   servers:
-    {% for server in kafka.servers %}
+    {% for server in component.servers %}
     - serverName: {{ server.serverName }}
     {# hostName #}
-      {% if server.hostName is defined %}
+      {% if server.hostName %}
       hostName: {{ server.hostName }}
       {% else %}
       hostName: {{ server.serverName }}
       {% endif %}
-    {# ipAddress #}
-      ipAddress: {{ server.ipAddress }}
+    {# hostAddress #}
+      hostAddress: {{ server.hostAddress }}
     {# serverId #}
       serverId: {{ server.serverId }}
     {# advertisedListeners #}
-      {% if server.advertisedListeners is defined %}
+      {% if server.advertisedListeners %}
       advertisedListeners: {{ server.advertisedListeners }}
       {% else %}
       advertisedListeners: PLAINTEXT://{{ server.serverName }}:{{ defaultKafkaListenPort }}
       {% endif %}
       paramOverride:
       {# dataDir #}
-        {% if server.paramOverride is defined and server.paramOverride.dataDir is defined %}
+        {% if server.paramOverride and server.paramOverride.dataDir %}
         dataDir: {{ server.paramOverride.dataDir }}
         {% else %}
         # dataDir:
         {% endif %}
       {# logDir #}
-        {% if server.paramOverride is defined and server.paramOverride.logDir is defined %}
+        {% if server.paramOverride and server.paramOverride.logDir %}
         logDir: {{ server.paramOverride.logDir }}
         {% else %}
         # logDir:
         {% endif %}
       {# listeners #}
-        {% if server.paramOverride is defined and server.paramOverride.listeners is defined %}
+        {% if server.paramOverride and server.paramOverride.listeners %}
         listeners: {{ server.paramOverride.listeners }}
         {% else %}
         # listeners:
         {% endif %}
       {# zookeeperConnect #}
-        {% if server.paramOverride is defined and server.paramOverride.zookeeperConnect is defined %}
+        {% if server.paramOverride and server.paramOverride.zookeeperConnect %}
         zookeeperConnect: {{ server.paramOverride.zookeeperConnect }}
         {% else %}
         # zookeeperConnect:
         {% endif %}
       {# metricsReporterBootstrapServers #}
-        {% if server.paramOverride is defined and server.paramOverride.metricsReporterBootstrapServers is defined %}
+        {% if server.paramOverride and server.paramOverride.metricsReporterBootstrapServers %}
         metricsReporterBootstrapServers: {{ server.paramOverride.metricsReporterBootstrapServers }}
         {% else %}
         # metricsReporterBootstrapServers:

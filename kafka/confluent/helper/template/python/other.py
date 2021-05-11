@@ -28,6 +28,9 @@ def create_start_and_stop_symlink_script_file(server_dict):
             data_list.append(f'    if [ -f "{server.file.log}" ]; then')
             data_list.append(f'        ln -snf {server.file.log} log.sh')
             data_list.append(f'    fi')
+            data_list.append(f'    if [ -f "{server.file.grep}" ]; then')
+            data_list.append(f'        ln -snf {server.file.grep} log.sh')
+            data_list.append(f'    fi')
     data_list.append(f'fi')
 
     edited_symlink = '\n'.join(data_list) + '\n'
@@ -42,7 +45,7 @@ def create_add_host_script_file(server_dict):
 
     for server_type, servers in server_dict.items():
         for server in servers:
-            data_list.append(f'{server.ip_address} {server.host_name}')
+            data_list.append(f'{server.host_address} {server.host_name}')
 
     data_list.append(f'EOF')
     edited_hosts = '\n'.join(data_list) + '\n'
@@ -61,17 +64,17 @@ def create_secure_copy_script_file(base, server_dict):
     for server_type, servers in server_dict.items():
         for server in servers:
             data_list.append(f'scp confluent-properties.tar.gz '
-                             f'{base.user}@{server.ip_address}:{base.confluent_home}')
+                             f'{base.user}@{server.host_name}:{base.confluent_home}')
             data_list.append(f'scp confluent-scripts.tar.gz '
-                             f'{base.user}@{server.ip_address}:{base.confluent_home}')
-    data_list.append(f'')
+                             f'{base.user}@{server.host_name}:{base.confluent_home}')
 
     for server_type, servers in server_dict.items():
         for server in servers:
             data_list.append(f'# scp confluent-properties.tar.gz '
-                             f'{base.user}@{server.host_name}:{base.confluent_home}')
+                             f'{base.user}@{server.host_address}:{base.confluent_home}')
             data_list.append(f'# scp confluent-scripts.tar.gz '
-                             f'{base.user}@{server.host_name}:{base.confluent_home}')
+                             f'{base.user}@{server.host_address}:{base.confluent_home}')
+    data_list.append(f'')
 
     edited_hosts = '\n'.join(data_list) + '\n'
     write_file('output/scripts/others/scp-files.sh', edited_hosts)
@@ -81,16 +84,17 @@ def create_kafka_alias_file(base):
     data_list = [
         f'### kafka aliases\n',
         f'CONFLUENT_HOME={base.confluent_home}',
-        f'PATH="\${{PATH}}:\${{CONFLUENT_HOME}}/bin"',
+        f'PATH="${{PATH}}:${{CONFLUENT_HOME}}/bin"',
         f'export PATH\n',
         f'alias psef="ps -ef | grep"',
         f'alias pxjava="pgrep -xa java"',
         f'alias killjava="pkill -9 java"',
-        f'alias goprops="cd \${{CONFLUENT_HOME}}/properties"',
-        f'alias goscripts="cd \${{CONFLUENT_HOME}}/scripts"',
-        f'alias startsh="\${{CONFLUENT_HOME}}/scripts/start.sh"',
-        f'alias stopsh="\${{CONFLUENT_HOME}}/scripts/stop.sh"',
-        f'alias logsh="\${{CONFLUENT_HOME}}/scripts/log.sh"'
+        f'alias goprops="cd ${{CONFLUENT_HOME}}/properties"',
+        f'alias goscripts="cd ${{CONFLUENT_HOME}}/scripts"',
+        f'alias startsh="${{CONFLUENT_HOME}}/scripts/start.sh"',
+        f'alias stopsh="${{CONFLUENT_HOME}}/scripts/stop.sh"',
+        f'alias logsh="${{CONFLUENT_HOME}}/scripts/log.sh"',
+        f'alias grepsh="${{CONFLUENT_HOME}}/scripts/grep.sh"'
     ]
 
     edited_hosts = '\n'.join(data_list) + '\n'

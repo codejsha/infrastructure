@@ -1,21 +1,26 @@
-{% if kafkaRest is defined %}
+{% if kafkaRest %}
+{% set component = kafkaRest %}
 kafkaRest:
   common:
-    {% if kafkaRest.common.stopScript is defined %}
-    stopScript: {{ kafkaRest.common.stopScript }}
-    {% else %}
-    stopScript: {{ defaultKafkaRestStopScript }}
-    {% endif %}
+    {% set stopScript = component.common.stopScript if component.common.stopScript
+        else defaultKafkaRestStopScript %}
+    stopScript: {{ stopScript }}
     param:
     {# logDir #}
-      logDir: {{ kafkaRest.common.param.logDir }}
-    {# bootstrapServers #}
-      {% if kafkaRest.common.param.bootstrapServers is defined %}
-      bootstrapServers: {{ kafkaRest.common.param.bootstrapServers }}
+      logDir: {{ component.common.param.logDir }}
+    {# listeners #}
+      {% if component.common.param.listeners %}
+      listeners: {{ component.common.param.listeners }}
       {% else %}
-      {% if kafka.servers is defined %}
+      listeners: http://0.0.0.0:{{ defaultKafkaRestListenPort }}
+      {% endif %}
+    {# bootstrapServers #}
+      {% if component.common.param.bootstrapServers %}
+      bootstrapServers: {{ component.common.param.bootstrapServers }}
+      {% else %}
+      {% if kafka.servers %}
       bootstrapServers: {% for server in kafka.servers -%}
-      PLAINTEXT://{{ server.serverName }}:{{ defaultKafkaListenPort }}{%- if not loop.last -%},{% endif %}
+      PLAINTEXT://{{ server.serverName }}:{{ defaultKafkaRestListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
       {% else %}
       bootstrapServers:
@@ -23,10 +28,10 @@ kafkaRest:
       {% endif %}
       {{ '' }}
     {# schemaRegistryUrl #}
-      {% if kafkaRest.common.param.schemaRegistryUrl is defined %}
-      schemaRegistryUrl: {{ kafkaRest.common.param.schemaRegistryUrl }}
+      {% if component.common.param.schemaRegistryUrl %}
+      schemaRegistryUrl: {{ component.common.param.schemaRegistryUrl }}
       {% else %}
-      {% if schemaRegistry.servers is defined %}
+      {% if schemaRegistry.servers %}
       schemaRegistryUrl: {% for server in schemaRegistry.servers -%}
       http://{{ server.serverName }}:{{ defaultSchemaRegistryListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
@@ -37,33 +42,45 @@ kafkaRest:
       {{ '' }}
 
   servers:
-    {% for server in kafkaRest.servers %}
+    {% for server in component.servers %}
     - serverName: {{ server.serverName }}
     {# hostName #}
-      {% if server.hostName is defined %}
+      {% if server.hostName %}
       hostName: {{ server.hostName }}
       {% else %}
       hostName: {{ server.serverName }}
       {% endif %}
-    {# ipAddress #}
-      ipAddress: {{ server.ipAddress }}
+    {# hostAddress #}
+      hostAddress: {{ server.hostAddress }}
     {# serverId #}
       serverId: {{ server.serverId }}
+    {# advertisedListeners #}
+      {% if server.advertisedListeners %}
+      advertisedListeners: {{ server.advertisedListeners }}
+      {% else %}
+      advertisedListeners: http://{{ server.serverName }}:{{ defaultKafkaRestListenPort }}
+      {% endif %}
       paramOverride:
       {# logDir #}
-        {% if server.paramOverride is defined and server.paramOverride.logDir is defined %}
+        {% if server.paramOverride and server.paramOverride.logDir %}
         logDir: {{ server.paramOverride.logDir }}
         {% else %}
         # logDir:
         {% endif %}
+      {# listeners #}
+        {% if server.paramOverride and server.paramOverride.listeners %}
+        listeners: {{ server.paramOverride.listeners }}
+        {% else %}
+        # listeners:
+        {% endif %}
       {# bootstrapServers #}
-        {% if server.paramOverride is defined and server.paramOverride.bootstrapServers is defined %}
+        {% if server.paramOverride and server.paramOverride.bootstrapServers %}
         bootstrapServers: {{ server.paramOverride.bootstrapServers }}
         {% else %}
         # bootstrapServers:
         {% endif %}
       {# schemaRegistryUrl #}
-        {% if server.paramOverride is defined and server.paramOverride.schemaRegistryUrl is defined %}
+        {% if server.paramOverride and server.paramOverride.schemaRegistryUrl %}
         schemaRegistryUrl: {{ server.paramOverride.schemaRegistryUrl }}
         {% else %}
         # schemaRegistryUrl:

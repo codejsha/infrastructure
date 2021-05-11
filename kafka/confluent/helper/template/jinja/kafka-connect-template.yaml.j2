@@ -1,21 +1,30 @@
-{% if kafkaConnect is defined %}
+{% if kafkaConnect %}
+{% set component = kafkaConnect %}
 kafkaConnect:
   common:
-    {% if kafkaConnect.common.stopScript is defined %}
-    stopScript: {{ kafkaConnect.common.stopScript }}
-    {% else %}
-    stopScript: {{ defaultKafkaConnectStopScript }}
-    {% endif %}
+    {% set stopScript = component.common.stopScript if component.common.stopScript
+        else defaultKafkaConnectStopScript %}
+    stopScript: {{ stopScript }}
     param:
     {# logDir #}
-      logDir: {{ kafkaConnect.common.param.logDir }}
+      logDir: {{ component.common.param.logDir }}
     {# groupId #}
-      groupId: {{ kafkaConnect.common.param.groupId }}
-    {# bootstrapServers #}
-      {% if kafkaConnect.common.param.bootstrapServers is defined %}
-      bootstrapServers: {{ kafkaConnect.common.param.bootstrapServers }}
+      groupId: {{ component.common.param.groupId }}
+    {# listenAddress #}
+      {% if component.common.param.listenAddress %}
+      listenAddress: {{ component.common.param.listenAddress }}
       {% else %}
-      {% if kafka.servers is defined %}
+      listenAddress: '0.0.0.0'
+      {% endif %}
+    {# listenPort #}
+      {% set listenPort = component.common.param.listenPort if component.common.param.listenPort
+          else defaultKafkaConnectListenPort %}
+      listenPort: {{ listenPort }}
+    {# bootstrapServers #}
+      {% if component.common.param.bootstrapServers %}
+      bootstrapServers: {{ component.common.param.bootstrapServers }}
+      {% else %}
+      {% if kafka.servers %}
       bootstrapServers: {% for server in kafka.servers -%}
       PLAINTEXT://{{ server.serverName }}:{{ defaultKafkaListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
@@ -25,10 +34,10 @@ kafkaConnect:
       {% endif %}
       {{ '' }}
     {# keyConverterSchemaRegistryUrl #}
-      {% if kafkaConnect.common.param.keyConverterSchemaRegistryUrl is defined %}
-      keyConverterSchemaRegistryUrl: {{ kafkaConnect.common.param.keyConverterSchemaRegistryUrl }}
+      {% if component.common.param.keyConverterSchemaRegistryUrl %}
+      keyConverterSchemaRegistryUrl: {{ component.common.param.keyConverterSchemaRegistryUrl }}
       {% else %}
-      {% if schemaRegistry.servers is defined %}
+      {% if schemaRegistry.servers %}
       keyConverterSchemaRegistryUrl: {% for server in schemaRegistry.servers -%}
       http://{{ server.serverName }}:{{ defaultSchemaRegistryListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
@@ -38,10 +47,10 @@ kafkaConnect:
       {% endif %}
       {{ '' }}
     {# valueConverterSchemaRegistryUrl #}
-      {% if kafkaConnect.common.param.valueConverterSchemaRegistryUrl is defined %}
-      valueConverterSchemaRegistryUrl: {{ kafkaConnect.common.param.valueConverterSchemaRegistryUrl }}
+      {% if component.common.param.valueConverterSchemaRegistryUrl %}
+      valueConverterSchemaRegistryUrl: {{ component.common.param.valueConverterSchemaRegistryUrl }}
       {% else %}
-      {% if schemaRegistry.servers is defined %}
+      {% if schemaRegistry.servers %}
       valueConverterSchemaRegistryUrl: {% for server in schemaRegistry.servers -%}
       http://{{ server.serverName }}:{{ defaultSchemaRegistryListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
@@ -51,92 +60,110 @@ kafkaConnect:
       {% endif %}
       {{ '' }}
     {# configStorageTopic #}
-      {% if kafkaConnect.common.param.configStorageTopic is defined %}
-      configStorageTopic: {{ kafkaConnect.common.param.configStorageTopic }}
-      {% else %}
-      configStorageTopic: {{ defaultKafkaConnectConfigStorageTopic }}
-      {% endif %}
+      {% set configStorageTopic = component.common.param.configStorageTopic if component.common.param.configStorageTopic
+          else defaultKafkaConnectConfigStorageTopic %}
+      configStorageTopic: {{ configStorageTopic }}
     {# offsetStorageTopic #}
-      {% if kafkaConnect.common.param.offsetStorageTopic is defined %}
-      offsetStorageTopic: {{ kafkaConnect.common.param.offsetStorageTopic }}
-      {% else %}
-      offsetStorageTopic: {{ defaultKafkaConnectOffsetStorageTopic }}
-      {% endif %}
+      {% set offsetStorageTopic = component.common.param.offsetStorageTopic if component.common.param.offsetStorageTopic
+          else defaultKafkaConnectOffsetStorageTopic %}
+      offsetStorageTopic: {{ offsetStorageTopic }}
     {# statusStorageTopic #}
-      {% if kafkaConnect.common.param.statusStorageTopic is defined %}
-      statusStorageTopic: {{ kafkaConnect.common.param.statusStorageTopic }}
-      {% else %}
-      statusStorageTopic: {{ defaultKafkaConnectStatusStorageTopic }}
-      {% endif %}
+      {% set statusStorageTopic = component.common.param.statusStorageTopic if component.common.param.statusStorageTopic
+          else defaultKafkaConnectStatusStorageTopic %}
+      statusStorageTopic: {{ statusStorageTopic }}
     {# pluginPath #}
-      {% if kafkaConnect.common.param.pluginPath is defined %}
-      pluginPath: {{ kafkaConnect.common.param.pluginPath }}
+      {% if component.common.param.pluginPath %}
+      pluginPath: {{ component.common.param.pluginPath }}
       {% else %}
       pluginPath: {{ base.confluentHome }}/share/java,{{ base.confluentHome }}/share/confluent-hub-components
       {% endif %}
 
   servers:
-    {% for server in kafkaConnect.servers %}
+    {% for server in component.servers %}
     - serverName: {{ server.serverName }}
     {# hostName #}
-      {% if server.hostName is defined %}
+      {% if server.hostName %}
       hostName: {{ server.hostName }}
       {% else %}
       hostName: {{ server.serverName }}
       {% endif %}
-    {# ipAddress #}
-      ipAddress: {{ server.ipAddress }}
+    {# hostAddress #}
+      hostAddress: {{ server.hostAddress }}
+    {# advertisedListenAddress #}
+      {% if server.advertisedListenAddress %}
+      advertisedListenAddress: {{ server.advertisedListenAddress }}
+      {% else %}
+      advertisedListenAddress: {{ server.serverName }}
+      {% endif %}
+    {# advertisedListenPort #}
+      {% if server.advertisedListenPort %}
+      advertisedListenPort: {{ server.advertisedListenPort }}
+      {% else %}
+      advertisedListenPort: {{ defaultKafkaConnectListenPort }}
+      {% endif %}
       paramOverride:
       {# groupId #}
-        {% if server.paramOverride is defined and server.paramOverride.groupId is defined %}
+        {% if server.paramOverride and server.paramOverride.groupId %}
         groupId: {{ server.paramOverride.groupId }}
         {% else %}
         # groupId:
         {% endif %}
       {# logDir #}
-        {% if server.paramOverride is defined and server.paramOverride.logDir is defined %}
+        {% if server.paramOverride and server.paramOverride.logDir %}
         logDir: {{ server.paramOverride.logDir }}
         {% else %}
         # logDir:
         {% endif %}
+      {# listenAddress #}
+        {% if server.paramOverride and server.paramOverride.listenAddress %}
+        listenAddress: {{ server.paramOverride.listenAddress }}
+        {% else %}
+        # listenAddress:
+        {% endif %}
+      {# listenPort #}
+        {% if server.paramOverride and server.paramOverride.listenPort %}
+        listenPort: {{ server.paramOverride.listenPort }}
+        {% else %}
+        # listenPort:
+        {% endif %}
       {# bootstrapServers #}
-        {% if server.paramOverride is defined and server.paramOverride.bootstrapServers is defined %}
+        {% if server.paramOverride and server.paramOverride.bootstrapServers %}
         bootstrapServers: {{ server.paramOverride.bootstrapServers }}
         {% else %}
         # bootstrapServers:
         {% endif %}
       {# keyConverterSchemaRegistryUrl #}
-        {% if server.paramOverride is defined and server.paramOverride.keyConverterSchemaRegistryUrl is defined %}
+        {% if server.paramOverride and server.paramOverride.keyConverterSchemaRegistryUrl %}
         keyConverterSchemaRegistryUrl: {{ server.paramOverride.keyConverterSchemaRegistryUrl }}
         {% else %}
         # keyConverterSchemaRegistryUrl:
         {% endif %}
       {# valueConverterSchemaRegistryUrl #}
-        {% if server.paramOverride is defined and server.paramOverride.valueConverterSchemaRegistryUrl is defined %}
+        {% if server.paramOverride and server.paramOverride.valueConverterSchemaRegistryUrl %}
         valueConverterSchemaRegistryUrl: {{ server.paramOverride.valueConverterSchemaRegistryUrl }}
         {% else %}
         # valueConverterSchemaRegistryUrl:
         {% endif %}
       {# configStorageTopic #}
-        {% if server.paramOverride is defined and server.paramOverride.configStorageTopic is defined %}
+        {% if server.paramOverride and server.paramOverride.configStorageTopic %}
         configStorageTopic: {{ server.paramOverride.configStorageTopic }}
         {% else %}
         # configStorageTopic:
         {% endif %}
       {# offsetStorageTopic #}
-        {% if server.paramOverride is defined and server.paramOverride.offsetStorageTopic is defined %}
+        {% if server.paramOverride and server.paramOverride.offsetStorageTopic %}
         offsetStorageTopic: {{ server.paramOverride.offsetStorageTopic }}
         {% else %}
         # offsetStorageTopic:
         {% endif %}
       {# statusStorageTopic #}
-        {% if server.paramOverride is defined and server.paramOverride.statusStorageTopic is defined %}
+        {% if server.paramOverride and server.paramOverride.statusStorageTopic %}
         statusStorageTopic: {{ server.paramOverride.statusStorageTopic }}
         {% else %}
         # statusStorageTopic:
         {% endif %}
       {# pluginPath #}
-        {% if server.paramOverride is defined and server.paramOverride.pluginPath is defined %}
+        {% if server.paramOverride and server.paramOverride.pluginPath %}
         pluginPath: {{ server.paramOverride.pluginPath }}
         {% else %}
         # pluginPath:

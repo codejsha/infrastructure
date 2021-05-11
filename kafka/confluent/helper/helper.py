@@ -34,6 +34,7 @@ def create_prop_file(server, prop, servers=None):
 
     # schema-registry
     elif server.server_type == ServerType.SCHEMA_REGISTRY:
+        edited_prop = replace_param('schema.registry.group.id', f'{server.group_id}', edited_prop)
         edited_prop = replace_param('host.name', f'{server.host_name}', edited_prop)
         edited_prop = replace_param('listeners', f'{server.listeners}', edited_prop)
         edited_prop = replace_param('kafkastore.bootstrap.servers', f'{server.bootstrap_servers}', edited_prop)
@@ -41,6 +42,10 @@ def create_prop_file(server, prop, servers=None):
     # kafka-connect
     elif server.server_type == ServerType.KAFKA_CONNECT:
         edited_prop = replace_param('group.id', f'{server.group_id}', edited_prop)
+        edited_prop = replace_param('rest.host.name', f'{server.listen_address}', edited_prop)
+        edited_prop = replace_param('rest.port', f'{server.listen_port}', edited_prop)
+        edited_prop = replace_param('rest.advertised.host.name', f'{server.advertised_listen_address}', edited_prop)
+        edited_prop = replace_param('rest.advertised.port', f'{server.advertised_listen_port}', edited_prop)
         edited_prop = replace_param('bootstrap.servers', f'{server.bootstrap_servers}', edited_prop)
         edited_prop = replace_param('key.converter.schema.registry.url',
                                     f'{server.key_converter_schema_registry_url}', edited_prop)
@@ -54,6 +59,10 @@ def create_prop_file(server, prop, servers=None):
     # replicator
     elif server.server_type == ServerType.REPLICATOR:
         edited_prop = replace_param('group.id', f'{server.group_id}', edited_prop)
+        edited_prop = replace_param('rest.host.name', f'{server.listen_address}', edited_prop)
+        edited_prop = replace_param('rest.port', f'{server.listen_port}', edited_prop)
+        edited_prop = replace_param('rest.advertised.host.name', f'{server.advertised_listen_address}', edited_prop)
+        edited_prop = replace_param('rest.advertised.port', f'{server.advertised_listen_port}', edited_prop)
         edited_prop = replace_param('bootstrap.servers', f'{server.bootstrap_servers}', edited_prop)
         edited_prop = replace_param('key.converter.schema.registry.url',
                                     f'{server.key_converter_schema_registry_url}', edited_prop)
@@ -67,17 +76,18 @@ def create_prop_file(server, prop, servers=None):
     # kafka-rest
     elif server.server_type == ServerType.KAFKA_REST:
         edited_prop = replace_param('id', f'{server.server_id}', edited_prop)
+        edited_prop = replace_param('listeners', f'{server.listeners}', edited_prop)
+        edited_prop = replace_param('advertised.listeners', f'{server.advertised_listeners}', edited_prop)
         edited_prop = replace_param('bootstrap.servers', f'{server.bootstrap_servers}', edited_prop)
         edited_prop = replace_param('schema.registry.url', f'{server.schema_registry_url}', edited_prop)
 
     # ksqldb
     elif server.server_type == ServerType.KSQLDB:
         edited_prop = replace_param('ksql.service.id', f'{server.group_id}', edited_prop)
-        edited_prop = replace_param('state.dir', f'{server.data_dir}', edited_prop)
-        edited_prop = replace_param('state.dir', f'{server.data_dir}', edited_prop)
+        edited_prop = replace_param('ksql.streams.state.dir', f'{server.data_dir}', edited_prop)
         edited_prop = replace_param('listeners', f'{server.listeners}', edited_prop)
-        edited_prop = replace_param('advertised.listener', f'{server.advertised_listener}', edited_prop)
-        edited_prop = replace_param('bootstrap.servers', f'{server.bootstrap_servers}', edited_prop)
+        edited_prop = replace_param('ksql.advertised.listener', f'{server.advertised_listener}', edited_prop)
+        edited_prop = replace_param('ksql.streams.bootstrap.servers', f'{server.bootstrap_servers}', edited_prop)
         edited_prop = replace_param('ksql.schema.registry.url', f'{server.schema_registry_url}', edited_prop)
 
     # control-center
@@ -136,7 +146,14 @@ def create_log_script_file(server, log):
     write_file(f'output/scripts/server-log/{server.file.log}', edited_log)
 
 
-def create_server_file(base, server_dict, prop_dict, start_dict, stop_dict, log_dict):
+def create_grep_script_file(server, grep):
+    edited_log = grep
+    edited_log = replace_variable('SERVER_NAME', f'{server.server_name}', edited_log)
+    edited_log = replace_variable('LOG_DIR', f'{server.log_dir}', edited_log)
+    write_file(f'output/scripts/server-grep/{server.file.grep}', edited_log)
+
+
+def create_server_file(base, server_dict, prop_dict, start_dict, stop_dict, log_dict, grep_dict):
     for server_type, servers in server_dict.items():
         for server in servers:
             if server.server_type == ServerType.ZOOKEEPER:
@@ -146,6 +163,7 @@ def create_server_file(base, server_dict, prop_dict, start_dict, stop_dict, log_
             create_start_script_file(base, server, start_dict.get(server_type))
             create_stop_script_file(base, server, stop_dict.get(server_type))
             create_log_script_file(server, log_dict.get(ServerType.ANY))
+            create_grep_script_file(server, grep_dict.get(ServerType.ANY))
 
     for server in [servers[0] for servers in server_dict.values() if servers]:
         create_common_stop_script_file(base, server, stop_dict.get(server.server_type))
@@ -209,9 +227,10 @@ def main():
     start_data = read_start_template_data(current_dir)
     stop_data = read_stop_template_data(current_dir)
     log_data = read_log_template_data(current_dir)
+    grep_data = read_grep_template_data(current_dir)
 
     # create files
-    create_server_file(base_data, server_data, prop_data, start_data, stop_data, log_data)
+    create_server_file(base_data, server_data, prop_data, start_data, stop_data, log_data, grep_data)
 
     # create other files
     create_start_and_stop_symlink_script_file(server_data)

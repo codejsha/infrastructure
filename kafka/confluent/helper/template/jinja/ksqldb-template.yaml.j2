@@ -1,29 +1,28 @@
-{% if ksqlDb is defined %}
+{% if ksqlDb %}
+{% set component = ksqlDb %}
 ksqlDb:
   common:
-    {% if ksqlDb.common.stopScript is defined %}
-    stopScript: {{ ksqlDb.common.stopScript }}
-    {% else %}
-    stopScript: {{ defaultKsqlDbStopScript }}
-    {% endif %}
+    {% set stopScript = component.common.stopScript if component.common.stopScript
+        else defaultKsqlDbStopScript %}
+    stopScript: {{ stopScript }}
     param:
     {# dataDir #}
-      dataDir: {{ ksqlDb.common.param.dataDir }}
+      dataDir: {{ component.common.param.dataDir }}
     {# logDir #}
-      logDir: {{ ksqlDb.common.param.logDir }}
+      logDir: {{ component.common.param.logDir }}
     {# groupId #}
-      groupId: {{ ksqlDb.common.param.groupId }}
+      groupId: {{ component.common.param.groupId }}
     {# listeners #}
-      {% if ksqlDb.common.param.listeners is defined %}
-      listeners: {{ ksqlDb.common.param.listeners }}
+      {% if component.common.param.listeners %}
+      listeners: {{ component.common.param.listeners }}
       {% else %}
       listeners: http://0.0.0.0:{{ defaultKsqlDbListenPort }}
       {% endif %}
     {# bootstrapServers #}
-      {% if ksqlDb.common.param.bootstrapServers is defined %}
-      bootstrapServers: {{ ksqlDb.common.param.bootstrapServers }}
+      {% if component.common.param.bootstrapServers %}
+      bootstrapServers: {{ component.common.param.bootstrapServers }}
       {% else %}
-      {% if kafka.servers is defined %}
+      {% if kafka.servers %}
       bootstrapServers: {% for server in kafka.servers -%}
       {{ server.serverName }}:{{ defaultKafkaListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
@@ -33,10 +32,10 @@ ksqlDb:
       {% endif %}
       {{ '' }}
     {# schemaRegistryUrl #}
-      {% if ksqlDb.common.param.schemaRegistryUrl is defined %}
-      schemaRegistryUrl: {{ ksqlDb.common.param.schemaRegistryUrl }}
+      {% if component.common.param.schemaRegistryUrl %}
+      schemaRegistryUrl: {{ component.common.param.schemaRegistryUrl }}
       {% else %}
-      {% if schemaRegistry.servers is defined %}
+      {% if schemaRegistry.servers %}
       schemaRegistryUrl: {% for server in schemaRegistry.servers -%}
       http://{{ server.serverName }}:{{ defaultSchemaRegistryListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
@@ -47,55 +46,55 @@ ksqlDb:
       {{ '' }}
 
   servers:
-    {% for server in ksqlDb.servers %}
+    {% for server in component.servers %}
     - serverName: {{ server.serverName }}
     {# hostName #}
-      {% if server.hostName is defined %}
+      {% if server.hostName %}
       hostName: {{ server.hostName }}
       {% else %}
       hostName: {{ server.serverName }}
       {% endif %}
-    {# ipAddress #}
-      ipAddress: {{ server.ipAddress }}
+    {# hostAddress #}
+      hostAddress: {{ server.hostAddress }}
     {# advertisedListener #}
-      {% if server.advertisedListener is defined %}
+      {% if server.advertisedListener %}
       advertisedListener: {{ server.advertisedListener }}
       {% else %}
       advertisedListener: http://{{ server.serverName }}:{{ defaultKsqlDbListenPort }}
       {% endif %}
       paramOverride:
       {# groupId #}
-        {% if server.paramOverride is defined and server.paramOverride.groupId is defined %}
+        {% if server.paramOverride and server.paramOverride.groupId %}
         groupId: {{ server.paramOverride.groupId }}
         {% else %}
         # groupId:
         {% endif %}
       {# dataDir #}
-        {% if server.paramOverride is defined and server.paramOverride.dataDir is defined %}
+        {% if server.paramOverride and server.paramOverride.dataDir %}
         dataDir: {{ server.paramOverride.dataDir }}
         {% else %}
         # dataDir:
         {% endif %}
       {# logDir #}
-        {% if server.paramOverride is defined and server.paramOverride.logDir is defined %}
+        {% if server.paramOverride and server.paramOverride.logDir %}
         logDir: {{ server.paramOverride.logDir }}
         {% else %}
         # logDir:
         {% endif %}
       {# listeners #}
-        {% if server.paramOverride is defined and server.paramOverride.listeners is defined %}
+        {% if server.paramOverride and server.paramOverride.listeners %}
         listeners: {{ server.paramOverride.listeners }}
         {% else %}
         # listeners:
         {% endif %}
       {# bootstrapServers #}
-        {% if server.paramOverride is defined and server.paramOverride.bootstrapServers is defined %}
+        {% if server.paramOverride and server.paramOverride.bootstrapServers %}
         bootstrapServers: {{ server.paramOverride.bootstrapServers }}
         {% else %}
         # bootstrapServers:
         {% endif %}
       {# schemaRegistryUrl #}
-        {% if server.paramOverride is defined and server.paramOverride.schemaRegistryUrl is defined %}
+        {% if server.paramOverride and server.paramOverride.schemaRegistryUrl %}
         schemaRegistryUrl: {{ server.paramOverride.schemaRegistryUrl }}
         {% else %}
         # schemaRegistryUrl:

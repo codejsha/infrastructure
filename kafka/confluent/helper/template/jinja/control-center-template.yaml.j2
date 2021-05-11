@@ -1,21 +1,20 @@
-{% if controlCenter is defined %}
+{% if controlCenter %}
+{% set component = controlCenter %}
 controlCenter:
   common:
-    {% if controlCenter.common.stopScript is defined %}
-    stopScript: {{ controlCenter.common.stopScript }}
-    {% else %}
-    stopScript: {{ defaultControlCenterStopScript }}
-    {% endif %}
+    {% set stopScript = component.common.stopScript if component.common.stopScript
+        else defaultControlCenterStopScript %}
+    stopScript: {{ stopScript }}
     param:
     {# dataDir #}
-      dataDir: {{ controlCenter.common.param.dataDir }}
+      dataDir: {{ component.common.param.dataDir }}
     {# logDir #}
-      logDir: {{ controlCenter.common.param.logDir }}
+      logDir: {{ component.common.param.logDir }}
     {# bootstrapServers #}
-      {% if controlCenter.common.param.bootstrapServers is defined %}
-      bootstrapServers: {{ controlCenter.common.param.bootstrapServers }}
+      {% if component.common.param.bootstrapServers %}
+      bootstrapServers: {{ component.common.param.bootstrapServers }}
       {% else %}
-      {% if kafka.servers is defined %}
+      {% if kafka.servers %}
       bootstrapServers: {% for server in kafka.servers -%}
       {{ server.serverName }}:{{ defaultKafkaListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
@@ -25,10 +24,10 @@ controlCenter:
       {% endif %}
       {{ '' }}
     {# zookeeperConnect #}
-      {% if controlCenter.common.param.zookeeperConnect is defined %}
-      zookeeperConnect: {{ controlCenter.common.param.zookeeperConnect }}
+      {% if component.common.param.zookeeperConnect %}
+      zookeeperConnect: {{ component.common.param.zookeeperConnect }}
       {% else %}
-      {% if zookeeper.servers is defined %}
+      {% if zookeeper.servers %}
       zookeeperConnect: {% for server in zookeeper.servers -%}
       {{ server.serverName }}:{{ defaultZookeeperClientPort }}
       {%- if not loop.last -%},{% endif %}
@@ -40,10 +39,10 @@ controlCenter:
       {% endif %}
       {{ '' }}
     {# schemaRegistryUrl #}
-      {% if controlCenter.common.param.schemaRegistryUrl is defined %}
-      schemaRegistryUrl: {{ controlCenter.common.param.schemaRegistryUrl }}
+      {% if component.common.param.schemaRegistryUrl %}
+      schemaRegistryUrl: {{ component.common.param.schemaRegistryUrl }}
       {% else %}
-      {% if schemaRegistry.servers is defined %}
+      {% if schemaRegistry.servers %}
       schemaRegistryUrl: {% for server in schemaRegistry.servers -%}
       http://{{ server.serverName }}:{{ defaultSchemaRegistryListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
@@ -53,10 +52,10 @@ controlCenter:
       {% endif %}
       {{ '' }}
     {# kafkaConnectUrl #}
-      {% if controlCenter.common.param.kafkaConnectUrl is defined %}
-      kafkaConnectUrl: {{ controlCenter.common.param.kafkaConnectUrl }}
+      {% if component.common.param.kafkaConnectUrl %}
+      kafkaConnectUrl: {{ component.common.param.kafkaConnectUrl }}
       {% else %}
-      {% if kafkaConnect.servers is defined %}
+      {% if kafkaConnect.servers %}
       kafkaConnectUrl: {% for server in kafkaConnect.servers -%}
       http://{{ server.serverName }}:{{ defaultKafkaConnectListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
@@ -66,10 +65,10 @@ controlCenter:
       {% endif %}
       {{ '' }}
     {# kafkaRestUrl #}
-      {% if controlCenter.common.param.kafkaRestUrl is defined %}
-      kafkaRestUrl: {{ controlCenter.common.param.kafkaRestUrl }}
+      {% if component.common.param.kafkaRestUrl %}
+      kafkaRestUrl: {{ component.common.param.kafkaRestUrl }}
       {% else %}
-      {% if kafkaRest.servers is defined %}
+      {% if kafkaRest.servers %}
       kafkaRestUrl: {% for server in kafkaRest.servers -%}
       http://{{ server.serverName }}:{{ defaultKafkaRestListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
@@ -79,10 +78,10 @@ controlCenter:
       {% endif %}
       {{ '' }}
     {# ksqlDbUrl #}
-      {% if controlCenter.common.param.ksqlDbUrl is defined %}
-      ksqlDbUrl: {{ controlCenter.common.param.ksqlDbUrl }}
+      {% if component.common.param.ksqlDbUrl %}
+      ksqlDbUrl: {{ component.common.param.ksqlDbUrl }}
       {% else %}
-      {% if ksqlDb.servers is defined %}
+      {% if ksqlDb.servers %}
       ksqlDbUrl: {% for server in ksqlDb.servers -%}
       http://{{ server.serverName }}:{{ defaultKsqlDbListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
@@ -93,63 +92,63 @@ controlCenter:
       {{ '' }}
 
   servers:
-    {% for server in controlCenter.servers %}
+    {% for server in component.servers %}
     - serverName: {{ server.serverName }}
     {# hostName #}
-      {% if server.hostName is defined %}
+      {% if server.hostName %}
       hostName: {{ server.hostName }}
       {% else %}
       hostName: {{ server.serverName }}
       {% endif %}
-    {# ipAddress #}
-      ipAddress: {{ server.ipAddress }}
+    {# hostAddress #}
+      hostAddress: {{ server.hostAddress }}
     {# serverId #}
       serverId: {{ server.serverId }}
       paramOverride:
       {# dataDir #}
-        {% if server.paramOverride is defined and server.paramOverride.dataDir is defined %}
+        {% if server.paramOverride and server.paramOverride.dataDir %}
         dataDir: {{ server.paramOverride.dataDir }}
         {% else %}
         # dataDir:
         {% endif %}
       {# logDir #}
-        {% if server.paramOverride is defined and server.paramOverride.logDir is defined %}
+        {% if server.paramOverride and server.paramOverride.logDir %}
         logDir: {{ server.paramOverride.logDir }}
         {% else %}
         # logDir:
         {% endif %}
       {# bootstrapServers #}
-        {% if server.paramOverride is defined and server.paramOverride.bootstrapServers is defined %}
+        {% if server.paramOverride and server.paramOverride.bootstrapServers %}
         bootstrapServers: {{ server.paramOverride.bootstrapServers }}
         {% else %}
         # bootstrapServers:
         {% endif %}
       {# zookeeperConnect #}
-        {% if server.paramOverride is defined and server.paramOverride.zookeeperConnect is defined %}
+        {% if server.paramOverride and server.paramOverride.zookeeperConnect %}
         zookeeperConnect: {{ server.paramOverride.zookeeperConnect }}
         {% else %}
         # zookeeperConnect:
         {% endif %}
       {# schemaRegistryUrl #}
-        {% if server.paramOverride is defined and server.paramOverride.schemaRegistryUrl is defined %}
+        {% if server.paramOverride and server.paramOverride.schemaRegistryUrl %}
         schemaRegistryUrl: {{ server.paramOverride.schemaRegistryUrl }}
         {% else %}
         # schemaRegistryUrl:
         {% endif %}
       {# kafkaConnectUrl #}
-        {% if server.paramOverride is defined and server.paramOverride.kafkaConnectUrl is defined %}
+        {% if server.paramOverride and server.paramOverride.kafkaConnectUrl %}
         kafkaConnectUrl: {{ server.paramOverride.kafkaConnectUrl }}
         {% else %}
         # kafkaConnectUrl:
         {% endif %}
       {# kafkaRestUrl #}
-        {% if server.paramOverride is defined and server.paramOverride.kafkaRestUrl is defined %}
+        {% if server.paramOverride and server.paramOverride.kafkaRestUrl %}
         kafkaRestUrl: {{ server.paramOverride.kafkaRestUrl }}
         {% else %}
         # kafkaRestUrl:
         {% endif %}
       {# ksqlDbUrl #}
-        {% if server.paramOverride is defined and server.paramOverride.ksqlDbUrl is defined %}
+        {% if server.paramOverride and server.paramOverride.ksqlDbUrl %}
         ksqlDbUrl: {{ server.paramOverride.ksqlDbUrl }}
         {% else %}
         # ksqlDbUrl:

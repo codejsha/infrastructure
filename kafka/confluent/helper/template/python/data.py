@@ -28,6 +28,7 @@ class ServerFile:
     start: any
     stop: str
     log: any
+    grep: any
 
 
 @dataclass
@@ -35,7 +36,7 @@ class Server:
     server_type: ServerType
     server_name: str
     host_name: str
-    ip_address: str
+    host_address: str
     stop_script: str
     file: ServerFile
 
@@ -63,6 +64,7 @@ class Kafka(Server):
 
 @dataclass
 class SchemaRegistry(Server):
+    group_id: str
     log_dir: str
     listeners: str
     bootstrap_servers: str
@@ -72,6 +74,10 @@ class SchemaRegistry(Server):
 class KafkaConnect(Server):
     group_id: str
     log_dir: str
+    listen_address: str
+    listen_port: str
+    advertised_listen_address: str
+    advertised_listen_port: str
     bootstrap_servers: str
     key_converter_schema_registry_url: str
     value_converter_schema_registry_url: str
@@ -85,6 +91,10 @@ class KafkaConnect(Server):
 class Replicator(Server):
     group_id: str
     log_dir: str
+    listen_address: str
+    listen_port: str
+    advertised_listen_address: str
+    advertised_listen_port: str
     bootstrap_servers: str
     key_converter_schema_registry_url: str
     value_converter_schema_registry_url: str
@@ -98,6 +108,8 @@ class Replicator(Server):
 class KafkaRest(Server):
     server_id: str
     log_dir: str
+    listeners: str
+    advertised_listeners: str
     bootstrap_servers: str
     schema_registry_url: str
 
@@ -122,7 +134,9 @@ class ControlCenter(Server):
     zookeeper_connect: str
     schema_registry_url: str
     kafka_connect_url: str
+    # replicator_url: str
     kafka_rest_url: str
     ksql_db_url: str
+    # ksql_db_advertised_url: str
 
 # endregion

@@ -1,25 +1,28 @@
-{% if schemaRegistry is defined %}
+{% if schemaRegistry %}
+{% set component = schemaRegistry %}
 schemaRegistry:
   common:
-    {% if schemaRegistry.common.stopScript is defined %}
-    stopScript: {{ schemaRegistry.common.stopScript }}
-    {% else %}
-    stopScript: {{ defaultSchemaRegistryStopScript }}
-    {% endif %}
+    {% set stopScript = component.common.stopScript if component.common.stopScript
+        else defaultSchemaRegistryStopScript %}
+    stopScript: {{ stopScript }}
     param:
     {# logDir #}
-      logDir: {{ schemaRegistry.common.param.logDir }}
+      logDir: {{ component.common.param.logDir }}
+    {# groupId #}
+      {% set groupId = component.common.param.groupId if component.common.param.groupId
+          else defaultSchemaRegistryGroupId %}
+      groupId: {{ groupId }}
     {# listeners #}
-      {% if schemaRegistry.common.param.listeners is defined %}
-      listeners: {{ schemaRegistry.common.param.listeners }}
+      {% if component.common.param.listeners %}
+      listeners: {{ component.common.param.listeners }}
       {% else %}
       listeners: http://0.0.0.0:{{ defaultSchemaRegistryListenPort }}
       {% endif %}
     {# bootstrapServers #}
-      {% if schemaRegistry.common.param.bootstrapServers is defined %}
-      bootstrapServers: {{ schemaRegistry.common.param.bootstrapServers }}
+      {% if component.common.param.bootstrapServers %}
+      bootstrapServers: {{ component.common.param.bootstrapServers }}
       {% else %}
-      {% if kafka.servers is defined %}
+      {% if kafka.servers %}
       bootstrapServers: {% for server in kafka.servers -%}
       PLAINTEXT://{{ server.serverName }}:{{ defaultKafkaListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
@@ -30,31 +33,37 @@ schemaRegistry:
       {{ '' }}
 
   servers:
-    {% for server in schemaRegistry.servers %}
+    {% for server in component.servers %}
     - serverName: {{ server.serverName }}
     {# hostName #}
-      {% if server.hostName is defined %}
+      {% if server.hostName %}
       hostName: {{ server.hostName }}
       {% else %}
       hostName: {{ server.serverName }}
       {% endif %}
-    {# ipAddress #}
-      ipAddress: {{ server.ipAddress }}
+    {# hostAddress #}
+      hostAddress: {{ server.hostAddress }}
       paramOverride:
+      {# groupId #}
+        {% if server.paramOverride and server.paramOverride.groupId %}
+        groupId: {{ server.paramOverride.groupId }}
+        {% else %}
+        # groupId:
+        {% endif %}
       {# logDir #}
-        {% if server.paramOverride is defined and server.paramOverride.logDir is defined %}
+        {% if server.paramOverride and server.paramOverride.logDir %}
         logDir: {{ server.paramOverride.logDir }}
         {% else %}
         # logDir:
         {% endif %}
       {# listeners #}
-        {% if server.paramOverride is defined and server.paramOverride.listeners is defined %}
+        {% if server.paramOverride and server.paramOverride.listeners %}
         listeners: {{ server.paramOverride.listeners }}
         {% else %}
         # listeners:
         {% endif %}
       {# bootstrapServers #}
-        {% if server.paramOverride is defined and server.paramOverride.bootstrapServers is defined %}
+        {% if server.paramOverride and server.paramOverride.bootstrapServers %}
         bootstrapServers: {{ server.paramOverride.bootstrapServers }}
         {% else %}
         # bootstrapServers:

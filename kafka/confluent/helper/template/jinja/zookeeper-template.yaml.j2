@@ -1,69 +1,62 @@
-{% if zookeeper is defined %}
+{% if zookeeper %}
+{% set component = zookeeper %}
 zookeeper:
   common:
-    {% if zookeeper.common.stopScript is defined %}
-    stopScript: {{ zookeeper.common.stopScript }}
-    {% else %}
-    stopScript: {{ defaultZookeeperStopScript }}
-    {% endif %}
+    {% set stopScript = component.common.stopScript if component.common.stopScript
+        else defaultZookeeperStopScript %}
+    stopScript: {{ stopScript }}
     param:
-      {# dataDir #}
-      dataDir: {{ zookeeper.common.param.dataDir }}
-      {# logDir #}
-      logDir: {{ zookeeper.common.param.logDir }}
-      {# clientPort #}
-      {% if zookeeper.common.param.clientPort is defined %}
-      clientPort: {{ zookeeper.common.param.clientPort }}
-      {% else %}
-      clientPort: {{ defaultZookeeperClientPort }}
-      {% endif %}
-      {# peerToPeerPort #}
-      {% if zookeeper.common.param.peerToPeerPort is defined %}
-      peerToPeerPort: {{ zookeeper.common.param.peerToPeerPort }}
-      {% else %}
-      peerToPeerPort: {{ defaultZookeeperPeerToPeerPort }}
-      {% endif %}
+    {# dataDir #}
+      dataDir: {{ component.common.param.dataDir }}
+    {# logDir #}
+      logDir: {{ component.common.param.logDir }}
+    {# clientPort #}
+      {% set clientPort = component.common.param.clientPort if component.common.param.clientPort
+          else defaultZookeeperClientPort %}
+      clientPort: {{ clientPort }}
+    {# peerToPeerPort #}
+      {% set peerToPeerPort = component.common.param.peerToPeerPort if component.common.param.peerToPeerPort
+          else defaultZookeeperPeerToPeerPort %}
+      peerToPeerPort: {{ peerToPeerPort }}
     {# zNode #}
-      {% if kafka.common.param.zNode is defined %}
-      zNode: {{ kafka.common.param.zNode }}
-      {% else %}
-      zNode: {{ defaultZookeeperZNode }}
-      {% endif %}
+      {% set zNode = component.common.param.zNode if component.common.param.zNode
+          else defaultZookeeperZNode %}
+      zNode: {{ zNode }}
 
   servers:
-    {% for server in zookeeper.servers %}
+    {% for server in component.servers %}
     - serverName: {{ server.serverName }}
-      {# hostName #}
-      {% if server.hostName is defined %}
+    {# hostName #}
+      {% if server.hostName %}
       hostName: {{ server.hostName }}
       {% else %}
       hostName: {{ server.serverName }}
       {% endif %}
-      {# ipAddress #}
-      ipAddress: {{ server.ipAddress }}
-      {# serverId #}
+    {# hostAddress #}
+      hostAddress: {{ server.hostAddress }}
+    {# serverId #}
       serverId: {{ server.serverId }}
       paramOverride:
-        {# dataDir #}
-        {% if server.paramOverride is defined and server.paramOverride.dataDir is defined %}
+      {# dataDir #}
+        {% if server.paramOverride and server.paramOverride.dataDir %}
         dataDir: {{ server.paramOverride.dataDir }}
         {% else %}
         # dataDir:
         {% endif %}
-        {# logDir #}
-        {% if server.paramOverride is defined and server.paramOverride.logDir is defined %}
+      {# logDir #}
+        {% if server.paramOverride and server.paramOverride.logDir %}
         logDir: {{ server.paramOverride.logDir }}
         {% else %}
         # logDir:
         {% endif %}
-        {# clientPort #}
-        {% if server.paramOverride is defined and server.paramOverride.clientPort is defined %}
+      {# clientPort #}
+        {% if server.paramOverride and server.paramOverride.clientPort %}
         clientPort: {{ server.paramOverride.clientPort }}
         {% else %}
         # clientPort:
         {% endif %}
-        {# peerToPeerPort #}
-        {% if server.paramOverride is defined and server.paramOverride.peerToPeerPort is defined %}
+      {# peerToPeerPort #}
+        {% if server.paramOverride and server.paramOverride.peerToPeerPort %}
         peerToPeerPort: {{ server.paramOverride.peerToPeerPort }}
         {% else %}
         # peerToPeerPort:

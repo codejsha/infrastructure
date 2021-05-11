@@ -1,21 +1,30 @@
-{% if replicator is defined %}
+{% if replicator %}
+{% set component = replicator %}
 replicator:
   common:
-    {% if replicator.common.stopScript is defined %}
-    stopScript: {{ replicator.common.stopScript }}
-    {% else %}
-    stopScript: {{ defaultReplicatorStopScript }}
-    {% endif %}
+    {% set stopScript = component.common.stopScript if component.common.stopScript
+        else defaultReplicatorStopScript %}
+    stopScript: {{ stopScript }}
     param:
     {# logDir #}
-      logDir: {{ replicator.common.param.logDir }}
+      logDir: {{ component.common.param.logDir }}
     {# groupId #}
-      groupId: {{ replicator.common.param.groupId }}
-    {# bootstrapServers #}
-      {% if replicator.common.param.bootstrapServers is defined %}
-      bootstrapServers: {{ replicator.common.param.bootstrapServers }}
+      groupId: {{ component.common.param.groupId }}
+    {# listenAddress #}
+      {% if component.common.param.listenAddress %}
+      listenAddress: {{ component.common.param.listenAddress }}
       {% else %}
-      {% if kafka.servers is defined %}
+      listenAddress: '0.0.0.0'
+      {% endif %}
+    {# listenPort #}
+      {% set listenPort = component.common.param.listenPort if component.common.param.listenPort
+          else defaultReplicatorListenPort %}
+      listenPort: {{ listenPort }}
+    {# bootstrapServers #}
+      {% if component.common.param.bootstrapServers %}
+      bootstrapServers: {{ component.common.param.bootstrapServers }}
+      {% else %}
+      {% if kafka.servers %}
       bootstrapServers: {% for server in kafka.servers -%}
       PLAINTEXT://{{ server.serverName }}:{{ defaultKafkaListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
@@ -25,10 +34,10 @@ replicator:
       {% endif %}
       {{ '' }}
     {# keyConverterSchemaRegistryUrl #}
-      {% if replicator.common.param.keyConverterSchemaRegistryUrl is defined %}
-      keyConverterSchemaRegistryUrl: {{ replicator.common.param.keyConverterSchemaRegistryUrl }}
+      {% if component.common.param.keyConverterSchemaRegistryUrl %}
+      keyConverterSchemaRegistryUrl: {{ component.common.param.keyConverterSchemaRegistryUrl }}
       {% else %}
-      {% if schemaRegistry.servers is defined %}
+      {% if schemaRegistry.servers %}
       keyConverterSchemaRegistryUrl: {% for server in schemaRegistry.servers -%}
       http://{{ server.serverName }}:{{ defaultSchemaRegistryListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
@@ -38,10 +47,10 @@ replicator:
       {% endif %}
       {{ '' }}
     {# valueConverterSchemaRegistryUrl #}
-      {% if replicator.common.param.valueConverterSchemaRegistryUrl is defined %}
-      valueConverterSchemaRegistryUrl: {{ replicator.common.param.valueConverterSchemaRegistryUrl }}
+      {% if component.common.param.valueConverterSchemaRegistryUrl %}
+      valueConverterSchemaRegistryUrl: {{ component.common.param.valueConverterSchemaRegistryUrl }}
       {% else %}
-      {% if schemaRegistry.servers is defined %}
+      {% if schemaRegistry.servers %}
       valueConverterSchemaRegistryUrl: {% for server in schemaRegistry.servers -%}
       http://{{ server.serverName }}:{{ defaultSchemaRegistryListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
@@ -51,92 +60,109 @@ replicator:
       {% endif %}
       {{ '' }}
     {# configStorageTopic #}
-      {% if replicator.common.param.configStorageTopic is defined %}
-      configStorageTopic: {{ replicator.common.param.configStorageTopic }}
-      {% else %}
-      configStorageTopic: {{ defaultReplicatorConfigStorageTopic }}
-      {% endif %}
+      {% set configStorageTopic = component.common.param.configStorageTopic if component.common.param.configStorageTopic
+          else defaultReplicatorConfigStorageTopic %}
+      configStorageTopic: {{ configStorageTopic }}
     {# offsetStorageTopic #}
-      {% if replicator.common.param.offsetStorageTopic is defined %}
-      offsetStorageTopic: {{ replicator.common.param.offsetStorageTopic }}
-      {% else %}
-      offsetStorageTopic: {{ defaultReplicatorOffsetStorageTopic }}
-      {% endif %}
+      {% set offsetStorageTopic = component.common.param.offsetStorageTopic if component.common.param.offsetStorageTopic
+          else defaultReplicatorOffsetStorageTopic %}
+      offsetStorageTopic: {{ offsetStorageTopic }}
     {# statusStorageTopic #}
-      {% if replicator.common.param.statusStorageTopic is defined %}
-      statusStorageTopic: {{ replicator.common.param.statusStorageTopic }}
-      {% else %}
-      statusStorageTopic: {{ defaultReplicatorStatusStorageTopic }}
-      {% endif %}
-    {# pluginPath #}
-      {% if replicator.common.param.pluginPath is defined %}
-      pluginPath: {{ replicator.common.param.pluginPath }}
+      {% set statusStorageTopic = component.common.param.statusStorageTopic if component.common.param.statusStorageTopic
+          else defaultReplicatorStatusStorageTopic %}
+      statusStorageTopic: {{ statusStorageTopic }}
+      {% if component.common.param.pluginPath %}
+      pluginPath: {{ component.common.param.pluginPath }}
       {% else %}
       pluginPath: {{ base.confluentHome }}/share/java,{{ base.confluentHome }}/share/confluent-hub-components
       {% endif %}
 
   servers:
-    {% for server in replicator.servers %}
+    {% for server in component.servers %}
     - serverName: {{ server.serverName }}
     {# hostName #}
-      {% if server.hostName is defined %}
+      {% if server.hostName %}
       hostName: {{ server.hostName }}
       {% else %}
       hostName: {{ server.serverName }}
       {% endif %}
-    {# ipAddress #}
-      ipAddress: {{ server.ipAddress }}
+    {# hostAddress #}
+      hostAddress: {{ server.hostAddress }}
+    {# advertisedListenAddress #}
+      {% if server.advertisedListenAddress %}
+      advertisedListenAddress: {{ server.advertisedListenAddress }}
+      {% else %}
+      advertisedListenAddress: {{ server.serverName }}
+      {% endif %}
+    {# advertisedListenPort #}
+      {% if server.advertisedListenPort %}
+      advertisedListenPort: {{ server.advertisedListenPort }}
+      {% else %}
+      advertisedListenPort: {{ defaultReplicatorListenPort }}
+      {% endif %}
       paramOverride:
       {# groupId #}
-        {% if server.paramOverride is defined and server.paramOverride.groupId is defined %}
+        {% if server.paramOverride and server.paramOverride.groupId %}
         groupId: {{ server.paramOverride.groupId }}
         {% else %}
         # groupId:
         {% endif %}
       {# logDir #}
-        {% if server.paramOverride is defined and server.paramOverride.logDir is defined %}
+        {% if server.paramOverride and server.paramOverride.logDir %}
         logDir: {{ server.paramOverride.logDir }}
         {% else %}
         # logDir:
         {% endif %}
+      {# listenAddress #}
+        {% if server.paramOverride and server.paramOverride.listenAddress %}
+        listenAddress: {{ server.paramOverride.listenAddress }}
+        {% else %}
+        # listenAddress:
+        {% endif %}
+      {# listenPort #}
+        {% if server.paramOverride and server.paramOverride.listenPort %}
+        listenPort: {{ server.paramOverride.listenPort }}
+        {% else %}
+        # listenPort:
+        {% endif %}
       {# bootstrapServers #}
-        {% if server.paramOverride is defined and server.paramOverride.bootstrapServers is defined %}
+        {% if server.paramOverride and server.paramOverride.bootstrapServers %}
         bootstrapServers: {{ server.paramOverride.bootstrapServers }}
         {% else %}
         # bootstrapServers:
         {% endif %}
       {# keyConverterSchemaRegistryUrl #}
-        {% if server.paramOverride is defined and server.paramOverride.keyConverterSchemaRegistryUrl is defined %}
+        {% if server.paramOverride and server.paramOverride.keyConverterSchemaRegistryUrl %}
         keyConverterSchemaRegistryUrl: {{ server.paramOverride.keyConverterSchemaRegistryUrl }}
         {% else %}
         # keyConverterSchemaRegistryUrl:
         {% endif %}
       {# valueConverterSchemaRegistryUrl #}
-        {% if server.paramOverride is defined and server.paramOverride.valueConverterSchemaRegistryUrl is defined %}
+        {% if server.paramOverride and server.paramOverride.valueConverterSchemaRegistryUrl %}
         valueConverterSchemaRegistryUrl: {{ server.paramOverride.valueConverterSchemaRegistryUrl }}
         {% else %}
         # valueConverterSchemaRegistryUrl:
         {% endif %}
       {# configStorageTopic #}
-        {% if server.paramOverride is defined and server.paramOverride.configStorageTopic is defined %}
+        {% if server.paramOverride and server.paramOverride.configStorageTopic %}
         configStorageTopic: {{ server.paramOverride.configStorageTopic }}
         {% else %}
         # configStorageTopic:
         {% endif %}
       {# offsetStorageTopic #}
-        {% if server.paramOverride is defined and server.paramOverride.offsetStorageTopic is defined %}
+        {% if server.paramOverride and server.paramOverride.offsetStorageTopic %}
         offsetStorageTopic: {{ server.paramOverride.offsetStorageTopic }}
         {% else %}
         # offsetStorageTopic:
         {% endif %}
       {# statusStorageTopic #}
-        {% if server.paramOverride is defined and server.paramOverride.statusStorageTopic is defined %}
+        {% if server.paramOverride and server.paramOverride.statusStorageTopic %}
         statusStorageTopic: {{ server.paramOverride.statusStorageTopic }}
         {% else %}
         # statusStorageTopic:
         {% endif %}
       {# pluginPath #}
-        {% if server.paramOverride is defined and server.paramOverride.pluginPath is defined %}
+        {% if server.paramOverride and server.paramOverride.pluginPath %}
         pluginPath: {{ server.paramOverride.pluginPath }}
         {% else %}
         # pluginPath:
