@@ -3,53 +3,56 @@
 CONFLUENT_HOME="/usr/local/confluent"
 SERVER_NAME="control-center1"
 
+# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/confluent-control-center/control-center.properties"
 # PROPERTIES_FILE="${CONFLUENT_HOME}/etc/confluent-control-center/control-center-dev.properties"
 # PROPERTIES_FILE="${CONFLUENT_HOME}/etc/confluent-control-center/control-center-minimal.properties"
 # PROPERTIES_FILE="${CONFLUENT_HOME}/etc/confluent-control-center/control-center-production.properties"
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/confluent-control-center/control-center.properties"
-PROPERTIES_FILE="${CONFLUENT_HOME}/properties/control-center-production1.properties"
+PROPERTIES_FILE="${CONFLUENT_HOME}/properties/control-center1.properties"
 
 DATA_DIR="/mnt/control-center/data"
 LOG_DIR="/mnt/control-center/logs"
 export LOG_DIR
 
-### java home
-# export JAVA_HOME="/usr/lib/jvm/java-11"
-export JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+# JAVA_HOME="/usr/lib/jvm/java-11"
+# JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+export JAVA_HOME
 
 ######################################################################
 
 ### memory options
-KAFKA_HEAP_OPTS="${KAFKA_HEAP_OPTS} -Xms512M -Xmx512M"
-export KAFKA_HEAP_OPTS
+CONTROL_CENTER_HEAP_OPTS="${CONTROL_CENTER_HEAP_OPTS} -Xms512M -Xmx512M"
+export CONTROL_CENTER_HEAP_OPTS
 
 ### performance
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -server"
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:+UseG1GC"
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:MaxGCPauseMillis=20"
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:InitiatingHeapOccupancyPercent=35"
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:+ExplicitGCInvokesConcurrent"
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:MaxInlineLevel=15"
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -Djava.awt.headless=true"
-export KAFKA_JVM_PERFORMANCE_OPTS
+CONTROL_CENTER_JVM_PERFORMANCE_OPTS="${CONTROL_CENTER_JVM_PERFORMANCE_OPTS} -server"
+CONTROL_CENTER_JVM_PERFORMANCE_OPTS="${CONTROL_CENTER_JVM_PERFORMANCE_OPTS} -XX:+UseG1GC"
+CONTROL_CENTER_JVM_PERFORMANCE_OPTS="${CONTROL_CENTER_JVM_PERFORMANCE_OPTS} -XX:MaxGCPauseMillis=20"
+CONTROL_CENTER_JVM_PERFORMANCE_OPTS="${CONTROL_CENTER_JVM_PERFORMANCE_OPTS} -XX:InitiatingHeapOccupancyPercent=35"
+CONTROL_CENTER_JVM_PERFORMANCE_OPTS="${CONTROL_CENTER_JVM_PERFORMANCE_OPTS} -XX:+ExplicitGCInvokesConcurrent"
+CONTROL_CENTER_JVM_PERFORMANCE_OPTS="${CONTROL_CENTER_JVM_PERFORMANCE_OPTS} -XX:MaxInlineLevel=15"
+CONTROL_CENTER_JVM_PERFORMANCE_OPTS="${CONTROL_CENTER_JVM_PERFORMANCE_OPTS} -Djava.awt.headless=true"
+export CONTROL_CENTER_JVM_PERFORMANCE_OPTS
 
 ### generic jvm settings
-KAFKA_OPTS="${KAFKA_OPTS} -D${SERVER_NAME}"
-export KAFKA_OPTS
+CONTROL_CENTER_OPTS="${CONTROL_CENTER_OPTS} -D${SERVER_NAME}"
+export CONTROL_CENTER_OPTS
 
 ### gc option
 export GC_LOG_ENABLED="true"
 
 ### jmx
 # export JMX_PORT=""
-KAFKA_JMX_OPTS="${KAFKA_JMX_OPTS} -Dcom.sun.management.jmxremote"
-KAFKA_JMX_OPTS="${KAFKA_JMX_OPTS} -Dcom.sun.management.jmxremote.authenticate=false"
-KAFKA_JMX_OPTS="${KAFKA_JMX_OPTS} -Dcom.sun.management.jmxremote.ssl=false "
-export KAFKA_JMX_OPTS
+CONTROL_CENTER_JMX_OPTS="${CONTROL_CENTER_JMX_OPTS} -Dcom.sun.management.jmxremote"
+CONTROL_CENTER_JMX_OPTS="${CONTROL_CENTER_JMX_OPTS} -Dcom.sun.management.jmxremote.authenticate=false"
+CONTROL_CENTER_JMX_OPTS="${CONTROL_CENTER_JMX_OPTS} -Dcom.sun.management.jmxremote.ssl=false "
+export CONTROL_CENTER_JMX_OPTS
 
 ### log4j
-# KAFKA_LOG4J_OPTS="${KAFKA_LOG4J_OPTS}"
-# export KAFKA_LOG4J_OPTS
+# CONTROL_CENTER_LOG4J_OPTS="${CONTROL_CENTER_LOG4J_OPTS}"
+# export CONTROL_CENTER_LOG4J_OPTS
+
+######################################################################
 
 ######################################################################
 

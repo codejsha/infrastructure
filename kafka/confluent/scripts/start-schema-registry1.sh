@@ -9,43 +9,46 @@ PROPERTIES_FILE="${CONFLUENT_HOME}/properties/schema-registry1.properties"
 LOG_DIR="/mnt/schema-registry/logs"
 export LOG_DIR
 
-### java home
-# export JAVA_HOME="/usr/lib/jvm/java-11"
-export JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+# JAVA_HOME="/usr/lib/jvm/java-11"
+# JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+export JAVA_HOME
 
 ######################################################################
 
 ### memory options
-KAFKA_HEAP_OPTS="${KAFKA_HEAP_OPTS} -Xms512M -Xmx512M"
-export KAFKA_HEAP_OPTS
+SCHEMA_REGISTRY_HEAP_OPTS="${SCHEMA_REGISTRY_HEAP_OPTS} -Xms512M -Xmx512M"
+export SCHEMA_REGISTRY_HEAP_OPTS
 
 ### performance
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -server"
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:+UseG1GC"
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:MaxGCPauseMillis=20"
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:InitiatingHeapOccupancyPercent=35"
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:+ExplicitGCInvokesConcurrent"
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:MaxInlineLevel=15"
-KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -Djava.awt.headless=true"
-export KAFKA_JVM_PERFORMANCE_OPTS
+SCHEMA_REGISTRY_JVM_PERFORMANCE_OPTS="${SCHEMA_REGISTRY_JVM_PERFORMANCE_OPTS} -server"
+SCHEMA_REGISTRY_JVM_PERFORMANCE_OPTS="${SCHEMA_REGISTRY_JVM_PERFORMANCE_OPTS} -XX:+UseG1GC"
+SCHEMA_REGISTRY_JVM_PERFORMANCE_OPTS="${SCHEMA_REGISTRY_JVM_PERFORMANCE_OPTS} -XX:MaxGCPauseMillis=20"
+SCHEMA_REGISTRY_JVM_PERFORMANCE_OPTS="${SCHEMA_REGISTRY_JVM_PERFORMANCE_OPTS} -XX:InitiatingHeapOccupancyPercent=35"
+SCHEMA_REGISTRY_JVM_PERFORMANCE_OPTS="${SCHEMA_REGISTRY_JVM_PERFORMANCE_OPTS} -XX:+ExplicitGCInvokesConcurrent"
+SCHEMA_REGISTRY_JVM_PERFORMANCE_OPTS="${SCHEMA_REGISTRY_JVM_PERFORMANCE_OPTS} -XX:MaxInlineLevel=15"
+SCHEMA_REGISTRY_JVM_PERFORMANCE_OPTS="${SCHEMA_REGISTRY_JVM_PERFORMANCE_OPTS} -Djava.awt.headless=true"
+export SCHEMA_REGISTRY_JVM_PERFORMANCE_OPTS
 
 ### generic jvm settings
-KAFKA_OPTS="${KAFKA_OPTS} -D${SERVER_NAME}"
-export KAFKA_OPTS
+SCHEMA_REGISTRY_OPTS="${SCHEMA_REGISTRY_OPTS} -D${SERVER_NAME}"
+export SCHEMA_REGISTRY_OPTS
 
 ### gc option
 export GC_LOG_ENABLED="true"
 
 ### jmx
 # export JMX_PORT=""
-KAFKA_JMX_OPTS="${KAFKA_JMX_OPTS} -Dcom.sun.management.jmxremote"
-KAFKA_JMX_OPTS="${KAFKA_JMX_OPTS} -Dcom.sun.management.jmxremote.authenticate=false"
-KAFKA_JMX_OPTS="${KAFKA_JMX_OPTS} -Dcom.sun.management.jmxremote.ssl=false "
-export KAFKA_JMX_OPTS
+SCHEMA_REGISTRY_JMX_OPTS="${SCHEMA_REGISTRY_JMX_OPTS} -Dcom.sun.management.jmxremote"
+SCHEMA_REGISTRY_JMX_OPTS="${SCHEMA_REGISTRY_JMX_OPTS} -Dcom.sun.management.jmxremote.authenticate=false"
+SCHEMA_REGISTRY_JMX_OPTS="${SCHEMA_REGISTRY_JMX_OPTS} -Dcom.sun.management.jmxremote.ssl=false "
+export SCHEMA_REGISTRY_JMX_OPTS
 
 ### log4j
-# KAFKA_LOG4J_OPTS="${KAFKA_LOG4J_OPTS}"
-# export KAFKA_LOG4J_OPTS
+# SCHEMA_REGISTRY_LOG4J_OPTS="${SCHEMA_REGISTRY_LOG4J_OPTS}"
+# export SCHEMA_REGISTRY_LOG4J_OPTS
+
+######################################################################
 
 ######################################################################
 

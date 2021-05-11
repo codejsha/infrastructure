@@ -10,9 +10,10 @@ DATA_DIR="/mnt/kafka/data"
 LOG_DIR="/mnt/kafka/logs"
 export LOG_DIR
 
-### java home
-# export JAVA_HOME="/usr/lib/jvm/java-11"
-export JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+# JAVA_HOME="/usr/lib/jvm/java-11"
+# JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+export JAVA_HOME
 
 ######################################################################
 
@@ -32,6 +33,7 @@ export KAFKA_JVM_PERFORMANCE_OPTS
 
 ### generic jvm settings
 KAFKA_OPTS="${KAFKA_OPTS} -D${SERVER_NAME}"
+# KAFKA_OPTS="${KAFKA_OPTS} -javaagent:/${CONFLUENT_HOME}/prometheus/jmx_prometheus_javaagent-0.15.0.jar=1234:/${CONFLUENT_HOME}/prometheus/kafka_broker.yaml"
 export KAFKA_OPTS
 
 ### gc option

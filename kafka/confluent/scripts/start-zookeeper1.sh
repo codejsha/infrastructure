@@ -12,8 +12,10 @@ LOG_DIR="/mnt/zookeeper/logs"
 export LOG_DIR
 
 ### java home
-# export JAVA_HOME="/usr/lib/jvm/java-11"
-export JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+# JAVA_HOME="/usr/lib/jvm/java-11"
+# JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+export JAVA_HOME
 
 ######################################################################
 
@@ -48,6 +50,8 @@ export KAFKA_JMX_OPTS
 ### log4j
 # KAFKA_LOG4J_OPTS="${KAFKA_LOG4J_OPTS}"
 # export KAFKA_LOG4J_OPTS
+
+######################################################################
 
 ######################################################################
 

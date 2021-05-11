@@ -1,17 +1,16 @@
 #!/bin/bash
 
 CONFLUENT_HOME="/usr/local/confluent"
-SERVER_NAME="zookeeper3"
-MYID="3"
+SERVER_NAME="replicator1"
 
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/kafka/zookeeper.properties"
-PROPERTIES_FILE="${CONFLUENT_HOME}/properties/zookeeper3.properties"
+# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/kafka-connect-replicator/replicator.properties"
+# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/kafka-connect-replicator/replicator-connect-standalone.properties"
+# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/kafka-connect-replicator/replicator-connect-distributed.properties"
+PROPERTIES_FILE="${CONFLUENT_HOME}/properties/replicator1.properties"
 
-DATA_DIR="/mnt/zookeeper/data"
-LOG_DIR="/mnt/zookeeper/logs"
+LOG_DIR="/mnt/replicator/logs"
 export LOG_DIR
 
-### java home
 # JAVA_HOME="/usr/lib/jvm/java-11"
 # JAVA_HOME="/usr/lib/jvm/java-1.8.0"
 JAVA_HOME="/usr/lib/jvm/java-1.8.0"
@@ -20,7 +19,7 @@ export JAVA_HOME
 ######################################################################
 
 ### memory options
-KAFKA_HEAP_OPTS="${KAFKA_HEAP_OPTS} -Xms512M -Xmx512M"
+KAFKA_HEAP_OPTS="${KAFKA_HEAP_OPTS} -Xms2G -Xmx2G"
 export KAFKA_HEAP_OPTS
 
 ### performance
@@ -53,6 +52,14 @@ export KAFKA_JMX_OPTS
 
 ######################################################################
 
+### classpath
+CLASSPATH="${CLASSPATH}:${CONFLUENT_HOME}/share/java/kafka-connect-replicator/*"
+export CLASSPATH
+
+### aws credentials
+# export AWS_ACCESS_KEY_ID=""
+# export AWS_SECRET_ACCESS_KEY=""
+
 ######################################################################
 
 ### check current user
@@ -69,17 +76,9 @@ if [ -n "${PID}" ]; then
     exit
 fi
 
-### create data and log dirs
-if [ ! -d "${DATA_DIR}" ]; then
-    mkdir -p ${DATA_DIR}
-fi
+### create log dir
 if [ ! -d "${LOG_DIR}/backup" ]; then
     mkdir -p ${LOG_DIR}/backup
-fi
-
-### create myid file
-if [ ! -f "${DATA_DIR}/myid" ]; then
-    echo ${MYID} > ${DATA_DIR}/myid
 fi
 
 ### backup stdout log
@@ -89,5 +88,5 @@ if [ -f "${LOG_DIR}/nohup.${SERVER_NAME}.out" ]; then
 fi
 
 touch ${LOG_DIR}/nohup.${SERVER_NAME}.out
-nohup ${CONFLUENT_HOME}/bin/zookeeper-server-start ${PROPERTIES_FILE} > ${LOG_DIR}/nohup.${SERVER_NAME}.out 2>&1 &
+nohup ${CONFLUENT_HOME}/bin/replicator ${PROPERTIES_FILE} > ${LOG_DIR}/nohup.${SERVER_NAME}.out 2>&1 &
 tail -f ${LOG_DIR}/nohup.${SERVER_NAME}.out

@@ -3,22 +3,24 @@
 CONFLUENT_HOME="/usr/local/confluent"
 SERVER_NAME="kafka-connect1"
 
+# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/kafka/connect-standalone.properties"
 # PROPERTIES_FILE="${CONFLUENT_HOME}/etc/kafka/connect-distributed.properties"
+# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/schema-registry/connect-avro-standalone.properties"
 # PROPERTIES_FILE="${CONFLUENT_HOME}/etc/schema-registry/connect-avro-distributed.properties"
-# PROPERTIES_FILE="${CONFLUENT_HOME}/properties/connect-distributed.properties"
-PROPERTIES_FILE="${CONFLUENT_HOME}/properties/connect-avro-distributed.properties"
+PROPERTIES_FILE="${CONFLUENT_HOME}/properties/kafka-connect1.properties"
 
 LOG_DIR="/mnt/kafka-connect/logs"
 export LOG_DIR
 
-### java home
-# export JAVA_HOME="/usr/lib/jvm/java-11"
-export JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+# JAVA_HOME="/usr/lib/jvm/java-11"
+# JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+export JAVA_HOME
 
 ######################################################################
 
 ### memory options
-KAFKA_HEAP_OPTS="${KAFKA_HEAP_OPTS} -Xms256M -Xmx2G"
+KAFKA_HEAP_OPTS="${KAFKA_HEAP_OPTS} -Xms2G -Xmx2G"
 export KAFKA_HEAP_OPTS
 
 ### performance
