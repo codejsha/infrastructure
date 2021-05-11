@@ -9,10 +9,13 @@
     "value.converter": "io.confluent.connect.avro.AvroConverter",
     "value.converter.schema.registry.url": "http://schema-registry1:8081,http://schema-registry2:8081",
     "hdfs.url": "hdfs://test.example.com:9000",
-    "format.class": "io.confluent.connect.hdfs3.parquet.ParquetFormat",
-    "partitioner.class": "io.confluent.connect.storage.partitioner.FieldPartitioner",
-    "partition.field.name": "userid",
+    "hadoop.home": "/usr/local/hadoop",
+    "hadoop.conf.dir": "/usr/local/hadoop/etc/hadoop",
+    "topics.dir": "/topics",
+    "logs.dir": "/logs",
     "topics": "pageviews",
+    "format.class": "io.confluent.connect.hdfs3.avro.AvroFormat",
+    "partitioner.class": "io.confluent.connect.storage.partitioner.DefaultPartitioner",
     "flush.size": "3"
   }
 }
