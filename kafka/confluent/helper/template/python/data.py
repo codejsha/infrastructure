@@ -24,11 +24,11 @@ class Base:
 
 @dataclass
 class ServerFile:
-    properties: any
-    start: any
+    properties: str
+    start: str
     stop: str
-    log: any
-    grep: any
+    log: str
+    grep: str
 
 
 @dataclass
