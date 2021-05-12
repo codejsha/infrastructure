@@ -22,7 +22,7 @@ schemaRegistry:
       {% if component.common.param.bootstrapServers %}
       bootstrapServers: {{ component.common.param.bootstrapServers }}
       {% else %}
-      {% if kafka.servers %}
+      {% if kafka and kafka.servers %}
       bootstrapServers: {% for server in kafka.servers -%}
       PLAINTEXT://{{ server.serverName }}:{{ defaultKafkaListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}

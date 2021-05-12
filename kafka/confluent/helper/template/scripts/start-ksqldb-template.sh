@@ -34,6 +34,10 @@ export KSQL_JVM_PERFORMANCE_OPTS
 
 ### generic jvm settings
 KSQL_OPTS="${KSQL_OPTS} -D${SERVER_NAME}"
+# PROMETHEUS_JAVA_AGENT_FILE="${CONFLUENT_HOME}/prometheus/jmx_prometheus_javaagent-0.15.0.jar"
+# PROMETHEUS_EXPORTER_FILE="${CONFLUENT_HOME}/prometheus/confluent_ksql.yml"
+# PROMETHEUS_PORT="1234"
+# KSQL_OPTS="${KSQL_OPTS} -javaagent:${PROMETHEUS_JAVA_AGENT_FILE}=${PROMETHEUS_PORT}:${PROMETHEUS_EXPORTER_FILE}"
 export KSQL_OPTS
 
 ### gc option

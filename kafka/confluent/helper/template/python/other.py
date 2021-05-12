@@ -68,13 +68,13 @@ def create_secure_copy_script_file(base, server_dict):
             data_list.append(f'scp confluent-scripts.tar.gz '
                              f'{base.user}@{server.host_name}:{base.confluent_home}')
 
+    data_list.append(f'')
     for server_type, servers in server_dict.items():
         for server in servers:
             data_list.append(f'# scp confluent-properties.tar.gz '
                              f'{base.user}@{server.host_address}:{base.confluent_home}')
             data_list.append(f'# scp confluent-scripts.tar.gz '
                              f'{base.user}@{server.host_address}:{base.confluent_home}')
-    data_list.append(f'')
 
     edited_hosts = '\n'.join(data_list) + '\n'
     write_file('output/scripts/others/scp-files.sh', edited_hosts)
@@ -82,7 +82,10 @@ def create_secure_copy_script_file(base, server_dict):
 
 def create_kafka_alias_file(base):
     data_list = [
-        f'### kafka aliases\n',
+        f'### kafka aliases',
+        f'###',
+        f'### [ -f ~/.kafka_aliases ] && source ~/.kafka_aliases',
+        f'###\n',
         f'CONFLUENT_HOME={base.confluent_home}',
         f'PATH="${{PATH}}:${{CONFLUENT_HOME}}/bin"',
         f'export PATH\n',

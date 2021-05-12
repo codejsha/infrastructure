@@ -18,7 +18,7 @@ kafkaRest:
       {% if component.common.param.bootstrapServers %}
       bootstrapServers: {{ component.common.param.bootstrapServers }}
       {% else %}
-      {% if kafka.servers %}
+      {% if kafka and kafka.servers %}
       bootstrapServers: {% for server in kafka.servers -%}
       PLAINTEXT://{{ server.serverName }}:{{ defaultKafkaListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
@@ -31,7 +31,7 @@ kafkaRest:
       {% if component.common.param.schemaRegistryUrl %}
       schemaRegistryUrl: {{ component.common.param.schemaRegistryUrl }}
       {% else %}
-      {% if schemaRegistry.servers %}
+      {% if schemaRegistry and schemaRegistry.servers %}
       schemaRegistryUrl: {% for server in schemaRegistry.servers -%}
       http://{{ server.serverName }}:{{ defaultSchemaRegistryListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}

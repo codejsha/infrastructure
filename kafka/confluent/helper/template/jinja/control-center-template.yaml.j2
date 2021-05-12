@@ -14,7 +14,7 @@ controlCenter:
       {% if component.common.param.bootstrapServers %}
       bootstrapServers: {{ component.common.param.bootstrapServers }}
       {% else %}
-      {% if kafka.servers %}
+      {% if kafka and kafka.servers %}
       bootstrapServers: {% for server in kafka.servers -%}
       {{ server.serverName }}:{{ defaultKafkaListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
@@ -27,7 +27,7 @@ controlCenter:
       {% if component.common.param.zookeeperConnect %}
       zookeeperConnect: {{ component.common.param.zookeeperConnect }}
       {% else %}
-      {% if zookeeper.servers %}
+      {% if zookeeper and zookeeper.servers %}
       zookeeperConnect: {% for server in zookeeper.servers -%}
       {{ server.serverName }}:{{ defaultZookeeperClientPort }}
       {%- if not loop.last -%},{% endif %}
@@ -42,7 +42,7 @@ controlCenter:
       {% if component.common.param.schemaRegistryUrl %}
       schemaRegistryUrl: {{ component.common.param.schemaRegistryUrl }}
       {% else %}
-      {% if schemaRegistry.servers %}
+      {% if schemaRegistry and schemaRegistry.servers %}
       schemaRegistryUrl: {% for server in schemaRegistry.servers -%}
       http://{{ server.serverName }}:{{ defaultSchemaRegistryListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
@@ -51,42 +51,16 @@ controlCenter:
       {% endif %}
       {% endif %}
       {{ '' }}
-    {# kafkaConnectUrl #}
-      {% if component.common.param.kafkaConnectUrl %}
-      kafkaConnectUrl: {{ component.common.param.kafkaConnectUrl }}
-      {% else %}
-      {% if kafkaConnect.servers %}
-      kafkaConnectUrl: {% for server in kafkaConnect.servers -%}
-      http://{{ server.serverName }}:{{ defaultKafkaConnectListenPort }}{%- if not loop.last -%},{% endif %}
-      {% endfor %}
-      {% else %}
-      kafkaConnectUrl:
-      {% endif %}
-      {% endif %}
-      {{ '' }}
     {# kafkaRestUrl #}
       {% if component.common.param.kafkaRestUrl %}
       kafkaRestUrl: {{ component.common.param.kafkaRestUrl }}
       {% else %}
-      {% if kafkaRest.servers %}
+      {% if kafkaRest and kafkaRest.servers %}
       kafkaRestUrl: {% for server in kafkaRest.servers -%}
       http://{{ server.serverName }}:{{ defaultKafkaRestListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
       {% else %}
       kafkaRestUrl:
-      {% endif %}
-      {% endif %}
-      {{ '' }}
-    {# ksqlDbUrl #}
-      {% if component.common.param.ksqlDbUrl %}
-      ksqlDbUrl: {{ component.common.param.ksqlDbUrl }}
-      {% else %}
-      {% if ksqlDb.servers %}
-      ksqlDbUrl: {% for server in ksqlDb.servers -%}
-      http://{{ server.serverName }}:{{ defaultKsqlDbListenPort }}{%- if not loop.last -%},{% endif %}
-      {% endfor %}
-      {% else %}
-      ksqlDbUrl:
       {% endif %}
       {% endif %}
       {{ '' }}
@@ -135,23 +109,11 @@ controlCenter:
         {% else %}
         # schemaRegistryUrl:
         {% endif %}
-      {# kafkaConnectUrl #}
-        {% if server.paramOverride and server.paramOverride.kafkaConnectUrl %}
-        kafkaConnectUrl: {{ server.paramOverride.kafkaConnectUrl }}
-        {% else %}
-        # kafkaConnectUrl:
-        {% endif %}
       {# kafkaRestUrl #}
         {% if server.paramOverride and server.paramOverride.kafkaRestUrl %}
         kafkaRestUrl: {{ server.paramOverride.kafkaRestUrl }}
         {% else %}
         # kafkaRestUrl:
-        {% endif %}
-      {# ksqlDbUrl #}
-        {% if server.paramOverride and server.paramOverride.ksqlDbUrl %}
-        ksqlDbUrl: {{ server.paramOverride.ksqlDbUrl }}
-        {% else %}
-        # ksqlDbUrl:
         {% endif %}
     {% include 'file-template.yaml.j2' %}
 

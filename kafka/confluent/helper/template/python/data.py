@@ -119,6 +119,7 @@ class KsqlDB(Server):
     group_id: str
     data_dir: str
     log_dir: str
+    listen_port: str
     listeners: str
     advertised_listener: str
     bootstrap_servers: str
@@ -133,10 +134,6 @@ class ControlCenter(Server):
     bootstrap_servers: str
     zookeeper_connect: str
     schema_registry_url: str
-    kafka_connect_url: str
-    # replicator_url: str
     kafka_rest_url: str
-    ksql_db_url: str
-    # ksql_db_advertised_url: str
 
 # endregion

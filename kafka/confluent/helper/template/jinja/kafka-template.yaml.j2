@@ -20,7 +20,7 @@ kafka:
       {% if component.common.param.zookeeperConnect %}
       zookeeperConnect: {{ component.common.param.zookeeperConnect }}
       {% else %}
-      {% if zookeeper.servers %}
+      {% if zookeeper and zookeeper.servers %}
       zookeeperConnect: {% for server in zookeeper.servers -%}
       {{ server.serverName }}:{{ defaultZookeeperClientPort }}
       {%- if not loop.last -%},{% endif %}
@@ -35,7 +35,7 @@ kafka:
       {% if component.common.param.metricsReporterBootstrapServers %}
       metricsReporterBootstrapServers: {{ component.common.param.metricsReporterBootstrapServers }}
       {% else %}
-      {% if component.servers %}
+      {% if kafka and kafka.servers %}
       metricsReporterBootstrapServers: {% for server in component.servers -%}
       {{ server.serverName }}:{{ defaultKafkaListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}

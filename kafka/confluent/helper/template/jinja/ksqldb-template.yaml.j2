@@ -12,6 +12,10 @@ ksqlDb:
       logDir: {{ component.common.param.logDir }}
     {# groupId #}
       groupId: {{ component.common.param.groupId }}
+    {# listenPort #}
+      {% set listenPort = component.common.param.listenPort if component.common.param.listenPort
+          else defaultKsqlDbListenPort %}
+      listenPort: {{ listenPort }}
     {# listeners #}
       {% if component.common.param.listeners %}
       listeners: {{ component.common.param.listeners }}
@@ -22,7 +26,7 @@ ksqlDb:
       {% if component.common.param.bootstrapServers %}
       bootstrapServers: {{ component.common.param.bootstrapServers }}
       {% else %}
-      {% if kafka.servers %}
+      {% if kafka and kafka.servers %}
       bootstrapServers: {% for server in kafka.servers -%}
       {{ server.serverName }}:{{ defaultKafkaListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
@@ -35,7 +39,7 @@ ksqlDb:
       {% if component.common.param.schemaRegistryUrl %}
       schemaRegistryUrl: {{ component.common.param.schemaRegistryUrl }}
       {% else %}
-      {% if schemaRegistry.servers %}
+      {% if schemaRegistry and schemaRegistry.servers %}
       schemaRegistryUrl: {% for server in schemaRegistry.servers -%}
       http://{{ server.serverName }}:{{ defaultSchemaRegistryListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
@@ -80,6 +84,12 @@ ksqlDb:
         logDir: {{ server.paramOverride.logDir }}
         {% else %}
         # logDir:
+        {% endif %}
+      {# listenPort #}
+        {% if server.paramOverride and server.paramOverride.listenPort %}
+        listenPort: {{ server.paramOverride.listenPort }}
+        {% else %}
+        # listenPort:
         {% endif %}
       {# listeners #}
         {% if server.paramOverride and server.paramOverride.listeners %}

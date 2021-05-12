@@ -90,20 +90,44 @@ def create_prop_file(server, prop, servers=None):
         edited_prop = replace_param('ksql.streams.bootstrap.servers', f'{server.bootstrap_servers}', edited_prop)
         edited_prop = replace_param('ksql.schema.registry.url', f'{server.schema_registry_url}', edited_prop)
 
+    write_file(f'output/properties/{server.file.properties}', edited_prop)
+
+
+def create_c3_prop_file(server, prop, connect_servers, replicator_servers, ksqldb_servers):
+    edited_prop = prop
+
     # control-center
-    elif server.server_type == ServerType.CONTROL_CENTER:
+    if server.server_type == ServerType.CONTROL_CENTER:
         edited_prop = replace_param('confluent.controlcenter.id', f'{server.server_id}', edited_prop)
         edited_prop = replace_param('confluent.controlcenter.data.dir', f'{server.data_dir}', edited_prop)
         edited_prop = replace_param('bootstrap.servers', f'{server.bootstrap_servers}', edited_prop)
         edited_prop = replace_param('zookeeper.connect', f'{server.zookeeper_connect}', edited_prop)
         edited_prop = replace_param('confluent.controlcenter.schema.registry.url',
                                     f'{server.schema_registry_url}', edited_prop)
-        edited_prop = replace_param('confluent.controlcenter.connect.connectcluster.cluster',
-                                    f'{server.kafka_connect_url}', edited_prop)
+
+        # kafka-connect cluster
+        connect_dict = get_sub_cluster_dict(connect_servers)
+        replicator_dict = get_sub_cluster_dict(replicator_servers)
+
+        connect_and_replicator_dict = {**replicator_dict, **connect_dict}
+        for gid, cluster_url in connect_and_replicator_dict.items():
+            edited_prop = append_param(f'confluent.controlcenter.connect.{gid}.cluster',
+                                       f'confluent.controlcenter.connect.<name>.cluster',
+                                       f'{cluster_url}', edited_prop)
+
+        # kafka-rest cluster
         edited_prop = replace_param('confluent.controlcenter.streams.cprest.url',
                                     f'{server.kafka_rest_url}', edited_prop)
-        edited_prop = replace_param('confluent.controlcenter.ksql.ksqlcluster.url',
-                                    f'{server.ksql_db_url}', edited_prop)
+
+        # ksqldb cluster
+        ksqldb_dict = get_sub_cluster_dict(ksqldb_servers)
+        for gid, cluster_url in ksqldb_dict.items():
+            edited_prop = append_param(f'confluent.controlcenter.ksql.{gid}.advertised.url',
+                                       f'confluent.controlcenter.ksql.<name>.advertised.url',
+                                       f'{cluster_url}', edited_prop)
+            edited_prop = append_param(f'confluent.controlcenter.ksql.{gid}.url',
+                                       f'confluent.controlcenter.ksql.<name>.advertised.url',
+                                       f'{cluster_url}', edited_prop)
 
     write_file(f'output/properties/{server.file.properties}', edited_prop)
 
@@ -157,9 +181,16 @@ def create_server_file(base, server_dict, prop_dict, start_dict, stop_dict, log_
     for server_type, servers in server_dict.items():
         for server in servers:
             if server.server_type == ServerType.ZOOKEEPER:
-                create_prop_file(server, prop_dict.get(server_type), server_dict.get(server_type))
+                create_prop_file(server, prop_dict.get(ServerType.ZOOKEEPER),
+                                 server_dict.get(ServerType.ZOOKEEPER))
+            elif server.server_type == ServerType.CONTROL_CENTER:
+                create_c3_prop_file(server, prop_dict.get(ServerType.CONTROL_CENTER),
+                                    server_dict.get(ServerType.KAFKA_CONNECT),
+                                    server_dict.get(ServerType.REPLICATOR),
+                                    server_dict.get(ServerType.KSQLDB))
             else:
                 create_prop_file(server, prop_dict.get(server_type))
+
             create_start_script_file(base, server, start_dict.get(server_type))
             create_stop_script_file(base, server, stop_dict.get(server_type))
             create_log_script_file(server, log_dict.get(ServerType.ANY))
@@ -193,6 +224,11 @@ def generate_zookeeper_cluster_list(server_id, servers):
 # region function
 
 
+def append_param(param, prev_param, param_value, prop):
+    edited_prop = re.sub(f'\n# {prev_param}=.*', f'\n# {prev_param}=\n{param}={param_value}', prop, count=1)
+    return edited_prop
+
+
 def replace_param(param, param_value, prop):
     edited_prop = re.sub(f'\n{param}=.*', f'\n{param}={param_value}', prop, count=1)
     return edited_prop
@@ -201,6 +237,21 @@ def replace_param(param, param_value, prop):
 def replace_variable(variable, variable_value, script):
     edited_prop = re.sub(f'\n{variable}=.*', f'\n{variable}="{variable_value}"', script, count=1)
     return edited_prop
+
+
+def get_sub_cluster_dict(cluster_servers):
+    temp_dict = {}
+    cluster_dict = {}
+
+    for server in cluster_servers:
+        if server.group_id in temp_dict:
+            temp_dict[f'{server.group_id}'].append(f'http://{server.host_name}:{server.listen_port}')
+        else:
+            temp_dict[f'{server.group_id}'] = [f'http://{server.host_name}:{server.listen_port}']
+    for gid, url in temp_dict.items():
+        cluster_dict[gid] = ','.join(url)
+
+    return cluster_dict
 
 
 # endregion
