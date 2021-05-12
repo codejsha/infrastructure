@@ -34,7 +34,7 @@ def create_start_and_stop_symlink_script_file(server_dict):
             data_list.append(f'        ln -snf {server.file.log} log.sh')
             data_list.append(f'    fi')
             data_list.append(f'    if [ -f "{server.file.grep}" ]; then')
-            data_list.append(f'        ln -snf {server.file.grep} log.sh')
+            data_list.append(f'        ln -snf {server.file.grep} grep.sh')
             data_list.append(f'    fi')
     data_list.append(f'fi')
 
