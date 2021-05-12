@@ -33,7 +33,10 @@ export KAFKA_JVM_PERFORMANCE_OPTS
 
 ### generic jvm settings
 KAFKA_OPTS="${KAFKA_OPTS} -D${SERVER_NAME}"
-# KAFKA_OPTS="${KAFKA_OPTS} -javaagent:/${CONFLUENT_HOME}/prometheus/jmx_prometheus_javaagent-0.15.0.jar=1234:/${CONFLUENT_HOME}/prometheus/kafka_broker.yaml"
+# PROMETHEUS_JAVA_AGENT_FILE="${CONFLUENT_HOME}/prometheus/jmx_prometheus_javaagent-0.15.0.jar"
+# PROMETHEUS_EXPORTER_FILE="${CONFLUENT_HOME}/prometheus/kafka_broker.yml"
+# PROMETHEUS_PORT="1234"
+# KAFKA_OPTS="${KAFKA_OPTS} -javaagent:${PROMETHEUS_JAVA_AGENT_FILE}=${PROMETHEUS_PORT}:${PROMETHEUS_EXPORTER_FILE}"
 export KAFKA_OPTS
 
 ### gc option
