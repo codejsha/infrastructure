@@ -105,7 +105,7 @@ def create_c3_prop_file(server, prop, connect_servers, replicator_servers, ksqld
         edited_prop = replace_param('confluent.controlcenter.schema.registry.url',
                                     f'{server.schema_registry_url}', edited_prop)
 
-        # kafka-connect cluster
+        # kafka-connect and replicator clusters
         connect_dict = get_sub_cluster_dict(connect_servers)
         replicator_dict = get_sub_cluster_dict(replicator_servers)
 
@@ -119,7 +119,7 @@ def create_c3_prop_file(server, prop, connect_servers, replicator_servers, ksqld
         edited_prop = replace_param('confluent.controlcenter.streams.cprest.url',
                                     f'{server.kafka_rest_url}', edited_prop)
 
-        # ksqldb cluster
+        # ksqldb clusters
         ksqldb_dict = get_sub_cluster_dict(ksqldb_servers)
         for gid, cluster_url in ksqldb_dict.items():
             edited_prop = append_param(f'confluent.controlcenter.ksql.{gid}.advertised.url',
@@ -273,7 +273,7 @@ def main():
     base_data = read_base_data(values_data)
     server_data = read_server_data(values_data)
 
-    # read template
+    # read templates
     prop_data = read_prop_template_data(current_dir)
     start_data = read_start_template_data(current_dir)
     stop_data = read_stop_template_data(current_dir)
