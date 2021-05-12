@@ -20,7 +20,7 @@ kafkaRest:
       {% else %}
       {% if kafka.servers %}
       bootstrapServers: {% for server in kafka.servers -%}
-      PLAINTEXT://{{ server.serverName }}:{{ defaultKafkaRestListenPort }}{%- if not loop.last -%},{% endif %}
+      PLAINTEXT://{{ server.serverName }}:{{ defaultKafkaListenPort }}{%- if not loop.last -%},{% endif %}
       {% endfor %}
       {% else %}
       bootstrapServers:
