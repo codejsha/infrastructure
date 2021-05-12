@@ -16,6 +16,11 @@ def create_start_and_stop_symlink_script_file(server_dict):
             else:
                 data_list.append(f'elif [ "$(hostname)" == "{server.host_name}" ]; then')
 
+            data_list.append(f'    find . -maxdepth 1 -name "*.sh" \\\n'
+                             f'        -not \( -name "{server.file.start}" -o -name "{server.file.stop}" \\\n'
+                             f'        -o -name "{server.stop_script}" -o -name "{server.file.log}" \\\n'
+                             f'        -o -name "{server.file.grep}" \) | xargs rm -f')
+
             data_list.append(f'    if [ -f "{server.file.start}" ]; then')
             data_list.append(f'        ln -snf {server.file.start} start.sh')
             data_list.append(f'    fi')
