@@ -18,8 +18,9 @@ function docker_run_mysql8 {
         --publish 33060:33060 \
         --env MYSQL_ROOT_PASSWORD="${PASSWORD}" \
         --mount type="bind",src="${MYSQL_VOLUME_DIR}/data",dst="/var/lib/mysql" \
-        --mount type="bind",src="${MYSQL_VOLUME_DIR}/config-file.cnf",dst="/etc/mysql/conf.d/config-file.cnf" \
         mysql:8.0.23
+
+        # --mount type="bind",src="${MYSQL_VOLUME_DIR}/config-file.cnf",dst="/etc/mysql/conf.d/config-file.cnf" \
 }
 
 function docker_run_mysql5 {
@@ -30,8 +31,9 @@ function docker_run_mysql5 {
         --publish 33060:33060 \
         --env MYSQL_ROOT_PASSWORD="${PASSWORD}" \
         --mount type="bind",src="${MYSQL_VOLUME_DIR}/data",dst="/var/lib/mysql" \
-        --mount type="bind",src="${MYSQL_VOLUME_DIR}/config-file.cnf",dst="/etc/mysql/conf.d/config-file.cnf" \
         mysql:5.7.33
+
+        # --mount type="bind",src="${MYSQL_VOLUME_DIR}/config-file.cnf",dst="/etc/mysql/conf.d/config-file.cnf" \
 }
 
 ######################################################################
