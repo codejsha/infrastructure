@@ -28,7 +28,7 @@ Using default response p.
 
 ```txt
 Partition number (1-4, default 1):  // ENTER
-First sector (2048-2147483647, default 2048):  // ENTER 
+First sector (2048-2147483647, default 2048):  // ENTER
 Last sector, +sectors or +size{K,M,G,T,P} (2048-2147483647, default 2147483647):  // ENTER
 
 Created a new partition 1 of type 'Linux' and of size 1024 GiB.
@@ -45,13 +45,13 @@ list block devices (`lsblk`):
 
 ```txt
 NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
-sda           8:0    0   256G  0 disk 
+sda           8:0    0   256G  0 disk
 ├─sda1        8:1    0   200M  0 part /boot/efi
 ├─sda2        8:2    0     1G  0 part /boot
-└─sda3        8:3    0 254.8G  0 part 
+└─sda3        8:3    0 254.8G  0 part
   └─cl-root 253:0    0 254.8G  0 lvm  /
-sdb           8:16   0     1T  0 disk 
-└─sdb1        8:17   0  1024G  0 part 
+sdb           8:16   0     1T  0 disk
+└─sdb1        8:17   0  1024G  0 part
 ```
 
 ## Create target backstore
@@ -61,7 +61,7 @@ sudo targetcli
 ```
 
 ```txt
-/> /backstores/block 
+/> /backstores/block
 /> create name=block_backend dev=/dev/sdb
 Created block storage object block_backend using /dev/sdb.
 ```
