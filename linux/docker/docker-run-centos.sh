@@ -7,8 +7,7 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 
 function docker_run_centos8 {
     docker container run \
-        --interactive \
-        --tty \
+        -it \
         --name centos8 \
         --mount type="bind",src="/mnt/share",dst="/mnt/share",readonly \
         --mount type="bind",src="/mnt/storage",dst="/mnt/storage" \
@@ -17,8 +16,7 @@ function docker_run_centos8 {
 
 function docker_run_centos7 {
     docker container run \
-        --interactive \
-        --tty \
+        -it \
         --name centos7 \
         --mount type="bind",src="/mnt/share",dst="/mnt/share",readonly \
         --mount type="bind",src="/mnt/storage",dst="/mnt/storage" \
@@ -27,8 +25,7 @@ function docker_run_centos7 {
 
 function docker_run_centos6 {
     docker container run \
-        --interactive \
-        --tty \
+        -it \
         --name centos6 \
         --mount type="bind",src="/mnt/share",dst="/mnt/share",readonly \
         --mount type="bind",src="/mnt/storage",dst="/mnt/storage" \

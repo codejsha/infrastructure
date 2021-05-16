@@ -10,8 +10,7 @@ sudo mkdir -p ${TEAMCITY_VOLUME_DIR}
 
 function docker_run_teamcity_server {
     docker container run \
-        --interactive \
-        --tty \
+        -it \
         --name teamcity-server-instance \
         --publish 8111:8111 \
         --mount type="bind",src="/mnt/volume/teamcity/datadir",dst="/data/teamcity_server/datadir" \

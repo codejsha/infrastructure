@@ -7,8 +7,7 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 
 function docker_run_ubuntu {
     docker container run \
-        --interactive \
-        --tty \
+        -it \
         --name ubuntu \
         --mount type="bind",src="/mnt/share",dst="/mnt/share",readonly \
         --mount type="bind",src="/mnt/storage",dst="/mnt/storage" \

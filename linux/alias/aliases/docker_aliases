@@ -3,8 +3,8 @@
 function docker() { echo "+ docker ${@}">&2; command docker ${@}; }
 
 alias dcattach="docker container attach"
-function dcexecbash() { CONTAINER_NAME="${1}"; if [ -n "${CONTAINER_NAME}" ]; then docker container exec --interactive --tty ${1} /bin/bash; fi; }
-function dcexecsh() { CONTAINER_NAME="${1}"; if [ -n "${CONTAINER_NAME}" ]; then docker container exec --interactive --tty ${1} /bin/sh; fi; }
+function dcexecbash() { CONTAINER_NAME="${1}"; if [ -n "${CONTAINER_NAME}" ]; then docker container exec -it ${1} /bin/bash; fi; }
+function dcexecsh() { CONTAINER_NAME="${1}"; if [ -n "${CONTAINER_NAME}" ]; then docker container exec -it ${1} /bin/sh; fi; }
 alias dcinspect="docker container inspect"
 alias dclo="docker container logs --follow"
 alias dclon="docker container logs --follow --tail"
