@@ -6,7 +6,7 @@ services:
     image: zookeeper:latest
     hostname: zookeeper1
     networks:
-      - stream-network
+      - default
     ports:
       - 2181
     environment:
@@ -29,7 +29,7 @@ services:
     image: zookeeper:latest
     hostname: zookeeper2
     networks:
-      - stream-network
+      - default
     ports:
       - 2181
     environment:
@@ -52,7 +52,7 @@ services:
     image: zookeeper:latest
     hostname: zookeeper3
     networks:
-      - stream-network
+      - default
     ports:
       - 2181
     environment:
@@ -71,6 +71,6 @@ services:
       - /mnt/volume/zookeeper/zookeeper3/logs:/logs
 
 networks:
-  stream-network:
+  default:
     external:
       name: stream-network
