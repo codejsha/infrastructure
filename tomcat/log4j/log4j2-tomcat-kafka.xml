@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="error">
     <Appenders>
-        <Kafka name="Kafka" topic="my_topic">
+        <Kafka name="Kafka" topic="my-topic">
             <PatternLayout pattern="[%date] [%level] [%thread] [%class.%method] %message%n"/>
             <Property name="bootstrap.servers">kafka1.example.com:9094,kafka2.example.com:9094,kafka3.example.com:9094</Property>
         </Kafka>
