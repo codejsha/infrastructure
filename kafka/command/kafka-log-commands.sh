@@ -2,6 +2,12 @@
 ### apache kafka
 ######################################################################
 
+### dump log
+
+./kafka-dump-log.sh \
+    --print-data-log \
+    --files /mnt/kafka/data/my-topic-0/00000000000000000000.log
+
 
 
 

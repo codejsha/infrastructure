@@ -7,6 +7,15 @@
     --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
     --topic my-topic
 
+######################################################################
+
+### verifiable producer
+
+./kafka-verifiable-producer.sh \
+    --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
+    --max-messages 100 \
+    --topic verify-test
+
 
 
 
@@ -25,6 +34,24 @@
     --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
     --property parse.key=true \
     --property key.separator=, \
+    --topic my-topic
+
+######################################################################
+
+### avro
+
+./kafka-avro-console-consumer \
+    --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
+    --property print.key=true \
+    --property schema.registry.url=http://schema-registry1:8081 \
+    --property value.schema='{"type":"record","name":"product","fields":[{"name":"string","price":"int"}]}' \
+    --topic my-topic
+
+./kafka-avro-console-consumer \
+    --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 \
+    --property print.key=true \
+    --property schema.registry.url=http://schema-registry1:8081 \
+    --property value.schema="$(< product.avsc)" \
     --topic my-topic
 
 ######################################################################

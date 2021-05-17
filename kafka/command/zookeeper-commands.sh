@@ -2,7 +2,7 @@
 ### apache kafka
 ######################################################################
 
-### kubernetes
+### broker list (kubernetes)
 
 kubectl exec -it my-cluster-zookeeper-0 -- bin/zookeeper-shell.sh localhost:2181 ls /brokers/ids
 
@@ -15,10 +15,12 @@ kubectl exec -it my-cluster-zookeeper-0 -- bin/zookeeper-shell.sh localhost:2181
 
 ### broker list
 
+./zookeeper-shell localhost:2181 ls /brokers/ids
 ./zookeeper-shell zookeeper1:2181,zookeeper2:2181,zookeeper3:2181 ls /brokers/ids
 
-### testcluster znode
-./zookeeper-shell zookeeper1:2181,zookeeper2:2181,zookeeper3:2181 ls /testcluster/brokers/ids
+### clusterlocal znode
+./zookeeper-shell localhost:2181 ls /clusterlocal/brokers/ids
+./zookeeper-shell zookeeper1:2181,zookeeper2:2181,zookeeper3:2181 ls /clusterlocal/brokers/ids
 
 ######################################################################
 
