@@ -21,7 +21,7 @@ export JAVA_HOME
 ######################################################################
 
 ### memory options
-CONTROL_CENTER_HEAP_OPTS="${CONTROL_CENTER_HEAP_OPTS} -Xms512M -Xmx512M"
+CONTROL_CENTER_HEAP_OPTS="${CONTROL_CENTER_HEAP_OPTS} -Xms6g -Xmx6g"
 export CONTROL_CENTER_HEAP_OPTS
 
 ### performance

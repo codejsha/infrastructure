@@ -19,7 +19,7 @@ export JAVA_HOME
 ######################################################################
 
 ### memory options
-KSQL_HEAP_OPTS="${KSQL_HEAP_OPTS} -Xms512M -Xmx512M"
+KSQL_HEAP_OPTS="${KSQL_HEAP_OPTS} -Xms3g -Xmx3g"
 export KSQL_HEAP_OPTS
 
 ### performance
@@ -34,10 +34,10 @@ export KSQL_JVM_PERFORMANCE_OPTS
 
 ### generic jvm settings
 KSQL_OPTS="${KSQL_OPTS} -D${SERVER_NAME}"
-# PROMETHEUS_JAVA_AGENT_FILE="${CONFLUENT_HOME}/prometheus/jmx_prometheus_javaagent-0.15.0.jar"
-# PROMETHEUS_EXPORTER_FILE="${CONFLUENT_HOME}/prometheus/confluent_ksql.yml"
-# PROMETHEUS_PORT="1234"
-# KSQL_OPTS="${KSQL_OPTS} -javaagent:${PROMETHEUS_JAVA_AGENT_FILE}=${PROMETHEUS_PORT}:${PROMETHEUS_EXPORTER_FILE}"
+# JMX_EXPORTER_JAVA_AGENT_FILE="${CONFLUENT_HOME}/prometheus/jmx_prometheus_javaagent-0.15.0.jar"
+# JMX_EXPORTER_CONFIG_FILE="${CONFLUENT_HOME}/prometheus/confluent_ksql.yml"
+# JMX_EXPORTER_HOST_PORT="1234"
+# KSQL_OPTS="${KSQL_OPTS} -javaagent:${JMX_EXPORTER_JAVA_AGENT_FILE}=${JMX_EXPORTER_HOST_PORT}:${JMX_EXPORTER_CONFIG_FILE}"
 export KSQL_OPTS
 
 ### gc option

@@ -19,7 +19,7 @@ export JAVA_HOME
 ######################################################################
 
 ### memory options
-KAFKA_HEAP_OPTS="${KAFKA_HEAP_OPTS} -Xms2G -Xmx2G"
+KAFKA_HEAP_OPTS="${KAFKA_HEAP_OPTS} -Xms2g -Xmx2g"
 export KAFKA_HEAP_OPTS
 
 ### performance
@@ -34,10 +34,10 @@ export KAFKA_JVM_PERFORMANCE_OPTS
 
 ### generic jvm settings
 KAFKA_OPTS="${KAFKA_OPTS} -D${SERVER_NAME}"
-# PROMETHEUS_JAVA_AGENT_FILE="${CONFLUENT_HOME}/prometheus/jmx_prometheus_javaagent-0.15.0.jar"
-# PROMETHEUS_EXPORTER_FILE="${CONFLUENT_HOME}/prometheus/kafka_connect.yml"
-# PROMETHEUS_PORT="1234"
-# KAFKA_OPTS="${KAFKA_OPTS} -javaagent:${PROMETHEUS_JAVA_AGENT_FILE}=${PROMETHEUS_PORT}:${PROMETHEUS_EXPORTER_FILE}"
+# JMX_EXPORTER_JAVA_AGENT_FILE="${CONFLUENT_HOME}/prometheus/jmx_prometheus_javaagent-0.15.0.jar"
+# JMX_EXPORTER_CONFIG_FILE="${CONFLUENT_HOME}/prometheus/kafka_connect.yml"
+# JMX_EXPORTER_HOST_PORT="1234"
+# KAFKA_OPTS="${KAFKA_OPTS} -javaagent:${JMX_EXPORTER_JAVA_AGENT_FILE}=${JMX_EXPORTER_HOST_PORT}:${JMX_EXPORTER_CONFIG_FILE}"
 export KAFKA_OPTS
 
 ### gc option

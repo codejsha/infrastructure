@@ -17,7 +17,7 @@ export JAVA_HOME
 ######################################################################
 
 ### memory options
-KAFKAREST_HEAP_OPTS="${KAFKAREST_HEAP_OPTS} -Xms512M -Xmx512M"
+KAFKAREST_HEAP_OPTS="${KAFKAREST_HEAP_OPTS} -Xms256m -Xmx256m"
 export KAFKAREST_HEAP_OPTS
 
 ### performance
@@ -32,10 +32,10 @@ export KAFKAREST_JVM_PERFORMANCE_OPTS
 
 ### generic jvm settings
 KAFKAREST_OPTS="${KAFKAREST_OPTS} -D${SERVER_NAME}"
-# PROMETHEUS_JAVA_AGENT_FILE="${CONFLUENT_HOME}/prometheus/jmx_prometheus_javaagent-0.15.0.jar"
-# PROMETHEUS_EXPORTER_FILE="${CONFLUENT_HOME}/prometheus/confluent_rest.yml"
-# PROMETHEUS_PORT="1234"
-# KAFKAREST_OPTS="${KAFKAREST_OPTS} -javaagent:${PROMETHEUS_JAVA_AGENT_FILE}=${PROMETHEUS_PORT}:${PROMETHEUS_EXPORTER_FILE}"
+# JMX_EXPORTER_JAVA_AGENT_FILE="${CONFLUENT_HOME}/prometheus/jmx_prometheus_javaagent-0.15.0.jar"
+# JMX_EXPORTER_CONFIG_FILE="${CONFLUENT_HOME}/prometheus/confluent_rest.yml"
+# JMX_EXPORTER_HOST_PORT="1234"
+# KAFKAREST_OPTS="${KAFKAREST_OPTS} -javaagent:${JMX_EXPORTER_JAVA_AGENT_FILE}=${JMX_EXPORTER_HOST_PORT}:${JMX_EXPORTER_CONFIG_FILE}"
 export KAFKAREST_OPTS
 
 ### gc option
