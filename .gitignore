@@ -21,7 +21,6 @@ temp.*
 /kafka/confluent/helper/output/
 /kafka/confluent/helper/rendered-values.yaml
 /kafka/confluent/kubernetes/confluent-operator/
-/kafka/debezium/
 /kafka/strimzi/strimzi-*/
 /kubernetes/kubespray/kubespray/
 /minio/operator/operator/
