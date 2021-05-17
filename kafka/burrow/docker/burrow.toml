@@ -1,0 +1,35 @@
+[zookeeper]
+servers=[ "zookeeper1:2181", "zookeeper2:2181", "zookeeper3:2181" ]
+timeout=6
+root-path="/burrow"
+
+[client-profile.profile]
+kafka-version="0.11.0"
+client-id="docker-client"
+
+[cluster.clusterlocal]
+client-profile="profile"
+class-name="kafka"
+servers=[ "kafka1:9092", "kafka2:9092", "kafka3:9092" ]
+topic-refresh=60
+offset-refresh=30
+groups-reaper-refresh=30
+
+[consumer.clusterlocal]
+class-name="kafka"
+cluster="clusterlocal"
+servers=[ "kafka1:9092", "kafka2:9092", "kafka3:9092" ]
+group-denylist="^(console-consumer-|python-kafka-consumer-).*$"
+group-allowlist=""
+
+[consumer.clusterlocal_zk]
+class-name="kafka_zk"
+cluster="clusterlocal"
+servers=[ "zookeeper1:2181", "zookeeper2:2181", "zookeeper3:2181" ]
+zookeeper-path="/clusterlocal"
+zookeeper-timeout=30
+group-denylist="^(console-consumer-|python-kafka-consumer-).*$"
+group-allowlist=""
+
+[httpserver.default]
+address=":8000"

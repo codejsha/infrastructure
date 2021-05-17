@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  burrow:
+    restart: unless-stopped
+    build: Burrow
+    hostname: burrow
+    container_name: burrow
+    networks:
+      - default
+    ports:
+      - 8000:8000
+    volumes:
+      - type: bind
+        source: /mnt/volume/burrow/docker-config
+        target: /etc/burrow
+      - type: bind
+        source: /mnt/volume/burrow/tmp
+        target: /var/tmp/burrow
+
+networks:
+  default:
+    external:
+      name: stream-network
