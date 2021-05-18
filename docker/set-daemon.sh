@@ -10,5 +10,5 @@ cat <<EOF | sudo tee /etc/docker/daemon.json
 }
 EOF
 
-systemctl daemon-reload
-systemctl restart docker.service
+sudo systemctl daemon-reload
+sudo systemctl restart docker.service

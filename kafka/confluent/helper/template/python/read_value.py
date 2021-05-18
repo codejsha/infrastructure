@@ -176,8 +176,8 @@ def read_control_center_list(values):
 
 
 def transform_dictionary(component_type, common_stop, common_params, server):
-    pop_file = server.pop('file')
-    server_file = {'file': ServerFile(**pop_file)}
+    popped_file = server.pop('file')
+    server_file = {'file': ServerFile(**popped_file)}
     server_override = server.pop('paramOverride')
 
     if server_override is not None:
