@@ -2,10 +2,10 @@ version: "3.8"
 
 services:
   burrow:
-    restart: unless-stopped
     build: Burrow
-    hostname: burrow
     container_name: burrow
+    hostname: burrow
+    restart: unless-stopped
     networks:
       - default
     ports:

@@ -3,6 +3,7 @@ version: "3.1"
 services:
   teamcity-server:
     image: jetbrains/teamcity-server:2018.2.2-linux
+    restart: unless-stopped
     ports:
       - 8111:8111
     volumes:
@@ -11,6 +12,7 @@ services:
 
   teamcity-agent:
     image: jetbrains/teamcity-agent:2018.2.2-linux
+    restart: unless-stopped
     volumes:
       - /team/teamcity-agent/config:/data/teamcity_agent/conf
     environment:
@@ -18,7 +20,7 @@ services:
 
   postgresql:
     image: postgres:11.1
-    restart: always
+    restart: unless-stopped
     ports:
       - 5432:5432
     environment:

@@ -3,8 +3,8 @@ version: "3.8"
 services:
   gitlab:
     image: "gitlab/gitlab-ce:latest"
-    restart: unless-stopped
     hostname: "gitlab.example.com"
+    restart: unless-stopped
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'http://gitlab.example.com:9480'

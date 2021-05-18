@@ -2,9 +2,9 @@ version: "3.8"
 
 services:
   zookeeper1:
-    restart: unless-stopped
     image: zookeeper:latest
     hostname: zookeeper1
+    restart: unless-stopped
     networks:
       - default
     ports:
@@ -27,9 +27,9 @@ services:
       - /mnt/volume/kafka/jmx_exporter:/usr/share/jmx-exporter
 
   zookeeper2:
-    restart: unless-stopped
     image: zookeeper:latest
     hostname: zookeeper2
+    restart: unless-stopped
     networks:
       - default
     ports:
@@ -52,9 +52,9 @@ services:
       - /mnt/volume/kafka/jmx_exporter:/usr/share/jmx-exporter
 
   zookeeper3:
-    restart: unless-stopped
     image: zookeeper:latest
     hostname: zookeeper3
+    restart: unless-stopped
     networks:
       - default
     ports:
@@ -77,9 +77,9 @@ services:
       - /mnt/volume/kafka/jmx_exporter:/usr/share/jmx-exporter
 
   kafka1:
-    restart: unless-stopped
     image: bitnami/kafka:latest
     hostname: kafka1
+    restart: unless-stopped
     networks:
       - default
     depends_on:
@@ -97,9 +97,9 @@ services:
       - /mnt/volume/kafka/jmx_exporter:/usr/share/jmx-exporter
 
   kafka2:
-    restart: unless-stopped
     image: bitnami/kafka:latest
     hostname: kafka2
+    restart: unless-stopped
     networks:
       - default
     depends_on:
@@ -117,9 +117,9 @@ services:
       - /mnt/volume/kafka/jmx_exporter:/usr/share/jmx-exporter
 
   kafka3:
-    restart: unless-stopped
     image: bitnami/kafka:latest
     hostname: kafka3
+    restart: unless-stopped
     networks:
       - default
     depends_on:
@@ -137,10 +137,10 @@ services:
       - /mnt/volume/kafka/jmx_exporter:/usr/share/jmx-exporter
 
   schema-registry:
-    restart: unless-stopped
     image: confluentinc/cp-schema-registry:latest
     container_name: schema-registry
     hostname: schema-registry
+    restart: unless-stopped
     networks:
       - default
     depends_on:
@@ -158,10 +158,10 @@ services:
       - /mnt/volume/kafka/jmx_exporter:/usr/share/jmx-exporter
 
   node-exporter:
-    restart: unless-stopped
     image: prom/node-exporter:latest
     container_name: node-exporter
     hostname: node-exporter
+    restart: unless-stopped
     networks:
       - default
     depends_on:
@@ -179,10 +179,10 @@ services:
       - "^(aufs|proc|nsfs|shm|cgroup|tmpfs|binfmt_misc|debugfs|devpts|fusectl|hugetlbfs|fuse.lxcfs|mqueue|pstore|securityfs|sysfs|autofs|devtmpfs|configfs)"
 
   kafka-lag-exporter:
-    restart: unless-stopped
     image: lightbend/kafka-lag-exporter:latest
     container_name: kafka-lag-exporter
     hostname: kafka-lag-exporter
+    restart: unless-stopped
     volumes:
       - /mnt/volume/kafka/kafka-lag-exporter:/opt/docker/conf
 
@@ -190,6 +190,7 @@ services:
     image: prom/prometheus:latest
     container_name: prometheus
     hostname: prometheus
+    restart: unless-stopped
     networks:
       - default
     depends_on:
@@ -205,6 +206,7 @@ services:
     image: grafana/grafana:latest
     container_name: grafana
     hostname: grafana
+    restart: unless-stopped
     networks:
       - default
     depends_on:
@@ -225,6 +227,7 @@ services:
     image: core.harbor.example.com/library/cmak:latest
     container_name: cmak
     hostname: cmak
+    restart: unless-stopped
     networks:
       - default
     depends_on:
