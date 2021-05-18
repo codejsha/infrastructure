@@ -1,12 +1,14 @@
-function New-ConfluentVM {
+function New-Machine {
     param (
         [Parameter(Mandatory = $true, Position = 0)]
         [string]$VMName,
         [Parameter(Mandatory = $true, Position = 1)]
         [string]$VMPath,
         [Parameter(Mandatory = $true, Position = 2)]
-        [Int64]$VMMemory,
+        [Int64]$VMProcessor,
         [Parameter(Mandatory = $true, Position = 3)]
+        [Int64]$VMMemory,
+        [Parameter(Mandatory = $true, Position = 4)]
         [string]$Switch
     )
 
@@ -24,7 +26,7 @@ function New-ConfluentVM {
     Set-VMFirmware -VMName $VMName `
         -EnableSecureBoot Off
     Set-VMProcessor -VMName $VMName `
-        -Count 2
+        -Count $VMProcessor
     Set-VMMemory -VMName $VMName `
         -DynamicMemoryEnabled $false
     # Add-VMDvdDrive -VMName $VMName  `
@@ -42,16 +44,16 @@ function New-ConfluentVM {
 
 ### Internal
 
-# New-ConfluentVM -VMName "ConfluentNodeMachine0" -VMPath "C:\hyper" -VMMemory 8GB -Switch "AlphaInternal"
-# New-ConfluentVM -VMName "ConfluentNodeMachine1" -VMPath "C:\hyper" -VMMemory 8GB -Switch "AlphaInternal"
-# New-ConfluentVM -VMName "ConfluentNodeMachine2" -VMPath "C:\hyper" -VMMemory 8GB -Switch "AlphaInternal"
-# New-ConfluentVM -VMName "ConfluentNodeMachine3" -VMPath "C:\hyper" -VMMemory 8GB -Switch "AlphaInternal"
-# New-ConfluentVM -VMName "ConfluentNodeMachine4" -VMPath "C:\hyper" -VMMemory 8GB -Switch "AlphaInternal"
-# New-ConfluentVM -VMName "ConfluentNodeMachine5" -VMPath "C:\hyper" -VMMemory 8GB -Switch "AlphaInternal"
+# New-Machine -VMName "ConfluentNodeMachine0" -VMPath "C:\hyper" -VMProcessor 2 -VMMemory 8GB -Switch "AlphaInternal"
+# New-Machine -VMName "ConfluentNodeMachine1" -VMPath "C:\hyper" -VMProcessor 2 -VMMemory 8GB -Switch "AlphaInternal"
+# New-Machine -VMName "ConfluentNodeMachine2" -VMPath "C:\hyper" -VMProcessor 2 -VMMemory 8GB -Switch "AlphaInternal"
+# New-Machine -VMName "ConfluentNodeMachine3" -VMPath "C:\hyper" -VMProcessor 2 -VMMemory 8GB -Switch "AlphaInternal"
+# New-Machine -VMName "ConfluentNodeMachine4" -VMPath "C:\hyper" -VMProcessor 2 -VMMemory 8GB -Switch "AlphaInternal"
+# New-Machine -VMName "ConfluentNodeMachine5" -VMPath "C:\hyper" -VMProcessor 2 -VMMemory 8GB -Switch "AlphaInternal"
 
-New-ConfluentVM -VMName "ConfluentNodeMachine0" -VMPath "$env:USERPROFILE\hyper" -VMMemory 8GB -Switch "AlphaInternal"
-New-ConfluentVM -VMName "ConfluentNodeMachine1" -VMPath "$env:USERPROFILE\hyper" -VMMemory 8GB -Switch "AlphaInternal"
-New-ConfluentVM -VMName "ConfluentNodeMachine2" -VMPath "$env:USERPROFILE\hyper" -VMMemory 8GB -Switch "AlphaInternal"
-New-ConfluentVM -VMName "ConfluentNodeMachine3" -VMPath "$env:USERPROFILE\hyper" -VMMemory 8GB -Switch "AlphaInternal"
-New-ConfluentVM -VMName "ConfluentNodeMachine4" -VMPath "$env:USERPROFILE\hyper" -VMMemory 8GB -Switch "AlphaInternal"
-New-ConfluentVM -VMName "ConfluentNodeMachine5" -VMPath "$env:USERPROFILE\hyper" -VMMemory 8GB -Switch "AlphaInternal"
+New-Machine -VMName "ConfluentNodeMachine0" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 2 -VMMemory 8GB -Switch "AlphaInternal"
+New-Machine -VMName "ConfluentNodeMachine1" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 2 -VMMemory 8GB -Switch "AlphaInternal"
+New-Machine -VMName "ConfluentNodeMachine2" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 2 -VMMemory 8GB -Switch "AlphaInternal"
+New-Machine -VMName "ConfluentNodeMachine3" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 2 -VMMemory 8GB -Switch "AlphaInternal"
+New-Machine -VMName "ConfluentNodeMachine4" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 2 -VMMemory 8GB -Switch "AlphaInternal"
+New-Machine -VMName "ConfluentNodeMachine5" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 2 -VMMemory 8GB -Switch "AlphaInternal"

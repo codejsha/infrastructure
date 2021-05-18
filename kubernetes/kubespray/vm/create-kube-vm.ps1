@@ -1,12 +1,14 @@
-function New-KubeVM {
+function New-Machine {
     param (
         [Parameter(Mandatory = $true, Position = 0)]
         [string]$VMName,
         [Parameter(Mandatory = $true, Position = 1)]
         [string]$VMPath,
         [Parameter(Mandatory = $true, Position = 2)]
-        [Int64]$VMMemory,
+        [Int64]$VMProcessor,
         [Parameter(Mandatory = $true, Position = 3)]
+        [Int64]$VMMemory,
+        [Parameter(Mandatory = $true, Position = 4)]
         [string]$Switch
     )
 
@@ -24,7 +26,7 @@ function New-KubeVM {
     Set-VMFirmware -VMName $VMName `
         -EnableSecureBoot Off
     Set-VMProcessor -VMName $VMName `
-        -Count 2
+        -Count $VMProcessor
     Set-VMMemory -VMName $VMName `
         -DynamicMemoryEnabled $false
     # Add-VMDvdDrive -VMName $VMName  `
@@ -42,21 +44,21 @@ function New-KubeVM {
 
 ### Internal
 
-# New-KubeVM -VMName "KubeAccessMachine" -VMPath "C:\hyper" -VMMemory 6GB -Switch "PlatformInternal"
-# New-KubeVM -VMName "KubeControlPlaneMachine1" -VMPath "C:\hyper" -VMMemory 3GB -Switch "PlatformInternal"
-# New-KubeVM -VMName "KubeControlPlaneMachine2" -VMPath "C:\hyper" -VMMemory 3GB -Switch "PlatformInternal"
-# New-KubeVM -VMName "KubeControlPlaneMachine3" -VMPath "C:\hyper" -VMMemory 3GB -Switch "PlatformInternal"
-# New-KubeVM -VMName "KubeNodeMachine1" -VMPath "C:\hyper" -VMMemory 16GB -Switch "PlatformInternal"
-# New-KubeVM -VMName "KubeNodeMachine2" -VMPath "C:\hyper" -VMMemory 16GB -Switch "PlatformInternal"
-# New-KubeVM -VMName "KubeNodeMachine3" -VMPath "C:\hyper" -VMMemory 16GB -Switch "PlatformInternal"
+# New-Machine -VMName "KubeAccessMachine" -VMPath "C:\hyper" -VMProcessor 2 -VMMemory 6GB -Switch "PlatformInternal"
+# New-Machine -VMName "KubeControlPlaneMachine1" -VMPath "C:\hyper" -VMProcessor 2 -VMMemory 3GB -Switch "PlatformInternal"
+# New-Machine -VMName "KubeControlPlaneMachine2" -VMPath "C:\hyper" -VMProcessor 2 -VMMemory 3GB -Switch "PlatformInternal"
+# New-Machine -VMName "KubeControlPlaneMachine3" -VMPath "C:\hyper" -VMProcessor 2 -VMMemory 3GB -Switch "PlatformInternal"
+# New-Machine -VMName "KubeNodeMachine1" -VMPath "C:\hyper" -VMProcessor 2 -VMMemory 16GB -Switch "PlatformInternal"
+# New-Machine -VMName "KubeNodeMachine2" -VMPath "C:\hyper" -VMProcessor 2 -VMMemory 16GB -Switch "PlatformInternal"
+# New-Machine -VMName "KubeNodeMachine3" -VMPath "C:\hyper" -VMProcessor 2 -VMMemory 16GB -Switch "PlatformInternal"
 
-New-KubeVM -VMName "KubeAccessMachine" -VMPath "$env:USERPROFILE\hyper" -VMMemory 6GB -Switch "PlatformInternal"
-New-KubeVM -VMName "KubeControlPlaneMachine1" -VMPath "$env:USERPROFILE\hyper" -VMMemory 3GB -Switch "PlatformInternal"
-New-KubeVM -VMName "KubeControlPlaneMachine2" -VMPath "$env:USERPROFILE\hyper" -VMMemory 3GB -Switch "PlatformInternal"
-New-KubeVM -VMName "KubeControlPlaneMachine3" -VMPath "$env:USERPROFILE\hyper" -VMMemory 3GB -Switch "PlatformInternal"
-New-KubeVM -VMName "KubeNodeMachine1" -VMPath "$env:USERPROFILE\hyper" -VMMemory 16GB -Switch "PlatformInternal"
-New-KubeVM -VMName "KubeNodeMachine2" -VMPath "$env:USERPROFILE\hyper" -VMMemory 16GB -Switch "PlatformInternal"
-New-KubeVM -VMName "KubeNodeMachine3" -VMPath "$env:USERPROFILE\hyper" -VMMemory 16GB -Switch "PlatformInternal"
+New-Machine -VMName "KubeAccessMachine" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 2 -VMMemory 6GB -Switch "PlatformInternal"
+New-Machine -VMName "KubeControlPlaneMachine1" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 2 -VMMemory 3GB -Switch "PlatformInternal"
+New-Machine -VMName "KubeControlPlaneMachine2" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 2 -VMMemory 3GB -Switch "PlatformInternal"
+New-Machine -VMName "KubeControlPlaneMachine3" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 2 -VMMemory 3GB -Switch "PlatformInternal"
+New-Machine -VMName "KubeNodeMachine1" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 2 -VMMemory 16GB -Switch "PlatformInternal"
+New-Machine -VMName "KubeNodeMachine2" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 2 -VMMemory 16GB -Switch "PlatformInternal"
+New-Machine -VMName "KubeNodeMachine3" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 2 -VMMemory 16GB -Switch "PlatformInternal"
 
 Set-VMNetworkAdapter -VMName "KubeAccessMachine" -StaticMacAddress "00155D0004F0"
 Set-VMNetworkAdapter -VMName "KubeControlPlaneMachine1" -StaticMacAddress "00155D0004F1"
@@ -70,21 +72,21 @@ Set-VMNetworkAdapter -VMName "KubeNodeMachine3" -StaticMacAddress "00155D0004F6"
 
 ### Internal + Private
 
-# New-KubeVM -VMName "KubeAccessMachine" -VMPath "C:\hyper" -VMMemory 6GB -Switch "PlatformPrivate"
-# New-KubeVM -VMName "KubeControlPlaneMachine1" -VMPath "C:\hyper" -VMMemory 3GB -Switch "PlatformPrivate"
-# New-KubeVM -VMName "KubeControlPlaneMachine2" -VMPath "C:\hyper" -VMMemory 3GB -Switch "PlatformPrivate"
-# New-KubeVM -VMName "KubeControlPlaneMachine3" -VMPath "C:\hyper" -VMMemory 3GB -Switch "PlatformPrivate"
-# New-KubeVM -VMName "KubeNodeMachine1" -VMPath "C:\hyper" -VMMemory 16GB -Switch "PlatformPrivate"
-# New-KubeVM -VMName "KubeNodeMachine2" -VMPath "C:\hyper" -VMMemory 16GB -Switch "PlatformPrivate"
-# New-KubeVM -VMName "KubeNodeMachine3" -VMPath "C:\hyper" -VMMemory 16GB -Switch "PlatformPrivate"
+# New-Machine -VMName "KubeAccessMachine" -VMPath "C:\hyper" -VMProcessor 2 -VMMemory 6GB -Switch "PlatformPrivate"
+# New-Machine -VMName "KubeControlPlaneMachine1" -VMPath "C:\hyper" -VMProcessor 2 -VMMemory 3GB -Switch "PlatformPrivate"
+# New-Machine -VMName "KubeControlPlaneMachine2" -VMPath "C:\hyper" -VMProcessor 2 -VMMemory 3GB -Switch "PlatformPrivate"
+# New-Machine -VMName "KubeControlPlaneMachine3" -VMPath "C:\hyper" -VMProcessor 2 -VMMemory 3GB -Switch "PlatformPrivate"
+# New-Machine -VMName "KubeNodeMachine1" -VMPath "C:\hyper" -VMProcessor 2 -VMMemory 16GB -Switch "PlatformPrivate"
+# New-Machine -VMName "KubeNodeMachine2" -VMPath "C:\hyper" -VMProcessor 2 -VMMemory 16GB -Switch "PlatformPrivate"
+# New-Machine -VMName "KubeNodeMachine3" -VMPath "C:\hyper" -VMProcessor 2 -VMMemory 16GB -Switch "PlatformPrivate"
 
-# New-KubeVM -VMName "KubeAccessMachine" -VMPath "$env:USERPROFILE\hyper" -VMMemory 6GB -Switch "PlatformPrivate"
-# New-KubeVM -VMName "KubeControlPlaneMachine1" -VMPath "$env:USERPROFILE\hyper" -VMMemory 3GB -Switch "PlatformPrivate"
-# New-KubeVM -VMName "KubeControlPlaneMachine2" -VMPath "$env:USERPROFILE\hyper" -VMMemory 3GB -Switch "PlatformPrivate"
-# New-KubeVM -VMName "KubeControlPlaneMachine3" -VMPath "$env:USERPROFILE\hyper" -VMMemory 3GB -Switch "PlatformPrivate"
-# New-KubeVM -VMName "KubeNodeMachine1" -VMPath "$env:USERPROFILE\hyper" -VMMemory 16GB -Switch "PlatformPrivate"
-# New-KubeVM -VMName "KubeNodeMachine2" -VMPath "$env:USERPROFILE\hyper" -VMMemory 16GB -Switch "PlatformPrivate"
-# New-KubeVM -VMName "KubeNodeMachine3" -VMPath "$env:USERPROFILE\hyper" -VMMemory 16GB -Switch "PlatformPrivate"
+# New-Machine -VMName "KubeAccessMachine" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 2 -VMMemory 6GB -Switch "PlatformPrivate"
+# New-Machine -VMName "KubeControlPlaneMachine1" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 2 -VMMemory 3GB -Switch "PlatformPrivate"
+# New-Machine -VMName "KubeControlPlaneMachine2" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 2 -VMMemory 3GB -Switch "PlatformPrivate"
+# New-Machine -VMName "KubeControlPlaneMachine3" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 2 -VMMemory 3GB -Switch "PlatformPrivate"
+# New-Machine -VMName "KubeNodeMachine1" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 2 -VMMemory 16GB -Switch "PlatformPrivate"
+# New-Machine -VMName "KubeNodeMachine2" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 2 -VMMemory 16GB -Switch "PlatformPrivate"
+# New-Machine -VMName "KubeNodeMachine3" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 2 -VMMemory 16GB -Switch "PlatformPrivate"
 
 # Set-VMNetworkAdapter -VMName "KubeAccessMachine" -StaticMacAddress "00155D0004F0"
 # Set-VMNetworkAdapter -VMName "KubeControlPlaneMachine1" -StaticMacAddress "00155D0004F1"

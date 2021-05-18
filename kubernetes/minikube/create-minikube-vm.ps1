@@ -1,12 +1,14 @@
-function New-MinikubeVM {
+function New-Machine {
     param (
         [Parameter(Mandatory = $true, Position = 0)]
         [string]$VMName,
         [Parameter(Mandatory = $true, Position = 1)]
         [string]$VMPath,
         [Parameter(Mandatory = $true, Position = 2)]
-        [Int64]$VMMemory,
+        [Int64]$VMProcessor,
         [Parameter(Mandatory = $true, Position = 3)]
+        [Int64]$VMMemory,
+        [Parameter(Mandatory = $true, Position = 4)]
         [string]$Switch
     )
 
@@ -24,7 +26,7 @@ function New-MinikubeVM {
     Set-VMFirmware -VMName $VMName `
         -EnableSecureBoot Off
     Set-VMProcessor -VMName $VMName `
-        -Count 2
+        -Count $VMProcessor
     Set-VMMemory -VMName $VMName `
         -DynamicMemoryEnabled $false
     # Add-VMDvdDrive -VMName $VMName  `
@@ -42,6 +44,6 @@ function New-MinikubeVM {
 
 ### Internal
 
-# New-MinikubeVM -VMName "MinikubeMachine" -VMPath "C:\hyper" -VMMemory 16GB -Switch "ServiceInternal"
+# New-Machine -VMName "MinikubeMachine" -VMPath "C:\hyper" -VMProcessor 4 -VMMemory 20GB -Switch "ServiceInternal"
 
-New-MinikubeVM -VMName "MinikubeMachine" -VMPath "$env:USERPROFILE\hyper" -VMMemory 16GB -Switch "ServiceInternal"
+New-Machine -VMName "MinikubeMachine" -VMPath "$env:USERPROFILE\hyper" -VMProcessor 4 -VMMemory 20GB -Switch "ServiceInternal"
