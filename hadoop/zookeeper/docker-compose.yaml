@@ -2,9 +2,9 @@ version: "3.8"
 
 services:
   zookeeper1:
-    restart: unless-stopped
     image: zookeeper:latest
     hostname: zookeeper1
+    restart: unless-stopped
     networks:
       - default
     ports:
@@ -25,9 +25,9 @@ services:
       - /mnt/volume/zookeeper/zookeeper1/logs:/logs
 
   zookeeper2:
-    restart: unless-stopped
     image: zookeeper:latest
     hostname: zookeeper2
+    restart: unless-stopped
     networks:
       - default
     ports:
@@ -48,9 +48,9 @@ services:
       - /mnt/volume/zookeeper/zookeeper2/logs:/logs
 
   zookeeper3:
-    restart: unless-stopped
     image: zookeeper:latest
     hostname: zookeeper3
+    restart: unless-stopped
     networks:
       - default
     ports:
