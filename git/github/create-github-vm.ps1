@@ -20,3 +20,5 @@ ADD-VMHardDiskDrive -VMName $VMName `
     -ControllerNumber 0 `
     -ControllerLocation 1 `
     -Path "$VMPath\$VMName\Virtual Hard Disks\$StorageVHDName"
+Set-VM -Name $VMName `
+    -AutomaticCheckpointsEnabled $false

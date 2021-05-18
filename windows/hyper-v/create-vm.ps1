@@ -28,3 +28,5 @@ Set-VMMemory $VMName -DynamicMemoryEnabled $false -StartupBytes 8GB
 Add-VMDvdDrive -VMName $VMName -ControllerNumber 0 -ControllerLocation 1 -Path $InstallMedia
 $DVDDrive = Get-VMDvdDrive -VMName $VMName
 Set-VMFirmware -VMName $VMName -FirstBootDevice $DVDDrive
+
+Set-VM -Name $VMName -AutomaticCheckpointsEnabled $false

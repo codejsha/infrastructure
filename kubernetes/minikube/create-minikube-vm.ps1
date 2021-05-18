@@ -34,6 +34,8 @@ function New-MinikubeVM {
     # $DVDDrive = Get-VMDvdDrive -VMName $VMName
     # Set-VMFirmware -VMName $VMName `
     #     -FirstBootDevice $DVDDrive
+    Set-VM -Name $VMName `
+        -AutomaticCheckpointsEnabled $false
 }
 
 ######################################################################
