@@ -172,17 +172,17 @@ def create_log_script_file(server, log):
 
 
 def create_grep_script_file(server, grep):
-    edited_log = grep
-    edited_log = replace_variable('SERVER_NAME', f'{server.server_name}', edited_log)
-    edited_log = replace_variable('LOG_DIR', f'{server.log_dir}', edited_log)
-    write_file(f'output/scripts/server-grep/{server.file.grep}', edited_log)
+    edited_grep = grep
+    edited_grep = replace_variable('SERVER_NAME', f'{server.server_name}', edited_grep)
+    edited_grep = replace_variable('LOG_DIR', f'{server.log_dir}', edited_grep)
+    write_file(f'output/scripts/server-grep/{server.file.grep}', edited_grep)
 
 
 def create_more_script_file(server, more):
-    edited_log = more
-    edited_log = replace_variable('SERVER_NAME', f'{server.server_name}', edited_log)
-    edited_log = replace_variable('LOG_DIR', f'{server.log_dir}', edited_log)
-    write_file(f'output/scripts/server-more/{server.file.more}', edited_log)
+    edited_more = more
+    edited_more = replace_variable('SERVER_NAME', f'{server.server_name}', edited_more)
+    edited_more = replace_variable('LOG_DIR', f'{server.log_dir}', edited_more)
+    write_file(f'output/scripts/server-more/{server.file.more}', edited_more)
 
 
 def create_server_file(base, server_dict, prop_dict, start_dict, stop_dict, log_dict, grep_dict, more_dict):
