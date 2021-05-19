@@ -1,8 +1,17 @@
 # process
 
-alias killhttpd="sudo pkill -9 httpd"
-alias killjava="sudo pkill -9 java"
-alias killprom="sudo pkill -9 prometheus"
+alias killhttpd="sudo pkill -9 --echo --count --exact httpd"
+alias killjava="sudo pkill -9 --echo --count --exact java"
+alias killprom="sudo pkill -9 --echo --count --exact prometheus"
+
+alias killzookeeper="sudo pkill -9 --echo --count --full \"org.apache.zookeeper.server.quorum.QuorumPeerMain\""
+alias killkafka="sudo pkill -9 --echo --count --full \"kafka.Kafka\""
+alias killschemaregistry="sudo pkill -9 --echo --count --full \"io.confluent.kafka.schemaregistry.rest.SchemaRegistryMain\""
+alias killkafkaconnect="sudo pkill -9 --echo --count --full \"org.apache.kafka.connect.cli.ConnectDistributed\""
+alias killkafkarest="sudo pkill -9 --echo --count --full \"io.confluent.kafkarest.KafkaRestMain\""
+alias killksqldb="sudo pkill -9 --echo --count --full \"io.confluent.ksql.rest.server.KsqlServerMain\""
+alias killcontrolcenter="sudo pkill -9 --echo --count --full \"io.confluent.controlcenter.ControlCenter\""
+alias killconfluent="killzookeeper; killkafka; killschemaregistry; killkafkaconnect; killkafkarest; killksqldb; killcontrolcenter;"
 
 alias psef="sudo ps -ef | grep "
 alias psefhttpd="sudo ps -ef | grep httpd"
@@ -20,3 +29,4 @@ alias pxjava="sudo pgrep --exact --list-full java | grep java"
 alias pxjavajboss="sudo pgrep --exact --list-full java | grep jboss"
 alias pxjavatomcat="sudo pgrep --exact --list-full java | grep tomcat"
 alias pxjavaweblogic="sudo pgrep --exact --list-full java | grep weblogic"
+alias pxprom="sudo pgrep --exact --list-full prometheus"
