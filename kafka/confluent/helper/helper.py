@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import pathlib
-import re
 
 from template.python.other import *
 from template.python.read_template import *
@@ -93,7 +92,7 @@ def create_prop_file(server, prop, servers=None):
     write_file(f'output/properties/{server.file.properties}', edited_prop)
 
 
-def create_c3_prop_file(server, prop, connect_servers, replicator_servers, ksqldb_servers):
+def create_control_center_prop_file(server, prop, connect_servers, replicator_servers, ksqldb_servers):
     edited_prop = prop
 
     # control-center
@@ -106,8 +105,8 @@ def create_c3_prop_file(server, prop, connect_servers, replicator_servers, ksqld
                                     f'{server.schema_registry_url}', edited_prop)
 
         # kafka-connect and replicator clusters
-        connect_dict = get_sub_cluster_dict(connect_servers)
-        replicator_dict = get_sub_cluster_dict(replicator_servers)
+        connect_dict = get_sub_cluster_domain_url_dict(connect_servers)
+        replicator_dict = get_sub_cluster_domain_url_dict(replicator_servers)
 
         connect_and_replicator_dict = {**replicator_dict, **connect_dict}
         for gid, cluster_url in connect_and_replicator_dict.items():
@@ -120,11 +119,13 @@ def create_c3_prop_file(server, prop, connect_servers, replicator_servers, ksqld
                                     f'{server.kafka_rest_url}', edited_prop)
 
         # ksqldb clusters
-        ksqldb_dict = get_sub_cluster_dict(ksqldb_servers)
-        for gid, cluster_url in ksqldb_dict.items():
+        ksqldb_domain_dict = get_sub_cluster_domain_url_dict(ksqldb_servers)
+        ksqldb_address_dict = get_sub_cluster_address_url_dict(ksqldb_servers)
+        for gid, cluster_url in ksqldb_address_dict.items():
             edited_prop = append_param(f'confluent.controlcenter.ksql.{gid}.advertised.url',
                                        f'confluent.controlcenter.ksql.<name>.advertised.url',
                                        f'{cluster_url}', edited_prop)
+        for gid, cluster_url in ksqldb_domain_dict.items():
             edited_prop = append_param(f'confluent.controlcenter.ksql.{gid}.url',
                                        f'confluent.controlcenter.ksql.<name>.advertised.url',
                                        f'{cluster_url}', edited_prop)
@@ -177,17 +178,24 @@ def create_grep_script_file(server, grep):
     write_file(f'output/scripts/server-grep/{server.file.grep}', edited_log)
 
 
-def create_server_file(base, server_dict, prop_dict, start_dict, stop_dict, log_dict, grep_dict):
+def create_more_script_file(server, more):
+    edited_log = more
+    edited_log = replace_variable('SERVER_NAME', f'{server.server_name}', edited_log)
+    edited_log = replace_variable('LOG_DIR', f'{server.log_dir}', edited_log)
+    write_file(f'output/scripts/server-more/{server.file.more}', edited_log)
+
+
+def create_server_file(base, server_dict, prop_dict, start_dict, stop_dict, log_dict, grep_dict, more_dict):
     for server_type, servers in server_dict.items():
         for server in servers:
             if server.server_type == ServerType.ZOOKEEPER:
                 create_prop_file(server, prop_dict.get(ServerType.ZOOKEEPER),
                                  server_dict.get(ServerType.ZOOKEEPER))
             elif server.server_type == ServerType.CONTROL_CENTER:
-                create_c3_prop_file(server, prop_dict.get(ServerType.CONTROL_CENTER),
-                                    server_dict.get(ServerType.KAFKA_CONNECT),
-                                    server_dict.get(ServerType.REPLICATOR),
-                                    server_dict.get(ServerType.KSQLDB))
+                create_control_center_prop_file(server, prop_dict.get(ServerType.CONTROL_CENTER),
+                                                server_dict.get(ServerType.KAFKA_CONNECT),
+                                                server_dict.get(ServerType.REPLICATOR),
+                                                server_dict.get(ServerType.KSQLDB))
             else:
                 create_prop_file(server, prop_dict.get(server_type))
 
@@ -195,6 +203,7 @@ def create_server_file(base, server_dict, prop_dict, start_dict, stop_dict, log_
             create_stop_script_file(base, server, stop_dict.get(server_type))
             create_log_script_file(server, log_dict.get(ServerType.ANY))
             create_grep_script_file(server, grep_dict.get(ServerType.ANY))
+            create_more_script_file(server, more_dict.get(ServerType.ANY))
 
     for server in [servers[0] for servers in server_dict.values() if servers]:
         create_common_stop_script_file(base, server, stop_dict.get(server.server_type))
@@ -239,7 +248,7 @@ def replace_variable(variable, variable_value, script):
     return edited_prop
 
 
-def get_sub_cluster_dict(cluster_servers):
+def get_sub_cluster_domain_url_dict(cluster_servers):
     temp_dict = {}
     cluster_dict = {}
 
@@ -248,6 +257,21 @@ def get_sub_cluster_dict(cluster_servers):
             temp_dict[f'{server.group_id}'].append(f'http://{server.host_name}:{server.listen_port}')
         else:
             temp_dict[f'{server.group_id}'] = [f'http://{server.host_name}:{server.listen_port}']
+    for gid, url in temp_dict.items():
+        cluster_dict[gid] = ','.join(url)
+
+    return cluster_dict
+
+
+def get_sub_cluster_address_url_dict(cluster_servers):
+    temp_dict = {}
+    cluster_dict = {}
+
+    for server in cluster_servers:
+        if server.group_id in temp_dict:
+            temp_dict[f'{server.group_id}'].append(f'http://{server.host_address}:{server.listen_port}')
+        else:
+            temp_dict[f'{server.group_id}'] = [f'http://{server.host_address}:{server.listen_port}']
     for gid, url in temp_dict.items():
         cluster_dict[gid] = ','.join(url)
 
@@ -264,6 +288,7 @@ def get_sub_cluster_dict(cluster_servers):
 
 
 def main():
+    # reset output directory
     current_dir = pathlib.Path(__file__).parent.absolute()
     reset_output_dir(current_dir)
 
@@ -279,9 +304,10 @@ def main():
     stop_data = read_stop_template_data(current_dir)
     log_data = read_log_template_data(current_dir)
     grep_data = read_grep_template_data(current_dir)
+    more_data = read_more_template_data(current_dir)
 
-    # create files
-    create_server_file(base_data, server_data, prop_data, start_data, stop_data, log_data, grep_data)
+    # create script and property files
+    create_server_file(base_data, server_data, prop_data, start_data, stop_data, log_data, grep_data, more_data)
 
     # create other files
     create_start_and_stop_symlink_script_file(server_data)

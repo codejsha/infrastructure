@@ -72,4 +72,12 @@ def read_grep_template_data(current_dir):
     }
     return grep_dict
 
+
+def read_more_template_data(current_dir):
+    scripts_template_dir = current_dir.joinpath('template/scripts')
+    more_dict = {
+        ServerType.ANY: read_file(f'{scripts_template_dir}/more-template.sh')
+    }
+    return more_dict
+
 # endregion

@@ -11,13 +11,14 @@ import yaml
 
 
 def reset_output_dir(current_dir):
-    properties_output_dir = current_dir.joinpath('output/properties')
     output_dir = current_dir.joinpath('output')
+    properties_output_dir = current_dir.joinpath('output/properties')
     scripts_output_dir = current_dir.joinpath('output/scripts')
     server_stop_scripts_output_dir = current_dir.joinpath('output/scripts/server-stop')
     server_log_scripts_output_dir = current_dir.joinpath('output/scripts/server-log')
     server_grep_scripts_output_dir = current_dir.joinpath('output/scripts/server-grep')
-    other_output_dir = current_dir.joinpath('output/scripts/others')
+    server_more_scripts_output_dir = current_dir.joinpath('output/scripts/server-more')
+    other_scripts_output_dir = current_dir.joinpath('output/scripts/others')
 
     if os.path.exists(output_dir):
         shutil.rmtree(output_dir)
@@ -28,7 +29,8 @@ def reset_output_dir(current_dir):
     os.mkdir(server_stop_scripts_output_dir)
     os.mkdir(server_log_scripts_output_dir)
     os.mkdir(server_grep_scripts_output_dir)
-    os.mkdir(other_output_dir)
+    os.mkdir(server_more_scripts_output_dir)
+    os.mkdir(other_scripts_output_dir)
 
 
 # endregion
@@ -52,7 +54,8 @@ def render_values_file(dir_path, file_name):
 
 def read_yaml_file(file_path):
     with open(file_path, 'r') as script_file:
-        return yaml.safe_load(script_file)
+        read_data = yaml.safe_load(script_file)
+        return read_data
 
 
 # endregion
@@ -62,7 +65,8 @@ def read_yaml_file(file_path):
 
 def read_file(file_path):
     with open(file_path, 'r') as script_file:
-        return script_file.read()
+        read_data = script_file.read()
+        return read_data
 
 
 def write_file(file_path, file_data):

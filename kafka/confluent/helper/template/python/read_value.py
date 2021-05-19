@@ -199,6 +199,7 @@ def change_dictionary_key_case(anydict):
 
 
 def camel_case_to_snake_case(anystr):
-    return re.sub(r"(?<!^)(?=[A-Z])", '_', anystr).lower()
+    snake_case_str = re.sub(r"(?<!^)(?=[A-Z])", '_', anystr).lower()
+    return snake_case_str
 
 # endregion

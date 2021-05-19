@@ -19,7 +19,7 @@ def create_start_and_stop_symlink_script_file(server_dict):
             data_list.append(f'    find . -maxdepth 1 -name "*.sh" \\\n'
                              f'        -not \( -name "{server.file.start}" -o -name "{server.file.stop}" \\\n'
                              f'        -o -name "{server.stop_script}" -o -name "{server.file.log}" \\\n'
-                             f'        -o -name "{server.file.grep}" \) | xargs rm -f')
+                             f'        -o -name "{server.file.grep}" -o -name "{server.file.more}" \) | xargs rm -f')
 
             data_list.append(f'    if [ -f "{server.file.start}" ]; then')
             data_list.append(f'        ln -snf {server.file.start} start.sh')
@@ -35,6 +35,9 @@ def create_start_and_stop_symlink_script_file(server_dict):
             data_list.append(f'    fi')
             data_list.append(f'    if [ -f "{server.file.grep}" ]; then')
             data_list.append(f'        ln -snf {server.file.grep} grep.sh')
+            data_list.append(f'    fi')
+            data_list.append(f'    if [ -f "{server.file.more}" ]; then')
+            data_list.append(f'        ln -snf {server.file.more} more.sh')
             data_list.append(f'    fi')
     data_list.append(f'fi')
 
@@ -70,6 +73,10 @@ def create_secure_copy_script_file(base, server_dict):
         for server in servers:
             data_list.append(f'scp confluent-properties.tar.gz '
                              f'{base.user}@{server.host_name}:{base.confluent_home}')
+
+    data_list.append(f'')
+    for server_type, servers in server_dict.items():
+        for server in servers:
             data_list.append(f'scp confluent-scripts.tar.gz '
                              f'{base.user}@{server.host_name}:{base.confluent_home}')
 
@@ -78,6 +85,10 @@ def create_secure_copy_script_file(base, server_dict):
         for server in servers:
             data_list.append(f'# scp confluent-properties.tar.gz '
                              f'{base.user}@{server.host_address}:{base.confluent_home}')
+
+    data_list.append(f'')
+    for server_type, servers in server_dict.items():
+        for server in servers:
             data_list.append(f'# scp confluent-scripts.tar.gz '
                              f'{base.user}@{server.host_address}:{base.confluent_home}')
 
@@ -93,16 +104,31 @@ def create_kafka_alias_file(base):
         f'###\n',
         f'CONFLUENT_HOME={base.confluent_home}',
         f'PATH="${{PATH}}:${{CONFLUENT_HOME}}/bin"',
-        f'export PATH\n',
-        f'alias psef="ps -ef | grep"',
+        f'export PATH',
+        f'',
+        f'alias psef="ps -ef | grep "',
         f'alias pxjava="pgrep -xa java"',
-        f'alias killjava="pkill -9 java"',
+        f'alias killjava="pkill -9 -ecx java"',
+        f'',
+        f'alias killzookeeper="pkill -9 -ecf \\"org.apache.zookeeper.server.quorum.QuorumPeerMain\\""',
+        f'alias killkafka="pkill -9 -ecf \\"kafka.Kafka\\""',
+        f'alias killschemaregistry="pkill -9 -ecf \\"io.confluent.kafka.schemaregistry.rest.SchemaRegistryMain\\""',
+        f'alias killkafkaconnect="pkill -9 -ecf \\"org.apache.kafka.connect.cli.ConnectDistributed\\""',
+        f'alias killkafkarest="pkill -9 -ecf \\"io.confluent.kafkarest.KafkaRestMain\\""',
+        f'alias killksqldb="pkill -9 -ecf \\"io.confluent.ksql.rest.server.KsqlServerMain\\""',
+        f'alias killcontrolcenter="pkill -9 -ecf \\"io.confluent.controlcenter.ControlCenter\\""',
+        f'alias killconfluent="killzookeeper; killkafka; killschemaregistry; killkafkaconnect; killkafkarest; killksqldb; killcontrolcenter;"',
+        f'',
+        f'alias goconfluent="cd ${{CONFLUENT_HOME}}"',
         f'alias goprops="cd ${{CONFLUENT_HOME}}/properties"',
         f'alias goscripts="cd ${{CONFLUENT_HOME}}/scripts"',
+        f'alias goconnector="cd ${{CONFLUENT_HOME}}/connectors"',
+        f'',
         f'alias startsh="${{CONFLUENT_HOME}}/scripts/start.sh"',
         f'alias stopsh="${{CONFLUENT_HOME}}/scripts/stop.sh"',
         f'alias logsh="${{CONFLUENT_HOME}}/scripts/log.sh"',
-        f'alias grepsh="${{CONFLUENT_HOME}}/scripts/grep.sh"'
+        f'alias grepsh="${{CONFLUENT_HOME}}/scripts/grep.sh"',
+        f'alias moresh="${{CONFLUENT_HOME}}/scripts/more.sh"'
     ]
 
     edited_hosts = '\n'.join(data_list) + '\n'

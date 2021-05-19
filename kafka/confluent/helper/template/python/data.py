@@ -29,6 +29,7 @@ class ServerFile:
     stop: str
     log: str
     grep: str
+    more: str
 
 
 @dataclass
