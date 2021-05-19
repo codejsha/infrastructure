@@ -1,6 +1,7 @@
 ######################################################################
 
 alias kafkacat="docker container run -it --network host edenhill/kafkacat:1.6.0"
+alias kafkacat="docker container run -it --stream-network host edenhill/kafkacat:1.6.0"
 
 ### version
 docker container run -it --network host edenhill/kafkacat:1.6.0 -V
