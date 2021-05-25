@@ -1,10 +1,10 @@
 # process
 
-alias killgrafana="pkill -9 -ecx grafana-server"
+alias killgrafana="pkill -9 --echo --count --exact grafana-server"
 alias killhttpd="sudo pkill -9 --echo --count --exact httpd"
 alias killjava="sudo pkill -9 --echo --count --exact java"
-alias killlagexporter="pkill -9 -ecx kafka-lag-exporter"
-alias killnodeexporter="pkill -9 -ecx node_exporter"
+alias killlagexporter="pkill -9 --echo --count --exact kafka-lag-exporter"
+alias killnodeexporter="pkill -9 --echo --count --exact node_exporter"
 alias killprometheus="sudo pkill -9 --echo --count --exact prometheus"
 
 alias killzookeeper="sudo pkill -9 --echo --count --full \"org.apache.zookeeper.server.quorum.QuorumPeerMain\""
