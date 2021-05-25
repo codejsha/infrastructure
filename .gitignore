@@ -8,7 +8,10 @@ __pycache__/
 temp/
 temp.*
 
+nohup.*
+
 *.jar
+*.log
 *.tar
 *.tar.gz
 *.tgz
