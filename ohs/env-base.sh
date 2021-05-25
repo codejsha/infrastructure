@@ -4,6 +4,7 @@ set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 export ORACLE_HOME="/usr/local/ohs"
+export MW_HOME="${ORACLE_HOME}"
 export DOMAIN_NAME="base_domain"
 export DOMAIN_HOME="${ORACLE_HOME}/user_projects/domains/${DOMAIN_NAME}"
 export NODE_MANAGER_NAME="localmachine"
