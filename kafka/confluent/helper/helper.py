@@ -109,26 +109,25 @@ def create_control_center_prop_file(server, prop, connect_servers, replicator_se
         replicator_dict = get_sub_cluster_domain_url_dict(replicator_servers)
 
         connect_and_replicator_dict = {**replicator_dict, **connect_dict}
-        for gid, cluster_url in connect_and_replicator_dict.items():
-            edited_prop = append_param(f'confluent.controlcenter.connect.{gid}.cluster',
-                                       f'confluent.controlcenter.connect.<name>.cluster',
-                                       f'{cluster_url}', edited_prop)
+        for gid, urls in connect_and_replicator_dict.items():
+            edited_prop = append_param(f'confluent.controlcenter.connect.{gid}.cluster', f'{urls}',
+                                       f'### kafka-connect', edited_prop)
 
         # kafka-rest cluster
         edited_prop = replace_param('confluent.controlcenter.streams.cprest.url',
                                     f'{server.kafka_rest_url}', edited_prop)
 
         # ksqldb clusters
+        ksqldb_group_list = get_unique_cluster_list(ksqldb_servers)
         ksqldb_domain_dict = get_sub_cluster_domain_url_dict(ksqldb_servers)
         ksqldb_address_dict = get_sub_cluster_address_url_dict(ksqldb_servers)
-        for gid, cluster_url in ksqldb_address_dict.items():
-            edited_prop = append_param(f'confluent.controlcenter.ksql.{gid}.advertised.url',
-                                       f'confluent.controlcenter.ksql.<name>.advertised.url',
-                                       f'{cluster_url}', edited_prop)
-        for gid, cluster_url in ksqldb_domain_dict.items():
-            edited_prop = append_param(f'confluent.controlcenter.ksql.{gid}.url',
-                                       f'confluent.controlcenter.ksql.<name>.advertised.url',
-                                       f'{cluster_url}', edited_prop)
+        for group in ksqldb_group_list:
+            urls = ksqldb_domain_dict.get(group)
+            ad_urls = ksqldb_address_dict.get(group)
+            edited_prop = append_param(f'confluent.controlcenter.ksql.{group}.advertised.url', f'{ad_urls}',
+                                       f'### ksqldb', edited_prop)
+            edited_prop = append_param(f'confluent.controlcenter.ksql.{group}.url', f'{urls}',
+                                       f'### ksqldb', edited_prop)
 
     write_file(f'output/properties/{server.file.properties}', edited_prop)
 
@@ -233,19 +232,30 @@ def generate_zookeeper_cluster_list(server_id, servers):
 # region function
 
 
-def append_param(param, prev_param, param_value, prop):
-    edited_prop = re.sub(f'\n# {prev_param}=.*', f'\n# {prev_param}=\n{param}={param_value}', prop, count=1)
+def append_param(param, param_value, prev_keyword, prop):
+    edited_prop = re.sub(f'\n{prev_keyword}', f'\n{prev_keyword}\n{param}={param_value}', prop, count=1)
     return edited_prop
 
 
 def replace_param(param, param_value, prop):
-    edited_prop = re.sub(f'\n{param}=.*', f'\n{param}={param_value}', prop, count=1)
+    if param_value == 'None':
+        edited_prop = re.sub(f'\n{param}=.*', f'\n# {param}=', prop, count=1)
+    else:
+        edited_prop = re.sub(f'\n{param}=.*', f'\n{param}={param_value}', prop, count=1)
     return edited_prop
 
 
 def replace_variable(variable, variable_value, script):
     edited_prop = re.sub(f'\n{variable}=.*', f'\n{variable}="{variable_value}"', script, count=1)
     return edited_prop
+
+
+def get_unique_cluster_list(cluster_servers):
+    cluster_list = []
+    for servers in cluster_servers:
+        cluster_list.append(servers.group_id)
+    unique_cluster_list = list(set(cluster_list))
+    return unique_cluster_list
 
 
 def get_sub_cluster_domain_url_dict(cluster_servers):
