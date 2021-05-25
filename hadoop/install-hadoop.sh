@@ -13,9 +13,22 @@ function install_hadoop  {
     local PARENT_HADOOP_HOME="$(readlink --canonicalize-missing ${HADOOP_HOME}/../)"
     local HADOOP_DIR_NAME="${INSTALL_FILE/\.tar\.gz/}"
 
+    ### check hadoop home
+    if [ -d "${HADOOP_HOME}" ]; then
+        echo "[ERROR] The HADOOP_HOME (${HADOOP_HOME}) already exists!"
+        exit
+    fi
+
+    ### download install file
     if [ ! -f "${INSTALL_FILE_DIR}/${INSTALL_FILE}" ]; then
         sudo curl -o ${INSTALL_FILE_DIR}/${INSTALL_FILE} \
             -LJO https://archive.apache.org/dist/hadoop/common/${HADOOP_DIR_NAME}/${INSTALL_FILE}
+    fi
+
+    ### check install file
+    if [ ! -f "${INSTALL_FILE_DIR}/${HTTPD_FILE}" ]; then
+        echo "[ERROR] The install file (${INSTALL_FILE_DIR}/${HTTPD_FILE}) does not exist!"
+        exit
     fi
 
     sudo tar -xzf ${INSTALL_FILE_DIR}/${INSTALL_FILE} -C ${PARENT_HADOOP_HOME}
