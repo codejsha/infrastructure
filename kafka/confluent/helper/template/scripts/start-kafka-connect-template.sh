@@ -14,6 +14,8 @@ export LOG_DIR
 
 # JAVA_HOME="/usr/lib/jvm/java-11"
 # JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+# JAVA_HOME="/usr/lib/jvm/zulu11"
+# JAVA_HOME="/usr/lib/jvm/zulu8"
 JAVA_HOME=""
 export JAVA_HOME
 
