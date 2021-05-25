@@ -18,11 +18,11 @@ Environment="CONTROL_CENTER_LOG4J_OPTS=-Dlog4j.configuration=file:/etc/confluent
 # Environment="CONTROL_CENTER_LOG4J_OPTS=-Dlog4j.configuration=file:/usr/local/confluent/etc/confluent-control-center/log4j-rolling.properties"
 
 ExecStart=
+# ExecStart=/usr/bin/control-center-start /etc/confluent-control-center/control-center.properties
 # ExecStart=/usr/bin/control-center-start /etc/confluent-control-center/control-center-dev.properties
 # ExecStart=/usr/bin/control-center-start /etc/confluent-control-center/control-center-minimal.properties
 # ExecStart=/usr/bin/control-center-start /etc/confluent-control-center/control-center-production.properties
-# ExecStart=/usr/bin/control-center-start /etc/confluent-control-center/control-center.properties
-ExecStart=/usr/bin/control-center-start /etc/confluent/properties/control-center-production1.properties
+ExecStart=/usr/bin/control-center-start /usr/local/confluent/properties/control-center1.properties
 EOF
 
 sudo systemctl daemon-reload

@@ -18,10 +18,11 @@ Environment="CLASSPATH=/usr/share/java/kafka-connect-replicator/*"
 # Environment="CLASSPATH="/usr/local/confluent/share/java/kafka-connect-replicator/*"
 
 ExecStart=
+# ExecStart=/usr/bin/connect-distributed /etc/kafka/connect-standalone.properties
 # ExecStart=/usr/bin/connect-distributed /etc/kafka/connect-distributed.properties
+# ExecStart=/usr/bin/connect-distributed /etc/schema-registry/connect-avro-standalone.properties
 # ExecStart=/usr/bin/connect-distributed /etc/schema-registry/connect-avro-distributed.properties
-# ExecStart=/usr/bin/connect-distributed /etc/confluent/properties/connect-distributed.properties
-ExecStart=/usr/bin/connect-distributed /etc/confluent/properties/connect-avro-distributed.properties
+ExecStart=/usr/bin/connect-distributed /usr/local/confluent/properties/kafka-connect2.properties
 EOF
 
 sudo systemctl daemon-reload

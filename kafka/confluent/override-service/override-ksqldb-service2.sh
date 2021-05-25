@@ -16,9 +16,9 @@ Environment="LOG_DIR=/var/log/confluent/ksql"
 # Environment="LOG_DIR=/mnt/ksqldb/logs"
 
 ExecStart=
-# ExecStart=/usr/bin/ksql-server-start /etc/ksqldb/ksql-server.properties
 # ExecStart=/usr/bin/ksql-server-start /etc/ksqldb/ksql-production-server.properties
-ExecStart=/usr/bin/ksql-server-start /usr/local/confluent/properties/ksqldb1.properties
+# ExecStart=/usr/bin/ksql-server-start /etc/ksqldb/ksql-server.properties
+ExecStart=/usr/bin/ksql-server-start /usr/local/confluent/properties/ksqldb2.properties
 EOF
 
 sudo systemctl daemon-reload

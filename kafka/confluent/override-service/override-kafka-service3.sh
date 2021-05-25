@@ -17,7 +17,7 @@ Environment="LOG_DIR=/var/log/kafka"
 
 ExecStart=
 # ExecStart=/usr/bin/kafka-server-start /etc/kafka/server.properties
-ExecStart=/usr/bin/kafka-server-start /etc/confluent/properties/kafka3.properties
+ExecStart=/usr/bin/kafka-server-start /usr/local/confluent/properties/kafka3.properties
 EOF
 
 sudo systemctl daemon-reload

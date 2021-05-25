@@ -17,7 +17,7 @@ Environment="LOG_DIR=/var/log/kafka"
 
 ExecStart=
 # ExecStart=/usr/bin/zookeeper-server-start /etc/kafka/zookeeper.properties
-ExecStart=/usr/bin/zookeeper-server-start /etc/confluent/properties/zookeeper1.properties
+ExecStart=/usr/bin/zookeeper-server-start /usr/local/confluent/properties/zookeeper1.properties
 EOF
 
 sudo systemctl daemon-reload

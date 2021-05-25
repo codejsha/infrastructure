@@ -17,7 +17,7 @@ Environment="LOG_DIR=/var/log/confluent/schema-registry"
 
 ExecStart=
 # ExecStart=/usr/bin/schema-registry-start /etc/schema-registry/schema-registry.properties
-ExecStart=/usr/bin/schema-registry-start /etc/confluent/properties/schema-registry1.properties
+ExecStart=/usr/bin/schema-registry-start /usr/local/confluent/properties/schema-registry1.properties
 EOF
 
 sudo systemctl daemon-reload

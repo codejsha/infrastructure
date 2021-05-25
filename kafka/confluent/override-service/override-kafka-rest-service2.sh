@@ -17,7 +17,7 @@ Environment="LOG_DIR=/var/log/confluent/kafka-rest"
 
 ExecStart=
 # ExecStart=/usr/bin/kafka-rest-start /etc/kafka-rest/kafka-rest.properties
-ExecStart=/usr/bin/kafka-rest-start /etc/confluent/properties/kafka-rest2.properties
+ExecStart=/usr/bin/kafka-rest-start /usr/local/confluent/properties/kafka-rest2.properties
 EOF
 
 sudo systemctl daemon-reload
