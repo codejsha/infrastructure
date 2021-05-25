@@ -1,13 +1,15 @@
-# Hadoop
+# Hadoop Ecosystem
+
+## Hadoop
 
 - https://hadoop.apache.org/
 
-## Local
-
-```bash
-bash ./install-hadoop.sh
-```
-
-## Docker
+### Docker
 
 - https://github.com/big-data-europe/docker-hadoop
+
+## Zookeeper
+
+### Docker
+
+- https://hub.docker.com/_/zookeeper
