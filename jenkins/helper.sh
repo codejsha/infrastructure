@@ -7,7 +7,11 @@ JENKINS_USER="admin"
 JENKINS_API_TOKEN="JENKINS_API_TOKEN"
 JENKINS_URL="http://jenkins.example.com"
 # JENKINS_FILE_DIR="${HOME}/.jenkins"
+
 JAVA_HOME="/usr/lib/jvm/java-11"
+# JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+# JAVA_HOME="/usr/lib/jvm/zulu11"
+# JAVA_HOME="/usr/lib/jvm/zulu8"
 
 ######################################################################
 
