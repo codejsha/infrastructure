@@ -50,7 +50,7 @@ function install_httpd {
             openssl openssl-devel
 
         ### http2 requirements
-        # sudo yum install -y nghttp2 libnghttp2 libnghttp2-devel
+        sudo yum install -y nghttp2 libnghttp2 libnghttp2-devel
     }
 
     function download_install_file {
