@@ -3,9 +3,8 @@
 from template.python.fileio import *
 
 
-def create_start_and_stop_symlink_script_file(server_dict):
+def create_symlink_by_hostname_script_file(server_dict):
     data_list = [f'#!/bin/bash\n']
-    total_server_count = sum(map(len, server_dict.values()))
 
     is_first = True
     for server_type, servers in server_dict.items():
@@ -18,8 +17,8 @@ def create_start_and_stop_symlink_script_file(server_dict):
 
             data_list.append(f'    find . -maxdepth 1 -name "*.sh" \\\n'
                              f'        -not \( -name "{server.file.start}" -o -name "{server.file.stop}" \\\n'
-                             f'        -o -name "{server.stop_script}" -o -name "{server.file.log}" \\\n'
-                             f'        -o -name "{server.file.grep}" -o -name "{server.file.more}" \) | xargs rm -f')
+                             f'        -o -name "{server.file.log}" -o -name "{server.file.grep}" \\\n'
+                             f'        -o -name "{server.file.more}" -o -name "{server.stop_script}" \) | xargs rm -f')
 
             data_list.append(f'    if [ -f "{server.file.start}" ]; then')
             data_list.append(f'        ln -snf {server.file.start} start.sh')
@@ -42,20 +41,49 @@ def create_start_and_stop_symlink_script_file(server_dict):
     data_list.append(f'fi')
 
     edited_symlink = '\n'.join(data_list) + '\n'
-    write_file('output/scripts/others/create-symlink.sh', edited_symlink)
+    write_file('output/scripts/others/create-symlink-by-hostname.sh', edited_symlink)
+
+
+def create_symlink_by_servername_script_file(server_dict):
+    data_list = [
+        f'#!/bin/bash\n',
+        f'SERVER_NAME="${{1}}"',
+        f'SERVER_NAME_REMOVED_NUMBER="$(echo ${{SERVER_NAME}} | sed \'s/[0-9]//g\')"',
+        f'',
+        f'if [[ ${{#}} -eq 0 ]]; then',
+        f'    echo "[ERROR] No argument provided!"',
+        f'    exit 1',
+        f'fi',
+        f'',
+        f'find . -maxdepth 1 -name "*.sh" \\',
+        f'    -not \( -name "start-${{SERVER_NAME}}.sh" -o -name "stop-${{SERVER_NAME}}.sh" \\',
+        f'    -o -name "log-${{SERVER_NAME}}.sh" -o -name "grep-${{SERVER_NAME}}.sh" \\',
+        f'    -o -name "more-${{SERVER_NAME}}.sh" -o -name "stop-${{SERVER_NAME_REMOVED_NUMBER}}.sh" \) | xargs rm -f'
+    ]
+
+    edited_symlink = '\n'.join(data_list) + '\n'
+    write_file('output/scripts/others/create-symlink-by-servername.sh', edited_symlink)
 
 
 def create_add_host_script_file(server_dict):
-    data_list = [
-        f'#!/bin/bash\n',
-        f'cat <<EOF | sudo tee -a /etc/hosts'
-    ]
+    data_list = [f'#!/bin/bash\n']
 
+    data_list.append(f'### append')
+    data_list.append(f'cat <<EOF | sudo tee -a /etc/hosts')
     for server_type, servers in server_dict.items():
         for server in servers:
             data_list.append(f'{server.host_address} {server.host_name}')
+    data_list.append(f'EOF\n')
 
-    data_list.append(f'EOF')
+    data_list.append(f'### overwrite')
+    data_list.append(f'# cat <<EOF | sudo tee /etc/hosts')
+    data_list.append(f'# 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4')
+    data_list.append(f'# ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6')
+    for server_type, servers in server_dict.items():
+        for server in servers:
+            data_list.append(f'# {server.host_address} {server.host_name}')
+    data_list.append(f'# EOF')
+
     edited_hosts = '\n'.join(data_list) + '\n'
     write_file('output/scripts/others/add-hosts.sh', edited_hosts)
 

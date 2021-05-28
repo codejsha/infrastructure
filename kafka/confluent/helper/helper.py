@@ -320,7 +320,8 @@ def main():
     create_server_file(base_data, server_data, prop_data, start_data, stop_data, log_data, grep_data, more_data)
 
     # create other files
-    create_start_and_stop_symlink_script_file(server_data)
+    create_symlink_by_hostname_script_file(server_data)
+    create_symlink_by_servername_script_file(server_data)
     create_add_host_script_file(server_data)
     create_secure_copy_script_file(base_data, server_data)
     create_kafka_alias_file(base_data)
