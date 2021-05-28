@@ -19,7 +19,7 @@ sudo rm -rf ${GRAFANA_VOLUME_DIR}
 sudo mkdir -p ${ZOOKEEPER_VOLUME_DIR}/{zookeeper1,zookeeper2,zookeeper3}/{data,datalog,logs}
 
 ### kafka
-sudo mkdir -p ${KAFKA_VOLUME_DIR}/{kafka1,kafka2,kafka3}/{config}
+sudo mkdir -p ${KAFKA_VOLUME_DIR}/{kafka1,kafka2,kafka3}/config
 sudo chmod -R 777 ${KAFKA_VOLUME_DIR}/{kafka1,kafka2,kafka3}
 sudo mkdir -p ${KAFKA_VOLUME_DIR}/jmx_exporter
 sudo /bin/cp -f /mnt/share/prometheus/jmx_prometheus_javaagent-0.15.0.jar ${KAFKA_VOLUME_DIR}/jmx_exporter
