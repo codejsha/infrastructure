@@ -14,6 +14,8 @@ export LOG_DIR
 ### java home
 # JAVA_HOME="/usr/lib/jvm/java-11"
 # JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+# JAVA_HOME="/usr/lib/jvm/zulu11"
+# JAVA_HOME="/usr/lib/jvm/zulu8"
 JAVA_HOME="/usr/lib/jvm/java-1.8.0"
 export JAVA_HOME
 
@@ -29,6 +31,8 @@ KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:+UseG1GC"
 KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:MaxGCPauseMillis=20"
 KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:InitiatingHeapOccupancyPercent=35"
 KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:+ExplicitGCInvokesConcurrent"
+# KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:ParallelGCThreads="
+# KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:ConcGCThreads="
 KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -XX:MaxInlineLevel=15"
 KAFKA_JVM_PERFORMANCE_OPTS="${KAFKA_JVM_PERFORMANCE_OPTS} -Djava.awt.headless=true"
 export KAFKA_JVM_PERFORMANCE_OPTS
@@ -73,7 +77,7 @@ if [ -n "${PID}" ]; then
     exit
 fi
 
-### create data and log dirs
+### create data and log directories
 if [ ! -d "${DATA_DIR}" ]; then
     mkdir -p ${DATA_DIR}
 fi

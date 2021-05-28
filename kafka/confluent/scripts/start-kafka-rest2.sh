@@ -11,6 +11,8 @@ export LOG_DIR
 
 # JAVA_HOME="/usr/lib/jvm/java-11"
 # JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+# JAVA_HOME="/usr/lib/jvm/zulu11"
+# JAVA_HOME="/usr/lib/jvm/zulu8"
 JAVA_HOME="/usr/lib/jvm/java-1.8.0"
 export JAVA_HOME
 
@@ -26,6 +28,8 @@ KAFKAREST_JVM_PERFORMANCE_OPTS="${KAFKAREST_JVM_PERFORMANCE_OPTS} -XX:+UseG1GC"
 KAFKAREST_JVM_PERFORMANCE_OPTS="${KAFKAREST_JVM_PERFORMANCE_OPTS} -XX:MaxGCPauseMillis=20"
 KAFKAREST_JVM_PERFORMANCE_OPTS="${KAFKAREST_JVM_PERFORMANCE_OPTS} -XX:InitiatingHeapOccupancyPercent=35"
 KAFKAREST_JVM_PERFORMANCE_OPTS="${KAFKAREST_JVM_PERFORMANCE_OPTS} -XX:+ExplicitGCInvokesConcurrent"
+# KAFKAREST_JVM_PERFORMANCE_OPTS="${KAFKAREST_JVM_PERFORMANCE_OPTS} -XX:ParallelGCThreads="
+# KAFKAREST_JVM_PERFORMANCE_OPTS="${KAFKAREST_JVM_PERFORMANCE_OPTS} -XX:ConcGCThreads="
 KAFKAREST_JVM_PERFORMANCE_OPTS="${KAFKAREST_JVM_PERFORMANCE_OPTS} -XX:MaxInlineLevel=15"
 KAFKAREST_JVM_PERFORMANCE_OPTS="${KAFKAREST_JVM_PERFORMANCE_OPTS} -Djava.awt.headless=true"
 export KAFKAREST_JVM_PERFORMANCE_OPTS
@@ -70,7 +74,7 @@ if [ -n "${PID}" ]; then
     exit
 fi
 
-### create log dir
+### create log directory
 if [ ! -d "${LOG_DIR}/backup" ]; then
     mkdir -p ${LOG_DIR}/backup
 fi
