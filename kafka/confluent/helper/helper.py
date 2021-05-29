@@ -210,6 +210,55 @@ def create_server_file(base, server_dict, prop_dict, start_dict, stop_dict, log_
 
 # endregion
 
+# region server_service_file
+
+
+def create_service_script_file(base, server, service):
+    edited_service = service
+    edited_service = replace_variable('USER', f'{base.user}', edited_service)
+    edited_service = replace_variable('GROUP', f'{base.group}', edited_service)
+    edited_service = replace_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_service)
+    edited_service = replace_variable('SERVER_NAME', f'{server.server_name}', edited_service)
+    edited_service = replace_variable('PROPERTIES_FILE',
+                                      f'{base.properties_path}/{server.file.properties}', edited_service)
+    edited_service = replace_variable('LOG_DIR', f'{server.log_dir}', edited_service)
+
+    if server.server_type in \
+            [ServerType.ZOOKEEPER, ServerType.KAFKA, ServerType.KSQLDB, ServerType.CONTROL_CENTER]:
+        edited_service = replace_variable('DATA_DIR', f'{server.data_dir}', edited_service)
+
+    if server.server_type == ServerType.ZOOKEEPER:
+        edited_service = replace_variable('MYID', f'{server.server_id}', edited_service)
+
+    edited_service = substitute_variable('USER', f'{base.user}', edited_service)
+    edited_service = substitute_variable('GROUP', f'{base.group}', edited_service)
+    edited_service = substitute_variable('SERVER_NAME', f'{server.server_name}', edited_service)
+    edited_service = substitute_variable('PROPERTIES_FILE',
+                                         f'{base.properties_path}/{server.file.properties}', edited_service)
+    edited_service = substitute_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_service)
+
+    write_file(f'output/services/override/{server.file.service}', edited_service)
+
+
+def create_service_env_file(base, server, service_env):
+    edited_service_env = service_env
+    edited_service_env = replace_variable('JAVA_HOME', f'{base.java_home}', edited_service_env)
+
+    edited_service_env = substitute_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_service_env)
+    edited_service_env = substitute_variable('SERVER_NAME', f'{server.server_name}', edited_service_env)
+
+    write_file(f'output/services/env/{server.file.service_env}', edited_service_env)
+
+
+def create_server_service_file(base, server_dict, service_dict, service_env_dict):
+    for server_type, servers in server_dict.items():
+        for server in servers:
+            create_service_script_file(base, server, service_dict.get(server_type))
+            create_service_env_file(base, server, service_env_dict.get(server_type))
+
+
+# endregion
+
 # region server_specific
 
 
@@ -318,9 +367,13 @@ def main():
     log_data = read_log_template_data(current_dir)
     grep_data = read_grep_template_data(current_dir)
     more_data = read_more_template_data(current_dir)
+    service_data = read_service_template_data(current_dir)
+    service_env_data = read_service_env_template_data(current_dir)
 
     # create script and property files
     create_server_file(base_data, server_data, prop_data, start_data, stop_data, log_data, grep_data, more_data)
+    # create overriding service files
+    create_server_service_file(base_data, server_data, service_data, service_env_data)
 
     # create other files
     create_symlink_by_hostname_script_file(server_data)
