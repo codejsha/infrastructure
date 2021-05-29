@@ -14,11 +14,13 @@ def reset_output_dir(current_dir):
     output_dir = current_dir.joinpath('output')
     properties_output_dir = current_dir.joinpath('output/properties')
     scripts_output_dir = current_dir.joinpath('output/scripts')
+    server_start_scripts_output_dir = current_dir.joinpath('output/scripts/server-start')
     server_stop_scripts_output_dir = current_dir.joinpath('output/scripts/server-stop')
     server_log_scripts_output_dir = current_dir.joinpath('output/scripts/server-log')
     server_grep_scripts_output_dir = current_dir.joinpath('output/scripts/server-grep')
     server_more_scripts_output_dir = current_dir.joinpath('output/scripts/server-more')
-    other_scripts_output_dir = current_dir.joinpath('output/scripts/others')
+    common_stop_scripts_output_dir = current_dir.joinpath('output/scripts/common-stop')
+    other_scripts_output_dir = current_dir.joinpath('output/others')
 
     if os.path.exists(output_dir):
         shutil.rmtree(output_dir)
@@ -26,10 +28,12 @@ def reset_output_dir(current_dir):
     os.mkdir(output_dir)
     os.mkdir(properties_output_dir)
     os.mkdir(scripts_output_dir)
+    os.mkdir(server_start_scripts_output_dir)
     os.mkdir(server_stop_scripts_output_dir)
     os.mkdir(server_log_scripts_output_dir)
     os.mkdir(server_grep_scripts_output_dir)
     os.mkdir(server_more_scripts_output_dir)
+    os.mkdir(common_stop_scripts_output_dir)
     os.mkdir(other_scripts_output_dir)
 
 

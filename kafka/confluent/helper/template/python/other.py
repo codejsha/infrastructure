@@ -41,7 +41,7 @@ def create_symlink_by_hostname_script_file(server_dict):
     data_list.append(f'fi')
 
     edited_symlink = '\n'.join(data_list) + '\n'
-    write_file('output/scripts/others/create-symlink-by-hostname.sh', edited_symlink)
+    write_file('output/others/create-symlink-by-hostname.sh', edited_symlink)
 
 
 def create_symlink_by_servername_script_file(server_dict):
@@ -58,24 +58,44 @@ def create_symlink_by_servername_script_file(server_dict):
         f'find . -maxdepth 1 -name "*.sh" \\',
         f'    -not \( -name "start-${{SERVER_NAME}}.sh" -o -name "stop-${{SERVER_NAME}}.sh" \\',
         f'    -o -name "log-${{SERVER_NAME}}.sh" -o -name "grep-${{SERVER_NAME}}.sh" \\',
-        f'    -o -name "more-${{SERVER_NAME}}.sh" -o -name "stop-${{SERVER_NAME_REMOVED_NUMBER}}.sh" \) | xargs rm -f'
+        f'    -o -name "more-${{SERVER_NAME}}.sh" -o -name "stop-${{SERVER_NAME_REMOVED_NUMBER}}.sh" \) | xargs rm -f',
+        f'',
+        f'if [ -f "start-${{SERVER_NAME}}.sh" ]; then',
+        f'    ln -snf start-${{SERVER_NAME}}.sh start.sh',
+        f'fi',
+        f'if [ -f "stop-${{SERVER_NAME}}.sh" ]; then',
+        f'    ln -snf stop-${{SERVER_NAME}}.sh stop.sh',
+        f'fi',
+        f'if [ -f "log-${{SERVER_NAME}}.sh" ]; then',
+        f'    ln -snf log-${{SERVER_NAME}}.sh log.sh',
+        f'fi',
+        f'if [ -f "grep-${{SERVER_NAME}}.sh" ]; then',
+        f'    ln -snf grep-${{SERVER_NAME}}.sh grep.sh',
+        f'fi',
+        f'if [ -f "more-${{SERVER_NAME}}.sh" ]; then',
+        f'    ln -snf more-${{SERVER_NAME}}.sh more.sh',
+        f'fi',
+        f'if [ -f "stop-${{SERVER_NAME_REMOVED_NUMBER}}.sh" ]; then',
+        f'    ln -snf stop-${{SERVER_NAME_REMOVED_NUMBER}}.sh stop.sh',
+        f'fi'
     ]
 
     edited_symlink = '\n'.join(data_list) + '\n'
-    write_file('output/scripts/others/create-symlink-by-servername.sh', edited_symlink)
+    write_file('output/others/create-symlink-by-servername.sh', edited_symlink)
 
 
 def create_add_host_script_file(server_dict):
     data_list = [f'#!/bin/bash\n']
 
-    data_list.append(f'### append')
+    data_list.append(f'### append\n')
     data_list.append(f'cat <<EOF | sudo tee -a /etc/hosts')
     for server_type, servers in server_dict.items():
         for server in servers:
             data_list.append(f'{server.host_address} {server.host_name}')
-    data_list.append(f'EOF\n')
+    data_list.append(f'EOF')
+    data_list.append(f'\n######################################################################\n')
 
-    data_list.append(f'### overwrite')
+    data_list.append(f'### overwrite\n')
     data_list.append(f'# cat <<EOF | sudo tee /etc/hosts')
     data_list.append(f'# 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4')
     data_list.append(f'# ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6')
@@ -85,35 +105,51 @@ def create_add_host_script_file(server_dict):
     data_list.append(f'# EOF')
 
     edited_hosts = '\n'.join(data_list) + '\n'
-    write_file('output/scripts/others/add-hosts.sh', edited_hosts)
+    write_file('output/others/add-hosts.sh', edited_hosts)
 
 
 def create_secure_copy_script_file(base, server_dict):
     data_list = [
         f'#!/bin/bash\n',
-        f'tar -czf confluent-properties.tar.gz ../../properties/*',
-        f'tar -czf confluent-scripts.tar.gz ../../scripts/*',
-        f'# tar -czf confluent-properties.tar.gz properties/*',
-        f'# tar -czf confluent-scripts.tar.gz scripts/*\n'
+        f'tar -czf confluent-others.tar.gz ../others/',
+        f'tar -czf confluent-properties.tar.gz ../properties/',
+        f'tar -czf confluent-scripts.tar.gz ../scripts/',
+        f'',
+        f'# tar -czf confluent-others.tar.gz others/',
+        f'# tar -czf confluent-properties.tar.gz properties/',
+        f'# tar -czf confluent-scripts.tar.gz scripts/'
     ]
 
+    # host name
+    data_list.append(f'\n######################################################################\n')
+    data_list.append(f'### host name\n')
+    for server_type, servers in server_dict.items():
+        for server in servers:
+            data_list.append(f'scp confluent-others.tar.gz '
+                             f'{base.user}@{server.host_name}:{base.confluent_home}')
+    data_list.append(f'')
     for server_type, servers in server_dict.items():
         for server in servers:
             data_list.append(f'scp confluent-properties.tar.gz '
                              f'{base.user}@{server.host_name}:{base.confluent_home}')
-
     data_list.append(f'')
     for server_type, servers in server_dict.items():
         for server in servers:
             data_list.append(f'scp confluent-scripts.tar.gz '
                              f'{base.user}@{server.host_name}:{base.confluent_home}')
 
+    # host address
+    data_list.append(f'\n######################################################################\n')
+    data_list.append(f'### host address\n')
+    for server_type, servers in server_dict.items():
+        for server in servers:
+            data_list.append(f'# scp confluent-others.tar.gz '
+                             f'{base.user}@{server.host_address}:{base.confluent_home}')
     data_list.append(f'')
     for server_type, servers in server_dict.items():
         for server in servers:
             data_list.append(f'# scp confluent-properties.tar.gz '
                              f'{base.user}@{server.host_address}:{base.confluent_home}')
-
     data_list.append(f'')
     for server_type, servers in server_dict.items():
         for server in servers:
@@ -121,7 +157,7 @@ def create_secure_copy_script_file(base, server_dict):
                              f'{base.user}@{server.host_address}:{base.confluent_home}')
 
     edited_hosts = '\n'.join(data_list) + '\n'
-    write_file('output/scripts/others/scp-files.sh', edited_hosts)
+    write_file('output/others/scp-files.sh', edited_hosts)
 
 
 def create_kafka_alias_file(base):
@@ -171,4 +207,4 @@ def create_kafka_alias_file(base):
     ]
 
     edited_hosts = '\n'.join(data_list) + '\n'
-    write_file('output/scripts/others/.kafka_aliases', edited_hosts)
+    write_file('output/others/.kafka_aliases', edited_hosts)

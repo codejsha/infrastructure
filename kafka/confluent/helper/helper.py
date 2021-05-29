@@ -7,7 +7,7 @@ from template.python.read_template import *
 from template.python.read_value import *
 
 
-# region create_file
+# region server_file
 
 
 def create_prop_file(server, prop, servers=None):
@@ -148,7 +148,7 @@ def create_start_script_file(base, server, start):
     if server.server_type == ServerType.ZOOKEEPER:
         edited_start = replace_variable('MYID', f'{server.server_id}', edited_start)
 
-    write_file(f'output/scripts/{server.file.start}', edited_start)
+    write_file(f'output/scripts/server-start/{server.file.start}', edited_start)
 
 
 def create_stop_script_file(base, server, stop):
@@ -160,7 +160,7 @@ def create_stop_script_file(base, server, stop):
 def create_common_stop_script_file(base, server, stop):
     edited_stop = stop
     edited_stop = replace_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_stop)
-    write_file(f'output/scripts/{server.stop_script}', edited_stop)
+    write_file(f'output/scripts/common-stop/{server.stop_script}', edited_stop)
 
 
 def create_log_script_file(server, log):
