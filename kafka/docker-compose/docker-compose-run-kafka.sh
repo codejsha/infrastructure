@@ -32,12 +32,12 @@ sudo /bin/cp -f ../kafka-lag-exporter/* ${KAFKA_LAG_EXPORTER_VOLUME_DIR}
 
 ### prometheus
 sudo mkdir -p ${PROMETHEUS_VOLUME_DIR}
-sudo /bin/cp -f /mnt/share/confluent-platform/prometheus-config/* ${PROMETHEUS_VOLUME_DIR}
+sudo /bin/cp -f /mnt/share/confluent-platform/prometheus/* ${PROMETHEUS_VOLUME_DIR}
 sudo /bin/cp -f prometheus.yml ${PROMETHEUS_VOLUME_DIR}
 
 ### grafana
 sudo mkdir -p ${GRAFANA_VOLUME_DIR}/provisioning
-sudo /bin/cp -rf /mnt/share/confluent-platform/grafana-provisioning/* ${GRAFANA_VOLUME_DIR}/provisioning
+sudo /bin/cp -rf /mnt/share/confluent-platform/grafana/* ${GRAFANA_VOLUME_DIR}/provisioning
 
 ### network
 KAFKA_DOCKER_NETWORK="stream-network"
