@@ -21,6 +21,9 @@ def reset_output_dir(current_dir):
     server_more_scripts_output_dir = current_dir.joinpath('output/scripts/server-more')
     common_stop_scripts_output_dir = current_dir.joinpath('output/scripts/common-stop')
     other_scripts_output_dir = current_dir.joinpath('output/others')
+    service_scripts_output_dir = current_dir.joinpath('output/services')
+    service_override_scripts_output_dir = current_dir.joinpath('output/services/override')
+    service_env_scripts_output_dir = current_dir.joinpath('output/services/env')
 
     if os.path.exists(output_dir):
         shutil.rmtree(output_dir)
@@ -35,6 +38,9 @@ def reset_output_dir(current_dir):
     os.mkdir(server_more_scripts_output_dir)
     os.mkdir(common_stop_scripts_output_dir)
     os.mkdir(other_scripts_output_dir)
+    os.mkdir(service_scripts_output_dir)
+    os.mkdir(service_override_scripts_output_dir)
+    os.mkdir(service_env_scripts_output_dir)
 
 
 # endregion

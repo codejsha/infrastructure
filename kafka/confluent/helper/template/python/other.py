@@ -114,10 +114,12 @@ def create_secure_copy_script_file(base, server_dict):
         f'tar -czf confluent-others.tar.gz ../others/',
         f'tar -czf confluent-properties.tar.gz ../properties/',
         f'tar -czf confluent-scripts.tar.gz ../scripts/',
+        f'tar -czf confluent-services.tar.gz ../services/',
         f'',
         f'# tar -czf confluent-others.tar.gz others/',
         f'# tar -czf confluent-properties.tar.gz properties/',
-        f'# tar -czf confluent-scripts.tar.gz scripts/'
+        f'# tar -czf confluent-scripts.tar.gz scripts/',
+        f'# tar -czf confluent-services.tar.gz services/'
     ]
 
     # host name
@@ -137,6 +139,11 @@ def create_secure_copy_script_file(base, server_dict):
         for server in servers:
             data_list.append(f'scp confluent-scripts.tar.gz '
                              f'{base.user}@{server.host_name}:{base.confluent_home}')
+    data_list.append(f'')
+    for server_type, servers in server_dict.items():
+        for server in servers:
+            data_list.append(f'scp confluent-services.tar.gz '
+                             f'{base.user}@{server.host_name}:{base.confluent_home}')
 
     # host address
     data_list.append(f'\n######################################################################\n')
@@ -154,6 +161,11 @@ def create_secure_copy_script_file(base, server_dict):
     for server_type, servers in server_dict.items():
         for server in servers:
             data_list.append(f'# scp confluent-scripts.tar.gz '
+                             f'{base.user}@{server.host_address}:{base.confluent_home}')
+    data_list.append(f'')
+    for server_type, servers in server_dict.items():
+        for server in servers:
+            data_list.append(f'# scp confluent-services.tar.gz '
                              f'{base.user}@{server.host_address}:{base.confluent_home}')
 
     edited_hosts = '\n'.join(data_list) + '\n'

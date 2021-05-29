@@ -11,6 +11,7 @@ from template.python.enumeration import ServerType
 @dataclass
 class Base:
     user: str
+    group: str
     confluent_home: str
     java_home: str
     properties_path: str
@@ -30,6 +31,8 @@ class ServerFile:
     log: str
     grep: str
     more: str
+    service: str
+    service_env: str
 
 
 @dataclass

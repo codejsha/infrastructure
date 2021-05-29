@@ -80,4 +80,39 @@ def read_more_template_data(current_dir):
     }
     return more_dict
 
+
+# endregion
+
+# region services
+
+
+def read_service_template_data(current_dir):
+    service_template_dir = current_dir.joinpath('template/services')
+    service_dict = {
+        ServerType.ZOOKEEPER: read_file(f'{service_template_dir}/zookeeper-service-template.sh'),
+        ServerType.KAFKA: read_file(f'{service_template_dir}/kafka-service-template.sh'),
+        ServerType.SCHEMA_REGISTRY: read_file(f'{service_template_dir}/schema-registry-service-template.sh'),
+        ServerType.KAFKA_CONNECT: read_file(f'{service_template_dir}/kafka-connect-service-template.sh'),
+        ServerType.REPLICATOR: read_file(f'{service_template_dir}/replicator-service-template.sh'),
+        ServerType.KAFKA_REST: read_file(f'{service_template_dir}/kafka-rest-service-template.sh'),
+        ServerType.KSQLDB: read_file(f'{service_template_dir}/ksqldb-service-template.sh'),
+        ServerType.CONTROL_CENTER: read_file(f'{service_template_dir}/control-center-service-template.sh'),
+    }
+    return service_dict
+
+
+def read_service_env_template_data(current_dir):
+    service_template_dir = current_dir.joinpath('template/services')
+    service_env_dict = {
+        ServerType.ZOOKEEPER: read_file(f'{service_template_dir}/zookeeper-service-template.env'),
+        ServerType.KAFKA: read_file(f'{service_template_dir}/kafka-service-template.env'),
+        ServerType.SCHEMA_REGISTRY: read_file(f'{service_template_dir}/schema-registry-service-template.env'),
+        ServerType.KAFKA_CONNECT: read_file(f'{service_template_dir}/kafka-connect-service-template.env'),
+        ServerType.REPLICATOR: read_file(f'{service_template_dir}/replicator-service-template.env'),
+        ServerType.KAFKA_REST: read_file(f'{service_template_dir}/kafka-rest-service-template.env'),
+        ServerType.KSQLDB: read_file(f'{service_template_dir}/ksqldb-service-template.env'),
+        ServerType.CONTROL_CENTER: read_file(f'{service_template_dir}/control-center-service-template.env'),
+    }
+    return service_env_dict
+
 # endregion
