@@ -49,12 +49,12 @@ export GC_LOG_ENABLED="true"
 # export JMX_PORT=""
 KAFKAREST_JMX_OPTS="${KAFKAREST_JMX_OPTS} -Dcom.sun.management.jmxremote"
 KAFKAREST_JMX_OPTS="${KAFKAREST_JMX_OPTS} -Dcom.sun.management.jmxremote.authenticate=false"
-KAFKAREST_JMX_OPTS="${KAFKAREST_JMX_OPTS} -Dcom.sun.management.jmxremote.ssl=false "
+KAFKAREST_JMX_OPTS="${KAFKAREST_JMX_OPTS} -Dcom.sun.management.jmxremote.ssl=false"
 export KAFKAREST_JMX_OPTS
 
 ### log4j
-# KAFKAREST_LOG4J_OPTS="${KAFKAREST_LOG4J_OPTS}"
-# export KAFKAREST_LOG4J_OPTS
+KAFKAREST_LOG4J_OPTS="${KAFKAREST_LOG4J_OPTS} -Dlog4j.configuration=file:${CONFLUENT_HOME}/log4j/kafka-rest-log4j.properties"
+export KAFKAREST_LOG4J_OPTS
 
 ######################################################################
 

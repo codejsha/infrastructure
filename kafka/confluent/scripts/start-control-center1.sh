@@ -53,12 +53,12 @@ export GC_LOG_ENABLED="true"
 # export JMX_PORT=""
 CONTROL_CENTER_JMX_OPTS="${CONTROL_CENTER_JMX_OPTS} -Dcom.sun.management.jmxremote"
 CONTROL_CENTER_JMX_OPTS="${CONTROL_CENTER_JMX_OPTS} -Dcom.sun.management.jmxremote.authenticate=false"
-CONTROL_CENTER_JMX_OPTS="${CONTROL_CENTER_JMX_OPTS} -Dcom.sun.management.jmxremote.ssl=false "
+CONTROL_CENTER_JMX_OPTS="${CONTROL_CENTER_JMX_OPTS} -Dcom.sun.management.jmxremote.ssl=false"
 export CONTROL_CENTER_JMX_OPTS
 
 ### log4j
-# CONTROL_CENTER_LOG4J_OPTS="${CONTROL_CENTER_LOG4J_OPTS}"
-# export CONTROL_CENTER_LOG4J_OPTS
+CONTROL_CENTER_LOG4J_OPTS="${CONTROL_CENTER_LOG4J_OPTS} -Dlog4j.configuration=file:${CONFLUENT_HOME}/log4j/control-center-log4j.properties"
+export CONTROL_CENTER_LOG4J_OPTS
 
 ######################################################################
 

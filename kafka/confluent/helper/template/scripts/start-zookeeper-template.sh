@@ -52,12 +52,12 @@ export GC_LOG_ENABLED="true"
 # export JMX_PORT=""
 KAFKA_JMX_OPTS="${KAFKA_JMX_OPTS} -Dcom.sun.management.jmxremote"
 KAFKA_JMX_OPTS="${KAFKA_JMX_OPTS} -Dcom.sun.management.jmxremote.authenticate=false"
-KAFKA_JMX_OPTS="${KAFKA_JMX_OPTS} -Dcom.sun.management.jmxremote.ssl=false "
+KAFKA_JMX_OPTS="${KAFKA_JMX_OPTS} -Dcom.sun.management.jmxremote.ssl=false"
 export KAFKA_JMX_OPTS
 
 ### log4j
-# KAFKA_LOG4J_OPTS="${KAFKA_LOG4J_OPTS}"
-# export KAFKA_LOG4J_OPTS
+KAFKA_LOG4J_OPTS="${KAFKA_LOG4J_OPTS} -Dlog4j.configuration=file:${CONFLUENT_HOME}/log4j/zookeeper-log4j.properties"
+export KAFKA_LOG4J_OPTS
 
 ######################################################################
 

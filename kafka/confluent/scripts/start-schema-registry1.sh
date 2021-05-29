@@ -49,12 +49,12 @@ export GC_LOG_ENABLED="true"
 # export JMX_PORT=""
 SCHEMA_REGISTRY_JMX_OPTS="${SCHEMA_REGISTRY_JMX_OPTS} -Dcom.sun.management.jmxremote"
 SCHEMA_REGISTRY_JMX_OPTS="${SCHEMA_REGISTRY_JMX_OPTS} -Dcom.sun.management.jmxremote.authenticate=false"
-SCHEMA_REGISTRY_JMX_OPTS="${SCHEMA_REGISTRY_JMX_OPTS} -Dcom.sun.management.jmxremote.ssl=false "
+SCHEMA_REGISTRY_JMX_OPTS="${SCHEMA_REGISTRY_JMX_OPTS} -Dcom.sun.management.jmxremote.ssl=false"
 export SCHEMA_REGISTRY_JMX_OPTS
 
 ### log4j
-# SCHEMA_REGISTRY_LOG4J_OPTS="${SCHEMA_REGISTRY_LOG4J_OPTS}"
-# export SCHEMA_REGISTRY_LOG4J_OPTS
+SCHEMA_REGISTRY_LOG4J_OPTS="${SCHEMA_REGISTRY_LOG4J_OPTS} -Dlog4j.configuration=file:${CONFLUENT_HOME}/log4j/schema-registry-log4j.properties"
+export SCHEMA_REGISTRY_LOG4J_OPTS
 
 ######################################################################
 

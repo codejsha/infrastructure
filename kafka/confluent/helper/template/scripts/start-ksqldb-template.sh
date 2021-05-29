@@ -55,12 +55,12 @@ export GC_LOG_ENABLED="true"
 # export JMX_PORT=""
 KSQL_JMX_OPTS="${KSQL_JMX_OPTS} -Dcom.sun.management.jmxremote"
 KSQL_JMX_OPTS="${KSQL_JMX_OPTS} -Dcom.sun.management.jmxremote.authenticate=false"
-KSQL_JMX_OPTS="${KSQL_JMX_OPTS} -Dcom.sun.management.jmxremote.ssl=false "
+KSQL_JMX_OPTS="${KSQL_JMX_OPTS} -Dcom.sun.management.jmxremote.ssl=false"
 export KSQL_JMX_OPTS
 
 ### log4j
-# KSQL_LOG4J_OPTS="${KSQL_LOG4J_OPTS}"
-# export KSQL_LOG4J_OPTS
+KSQL_LOG4J_OPTS="${KSQL_LOG4J_OPTS} -Dlog4j.configuration=file:${CONFLUENT_HOME}/log4j/ksqldb-log4j.properties"
+export KSQL_LOG4J_OPTS
 
 ######################################################################
 
