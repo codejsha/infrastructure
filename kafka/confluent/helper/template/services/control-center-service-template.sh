@@ -59,7 +59,7 @@ User=${USER}
 Group=${GROUP}
 
 Environment=
-EnvironmentFile=
+EnvironmentFile=${CONFLUENT_HOME}/services/${SERVER_NAME}-service.env
 
 ExecStart=
 ExecStart=/usr/bin/control-center-start ${PROPERTIES_FILE}
