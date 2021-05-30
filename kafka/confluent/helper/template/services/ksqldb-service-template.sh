@@ -48,6 +48,8 @@ sudo chown -R ${USER}:${GROUP} ${DATA_DIR} ${LOG_DIR}
 
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-ksqldb.service.d/override.conf
 [Service]
+SuccessExitStatus=143
+
 User=
 Group=
 User=${USER}
