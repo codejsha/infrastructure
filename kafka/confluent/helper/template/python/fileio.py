@@ -12,35 +12,26 @@ import yaml
 
 def reset_output_dir(current_dir):
     output_dir = current_dir.joinpath('output')
-    properties_output_dir = current_dir.joinpath('output/properties')
-    scripts_output_dir = current_dir.joinpath('output/scripts')
-    server_start_scripts_output_dir = current_dir.joinpath('output/scripts/server-start')
-    server_stop_scripts_output_dir = current_dir.joinpath('output/scripts/server-stop')
-    server_log_scripts_output_dir = current_dir.joinpath('output/scripts/server-log')
-    server_grep_scripts_output_dir = current_dir.joinpath('output/scripts/server-grep')
-    server_more_scripts_output_dir = current_dir.joinpath('output/scripts/server-more')
-    common_stop_scripts_output_dir = current_dir.joinpath('output/scripts/common-stop')
-    other_scripts_output_dir = current_dir.joinpath('output/others')
-    service_scripts_output_dir = current_dir.joinpath('output/services')
-    service_override_scripts_output_dir = current_dir.joinpath('output/services/override')
-    service_env_scripts_output_dir = current_dir.joinpath('output/services/env')
+    output_sub_dirs = [
+        'properties',
+        'scripts',
+        'scripts/server-start',
+        'scripts/server-stop',
+        'scripts/server-log',
+        'scripts/server-grep',
+        'scripts/server-more',
+        'scripts/common-stop',
+        'others',
+        'services',
+        'services/override',
+        'services/env'
+    ]
 
     if os.path.exists(output_dir):
         shutil.rmtree(output_dir)
 
-    os.mkdir(output_dir)
-    os.mkdir(properties_output_dir)
-    os.mkdir(scripts_output_dir)
-    os.mkdir(server_start_scripts_output_dir)
-    os.mkdir(server_stop_scripts_output_dir)
-    os.mkdir(server_log_scripts_output_dir)
-    os.mkdir(server_grep_scripts_output_dir)
-    os.mkdir(server_more_scripts_output_dir)
-    os.mkdir(common_stop_scripts_output_dir)
-    os.mkdir(other_scripts_output_dir)
-    os.mkdir(service_scripts_output_dir)
-    os.mkdir(service_override_scripts_output_dir)
-    os.mkdir(service_env_scripts_output_dir)
+    for sub_dir in output_sub_dirs:
+        os.makedirs(output_dir.joinpath(sub_dir))
 
 
 # endregion
