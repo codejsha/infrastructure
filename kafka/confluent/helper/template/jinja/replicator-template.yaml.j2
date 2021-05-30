@@ -14,7 +14,7 @@ replicator:
       {% if component.common.param.listenAddress %}
       listenAddress: {{ component.common.param.listenAddress }}
       {% else %}
-      listenAddress: '0.0.0.0'
+      listenAddress: 0.0.0.0
       {% endif %}
     {# listenPort #}
       {% set listenPort = component.common.param.listenPort if component.common.param.listenPort
