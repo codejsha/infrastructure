@@ -3,9 +3,6 @@
 from dataclasses import dataclass
 
 
-# region base
-
-
 @dataclass
 class Base:
     user: str
@@ -14,5 +11,3 @@ class Base:
     java_home: str
     properties_path: str
     scripts_path: str
-
-# endregion

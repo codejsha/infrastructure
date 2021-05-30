@@ -5,9 +5,6 @@ from dataclasses import dataclass
 from template.python.enumeration import ServerType
 
 
-# region servers
-
-
 @dataclass
 class ServerFile:
     properties: str
@@ -124,5 +121,3 @@ class ControlCenter(Server):
     zookeeper_connect: str
     schema_registry_url: str
     kafka_rest_url: str
-
-# endregion
