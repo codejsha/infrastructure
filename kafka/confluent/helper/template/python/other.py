@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from template.python.fileio import *
+from template.python.fileio import write_file
 
 
 def create_symlink_by_hostname_script_file(server_dict):

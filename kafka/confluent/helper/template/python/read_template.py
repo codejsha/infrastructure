@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from template.python.enumeration import ServerType
-from template.python.fileio import *
+from template.python.fileio import read_file
 
 
 # region properties

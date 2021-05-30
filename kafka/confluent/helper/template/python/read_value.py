@@ -2,8 +2,8 @@
 
 import re
 
-from template.python.data import *
-from template.python.enumeration import ServerType
+from template.python.base import Base
+from template.python.server import *
 
 
 # region base

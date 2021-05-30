@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from template.python.argument_parse import *
+from template.python.fileio import *
 from template.python.other import *
 from template.python.read_template import *
 from template.python.read_value import *
@@ -240,6 +242,7 @@ def create_service_script_file(base, server, service):
 
 def create_service_env_file(base, server, service_env):
     edited_service_env = service_env
+    edited_service_env = replace_variable('LOG_DIR', f'{server.log_dir}', edited_service_env)
     edited_service_env = replace_variable('JAVA_HOME', f'{base.java_home}', edited_service_env)
 
     edited_service_env = substitute_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_service_env)
@@ -350,13 +353,16 @@ def get_sub_cluster_address_url_dict(cluster_servers):
 
 
 def main():
+    # parse arguments
+    values_file = get_value_file()
+
     # reset output directory
     current_dir = pathlib.Path(__file__).parent.absolute()
     reset_output_dir(current_dir)
 
     # read values
-    rendered_file_name = render_values_file(f'{current_dir}', 'values.yaml')
-    values_data = read_yaml_file(f'{rendered_file_name}')
+    rendered_file_name = render_values_file(current_dir, values_file)
+    values_data = read_yaml_file(rendered_file_name)
     base_data = read_base_data(values_data)
     server_data = read_server_data(values_data)
 

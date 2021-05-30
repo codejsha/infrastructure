@@ -43,13 +43,13 @@ def reset_output_dir(current_dir):
 def render_values_file(dir_path, file_name):
     rendered_file_name = 'rendered-values.yaml'
 
-    with open(f'{dir_path}/{file_name}', 'r') as script_file:
+    with open(dir_path.joinpath(file_name), 'r') as script_file:
         env = jinja2.Environment(loader=jinja2.FileSystemLoader('template/jinja'),
                                  trim_blocks=True, lstrip_blocks=True)
         template = env.get_template('value-template.yaml.j2')
         context = yaml.safe_load(script_file)
         rendered_values = template.render(**context)
-        write_file(f'{dir_path}/{rendered_file_name}', rendered_values)
+        write_file(dir_path.joinpath(rendered_file_name), rendered_values)
 
     return rendered_file_name
 
