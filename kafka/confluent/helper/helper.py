@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-import pathlib
-
 from template.python.other import *
 from template.python.read_template import *
 from template.python.read_value import *

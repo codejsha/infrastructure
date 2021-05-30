@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import pathlib
 import shutil
 
 import jinja2
@@ -31,7 +32,7 @@ def reset_output_dir(current_dir):
         shutil.rmtree(output_dir)
 
     for sub_dir in output_sub_dirs:
-        os.makedirs(output_dir.joinpath(sub_dir))
+        pathlib.Path(output_dir.joinpath(sub_dir)).mkdir(parents=True, exist_ok=True)
 
 
 # endregion
