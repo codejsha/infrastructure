@@ -157,12 +157,6 @@ def create_stop_script_file(base, server, stop):
     write_file(f'output/scripts/server-stop/{server.file.stop}', edited_stop)
 
 
-def create_common_stop_script_file(base, server, stop):
-    edited_stop = stop
-    edited_stop = replace_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_stop)
-    write_file(f'output/scripts/common-stop/{server.stop_script}', edited_stop)
-
-
 def create_log_script_file(server, log):
     edited_log = log
     edited_log = replace_variable('SERVER_NAME', f'{server.server_name}', edited_log)
@@ -182,6 +176,12 @@ def create_more_script_file(server, more):
     edited_more = replace_variable('SERVER_NAME', f'{server.server_name}', edited_more)
     edited_more = replace_variable('LOG_DIR', f'{server.log_dir}', edited_more)
     write_file(f'output/scripts/server-more/{server.file.more}', edited_more)
+
+
+def create_common_stop_script_file(base, server, stop):
+    edited_stop = stop
+    edited_stop = replace_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_stop)
+    write_file(f'output/scripts/common-stop/{server.stop_script}', edited_stop)
 
 
 def create_server_file(base, server_dict, prop_dict, start_dict, stop_dict, log_dict, grep_dict, more_dict):
