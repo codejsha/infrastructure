@@ -1,6 +1,7 @@
 # Confluent
 
 - https://docs.confluent.io/platform/current/overview.html
+- https://github.com/confluentinc/jmx-monitoring-stacks
 
 ## Local
 
@@ -15,12 +16,6 @@ docker create network stream-network
 
 docker-compose up -d
 # docker-compose up -d -f docker-compose.yaml
-```
-
-## Kubernetes (Open source Helm charts)
-
-```bash
-bash ./helm-install-open-source-confluent-kafka.sh
 ```
 
 ## Kubernetes (Operator with Helm)
@@ -61,4 +56,10 @@ kubectl apply --filename kafka-connect0-ingress.yaml
 
 ```bash
 bash ./apply-namespaced-deployment.sh
+```
+
+## Kubernetes (Open source Helm charts)
+
+```bash
+bash ./helm-install-open-source-confluent-kafka.sh
 ```
