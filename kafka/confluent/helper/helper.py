@@ -5,6 +5,7 @@ from template.python.fileio import *
 from template.python.other import *
 from template.python.read_template import *
 from template.python.read_value import *
+from template.python.symlink import *
 
 
 # region server_file
