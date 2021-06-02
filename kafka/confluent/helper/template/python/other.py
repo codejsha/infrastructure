@@ -4,7 +4,10 @@ from template.python.fileio import write_file
 
 
 def create_symlink_by_hostname_script_file(server_dict):
-    data_list = [f'#!/bin/bash\n']
+    data_list = [
+        f'#!/bin/bash\n',
+        f'mkdir backup\n'
+    ]
 
     is_first = True
     for server_type, servers in server_dict.items():
@@ -18,7 +21,7 @@ def create_symlink_by_hostname_script_file(server_dict):
             data_list.append(f'    find . -maxdepth 1 -name "*.sh" \\\n'
                              f'        -not \( -name "{server.file.start}" -o -name "{server.file.stop}" \\\n'
                              f'        -o -name "{server.file.log}" -o -name "{server.file.grep}" \\\n'
-                             f'        -o -name "{server.file.more}" -o -name "{server.stop_script}" \) | xargs rm -f')
+                             f'        -o -name "{server.file.more}" -o -name "{server.stop_script}" \) | xargs -I {{}} mv {{}} backup/')
 
             data_list.append(f'    if [ -f "{server.file.start}" ]; then')
             data_list.append(f'        ln -snf {server.file.start} start.sh')
@@ -41,7 +44,7 @@ def create_symlink_by_hostname_script_file(server_dict):
     data_list.append(f'fi')
 
     edited_symlink = '\n'.join(data_list) + '\n'
-    write_file('output/others/create-symlink-by-hostname.sh', edited_symlink)
+    write_file('output/scripts/create-symlink-by-hostname.sh', edited_symlink)
 
 
 def create_symlink_by_servername_script_file(server_dict):
@@ -55,10 +58,11 @@ def create_symlink_by_servername_script_file(server_dict):
         f'    exit 1',
         f'fi',
         f'',
+        f'mkdir backup\n',
         f'find . -maxdepth 1 -name "*.sh" \\',
         f'    -not \( -name "start-${{SERVER_NAME}}.sh" -o -name "stop-${{SERVER_NAME}}.sh" \\',
         f'    -o -name "log-${{SERVER_NAME}}.sh" -o -name "grep-${{SERVER_NAME}}.sh" \\',
-        f'    -o -name "more-${{SERVER_NAME}}.sh" -o -name "stop-${{SERVER_NAME_REMOVED_NUMBER}}.sh" \) | xargs rm -f',
+        f'    -o -name "more-${{SERVER_NAME}}.sh" -o -name "stop-${{SERVER_NAME_REMOVED_NUMBER}}.sh" \) | xargs -I {{}} mv {{}} backup/',
         f'',
         f'if [ -f "start-${{SERVER_NAME}}.sh" ]; then',
         f'    ln -snf start-${{SERVER_NAME}}.sh start.sh',
@@ -81,7 +85,7 @@ def create_symlink_by_servername_script_file(server_dict):
     ]
 
     edited_symlink = '\n'.join(data_list) + '\n'
-    write_file('output/others/create-symlink-by-servername.sh', edited_symlink)
+    write_file('output/scripts/create-symlink-by-servername.sh', edited_symlink)
 
 
 def create_add_host_script_file(server_dict):
@@ -111,15 +115,17 @@ def create_add_host_script_file(server_dict):
 def create_secure_copy_script_file(base, server_dict):
     data_list = [
         f'#!/bin/bash\n',
-        f'tar -czf confluent-others.tar.gz ../others/',
-        f'tar -czf confluent-properties.tar.gz ../properties/',
-        f'tar -czf confluent-scripts.tar.gz ../scripts/',
-        f'tar -czf confluent-services.tar.gz ../services/',
+        f'tar -czf confluent-log4j.tar.gz --exclude=*.tar.gz ../log4j/',
+        f'tar -czf confluent-others.tar.gz --exclude=*.tar.gz ../others/',
+        f'tar -czf confluent-properties.tar.gz --exclude=*.tar.gz ../properties/',
+        f'tar -czf confluent-scripts.tar.gz --exclude=*.tar.gz ../scripts/',
+        f'tar -czf confluent-services.tar.gz --exclude=*.tar.gz ../services/',
         f'',
-        f'# tar -czf confluent-others.tar.gz others/',
-        f'# tar -czf confluent-properties.tar.gz properties/',
-        f'# tar -czf confluent-scripts.tar.gz scripts/',
-        f'# tar -czf confluent-services.tar.gz services/'
+        f'# tar -czf confluent-log4j.tar.gz --exclude=*.tar.gz log4j/',
+        f'# tar -czf confluent-others.tar.gz --exclude=*.tar.gz others/',
+        f'# tar -czf confluent-properties.tar.gz --exclude=*.tar.gz properties/',
+        f'# tar -czf confluent-scripts.tar.gz --exclude=*.tar.gz scripts/',
+        f'# tar -czf confluent-services.tar.gz --exclude=*.tar.gz services/'
     ]
 
     # host name
@@ -127,22 +133,7 @@ def create_secure_copy_script_file(base, server_dict):
     data_list.append(f'### host name\n')
     for server_type, servers in server_dict.items():
         for server in servers:
-            data_list.append(f'scp confluent-others.tar.gz '
-                             f'{base.user}@{server.host_name}:{base.confluent_home}')
-    data_list.append(f'')
-    for server_type, servers in server_dict.items():
-        for server in servers:
-            data_list.append(f'scp confluent-properties.tar.gz '
-                             f'{base.user}@{server.host_name}:{base.confluent_home}')
-    data_list.append(f'')
-    for server_type, servers in server_dict.items():
-        for server in servers:
-            data_list.append(f'scp confluent-scripts.tar.gz '
-                             f'{base.user}@{server.host_name}:{base.confluent_home}')
-    data_list.append(f'')
-    for server_type, servers in server_dict.items():
-        for server in servers:
-            data_list.append(f'scp confluent-services.tar.gz '
+            data_list.append(f'scp confluent-log4j.tar.gz confluent-others.tar.gz confluent-properties.tar.gz confluent-scripts.tar.gz confluent-services.tar.gz '
                              f'{base.user}@{server.host_name}:{base.confluent_home}')
 
     # host address
@@ -150,22 +141,7 @@ def create_secure_copy_script_file(base, server_dict):
     data_list.append(f'### host address\n')
     for server_type, servers in server_dict.items():
         for server in servers:
-            data_list.append(f'# scp confluent-others.tar.gz '
-                             f'{base.user}@{server.host_address}:{base.confluent_home}')
-    data_list.append(f'')
-    for server_type, servers in server_dict.items():
-        for server in servers:
-            data_list.append(f'# scp confluent-properties.tar.gz '
-                             f'{base.user}@{server.host_address}:{base.confluent_home}')
-    data_list.append(f'')
-    for server_type, servers in server_dict.items():
-        for server in servers:
-            data_list.append(f'# scp confluent-scripts.tar.gz '
-                             f'{base.user}@{server.host_address}:{base.confluent_home}')
-    data_list.append(f'')
-    for server_type, servers in server_dict.items():
-        for server in servers:
-            data_list.append(f'# scp confluent-services.tar.gz '
+            data_list.append(f'# scp confluent-log4j.tar.gz confluent-others.tar.gz confluent-properties.tar.gz confluent-scripts.tar.gz confluent-services.tar.gz '
                              f'{base.user}@{server.host_address}:{base.confluent_home}')
 
     edited_hosts = '\n'.join(data_list) + '\n'

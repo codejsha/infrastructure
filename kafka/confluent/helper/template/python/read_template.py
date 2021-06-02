@@ -115,4 +115,24 @@ def read_service_env_template_data(current_dir):
     }
     return service_env_dict
 
+
+# endregion
+
+# region log4j
+
+
+def read_log4j_template_data(current_dir):
+    log4j_template_dir = current_dir.joinpath('template/log4j')
+    log4j_dict = {
+        ServerType.ZOOKEEPER: read_file(f'{log4j_template_dir}/zookeeper-log4j.properties'),
+        ServerType.KAFKA: read_file(f'{log4j_template_dir}/kafka-log4j.properties'),
+        ServerType.SCHEMA_REGISTRY: read_file(f'{log4j_template_dir}/schema-registry-log4j.properties'),
+        ServerType.KAFKA_CONNECT: read_file(f'{log4j_template_dir}/kafka-connect-log4j.properties'),
+        ServerType.REPLICATOR: read_file(f'{log4j_template_dir}/replicator-log4j.properties'),
+        ServerType.KAFKA_REST: read_file(f'{log4j_template_dir}/kafka-rest-log4j.properties'),
+        ServerType.KSQLDB: read_file(f'{log4j_template_dir}/ksqldb-log4j.properties'),
+        ServerType.CONTROL_CENTER: read_file(f'{log4j_template_dir}/control-center-log4j.properties'),
+    }
+    return log4j_dict
+
 # endregion

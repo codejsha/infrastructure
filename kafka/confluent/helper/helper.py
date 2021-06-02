@@ -132,8 +132,27 @@ def create_control_center_prop_file(server, prop, connect_servers, replicator_se
     write_file(f'output/properties/{server.file.properties}', edited_prop)
 
 
-def create_start_script_file(base, server, start):
-    edited_start = start
+def create_log4j_prop_file(server_type, log4j_prop):
+    if server_type == ServerType.ZOOKEEPER:
+        write_file(f'output/log4j/zookeeper-log4j.properties', log4j_prop)
+    elif server_type == ServerType.KAFKA:
+        write_file(f'output/log4j/kafka-log4j.properties', log4j_prop)
+    elif server_type == ServerType.SCHEMA_REGISTRY:
+        write_file(f'output/log4j/schema-registry-log4j.properties', log4j_prop)
+    elif server_type == ServerType.KAFKA_CONNECT:
+        write_file(f'output/log4j/kafka-connect-log4j.properties', log4j_prop)
+    elif server_type == ServerType.REPLICATOR:
+        write_file(f'output/log4j/replicator-log4j.properties', log4j_prop)
+    elif server_type == ServerType.KAFKA_REST:
+        write_file(f'output/log4j/kafka-rest-log4j.properties', log4j_prop)
+    elif server_type == ServerType.KSQLDB:
+        write_file(f'output/log4j/ksqldb-log4j.properties', log4j_prop)
+    elif server_type == ServerType.CONTROL_CENTER:
+        write_file(f'output/log4j/control-center-log4j.properties', log4j_prop)
+
+
+def create_start_script_file(base, server, start_script):
+    edited_start = start_script
     edited_start = replace_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_start)
     edited_start = replace_variable('SERVER_NAME', f'{server.server_name}', edited_start)
     edited_start = replace_variable('PROPERTIES_FILE',
@@ -148,49 +167,49 @@ def create_start_script_file(base, server, start):
     if server.server_type == ServerType.ZOOKEEPER:
         edited_start = replace_variable('MYID', f'{server.server_id}', edited_start)
 
-    write_file(f'output/scripts/server-start/{server.file.start}', edited_start)
+    write_file(f'output/scripts/{server.file.start}', edited_start)
 
 
-def create_stop_script_file(base, server, stop):
-    edited_stop = stop
+def create_stop_script_file(base, server, stop_script):
+    edited_stop = stop_script
     edited_stop = replace_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_stop)
-    write_file(f'output/scripts/server-stop/{server.file.stop}', edited_stop)
+    write_file(f'output/scripts/{server.file.stop}', edited_stop)
 
 
-def create_log_script_file(server, log):
-    edited_log = log
+def create_log_script_file(server, log_script):
+    edited_log = log_script
     edited_log = replace_variable('SERVER_NAME', f'{server.server_name}', edited_log)
     edited_log = replace_variable('LOG_DIR', f'{server.log_dir}', edited_log)
-    write_file(f'output/scripts/server-log/{server.file.log}', edited_log)
+    write_file(f'output/scripts/{server.file.log}', edited_log)
 
 
-def create_grep_script_file(server, grep):
-    edited_grep = grep
+def create_grep_script_file(server, grep_script):
+    edited_grep = grep_script
     edited_grep = replace_variable('SERVER_NAME', f'{server.server_name}', edited_grep)
     edited_grep = replace_variable('LOG_DIR', f'{server.log_dir}', edited_grep)
-    write_file(f'output/scripts/server-grep/{server.file.grep}', edited_grep)
+    write_file(f'output/scripts/{server.file.grep}', edited_grep)
 
 
-def create_more_script_file(server, more):
-    edited_more = more
+def create_more_script_file(server, more_script):
+    edited_more = more_script
     edited_more = replace_variable('SERVER_NAME', f'{server.server_name}', edited_more)
     edited_more = replace_variable('LOG_DIR', f'{server.log_dir}', edited_more)
-    write_file(f'output/scripts/server-more/{server.file.more}', edited_more)
+    write_file(f'output/scripts/{server.file.more}', edited_more)
 
 
-def create_common_stop_script_file(base, server, stop):
-    edited_stop = stop
+def create_common_stop_script_file(base, server, stop_script):
+    edited_stop = stop_script
     edited_stop = replace_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_stop)
-    write_file(f'output/scripts/common-stop/{server.stop_script}', edited_stop)
+    write_file(f'output/scripts/{server.stop_script}', edited_stop)
 
 
-def create_server_file(base, server_dict, prop_dict, start_dict, stop_dict, log_dict, grep_dict, more_dict):
+def create_server_file(base, server_dict, prop_dict, log4j_dict, start_dict, stop_dict, log_dict, grep_dict, more_dict):
     for server_type, servers in server_dict.items():
         for server in servers:
-            if server.server_type == ServerType.ZOOKEEPER:
+            if server_type == ServerType.ZOOKEEPER:
                 create_prop_file(server, prop_dict.get(ServerType.ZOOKEEPER),
                                  server_dict.get(ServerType.ZOOKEEPER))
-            elif server.server_type == ServerType.CONTROL_CENTER:
+            elif server_type == ServerType.CONTROL_CENTER:
                 create_control_center_prop_file(server, prop_dict.get(ServerType.CONTROL_CENTER),
                                                 server_dict.get(ServerType.KAFKA_CONNECT),
                                                 server_dict.get(ServerType.REPLICATOR),
@@ -207,14 +226,17 @@ def create_server_file(base, server_dict, prop_dict, start_dict, stop_dict, log_
     for server in [servers[0] for servers in server_dict.values() if servers]:
         create_common_stop_script_file(base, server, stop_dict.get(server.server_type))
 
+    for server_type, log4j_prop in log4j_dict.items():
+        create_log4j_prop_file(server_type, log4j_prop)
+
 
 # endregion
 
 # region server_service_file
 
 
-def create_service_script_file(base, server, service):
-    edited_service = service
+def create_service_script_file(base, server, service_script):
+    edited_service = service_script
     edited_service = replace_variable('USER', f'{base.user}', edited_service)
     edited_service = replace_variable('GROUP', f'{base.group}', edited_service)
     edited_service = replace_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_service)
@@ -237,7 +259,7 @@ def create_service_script_file(base, server, service):
                                          f'{base.properties_path}/{server.file.properties}', edited_service)
     edited_service = substitute_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_service)
 
-    write_file(f'output/services/override/{server.file.service}', edited_service)
+    write_file(f'output/services/{server.file.service}', edited_service)
 
 
 def create_service_env_file(base, server, service_env):
@@ -248,7 +270,7 @@ def create_service_env_file(base, server, service_env):
     edited_service_env = substitute_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_service_env)
     edited_service_env = substitute_variable('SERVER_NAME', f'{server.server_name}', edited_service_env)
 
-    write_file(f'output/services/env/{server.file.service_env}', edited_service_env)
+    write_file(f'output/services/{server.file.service_env}', edited_service_env)
 
 
 def create_server_service_file(base, server_dict, service_dict, service_env_dict):
@@ -368,6 +390,7 @@ def main():
 
     # read templates
     prop_data = read_prop_template_data(current_dir)
+    log4j_data = read_log4j_template_data(current_dir)
     start_data = read_start_template_data(current_dir)
     stop_data = read_stop_template_data(current_dir)
     log_data = read_log_template_data(current_dir)
@@ -377,7 +400,8 @@ def main():
     service_env_data = read_service_env_template_data(current_dir)
 
     # create script and property files
-    create_server_file(base_data, server_data, prop_data, start_data, stop_data, log_data, grep_data, more_data)
+    create_server_file(base_data, server_data, prop_data, log4j_data,
+                       start_data, stop_data, log_data, grep_data, more_data)
     # create overriding service files
     create_server_service_file(base_data, server_data, service_data, service_env_data)
 

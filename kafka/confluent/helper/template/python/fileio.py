@@ -14,18 +14,11 @@ import yaml
 def reset_output_dir(current_dir):
     output_dir = current_dir.joinpath('output')
     output_sub_dirs = [
+        'log4j',
+        'others',
         'properties',
         'scripts',
-        'scripts/server-start',
-        'scripts/server-stop',
-        'scripts/server-log',
-        'scripts/server-grep',
-        'scripts/server-more',
-        'scripts/common-stop',
-        'others',
-        'services',
-        'services/override',
-        'services/env'
+        'services'
     ]
 
     if os.path.exists(output_dir):
