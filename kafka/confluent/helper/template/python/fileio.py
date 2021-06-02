@@ -72,7 +72,7 @@ def read_file(file_path):
 
 
 def write_file(file_path, file_data):
-    with open(file_path, 'w') as script_file:
+    with open(file_path, 'w', newline='\n') as script_file:
         script_file.write(file_data)
 
 # endregion
