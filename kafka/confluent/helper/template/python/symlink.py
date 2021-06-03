@@ -6,7 +6,7 @@ from template.python.fileio import write_file
 def create_symlink_by_hostname_script_file(server_dict):
     data_list = [
         f'#!/bin/bash\n',
-        f'mkdir backup\n',
+        f'mkdir -p backup\n',
         f'find . -maxdepth 1 -name "*.sh" | xargs chmod 750\n'
     ]
 
@@ -59,7 +59,7 @@ def create_symlink_by_servername_script_file(server_dict):
         f'    exit 1',
         f'fi',
         f'',
-        f'mkdir backup\n',
+        f'mkdir -p backup\n',
         f'find . -maxdepth 1 -name "*.sh" | xargs chmod 750',
         f'find . -maxdepth 1 -name "*.sh" \\',
         f'    -not \( -name "start-${{SERVER_NAME}}.sh" -o -name "stop-${{SERVER_NAME}}.sh" \\',
