@@ -56,7 +56,8 @@ EOF
 docker run --rm -it \
     --network stream-network \
     --env KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper1:2181,zookeeper2:2181,zookeeper3:2181/clusterlocal \
-    bitnami/kafka:latest kafka-topics.sh --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 --list
+    bitnami/kafka:latest \
+    kafka-topics.sh --bootstrap-server kafka1:9092,kafka2:9092,kafka3:9092 --list
 
 
 

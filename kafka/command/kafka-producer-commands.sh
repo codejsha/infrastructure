@@ -16,6 +16,27 @@
     --max-messages 100 \
     --topic verify-test
 
+######################################################################
+
+### perf-test
+
+### producer-props
+./kafka-producer-perf-test.sh \
+    --producer-props \
+        bootstrap.servers=kafka1:9092,kafka2:9092,kafka3:9092 \
+        client.id=perf-test-producer \
+    --topic perf-test \
+    --num-records 1000 \
+    --throughput -1 \
+    --record-size 500000
+
+### producer.properties
+./kafka-producer-perf-test.sh \
+    --producer.config producer.properties \
+    --topic perf-test \
+    --num-records 1000 \
+    --throughput -1 \
+    --record-size 500000
 
 
 
