@@ -87,7 +87,7 @@ def create_prop_file(server, prop, servers=None):
         edited_prop = replace_param('ksql.streams.state.dir', f'{server.data_dir}', edited_prop)
         edited_prop = replace_param('listeners', f'{server.listeners}', edited_prop)
         edited_prop = replace_param('ksql.advertised.listener', f'{server.advertised_listener}', edited_prop)
-        edited_prop = replace_param('ksql.streams.bootstrap.servers', f'{server.bootstrap_servers}', edited_prop)
+        edited_prop = replace_param('bootstrap.servers', f'{server.bootstrap_servers}', edited_prop)
         edited_prop = replace_param('ksql.schema.registry.url', f'{server.schema_registry_url}', edited_prop)
 
     write_file(f'output/properties/{server.file.properties}', edited_prop)
