@@ -4,6 +4,11 @@ KAFKA_CONNECT_URL="http://localhost:8083"
 # KAFKA_CONNECT_URL="http://kafka-connect1:8083"
 # KAFKA_CONNECT_URL="http://kafka-connect.example.com"
 
+CONNECTOR_CONFIG_FILE="postgresql-source.json"
+# CONNECTOR_CONFIG_FILE="postgresql-source-kubernetes.json"
+
+CONNECTOR_NAME="postgresql-source"
+
 ######################################################################
 
 function register_connector {
@@ -12,15 +17,8 @@ function register_connector {
         --request POST \
         --header "Accept:application/json" \
         --header "Content-Type:application/json" \
-        --data @postgresql-source.json \
+        --data @${CONNECTOR_CONFIG_FILE} \
         ${KAFKA_CONNECT_URL}/connectors
-    # curl \
-    #     --include \
-    #     --request POST \
-    #     --header "Accept:application/json" \
-    #     --header "Content-Type:application/json" \
-    #     --data @postgresql-source-kubernetes.json \
-    #     ${KAFKA_CONNECT_URL}/connectors
 
     echo
 }
@@ -30,7 +28,7 @@ function delete_connector {
         --include \
         --request DELETE \
         --header "Accept:application/json" \
-        ${KAFKA_CONNECT_URL}/connectors/postgresql-source
+        ${KAFKA_CONNECT_URL}/connectors/${CONNECTOR_NAME}
 }
 
 ######################################################################
