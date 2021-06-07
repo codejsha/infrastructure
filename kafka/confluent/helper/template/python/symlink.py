@@ -52,7 +52,7 @@ def create_symlink_by_servername_script_file(server_dict):
     data_list = [
         f'#!/bin/bash\n',
         f'SERVER_NAME="${{1}}"',
-        f'SERVER_NAME_REMOVED_NUMBER="$(echo ${{SERVER_NAME}} | sed \'s/[0-9]//g\')"',
+        f'SERVER_NAME_NUMBER_REMOVED="$(echo ${{SERVER_NAME}} | sed \'s/[0-9]//g\')"',
         f'',
         f'if [[ ${{#}} -eq 0 ]]; then',
         f'    echo "[ERROR] No argument provided!"',
@@ -64,7 +64,7 @@ def create_symlink_by_servername_script_file(server_dict):
         f'find . -maxdepth 1 -name "*.sh" \\',
         f'    -not \( -name "start-${{SERVER_NAME}}.sh" -o -name "stop-${{SERVER_NAME}}.sh" \\',
         f'    -o -name "log-${{SERVER_NAME}}.sh" -o -name "grep-${{SERVER_NAME}}.sh" \\',
-        f'    -o -name "more-${{SERVER_NAME}}.sh" -o -name "stop-${{SERVER_NAME_REMOVED_NUMBER}}.sh" \) | xargs -I {{}} mv {{}} backup/',
+        f'    -o -name "more-${{SERVER_NAME}}.sh" -o -name "stop-${{SERVER_NAME_NUMBER_REMOVED}}.sh" \) | xargs -I {{}} mv {{}} backup/',
         f'',
         f'if [ -f "start-${{SERVER_NAME}}.sh" ]; then',
         f'    ln -snf start-${{SERVER_NAME}}.sh start.sh',
@@ -81,8 +81,8 @@ def create_symlink_by_servername_script_file(server_dict):
         f'if [ -f "more-${{SERVER_NAME}}.sh" ]; then',
         f'    ln -snf more-${{SERVER_NAME}}.sh more.sh',
         f'fi',
-        f'if [ -f "stop-${{SERVER_NAME_REMOVED_NUMBER}}.sh" ]; then',
-        f'    ln -snf stop-${{SERVER_NAME_REMOVED_NUMBER}}.sh stop.sh',
+        f'if [ -f "stop-${{SERVER_NAME_NUMBER_REMOVED}}.sh" ]; then',
+        f'    ln -snf stop-${{SERVER_NAME_NUMBER_REMOVED}}.sh stop.sh',
         f'fi'
     ]
 
