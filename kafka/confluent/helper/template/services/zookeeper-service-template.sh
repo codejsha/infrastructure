@@ -31,7 +31,7 @@ sudo chown -R ${USER}:${GROUP} ${DATA_DIR} ${LOG_DIR}
 # Description=Apache Kafka - ZooKeeper
 # Documentation=http://docs.confluent.io/
 # After=network.target
-# 
+#
 # [Service]
 # Type=simple
 # User=cp-kafka
@@ -40,7 +40,7 @@ sudo chown -R ${USER}:${GROUP} ${DATA_DIR} ${LOG_DIR}
 # LimitNOFILE=100000
 # TimeoutStopSec=180
 # Restart=no
-# 
+#
 # [Install]
 # WantedBy=multi-user.target
 # EOF

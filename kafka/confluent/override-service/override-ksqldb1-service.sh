@@ -30,7 +30,7 @@ sudo chown -R confluent:confluent ${DATA_DIR} ${LOG_DIR}
 # Description=Streaming SQL engine for Apache Kafka
 # Documentation=http://docs.confluent.io/
 # After=network.target confluent-kafka.target confluent-schema-registry.target
-# 
+#
 # [Service]
 # Type=simple
 # User=cp-ksql
@@ -39,7 +39,7 @@ sudo chown -R confluent:confluent ${DATA_DIR} ${LOG_DIR}
 # ExecStart=/usr/bin/ksql-server-start /etc/ksqldb/ksql-server.properties
 # TimeoutStopSec=180
 # Restart=no
-# 
+#
 # [Install]
 # WantedBy=multi-user.target
 # EOF

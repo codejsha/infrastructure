@@ -30,7 +30,7 @@ sudo chown -R ${USER}:${GROUP} ${LOG_DIR}
 # Description=Apache Kafka Connect - distributed
 # Documentation=http://docs.confluent.io/
 # After=network.target confluent-server.target
-# 
+#
 # [Service]
 # Type=simple
 # User=cp-kafka-connect
@@ -38,7 +38,7 @@ sudo chown -R ${USER}:${GROUP} ${LOG_DIR}
 # ExecStart=/usr/bin/connect-distributed /etc/kafka/connect-distributed.properties
 # TimeoutStopSec=180
 # Restart=no
-# 
+#
 # [Install]
 # WantedBy=multi-user.target
 # EOF

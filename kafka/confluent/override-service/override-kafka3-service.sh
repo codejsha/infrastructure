@@ -29,7 +29,7 @@ sudo chown -R confluent:confluent ${DATA_DIR} ${LOG_DIR}
 # Description=Apache Kafka - broker
 # Documentation=http://docs.confluent.io/
 # After=network.target confluent-zookeeper.target
-# 
+#
 # [Service]
 # Type=simple
 # User=cp-kafka
@@ -38,7 +38,7 @@ sudo chown -R confluent:confluent ${DATA_DIR} ${LOG_DIR}
 # LimitNOFILE=1000000
 # TimeoutStopSec=180
 # Restart=no
-# 
+#
 # [Install]
 # WantedBy=multi-user.target
 # EOF

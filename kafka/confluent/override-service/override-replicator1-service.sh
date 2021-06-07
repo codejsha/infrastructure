@@ -29,7 +29,7 @@ sudo chown -R confluent:confluent ${LOG_DIR}
 # Description=Confluent Replicator
 # Documentation=http://docs.confluent.io/
 # After=network.target confluent-server.target
-# 
+#
 # [Service]
 # Type=simple
 # User=cp-kafka-connect
@@ -37,7 +37,7 @@ sudo chown -R confluent:confluent ${LOG_DIR}
 # ExecStart=/usr/bin/replicator /etc/kafka-connect-replicator/replicator-connect-distributed.properties
 # TimeoutStopSec=180
 # Restart=no
-# 
+#
 # [Install]
 # WantedBy=multi-user.target
 # EOF

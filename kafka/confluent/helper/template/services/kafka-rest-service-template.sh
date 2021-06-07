@@ -27,7 +27,7 @@ sudo chown -R ${USER}:${GROUP} ${LOG_DIR}
 # Description=A REST proxy for Apache Kafka
 # Documentation=http://docs.confluent.io/
 # After=network.target confluent-kafka.target
-# 
+#
 # [Service]
 # Type=simple
 # User=cp-kafka-rest
@@ -37,7 +37,7 @@ sudo chown -R ${USER}:${GROUP} ${LOG_DIR}
 # LimitNOFILE=100000
 # TimeoutStopSec=180
 # Restart=no
-# 
+#
 # [Install]
 # WantedBy=multi-user.target
 # EOF
