@@ -9,6 +9,8 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 source ../env-base.sh
 
 ######################################################################
+### FILESTORE
+######################################################################
 
 ### CREATE FILESTORE
 ### bash ./create-filestore.sh ${FILESTORE_NAME} ${FILESTORE_DIR} ${FILESTORE_TARGET}
@@ -16,6 +18,11 @@ source ../env-base.sh
 bash ./create-filestore.sh BaseFileStore1 ${DOMAIN_HOME}/filestore/BaseFileStore1 JmsManagedServer1
 bash ./create-filestore.sh BaseFileStore2 ${DOMAIN_HOME}/filestore/BaseFileStore2 JmsManagedServer2
 
+
+
+
+######################################################################
+### JMSSERVER
 ######################################################################
 
 ### CREATE JMSSERVER
@@ -24,6 +31,11 @@ bash ./create-filestore.sh BaseFileStore2 ${DOMAIN_HOME}/filestore/BaseFileStore
 bash ./create-jms-server.sh BaseJmsServer1 BaseFileStore1 JmsManagedServer1
 bash ./create-jms-server.sh BaseJmsServer2 BaseFileStore2 JmsManagedServer2
 
+
+
+
+######################################################################
+### JMSMODULE
 ######################################################################
 
 ### CREATE JMSMODULE

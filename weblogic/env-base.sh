@@ -86,7 +86,7 @@ fi
 
 ######################################################################
 
-### setup weblogic home
+### set weblogic home
 
 WL_HOME=""
 if [[ ${WEBLOGIC_VERSION} =~ ^14.1|^12. ]]; then
