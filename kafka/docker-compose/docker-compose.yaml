@@ -157,6 +157,35 @@ services:
     volumes:
       - /mnt/volume/kafka/jmx_exporter:/usr/share/jmx-exporter
 
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    hostname: prometheus
+    restart: unless-stopped
+    networks:
+      - default
+    ports:
+      - 9090:9090
+    volumes:
+      - /mnt/volume/kafka/prometheus:/etc/prometheus
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    hostname: grafana
+    restart: unless-stopped
+    networks:
+      - default
+    ports:
+      - 3000:3000
+    environment:
+      - "GF_INSTALL_PLUGINS=grafana-piechart-panel"
+      - "GF_SECURITY_ADMIN_USER=admin"
+      - "GF_SECURITY_ADMIN_PASSWORD=admin"
+      - "GF_USERS_ALLOW_SIGN_UP=false"
+    volumes:
+      - /mnt/volume/kafka/grafana/provisioning:/etc/grafana/provisioning
+
   node-exporter:
     image: prom/node-exporter:latest
     container_name: node-exporter
@@ -164,10 +193,6 @@ services:
     restart: unless-stopped
     networks:
       - default
-    depends_on:
-      - kafka1
-      - kafka2
-      - kafka3
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
@@ -183,45 +208,10 @@ services:
     container_name: kafka-lag-exporter
     hostname: kafka-lag-exporter
     restart: unless-stopped
+    networks:
+      - default
     volumes:
       - /mnt/volume/kafka/kafka-lag-exporter:/opt/docker/conf
-
-  prometheus:
-    image: prom/prometheus:latest
-    container_name: prometheus
-    hostname: prometheus
-    restart: unless-stopped
-    networks:
-      - default
-    depends_on:
-      - kafka1
-      - kafka2
-      - kafka3
-    ports:
-      - 9090:9090
-    volumes:
-      - /mnt/volume/prometheus:/etc/prometheus
-
-  grafana:
-    image: grafana/grafana:latest
-    container_name: grafana
-    hostname: grafana
-    restart: unless-stopped
-    networks:
-      - default
-    depends_on:
-      - kafka1
-      - kafka2
-      - kafka3
-    ports:
-      - 3000:3000
-    environment:
-      - "GF_INSTALL_PLUGINS=grafana-piechart-panel"
-      - "GF_SECURITY_ADMIN_USER=admin"
-      - "GF_SECURITY_ADMIN_PASSWORD=admin"
-      - "GF_USERS_ALLOW_SIGN_UP=false"
-    volumes:
-      - /mnt/volume/grafana/provisioning:/etc/grafana/provisioning
 
   cmak:
     image: core.harbor.example.com/library/cmak:latest

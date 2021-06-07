@@ -3,7 +3,7 @@
 # set -o errexit
 # trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-KAFKA_VOLUME_DIR="/mnt/volume/kafka"
+KAFKA_VOLUME_DIR="/mnt/volume/confluent"
 ZOOKEEPER_VOLUME_DIR="${KAFKA_VOLUME_DIR}"
 PROMETHEUS_VOLUME_DIR="${KAFKA_VOLUME_DIR}/prometheus"
 GRAFANA_VOLUME_DIR="${KAFKA_VOLUME_DIR}/grafana"
@@ -11,13 +11,6 @@ JMX_EXPORTER_VOLUME_DIR="${KAFKA_VOLUME_DIR}/jmx_exporter"
 KAFKA_LAG_EXPORTER_VOLUME_DIR="${KAFKA_VOLUME_DIR}/kafka-lag-exporter"
 
 sudo rm -rf ${KAFKA_VOLUME_DIR}
-
-### zookeeper
-sudo mkdir -p ${ZOOKEEPER_VOLUME_DIR}/{zookeeper1,zookeeper2,zookeeper3}/{data,datalog,logs}
-
-### kafka
-sudo mkdir -p ${KAFKA_VOLUME_DIR}/{kafka1,kafka2,kafka3}/config
-sudo chmod -R 777 ${KAFKA_VOLUME_DIR}/{kafka1,kafka2,kafka3}
 
 ### prometheus
 sudo mkdir -p ${PROMETHEUS_VOLUME_DIR}

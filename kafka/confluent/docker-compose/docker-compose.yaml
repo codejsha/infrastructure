@@ -1,6 +1,7 @@
 ---
 version: "2"
 services:
+  ### zookeeper
   zookeeper:
     image: confluentinc/cp-zookeeper:6.1.0
     container_name: zookeeper
@@ -13,7 +14,11 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+      KAFKA_OPTS: -javaagent:/usr/share/jmx-exporter/jmx_prometheus_javaagent-0.15.0.jar=1234:/usr/share/jmx-exporter/zookeeper.yml
+    volumes:
+      - /mnt/volume/confluent/jmx_exporter:/usr/share/jmx-exporter
 
+  ### kafka
   broker:
     image: confluentinc/cp-server:6.1.0
     container_name: broker
@@ -45,7 +50,11 @@ services:
       CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
       CONFLUENT_METRICS_ENABLE: "true"
       CONFLUENT_SUPPORT_CUSTOMER_ID: "anonymous"
+      KAFKA_OPTS: -javaagent:/usr/share/jmx-exporter/jmx_prometheus_javaagent-0.15.0.jar=1234:/usr/share/jmx-exporter/kafka_broker.yml
+    volumes:
+      - /mnt/volume/confluent/jmx_exporter:/usr/share/jmx-exporter
 
+  ### schema-registry
   schema-registry:
     image: confluentinc/cp-schema-registry:6.1.0
     container_name: schema-registry
@@ -61,7 +70,11 @@ services:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: "broker:29092"
       SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+      SCHEMA_REGISTRY_OPTS: -javaagent:/usr/share/jmx-exporter/jmx_prometheus_javaagent-0.15.0.jar=1234:/usr/share/jmx-exporter/confluent_schemaregistry.yml
+    volumes:
+      - /mnt/volume/confluent/jmx_exporter:/usr/share/jmx-exporter
 
+  ### kafka-connect
   connect:
     image: cnfldemos/cp-server-connect-datagen:0.4.0-6.1.0
     container_name: connect
@@ -95,7 +108,104 @@ services:
       CONNECT_CONSUMER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
       CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components"
       CONNECT_LOG4J_LOGGERS: org.apache.zookeeper=ERROR,org.I0Itec.zkclient=ERROR,org.reflections=ERROR
+      KAFKA_OPTS: -javaagent:/usr/share/jmx-exporter/jmx_prometheus_javaagent-0.15.0.jar=1234:/usr/share/jmx-exporter/kafka_connect.yml
+    volumes:
+      - /mnt/volume/confluent/jmx_exporter:/usr/share/jmx-exporter
 
+  ### kafka-rest
+  rest-proxy:
+    image: confluentinc/cp-kafka-rest:6.1.0
+    container_name: rest-proxy
+    hostname: rest-proxy
+    restart: unless-stopped
+    networks:
+      - default
+    depends_on:
+      - broker
+      - schema-registry
+    ports:
+      - 8082:8082
+    environment:
+      KAFKA_REST_HOST_NAME: rest-proxy
+      KAFKA_REST_BOOTSTRAP_SERVERS: "broker:29092"
+      KAFKA_REST_LISTENERS: "http://0.0.0.0:8082"
+      KAFKA_REST_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
+      KAFKAREST_OPTS: -javaagent:/usr/share/jmx-exporter/jmx_prometheus_javaagent-0.15.0.jar=1234:/usr/share/jmx-exporter/confluent_rest.yml
+    volumes:
+      - /mnt/volume/confluent/jmx_exporter:/usr/share/jmx-exporter
+
+  ### ksqldb
+  ksqldb-server:
+    image: confluentinc/cp-ksqldb-server:6.1.0
+    container_name: ksqldb-server
+    hostname: ksqldb-server
+    restart: unless-stopped
+    networks:
+      - default
+    depends_on:
+      - broker
+      - connect
+    ports:
+      - "8088:8088"
+    environment:
+      KSQL_CONFIG_DIR: "/etc/ksql"
+      KSQL_BOOTSTRAP_SERVERS: "broker:29092"
+      KSQL_HOST_NAME: ksqldb-server
+      KSQL_LISTENERS: "http://0.0.0.0:8088"
+      KSQL_CACHE_MAX_BYTES_BUFFERING: 0
+      KSQL_KSQL_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
+      KSQL_PRODUCER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor"
+      KSQL_CONSUMER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
+      KSQL_KSQL_CONNECT_URL: "http://connect:8083"
+      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_REPLICATION_FACTOR: 1
+      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: "true"
+      KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: "true"
+      KSQL_OPTS: -javaagent:/usr/share/jmx-exporter/jmx_prometheus_javaagent-0.15.0.jar=1234:/usr/share/jmx-exporter/confluent_ksql.yml
+    volumes:
+      - /mnt/volume/confluent/jmx_exporter:/usr/share/jmx-exporter
+
+  ### ksqldb-cli
+  ksqldb-cli:
+    image: confluentinc/cp-ksqldb-cli:6.1.0
+    container_name: ksqldb-cli
+    hostname: ksqldb-cli
+    restart: unless-stopped
+    networks:
+      - default
+    depends_on:
+      - broker
+      - connect
+      - ksqldb-server
+    entrypoint: /bin/sh
+    tty: true
+
+  ### ksqldb-datagen
+  ksql-datagen:
+    image: confluentinc/ksqldb-examples:6.1.0
+    container_name: ksql-datagen
+    hostname: ksql-datagen
+    restart: unless-stopped
+    networks:
+      - default
+    depends_on:
+      - ksqldb-server
+      - broker
+      - schema-registry
+      - connect
+    command: "bash -c 'echo Waiting for Kafka to be ready... && \
+      cub kafka-ready -b broker:29092 1 40 && \
+      echo Waiting for Confluent Schema Registry to be ready... && \
+      cub sr-ready schema-registry 8081 40 && \
+      echo Waiting a few seconds for topic creation to finish... && \
+      sleep 11 && \
+      tail -f /dev/null'"
+    environment:
+      KSQL_CONFIG_DIR: "/etc/ksql"
+      STREAMS_BOOTSTRAP_SERVERS: broker:29092
+      STREAMS_SCHEMA_REGISTRY_HOST: schema-registry
+      STREAMS_SCHEMA_REGISTRY_PORT: 8081
+
+  ### control-center
   control-center:
     image: confluentinc/cp-enterprise-control-center:6.1.0
     container_name: control-center
@@ -122,88 +232,65 @@ services:
       CONFLUENT_METRICS_TOPIC_REPLICATION: 1
       PORT: 9021
 
-  ksqldb-server:
-    image: confluentinc/cp-ksqldb-server:6.1.0
-    container_name: ksqldb-server
-    hostname: ksqldb-server
+  ### prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    hostname: prometheus
     restart: unless-stopped
     networks:
       - default
-    depends_on:
-      - broker
-      - connect
     ports:
-      - "8088:8088"
-    environment:
-      KSQL_CONFIG_DIR: "/etc/ksql"
-      KSQL_BOOTSTRAP_SERVERS: "broker:29092"
-      KSQL_HOST_NAME: ksqldb-server
-      KSQL_LISTENERS: "http://0.0.0.0:8088"
-      KSQL_CACHE_MAX_BYTES_BUFFERING: 0
-      KSQL_KSQL_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
-      KSQL_PRODUCER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor"
-      KSQL_CONSUMER_INTERCEPTOR_CLASSES: "io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor"
-      KSQL_KSQL_CONNECT_URL: "http://connect:8083"
-      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_REPLICATION_FACTOR: 1
-      KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: "true"
-      KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: "true"
+      - 9090:9090
+    volumes:
+      - /mnt/volume/confluent/prometheus:/etc/prometheus
 
-  ksqldb-cli:
-    image: confluentinc/cp-ksqldb-cli:6.1.0
-    container_name: ksqldb-cli
-    hostname: ksqldb-cli
+  ### grafana
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    hostname: grafana
     restart: unless-stopped
     networks:
       - default
-    depends_on:
-      - broker
-      - connect
-      - ksqldb-server
-    entrypoint: /bin/sh
-    tty: true
-
-  ksql-datagen:
-    image: confluentinc/ksqldb-examples:6.1.0
-    container_name: ksql-datagen
-    hostname: ksql-datagen
-    restart: unless-stopped
-    networks:
-      - default
-    depends_on:
-      - ksqldb-server
-      - broker
-      - schema-registry
-      - connect
-    command: "bash -c 'echo Waiting for Kafka to be ready... && \
-      cub kafka-ready -b broker:29092 1 40 && \
-      echo Waiting for Confluent Schema Registry to be ready... && \
-      cub sr-ready schema-registry 8081 40 && \
-      echo Waiting a few seconds for topic creation to finish... && \
-      sleep 11 && \
-      tail -f /dev/null'"
-    environment:
-      KSQL_CONFIG_DIR: "/etc/ksql"
-      STREAMS_BOOTSTRAP_SERVERS: broker:29092
-      STREAMS_SCHEMA_REGISTRY_HOST: schema-registry
-      STREAMS_SCHEMA_REGISTRY_PORT: 8081
-
-  rest-proxy:
-    image: confluentinc/cp-kafka-rest:6.1.0
-    container_name: rest-proxy
-    hostname: rest-proxy
-    restart: unless-stopped
-    networks:
-      - default
-    depends_on:
-      - broker
-      - schema-registry
     ports:
-      - 8082:8082
+      - 3000:3000
     environment:
-      KAFKA_REST_HOST_NAME: rest-proxy
-      KAFKA_REST_BOOTSTRAP_SERVERS: "broker:29092"
-      KAFKA_REST_LISTENERS: "http://0.0.0.0:8082"
-      KAFKA_REST_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
+      - "GF_INSTALL_PLUGINS=grafana-piechart-panel"
+      - "GF_SECURITY_ADMIN_USER=admin"
+      - "GF_SECURITY_ADMIN_PASSWORD=admin"
+      - "GF_USERS_ALLOW_SIGN_UP=false"
+    volumes:
+      - /mnt/volume/confluent/grafana/provisioning:/etc/grafana/provisioning
+
+  ### node-exporter
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    hostname: node-exporter
+    restart: unless-stopped
+    networks:
+      - default
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - "--path.procfs=/host/proc"
+      - "--path.sysfs=/host/sys"
+      - "--collector.filesystem.ignored-mount-points"
+      - "^(aufs|proc|nsfs|shm|cgroup|tmpfs|binfmt_misc|debugfs|devpts|fusectl|hugetlbfs|fuse.lxcfs|mqueue|pstore|securityfs|sysfs|autofs|devtmpfs|configfs)"
+
+  ### kafka-lag-exporter
+  kafka-lag-exporter:
+    image: lightbend/kafka-lag-exporter:latest
+    container_name: kafka-lag-exporter
+    hostname: kafka-lag-exporter
+    restart: unless-stopped
+    networks:
+      - default
+    volumes:
+      - /mnt/volume/confluent/kafka-lag-exporter:/opt/docker/conf
 
 networks:
   default:

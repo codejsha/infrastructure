@@ -21,18 +21,14 @@ scrape_configs:
   - job_name: "zookeeper"
     static_configs:
       - targets:
-          - "zookeeper1:1234"
-          - "zookeeper2:1234"
-          - "zookeeper3:1234"
+          - "zookeeper:1234"
         labels:
           env: "clusterlocal"
 
   - job_name: "kafka"
     static_configs:
       - targets:
-          - "kafka1:1234"
-          - "kafka2:1234"
-          - "kafka3:1234"
+          - "broker:1234"
         labels:
           env: "clusterlocal"
 
@@ -40,6 +36,27 @@ scrape_configs:
     static_configs:
       - targets:
           - "schema-registry:1234"
+        labels:
+          env: "clusterlocal"
+
+  - job_name: "connect"
+    static_configs:
+      - targets:
+          - "connect:1234"
+        labels:
+          env: "clusterlocal"
+
+  - job_name: "rest-proxy"
+    static_configs:
+      - targets:
+          - "rest-proxy:1234"
+        labels:
+          env: "clusterlocal"
+
+  - job_name: "ksqldb-server"
+    static_configs:
+      - targets:
+          - "ksqldb-server:1234"
         labels:
           env: "clusterlocal"
 
