@@ -23,8 +23,8 @@ function set_arguments {
         shift
         case "${ARGS}" in
             "--help")           print_help;                     ;;
-            "--worker-name")    PORT_OFFSET="${1}";             shift;;
-            "--worker-name="*)  PORT_OFFSET="${ARGS#*=}";       ;;
+            "--worker-name")    WORKER_NAME="${1}";             shift;;
+            "--worker-name="*)  WORKER_NAME="${ARGS#*=}";       ;;
         esac
     done
 }

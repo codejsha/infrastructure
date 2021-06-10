@@ -15,7 +15,7 @@ function disable_http_method {
         --password="${PASSWORD}" \
 <<EOF
 batch
-/subsystem=undertow/server=default-server/https-listener=default:write-attribute(name=disallowed-methods,value=[PUT,DELETE,TRACE,OPTIONS])
+/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=disallowed-methods,value=[PUT,DELETE,TRACE,OPTIONS])
 run-batch
 quit
 EOF
