@@ -3,11 +3,11 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
-cd domain
-
 ######################################################################
 
 function all_12cr2 {
+    cd domain
+
     bash ./create-domain.sh
     bash ./delete-component.sh
     bash ./create-component.sh
@@ -21,6 +21,8 @@ function all_12cr2 {
 }
 
 function all_12cr1 {
+    cd domain
+
     bash ./create-domain.sh
     bash ./create-component.sh
 
@@ -33,6 +35,8 @@ function all_12cr1 {
 }
 
 function all_11g {
+    cd instance
+
     bash ./create-instance-11g.sh
     bash ./create-component-11g.sh
 

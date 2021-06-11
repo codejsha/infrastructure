@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-oracle_home = os.environ['MW_HOME']
+mw_home = os.environ['MW_HOME']
+oracle_home = mw_home
 domain_home = os.environ['DOMAIN_HOME']
 admin_server_name = os.environ['ADMIN_SERVER_NAME']
 admin_server_listen_address = os.environ['ADMIN_SERVER_LISTEN_ADDRESS']
