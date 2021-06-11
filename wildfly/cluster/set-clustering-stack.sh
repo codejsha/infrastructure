@@ -4,10 +4,11 @@ set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
 source ../env-base.sh
+source ./env-clustering-stack.sh
 
 ######################################################################
 
-function set_udp_clustering {
+function set_clustering_stack {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
@@ -15,7 +16,7 @@ function set_udp_clustering {
         --password="${PASSWORD}" \
 <<EOF
 batch
-/subsystem=jgroups/channel=ee:write-attribute(name=stack,value=udp)
+/subsystem=jgroups/channel=ee:write-attribute(name=stack,value=${STACK_NAME})
 run-batch
 quit
 EOF
@@ -33,5 +34,5 @@ function reload_server {
 
 ######################################################################
 
-set_udp_clustering
+set_clustering_stack
 reload_server

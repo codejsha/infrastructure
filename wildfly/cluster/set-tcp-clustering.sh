@@ -22,42 +22,6 @@ quit
 EOF
 }
 
-function delete_outbound_socket_binding {
-    ${JBOSS_HOME}/bin/jboss-cli.sh \
-        --connect \
-        --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --user="${USERNAME}" \
-        --password="${PASSWORD}" \
-<<EOF
-batch
-/socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=${CLUSTER_INSTANCE_NAME1}:remove()
-/socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=${CLUSTER_INSTANCE_NAME2}:remove()
-run-batch
-quit
-EOF
-}
-
-function set_standard_sockets {
-    ${JBOSS_HOME}/bin/jboss-cli.sh \
-        --connect \
-        --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --user="${USERNAME}" \
-        --password="${PASSWORD}" \
-<<EOF
-batch
-/socket-binding-group=standard-sockets/socket-binding=jgroups-tcp:write-attribute(name=port,value=${JGROUPS_TCP_PORT})
-/socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=${CLUSTER_INSTANCE_NAME1}:add(host=${CLUSTER_BIND_ADDRESS1},port=${REMOTE_DEST_PORT1})
-/socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=${CLUSTER_INSTANCE_NAME2}:add(host=${CLUSTER_BIND_ADDRESS2},port=${REMOTE_DEST_PORT2})
-run-batch
-quit
-EOF
-
-# /socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=${CLUSTER_INSTANCE_NAME1}:write-attribute(name=host,value=${CLUSTER_BIND_ADDRESS1})
-# /socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=${CLUSTER_INSTANCE_NAME2}:write-attribute(name=host,value=${CLUSTER_BIND_ADDRESS2})
-# /socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=${CLUSTER_INSTANCE_NAME1}:write-attribute(name=port,value=${REMOTE_DEST_PORT1})
-# /socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=${CLUSTER_INSTANCE_NAME2}:write-attribute(name=port,value=${REMOTE_DEST_PORT2})
-}
-
 function set_tcp_stack {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
@@ -105,20 +69,6 @@ EOF
 # /subsystem=jgroups/stack=tcp:add-protocol(type=FRAG2)
 }
 
-function set_default_stack {
-    ${JBOSS_HOME}/bin/jboss-cli.sh \
-        --connect \
-        --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
-        --user="${USERNAME}" \
-        --password="${PASSWORD}" \
-<<EOF
-batch
-/subsystem=jgroups/channel=ee:write-attribute(name=stack,value=tcp)
-run-batch
-quit
-EOF
-}
-
 function reload_server {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
@@ -132,8 +82,5 @@ function reload_server {
 ######################################################################
 
 set_node_name
-delete_outbound_socket_binding
-set_standard_sockets
 set_tcp_stack
-set_default_stack
 reload_server
