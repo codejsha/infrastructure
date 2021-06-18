@@ -17,7 +17,7 @@ bash ./create-datasource.sh BaseDataSource1
 ### CONFIGURE DATASOURCE
 ### bash ./set-datasource-config.sh ${DS_NAME} ${DS_JNDI} \
 ###     ${DS_URL} \
-###     ${DS_DRIVER} ${DS_USER} ${DS_PASSWORD} \
+###     ${DS_DRIVER} ${DS_USERNAME} ${DS_PASSWORD} \
 ###     ${DS_INIT} ${DS_MIN} ${DS_MAX} ${DS_TARGET_TYPE} ${DS_TARGET}
 
 bash ./set-datasource-config.sh BaseDataSource1 "baseds1" \
@@ -54,7 +54,7 @@ bash ./set-datasource-config.sh BaseDataSource1 "baseds1" \
 ### CONFIGURE DATASOURCE
 ### bash ./set-datasource-config.sh ${DS_NAME} ${DS_JNDI} \
 ###     ${DS_URL} \
-###     ${DS_DRIVER} ${DS_USER} ${DS_PASSWORD} \
+###     ${DS_DRIVER} ${DS_USERNAME} ${DS_PASSWORD} \
 ###     ${DS_INIT} ${DS_MIN} ${DS_MAX} ${DS_TARGET_TYPE} ${DS_TARGET}
 
 # bash ./set-datasource-config.sh BaseDataSource2 "baseds2" \
@@ -91,7 +91,7 @@ bash ./set-datasource-config.sh BaseDataSource1 "baseds1" \
 ### CONFIGURE DATASOURCE
 ### bash ./set-datasource-config.sh ${DS_NAME} ${DS_JNDI} \
 ###     ${DS_URL} \
-###     ${DS_DRIVER} ${DS_USER} ${DS_PASSWORD} \
+###     ${DS_DRIVER} ${DS_USERNAME} ${DS_PASSWORD} \
 ###     ${DS_INIT} ${DS_MIN} ${DS_MAX} ${DS_TARGET_TYPE} ${DS_TARGET}
 
 # bash ./set-datasource-config.sh BaseDataSource3 "baseds3" \

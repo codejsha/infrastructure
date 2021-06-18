@@ -3,6 +3,10 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
+######################################################################
+### postgresql
+######################################################################
+
 ### postgresql (as module)
 
 DRIVER_NAME="postgres"
@@ -18,6 +22,11 @@ DRIVER_CLASS_NAME="org.postgresql.xa.PGXADataSource"
 # DRIVER_FILE="postgresql-42.2.19.jar"
 # DRIVER_RUNTIME_NAME="${DRIVER_FILE}"
 
+
+
+
+######################################################################
+### oracle database
 ######################################################################
 
 ### oracle database (as module)
@@ -45,6 +54,9 @@ DRIVER_CLASS_NAME="org.postgresql.xa.PGXADataSource"
 # DRIVER_FILE="ojdbc6.jar"
 
 # DRIVER_RUNTIME_NAME="${DRIVER_FILE}"
+
+
+
 
 ######################################################################
 

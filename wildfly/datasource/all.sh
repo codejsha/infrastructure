@@ -3,10 +3,20 @@ set -o errtrace
 set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
 
+######################################################################
 ### JDBC MODULE
+######################################################################
+
 bash ./add-jdbc-module.sh
 # bash ./add-jdbc-module.sh --port-offset=0
 # bash ./add-jdbc-module.sh --port-offset=1
+
+
+
+
+######################################################################
+### JDBC DRIVER
+######################################################################
 
 ### JDBC DRIVER (AS MODULE)
 
@@ -22,6 +32,11 @@ bash ./add-jdbc-driver-as-module.sh --port-offset=1
 # bash ./add-jdbc-driver-as-deployment.sh --port-offset=0
 # bash ./add-jdbc-driver-as-deployment.sh --port-offset=1
 
+
+
+
+######################################################################
+### DATASOURCE
 ######################################################################
 
 # bash ./add-datasource.sh
@@ -49,26 +64,11 @@ bash ./set-cached-connection-manager.sh --port-offset=1
 bash ./enable-datasource-statistics.sh --port-offset=0 --name=baseds1
 bash ./enable-datasource-statistics.sh --port-offset=1 --name=baseds1
 
+
+
+
 ######################################################################
-
-# bash ./get-datasource-driver.sh
-# bash ./get-datasource-driver.sh --driver-name=oracle
-# bash ./get-datasource-driver.sh --port-offset=0
-# bash ./get-datasource-driver.sh --port-offset=1
-# bash ./get-datasource-driver.sh --port-offset=0 --driver-name=oracle
-# bash ./get-datasource-driver.sh --port-offset=1 --driver-name=oracle
-
-# bash ./get-datasource.sh
-# bash ./get-datasource.sh --port-offset=0
-# bash ./get-datasource.sh --port-offset=1
-
-# bash ./get-datasource-statistics.sh
-# bash ./get-datasource-statistics.sh --name=baseds1
-# bash ./get-datasource-statistics.sh --port-offset=0
-# bash ./get-datasource-statistics.sh --port-offset=1
-# bash ./get-datasource-statistics.sh --port-offset=0 --name=baseds1
-# bash ./get-datasource-statistics.sh --port-offset=1 --name=baseds1
-
+### TEST DATASOURCE
 ######################################################################
 
 # bash ./test-datasource-connection.sh
@@ -78,7 +78,39 @@ bash ./enable-datasource-statistics.sh --port-offset=1 --name=baseds1
 # bash ./test-datasource-connection.sh --port-offset=0 --name=baseds1
 # bash ./test-datasource-connection.sh --port-offset=1 --name=baseds1
 
+
+
+
 ######################################################################
+### GET ALL
+######################################################################
+
+# bash ./get-datasource.sh
+# bash ./get-datasource.sh --port-offset=0
+# bash ./get-datasource.sh --port-offset=1
+
+# bash ./get-datasource-driver.sh
+# bash ./get-datasource-driver.sh --driver-name=oracle
+# bash ./get-datasource-driver.sh --port-offset=0
+# bash ./get-datasource-driver.sh --port-offset=1
+# bash ./get-datasource-driver.sh --port-offset=0 --driver-name=oracle
+# bash ./get-datasource-driver.sh --port-offset=1 --driver-name=oracle
+
+# bash ./get-datasource-statistics.sh
+# bash ./get-datasource-statistics.sh --name=baseds1
+# bash ./get-datasource-statistics.sh --port-offset=0
+# bash ./get-datasource-statistics.sh --port-offset=1
+# bash ./get-datasource-statistics.sh --port-offset=0 --name=baseds1
+# bash ./get-datasource-statistics.sh --port-offset=1 --name=baseds1
+
+
+
+
+######################################################################
+### DELETE ALL
+######################################################################
+
+### DELETE DATASOURCE
 
 # bash ./delete-datasource.sh
 # bash ./delete-datasource.sh --name=baseds1

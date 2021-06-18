@@ -9,7 +9,7 @@ ds_name = os.environ['DS_NAME']
 ds_jndi = os.environ['DS_JNDI']
 ds_url = os.environ['DS_URL']
 ds_driver = os.environ['DS_DRIVER']
-ds_user = os.environ['DS_USER']
+ds_username = os.environ['DS_USERNAME']
 ds_password = os.environ['DS_PASSWORD']
 ds_init = os.environ['DS_INIT']
 ds_min = os.environ['DS_MIN']
@@ -22,7 +22,7 @@ ds_target = os.environ['DS_TARGET']
 
 
 def set_generic_datasource_param_config(_domain_version, _ds_name, _ds_jndi, _ds_url,
-                                        _ds_driver, _ds_user, _ds_password,
+                                        _ds_driver, _ds_username, _ds_password,
                                         _ds_init, _ds_min, _ds_max, _ds_target_type, _ds_target):
     _ds_jndi_list = [jndi.strip() for jndi in _ds_jndi.split(',')]
     _ds_target_list = [target.strip() for target in _ds_target.split(',')]
@@ -43,7 +43,7 @@ def set_generic_datasource_param_config(_domain_version, _ds_name, _ds_jndi, _ds
 
     cd('/JDBCSystemResources/' + _ds_name + '/JDBCResource/' + _ds_name +
        '/JDBCDriverParams/' + _ds_name + '/Properties/' + _ds_name + '/Properties/user')
-    cmo.setValue(_ds_user)
+    cmo.setValue(_ds_username)
 
     cd('/JDBCSystemResources/' + _ds_name + '/JDBCResource/' + _ds_name +
        '/JDBCDataSourceParams/' + _ds_name)
@@ -110,7 +110,7 @@ startEdit()
 domain_version = cmo.getDomainVersion()
 
 set_generic_datasource_param_config(domain_version, ds_name, ds_jndi, ds_url,
-                                    ds_driver, ds_user, ds_password,
+                                    ds_driver, ds_username, ds_password,
                                     ds_init, ds_min, ds_max, ds_target_type, ds_target)
 
 save()
