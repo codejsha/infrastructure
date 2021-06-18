@@ -5,23 +5,37 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 
 DRIVER_NAME="${DRIVER_NAME}"
 
+######################################################################
+### postgresql
+######################################################################
+
 DATASOURCE_NAME="baseds1"
 JNDI_NAME="java:jboss/datasources/baseds1"
-
-### postgresql
 CONNECTION_URL="jdbc:postgresql://test.example.com:5432/postgres"
-USERNAME="postgres"
-PASSWORD="${PASSWORD}"
-# PASSWORD="postgres"
-# PASSWORD="\${VAULT::datasource::password::1}"
+DS_USERNAME="postgres"
+DS_PASSWORD="${PASSWORD}"
+# DS_PASSWORD="postgres"
+# DS_PASSWORD="\${VAULT::datasource::password::1}"
 CHECK_VALID_CONNECTION_SQL="SELECT 1"
 
+
+
+
+######################################################################
 ### oracle database
+######################################################################
+
+### oracle database
+# DATASOURCE_NAME="baseds1"
+# JNDI_NAME="java:jboss/datasources/baseds1"
 # CONNECTION_URL="jdbc:oracle:thin:@192.168.137.1:1521:orclcdb"
-# USERNAME="system"
-# PASSWORD="${PASSWORD}"
-# PASSWORD="\${VAULT::datasource::password::1}"
+# DS_USERNAME="system"
+# DS_PASSWORD="${PASSWORD}"
+# DS_PASSWORD="\${VAULT::datasource::password::1}"
 # CHECK_VALID_CONNECTION_SQL="SQL ISVALID"
+
+
+
 
 ENABLED="true"
 INITIAL_POOL_SIZE="30"

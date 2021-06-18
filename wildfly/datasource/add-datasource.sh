@@ -25,8 +25,8 @@ batch
         initial-pool-size=${INITIAL_POOL_SIZE},\
         min-pool-size=${MIN_POOL_SIZE},\
         max-pool-size=${MAX_POOL_SIZE},\
-        user-name=${USERNAME},\
-        password=${PASSWORD},\
+        user-name=${DS_USERNAME},\
+        password=${DS_PASSWORD},\
         check-valid-connection-sql="${CHECK_VALID_CONNECTION_SQL}",\
         background-validation=${BACKGROUND_VALIDATION},\
         background-validation-millis=${BACKGROUND_VALIDATION_MILLIS},\
