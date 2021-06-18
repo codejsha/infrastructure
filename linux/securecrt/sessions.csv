@@ -1,0 +1,2 @@
+protocol,port,emulation,folder,hostname,session_name,username
+ssh2,22,xterm,local/others,192.168.137.150,testmachine,prouser
