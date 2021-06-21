@@ -288,15 +288,13 @@ def create_server_service_file(base, server_dict, service_dict, service_env_dict
 
 def generate_zookeeper_cluster_list(server_id, servers):
     cluster_list = []
-    index = 1
     for server in servers:
-        if int(server_id) == index:
-            cluster_list.append(f'server.{server_id}='
+        if server.server_id == server_id:
+            cluster_list.append(f'server.{server.server_id}='
                                 f'0.0.0.0:{server.peer_to_peer_port}')
         else:
-            cluster_list.append(f'server.{index}='
+            cluster_list.append(f'server.{server.server_id}='
                                 f'{server.server_name}:{server.peer_to_peer_port}')
-        index += 1
     return cluster_list
 
 
