@@ -1,7 +1,7 @@
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 source ../env-base.sh
 
@@ -62,11 +62,11 @@ EOF
 if [[ ${WEBLOGIC_VERSION} =~ ^14.1|^12. ]]; then
 cat <<EOF > ${DOMAIN_HOME}/scripts/change-nodemgr-password.sh
 #!/bin/bash
-set -o xtrace
-set -o errtrace
-set -o errexit
 trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
+set -o errexit
+set -o errtrace
+set -o xtrace
 
 ORACLE_HOME="${ORACLE_HOME}"
 export DOMAIN_NAME="${DOMAIN_NAME}"
@@ -75,11 +75,11 @@ EOF
 elif [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
 cat <<EOF > ${DOMAIN_HOME}/scripts/change-nodemgr-password.sh
 #!/bin/bash
-set -o xtrace
-set -o errtrace
-set -o errexit
 trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
 export PS4="\e[33;1m+ \e[0m"
+set -o errexit
+set -o errtrace
+set -o xtrace
 
 MW_HOME="${MW_HOME}"
 export DOMAIN_NAME="${DOMAIN_NAME}"

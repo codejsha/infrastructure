@@ -1,7 +1,7 @@
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 WL_HOME="/usr/local/weblogic/wlserver_10.3"
 DOMAIN_HOME="/usr/local/weblogic/user_projects/domains/base_domain"

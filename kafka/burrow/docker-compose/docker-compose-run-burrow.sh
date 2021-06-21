@@ -1,7 +1,7 @@
 #!/bin/bash
-# set -o errtrace
-# set -o errexit
 # trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
+# set -o errexit
+# set -o errtrace
 
 BURROW_VOLUME_DIR="/mnt/volume/burrow"
 sudo mkdir -p ${BURROW_VOLUME_DIR}/{docker-config,tmp}

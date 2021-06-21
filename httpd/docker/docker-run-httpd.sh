@@ -1,7 +1,7 @@
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 HTTPD_VOLUME_DIR="/mnt/volume/httpd"
 sudo mkdir -p ${HTTPD_VOLUME_DIR}/{conf,htdocs}

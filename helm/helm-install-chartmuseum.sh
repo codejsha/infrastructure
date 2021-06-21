@@ -1,7 +1,7 @@
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 export AWS_ACCESS_KEY="${AWS_ACCESS_KEY}"
 export AWS_SECRET_KEY="${AWS_SECRET_KEY}"

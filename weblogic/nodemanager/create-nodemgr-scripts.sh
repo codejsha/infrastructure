@@ -1,7 +1,7 @@
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 source ../env-base.sh
 
@@ -30,9 +30,9 @@ FILE_NAME_SUFFIX="${FILE_NAME_SUFFIX/machine/nodemanager}"
 if [[ ${WEBLOGIC_VERSION} =~ ^14.1|^12. ]]; then
 cat <<EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 DOMAIN_HOME="${DOMAIN_HOME}"
 LOG_DIR="${VAR_LOG_DIR}"
@@ -46,9 +46,9 @@ EOF
 elif [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
 cat <<EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 WL_HOME="${WL_HOME}"
 DOMAIN_HOME="${DOMAIN_HOME}"
@@ -111,9 +111,9 @@ EOF
 if [[ ${WEBLOGIC_VERSION} =~ ^14.1|^12. ]]; then
 cat <<EOF > ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 DOMAIN_HOME="${DOMAIN_HOME}"
 
@@ -123,9 +123,9 @@ EOF
 elif [[ ${WEBLOGIC_VERSION} =~ ^10.3 ]]; then
 cat <<EOF > ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 WL_HOME="${WL_HOME}"
 

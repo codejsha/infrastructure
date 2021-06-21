@@ -1,7 +1,7 @@
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 # HELM_VERSION="3.5.1"
 # curl -LJO https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz

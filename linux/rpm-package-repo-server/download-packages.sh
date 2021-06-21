@@ -1,7 +1,7 @@
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 PACKAGE_REPO_VOLUME_DIR="/mnt/volume/example-repo"
 sudo mkdir -p ${PACKAGE_REPO_VOLUME_DIR}/package

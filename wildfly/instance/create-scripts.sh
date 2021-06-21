@@ -1,7 +1,7 @@
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 source ../env-base.sh
 
@@ -21,9 +21,9 @@ VAR_JBOSS_LOG_DIR="${JBOSS_LOG_DIR/${JBOSS_BASE_DIR}/${TEMP}}"
 
 cat <<EOF > ${JBOSS_BASE_DIR}/start-${INSTANCE_NAME}.sh
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export JAVA_HOME="${JAVA_HOME}"
@@ -157,9 +157,9 @@ EOF
 
 cat <<EOF > ${JBOSS_BASE_DIR}/stop-${INSTANCE_NAME}.sh
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export JAVA_HOME="${JAVA_HOME}"

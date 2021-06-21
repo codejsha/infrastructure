@@ -1,7 +1,7 @@
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 source ../env-base.sh
 source ./env-instance.sh
@@ -21,9 +21,9 @@ VAR_LOG_DIR="${LOG_DIR/${CATALINA_BASE}/${TEMP}}"
 ### create start script
 cat <<EOF > ${CATALINA_BASE}/start-${INSTANCE_NAME}.sh
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export JAVA_HOME="${JAVA_HOME}"
@@ -123,9 +123,9 @@ EOF
 ### create stop script
 cat <<EOF > ${CATALINA_BASE}/stop-${INSTANCE_NAME}.sh
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export JAVA_HOME="${JAVA_HOME}"
@@ -141,9 +141,9 @@ EOF
 ### create configtest script
 cat <<EOF > ${CATALINA_BASE}/check-config.sh
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export CATALINA_HOME="${CATALINA_HOME}"
@@ -157,9 +157,9 @@ EOF
 ### create version script
 cat <<EOF > ${CATALINA_BASE}/get-version.sh
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 INSTANCE_NAME="${INSTANCE_NAME}"
 export CATALINA_HOME="${CATALINA_HOME}"
