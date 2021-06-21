@@ -1,7 +1,7 @@
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 source ../env-base.sh
 
@@ -13,9 +13,9 @@ mkdir -p ${DOMAIN_HOME}/scripts
 
 cat <<EOF > ${DOMAIN_HOME}/scripts/regen-demo-identity.sh
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 JAVA_HOME="${JAVA_HOME}"
 WL_HOME="${WL_HOME}"

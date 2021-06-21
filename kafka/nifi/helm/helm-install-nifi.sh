@@ -1,7 +1,7 @@
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 helm repo add cetic https://cetic.github.io/helm-charts
 helm repo update

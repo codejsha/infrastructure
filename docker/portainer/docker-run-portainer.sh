@@ -1,7 +1,7 @@
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 PORTAINER_VOLUME_DIR="/mnt/volume/portainer"
 sudo mkdir -p ${PORTAINER_VOLUME_DIR}/data

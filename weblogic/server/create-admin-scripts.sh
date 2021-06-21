@@ -1,7 +1,7 @@
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 source ../env-base.sh
 
@@ -22,9 +22,9 @@ FILE_NAME_SUFFIX="admin"
 
 cat <<EOF > ${DOMAIN_HOME}/start-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 SERVER_NAME="${SERVER_NAME}"
 DOMAIN_HOME="${DOMAIN_HOME}"
@@ -154,9 +154,9 @@ EOF
 
 cat <<EOF > ${DOMAIN_HOME}/stop-${FILE_NAME_SUFFIX}.sh
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "\${BASH_SOURCE[0]}: line \${LINENO}: status \${?}: user \${USER}: func \${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 ADMIN_URL="t3://${ADMIN_SERVER_LISTEN_ADDRESS}:${ADMIN_SERVER_LISTEN_PORT}"
 DOMAIN_HOME="${DOMAIN_HOME}"

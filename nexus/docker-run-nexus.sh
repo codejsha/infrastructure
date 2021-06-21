@@ -1,7 +1,7 @@
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 NEXUS_VOLUME_DIR="/mnt/volume/nexus"
 sudo mkdir -p ${NEXUS_VOLUME_DIR}

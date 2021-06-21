@@ -1,7 +1,7 @@
 #!/bin/bash
-set -o errtrace
-set -o errexit
 trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func ${FUNCNAME[0]}"' ERR
+set -o errexit
+set -o errtrace
 
 GITLAB_VOLUME_DIR="/mnt/volume/gitlab"
 sudo mkdir -p ${GITLAB_VOLUME_DIR}/{config,logs,data}
