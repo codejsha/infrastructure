@@ -24,6 +24,8 @@ sudo chown -R ${USER}:${GROUP} ${LOG_DIR}
 
 ######################################################################
 
+### default
+
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-replicator.service
 [Unit]
 Description=Confluent Replicator
@@ -43,6 +45,8 @@ WantedBy=multi-user.target
 EOF
 
 ######################################################################
+
+### override
 
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-replicator.service.d/override.conf
 [Service]

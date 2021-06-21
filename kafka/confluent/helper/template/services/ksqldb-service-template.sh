@@ -25,6 +25,8 @@ sudo chown -R ${USER}:${GROUP} ${DATA_DIR} ${LOG_DIR}
 
 ######################################################################
 
+### default
+
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-ksqldb.service
 [Unit]
 Description=Streaming SQL engine for Apache Kafka
@@ -45,6 +47,8 @@ WantedBy=multi-user.target
 EOF
 
 ######################################################################
+
+### override
 
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-ksqldb.service.d/override.conf
 [Service]

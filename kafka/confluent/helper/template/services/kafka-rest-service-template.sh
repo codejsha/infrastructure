@@ -22,6 +22,8 @@ sudo chown -R ${USER}:${GROUP} ${LOG_DIR}
 
 ######################################################################
 
+### default
+
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-kafka-rest.service
 [Unit]
 Description=A REST proxy for Apache Kafka
@@ -43,6 +45,8 @@ WantedBy=multi-user.target
 EOF
 
 ######################################################################
+
+### override
 
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-kafka-rest.service.d/override.conf
 [Service]

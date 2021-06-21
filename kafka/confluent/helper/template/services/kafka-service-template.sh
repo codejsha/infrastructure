@@ -24,6 +24,8 @@ sudo chown -R ${USER}:${GROUP} ${DATA_DIR} ${LOG_DIR}
 
 ######################################################################
 
+### default
+
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-server.service
 [Unit]
 Description=Apache Kafka - broker
@@ -44,6 +46,8 @@ WantedBy=multi-user.target
 EOF
 
 ######################################################################
+
+### override
 
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-server.service.d/override.conf
 [Service]

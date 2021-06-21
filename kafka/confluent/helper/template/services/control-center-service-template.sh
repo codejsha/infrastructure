@@ -27,6 +27,8 @@ sudo chown -R ${USER}:${GROUP} ${DATA_DIR} ${LOG_DIR}
 
 ######################################################################
 
+### default
+
 cat <<EOF | sudo tee confluent-control-center.service
 [Unit]
 Description=Confluent Control Center
@@ -48,6 +50,8 @@ WantedBy=multi-user.target
 EOF
 
 ######################################################################
+
+### override
 
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-control-center.service.d/override.conf
 [Service]

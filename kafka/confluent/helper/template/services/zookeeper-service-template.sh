@@ -26,6 +26,8 @@ sudo chown -R ${USER}:${GROUP} ${DATA_DIR} ${LOG_DIR}
 
 ######################################################################
 
+### default
+
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-zookeeper.service
 [Unit]
 Description=Apache Kafka - ZooKeeper
@@ -46,6 +48,8 @@ WantedBy=multi-user.target
 EOF
 
 ######################################################################
+
+### override
 
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-zookeeper.service.d/override.conf
 [Service]

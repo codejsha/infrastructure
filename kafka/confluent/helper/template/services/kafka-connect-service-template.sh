@@ -25,6 +25,8 @@ sudo chown -R ${USER}:${GROUP} ${LOG_DIR}
 
 ######################################################################
 
+### default
+
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-kafka-connect.service
 [Unit]
 Description=Apache Kafka Connect - distributed
@@ -44,6 +46,8 @@ WantedBy=multi-user.target
 EOF
 
 ######################################################################
+
+### override
 
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-kafka-connect.service.d/override.conf
 [Service]
