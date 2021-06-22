@@ -14,10 +14,14 @@ zookeeper:
       {% set clientPort = component.common.param.clientPort if component.common.param.clientPort
           else defaultZookeeperClientPort %}
       clientPort: {{ clientPort }}
-    {# peerToPeerPort #}
-      {% set peerToPeerPort = component.common.param.peerToPeerPort if component.common.param.peerToPeerPort
-          else defaultZookeeperPeerToPeerPort %}
-      peerToPeerPort: {{ peerToPeerPort }}
+    {# leaderPort #}
+      {% set leaderPort = component.common.param.leaderPort if component.common.param.leaderPort
+          else defaultZookeeperLeaderPort %}
+      leaderPort: {{ leaderPort }}
+    {# leaderElectionPort #}
+      {% set leaderElectionPort = component.common.param.leaderElectionPort if component.common.param.leaderElectionPort
+          else defaultZookeeperLeaderElectionPort %}
+      leaderElectionPort: {{ leaderElectionPort }}
     {# zNode #}
       {% set zNode = component.common.param.zNode if component.common.param.zNode
           else defaultZookeeperZNode %}
@@ -55,11 +59,17 @@ zookeeper:
         {% else %}
         # clientPort:
         {% endif %}
-      {# peerToPeerPort #}
-        {% if server.paramOverride and server.paramOverride.peerToPeerPort %}
-        peerToPeerPort: {{ server.paramOverride.peerToPeerPort }}
+      {# leaderPort #}
+        {% if server.paramOverride and server.paramOverride.leaderPort %}
+        leaderPort: {{ server.paramOverride.leaderPort }}
         {% else %}
-        # peerToPeerPort:
+        # leaderPort:
+        {% endif %}
+      {# leaderElectionPort #}
+        {% if server.paramOverride and server.paramOverride.leaderElectionPort %}
+        leaderElectionPort: {{ server.paramOverride.leaderElectionPort }}
+        {% else %}
+        # leaderElectionPort:
         {% endif %}
     {% include 'file-template.yaml.j2' %}
 

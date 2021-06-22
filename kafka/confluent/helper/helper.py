@@ -291,10 +291,10 @@ def generate_zookeeper_cluster_list(server_id, servers):
     for server in servers:
         if server.server_id == server_id:
             cluster_list.append(f'server.{server.server_id}='
-                                f'0.0.0.0:{server.peer_to_peer_port}')
+                                f'0.0.0.0:{server.leader_port}:{server.leader_election_port}')
         else:
             cluster_list.append(f'server.{server.server_id}='
-                                f'{server.server_name}:{server.peer_to_peer_port}')
+                                f'{server.server_name}:{server.leader_port}:{server.leader_election_port}')
     return cluster_list
 
 

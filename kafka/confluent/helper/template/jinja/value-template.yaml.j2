@@ -2,7 +2,8 @@
 {# zookeeper #}
 {% set defaultZookeeperStopScript = 'stop-zookeeper.sh' %}
 {% set defaultZookeeperClientPort = '2181' %}
-{% set defaultZookeeperPeerToPeerPort = '2888:3888' %}
+{% set defaultZookeeperLeaderPort = '2888' %}
+{% set defaultZookeeperLeaderElectionPort = '3888' %}
 {% set defaultZookeeperZNode = '/clusterlocal' %}
 {# kafka #}
 {% set defaultKafkaStopScript = 'stop-kafka.sh' %}

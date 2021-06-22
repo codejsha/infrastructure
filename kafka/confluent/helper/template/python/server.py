@@ -33,7 +33,8 @@ class Zookeeper(Server):
     data_dir: str
     log_dir: str
     client_port: str
-    peer_to_peer_port: str
+    leader_port: str
+    leader_election_port: str
     z_node: str
 
 
