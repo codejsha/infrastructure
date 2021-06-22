@@ -96,5 +96,5 @@ if [ -f "${LOG_DIR}/nohup.${SERVER_NAME}.out" ]; then
 fi
 
 touch ${LOG_DIR}/nohup.${SERVER_NAME}.out
-nohup ${CONFLUENT_HOME}/bin/replicator ${PROPERTIES_FILE} > ${LOG_DIR}/nohup.${SERVER_NAME}.out 2>&1 &
+nohup ${CONFLUENT_HOME}/bin/connect-distributed ${PROPERTIES_FILE} > ${LOG_DIR}/nohup.${SERVER_NAME}.out 2>&1 &
 tail -f ${LOG_DIR}/nohup.${SERVER_NAME}.out
