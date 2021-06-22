@@ -80,17 +80,12 @@ def create_add_host_script_file(server_dict):
 def create_secure_copy_script_file(base, server_dict):
     data_list = [
         f'#!/bin/bash\n',
-        f'tar -czf confluent-log4j.tar.gz --exclude=*.tar.gz ../log4j/',
-        f'tar -czf confluent-others.tar.gz --exclude=*.tar.gz ../others/',
-        f'tar -czf confluent-properties.tar.gz --exclude=*.tar.gz ../properties/',
-        f'tar -czf confluent-scripts.tar.gz --exclude=*.tar.gz ../scripts/',
-        f'tar -czf confluent-services.tar.gz --exclude=*.tar.gz ../services/',
-        f'',
-        f'# tar -czf confluent-log4j.tar.gz --exclude=*.tar.gz log4j/',
-        f'# tar -czf confluent-others.tar.gz --exclude=*.tar.gz others/',
-        f'# tar -czf confluent-properties.tar.gz --exclude=*.tar.gz properties/',
-        f'# tar -czf confluent-scripts.tar.gz --exclude=*.tar.gz scripts/',
-        f'# tar -czf confluent-services.tar.gz --exclude=*.tar.gz services/'
+        f'cd ..',
+        f'tar -czf confluent-log4j.tar.gz log4j/',
+        f'tar -czf confluent-others.tar.gz others/',
+        f'tar -czf confluent-properties.tar.gz properties/',
+        f'tar -czf confluent-scripts.tar.gz scripts/',
+        f'tar -czf confluent-services.tar.gz services/'
     ]
 
     # host name
