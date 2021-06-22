@@ -15,6 +15,6 @@ helm upgrade --install my-kafka-operator \
     --version 0.20.1 \
     strimzi/strimzi-kafka-operator
 
-    # --values helm-chart-values-strimzi.yaml \
+    # --values values-strimzi.yaml \
 
 kubectl apply --filename strimzi-kafka-cluster.yaml

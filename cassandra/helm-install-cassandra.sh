@@ -12,6 +12,6 @@ NAMESPACE="cassandra-system"
 helm upgrade --install my-cassandra \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --values helm-chart-values.yaml \
+    --values values.yaml \
     --version 7.1.2 \
     bitnami/cassandra

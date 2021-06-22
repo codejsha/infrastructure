@@ -10,7 +10,7 @@ export USERNAME="minio"
 export PASSWORD="minio123"
 # export PASSWORD="${PASSWORD}"
 
-envsubst < ./helm-chart-values.yaml > ./helm-chart-values-temp.yaml
+envsubst < ./values.yaml > ./values-temp.yaml
 
 NAMESPACE="minio-system"
 
@@ -18,6 +18,6 @@ NAMESPACE="minio-system"
 helm upgrade --install my-minio \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --values helm-chart-values-temp.yaml \
+    --values values-temp.yaml \
     --version 8.0.10 \
     minio/minio

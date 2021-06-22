@@ -13,6 +13,6 @@ NAMESPACE="prometheus-system"
 helm upgrade --install my-prometheus \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --values helm-chart-values.yaml \
+    --values values.yaml \
     --version 11.16.9 \
     prometheus-community/prometheus

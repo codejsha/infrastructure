@@ -32,7 +32,7 @@ export REGISTRY_PASSWORD="${PASSWORD}"
 export REGISTRY_HTPASSWD="$(htpasswd -nbBC10 ${REGISTRY_USERNAME} ${REGISTRY_PASSWORD})"
 export DATABASE_PASSWORD="${PASSWORD}"
 
-envsubst < ./helm-chart-values.yaml > ./helm-chart-values-temp.yaml
+envsubst < ./values.yaml > ./values-temp.yaml
 
 NAMESPACE="harbor-system"
 
@@ -40,6 +40,6 @@ NAMESPACE="harbor-system"
 helm upgrade --install my-harbor \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --values helm-chart-values-temp.yaml \
+    --values values-temp.yaml \
     --version 1.6.1 \
     harbor/harbor

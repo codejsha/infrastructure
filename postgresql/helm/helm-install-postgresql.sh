@@ -8,7 +8,7 @@ helm repo update
 
 export PASSWORD="${PASSWORD}"
 
-envsubst < ./helm-chart-values.yaml > ./helm-chart-values-temp.yaml
+envsubst < ./values.yaml > ./values-temp.yaml
 
 ######################################################################
 
@@ -19,7 +19,7 @@ function helm_install_postgresql {
     helm upgrade --install my-postgres \
         --create-namespace \
         --namespace ${NAMESPACE} \
-        --values helm-chart-values-temp.yaml \
+        --values values-temp.yaml \
         --version 10.3.18 \
         bitnami/postgresql
 }
@@ -31,8 +31,8 @@ function helm_install_postgresql_harbor {
     helm upgrade --install my-harbor-postgres \
         --create-namespace \
         --namespace ${NAMESPACE} \
-        --values helm-chart-values-temp.yaml \
-        --values helm-chart-values-harbor.yaml \
+        --values values-temp.yaml \
+        --values values-harbor.yaml \
         --version 10.3.18 \
         bitnami/postgresql
 }

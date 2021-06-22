@@ -9,6 +9,6 @@ NAMESPACE="elastic-system"
 helm upgrade --install my-fluentd \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --values helm-chart-values-fluentd.yaml \
+    --values values-fluentd.yaml \
     --version 3.6.1 \
     bitnami/fluentd

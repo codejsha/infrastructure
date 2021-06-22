@@ -8,7 +8,7 @@ helm repo update
 
 export PASSWORD="${PASSWORD}"
 
-envsubst < ./helm-chart-values.yaml > ./helm-chart-values-temp.yaml
+envsubst < ./values.yaml > ./values-temp.yaml
 
 NAMESPACE="redis-system"
 
@@ -16,6 +16,6 @@ NAMESPACE="redis-system"
 helm upgrade --install my-redis \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --values helm-chart-values-temp.yaml \
+    --values values-temp.yaml \
     --version 12.2.4 \
     bitnami/redis

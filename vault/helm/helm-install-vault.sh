@@ -12,17 +12,17 @@ NAMESPACE="vault-system"
 helm upgrade --install my-vault \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --values helm-chart-values.yaml \
-    --values helm-chart-values-standalone.yaml \
+    --values values.yaml \
+    --values values-standalone.yaml \
     --version 0.11.0 \
     hashicorp/vault
 
     ### dev mode
-    # --values helm-chart-values-dev.yaml \
+    # --values values-dev.yaml \
     ### standalone mode
-    # --values helm-chart-values-standalone.yaml \
+    # --values values-standalone.yaml \
     ### ha mode
-    # --values helm-chart-values-ha.yaml \
+    # --values values-ha.yaml \
 
 # mkdir -p ~/.vault
 # kubectl exec -it my-vault-0 -- vault operator init > ~/.vault/unseal_keys_and_root_token.txt

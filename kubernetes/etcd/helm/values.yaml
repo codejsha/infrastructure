@@ -1,0 +1,104 @@
+# nameOverride:
+# fullnameOverride:
+
+commonLabels: {}
+commonAnnotations: {}
+
+clusterDomain: cluster.local
+
+auth:
+  rbac:
+    enabled: true
+    allowNoneAuthentication: true
+    rootPassword: "root"
+    existingSecret: ""
+
+# maxProcs:
+removeMemberOnContainerTermination: true
+
+# configuration:
+# existingConfigmap:
+
+command: []
+args: []
+
+replicaCount: 1
+
+containerPorts:
+  client: 2379
+  peer: 2380
+
+resources:
+  limits: {}
+  requests: {}
+
+initContainers: {}
+sidecars: {}
+
+affinity: {}
+nodeSelector: {}
+tolerations: []
+priorityClassName: ""
+
+pdb:
+  create: false
+  minAvailable: 1
+  # maxUnavailable: 1
+
+service:
+  type: ClusterIP
+  port: 2379
+  clientPortNameOverride: ""
+  peerPort: 2380
+  peerPortNameOverride: ""
+  nodePorts:
+    clientPort: ""
+    peerPort: ""
+  loadBalancerIP: ""
+  loadBalancerSourceRanges: []
+  externalIPs: []
+  annotations: {}
+
+persistence:
+  enabled: true
+  storageClass: "standard"
+  # storageClass: "rook-ceph-block"
+  annotations: {}
+  accessModes:
+    - ReadWriteOnce
+  size: 8Gi
+  selector: {}
+
+metrics:
+  enabled: true
+  podAnnotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "2379"
+  podMonitor:
+    enabled: false
+    namespace: istio-system
+    interval: 30s
+    # scrapeTimeout: 30s
+    additionalLabels: {}
+    scheme: http
+    tlsConfig: {}
+
+startFromSnapshot:
+  enabled: false
+  existingClaim: ""
+  snapshotFilename: ""
+
+disasterRecovery:
+  enabled: false
+  cronjob:
+    schedule: "*/30 * * * *"
+    historyLimit: 1
+    snapshotHistoryLimit: 1
+    podAnnotations: {}
+    resources:
+      limits: {}
+      requests: {}
+  pvc:
+    size: 2Gi
+    storageClassName: "standard"
+    # storageClassName: "rook-ceph-block"

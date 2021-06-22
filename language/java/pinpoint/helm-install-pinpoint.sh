@@ -10,7 +10,7 @@ export MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}"
 export MYSQL_USERNAME="${MYSQL_USERNAME}"
 export MYSQL_PASSWORD="${MYSQL_PASSWORD}"
 
-envsubst < ./helm-chart-values.yaml > ./helm-chart-values-temp.yaml
+envsubst < ./values.yaml > ./values-temp.yaml
 
 NAMESPACE="pinpoint-system"
 
@@ -18,5 +18,5 @@ NAMESPACE="pinpoint-system"
 helm upgrade --install my-pinpoint \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --values helm-chart-values-temp.yaml \
+    --values values-temp.yaml \
     ./pinpoint

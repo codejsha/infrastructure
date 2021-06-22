@@ -8,7 +8,7 @@ helm repo update
 
 export PASSWORD="${PASSWORD}"
 
-envsubst < ./helm-chart-values.yaml > ./helm-chart-values-temp.yaml
+envsubst < ./values.yaml > ./values-temp.yaml
 
 NAMESPACE="wildfly-system"
 
@@ -16,6 +16,6 @@ NAMESPACE="wildfly-system"
 helm upgrade --install my-wildfly \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --values helm-chart-values-temp.yaml \
+    --values values-temp.yaml \
     --version 8.2.3 \
     bitnami/wildfly

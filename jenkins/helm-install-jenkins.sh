@@ -8,7 +8,7 @@ helm repo update
 
 export PASSWORD="${PASSWORD}"
 
-envsubst < ./helm-chart-values.yaml > ./helm-chart-values-temp.yaml
+envsubst < ./values.yaml > ./values-temp.yaml
 
 NAMESPACE="jenkins-system"
 
@@ -16,6 +16,6 @@ NAMESPACE="jenkins-system"
 helm upgrade --install my-jenkins \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --values helm-chart-values-temp.yaml \
+    --values values-temp.yaml \
     --version 3.0.12 \
     jenkins/jenkins

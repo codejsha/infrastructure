@@ -12,5 +12,5 @@ NAMESPACE="backstage-system"
 helm upgrade --install my-backstage \
     --create-namespace \
     --namespace ${NAMESPACE} \
-    --values helm-chart-values.yaml \
+    --values values.yaml \
     ./backstage/contrib/chart/backstage
