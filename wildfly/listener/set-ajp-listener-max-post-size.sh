@@ -33,5 +33,5 @@ function reload_server {
 
 ######################################################################
 
-set_listener_timeout
+set_listener_max_post_size
 reload_server
