@@ -33,7 +33,7 @@ cd ..
 ######################################################################
 
 ### MAVEN
-cd maven
+cd repository/maven
 
 ### delete-repository.sh ${REPOSITORY_NAME}
 bash ./delete-repository.sh "maven-central"
@@ -49,7 +49,7 @@ cd ..
 ######################################################################
 
 ### DOCKER
-cd docker
+cd repository/docker
 
 ### create-docker-proxy-repo.sh ${REPOSITORY_NAME} ${BLOBSTORE_NAME} ${REMOTE_URL} ${DOCKER_INDEX_TYPE}
 bash ./create-docker-proxy-repo.sh "docker-hub" "nexus-docker-hub" "https://registry-1.docker.io" "HUB"
@@ -76,7 +76,7 @@ cd ..
 ######################################################################
 
 ### HELM
-cd helm
+cd repository/helm
 
 ### create-helm-proxy-repo.sh ${REPOSITORY_NAME} ${BLOBSTORE_NAME} ${REMOTE_URL}
 # bash ./create-helm-proxy-repo.sh "helm-chartmuseum" "nexus-helm-chartmuseum" "http://chartmuseum-service.chart-system:8080"
@@ -87,6 +87,7 @@ cd ..
 ######################################################################
 
 ### DELETE
+# cd repository
 
 # bash ./delete-repository.sh "maven-central"
 # bash ./delete-repository.sh "docker-hub"
