@@ -8,7 +8,7 @@ set -o errtrace
 function install_confluent_kafka_with_download {
     local CONFLUENT_HOME="/usr/local/confluent"
     local INSTALL_FILE_DIR="/mnt/share/confluent-platform"
-    local INSTALL_FILE="confluent-6.1.0.tar.gz"
+    local INSTALL_FILE="confluent-6.2.0.tar.gz"
 
     local PARENT_CONFLUENT_HOME="$(readlink --canonicalize-missing ${CONFLUENT_HOME}/../)"
     local CONFLUENT_VERSION="$(echo ${INSTALL_FILE} | grep -o -E "([^confluent-].*[^\.tar\.gz])")"
@@ -62,16 +62,16 @@ function install_confluent_kafka_with_yum {
 cat <<EOF | sudo tee /etc/yum.repos.d/confluent.repo
 [Confluent.dist]
 name=Confluent repository (dist)
-baseurl=https://packages.confluent.io/rpm/6.1/7
+baseurl=https://packages.confluent.io/rpm/6.2/$releasever
 gpgcheck=1
-gpgkey=https://packages.confluent.io/rpm/6.1/archive.key
+gpgkey=https://packages.confluent.io/rpm/6.2/archive.key
 enabled=1
 
 [Confluent]
 name=Confluent repository
-baseurl=https://packages.confluent.io/rpm/6.1
+baseurl=https://packages.confluent.io/rpm/6.2
 gpgcheck=1
-gpgkey=https://packages.confluent.io/rpm/6.1/archive.key
+gpgkey=https://packages.confluent.io/rpm/6.2/archive.key
 enabled=1
 EOF
 
