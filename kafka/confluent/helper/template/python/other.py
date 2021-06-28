@@ -89,8 +89,7 @@ def create_secure_copy_script_file(base, server_dict):
         f'tar -czf confluent-scripts.tar.gz scripts/',
         f'tar -czf confluent-services.tar.gz services/',
         f'',
-        f'set -o xtrace',
-        f''
+        f'set -o xtrace'
     ]
 
     # host name
