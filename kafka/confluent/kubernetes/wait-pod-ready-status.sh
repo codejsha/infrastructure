@@ -21,12 +21,13 @@ while [ "${ELAPSED_TIME}" -lt "${MAX_ELAPSED_TIME}" ]; do
     for IS_POD_READY in ${IS_POD_READY_ARR[@]}; do
         if [ "${IS_POD_READY}" == "False" ]; then
             ALL_POD_READY="False"
+            break
         fi
     done
 
     if [ "${ALL_POD_READY}" == "True" ]; then
         echo "[INFO] All pods are ready (${LABEL})."
-        break;
+        break
     fi
 
     echo "[INFO] Waiting for all pods to be ready (${LABEL}) ..."

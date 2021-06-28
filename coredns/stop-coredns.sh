@@ -8,7 +8,7 @@ COREDNS_HOME="/svc/infrastructure/coredns"
 ######################################################################
 
 function stop_coredns {
-    sudo pkill --pidfile ${COREDNS_HOME}/coredns.pid
+    sudo pkill --echo --count --pidfile ${COREDNS_HOME}/coredns.pid
     # sudo kill -9 $(cat ${COREDNS_HOME}/coredns.pid)
 }
 

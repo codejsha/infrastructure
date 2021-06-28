@@ -8,7 +8,8 @@ def create_kafka_alias_file(base):
         f'### kafka aliases',
         f'###',
         f'### [ -f ~/.kafka_aliases ] && source ~/.kafka_aliases',
-        f'###\n',
+        f'###',
+        f'',
         f'CONFLUENT_HOME={base.confluent_home}',
         f'PATH="${{PATH}}:${{CONFLUENT_HOME}}/bin"',
         f'JAVA_HOME={base.java_home}',
@@ -79,7 +80,8 @@ def create_add_host_script_file(server_dict):
 
 def create_secure_copy_script_file(base, server_dict):
     data_list = [
-        f'#!/bin/bash\n',
+        f'#!/bin/bash',
+        f'',
         f'cd ..',
         f'tar -czf confluent-log4j.tar.gz log4j/',
         f'tar -czf confluent-others.tar.gz others/',

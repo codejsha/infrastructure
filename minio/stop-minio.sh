@@ -3,4 +3,4 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 set -o errexit
 set -o errtrace
 
-pkill -9 minio
+pkill -9 --echo --count --exact minio
