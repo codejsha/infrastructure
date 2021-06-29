@@ -1,6 +1,6 @@
 ######################################################################
 
-gpg --full-generate-key
+gpg --gen-key
 ### Kind of key:    RSA and RSA (default)
 ### Keysize:        4096
 ### Expire:         <PERIOD>
@@ -8,7 +8,7 @@ gpg --full-generate-key
 ### Email address:  <USER_EMAIL>
 ### Okay
 
-gpg --list-secret-keys --keyid-format LONG
+gpg --list-key
 gpg --armor --export "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 ######################################################################
