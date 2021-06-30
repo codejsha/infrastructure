@@ -1,0 +1,159 @@
+base:
+  user: confluent
+  group: confluent
+  confluentHome: /app/confluent
+  javaHome: /usr/lib/jvm/java-1.8.0
+  propertiesPath: ${CONFLUENT_HOME}/properties
+  scriptsPath: ${CONFLUENT_HOME}/scripts
+
+######################################################################
+
+### zookeeper
+zookeeper:
+  common:
+    param:
+      dataDir: /data/zookeeper
+      logDir: /logs/zookeeper
+
+  servers:
+    - serverName: zookeeper11
+      # hostName:
+      hostAddress: 10.0.1.44
+      serverId: 11
+      # paramOverride:
+
+    - serverName: zookeeper12
+      # hostName:
+      hostAddress: 10.0.1.46
+      serverId: 12
+      # paramOverride:
+
+    - serverName: zookeeper13
+      # hostName:
+      hostAddress: 10.0.1.47
+      serverId: 13
+      # paramOverride:
+
+######################################################################
+
+### kafka
+kafka:
+  common:
+    param:
+      dataDir: /data/kafka
+      logDir: /logs/kafka
+
+  servers:
+    - serverName: kafka11
+      # hostName:
+      hostAddress: 10.0.1.31
+      serverId: 11
+      # paramOverride:
+
+    - serverName: kafka12
+      # hostName:
+      hostAddress: 10.0.1.32
+      serverId: 12
+      # paramOverride:
+
+    - serverName: kafka13
+      # hostName:
+      hostAddress: 10.0.1.33
+      serverId: 13
+      # paramOverride:
+
+######################################################################
+
+### schema-registry
+schemaRegistry:
+  common:
+    param:
+      logDir: /logs/schema-registry
+
+  servers:
+    - serverName: schema-registry11
+      # hostName:
+      hostAddress: 10.0.1.38
+      # paramOverride:
+
+    - serverName: schema-registry12
+      # hostName:
+      hostAddress: 10.0.1.39
+      # paramOverride:
+
+######################################################################
+
+### kafka-connect
+kafkaConnect:
+  common:
+    param:
+      logDir: /logs/kafka-connect
+      groupId: connect-cluster
+
+  servers:
+    - serverName: kafka-connect11
+      # hostName:
+      hostAddress: 10.0.1.35
+      # paramOverride:
+
+    - serverName: kafka-connect12
+      # hostName:
+      hostAddress: 10.0.1.29
+      # paramOverride:
+
+    - serverName: kafka-connect13
+      # hostName:
+      hostAddress: 10.0.1.75
+      # paramOverride:
+
+######################################################################
+
+### replicator
+replicator:
+  common:
+    param:
+      logDir: /logs/replicator
+      groupId: replicator-cluster
+
+  servers:
+    - serverName: replicator11
+      # hostName:
+      hostAddress: 10.0.1.40
+      # paramOverride:
+
+    - serverName: replicator12
+      # hostName:
+      hostAddress: 10.0.1.41
+      # paramOverride:
+
+######################################################################
+
+### ksqldb
+ksqlDb:
+  common:
+    param:
+      dataDir: /data/ksqldb
+      logDir: /logs/ksqldb
+      groupId: ksql-cluster
+
+  servers:
+    - serverName: ksqldb11
+      # hostName:
+      hostAddress: 10.0.1.37
+      # paramOverride:
+
+######################################################################
+
+### control-center
+controlCenter:
+  common:
+    param:
+      dataDir: /data/control-center
+      logDir: /logs/control-center
+
+  servers:
+    - serverName: control-center11
+      # hostName:
+      hostAddress: 10.0.1.34
+      serverId: 11
+      # paramOverride:
