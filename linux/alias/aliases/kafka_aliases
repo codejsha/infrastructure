@@ -1,12 +1,48 @@
-# confluent
+# kafka aliases
 
 source <(confluent completion bash)
 
 function kafkacat() { echo "+ kafkacat ${@}">&2; command kafkacat ${@}; }
 
-CONFLUENT_HOME="/usr/local/confluent"
-export CONFLUENT_HOME
+alias kafkacat="docker container run -it --network host edenhill/kafkacat:1.6.0"
+
+######################################################################
+
+CONFLUENT_HOME=/usr/local/confluent
 PATH="${PATH}:${CONFLUENT_HOME}/bin"
+JAVA_HOME=/usr/lib/jvm/java-1.8.0
+PATH="${PATH}:${JAVA_HOME}/bin"
 export PATH
 
-alias kafkacat="docker container run -it --network host edenhill/kafkacat:1.6.0"
+alias psef="ps -ef | grep"
+alias pxjava="pgrep -xa java | grep java"
+alias pxprometheus="pgrep -xa prometheus | grep prometheus"
+alias pxgrafana="pgrep -xa grafana-server | grep grafana-server"
+alias pxnodeexporter="pgrep -xa node_exporter | grep node_exporter"
+alias pxlagexporter="pgrep -xa java | grep kafka-lag-exporter"
+
+alias killjava="pkill -9 -ecx java"
+alias killprometheus="pkill -9 -ecx prometheus"
+alias killgrafana="pkill -9 -ecx grafana-server"
+alias killnodeexporter="pkill -9 -ecx node_exporter"
+alias killlagexporter="pkill -9 -ecf com.lightbend.kafkalagexporter"
+
+alias killzookeeper="pkill -9 -ecf \"org.apache.zookeeper.server.quorum.QuorumPeerMain\""
+alias killkafka="pkill -9 -ecf \"kafka.Kafka\""
+alias killschemaregistry="pkill -9 -ecf \"io.confluent.kafka.schemaregistry.rest.SchemaRegistryMain\""
+alias killkafkaconnect="pkill -9 -ecf \"org.apache.kafka.connect.cli.ConnectDistributed\""
+alias killkafkarest="pkill -9 -ecf \"io.confluent.kafkarest.KafkaRestMain\""
+alias killksqldb="pkill -9 -ecf \"io.confluent.ksql.rest.server.KsqlServerMain\""
+alias killcontrolcenter="pkill -9 -ecf \"io.confluent.controlcenter.ControlCenter\""
+alias killconfluent="killzookeeper; killkafka; killschemaregistry; killkafkaconnect; killkafkarest; killksqldb; killcontrolcenter;"
+
+alias goconfluent="cd ${CONFLUENT_HOME}"
+alias goprops="cd ${CONFLUENT_HOME}/properties"
+alias goscripts="cd ${CONFLUENT_HOME}/scripts"
+alias goconnector="cd ${CONFLUENT_HOME}/connectors"
+
+alias startsh="${CONFLUENT_HOME}/scripts/start.sh"
+alias stopsh="${CONFLUENT_HOME}/scripts/stop.sh"
+alias logsh="${CONFLUENT_HOME}/scripts/log.sh"
+alias grepsh="${CONFLUENT_HOME}/scripts/grep.sh"
+alias moresh="${CONFLUENT_HOME}/scripts/more.sh"
