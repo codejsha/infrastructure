@@ -26,8 +26,8 @@ function install_hadoop  {
     fi
 
     ### check install file
-    if [ ! -f "${INSTALL_FILE_DIR}/${HTTPD_FILE}" ]; then
-        echo "[ERROR] The install file (${INSTALL_FILE_DIR}/${HTTPD_FILE}) does not exist!"
+    if [ ! -f "${INSTALL_FILE_DIR}/${INSTALL_FILE}" ]; then
+        echo "[ERROR] The install file (${INSTALL_FILE_DIR}/${INSTALL_FILE}) does not exist!"
         exit
     fi
 
