@@ -69,5 +69,3 @@ scrape_configs:
     static_configs:
       - targets:
           - "kafka-lag-exporter:9999"
-        labels:
-          env: "clusterlocal"

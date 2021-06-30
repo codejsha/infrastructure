@@ -27,11 +27,11 @@ function install_httpd {
     # local INSTALL_FILE_DIR="/svc/install"
     local PARENT_BUILD_DIR="/svc/install"
 
-    local HTTPD_FILE="httpd-2.4.46.tar.gz"
+    local INSTALL_FILE="httpd-2.4.46.tar.gz"
     local APR_FILE="apr-1.7.0.tar.gz"
     local APRUTIL_FILE="apr-util-1.6.1.tar.gz"
 
-    local HTTPD_DIR_NAME="${HTTPD_FILE/\.tar\.gz/}"
+    local HTTPD_DIR_NAME="${INSTALL_FILE/\.tar\.gz/}"
     local APR_DIR_NAME="${APR_FILE/\.tar\.gz/}"
     local APRUTIL_DIR_NAME="${APRUTIL_FILE/\.tar\.gz/}"
 
@@ -54,8 +54,8 @@ function install_httpd {
     }
 
     function download_install_file {
-        if [ ! -f "${INSTALL_FILE_DIR}/${HTTPD_FILE}" ]; then
-            sudo curl -o ${INSTALL_FILE_DIR}/${HTTPD_FILE} -LJO http://archive.apache.org/dist/httpd/${HTTPD_FILE}
+        if [ ! -f "${INSTALL_FILE_DIR}/${INSTALL_FILE}" ]; then
+            sudo curl -o ${INSTALL_FILE_DIR}/${INSTALL_FILE} -LJO http://archive.apache.org/dist/httpd/${INSTALL_FILE}
         fi
         if [ ! -f "${INSTALL_FILE_DIR}/${APR_FILE}" ]; then
             sudo curl -o ${INSTALL_FILE_DIR}/${APR_FILE} -LJO http://archive.apache.org/dist/apr/${APR_FILE}
@@ -66,8 +66,8 @@ function install_httpd {
     }
 
     function check_install_file {
-        if [ ! -f "${INSTALL_FILE_DIR}/${HTTPD_FILE}" ]; then
-            echo "[ERROR] The install file (${INSTALL_FILE_DIR}/${HTTPD_FILE}) does not exist!"
+        if [ ! -f "${INSTALL_FILE_DIR}/${INSTALL_FILE}" ]; then
+            echo "[ERROR] The install file (${INSTALL_FILE_DIR}/${INSTALL_FILE}) does not exist!"
             exit
         fi
         if [ ! -f "${INSTALL_FILE_DIR}/${APR_FILE}" ]; then
@@ -81,7 +81,7 @@ function install_httpd {
     }
 
     function extract_install_file {
-        tar -xzf ${INSTALL_FILE_DIR}/${HTTPD_FILE} -C ${PARENT_BUILD_DIR}
+        tar -xzf ${INSTALL_FILE_DIR}/${INSTALL_FILE} -C ${PARENT_BUILD_DIR}
         tar -xzf ${INSTALL_FILE_DIR}/${APR_FILE} -C ${PARENT_BUILD_DIR}
         tar -xzf ${INSTALL_FILE_DIR}/${APRUTIL_FILE} -C ${PARENT_BUILD_DIR}
     }

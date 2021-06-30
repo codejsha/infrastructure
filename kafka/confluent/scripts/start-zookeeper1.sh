@@ -11,11 +11,8 @@ DATA_DIR="/mnt/zookeeper/data"
 LOG_DIR="/mnt/zookeeper/logs"
 export LOG_DIR
 
-### java home
 # JAVA_HOME="/usr/lib/jvm/java-11"
 # JAVA_HOME="/usr/lib/jvm/java-1.8.0"
-# JAVA_HOME="/usr/lib/jvm/zulu11"
-# JAVA_HOME="/usr/lib/jvm/zulu8"
 JAVA_HOME="/usr/lib/jvm/java-1.8.0"
 export JAVA_HOME
 
