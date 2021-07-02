@@ -10,11 +10,11 @@ function install_confluent_kafka_with_download {
     local INSTALL_FILE_DIR="/mnt/share/confluent-platform"
     local INSTALL_FILE="confluent-6.2.0.tar.gz"
 
+    local CONFLUENT_MAJOR_VERSION="$(echo ${CONFLUENT_VERSION} | grep -o -E "^[0-9]{1,3}")"
     local PARENT_CONFLUENT_HOME="$(readlink --canonicalize-missing ${CONFLUENT_HOME}/../)"
     local CONFLUENT_VERSION="$(echo ${INSTALL_FILE} | grep -o -E "([^confluent-].*[^\.tar\.gz])")"
-    local CONFLUENT_MAJOR_VERSION="$(echo ${CONFLUENT_VERSION} | grep -o -E "^[0-9]{1,3}")"
 
-    function check_confluent_home {
+    function check_install_home {
         if [ -d "${CONFLUENT_HOME}" ]; then
             echo "[ERROR] The CONFLUENT_HOME (${CONFLUENT_HOME}) already exists!"
             exit
@@ -46,7 +46,7 @@ function install_confluent_kafka_with_download {
         sudo /usr/local/confluent/bin/confluent completion bash | sudo tee /etc/bash_completion.d/confluent
     }
 
-    check_confluent_home
+    check_install_home
     download_install_file
     check_install_file
     install_confluent

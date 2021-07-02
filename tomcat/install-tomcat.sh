@@ -15,13 +15,13 @@ INSTALL_FILE="apache-tomcat-9.0.39.tar.gz"
 
 ######################################################################
 
-PARENT_CATALINA_HOME="$(readlink --canonicalize-missing ${CATALINA_HOME}/../)"
 TOMCAT_VERSION="$(echo ${INSTALL_FILE} | grep -o -E "([^apache-tomcat-].*[^\.tar\.gz])")"
 TOMCAT_MAJOR_VERSION="$(echo ${TOMCAT_VERSION} | grep -o -E "^[0-9]{1,3}")"
+PARENT_CATALINA_HOME="$(readlink --canonicalize-missing ${CATALINA_HOME}/../)"
 
 ######################################################################
 
-function check_catalina_home {
+function check_install_home {
     if [ -d "${CATALINA_HOME}" ]; then
         echo "[ERROR] The CATALINA_HOME (${CATALINA_HOME}) already exists!"
         exit
@@ -50,7 +50,7 @@ function install_tomcat {
 
 ######################################################################
 
-check_catalina_home
+check_install_home
 download_install_file
 check_install_file
 install_tomcat

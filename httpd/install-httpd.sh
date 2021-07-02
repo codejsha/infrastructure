@@ -35,7 +35,7 @@ function install_httpd {
     local APR_DIR_NAME="${APR_FILE/\.tar\.gz/}"
     local APRUTIL_DIR_NAME="${APRUTIL_FILE/\.tar\.gz/}"
 
-    function check_httpd_home {
+    function check_install_home {
         if [ -d "${HTTPD_HOME}" ]; then
             echo "[ERROR] The HTTPD_HOME (${HTTPD_HOME}) already exists!"
             exit
@@ -112,7 +112,7 @@ function install_httpd {
         sudo chown -R $(id -un):$(id -gn) ${HTTPD_HOME}
     }
 
-    check_httpd_home
+    check_install_home
     install_required_package
     download_install_file
     check_install_file

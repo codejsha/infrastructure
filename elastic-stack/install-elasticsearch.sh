@@ -4,14 +4,14 @@ set -o errexit
 set -o errtrace
 
 ELASTICSEARCH_HOME="/usr/local/elasticsearch"
-INSTALL_FILE_DIR="/mnt/share/elastic-elasticsearch"
+INSTALL_FILE_DIR="/mnt/share/elastic-stack"
 INSTALL_FILE="elasticsearch-7.13.2-linux-x86_64.tar.gz"
 
-PARENT_ELASTICSEARCH_HOME="$(readlink --canonicalize-missing ${ELASTICSEARCH_HOME}/../)"
-ELASTICSEARCH_DIR_NAME="${INSTALL_FILE/\.tar\.gz/}"
 ELASTICSEARCH_VERSION="$(echo ${INSTALL_FILE} | grep -o -E "[0-9]*\.[0-9]*\.[0-9]*")"
+PARENT_ELASTICSEARCH_HOME="$(readlink --canonicalize-missing ${ELASTICSEARCH_HOME}/../)"
+ELASTICSEARCH_DIR_NAME="elasticsearch-${ELASTICSEARCH_VERSION}"
 
-### check elasticsearch home
+### check install home
 if [ -d "${ELASTICSEARCH_HOME}" ]; then
     echo "[ERROR] The ELASTICSEARCH_HOME (${ELASTICSEARCH_HOME}) already exists!"
     exit
@@ -29,6 +29,7 @@ if [ ! -f "${INSTALL_FILE_DIR}/${INSTALL_FILE}" ]; then
     exit
 fi
 
+### install
 sudo tar -xzf ${INSTALL_FILE_DIR}/${INSTALL_FILE} -C ${PARENT_ELASTICSEARCH_HOME}
 sudo mv ${PARENT_ELASTICSEARCH_HOME}/${ELASTICSEARCH_DIR_NAME} ${ELASTICSEARCH_HOME}
 sudo chown -R $(id -un):$(id -gn) ${ELASTICSEARCH_HOME}

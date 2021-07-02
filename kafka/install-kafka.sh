@@ -10,11 +10,11 @@ function install_kafka_with_download {
     local INSTALL_FILE_DIR="/mnt/share/apache-kafka"
     local INSTALL_FILE="kafka_2.13-2.8.0.tgz"
 
+    local KAFKA_VERSION="$(echo ${INSTALL_FILE} | grep -o -E "([^kafka_][1-9]{1}\.[1-9]{1,2}.*[^\.tgz])" | tr -d "-")"
     local PARENT_KAFKA_HOME="$(readlink --canonicalize-missing ${KAFKA_HOME}/../)"
     local KAFKA_DIR_NAME="$(echo ${INSTALL_FILE} | grep -o -E "(.*[^\.tgz])")"
-    local KAFKA_VERSION="$(echo ${INSTALL_FILE} | grep -o -E "([^kafka_][1-9]{1}\.[1-9]{1,2}.*[^\.tgz])" | tr -d "-")"
 
-    function check_kafka_home {
+    function check_install_home {
         if [ -d "${KAFKA_HOME}" ]; then
             echo "[ERROR] The KAFKA_HOME (${KAFKA_HOME}) already exists!"
             exit
@@ -41,7 +41,7 @@ function install_kafka_with_download {
         sudo chown -R $(id -un):$(id -gn) ${KAFKA_HOME}
     }
 
-    check_kafka_home
+    check_install_home
     download_install_file
     check_install_file
     install_kafka

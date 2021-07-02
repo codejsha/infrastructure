@@ -13,7 +13,7 @@ function install_hive  {
     local PARENT_HIVE_HOME="$(readlink --canonicalize-missing ${HIVE_HOME}/../)"
     local HIVE_DIR_NAME="${INSTALL_FILE/\.tar\.gz/}"
 
-    ### check hive home
+    ### check install home
     if [ -d "${HIVE_HOME}" ]; then
         echo "[ERROR] The HIVE_HOME (${HIVE_HOME}) already exists!"
         exit
@@ -31,6 +31,7 @@ function install_hive  {
         exit
     fi
 
+    ### install
     sudo tar -xzf ${INSTALL_FILE_DIR}/${INSTALL_FILE} -C ${PARENT_HIVE_HOME}
     sudo mv ${PARENT_HIVE_HOME}/${HIVE_DIR_NAME} ${HIVE_HOME}
     sudo chown -R $(id -un):$(id -gn) ${HIVE_HOME}

@@ -10,7 +10,7 @@ INSTALL_FILE="grafana-8.0.3.linux-amd64.tar.gz"
 PARENT_GRAFANA_HOME="$(readlink --canonicalize-missing ${GRAFANA_HOME}/../)"
 GRAFANA_DIR_NAME="${INSTALL_FILE/\.tar\.gz/}"
 
-### check grafana home
+### check install home
 if [ -d "${GRAFANA_HOME}" ]; then
     echo "[ERROR] The GRAFANA_HOME (${GRAFANA_HOME}) already exists!"
     exit
@@ -28,6 +28,7 @@ if [ ! -f "${INSTALL_FILE_DIR}/${INSTALL_FILE}" ]; then
     exit
 fi
 
+### install
 sudo tar -xzf ${INSTALL_FILE_DIR}/${INSTALL_FILE} -C ${PARENT_GRAFANA_HOME}
 sudo mv ${PARENT_GRAFANA_HOME}/${GRAFANA_DIR_NAME} ${GRAFANA_HOME}
 sudo chown -R $(id -un):$(id -gn) ${GRAFANA_HOME}

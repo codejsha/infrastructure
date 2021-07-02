@@ -4,14 +4,14 @@ set -o errexit
 set -o errtrace
 
 KIBANA_HOME="/usr/local/kibana"
-INSTALL_FILE_DIR="/mnt/share/elastic-kibana"
+INSTALL_FILE_DIR="/mnt/share/elastic-stack"
 INSTALL_FILE="kibana-7.13.2-linux-x86_64.tar.gz"
 
+KIBANA_VERSION="$(echo ${INSTALL_FILE} | grep -o -E "[0-9]*\.[0-9]*\.[0-9]*")"
 PARENT_KIBANA_HOME="$(readlink --canonicalize-missing ${KIBANA_HOME}/../)"
 KIBANA_DIR_NAME="${INSTALL_FILE/\.tar\.gz/}"
-KIBANA_VERSION="$(echo ${INSTALL_FILE} | grep -o -E "[0-9]*\.[0-9]*\.[0-9]*")"
 
-### check kibana home
+### check install home
 if [ -d "${KIBANA_HOME}" ]; then
     echo "[ERROR] The KIBANA_HOME (${KIBANA_HOME}) already exists!"
     exit
@@ -29,6 +29,7 @@ if [ ! -f "${INSTALL_FILE_DIR}/${INSTALL_FILE}" ]; then
     exit
 fi
 
+### install
 sudo tar -xzf ${INSTALL_FILE_DIR}/${INSTALL_FILE} -C ${PARENT_KIBANA_HOME}
 sudo mv ${PARENT_KIBANA_HOME}/${KIBANA_DIR_NAME} ${KIBANA_HOME}
 sudo chown -R $(id -un):$(id -gn) ${KIBANA_HOME}

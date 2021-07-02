@@ -7,11 +7,11 @@ PROMETHEUS_HOME="/usr/local/prometheus"
 INSTALL_FILE_DIR="/mnt/share/prometheus"
 INSTALL_FILE="prometheus-2.25.2.linux-amd64.tar.gz"
 
+PROMETHEUS_VERSION="$(echo ${INSTALL_FILE} | grep -o -E "[0-9]*\.[0-9]*\.[0-9]*")"
 PARENT_PROMETHEUS_HOME="$(readlink --canonicalize-missing ${PROMETHEUS_HOME}/../)"
 PROMETHEUS_DIR_NAME="${INSTALL_FILE/\.tar\.gz/}"
-PROMETHEUS_VERSION="$(echo ${INSTALL_FILE} | grep -o -E "[0-9]*\.[0-9]*\.[0-9]*")"
 
-### check prometheus home
+### check install home
 if [ -d "${PROMETHEUS_HOME}" ]; then
     echo "[ERROR] The PROMETHEUS_HOME (${PROMETHEUS_HOME}) already exists!"
     exit
@@ -29,6 +29,7 @@ if [ ! -f "${INSTALL_FILE_DIR}/${INSTALL_FILE}" ]; then
     exit
 fi
 
+### install
 sudo tar -xzf ${INSTALL_FILE_DIR}/${INSTALL_FILE} -C ${PARENT_PROMETHEUS_HOME}
 sudo mv ${PARENT_PROMETHEUS_HOME}/${PROMETHEUS_DIR_NAME} ${PROMETHEUS_HOME}
 sudo chown -R $(id -un):$(id -gn) ${PROMETHEUS_HOME}

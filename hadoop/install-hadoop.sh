@@ -13,7 +13,7 @@ function install_hadoop  {
     local PARENT_HADOOP_HOME="$(readlink --canonicalize-missing ${HADOOP_HOME}/../)"
     local HADOOP_DIR_NAME="${INSTALL_FILE/\.tar\.gz/}"
 
-    ### check hadoop home
+    ### check install home
     if [ -d "${HADOOP_HOME}" ]; then
         echo "[ERROR] The HADOOP_HOME (${HADOOP_HOME}) already exists!"
         exit
@@ -31,6 +31,7 @@ function install_hadoop  {
         exit
     fi
 
+    ### install
     sudo tar -xzf ${INSTALL_FILE_DIR}/${INSTALL_FILE} -C ${PARENT_HADOOP_HOME}
     sudo mv ${PARENT_HADOOP_HOME}/${HADOOP_DIR_NAME} ${HADOOP_HOME}
     sudo chown -R $(id -un):$(id -gn) ${HADOOP_HOME}
