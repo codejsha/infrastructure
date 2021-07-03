@@ -21,7 +21,7 @@ def set_domain_output_compression(_domain_name, _compress_content_type):
     _objects = []
     for _content_type in _content_type_list:
         _objects.append(str(_content_type))
-    set('GzipCompressionContentType',jarray.array(_objects, String))
+    set('GzipCompressionContentType', jarray.array(_objects, String))
 
 
 ######################################################################

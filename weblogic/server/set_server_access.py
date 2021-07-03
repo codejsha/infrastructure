@@ -16,7 +16,7 @@ managed_server_name = os.environ['MANAGED_SERVER_NAME']
 def set_server_access_log_config(_log_dir, _server_name):
     cd('/Servers/' + _server_name + '/WebServer/' + _server_name + '/WebServerLog/' + _server_name)
     cmo.setLoggingEnabled(True)
-    cmo.setFileName(_log_dir + '/' +  _server_name + '/'
+    cmo.setFileName(_log_dir + '/' + _server_name + '/' +
                     'access.' + _server_name + '.%%yyyy%%%%MM%%%%dd%%_%%HH%%%%mm%%%%ss%%.log')
     # cmo.setFileName('/dev/null')
     cmo.setRotationType('byTime')

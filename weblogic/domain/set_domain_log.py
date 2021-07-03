@@ -13,7 +13,7 @@ admin_password = os.environ['ADMIN_PASSWORD']
 
 def set_domain_log_config(_domain_name, _log_dir):
     cd('/Log/' + _domain_name)
-    cmo.setFileName(_log_dir + '/domain/'
+    cmo.setFileName(_log_dir + '/domain/' +
                     'domain.' + _domain_name + '.%%yyyy%%%%MM%%%%dd%%_%%HH%%%%mm%%%%ss%%.log')
     # cmo.setFileName('/dev/null')
     cmo.setRotationType('byTime')

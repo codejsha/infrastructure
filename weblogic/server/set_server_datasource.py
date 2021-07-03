@@ -17,7 +17,7 @@ def set_server_datasource_log_config(_log_dir, _server_name):
     cd('/Servers/' + _server_name + '/DataSource/' + _server_name)
     cmo.setRmiJDBCSecurity('Compatibility')
     cd('/Servers/' + _server_name + '/DataSource/' + _server_name + '/DataSourceLogFile/' + _server_name)
-    cmo.setFileName(_log_dir + '/' +  _server_name + '/'
+    cmo.setFileName(_log_dir + '/' + _server_name + '/' +
                     'datasource.' + _server_name + '.%%yyyy%%%%MM%%%%dd%%_%%HH%%%%mm%%%%ss%%.log')
     # cmo.setFileName('/dev/null')
     cmo.setRotationType('byTime')
