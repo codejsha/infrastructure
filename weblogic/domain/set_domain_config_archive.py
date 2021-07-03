@@ -12,7 +12,7 @@ admin_password = os.environ['ADMIN_PASSWORD']
 def set_domain_config_archive():
     cd('/')
     cmo.setConfigBackupEnabled(True)
-    cmo.setArchiveConfigurationCount(7)
+    cmo.setArchiveConfigurationCount(50)
 
 
 ######################################################################
