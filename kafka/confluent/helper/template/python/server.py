@@ -11,8 +11,6 @@ class ServerFile:
     start: str
     stop: str
     log: str
-    grep: str
-    more: str
     service: str
     service_env: str
 
@@ -23,6 +21,7 @@ class Server:
     server_name: str
     host_name: str
     host_address: str
+    ssh_port: str
     stop_script: str
     file: ServerFile
 

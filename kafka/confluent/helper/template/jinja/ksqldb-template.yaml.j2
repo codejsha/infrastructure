@@ -60,6 +60,12 @@ ksqlDb:
       {% endif %}
     {# hostAddress #}
       hostAddress: {{ server.hostAddress }}
+    {# sshPort #}
+      {% if server.sshPort %}
+      sshPort: {{ server.sshPort }}
+      {% else %}
+      sshPort: {{ defaultSshPort }}
+      {% endif %}
     {# advertisedListener #}
       {% if server.advertisedListener %}
       advertisedListener: {{ server.advertisedListener }}

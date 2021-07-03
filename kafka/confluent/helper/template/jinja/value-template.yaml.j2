@@ -1,4 +1,5 @@
 {# ###################################################################### #}
+{% set defaultSshPort = '22' %}
 {# zookeeper #}
 {% set defaultZookeeperStopScript = 'stop-zookeeper.sh' %}
 {% set defaultZookeeperClientPort = '2181' %}
@@ -39,8 +40,8 @@ base:
   group: {{ base.group }}
   confluentHome: {{ base.confluentHome }}
   javaHome: {{ base.javaHome }}
-  propertiesPath: {{ base.propertiesPath }}
-  scriptsPath: {{ base.scriptsPath }}
+  propertiesDir: {{ base.propertiesDir }}
+  scriptsDir: {{ base.scriptsDir }}
 
 
 ######################################################################

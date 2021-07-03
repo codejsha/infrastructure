@@ -2,7 +2,9 @@
 
 from template.python.argument_parse import *
 from template.python.fileio import *
+from template.python.function import *
 from template.python.other import *
+from template.python.parallel_ssh import *
 from template.python.read_template import *
 from template.python.read_value import *
 from template.python.symlink import *
@@ -157,7 +159,7 @@ def create_start_script_file(base, server, start_script):
     edited_start = replace_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_start)
     edited_start = replace_variable('SERVER_NAME', f'{server.server_name}', edited_start)
     edited_start = replace_variable('PROPERTIES_FILE',
-                                    f'{base.properties_path}/{server.file.properties}', edited_start)
+                                    f'{base.properties_dir}/{server.file.properties}', edited_start)
     edited_start = replace_variable('LOG_DIR', f'{server.log_dir}', edited_start)
     edited_start = replace_variable('JAVA_HOME', f'{base.java_home}', edited_start)
 
@@ -184,27 +186,13 @@ def create_log_script_file(server, log_script):
     write_file(f'output/scripts/{server.file.log}', edited_log)
 
 
-def create_grep_script_file(server, grep_script):
-    edited_grep = grep_script
-    edited_grep = replace_variable('SERVER_NAME', f'{server.server_name}', edited_grep)
-    edited_grep = replace_variable('LOG_DIR', f'{server.log_dir}', edited_grep)
-    write_file(f'output/scripts/{server.file.grep}', edited_grep)
-
-
-def create_more_script_file(server, more_script):
-    edited_more = more_script
-    edited_more = replace_variable('SERVER_NAME', f'{server.server_name}', edited_more)
-    edited_more = replace_variable('LOG_DIR', f'{server.log_dir}', edited_more)
-    write_file(f'output/scripts/{server.file.more}', edited_more)
-
-
 def create_common_stop_script_file(base, server, stop_script):
     edited_stop = stop_script
     edited_stop = replace_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_stop)
     write_file(f'output/scripts/{server.stop_script}', edited_stop)
 
 
-def create_server_file(base, server_dict, prop_dict, log4j_dict, start_dict, stop_dict, log_dict, grep_dict, more_dict):
+def create_server_file(base, server_dict, prop_dict, log4j_dict, start_dict, stop_dict, log_dict):
     for server_type, servers in server_dict.items():
         for server in servers:
             if server_type == ServerType.ZOOKEEPER:
@@ -221,8 +209,6 @@ def create_server_file(base, server_dict, prop_dict, log4j_dict, start_dict, sto
             create_start_script_file(base, server, start_dict.get(server_type))
             create_stop_script_file(base, server, stop_dict.get(server_type))
             create_log_script_file(server, log_dict.get(ServerType.ANY))
-            create_grep_script_file(server, grep_dict.get(ServerType.ANY))
-            create_more_script_file(server, more_dict.get(ServerType.ANY))
 
     for server in [servers[0] for servers in server_dict.values() if servers]:
         create_common_stop_script_file(base, server, stop_dict.get(server.server_type))
@@ -243,7 +229,7 @@ def create_service_script_file(base, server, service_script):
     edited_service = replace_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_service)
     edited_service = replace_variable('SERVER_NAME', f'{server.server_name}', edited_service)
     edited_service = replace_variable('PROPERTIES_FILE',
-                                      f'{base.properties_path}/{server.file.properties}', edited_service)
+                                      f'{base.properties_dir}/{server.file.properties}', edited_service)
     edited_service = replace_variable('LOG_DIR', f'{server.log_dir}', edited_service)
 
     if server.server_type in \
@@ -257,7 +243,7 @@ def create_service_script_file(base, server, service_script):
     edited_service = substitute_variable('GROUP', f'{base.group}', edited_service)
     edited_service = substitute_variable('SERVER_NAME', f'{server.server_name}', edited_service)
     edited_service = substitute_variable('PROPERTIES_FILE',
-                                         f'{base.properties_path}/{server.file.properties}', edited_service)
+                                         f'{base.properties_dir}/{server.file.properties}', edited_service)
     edited_service = substitute_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_service)
 
     write_file(f'output/services/{server.file.service}', edited_service)
@@ -279,89 +265,6 @@ def create_server_service_file(base, server_dict, service_dict, service_env_dict
         for server in servers:
             create_service_script_file(base, server, service_dict.get(server_type))
             create_service_env_file(base, server, service_env_dict.get(server_type))
-
-
-# endregion
-
-# region server_specific
-
-
-def generate_zookeeper_cluster_list(server_id, servers):
-    cluster_list = []
-    for server in servers:
-        if server.server_id == server_id:
-            cluster_list.append(f'server.{server.server_id}='
-                                f'0.0.0.0:{server.leader_port}:{server.leader_election_port}')
-        else:
-            cluster_list.append(f'server.{server.server_id}='
-                                f'{server.server_name}:{server.leader_port}:{server.leader_election_port}')
-    return cluster_list
-
-
-# endregion
-
-# region function
-
-
-def append_param(param, param_value, prev_keyword, prop):
-    edited_prop = re.sub(f'\n{prev_keyword}', f'\n{prev_keyword}\n{param}={param_value}', prop, count=1)
-    return edited_prop
-
-
-def replace_param(param, param_value, prop):
-    if param_value == 'None':
-        edited_prop = re.sub(f'\n{param}=.*', f'\n# {param}=', prop, count=1)
-    else:
-        edited_prop = re.sub(f'\n{param}=.*', f'\n{param}={param_value}', prop, count=1)
-    return edited_prop
-
-
-def replace_variable(variable, variable_value, script):
-    edited_script = re.sub(f'\n{variable}=.*', f'\n{variable}="{variable_value}"', script, count=1)
-    return edited_script
-
-
-def substitute_variable(variable, variable_value, script):
-    edited_script = re.sub(f'\${{{variable}}}', f'{variable_value}', script)
-    return edited_script
-
-
-def get_unique_cluster_list(cluster_servers):
-    cluster_list = []
-    for servers in cluster_servers:
-        cluster_list.append(servers.group_id)
-    unique_cluster_list = list(set(cluster_list))
-    return unique_cluster_list
-
-
-def get_sub_cluster_domain_url_dict(cluster_servers):
-    temp_dict = {}
-    cluster_dict = {}
-
-    for server in cluster_servers:
-        if server.group_id in temp_dict:
-            temp_dict[f'{server.group_id}'].append(f'http://{server.host_name}:{server.listen_port}')
-        else:
-            temp_dict[f'{server.group_id}'] = [f'http://{server.host_name}:{server.listen_port}']
-    for gid, url in temp_dict.items():
-        cluster_dict[gid] = ','.join(url)
-
-    return cluster_dict
-
-
-def get_sub_cluster_address_url_dict(cluster_servers):
-    temp_dict = {}
-    cluster_dict = {}
-
-    for server in cluster_servers:
-        if server.group_id in temp_dict:
-            temp_dict[f'{server.group_id}'].append(f'http://{server.host_address}:{server.listen_port}')
-        else:
-            temp_dict[f'{server.group_id}'] = [f'http://{server.host_address}:{server.listen_port}']
-    for gid, url in temp_dict.items():
-        cluster_dict[gid] = ','.join(url)
-
-    return cluster_dict
 
 
 # endregion
@@ -393,14 +296,15 @@ def main():
     start_data = read_start_template_data(current_dir)
     stop_data = read_stop_template_data(current_dir)
     log_data = read_log_template_data(current_dir)
-    grep_data = read_grep_template_data(current_dir)
-    more_data = read_more_template_data(current_dir)
     service_data = read_service_template_data(current_dir)
     service_env_data = read_service_env_template_data(current_dir)
+    pssh_start_data = read_pssh_start_template_data(current_dir)
+    pssh_start_data = read_pssh_stop_template_data(current_dir)
+    pssh_kill_data = read_pssh_kill_template_data(current_dir)
 
     # create script and property files
     create_server_file(base_data, server_data, prop_data, log4j_data,
-                       start_data, stop_data, log_data, grep_data, more_data)
+                       start_data, stop_data, log_data)
     # create overriding service files
     create_server_service_file(base_data, server_data, service_data, service_env_data)
 
@@ -410,6 +314,10 @@ def main():
     create_add_host_script_file(server_data)
     create_secure_copy_script_file(base_data, server_data)
     create_kafka_alias_file(base_data)
+
+    # create pssh host files
+    create_pssh_host_file(base_data, server_data)
+    create_pssh_script_file(base_data, pssh_start_data, pssh_start_data, pssh_kill_data)
 
 
 if __name__ == "__main__":

@@ -17,6 +17,7 @@ def reset_output_dir(current_dir):
         'log4j',
         'others',
         'properties',
+        'pssh/hosts',
         'scripts',
         'services'
     ]

@@ -38,6 +38,12 @@ zookeeper:
       {% endif %}
     {# hostAddress #}
       hostAddress: {{ server.hostAddress }}
+    {# sshPort #}
+      {% if server.sshPort %}
+      sshPort: {{ server.sshPort }}
+      {% else %}
+      sshPort: {{ defaultSshPort }}
+      {% endif %}
     {# serverId #}
       serverId: {{ server.serverId }}
       paramOverride:

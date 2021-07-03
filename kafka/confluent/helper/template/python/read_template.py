@@ -85,22 +85,6 @@ def read_log_template_data(current_dir):
     return log_dict
 
 
-def read_grep_template_data(current_dir):
-    scripts_template_dir = current_dir.joinpath('template/scripts')
-    grep_dict = {
-        ServerType.ANY: read_file(f'{scripts_template_dir}/grep-template.sh')
-    }
-    return grep_dict
-
-
-def read_more_template_data(current_dir):
-    scripts_template_dir = current_dir.joinpath('template/scripts')
-    more_dict = {
-        ServerType.ANY: read_file(f'{scripts_template_dir}/more-template.sh')
-    }
-    return more_dict
-
-
 # endregion
 
 # region services
@@ -134,5 +118,48 @@ def read_service_env_template_data(current_dir):
         ServerType.CONTROL_CENTER: read_file(f'{service_template_dir}/control-center-service-template.env'),
     }
     return service_env_dict
+
+
+# endregion
+
+# region pssh
+
+
+def read_pssh_start_template_data(current_dir):
+    pssh_template_dir = current_dir.joinpath('template/pssh')
+    pssh_start_dict = {
+        ServerType.ZOOKEEPER: read_file(f'{pssh_template_dir}/start-all-zookeeper-template.sh'),
+        ServerType.KAFKA: read_file(f'{pssh_template_dir}/start-all-kafka-template.sh'),
+        ServerType.SCHEMA_REGISTRY: read_file(f'{pssh_template_dir}/start-all-schema-registry-template.sh'),
+        ServerType.KAFKA_CONNECT: read_file(f'{pssh_template_dir}/start-all-kafka-connect-template.sh'),
+        ServerType.REPLICATOR: read_file(f'{pssh_template_dir}/start-all-replicator-template.sh'),
+        ServerType.KAFKA_REST: read_file(f'{pssh_template_dir}/start-all-kafka-rest-template.sh'),
+        ServerType.KSQLDB: read_file(f'{pssh_template_dir}/start-all-ksqldb-template.sh'),
+        ServerType.CONTROL_CENTER: read_file(f'{pssh_template_dir}/start-all-control-center-template.sh'),
+    }
+    return pssh_start_dict
+
+
+def read_pssh_stop_template_data(current_dir):
+    pssh_template_dir = current_dir.joinpath('template/pssh')
+    pssh_stop_dict = {
+        ServerType.ZOOKEEPER: read_file(f'{pssh_template_dir}/stop-all-zookeeper-template.sh'),
+        ServerType.KAFKA: read_file(f'{pssh_template_dir}/stop-all-kafka-template.sh'),
+        ServerType.SCHEMA_REGISTRY: read_file(f'{pssh_template_dir}/stop-all-schema-registry-template.sh'),
+        ServerType.KAFKA_CONNECT: read_file(f'{pssh_template_dir}/stop-all-kafka-connect-template.sh'),
+        ServerType.REPLICATOR: read_file(f'{pssh_template_dir}/stop-all-replicator-template.sh'),
+        ServerType.KAFKA_REST: read_file(f'{pssh_template_dir}/stop-all-kafka-rest-template.sh'),
+        ServerType.KSQLDB: read_file(f'{pssh_template_dir}/stop-all-ksqldb-template.sh'),
+        ServerType.CONTROL_CENTER: read_file(f'{pssh_template_dir}/stop-all-control-center-template.sh'),
+    }
+    return pssh_stop_dict
+
+
+def read_pssh_kill_template_data(current_dir):
+    pssh_template_dir = current_dir.joinpath('template/pssh')
+    pssh_kill_dict = {
+        ServerType.ANY: read_file(f'{pssh_template_dir}/kill-java.sh'),
+    }
+    return pssh_kill_dict
 
 # endregion

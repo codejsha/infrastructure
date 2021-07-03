@@ -3,8 +3,8 @@ base:
   group: confluent
   confluentHome: /usr/local/confluent
   javaHome: /usr/lib/jvm/java-1.8.0
-  propertiesPath: ${CONFLUENT_HOME}/properties
-  scriptsPath: ${CONFLUENT_HOME}/scripts
+  propertiesDir: ${CONFLUENT_HOME}/properties
+  scriptsDir: ${CONFLUENT_HOME}/scripts
 
 ######################################################################
 

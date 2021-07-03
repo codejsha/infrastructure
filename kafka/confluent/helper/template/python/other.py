@@ -16,38 +16,20 @@ def create_kafka_alias_file(base):
         f'PATH="${{PATH}}:${{JAVA_HOME}}/bin"',
         f'export PATH',
         f'',
-        f'alias psef="ps -ef | grep"',
         f'alias pxjava="pgrep -xa java | grep java"',
         f'alias pxprometheus="pgrep -xa prometheus | grep prometheus"',
         f'alias pxgrafana="pgrep -xa grafana-server | grep grafana-server"',
         f'alias pxnodeexporter="pgrep -xa node_exporter | grep node_exporter"',
         f'alias pxlagexporter="pgrep -xa java | grep kafka-lag-exporter"',
+        f'alias pxelasticsearch="pgrep -xa java | grep elasticsearch"',
+        f'alias pxkibana="pgrep -xa node | grep kibana"',
         f'',
         f'alias killjava="pkill -9 -ecx java"',
-        f'alias killprometheus="pkill -9 -ecx prometheus"',
-        f'alias killgrafana="pkill -9 -ecx grafana-server"',
-        f'alias killnodeexporter="pkill -9 -ecx node_exporter"',
-        f'alias killlagexporter="pkill -9 -ecf com.lightbend.kafkalagexporter"',
-        f'',
-        f'alias killzookeeper="pkill -9 -ecf \\"org.apache.zookeeper.server.quorum.QuorumPeerMain\\""',
-        f'alias killkafka="pkill -9 -ecf \\"kafka.Kafka\\""',
-        f'alias killschemaregistry="pkill -9 -ecf \\"io.confluent.kafka.schemaregistry.rest.SchemaRegistryMain\\""',
-        f'alias killkafkaconnect="pkill -9 -ecf \\"org.apache.kafka.connect.cli.ConnectDistributed\\""',
-        f'alias killkafkarest="pkill -9 -ecf \\"io.confluent.kafkarest.KafkaRestMain\\""',
-        f'alias killksqldb="pkill -9 -ecf \\"io.confluent.ksql.rest.server.KsqlServerMain\\""',
-        f'alias killcontrolcenter="pkill -9 -ecf \\"io.confluent.controlcenter.ControlCenter\\""',
-        f'alias killconfluent="killzookeeper; killkafka; killschemaregistry; killkafkaconnect; killkafkarest; killksqldb; killcontrolcenter;"',
         f'',
         f'alias goconfluent="cd ${{CONFLUENT_HOME}}"',
         f'alias goprops="cd ${{CONFLUENT_HOME}}/properties"',
         f'alias goscripts="cd ${{CONFLUENT_HOME}}/scripts"',
-        f'alias goconnector="cd ${{CONFLUENT_HOME}}/connectors"',
-        f'',
-        f'alias startsh="${{CONFLUENT_HOME}}/scripts/start.sh"',
-        f'alias stopsh="${{CONFLUENT_HOME}}/scripts/stop.sh"',
-        f'alias logsh="${{CONFLUENT_HOME}}/scripts/log.sh"',
-        f'alias grepsh="${{CONFLUENT_HOME}}/scripts/grep.sh"',
-        f'alias moresh="${{CONFLUENT_HOME}}/scripts/more.sh"'
+        f'alias goconnector="cd ${{CONFLUENT_HOME}}/connectors"'
     ]
 
     edited_hosts = '\n'.join(data_list) + '\n'
@@ -86,6 +68,7 @@ def create_secure_copy_script_file(base, server_dict):
         f'tar -czf confluent-log4j.tar.gz log4j/',
         f'tar -czf confluent-others.tar.gz others/',
         f'tar -czf confluent-properties.tar.gz properties/',
+        f'tar -czf confluent-pssh.tar.gz pssh/',
         f'tar -czf confluent-scripts.tar.gz scripts/',
         f'tar -czf confluent-services.tar.gz services/',
         f'',
@@ -97,16 +80,18 @@ def create_secure_copy_script_file(base, server_dict):
     data_list.append(f'### host name\n')
     for server_type, servers in server_dict.items():
         for server in servers:
-            data_list.append(f'scp confluent-log4j.tar.gz confluent-others.tar.gz confluent-properties.tar.gz confluent-scripts.tar.gz confluent-services.tar.gz '
-                             f'{base.user}@{server.host_name}:{base.confluent_home}')
+            data_list.append(
+                f'scp confluent-log4j.tar.gz confluent-others.tar.gz confluent-properties.tar.gz confluent-pssh.tar.gz confluent-scripts.tar.gz confluent-services.tar.gz '
+                f'{base.user}@{server.host_name}:{base.confluent_home}')
 
     # host address
     data_list.append(f'\n######################################################################\n')
     data_list.append(f'### host address\n')
     for server_type, servers in server_dict.items():
         for server in servers:
-            data_list.append(f'# scp confluent-log4j.tar.gz confluent-others.tar.gz confluent-properties.tar.gz confluent-scripts.tar.gz confluent-services.tar.gz '
-                             f'{base.user}@{server.host_address}:{base.confluent_home}')
+            data_list.append(
+                f'# scp confluent-log4j.tar.gz confluent-others.tar.gz confluent-properties.tar.gz confluent-pssh.tar.gz confluent-scripts.tar.gz confluent-services.tar.gz '
+                f'{base.user}@{server.host_address}:{base.confluent_home}')
 
     edited_hosts = '\n'.join(data_list) + '\n'
     write_file('output/others/scp-files.sh', edited_hosts)

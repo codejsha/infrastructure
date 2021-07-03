@@ -9,5 +9,5 @@ class Base:
     group: str
     confluent_home: str
     java_home: str
-    properties_path: str
-    scripts_path: str
+    properties_dir: str
+    scripts_dir: str

@@ -1,20 +1,15 @@
 #!/bin/bash
 
+JAVA_HOME=""
+export JAVA_HOME
+
 CONFLUENT_HOME=""
 SERVER_NAME=""
-MYID=""
-
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/kafka/zookeeper.properties"
 PROPERTIES_FILE=""
 
 DATA_DIR=""
 LOG_DIR=""
 export LOG_DIR
-
-# JAVA_HOME="/usr/lib/jvm/java-11"
-# JAVA_HOME="/usr/lib/jvm/java-1.8.0"
-JAVA_HOME=""
-export JAVA_HOME
 
 ######################################################################
 
@@ -93,6 +88,11 @@ if [ -f "${LOG_DIR}/nohup.${SERVER_NAME}.out" ]; then
     mv ${LOG_DIR}/nohup.${SERVER_NAME}.out ${LOG_DIR}/backup/nohup.${SERVER_NAME}.${DATETIME}.out
 fi
 
+### start
 touch ${LOG_DIR}/nohup.${SERVER_NAME}.out
 nohup ${CONFLUENT_HOME}/bin/zookeeper-server-start ${PROPERTIES_FILE} > ${LOG_DIR}/nohup.${SERVER_NAME}.out 2>&1 &
-tail -f ${LOG_DIR}/nohup.${SERVER_NAME}.out
+
+### tail stdout log
+if [ "${1}" == "tail" ]; then
+    tail -f ${LOG_DIR}/nohup.${SERVER_NAME}.out
+fi

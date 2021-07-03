@@ -89,6 +89,12 @@ kafkaConnect:
       {% endif %}
     {# hostAddress #}
       hostAddress: {{ server.hostAddress }}
+    {# sshPort #}
+      {% if server.sshPort %}
+      sshPort: {{ server.sshPort }}
+      {% else %}
+      sshPort: {{ defaultSshPort }}
+      {% endif %}
     {# advertisedListenAddress #}
       {% if server.advertisedListenAddress %}
       advertisedListenAddress: {{ server.advertisedListenAddress }}

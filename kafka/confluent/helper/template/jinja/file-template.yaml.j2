@@ -23,18 +23,6 @@
         {% else %}
         log: log-{{ server.serverName }}.sh
         {% endif %}
-      {# grep #}
-        {% if server.file and server.file.grep %}
-        grep: {{ server.file.grep }}
-        {% else %}
-        grep: grep-{{ server.serverName }}.sh
-        {% endif %}
-      {# more #}
-        {% if server.file and server.file.more %}
-        more: {{ server.file.more }}
-        {% else %}
-        more: more-{{ server.serverName }}.sh
-        {% endif %}
       {# service #}
         {% if server.file and server.file.service %}
         service: {{ server.file.service }}
