@@ -14,7 +14,7 @@ fi
 function ssh() { echo "+ ssh ${@}">&2; command ssh ${@}; }
 function sudo() { echo "+ sudo ${@}">&2; command sudo ${@}; }
 function xargs() { echo "+ xargs ${@}">&2; command xargs ${@}; }
-alias ll='ls -l -h --color=auto'
+alias ll="ls -l -h --color=auto"
 alias sudo-shell="sudo --shell"
 alias watch="watch "
 

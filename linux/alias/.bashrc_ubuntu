@@ -122,7 +122,7 @@ fi
 function ssh() { echo "+ ssh ${@}">&2; command ssh ${@}; }
 function sudo() { echo "+ sudo ${@}">&2; command sudo ${@}; }
 function xargs() { echo "+ xargs ${@}">&2; command xargs ${@}; }
-alias ll='ls -l -h --color=auto'
+alias ll="ls -l -h --color=auto"
 alias sshctrl1="ssh root@controlplane1"
 alias sshctrl2="ssh root@controlplane2"
 alias sshctrl3="ssh root@controlplane3"
