@@ -1,21 +1,15 @@
 #!/bin/bash
 
+JAVA_HOME="/usr/lib/jvm/java-1.8.0"
+export JAVA_HOME
+
 CONFLUENT_HOME="/usr/local/confluent"
 SERVER_NAME="ksqldb1"
-
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/ksqldb/ksql-server.properties"
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/ksqldb/ksql-production-server.properties"
 PROPERTIES_FILE="${CONFLUENT_HOME}/properties/ksqldb1.properties"
 
 DATA_DIR="/mnt/ksqldb/data"
 LOG_DIR="/mnt/ksqldb/logs"
 export LOG_DIR
-
-# JAVA_HOME="/usr/lib/jvm/java-11"
-# JAVA_HOME="/usr/lib/jvm/java-1.8.0"
-
-JAVA_HOME="/usr/lib/jvm/java-1.8.0"
-export JAVA_HOME
 
 ######################################################################
 
@@ -63,14 +57,6 @@ export KSQL_LOG4J_OPTS
 
 ######################################################################
 
-### ksqldb log4j
-# KSQL_LOG4J_OPTS="${KSQL_LOG4J_OPTS}"
-# export KSQL_LOG4J_OPTS
-
-### ksqldb settings
-# KSQL_OPTS="${KSQL_OPTS}"
-# export KSQL_OPTS
-
 ######################################################################
 
 ### check current user
@@ -101,6 +87,11 @@ if [ -f "${LOG_DIR}/nohup.${SERVER_NAME}.out" ]; then
     mv ${LOG_DIR}/nohup.${SERVER_NAME}.out ${LOG_DIR}/backup/nohup.${SERVER_NAME}.${DATETIME}.out
 fi
 
+### start
 touch ${LOG_DIR}/nohup.${SERVER_NAME}.out
 nohup ${CONFLUENT_HOME}/bin/ksql-server-start ${PROPERTIES_FILE} > ${LOG_DIR}/nohup.${SERVER_NAME}.out 2>&1 &
-tail -f ${LOG_DIR}/nohup.${SERVER_NAME}.out
+
+### tail stdout log
+if [ "${1}" == "tail" ]; then
+    tail -f ${LOG_DIR}/nohup.${SERVER_NAME}.out
+fi
