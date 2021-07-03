@@ -65,6 +65,62 @@ bash ./set-server-config.sh ManagedServer2 test.example.com 7004 BaseCluster1 Ba
 
 ######################################################################
 
+### CONFIGURE PROTOCOL
+### bash ./set-server-protocol.sh ${MANAGED_SERVER_NAME}
+
+bash ./set-server-protocol.sh ManagedServer1
+bash ./set-server-protocol.sh ManagedServer2
+
+######################################################################
+
+### CONFIGURE TUNNING
+### bash ./set-server-tunning.sh ${MANAGED_SERVER_NAME}
+
+bash ./set-server-tunning.sh ManagedServer1
+bash ./set-server-tunning.sh ManagedServer2
+
+######################################################################
+
+### CONFIGURE SSL
+### bash ./set-server-ssl.sh ${MANAGED_SERVER_NAME}
+
+bash ./set-server-ssl.sh ManagedServer1
+bash ./set-server-ssl.sh ManagedServer2
+
+######################################################################
+
+### CONFIGURE LOG
+### bash ./set-server-log.sh ${MANAGED_SERVER_NAME}
+
+bash ./set-server-log.sh ManagedServer1
+bash ./set-server-log.sh ManagedServer2
+
+######################################################################
+
+### CONFIGURE ACCESS LOG
+### bash ./set-server-access.sh ${MANAGED_SERVER_NAME}
+
+bash ./set-server-access.sh ManagedServer1
+bash ./set-server-access.sh ManagedServer2
+
+######################################################################
+
+### CONFIGURE DATASOURCE LOG
+### bash ./set-server-datasource.sh ${MANAGED_SERVER_NAME}
+
+bash ./set-server-datasource.sh ManagedServer1
+bash ./set-server-datasource.sh ManagedServer2
+
+######################################################################
+
+### CONFIGURE SERVER START
+### bash ./set-server-start.sh ${MANAGED_SERVER_NAME} ${NODEMGR_NAME}
+
+bash ./set-server-start.sh ManagedServer1 BaseMachine1
+bash ./set-server-start.sh ManagedServer2 BaseMachine1
+
+######################################################################
+
 ### CREATE SCRIPTS
 
 ### bash ./create-managed-scripts.sh ${SERVER_NAME}
