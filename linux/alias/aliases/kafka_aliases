@@ -8,9 +8,13 @@ alias kafkacat="docker container run -it --network host edenhill/kafkacat:1.6.0"
 
 ######################################################################
 
-CONFLUENT_HOME=/usr/local/confluent
+CONFLUENT_HOME="/usr/local/confluent"
+export CONFLUENT_HOME
 PATH="${PATH}:${CONFLUENT_HOME}/bin"
+export PATH
+
 JAVA_HOME=/usr/lib/jvm/java-1.8.0
+export JAVA_HOME
 PATH="${PATH}:${JAVA_HOME}/bin"
 export PATH
 
