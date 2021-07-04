@@ -14,3 +14,12 @@ class ServerType(Enum):
     CONTROL_CENTER = 8
     ANY = 9
     NONE = 10
+
+
+class TopicCommandType(Enum):
+    CREATE = 1
+    DELETE = 2
+    DESCRIBE = 3
+    LIST = 4
+    ANY = 5
+    NONE = 6

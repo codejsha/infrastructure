@@ -42,7 +42,7 @@ def create_pssh_host_file(base, server_dict):
 def create_pssh_start_script_file(base, server_type, start_script):
     edited_start = start_script
     edited_start = replace_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_start)
-    edited_start = substitute_variable('SCRIPT_DIR', f'{base.scripts_dir}', edited_start)
+    edited_start = substitute_variable('SCRIPTS_DIR', f'{base.scripts_dir}', edited_start)
 
     if server_type == ServerType.ZOOKEEPER:
         write_file(f'output/pssh/start-all-zookeeper.sh', edited_start)
@@ -65,7 +65,7 @@ def create_pssh_start_script_file(base, server_type, start_script):
 def create_pssh_stop_script_file(base, server_type, stop_script):
     edited_stop = stop_script
     edited_stop = replace_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_stop)
-    edited_stop = substitute_variable('SCRIPT_DIR', f'{base.scripts_dir}', edited_stop)
+    edited_stop = substitute_variable('SCRIPTS_DIR', f'{base.scripts_dir}', edited_stop)
 
     if server_type == ServerType.ZOOKEEPER:
         write_file(f'output/pssh/stop-all-zookeeper.sh', edited_stop)
