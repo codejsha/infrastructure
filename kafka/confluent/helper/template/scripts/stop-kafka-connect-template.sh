@@ -7,6 +7,7 @@ CONFLUENT_HOME=""
 # kill -9 ${PID}
 
 pkill -9 -ecf "org\.apache\.kafka\.connect\.cli\.ConnectDistributed"
-# pkill -9 -ecf "org.apache.kafka.connect.cli.ConnectDistributed"
+# pkill -15 -ecf "org\.apache\.kafka\.connect\.cli\.ConnectDistributed"
+
 # pkill -9 -ecf "org\.apache\.kafka\.connect\.cli\.ConnectStandalone"
-# pkill -9 -ecf "org.apache.kafka.connect.cli.ConnectStandalone"
+# pkill -15 -ecf "org\.apache\.kafka\.connect\.cli\.ConnectStandalone"
