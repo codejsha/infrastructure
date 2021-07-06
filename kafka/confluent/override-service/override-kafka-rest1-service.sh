@@ -22,27 +22,31 @@ sudo chown -R confluent:confluent ${LOG_DIR}
 
 ######################################################################
 
-# cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-kafka-rest.service
-# [Unit]
-# Description=A REST proxy for Apache Kafka
-# Documentation=http://docs.confluent.io/
-# After=network.target confluent-kafka.target
-#
-# [Service]
-# Type=simple
-# User=cp-kafka-rest
-# Group=confluent
-# Environment="LOG_DIR=/var/log/confluent/kafka-rest"
-# ExecStart=/usr/bin/kafka-rest-start /etc/kafka-rest/kafka-rest.properties
-# LimitNOFILE=100000
-# TimeoutStopSec=180
-# Restart=no
-#
-# [Install]
-# WantedBy=multi-user.target
-# EOF
+### default
+
+cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-kafka-rest.service
+[Unit]
+Description=A REST proxy for Apache Kafka
+Documentation=http://docs.confluent.io/
+After=network.target confluent-kafka.target
+
+[Service]
+Type=simple
+User=cp-kafka-rest
+Group=confluent
+Environment="LOG_DIR=/var/log/confluent/kafka-rest"
+ExecStart=/usr/bin/kafka-rest-start /etc/kafka-rest/kafka-rest.properties
+LimitNOFILE=100000
+TimeoutStopSec=180
+Restart=no
+
+[Install]
+WantedBy=multi-user.target
+EOF
 
 ######################################################################
+
+### override
 
 cat <<EOF | sudo tee /usr/lib/systemd/system/confluent-kafka-rest.service.d/override.conf
 [Service]
