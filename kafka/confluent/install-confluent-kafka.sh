@@ -62,7 +62,7 @@ function install_confluent_kafka_with_yum {
 cat <<EOF | sudo tee /etc/yum.repos.d/confluent.repo
 [Confluent.dist]
 name=Confluent repository (dist)
-baseurl=https://packages.confluent.io/rpm/6.2/$releasever
+baseurl=https://packages.confluent.io/rpm/6.2/\$releasever
 gpgcheck=1
 gpgkey=https://packages.confluent.io/rpm/6.2/archive.key
 enabled=1
