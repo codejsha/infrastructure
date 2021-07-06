@@ -10,8 +10,8 @@ PID="${1}"
 JAVA_HOME="/usr/lib/jvm/java-11"
 # JAVA_HOME="/usr/lib/jvm/java-1.8.0"
 
-LOOP_COUNT=1
-INTERVAL_SECONDS=5
+LOOP_COUNT="1"
+INTERVAL_SECONDS="5"
 
 if [ -z "${PID}" ]; then
     echo "Usage: bash ./print-thread-dump.sh <PID>"
@@ -25,8 +25,8 @@ fi
 
 for IDX in $(seq 1 ${LOOP_COUNT})
 do
-    ${JAVA_HOME}/bin/jstack -l ${PID} > ${PID}-threaddump-${IDX}.tdump
-    # ${JAVA_HOME}/bin/jcmd ${PID} Thread.print > ${PID}-threaddump-${IDX}.tdump
+    ${JAVA_HOME}/bin/jstack -l ${PID} > threaddump-${PID}-${IDX}.tdump
+    # ${JAVA_HOME}/bin/jcmd ${PID} Thread.print > threaddump-${PID}-${IDX}.tdump
     # kill -3 ${PID}
 
     sleep ${INTERVAL_SECONDS}

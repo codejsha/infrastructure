@@ -20,6 +20,6 @@ if [ -z "${JAVA_HOME}" ]; then
     exit
 fi
 
-${JAVA_HOME}/bin/jmap -dump:live,format=b,file=${PID}-heapdump.hprof ${PID}
-# ${JAVA_HOME}/bin/jmap -dump:format=b,file=${PID}-heapdump.hprof ${PID}
-# ${JAVA_HOME}/bin/jcmd GC.heap_dump ${PID}-heapdump.hprof ${PID}
+${JAVA_HOME}/bin/jmap -dump:live,format=b,file=heapdump-${PID}.hprof ${PID}
+# ${JAVA_HOME}/bin/jmap -dump:format=b,file=heapdump-${PID}.hprof ${PID}
+# ${JAVA_HOME}/bin/jcmd GC.heap_dump heapdump-${PID}.hprof ${PID}

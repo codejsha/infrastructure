@@ -42,20 +42,20 @@ ${JAVA_HOME}/bin/jhsdb jmap --heap --pid ${PID}
 ### heap dump
 
 ### live objects
-${JAVA_HOME}/bin/jcmd ${PID} GC.heap_dump ${PID}-heapdump.hprof
-${JAVA_HOME}/bin/jmap -dump:live,format=b,file=${PID}-heapdump.hprof ${PID}
+${JAVA_HOME}/bin/jcmd ${PID} GC.heap_dump heapdump-${PID}.hprof
+${JAVA_HOME}/bin/jmap -dump:live,format=b,file=heapdump-${PID}.hprof ${PID}
 
 ### all objects
-${JAVA_HOME}/bin/jcmd ${PID} GC.heap_dump -all ${PID}-heapdump.hprof
-${JAVA_HOME}/bin/jmap -dump:format=b,file=${PID}-heapdump.hprof ${PID}
+${JAVA_HOME}/bin/jcmd ${PID} GC.heap_dump -all heapdump-${PID}.hprof
+${JAVA_HOME}/bin/jmap -dump:format=b,file=heapdump-${PID}.hprof ${PID}
 
 ######################################################################
 
 ### thread dump
 ${JAVA_HOME}/bin/jcmd ${PID} Thread.print
-${JAVA_HOME}/bin/jcmd ${PID} Thread.print > ${PID}-threaddump.tdump
+${JAVA_HOME}/bin/jcmd ${PID} Thread.print > threaddump-${PID}.tdump
 ${JAVA_HOME}/bin/jstack -l ${PID}
-${JAVA_HOME}/bin/jstack -l ${PID} > ${PID}-threaddump.tdump
+${JAVA_HOME}/bin/jstack -l ${PID} > threaddump-${PID}.tdump
 
 ######################################################################
 

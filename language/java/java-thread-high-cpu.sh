@@ -27,11 +27,11 @@ fi
 for IDX1 in $(seq 1 ${LOOP_COUNT})
 do
     echo "[INFO] Print ${IDX1} times..."
-    ps -eLo pid,ppid,tid,pcpu,comm | grep ${PID} > ${PID}-ps-${IDX1}.out
-    ${JAVA_HOME}/bin/jstack -l ${PID} > ${PID}-thread-${IDX1}.tdump
-    top -p ${PID} -b -n 1 > ${PID}-top-${IDX1}.out
+    ps -eLo pid,ppid,tid,pcpu,comm | grep ${PID} > ps-${PID}-${IDX1}.out
+    ${JAVA_HOME}/bin/jstack -l ${PID} > threaddump-${PID}-${IDX1}.tdump
+    top -b -n 1 -p ${PID} > top-${PID}-${IDX1}.out
 
-    HIGH_CPU_THREADS=($(cat ${PID}-ps-${IDX1}.out | awk '{ print $4" "$3 }' \
+    HIGH_CPU_THREADS=($(cat ps-${PID}-${IDX1}.out | awk '{ print $4" "$3 }' \
         | sort --reverse --numeric-sort | head --lines=${TOP_THREAD_COUNT} | awk '{ print $2 }'))
     for IDX2 in $(seq 0 $((${TOP_THREAD_COUNT} - 1)))
     do
