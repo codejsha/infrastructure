@@ -74,7 +74,12 @@ def create_other_file(base, server_dict):
 
 def create_pssh_file(base, server_dict, pssh_start_dict, pssh_stop_dict, pssh_kill_dict):
     create_pssh_host_file(base, server_dict)
-    create_pssh_script_file(base, pssh_start_dict, pssh_stop_dict, pssh_kill_dict)
+    for server_type, start_script in pssh_start_dict.items():
+        create_pssh_start_script_file(base, server_type, start_script)
+    for server_type, stop_script in pssh_stop_dict.items():
+        create_pssh_stop_script_file(base, server_type, stop_script)
+    for server_type, kill_script in pssh_kill_dict.items():
+        create_pssh_kill_script_file(base, kill_script)
 
 
 # endregion
@@ -130,7 +135,7 @@ def main():
     create_server_service_file(base_data, server_data, service_data, service_env_data)
     # create other files
     create_other_file(base_data, server_data)
-    # create pssh host files
+    # create pssh files
     create_pssh_file(base_data, server_data, pssh_start_data, pssh_stop_data, pssh_kill_data)
     # create command files
     create_command_file(base_data, server_data, command_data)

@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
-import re
-
 from template.python.base import Base
+from template.python.function import *
 from template.python.server import *
 
 
@@ -80,7 +79,7 @@ def read_server_list(server_type, values):
 
 # endregion
 
-# region function
+# region dictionary
 
 
 def transform_dictionary(component_type, common_stop, common_params, server):
@@ -97,17 +96,5 @@ def transform_dictionary(component_type, common_stop, common_params, server):
 
     edited_dict = change_dictionary_key_case(merge_dict)
     return edited_dict
-
-
-def change_dictionary_key_case(anydict):
-    result = dict()
-    for key in anydict.keys():
-        result[camel_case_to_snake_case(key)] = anydict[key]
-    return result
-
-
-def camel_case_to_snake_case(anystr):
-    snake_case_str = re.sub(r"(?<!^)(?=[A-Z])", '_', anystr).lower()
-    return snake_case_str
 
 # endregion

@@ -5,6 +5,9 @@ from template.python.fileio import write_file
 from template.python.function import *
 
 
+# region pssh_hosts
+
+
 def create_pssh_host_file(base, server_dict):
     server_type_str = ''
 
@@ -31,12 +34,15 @@ def create_pssh_host_file(base, server_dict):
         data_list.append(f'### {server_type_str}\n')
 
         for server in servers:
-            # data_list.append(f'### {server.server_name}')
-            # data_list.append(f'### {server.host_name}')
             data_list.append(f'{base.user}@{server.host_address}:{server.ssh_port}')
 
         edited_hosts = '\n'.join(data_list) + '\n'
         write_file(f'output/pssh/hosts/{server_type_str}.hosts', edited_hosts)
+
+
+# endregion
+
+# region pssh_scripts
 
 
 def create_pssh_start_script_file(base, server_type, start_script):
@@ -90,11 +96,4 @@ def create_pssh_kill_script_file(base, kill_script):
     edited_kill = replace_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_kill)
     write_file(f'output/pssh/kill-java.sh', edited_kill)
 
-
-def create_pssh_script_file(base, start_dict, stop_dict, kill_dict):
-    for server_type, start_script in start_dict.items():
-        create_pssh_start_script_file(base, server_type, start_script)
-    for server_type, stop_script in stop_dict.items():
-        create_pssh_stop_script_file(base, server_type, stop_script)
-    for server_type, kill_script in kill_dict.items():
-        create_pssh_kill_script_file(base, kill_script)
+# endregion

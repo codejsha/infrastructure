@@ -5,6 +5,9 @@ from template.python.fileio import write_file
 from template.python.function import *
 
 
+# region topic
+
+
 def create_topic_command_file(base, server_dict, command_type, command_script):
     edited_command = command_script
     edited_command = replace_variable('CONFLUENT_HOME', f'{base.confluent_home}', edited_command)
@@ -13,10 +16,12 @@ def create_topic_command_file(base, server_dict, command_type, command_script):
                                          f'{first_server.metrics_reporter_bootstrap_servers}', edited_command)
 
     if command_type == TopicCommandType.CREATE:
-        write_file(f'output/commands/create-topic.sh', edited_command)
+        write_file(f'output/scripts/create-topic.sh', edited_command)
     elif command_type == TopicCommandType.DELETE:
-        write_file(f'output/commands/delete-topic.sh', edited_command)
+        write_file(f'output/scripts/delete-topic.sh', edited_command)
     elif command_type == TopicCommandType.DESCRIBE:
-        write_file(f'output/commands/describe-topic.sh', edited_command)
+        write_file(f'output/scripts/describe-topic.sh', edited_command)
     elif command_type == TopicCommandType.LIST:
-        write_file(f'output/commands/get-topic-list.sh', edited_command)
+        write_file(f'output/scripts/get-topic-list.sh', edited_command)
+
+# endregion

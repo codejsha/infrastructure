@@ -21,7 +21,8 @@ def create_symlink_by_hostname_script_file(server_dict):
 
             data_list.append(f'    find . -maxdepth 1 -name "*.sh" \\\n'
                              f'        -not \( -name "{server.file.start}" -o -name "{server.file.stop}" \\\n'
-                             f'        -o -name "{server.file.log}" -o -name "{server.stop_script}" \) | xargs -I {{}} mv {{}} backup/')
+                             f'        -o -name "{server.file.log}" -o -name "{server.stop_script}" \\\n'
+                             f'        -o -name "*topic*.sh" \) | xargs -I {{}} mv {{}} backup/')
 
             data_list.append(f'    if [ -f "{server.file.start}" ]; then')
             data_list.append(f'        ln -snf {server.file.start} start.sh')
@@ -54,7 +55,8 @@ def create_symlink_by_servername_script_file(server_dict):
         f'find . -maxdepth 1 -name "*.sh" \\',
         f'    -not \( -name "start-${{SERVER_NAME}}.sh" -o -name "stop-${{SERVER_NAME}}.sh" \\',
         f'    -o -name "log-${{SERVER_NAME}}.sh" -o -name "grep-${{SERVER_NAME}}.sh" \\',
-        f'    -o -name "more-${{SERVER_NAME}}.sh" -o -name "stop-${{SERVER_NAME_NUMBER_REMOVED}}.sh" \) | xargs -I {{}} mv {{}} backup/',
+        f'    -o -name "more-${{SERVER_NAME}}.sh" -o -name "stop-${{SERVER_NAME_NUMBER_REMOVED}}.sh" \\\n'
+        f'    -o -name "*topic*.sh" \) | xargs -I {{}} mv {{}} backup/',
         f'',
         f'if [ -f "start-${{SERVER_NAME}}.sh" ]; then',
         f'    ln -snf start-${{SERVER_NAME}}.sh start.sh',

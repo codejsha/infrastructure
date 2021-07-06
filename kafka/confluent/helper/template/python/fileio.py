@@ -14,7 +14,6 @@ import yaml
 def reset_output_dir(current_dir):
     output_dir = current_dir.joinpath('output')
     output_sub_dirs = [
-        'commands',
         'log4j',
         'others',
         'properties',
