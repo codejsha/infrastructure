@@ -5,7 +5,7 @@ set -o errtrace
 
 PROMETHEUS_VOLUME_DIR="/mnt/volume/prometheus"
 sudo mkdir -p ${PROMETHEUS_VOLUME_DIR}
-sudo /bin/cp -f prometheus.yaml ${PROMETHEUS_VOLUME_DIR}/prometheus.yml
+sudo /bin/cp -f prometheus.yml ${PROMETHEUS_VOLUME_DIR}/prometheus.yml
 
 ######################################################################
 
