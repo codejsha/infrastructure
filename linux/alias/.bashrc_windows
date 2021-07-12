@@ -18,14 +18,6 @@ alias ll="ls -l -h --color=auto"
 alias sudo-shell="sudo --shell"
 alias watch="watch "
 
-# location
-function cdp() { DIRECTORY="${1}"; echo "+ cd -P ${@}">&2; command cd -P ${DIRECTORY}; STATUS="${?}"; if [ "${STATUS}" -eq "0" ]; then printf "\e[38;2;216;160;223mLOCATION: $(pwd)\e[0m\n"; ls --almost-all -l; fi; }
-function gocoderepos() { DIRECTORY="${HOME}/source/coderepos"; echo "+ cd ${DIRECTORY}">&2; command cd ${DIRECTORY}; STATUS="${?}"; if [ "${STATUS}" -eq "0" ]; then ls --almost-all -l; fi; }
-function goinfra() { DIRECTORY="${HOME}/source/repos/infrastructure"; echo "+ cd ${DIRECTORY}">&2; command cd ${DIRECTORY}; STATUS="${?}"; if [ "${STATUS}" -eq "0" ]; then ls --almost-all; fi; }
-function gorepos() { DIRECTORY="${HOME}/source/repos"; echo "+ cd ${DIRECTORY}">&2; command cd ${DIRECTORY}; STATUS="${?}"; if [ "${STATUS}" -eq "0" ]; then ls --almost-all -l; fi; }
-function gosubrepos() { DIRECTORY="${HOME}/source/subrepos"; echo "+ cd ${DIRECTORY}">&2; command cd ${DIRECTORY}; STATUS="${?}"; if [ "${STATUS}" -eq "0" ]; then ls --almost-all -l; fi; }
-function readlinkpwd() { echo "+ readlink --canonicalize .">&2; command readlink --canonicalize .; }
-
 [ -f ~/.aliases/argo_aliases ] && source ~/.aliases/argo_aliases
 [ -f ~/.aliases/cloud_aliases ] && source ~/.aliases/cloud_aliases
 [ -f ~/.aliases/docker_aliases ] && source ~/.aliases/docker_aliases
@@ -41,6 +33,7 @@ function readlinkpwd() { echo "+ readlink --canonicalize .">&2; command readlink
 [ -f ~/.aliases/minikube_aliases ] && source ~/.aliases/minikube_aliases
 [ -f ~/.aliases/minio_aliases ] && source ~/.aliases/minio_aliases
 [ -f ~/.aliases/network_aliases ] && source ~/.aliases/network_aliases
+[ -f ~/.aliases/location_aliases_windows ] && source ~/.aliases/location_aliases_windows
 [ -f ~/.aliases/other_aliases ] && source ~/.aliases/other_aliases
 [ -f ~/.aliases/package_aliases ] && source ~/.aliases/package_aliases
 [ -f ~/.aliases/podman_aliases ] && source ~/.aliases/podman_aliases

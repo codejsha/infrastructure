@@ -6,6 +6,13 @@ function kubectl() { echo "+ kubectl ${@}">&2; command kubectl ${@}; }
 
 [ -f ~/.aliases/kubectl_aliases ] && source ~/.aliases/kubectl_aliases
 
+alias sshctrl1="ssh root@controlplane1"
+alias sshctrl2="ssh root@controlplane2"
+alias sshctrl3="ssh root@controlplane3"
+alias sshnode1="ssh root@node1"
+alias sshnode2="ssh root@node2"
+alias sshnode3="ssh root@node3"
+
 alias dashboard-password="kubectl describe secrets kubernetes-dashboard-token --namespace kube-system | grep token: | awk '{print \$2}'"
 alias kaeof="cat <<EOF | kubectl apply --filename -"
 alias kc="kubectl create --recursive --filename"

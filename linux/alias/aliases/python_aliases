@@ -1,0 +1,8 @@
+# python
+
+function python() { echo "+ python ${@}">&2; command python ${@}; }
+function python2() { echo "+ python2 ${@}">&2; command python2 ${@}; }
+function python3() { echo "+ python3 ${@}">&2; command python3 ${@}; }
+
+alias change-python3="sudo alternatives --set python /usr/bin/python3"
+alias change-python2="sudo alternatives --set python /usr/bin/python2"
