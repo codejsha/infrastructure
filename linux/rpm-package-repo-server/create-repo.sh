@@ -3,7 +3,7 @@ trap 'echo "${BASH_SOURCE[0]}: line ${LINENO}: status ${?}: user ${USER}: func $
 set -o errexit
 set -o errtrace
 
-sudo yum install -y yum-utils createrepo
+sudo yum install -y createrepo
 
 PACKAGE_REPO_VOLUME_DIR="/mnt/volume/example-repo"
 sudo mkdir -p ${PACKAGE_REPO_VOLUME_DIR}/package
