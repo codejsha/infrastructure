@@ -7,8 +7,9 @@ GRAFANA_HOME="/usr/local/grafana"
 INSTALL_FILE_DIR="/mnt/share/grafana"
 INSTALL_FILE="grafana-8.0.3.linux-amd64.tar.gz"
 
+GRAFANA_VERSION="$(echo ${INSTALL_FILE} | grep -o -E "[0-9]*\.[0-9]*\.[0-9]*")"
 PARENT_GRAFANA_HOME="$(readlink --canonicalize-missing ${GRAFANA_HOME}/../)"
-GRAFANA_DIR_NAME="${INSTALL_FILE/\.tar\.gz/}"
+GRAFANA_DIR_NAME="grafana-${GRAFANA_VERSION}"
 
 ### check install home
 if [ -d "${GRAFANA_HOME}" ]; then
