@@ -3,10 +3,10 @@
 ### health check
 
 ### pod running
-# kubectl get pods --namespace rook-ceph
-# kubectl get cephcluster --namespace rook-ceph
+kubectl get pods --namespace rook-ceph
+kubectl get cephcluster --namespace rook-ceph
 
-# kubectl exec -it --namespace rook-ceph $(kubectl get pods --namespace rook-ceph --selector "app=rook-ceph-tools" --output jsonpath='{.items[0].metadata.name}') -- bash
+kubectl exec -it --namespace rook-ceph $(kubectl get pods --namespace rook-ceph --selector "app=rook-ceph-tools" --output jsonpath='{.items[0].metadata.name}') -- bash
 ceph status
 ceph osd status
 ceph osd df
