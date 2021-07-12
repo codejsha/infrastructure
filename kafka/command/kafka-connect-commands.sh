@@ -3,76 +3,76 @@
 ### plugin
 
 ### list
-curl --include --request GET --header "Accept:application/json" http://localhost:8083/connector-plugins | jq .[].class
-curl --include --request GET --header "Accept:application/json" http://kafka-connect1:8083/connector-plugins | jq .[].class
-curl --include --request GET --header "Accept:application/json" http://kafka-connect.example.com/connector-plugins | jq .[].class
+curl --silent --request GET --header "Accept:application/json" http://localhost:8083/connector-plugins | jq .[].class
+curl --silent --request GET --header "Accept:application/json" http://kafka-connect1:8083/connector-plugins | jq .[].class
+curl --silent --request GET --header "Accept:application/json" http://kafka-connect.example.com/connector-plugins | jq .[].class
 
 ### validate connector
-jq .config postgresql-source.json > postgresql-source-temp.json
-curl --include --request PUT --header "Accept:application/json" --header "Content-Type:application/json" --data @postgresql-source-temp.json http://localhost:8083/connector-plugins/PostgresConnector/config/validate | jq
-curl --include --request PUT --header "Accept:application/json" --header "Content-Type:application/json" --data @postgresql-source-temp.json http://kafka-connect1:8083/connector-plugins/PostgresConnector/config/validate | jq
-curl --include --request PUT --header "Accept:application/json" --header "Content-Type:application/json" --data @postgresql-source-temp.json http://kafka-connect.example.com/connector-plugins/PostgresConnector/config/validate | jq
+jq .config filestream-source.json > filestream-source-temp.json
+curl --include --request PUT --header "Accept:application/json" --header "Content-Type:application/json" --data @filestream-source-temp.json http://localhost:8083/connector-plugins/PostgresConnector/config/validate
+curl --include --request PUT --header "Accept:application/json" --header "Content-Type:application/json" --data @filestream-source-temp.json http://kafka-connect1:8083/connector-plugins/PostgresConnector/config/validate
+curl --include --request PUT --header "Accept:application/json" --header "Content-Type:application/json" --data @filestream-source-temp.json http://kafka-connect.example.com/connector-plugins/PostgresConnector/config/validate
 
 ######################################################################
 
 ### connector
 
 ### list
-curl --include --request GET --header "Accept:application/json" http://localhost:8083/connectors | jq
-curl --include --request GET --header "Accept:application/json" http://kafka-connect1:8083/connectors | jq
-curl --include --request GET --header "Accept:application/json" http://kafka-connect.example.com/connectors | jq
+curl --silent --request GET --header "Accept:application/json" http://localhost:8083/connectors | jq
+curl --silent --request GET --header "Accept:application/json" http://kafka-connect1:8083/connectors | jq
+curl --silent --request GET --header "Accept:application/json" http://kafka-connect.example.com/connectors | jq
 
 ### register
-curl --include --request POST --header "Accept:application/json" --header "Content-Type:application/json" --data @postgresql-source.json http://localhost:8083/connectors | jq
-curl --include --request POST --header "Accept:application/json" --header "Content-Type:application/json" --data @postgresql-source.json http://kafka-connect1:8083/connectors | jq
-curl --include --request POST --header "Accept:application/json" --header "Content-Type:application/json" --data @postgresql-source.json http://kafka-connect.example.com/connectors | jq
+curl --include --request POST --header "Accept:application/json" --header "Content-Type:application/json" --data @filestream-source.json http://localhost:8083/connectors
+curl --include --request POST --header "Accept:application/json" --header "Content-Type:application/json" --data @filestream-source.json http://kafka-connect1:8083/connectors
+curl --include --request POST --header "Accept:application/json" --header "Content-Type:application/json" --data @filestream-source.json http://kafka-connect.example.com/connectors
 
 ### describe
-curl --include --request GET --header "Accept:application/json" http://localhost:8083/connectors/postgresql-source | jq
-curl --include --request GET --header "Accept:application/json" http://kafka-connect1:8083/connectors/postgresql-source | jq
-curl --include --request GET --header "Accept:application/json" http://kafka-connect.example.com/connectors/postgresql-source | jq
+curl --silent --request GET --header "Accept:application/json" http://localhost:8083/connectors/filestream-source | jq
+curl --silent --request GET --header "Accept:application/json" http://kafka-connect1:8083/connectors/filestream-source | jq
+curl --silent --request GET --header "Accept:application/json" http://kafka-connect.example.com/connectors/filestream-source | jq
 
 ### config
-curl --include --request GET --header "Accept:application/json" http://localhost:8083/connectors/postgresql-source/config | jq
-curl --include --request GET --header "Accept:application/json" http://kafka-connect1:8083/connectors/postgresql-source/config | jq
-curl --include --request GET --header "Accept:application/json" http://kafka-connect.example.com/connectors/postgresql-source/config | jq
+curl --silent --request GET --header "Accept:application/json" http://localhost:8083/connectors/filestream-source/config | jq
+curl --silent --request GET --header "Accept:application/json" http://kafka-connect1:8083/connectors/filestream-source/config | jq
+curl --silent --request GET --header "Accept:application/json" http://kafka-connect.example.com/connectors/filestream-source/config | jq
 
 ### update
-jq .config postgresql-source.json > postgresql-source-temp.json
-curl --include --request PUT --header "Accept:application/json" --header "Content-Type:application/json" --data @postgresql-source-temp.json http://localhost:8083/connectors/postgresql-source/config | jq
-curl --include --request PUT --header "Accept:application/json" --header "Content-Type:application/json" --data @postgresql-source-temp.json http://kafka-connect1:8083/connectors/postgresql-source/config | jq
-curl --include --request PUT --header "Accept:application/json" --header "Content-Type:application/json" --data @postgresql-source-temp.json http://kafka-connect.example.com/connectors/postgresql-source/config | jq
+jq .config filestream-source.json > filestream-source-temp.json
+curl --include --request PUT --header "Accept:application/json" --header "Content-Type:application/json" --data @filestream-source-temp.json http://localhost:8083/connectors/filestream-source/config
+curl --include --request PUT --header "Accept:application/json" --header "Content-Type:application/json" --data @filestream-source-temp.json http://kafka-connect1:8083/connectors/filestream-source/config
+curl --include --request PUT --header "Accept:application/json" --header "Content-Type:application/json" --data @filestream-source-temp.json http://kafka-connect.example.com/connectors/filestream-source/config
 
 ### status
-curl --include --request GET --header "Accept:application/json" http://localhost:8083/connectors/postgresql-source/status | jq
-curl --include --request GET --header "Accept:application/json" http://kafka-connect1:8083/connectors/postgresql-source/status | jq
-curl --include --request GET --header "Accept:application/json" http://kafka-connect.example.com/connectors/postgresql-source/status | jq
+curl --silent --request GET --header "Accept:application/json" http://localhost:8083/connectors/filestream-source/status | jq
+curl --silent --request GET --header "Accept:application/json" http://kafka-connect1:8083/connectors/filestream-source/status | jq
+curl --silent --request GET --header "Accept:application/json" http://kafka-connect.example.com/connectors/filestream-source/status | jq
 
 ### delete
-curl --include --request GET --header "Accept:application/json" -X DELETE http://localhost:8083/connectors/postgresql-source
-curl --include --request GET --header "Accept:application/json" -X DELETE http://kafka-connect1:8083/connectors/postgresql-source
-curl --include --request GET --header "Accept:application/json" -X DELETE http://kafka-connect.example.com/connectors/postgresql-source
+curl --silent --request GET --header "Accept:application/json" -X DELETE http://localhost:8083/connectors/filestream-source
+curl --silent --request GET --header "Accept:application/json" -X DELETE http://kafka-connect1:8083/connectors/filestream-source
+curl --silent --request GET --header "Accept:application/json" -X DELETE http://kafka-connect.example.com/connectors/filestream-source
 
 ######################################################################
 
 ### topic
 
-curl --include --request GET --header "Accept:application/json" http://localhost:8083/connectors/postgresql-source/topics | jq
-curl --include --request GET --header "Accept:application/json" http://kafka-connect1:8083/connectors/postgresql-source/topics | jq
-curl --include --request GET --header "Accept:application/json" http://kafka-connect.example.com/connectors/postgresql-source/topics | jq
+curl --silent --request GET --header "Accept:application/json" http://localhost:8083/connectors/filestream-source/topics | jq
+curl --silent --request GET --header "Accept:application/json" http://kafka-connect1:8083/connectors/filestream-source/topics | jq
+curl --silent --request GET --header "Accept:application/json" http://kafka-connect.example.com/connectors/filestream-source/topics | jq
 
 ######################################################################
 
 ### task
 
-curl --include --request GET --header "Accept:application/json" http://localhost:8083/connectors/postgresql-source/tasks | jq
-curl --include --request GET --header "Accept:application/json" http://kafka-connect1:8083/connectors/postgresql-source/tasks | jq
-curl --include --request GET --header "Accept:application/json" http://kafka-connect.example.com/connectors/postgresql-source/tasks | jq
+curl --silent --request GET --header "Accept:application/json" http://localhost:8083/connectors/filestream-source/tasks | jq
+curl --silent --request GET --header "Accept:application/json" http://kafka-connect1:8083/connectors/filestream-source/tasks | jq
+curl --silent --request GET --header "Accept:application/json" http://kafka-connect.example.com/connectors/filestream-source/tasks | jq
 
-curl --include --request GET --header "Accept:application/json" http://localhost:8083/connectors/postgresql-source/tasks/0 | jq
-curl --include --request GET --header "Accept:application/json" http://kafka-connect1:8083/connectors/postgresql-source/tasks/0 | jq
-curl --include --request GET --header "Accept:application/json" http://kafka-connect.example.com/connectors/postgresql-source/tasks/0 | jq
+curl --silent --request GET --header "Accept:application/json" http://localhost:8083/connectors/filestream-source/tasks/0 | jq
+curl --silent --request GET --header "Accept:application/json" http://kafka-connect1:8083/connectors/filestream-source/tasks/0 | jq
+curl --silent --request GET --header "Accept:application/json" http://kafka-connect.example.com/connectors/filestream-source/tasks/0 | jq
 
-curl --include --request GET --header "Accept:application/json" http://localhost:8083/connectors/postgresql-source/tasks/0/status | jq
-curl --include --request GET --header "Accept:application/json" http://kafka-connect1:8083/connectors/postgresql-source/tasks/0/status | jq
-curl --include --request GET --header "Accept:application/json" http://kafka-connect.example.com/connectors/postgresql-source/tasks/0/status | jq
+curl --silent --request GET --header "Accept:application/json" http://localhost:8083/connectors/filestream-source/tasks/0/status | jq
+curl --silent --request GET --header "Accept:application/json" http://kafka-connect1:8083/connectors/filestream-source/tasks/0/status | jq
+curl --silent --request GET --header "Accept:application/json" http://kafka-connect.example.com/connectors/filestream-source/tasks/0/status | jq
