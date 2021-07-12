@@ -35,8 +35,8 @@ def create_kafka_alias_file(base):
         f'alias goconnector="cd ${{CONFLUENT_HOME}}/connectors"'
     ]
 
-    edited_hosts = '\n'.join(data_list) + '\n'
-    write_file('output/others/.kafka_aliases', edited_hosts)
+    edited_aliases = '\n'.join(data_list) + '\n'
+    write_file('output/others/.kafka_aliases', edited_aliases)
 
 
 def create_add_host_script_file(server_dict):
@@ -63,7 +63,7 @@ def create_add_host_script_file(server_dict):
     write_file('output/others/add-hosts.sh', edited_hosts)
 
 
-def create_secure_copy_script_file(base, server_dict):
+def create_copy_archive_script_file(base, server_dict):
     data_list = [
         f'#!/bin/bash',
         f'',
@@ -96,5 +96,39 @@ def create_secure_copy_script_file(base, server_dict):
                 f'# scp confluent-log4j.tar.gz confluent-others.tar.gz confluent-properties.tar.gz confluent-pssh.tar.gz confluent-scripts.tar.gz confluent-services.tar.gz '
                 f'{base.user}@{server.host_address}:{base.confluent_home}')
 
-    edited_hosts = '\n'.join(data_list) + '\n'
-    write_file('output/others/scp-files.sh', edited_hosts)
+    edited_script = '\n'.join(data_list) + '\n'
+    write_file('output/others/scp-files.sh', edited_script)
+
+
+def create_parallel_copy_archive_script_file(base, server_dict):
+    data_list = [
+        f'#!/bin/bash',
+        f'',
+        f'cd ..',
+        f'tar -czf confluent-log4j.tar.gz log4j/',
+        f'tar -czf confluent-others.tar.gz others/',
+        f'tar -czf confluent-properties.tar.gz properties/',
+        f'tar -czf confluent-pssh.tar.gz pssh/',
+        f'tar -czf confluent-scripts.tar.gz scripts/',
+        f'tar -czf confluent-services.tar.gz services/',
+        f'',
+        f'set -o xtrace',
+        f'',
+        f'######################################################################',
+        f'',
+        f'pscp.pssh \\',
+        f'    --hosts=../pssh/hosts/zookeeper.hosts \\',
+        f'    --hosts=../pssh/hosts/kafka.hosts \\',
+        f'    --hosts=../pssh/hosts/schema-registry.hosts \\',
+        f'    --hosts=../pssh/hosts/kafka-connect.hosts \\',
+        f'    --hosts=../pssh/hosts/replicator.hosts \\',
+        f'    --hosts=../pssh/hosts/kafka-rest.hosts \\',
+        f'    --hosts=../pssh/hosts/ksqldb.hosts \\',
+        f'    --hosts=../pssh/hosts/control-center.hosts \\',
+        f'    --askpass \\',
+        f'    confluent-log4j.tar.gz confluent-others.tar.gz confluent-properties.tar.gz confluent-pssh.tar.gz confluent-scripts.tar.gz confluent-services.tar.gz \\',
+        f'    {base.confluent_home}',
+    ]
+
+    edited_script = '\n'.join(data_list) + '\n'
+    write_file('output/others/pscp-files.sh', edited_script)

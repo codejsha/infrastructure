@@ -5,7 +5,7 @@ from template.python.command import *
 from template.python.fileio import *
 from template.python.log4j_prop import *
 from template.python.other import *
-from template.python.parallel_ssh import *
+from template.python.parallel_script import *
 from template.python.prop import *
 from template.python.read_template import *
 from template.python.read_value import *
@@ -62,10 +62,10 @@ def create_server_service_file(base, server_dict, service_dict, service_env_dict
 def create_other_file(base, server_dict):
     create_symlink_by_hostname_script_file(server_dict)
     create_symlink_by_servername_script_file(server_dict)
-    create_add_host_script_file(server_dict)
-    create_secure_copy_script_file(base, server_dict)
     create_kafka_alias_file(base)
-
+    create_add_host_script_file(server_dict)
+    create_copy_archive_script_file(base, server_dict)
+    create_parallel_copy_archive_script_file(base, server_dict)
 
 # endregion
 
