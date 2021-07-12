@@ -13,7 +13,6 @@ CONNECTOR_NAME="mysql-source"
 
 function register_connector {
     curl \
-        --include \
         --request POST \
         --header "Accept:application/json" \
         --header "Content-Type:application/json" \
@@ -25,7 +24,6 @@ function register_connector {
 
 function delete_connector {
     curl \
-        --include \
         --request DELETE \
         --header "Accept:application/json" \
         ${KAFKA_CONNECT_URL}/connectors/${CONNECTOR_NAME}

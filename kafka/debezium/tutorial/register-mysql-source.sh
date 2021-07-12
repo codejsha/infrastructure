@@ -7,7 +7,6 @@ set -o errtrace
 
 function register_mysql_connector {
     curl \
-        --include \
         --request POST \
         --header "Accept:application/json" \
         --header "Content-Type:application/json" \
@@ -23,7 +22,6 @@ function get_connector_list {
 
 function get_connector_task {
     curl \
-        --include \
         --header "Accept:application/json" \
         --request GET \
         localhost:8083/connectors/inventory-connector
