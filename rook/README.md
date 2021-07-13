@@ -8,9 +8,25 @@
 
 ## Install
 
+### Kubernetes
+
 ```bash
 bash ./operator-install-rook-ceph.sh
 bash ./operator-install-rook-ceph-cluster.sh
+```
+
+### minikube
+
+```bash
+bash ./operator-install-rook-ceph.sh
+bash ./operator-install-rook-ceph-cluster-minikube.sh
+```
+
+### OpenShift
+
+```bash
+bash ./operator-install-rook-ceph-openshift.sh
+bash ./operator-install-rook-ceph-cluster-openshift.sh
 ```
 
 ## Cluster
