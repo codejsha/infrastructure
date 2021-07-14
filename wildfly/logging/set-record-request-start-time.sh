@@ -5,11 +5,9 @@ set -o errtrace
 
 source ../env-base.sh
 
-LOG_FORMAT="%h %l %u %t &quot;%r&quot; %s %b &quot;%{i,Referer}&quot; &quot;%{i,User-Agent}&quot; Cookie: &quot;%{i,COOKIE}&quot; Set-Cookie: &quot;%{o,SET-COOKIE}&quot; SessionID: %S Thread: &quot;%I&quot; TimeTaken: %T"
-
 ######################################################################
 
-function add_access_log {
+function set_record_request_start_time {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
@@ -17,8 +15,9 @@ function add_access_log {
         --password="${PASSWORD}" \
 <<EOF
 batch
-/subsystem=undertow/server=default-server/host=default-host/setting=access-log\
-    :add(pattern="${LOG_FORMAT}",directory=.,relative-to=jboss.server.log.dir,prefix=access.)
+/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=record-request-start-time,value=true)
+/subsystem=undertow/server=default-server/https-listener=https:write-attribute(name=record-request-start-time,value=true)
+/subsystem=undertow/server=default-server/ajp-listener=ajp:write-attribute(name=record-request-start-time,value=true)
 run-batch
 quit
 EOF
@@ -36,5 +35,5 @@ function reload_server {
 
 ######################################################################
 
-add_access_log
+set_record_request_start_time
 reload_server

@@ -5,7 +5,7 @@ set -o errtrace
 
 source ../env-base.sh
 
-LOG_FORMAT="%h %l %u %t %r %s %b %{Referer}i %{User-Agent}i Cookie: %{COOKIE}i Set-Cookie: %{SET-COOKIE}o SessionID: %S Thread: %I TimeTaken: %T"
+LOG_FORMAT="%h %l %u %t &quot;%r&quot; %s %b &quot;%{i,Referer}&quot; &quot;%{i,User-Agent}&quot; Cookie: &quot;%{i,COOKIE}&quot; Set-Cookie: &quot;%{o,SET-COOKIE}&quot; SessionID: %S Thread: &quot;%I&quot; TimeTaken: %T"
 
 ######################################################################
 
@@ -19,28 +19,25 @@ function set_access_log {
 batch
 /subsystem=undertow/server=default-server/host=default-host/setting=access-log:write-attribute(name=prefix,value=access.)
 /subsystem=undertow/server=default-server/host=default-host/setting=access-log:write-attribute(name=pattern,value="${LOG_FORMAT}")
+/subsystem=undertow/server=default-server/host=default-host/setting=access-log:write-attribute(name=directory,value=.)
 /subsystem=undertow/server=default-server/host=default-host/setting=access-log:write-attribute(name=relative-to,value=jboss.server.log.dir)
-/subsystem=undertow/server=default-server/host=default-host/setting=access-log:write-attribute(name=use-server-log,value=true)
+# /subsystem=undertow/server=default-server/host=default-host/setting=access-log:write-attribute(name=use-server-log,value=true)
 run-batch
 quit
 EOF
 }
 
-function remove_access_log {
+function reload_server {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
         --user="${USERNAME}" \
         --password="${PASSWORD}" \
-<<EOF
-batch
-/subsystem=undertow/server=default-server/host=default-host/setting=access-log:remove()
-run-batch
-quit
-EOF
+        --echo-command \
+        --command=":reload()"
 }
 
 ######################################################################
 
 set_access_log
-# remove_access_log
+reload_server
