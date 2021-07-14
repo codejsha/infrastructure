@@ -8,7 +8,7 @@ source ./env-tcpping.sh
 
 ######################################################################
 
-function set_node_name {
+function set_server_name {
     ${JBOSS_HOME}/bin/jboss-cli.sh \
         --connect \
         --controller="${BIND_ADDRESS_MGMT}:${JBOSS_MGMT_HTTP_PORT}" \
@@ -81,6 +81,6 @@ function reload_server {
 
 ######################################################################
 
-set_node_name
+set_server_name
 set_tcp_stack
 reload_server
