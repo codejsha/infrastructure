@@ -7,11 +7,6 @@ GROUP=""
 
 CONFLUENT_HOME=""
 SERVER_NAME=""
-
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/kafka/connect-standalone.properties"
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/kafka/connect-distributed.properties"
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/schema-registry/connect-avro-standalone.properties"
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/schema-registry/connect-avro-distributed.properties"
 PROPERTIES_FILE=""
 
 # LOG_DIR="/var/log/kafka"

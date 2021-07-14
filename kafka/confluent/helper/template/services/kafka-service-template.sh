@@ -7,8 +7,6 @@ GROUP=""
 
 CONFLUENT_HOME=""
 SERVER_NAME=""
-
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/kafka/server.properties"
 PROPERTIES_FILE=""
 
 # DATA_DIR="/var/lib/kafka"

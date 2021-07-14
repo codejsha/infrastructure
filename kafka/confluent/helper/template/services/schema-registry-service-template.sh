@@ -7,8 +7,6 @@ GROUP=""
 
 CONFLUENT_HOME=""
 SERVER_NAME=""
-
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/schema-registry/schema-registry.properties"
 PROPERTIES_FILE=""
 
 # LOG_DIR="/var/log/confluent/schema-registry"

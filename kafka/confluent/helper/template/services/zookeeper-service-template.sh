@@ -8,8 +8,6 @@ GROUP=""
 CONFLUENT_HOME=""
 SERVER_NAME=""
 MYID=""
-
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/kafka/zookeeper.properties"
 PROPERTIES_FILE=""
 
 # DATA_DIR="/var/lib/zookeeper"

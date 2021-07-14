@@ -7,10 +7,6 @@ GROUP=""
 
 CONFLUENT_HOME=""
 SERVER_NAME=""
-
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/kafka-connect-replicator/replicator.properties"
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/kafka-connect-replicator/replicator-connect-standalone.properties"
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/kafka-connect-replicator/replicator-connect-distributed.properties"
 PROPERTIES_FILE=""
 
 # LOG_DIR="/var/log/kafka"

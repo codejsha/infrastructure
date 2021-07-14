@@ -7,9 +7,6 @@ GROUP=""
 
 CONFLUENT_HOME=""
 SERVER_NAME=""
-
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/ksqldb/ksql-server.properties"
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/ksqldb/ksql-production-server.properties"
 PROPERTIES_FILE=""
 
 # DATA_DIR="/var/lib/kafka-streams"

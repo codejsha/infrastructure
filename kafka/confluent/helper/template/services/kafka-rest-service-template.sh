@@ -7,8 +7,6 @@ GROUP=""
 
 CONFLUENT_HOME=""
 SERVER_NAME=""
-
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/kafka-rest/kafka-rest.properties"
 PROPERTIES_FILE=""
 
 # LOG_DIR="/var/log/confluent/kafka-rest"

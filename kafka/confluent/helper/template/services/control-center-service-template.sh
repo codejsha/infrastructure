@@ -7,11 +7,6 @@ GROUP=""
 
 CONFLUENT_HOME=""
 SERVER_NAME=""
-
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/confluent-control-center/control-center.properties"
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/confluent-control-center/control-center-dev.properties"
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/confluent-control-center/control-center-minimal.properties"
-# PROPERTIES_FILE="${CONFLUENT_HOME}/etc/confluent-control-center/control-center-production.properties"
 PROPERTIES_FILE=""
 
 # DATA_DIR="/var/lib/confluent/control-center"
